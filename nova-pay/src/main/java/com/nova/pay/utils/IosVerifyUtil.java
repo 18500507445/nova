@@ -1,8 +1,8 @@
-package utils;
+package com.nova.pay.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import config.ApplePayConfig;
+import com.nova.pay.config.ApplePayConfig;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 

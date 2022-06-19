@@ -1,4 +1,4 @@
-package config;
+package com.nova.pay.config;
 
 /**
  * @Description: 苹果支付配置类

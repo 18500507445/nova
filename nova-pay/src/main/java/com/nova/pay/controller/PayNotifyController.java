@@ -1,4 +1,4 @@
-package controller;
+package com.nova.pay.controller;
 
 
 import com.sun.org.slf4j.internal.Logger;

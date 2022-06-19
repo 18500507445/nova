@@ -1,4 +1,4 @@
-package config;
+package com.nova.pay.config;
 
 import com.github.wxpay.sdk.WXPayConfig;
 

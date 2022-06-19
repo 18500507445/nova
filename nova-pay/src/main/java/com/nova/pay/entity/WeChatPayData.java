@@ -1,4 +1,4 @@
-package entity;
+package com.nova.pay.entity;
 
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;

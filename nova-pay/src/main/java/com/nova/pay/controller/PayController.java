@@ -1,11 +1,11 @@
-package controller;
+package com.nova.pay.controller;
 
+import com.nova.pay.utils.AliPayUtil;
+import com.nova.pay.utils.WeChatPayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import utils.AliPayUtil;
-import utils.WeChatPayUtil;
 
 import javax.annotation.Resource;
 

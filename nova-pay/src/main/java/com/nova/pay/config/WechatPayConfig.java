@@ -1,4 +1,4 @@
-package config;
+package com.nova.pay.config;
 
 /**
  * @Description: 微信配置类

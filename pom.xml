@@ -21,6 +21,9 @@
 
     <modules>
         <module>nova-framework</module>
+        <module>nova-pay</module>
+        <module>nova-tools</module>
+        <module>nova-common</module>
     </modules>
 
     <properties>
@@ -28,16 +31,10 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-
         <nova.version>1.0-SNAPSHOT</nova.version>
-
         <boot.version>2.7.0</boot.version>
-        <fastjson.version>2.0.7</fastjson.version>
-        <lombok.version>1.18.24</lombok.version>
-        <lang3.version>3.12.0</lang3.version>
-        <hutool.version>5.8.4.M1</hutool.version>
+
         <xxljob.version>2.3.1</xxljob.version>
-        <collections4.version>4.4</collections4.version>
 
         <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
         <pagehelper.boot.version>1.4.3</pagehelper.boot.version>
@@ -78,44 +75,11 @@
                 <version>${pagehelper.boot.version}</version>
             </dependency>
 
-            <!-- 阿里JSON解析器 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-
-            <!-- lombok -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-
-            <!--    新增糊涂工具类，当前工具类非常全面 API https://apidoc.gitee.com/loolly/hutool-all -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-
             <!--xxl-job -->
             <dependency>
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxljob.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${lang3.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-collections4</artifactId>
-                <version>${collections4.version}</version>
             </dependency>
 
             <!-- 模块集成开始 -->
@@ -125,6 +89,14 @@
                 <artifactId>nova-framework</artifactId>
                 <version>${nova.version}</version>
             </dependency>
+
+            <!-- 通用组件 -->
+            <dependency>
+                <groupId>com.nova</groupId>
+                <artifactId>nova-common</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

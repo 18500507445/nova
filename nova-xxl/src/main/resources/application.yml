@@ -1,0 +1,18 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+xxl:
+  job:
+    accessToken: 8DCyt4wLgedT3YqVFAc1E8wkL1p4ykug
+    admin:
+      addresses: http://172.30.16.74:8080
+    executor:
+      address:
+      appname: xxl-job-hd-job
+      ip:
+      logpath: /opt/logbak/xxl-job/jobhandler
+      logretentiondays: -1
+      port: -1

@@ -35,7 +35,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
 
         <!--    新增糊涂工具类，当前工具类非常全面 API https://apidoc.gitee.com/loolly/hutool-all -->
@@ -48,7 +47,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${lang3.version}</version>
         </dependency>
 
         <dependency>

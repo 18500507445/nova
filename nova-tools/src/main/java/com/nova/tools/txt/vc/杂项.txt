@@ -1,0 +1,199 @@
+测试环境满天星，写死打包上服务
+满天星会员sellTicket
+CMTSMemberServiceImpl
+member.setMemberCode("TEST");
+member.setMemberPayCode("70");
+member.setMemberKey("12345678");
+
+
+ @Override
+    public PurchaseBuyTicketBean purchaseBuyTicketForCard(String cinemaCode, String sessionCode, String count, String seatCode, String seatPrice, String orderCode, String lockCode, String poundage,String connectFee, String phone) {
+        StringBuffer sbKey = new StringBuffer();
+        StringBuffer request = new StringBuffer();
+        StringBuffer response = new StringBuffer();
+        PurchaseBuyTicketBean resultBean = new PurchaseBuyTicketBean();
+        try {
+//            CodeTicketCMTSMember member = queryMemberInfo(cinemaCode);
+            CodeTicketCMTSMember member = new CodeTicketCMTSMember();//queryMemberInfo(cinemaCode);
+            member.setMemberCode("TEST");
+            member.setMemberPayCode("70");
+            member.setMemberKey("12345678");
+            if (member == null) {
+                logger.error("数据库中没有此应用的会员接口账号，影院编码," + cinemaCode);
+                resultBean.setStatus(ReturnCode.PROCESS_ERROR);
+                resultBean.setErrorCode(ResultStatus.FAILURE);
+                resultBean.setErrorMessage("数据库中没有此应用的会员接口账号，影院编码：" + cinemaCode);
+                return resultBean;
+            }
+            request.append(CMTS_XMLSTART);
+            request.append("<web:SellTicket><web:pXmlString>");
+            request.append("<![CDATA[<?xml version=\"1.0\"?>");
+            request.append("<SellTicketParameter>");
+            request.append("<AppCode>").append(member.getMemberCode()).append("</AppCode>");
+            sbKey.append(member.getMemberCode());
+            request.append("<CinemaId>").append(cinemaCode).append("</CinemaId>");
+            sbKey.append(cinemaCode);
+            request.append("<FeatureAppNo>").append(sessionCode).append("</FeatureAppNo>");
+            sbKey.append(sessionCode);
+            request.append("<SerialNum>").append(orderCode).append("</SerialNum>");
+            sbKey.append(orderCode);
+            request.append("<Printpassword></Printpassword>");
+            request.append("<Balance>").append(0).append("</Balance>");
+            sbKey.append(0);
+            String payType = member.getMemberPayCode();
+            request.append("<PayType>").append(payType).append("</PayType>");
+            sbKey.append(payType);
+            request.append("<RecvMobilePhone>").append(phone).append("</RecvMobilePhone>");
+            sbKey.append(phone);
+            request.append("<SendType>").append(100).append("</SendType>");
+            sbKey.append(100);
+            request.append("<PayResult>").append(0).append("</PayResult>");
+            sbKey.append(0);
+            // 扣费方式
+            request.append("<IsCmtsPay>").append(false).append("</IsCmtsPay>");
+            sbKey.append(false);
+            request.append("<IsCmtsSendCode>").append(false).append("</IsCmtsSendCode>");
+            sbKey.append(false);
+            request.append("<PayMobile></PayMobile>");
+            request.append("<BookSign>").append(0).append("</BookSign>");
+            sbKey.append(0);
+            BigDecimal price = new BigDecimal(seatPrice);
+            int num = Integer.parseInt(count);
+            BigDecimal servicePrice = new BigDecimal(poundage).add(new BigDecimal(connectFee));
+            BigDecimal payed = price.add(servicePrice).multiply(new BigDecimal(num));
+            request.append("<Payed>").append(payed.doubleValue()).append("</Payed>");
+            sbKey.append(payed.doubleValue());
+            request.append("<SendModeID>").append(0).append("</SendModeID>");
+            sbKey.append(0);
+            request.append("<PaySeqNo>").append(lockCode).append("</PaySeqNo>");
+            sbKey.append(lockCode);
+            request.append("<TokenID>").append(tokenBean.getTokenId()).append("</TokenID>");
+            sbKey.append(tokenBean.getTokenId());
+            sbKey.append(tokenBean.getToken());
+            sbKey.append(member.getMemberKey());
+            request.append("<VerifyInfo>").append(Sign.MD5(sbKey.toString().toLowerCase()).substring(8, 24)).append("</VerifyInfo>");
+            request.append("</SellTicketParameter>]]>");
+            request.append("</web:pXmlString></web:SellTicket>");
+            request.append(CMTS_XMLEND);
+            CMTSPurchaseTicketBean purchaseTicket = this.sendXmlGetBean(cinemaCode,request,response, CMTSPurchaseTicketBean.class,1);
+            resultBean = cmtsMemberProcessData.getPurchaseBuyTicketBean(purchaseTicket);
+            if(purchaseTicket == null){
+                resultBean.setStatus(ReturnCode.SERVICE_TIMEOUT);
+                resultBean.setErrorMessage("售票系统方响应超时");
+            }
+            resultBean.setRequestStr(request.toString());
+            resultBean.setResponseStr(response.toString());
+            logger.warn("CMTSMemberSystem : request = " + request);
+            logger.warn("CMTSMemberSystem : response = " + response);
+        }catch (Exception e){
+            logger.error("确认订单异常",e);
+            resultBean.setRequestStr(request.toString());
+            resultBean.setResponseStr(response.toString());
+            resultBean.setStatus(ReturnCode.PROCESS_ERROR);
+            resultBean.setErrorMessage("系统异常");
+        }
+        return resultBean;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 满天星票务下单接口
+
+  @Override
+     public PurchaseBuyTicketBean purchaseTicketAfterLockSeat(String cinemaCode, String sessionCode, String count, String seatCode, String seatPrice, String orderCode, String lockCode, String poundage, String phone, String connectFee, List<OrderSeatInfo> orderSeatInfo, Object... args) {
+         StringBuffer sbKey = new StringBuffer();
+         StringBuffer request = new StringBuffer();
+         StringBuffer response = new StringBuffer();
+         PurchaseBuyTicketBean resultBean = new PurchaseBuyTicketBean();
+         try {
+             request.append(CMTS_XMLSTART);
+             request.append("<web:SellTicket><web:pXmlString>");
+             request.append("<![CDATA[<?xml version=\"1.0\"?>");
+             request.append("<SellTicketParameter>");
+             request.append("<AppCode>").append(getConfig().getAppCode()).append("</AppCode>");
+             sbKey.append(getConfig().getAppCode());
+             request.append("<CinemaId>").append(cinemaCode).append("</CinemaId>");
+             sbKey.append(cinemaCode);
+             request.append("<FeatureAppNo>").append(sessionCode).append("</FeatureAppNo>");
+             sbKey.append(sessionCode);
+             request.append("<SerialNum>").append(orderCode).append("</SerialNum>");
+             sbKey.append(orderCode);
+             request.append("<Printpassword></Printpassword>");
+             request.append("<Balance>").append(0).append("</Balance>");
+             sbKey.append(0);
+             String payType = "";
+
+             if ("1".equals(enpayType)) {//1为线上环境
+                 payType = getConfigMember().getKey();
+             } else {
+                 payType = enpayType;
+             }
+             lockCode = "";
+             request.append("<PayType>").append(payType).append("</PayType>");
+             sbKey.append(payType);
+             request.append("<RecvMobilePhone>").append(phone).append("</RecvMobilePhone>");
+             sbKey.append(phone);
+             request.append("<SendType>").append(100).append("</SendType>");
+             sbKey.append(100);
+             request.append("<PayResult>").append(0).append("</PayResult>");
+             sbKey.append(0);
+             // 扣费方式
+             request.append("<IsCmtsPay>").append(IS_CMTS_PAY).append("</IsCmtsPay>");
+             sbKey.append(IS_CMTS_PAY);
+             request.append("<IsCmtsSendCode>").append(IS_CMTS_SEND_CODE).append("</IsCmtsSendCode>");
+             sbKey.append(IS_CMTS_SEND_CODE);
+             request.append("<PayMobile></PayMobile>");
+             request.append("<BookSign>").append(0).append("</BookSign>");
+             sbKey.append(0);
+
+             BigDecimal price = BigDecimal.ZERO;
+             for (OrderSeatInfo seatInfo : orderSeatInfo) {
+                 price = price.add(new BigDecimal(seatInfo.getSeatPrice()));
+             }
+             int num = Integer.parseInt(count);
+             BigDecimal totalServicePrice = (new BigDecimal(poundage).add(new BigDecimal(connectFee))).multiply(new BigDecimal(num));
+             BigDecimal payed = price.add(totalServicePrice);
+
+             request.append("<Payed>").append(payed.doubleValue()).append("</Payed>");
+             sbKey.append(payed.doubleValue());
+             request.append("<SendModeID>").append(0).append("</SendModeID>");
+             sbKey.append(0);
+             request.append("<PaySeqNo>").append(lockCode).append("</PaySeqNo>");
+             sbKey.append(lockCode);
+             request.append("<TokenID>").append(tokenBean.getTokenId()).append("</TokenID>");
+             sbKey.append(tokenBean.getTokenId());
+             sbKey.append(tokenBean.getToken());
+             sbKey.append(getConfig().getKey());
+             request.append("<VerifyInfo>").append(cmtsSign(sbKey.toString())).append("</VerifyInfo>");
+             request.append("</SellTicketParameter>]]>");
+             request.append("</web:pXmlString></web:SellTicket>");
+             request.append(CMTS_XMLEND);
+             CMTSPurchaseTicketBean purchaseTicket = this.sendXmlGetBean(cinemaCode, request, response, CMTSPurchaseTicketBean.class);
+             resultBean = cmtsProcessData.getPurchaseBuyTicketBean(purchaseTicket);
+             if (purchaseTicket == null) {
+                 resultBean.setStatus(ReturnCode.SERVICE_TIMEOUT);
+                 resultBean.setErrorMessage("售票系统方响应超时");
+             }
+             resultBean.setRequestStr(request.toString());
+             resultBean.setResponseStr(response.toString());
+         } catch (Exception e) {
+             resultBean.setRequestStr(request.toString());
+             resultBean.setResponseStr(response.toString());
+             resultBean.setStatus(ReturnCode.PROCESS_ERROR);
+             resultBean.setErrorMessage("系统异常");
+             logger.error("确认订单异常", e);
+         }
+         return resultBean;
+     }
+
+

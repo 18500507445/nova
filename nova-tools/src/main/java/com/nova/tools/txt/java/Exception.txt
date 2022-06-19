@@ -1,0 +1,17 @@
+1.代码异常整理
+(1)NumberFormatException 数字格式化异常 例如:String a = "0.01" 转换Long类型
+
+
+
+
+2.Sql异常整理
+(1)java.sql.SQLException: Field 'order_status' doesn't have a default value
+数据库字段为`order_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT  默认值0，但是没有设置默认值
+
+
+
+
+
+
+
+

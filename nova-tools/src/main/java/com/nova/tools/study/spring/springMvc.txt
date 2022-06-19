@@ -1,0 +1,7 @@
+D:\Tools\JetBrains\workspace\Tools\src\main\java\com\wzh\tools\picture\springMVC原理.png
+
+1.客户端发送请求到前端控制器DispatcherServlet
+2.DispatcherServlet查询处理器映射器handlerMapping(根据配置或注解)找到处理请求的Controller
+3.Controller调用业务逻辑后，返回ModelAndView
+4.DispatcherServlet根据视图解析器ViewResolver，解析成真正视图
+5.最后，DispatcherServlet将model数据返回到客户端

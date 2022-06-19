@@ -1,0 +1,22 @@
+#showtooltip 回春术
+/cast [@mouseover,help][help,nodead][@targettarget,help,nodead][]回春术
+
+
+#showtooltip 纠缠根须
+/stopattack
+/cast [@mouseover,harm][]纠缠根须
+
+
+/use [nostealth,mod:alt,@player]回春术
+/cast [mod:alt]!潜行
+/cast [nomod,nostance]!猎豹形态
+
+
+猫德 非战斗中在室外旅行形态，室内豹形态、战斗中不是豹形态直接变豹子，是豹形态施放愈合且不变形
+/cast [combat,nostance:2]猎豹形态(变形)
+/cast [outdoors,nocombat,stance:3]猎豹形态(变形)
+/cast [outdoors,nocombat]旅行形态
+/cast [indoors,nocombat]猎豹形态(变形)
+/console autounshift 0
+/cast 愈合
+/console autounshift

@@ -1,0 +1,24 @@
+射击猎属性主精通、副暴击
+
+#showtooltip 误导
+/施放 [@mouseover,help] [@target,help] [@targettarget,help] [@focus,help] [@pet] []误导
+
+若焦点友善,对焦点使用误导,若焦点的目标是友善,对焦点的目标使用误导。若目标友善,对其使用误导。若目标的目标友善,对其使用误导,若宠物存在,对宠物使用误导
+#showtooltip 误导
+/cast [target=focus, help]误导
+/cast [target=focustarget, help]误导
+/cast [target=target, help]误导
+/cast [target=targettarget, help]误导
+/cast [target=pet, nodead, exists]误导
+
+#showtooltip 反制射击
+/cast [@mouseover,harm,nodead,exists] [@focus,harm,nodead,exists][]反制射击
+
+没宠物召唤宠物1,宠物死亡复活,宠物未死亡治疗
+#showtooltips 宝宝
+/cast [nopet]召唤宠物 1; [@pet,dead]复活宠物;[@pet,nodead]治疗宠物
+
+多重射击
+#showtooltip 多重射击
+/startattack
+/cast [@mouseover,harm,nodead][]多重射击

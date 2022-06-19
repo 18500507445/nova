@@ -1,0 +1,129 @@
+智慧教育管理平台
+http://t.edicw.com/ppp/login/loginPage
+
+果洛智慧教育管理平台-dev
+t100318
+BeanCopyUtils
+
+ppp_business(apidb_gl)
+账号:t100048
+
+ppp_business(apidb)
+账号:t104
+
+
+大兴红星法院(电话:57362579),4月29号,上午九点半开庭(线上开)
+两条短信 一条是 app链接，另外一条是账号密码
+密码:AXkjGNdg
+
+https://user.viptifen.com/
+账号:hanjunjie1
+密码:000000
+
+https://www.cnblogs.com/huaface/p/9110557.html
+需求分析
+1.新增模块“查询重复资源”(权限为资源审核员)
+2.资源分类:文件(md5值对比)，视频(md5值对比)，试题(文本内容相似度>80%)
+3.重复资源可以删除,弹窗提示(修改资源表和中间表 del_flag标识)
+
+
+查询中间表和资源表
+
+添加定时任务
+(1)扫描全部
+(2)凌晨扫描前一天
+第一种:代码找出md5相同的，然后入库
+第二种:直接md5入库，查询找出相同的
+
+hxy_resource_statistics
+
+//新需求
+PrepareController.add
+ReviewController.add
+
+Exams.catalogs 视频List
+Exams.taskResources 资源List
+授课-课件
+PublishController.publish_post
+习题课-课件
+PublishController.publishexercise_post
+线上交互授课
+PublishOnlineController.publishonline_post
+竞技任务
+PublishPkController.publishpk_post
+
+DictionaryTypeHandler
+BaseController
+
+grade_flag学段
+books.course = hxy_dictionary_item.code
+1小学 2初中 3高中 4幼教 5职业教育
+
+a_course_meta
+
+dictionary_Id = 1 ,hxy_grades.quartile=hxy_dictionary_item.code
+
+course学科
+books.jiaocai_type = hxy_bookversions.id
+98	
+
+
+<input type="checkbox" id="cbx" /><label for="cbx">点我</label><br/>
+<input type="button" id="btn" value="获取复选框的值"/>
+
+questionQueryVo.setXueduan("3")
+
+
+hxy_dictionary_item表
+新增学段:幼教和职业教育
+新增学科:文学(15)	
+
+hxy_grades表
+新增学段:幼教和职业教育 
+
+
+1.用户中心,字典表id变动，排序修改。
+2.用户中心,新增学生增加 幼教 职业教育相关学科
+3.资源中心,首页bug修改
+4.资源中心,头部匹配幼教和职业教育
+
+
+t平台修改：
+备课中心：移到任务中心上面
+数据中心下的 “工作安排”：去掉
+数据中心下的 “教学数据”：去掉
+学生群组下的 “学情数据”：移动到数据中心下
+取消个人中心显示，保留点击头像进入个人中心
+个人中心：去掉积分记录
+消息中心：去掉右上部抬头显示，放到个人中心：和基础信息、问题反馈并列（原来积分记录的位置）
+首页：
+安排教学任务：
+ 发布预习任务，发布复习任务，发布竞技任务
+ 发布智能作业，发布错题任务，发布线上交互课
+
+
+1，每个学科 人教版 最后一本教材的最后增加一章 初中叫中考专题，高中叫高考专题，之前有试卷章可以和那个合并，下面的节是各册书（人教版下的各册书作为节名）；
+2，把提分王中的专题视频和部分章节视频放到这个章的各节下，作为公共视频；
+3，调数（语文不够的话用大连视频来顶数）
+
+
+
+1.人教版，最后一本教材 最后一章，新增中考专题/高考专题，下面节叫教材版本 (填充数据)
+2.取公共视频的逻辑当专题讲座
+
+
+xueke=02&xueduan=2&bookversion=1&resourceType=12&bookId=439
+
+catalogsDao.getCatalog
+resource_type = 12专题讲座
+resource_type = 8 公共视频
+走公共视频逻辑
+
+211197
+维护catalogs表zhangjie_id
+
+up_catalog_id = 0为章节id
+up_catalog_id ！= 0为节id
+chapterIds,sectionIds,
+
+

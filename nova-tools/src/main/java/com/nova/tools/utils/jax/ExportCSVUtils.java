@@ -1,6 +1,7 @@
 package com.nova.tools.utils.jax;
 
-import com.alibaba.nacos.common.utils.StringUtils;
+
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

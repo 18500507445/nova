@@ -18,9 +18,7 @@ public class ListExercise {
 
     public static void main(String[] args) {
         List<People> peopleList = Myself.EXERCISE_LIST;
-
         listFilter(peopleList);
-
     }
 
     /**

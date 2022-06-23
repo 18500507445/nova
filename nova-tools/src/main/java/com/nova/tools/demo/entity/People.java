@@ -2,6 +2,8 @@ package com.nova.tools.demo.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Description:
  * @Author: wangzehui
@@ -40,6 +42,11 @@ public class People {
      */
     private String description;
 
+    /**
+     * 时间
+     */
+    public Date createTime;
+
     public People() {
 
     }
@@ -51,12 +58,13 @@ public class People {
         this.description = description;
     }
 
-    public People(Integer id, Integer age, String name, Integer groupId, String groupName, String description) {
+    public People(Integer id, Integer age, String name, Integer groupId, String groupName, String description, Date createTime) {
         this.id = id;
         this.age = age;
         this.groupId = groupId;
         this.groupName = groupName;
         this.name = name;
         this.description = description;
+        this.createTime = createTime;
     }
 }

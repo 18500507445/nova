@@ -1,7 +1,10 @@
 package com.nova.tools.demo.entity;
 
+import cn.hutool.core.date.DateUtil;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,9 +41,9 @@ public class Myself {
 
     //exercise-list
     public static final List<People> EXERCISE_LIST = Arrays.asList(
-            new People(1, 15, "小明", 1, "一组", ""),
-            new People(2, 16, "小红", 1, "一组", "很高"),
-            new People(3, 17, "小李", 2, "二组", "很胖")
+            new People(1, 15, "小明", 1, "一组", "", DateUtil.beginOfWeek(new Date())),
+            new People(2, 16, "小红", 1, "一组", "很高",DateUtil.date()),
+            new People(3, 17, "小李", 2, "二组", "很胖", DateUtil.beginOfMonth(new Date()))
     );
 
     //string-arr

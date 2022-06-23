@@ -1,7 +1,7 @@
 package com.nova.tools.utils.jax;
 
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +32,7 @@ public class ExportCSVUtils {
         File fileLoad = new File(tempFile.getCanonicalPath());
         response.reset();
         String origin = request.getHeader("Origin");
-        if (StringUtils.hasText(origin)) {
+        if (StringUtils.isNotBlank(origin)) {
             response.addHeader("Access-Control-Allow-Origin", origin);
         }
         response.addHeader("Access-Control-Expose-Headers", "filename");

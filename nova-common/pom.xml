@@ -22,7 +22,6 @@
         <hutool.version>5.8.4.M1</hutool.version>
         <collections4.version>4.4</collections4.version>
         <email.version>1.5</email.version>
-        <swagger.version>3.0.0</swagger.version>
         <guava.version>31.1-jre</guava.version>
     </properties>
 
@@ -63,19 +62,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>${email.version}</version>
-        </dependency>
-
-        <!-- Swagger3依赖 -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>${swagger.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-models</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

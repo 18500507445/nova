@@ -1,5 +1,7 @@
 package com.nova.tools.utils.time;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -334,6 +336,8 @@ public class DateUtil {
         return goldList;
     }
 
+
+
     /**
      * 获取当前日期是星期几<br>
      *
@@ -640,8 +644,32 @@ public class DateUtil {
     public static void main(String[] args) {
         boolean result = between(parse("2021-07-03 23:59:59", DATE_FULL_STR), parse("2021-06-11 00:00:00", DATE_FULL_STR), parse("2021-07-03 23:59:59", DATE_FULL_STR));
         System.out.println(result);
+
+
+        BigDecimal min = new BigDecimal("188.1");
+        BigDecimal max = new BigDecimal("184.7");
+        int n = 5;
+        HashSet<BigDecimal> set = new HashSet<>();
+        A(min,max,n,set);
+
+        TreeSet<BigDecimal> sort = new TreeSet<>(set);
+        System.out.println(JSONObject.toJSONString(sort));
     }
 
-
+    public static void A(BigDecimal min, BigDecimal max, int n, HashSet<BigDecimal> set) {
+        if (max.compareTo(min) < 0) {
+            return;
+        }
+        for (int i = 0; i < n; i++) {
+            // 将不同的数存入HashSet中
+            String num = BigDecimal.valueOf(Math.random()).multiply(max.subtract(min)).add(min).setScale(2, BigDecimal.ROUND_UP).stripTrailingZeros().toPlainString();
+            set.add(new BigDecimal(num));
+        }
+        int setSize = set.size();
+        // 如果存入的数小于指定生成的个数，则调用递归再生成剩余个数的随机数，如此循环，直到达到指定大小
+        if (setSize < n) {
+            A(min, max, n - setSize, set);
+        }
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.nova.tools.utils.check;
 
 /**
- * @Description:
+ * @Description: 验证码
  * @Author: wangzehui
  * @Date: 2020/4/26 9:38
  */

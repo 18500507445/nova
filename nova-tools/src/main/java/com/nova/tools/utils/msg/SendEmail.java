@@ -1,6 +1,4 @@
-package com.nova.tools.utils.mail;
-
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+package com.nova.tools.utils.msg;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

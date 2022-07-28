@@ -1,4 +1,4 @@
-package com.nova.tools.utils.mail;
+package com.nova.tools.utils.msg;
 
 import org.apache.commons.mail.HtmlEmail;
 

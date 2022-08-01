@@ -18,6 +18,8 @@
         <alipay.version>4.31.12.ALL</alipay.version>
         <wxpay.v2.version>0.0.3</wxpay.v2.version>
         <wxpay.v3.version>0.4.7</wxpay.v3.version>
+        <yeepay.version>3.2.25</yeepay.version>
+        <ocr.version>1.1.7</ocr.version>
 
     </properties>
 
@@ -41,6 +43,22 @@
             <groupId>com.github.wechatpay-apiv3</groupId>
             <artifactId>wechatpay-apache-httpclient</artifactId>
             <version>${wxpay.v3.version}</version>
+        </dependency>
+
+        <!-- 易宝业务sdk -->
+        <dependency>
+            <groupId>com.nft.pay</groupId>
+            <artifactId>yop-java-sdk</artifactId>
+            <version>${yeepay.version}</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/lib/yop-java-sdk-3.2.25-jdk18json.jar</systemPath>
+        </dependency>
+
+        <!-- 阿里云 ocr身份证识别 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>ocr_api20210707</artifactId>
+            <version>${ocr.version}</version>
         </dependency>
 
         <dependency>

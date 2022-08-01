@@ -34,6 +34,32 @@ public class WechatPayConfig {
      */
     public static final String PAY_SECRET = "";
 
+    /**
+     * 获取用户openId(发红包用的)
+     */
+    public static final String RED_ENVELOPES_APP_ID = "";
+
+    /**
+     * 应用秘钥
+     */
+    public static final String RED_ENVELOPES_APP_SECRET = "";
+
+    /**
+     * 红包商户ID
+     */
+    public static final String RED_ENVELOPES_MCH_ID = "";
+
+    /**
+     * 1610923938红包商户，商户证书序列号
+     */
+    public static final String RED_ENVELOPES_MCH_SERIAL_NO = "";
+
+    /**
+     * 商户私钥文件路径
+     * /Users/wangzehui/IdeaProjects/zc_dev/nft-pay/src/main/resources/1625017129/apiclient_key.pem
+     */
+    public static final String RED_ENVELOPES_PRIVATE_CERT_PATH = "/Users/wangzehui/IdeaProjects/zc_dev/nft-pay/src/main/resources/1625017129/apiclient_key.pem";
+
 
     /**
      * P12证书路径（退款需要用，线上是服务器路径

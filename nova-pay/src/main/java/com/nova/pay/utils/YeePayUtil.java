@@ -429,7 +429,7 @@ public class YeePayUtil {
         RecognizeIdcardResponse resp;
         Map<String, String> hashMap = new HashMap<>(16);
         try {
-            com.aliyun.ocr_api20210707.Client client = createClient("LTAI5tG9G2oN3dHzuuwtqbwX", "6sOjVowHKhHIsHwdu3IOQ1CDEStvq2");
+            com.aliyun.ocr_api20210707.Client client = createClient("", "");
             RecognizeIdcardRequest recognizeIdcardRequest = new RecognizeIdcardRequest().setUrl(data.getIdCardUrl());
             RuntimeOptions runtime = new RuntimeOptions();
             resp = client.recognizeIdcardWithOptions(recognizeIdcardRequest, runtime);

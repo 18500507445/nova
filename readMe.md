@@ -10,3 +10,14 @@
 
 3.nova-common
 * 通用组件
+
+4.nova-redis
+* redis
+
+5.nova-pay
+* 支付组件(微信、支付宝、易宝支付)
+
+6.nova-tools
+* 老项目迁移
+
+

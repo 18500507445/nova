@@ -1,6 +1,8 @@
 package com.nova.tools.utils.random;
 
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -40,7 +42,7 @@ public class randomTest {
         return -1;
     }
 
-    public static int random(Map<String, String> map) {
+    public static String random(Map<String, String> map) {
         Set<Map.Entry<String, String>> entries = map.entrySet();
         Random random = new Random();
         int sum = 0;
@@ -56,36 +58,38 @@ public class randomTest {
             int valueInt = Integer.parseInt(value);
             sumTemp += valueInt;
             if (randomInt <= sumTemp) {
-                return Integer.parseInt(entry.getKey());
+                return entry.getKey();
             }
         }
-        return -1;
+        return "";
     }
 
     public static void main(String[] args) {
         Map<String, String> map = new HashMap<>(16);
-        map.put("1", "5");
-        map.put("2", "2");
-        map.put("3", "2");
-        map.put("4", "2");
+        map.put("211439226724", "2");
+        map.put("211439226042", "2");
+        map.put("211439237059", "2");
+        map.put("211439972426", "2");
+        map.put("211439226759", "2");
         int sum1 = 0;
         int sum2 = 0;
         int sum3 = 0;
         int sum4 = 0;
-        for (int i = 0; i < 100000; i++) {
-            int random = random(map);
-            if (random == 1) {
+        for (int i = 0; i < 1000; i++) {
+            String random = random(map);
+            if (StringUtils.equals("211439226724",random)) {
                 sum1++;
             }
-            if (random == 2) {
+            if (StringUtils.equals("211439226042",random)) {
                 sum2++;
             }
-            if (random == 3) {
+            if (StringUtils.equals("211439237059",random)) {
                 sum3++;
             }
-            if (random == 4) {
+            if (StringUtils.equals("211439972426",random)) {
                 sum4++;
             }
+            System.out.println(random);
         }
         System.out.println("sum1:" + sum1);
         System.out.println("sum2:" + sum2);

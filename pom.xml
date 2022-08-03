@@ -21,7 +21,7 @@
 
     <modules>
         <module>nova-framework</module>
-        <module>nova-pay</module>
+        <module>nova-oldPay</module>
         <module>nova-tools</module>
         <module>nova-common</module>
         <module>nova-redis</module>

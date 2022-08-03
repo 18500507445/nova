@@ -1,4 +1,4 @@
-package com.nova.pay.utils;
+package com.nova.oldPay.utils;
 
 
 import cn.hutool.core.date.DateUtil;
@@ -9,9 +9,9 @@ import com.aliyun.ocr_api20210707.models.RecognizeIdcardRequest;
 import com.aliyun.ocr_api20210707.models.RecognizeIdcardResponse;
 import com.aliyun.teaopenapi.models.Config;
 import com.aliyun.teautil.models.RuntimeOptions;
-import com.nova.pay.config.YeePayConfig;
-import com.nova.pay.entity.YeePayData;
-import com.nova.pay.entity.YeePayRecordDto;
+import com.nova.oldPay.config.YeePayConfig;
+import com.nova.oldPay.entity.YeePayData;
+import com.nova.oldPay.entity.YeePayRecordDto;
 import com.yeepay.g3.sdk.yop.client.YopRequest;
 import com.yeepay.g3.sdk.yop.client.YopResponse;
 import com.yeepay.g3.sdk.yop.client.YopRsaClient;

@@ -1,12 +1,12 @@
-package com.nova.pay.utils;
+package com.nova.oldPay.utils;
 
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayUtil;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
-import com.nova.pay.config.NftWeChatPayConfig;
-import com.nova.pay.config.WechatPayConfig;
-import com.nova.pay.entity.WeChatPayData;
+import com.nova.oldPay.config.NftWeChatPayConfig;
+import com.nova.oldPay.config.WechatPayConfig;
+import com.nova.oldPay.entity.WeChatPayData;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;

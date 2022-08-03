@@ -1,4 +1,4 @@
-package com.nova.pay.utils;
+package com.nova.oldPay.utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,7 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 

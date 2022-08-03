@@ -1,7 +1,7 @@
-package com.nova.pay.controller;
+package com.nova.oldPay.controller;
 
-import com.nova.pay.utils.AliPayUtil;
-import com.nova.pay.utils.WeChatPayUtil;
+import com.nova.oldPay.utils.AliPayUtil;
+import com.nova.oldPay.utils.WeChatPayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;

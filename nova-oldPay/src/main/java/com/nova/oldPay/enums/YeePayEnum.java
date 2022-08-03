@@ -1,4 +1,4 @@
-package com.nova.pay.enums;
+package com.nova.oldPay.enums;
 
 /**
  * @Description: 易宝入网枚举

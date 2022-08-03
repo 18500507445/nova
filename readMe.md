@@ -17,7 +17,10 @@
 5.nova-oldPay
 * 旧支付组件(微信、支付宝、易宝支付)
 
-6.nova-tools
+6.nova-pay
+* 新支付组件(微信、支付宝)
+
+7.nova-tools
 * 老项目迁移
 
 

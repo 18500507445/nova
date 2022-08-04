@@ -12,9 +12,11 @@
     <artifactId>nova-pay</artifactId>
 
     <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
         <weixin.pay.version>4.3.0</weixin.pay.version>
         <weixin.mp.version>4.3.0</weixin.mp.version>
-
     </properties>
 
     <dependencies>
@@ -30,6 +32,12 @@
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-mp</artifactId>
             <version>${weixin.mp.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

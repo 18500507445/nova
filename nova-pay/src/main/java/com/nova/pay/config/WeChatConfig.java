@@ -5,7 +5,6 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
-import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.springframework.stereotype.Component;
 
@@ -41,13 +40,13 @@ public class WeChatConfig {
      * @return
      */
     public static WxPayService getEntWxPayService() {
-        WxPayConfig payConfig = new WxPayConfig();
-        payConfig.setAppId("");
-        payConfig.setMchId("");
-        payConfig.setMchKey("");
-        payConfig.setKeyPath("");
+        WxPayConfig entWxPayConfig = new WxPayConfig();
+        entWxPayConfig.setAppId("");
+        entWxPayConfig.setMchId("");
+        entWxPayConfig.setMchKey("");
+        entWxPayConfig.setKeyPath("");
         WxPayService wxPayService = new WxPayServiceImpl();
-        wxPayService.setConfig(payConfig);
+        wxPayService.setConfig(entWxPayConfig);
         return wxPayService;
     }
 

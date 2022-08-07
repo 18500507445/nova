@@ -9,7 +9,11 @@ package com.nova.tools.demo.designpatterns.single;
 public class Test {
     public static void main(String[] args) {
         //测试单利
-        SingleDemo instance = SingleDemo.getInstance();
-        instance.showMessage();
+        Singleton instance1 = Singleton.getInstance();
+        Singleton instance2 = Singleton.getInstance();
+        if (instance1 == instance2) {
+            System.out.println("same");
+        }
+
     }
 }

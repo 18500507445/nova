@@ -19,7 +19,6 @@ public class Paixu {
         String[] split = str.split("-");
         System.out.println(Arrays.toString(split));
 
-
     }
 
 

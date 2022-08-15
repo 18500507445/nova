@@ -16,13 +16,13 @@ import java.io.File;
 import java.util.Date;
 
 /**
- * @Description: 微信支付工具类
+ * @Description: 微信支付v2工具类
  * 文档地址：http://www.binary.ac.cn/weixin-java-pay-javadoc/com/github/binarywang/wxpay/service/WxPayService.html
  * @Author: wangzehui
  * @Date: 2022/8/4 21:44
  */
 @Component
-public class WeChatPayUtils {
+public class WeChatV2PayUtils {
 
     public static final WxPayService wxService = WeChatConfig.getWxPayService();
 

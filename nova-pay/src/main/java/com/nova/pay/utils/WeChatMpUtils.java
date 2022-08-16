@@ -1,4 +1,4 @@
-package com.nova.pay.untils;
+package com.nova.pay.utils;
 
 import com.nova.pay.config.WeChatConfig;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;

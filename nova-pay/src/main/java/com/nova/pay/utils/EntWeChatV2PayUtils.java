@@ -1,4 +1,4 @@
-package com.nova.pay.untils;
+package com.nova.pay.utils;
 
 import com.github.binarywang.wxpay.bean.entpay.*;
 import com.github.binarywang.wxpay.exception.WxPayException;

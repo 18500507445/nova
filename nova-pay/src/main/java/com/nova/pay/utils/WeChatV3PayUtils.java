@@ -1,4 +1,4 @@
-package com.nova.pay.untils;
+package com.nova.pay.utils;
 
 import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryV3Result;

@@ -24,7 +24,7 @@ import java.util.Date;
 @Component
 public class WeChatV2PayUtils {
 
-    public static final WxPayService wxService = WeChatConfig.getWxPayService();
+    public static final WxPayService wxService = WeChatConfig.getWxV2PayService();
 
     /**
      * 调用统一下单接口，并组装生成支付所需参数对象.

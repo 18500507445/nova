@@ -17,16 +17,36 @@ import org.springframework.stereotype.Component;
 public class WeChatConfig {
 
     /**
-     * 设置微信配置
+     * 设置微信V2配置
      *
      * @return
      */
-    public static WxPayService getWxPayService() {
+    public static WxPayService getWxV2PayService() {
         WxPayConfig payConfig = new WxPayConfig();
         payConfig.setAppId("");
         payConfig.setMchId("");
         payConfig.setMchKey("");
         payConfig.setKeyPath("");
+        // 可以指定是否使用沙箱环境
+        payConfig.setUseSandboxEnv(false);
+        WxPayService wxPayService = new WxPayServiceImpl();
+        wxPayService.setConfig(payConfig);
+        return wxPayService;
+    }
+
+    /**
+     * 设置微信V3配置
+     *
+     * @return
+     */
+    public static WxPayService getWxV3PayService() {
+        WxPayConfig payConfig = new WxPayConfig();
+        payConfig.setAppId("");
+        payConfig.setMchId("");
+        payConfig.setMchKey("");
+        payConfig.setApiV3Key("");
+        payConfig.setCertSerialNo("");
+        payConfig.setPrivateCertPath("");
         // 可以指定是否使用沙箱环境
         payConfig.setUseSandboxEnv(false);
         WxPayService wxPayService = new WxPayServiceImpl();

@@ -46,6 +46,7 @@ public class WeChatConfig {
         payConfig.setMchKey("");
         payConfig.setApiV3Key("");
         payConfig.setCertSerialNo("");
+        payConfig.setPrivateKeyPath("");
         payConfig.setPrivateCertPath("");
         // 可以指定是否使用沙箱环境
         payConfig.setUseSandboxEnv(false);

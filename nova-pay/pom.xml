@@ -15,8 +15,8 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <weixin.pay.version>4.3.9.B</weixin.pay.version>
-        <weixin.mp.version>4.3.9.B</weixin.mp.version>
+        <weixin.pay.version>4.4.0</weixin.pay.version>
+        <weixin.mp.version>4.4.0</weixin.mp.version>
     </properties>
 
     <dependencies>

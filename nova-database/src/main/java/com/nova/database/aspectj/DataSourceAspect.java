@@ -1,5 +1,4 @@
-package com.nova.framework.aspectj;
-
+package com.nova.database.aspectj;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.common.annotation.DataSource;

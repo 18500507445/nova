@@ -20,11 +20,12 @@
     </developers>
 
     <modules>
+        <module>nova-common</module>
         <module>nova-framework</module>
+        <module>nova-database</module>
         <module>nova-oldPay</module>
         <module>nova-pay</module>
         <module>nova-tools</module>
-        <module>nova-common</module>
         <module>nova-redis</module>
         <module>nova-xxl</module>
     </modules>
@@ -42,7 +43,7 @@
         <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
         <pagehelper.boot.version>1.4.3</pagehelper.boot.version>
         <bitwalker.version>1.21</bitwalker.version>
-
+        <druid.version>1.2.8</druid.version>
     </properties>
 
     <!-- 依赖声明-->
@@ -76,6 +77,13 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.boot.version}</version>
+            </dependency>
+
+            <!--阿里数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
             </dependency>
 
             <!--xxl-job -->

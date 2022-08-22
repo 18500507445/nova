@@ -1,5 +1,6 @@
 package com.nova.pay.utils;
 
+import cn.hutool.json.JSONUtil;
 import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryV3Result;
 import com.github.binarywang.wxpay.bean.result.WxPayRefundQueryV3Result;
@@ -19,17 +20,33 @@ public class WeChatV3PayUtils {
 
     public static final WxPayService wxService = WeChatConfig.getWxV3PayService();
 
+    public static void main(String[] args) throws WxPayException {
+        WxPayUnifiedOrderV3Request request = new WxPayUnifiedOrderV3Request();
+        request.setOutTradeNo(System.currentTimeMillis() + "");
+        request.setNotifyUrl("https://www.baidu.com");
+        request.setDescription("wzh");
+
+        WxPayUnifiedOrderV3Request.Amount amount = new WxPayUnifiedOrderV3Request.Amount();
+        amount.setCurrency("CNY");
+        amount.setTotal(100);
+        request.setAmount(amount);
+
+        WxPayUnifiedOrderV3Result.AppResult result = wxService.createOrderV3(TradeTypeEnum.APP, request);
+        System.out.println(JSONUtil.toJsonStr(result));
+    }
+
+
     /**
      * 调用统一下单接口，并组装生成支付所需参数对象.
      */
-    public void createOrder() throws WxPayException {
+    public static void createOrder(String[] args) throws WxPayException {
         WxPayUnifiedOrderV3Request request = new WxPayUnifiedOrderV3Request();
-        request.setOutTradeNo("");
-        request.setNotifyUrl("");
-        request.setDescription("test");
+        request.setOutTradeNo(System.currentTimeMillis() + "");
+        request.setNotifyUrl("https://www.baidu.com");
+        request.setDescription("wzh");
 
         WxPayUnifiedOrderV3Request.Payer payer = new WxPayUnifiedOrderV3Request.Payer();
-        payer.setOpenid("openid");
+        payer.setOpenid(System.currentTimeMillis() + "");
         request.setPayer(payer);
 
         //构建金额信息
@@ -37,10 +54,11 @@ public class WeChatV3PayUtils {
         //设置币种信息
         amount.setCurrency("CNY");
         //设置金额
-        amount.setTotal(1);
+        amount.setTotal(100);
         request.setAmount(amount);
 
-        WxPayUnifiedOrderV3Result.JsapiResult result = wxService.createOrderV3(TradeTypeEnum.JSAPI, request);
+        WxPayUnifiedOrderV3Result.AppResult result = wxService.createOrderV3(TradeTypeEnum.APP, request);
+        System.out.println(JSONUtil.toJsonStr(result));
     }
 
     /**

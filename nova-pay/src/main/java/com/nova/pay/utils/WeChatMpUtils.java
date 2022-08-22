@@ -17,6 +17,11 @@ public class WeChatMpUtils {
 
     public static final WxMpService wxMpService = WeChatConfig.getWxMpService();
 
+    public static void main(String[] args) {
+        WeChatMpUtils weChatMpUtils = new WeChatMpUtils();
+        System.out.println(weChatMpUtils.getUserInfo("o7vUD6ebtkEualtIMNXpDS6ixIDE","zh_CN"));
+    }
+
     /**
      * 用code换取oauth2的openid
      * 详情请见: http://mp.weixin.qq.com/wiki/1/8a5ce6257f1d3b2afb20f83e72b72ce9.html

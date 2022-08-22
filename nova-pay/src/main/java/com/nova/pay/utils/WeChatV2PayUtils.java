@@ -1,12 +1,16 @@
 package com.nova.pay.utils;
 
+import cn.hutool.json.JSONUtil;
 import com.github.binarywang.wxpay.bean.coupon.*;
 import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.notify.WxPayRefundNotifyResult;
 import com.github.binarywang.wxpay.bean.notify.WxScanPayNotifyResult;
+import com.github.binarywang.wxpay.bean.order.WxPayAppOrderResult;
+import com.github.binarywang.wxpay.bean.order.WxPayMwebOrderResult;
 import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.*;
+import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.nova.pay.config.WeChatConfig;
@@ -27,15 +31,27 @@ public class WeChatV2PayUtils {
     public static final WxPayService wxService = WeChatConfig.getWxV2PayService();
 
     /**
-     * 调用统一下单接口，并组装生成支付所需参数对象.
+     * unifiedOrder和createOrder都可以
      *
-     * @param request 统一下单请求参数
-     * @param <T>     请使用{@link com.github.binarywang.wxpay.bean.order}包下的类
-     * @return WxPayAppOrderResult、WxPayMpOrderResult、WxPayMwebOrderResult、WxPayNativeOrderResult
+     * @param args
      */
-    public <T> T createOrder(WxPayUnifiedOrderRequest request) throws WxPayException {
-        return wxService.createOrder(request);
+    public static void main(String[] args) {
+        WeChatV2PayUtils weChatV2PayUtils = new WeChatV2PayUtils();
+        WxPayUnifiedOrderRequest wxPayUnifiedOrderRequest = new WxPayUnifiedOrderRequest();
+        try {
+            wxPayUnifiedOrderRequest.setBody("wzh");
+            wxPayUnifiedOrderRequest.setSpbillCreateIp("11.1.11.2");
+            wxPayUnifiedOrderRequest.setNotifyUrl("www.baidu.com");
+            wxPayUnifiedOrderRequest.setTradeType(WxPayConstants.TradeType.MWEB);
+            wxPayUnifiedOrderRequest.setOutTradeNo(System.currentTimeMillis() + "");
+            wxPayUnifiedOrderRequest.setTotalFee(100);
+            WxPayMwebOrderResult wxPayAppOrderResult = weChatV2PayUtils.createOrder(wxPayUnifiedOrderRequest);
+            System.out.println(JSONUtil.toJsonStr(wxPayAppOrderResult));
+        } catch (WxPayException e) {
+            e.printStackTrace();
+        }
     }
+
 
     /**
      * 统一下单(详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1)
@@ -48,6 +64,17 @@ public class WeChatV2PayUtils {
         return wxService.unifiedOrder(request);
     }
 
+
+    /**
+     * 调用统一下单接口，并组装生成支付所需参数对象.
+     *
+     * @param request 统一下单请求参数
+     * @param <T>     请使用{@link com.github.binarywang.wxpay.bean.order}包下的类
+     * @return WxPayAppOrderResult、WxPayMpOrderResult、WxPayMwebOrderResult、WxPayNativeOrderResult
+     */
+    public <T> T createOrder(WxPayUnifiedOrderRequest request) throws WxPayException {
+        return wxService.createOrder(request);
+    }
 
     /**
      * <pre>

@@ -1,8 +1,8 @@
 package com.nova.database.aspectj;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.nova.common.annotation.DataSource;
-import com.nova.common.config.datasource.DynamicDataSourceContextHolder;
+import com.nova.database.annotation.DataSource;
+import com.nova.database.config.DynamicDataSourceContextHolder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

@@ -11,7 +11,6 @@ import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 import com.nova.oldPay.config.AliPayConfig;
 import com.nova.oldPay.entity.AliPayData;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,7 +22,6 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/6/17 13:11
  */
-@Slf4j
 public class AliPayUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(AliPayUtil.class);

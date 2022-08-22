@@ -1,4 +1,4 @@
-package com.nova.common.annotation;
+package com.nova.database.annotation;
 
 
 import com.nova.common.enums.DataSourceType;

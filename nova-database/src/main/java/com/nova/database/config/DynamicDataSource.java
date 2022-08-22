@@ -1,6 +1,5 @@
-package com.nova.database.datasource;
+package com.nova.database.config;
 
-import com.nova.common.config.datasource.DynamicDataSourceContextHolder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;

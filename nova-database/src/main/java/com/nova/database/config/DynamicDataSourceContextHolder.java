@@ -1,4 +1,4 @@
-package com.nova.common.config.datasource;
+package com.nova.database.config;
 
 
 import org.slf4j.Logger;

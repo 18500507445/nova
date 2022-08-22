@@ -18,6 +18,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-common</artifactId>
+        </dependency>
 
         <!-- SpringBoot Web容器 -->
         <dependency>

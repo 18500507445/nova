@@ -38,7 +38,7 @@
         <boot.version>2.7.0</boot.version>
 
         <xxljob.version>2.3.1</xxljob.version>
-
+        <shiro.version>1.8.0</shiro.version>
         <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
         <pagehelper.boot.version>1.4.3</pagehelper.boot.version>
         <bitwalker.version>1.21</bitwalker.version>

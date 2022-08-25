@@ -13,6 +13,7 @@ import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.github.binarywang.wxpay.util.XmlConfig;
 import com.nova.pay.config.WeChatConfig;
 import org.springframework.stereotype.Component;
 
@@ -35,21 +36,62 @@ public class WeChatV2PayUtils {
      *
      * @param args
      */
-    public static void main(String[] args) {
-        WeChatV2PayUtils weChatV2PayUtils = new WeChatV2PayUtils();
-        WxPayUnifiedOrderRequest wxPayUnifiedOrderRequest = new WxPayUnifiedOrderRequest();
+    public static void main(String[] args){
+        //WeChatV2PayUtils weChatV2PayUtils = new WeChatV2PayUtils();
+        //WxPayUnifiedOrderRequest wxPayUnifiedOrderRequest = new WxPayUnifiedOrderRequest();
+        //try {
+        //    wxPayUnifiedOrderRequest.setBody("wzh");
+        //    wxPayUnifiedOrderRequest.setSpbillCreateIp("11.1.11.2");
+        //    wxPayUnifiedOrderRequest.setNotifyUrl("www.baidu.com");
+        //    wxPayUnifiedOrderRequest.setTradeType(WxPayConstants.TradeType.APP);
+        //    wxPayUnifiedOrderRequest.setOutTradeNo(System.currentTimeMillis() + "");
+        //    wxPayUnifiedOrderRequest.setTotalFee(100);
+        //    Object order = weChatV2PayUtils.createOrder(wxPayUnifiedOrderRequest);
+        //    System.out.println(JSONUtil.toJsonStr(order));
+        //} catch (WxPayException e) {
+        //    e.printStackTrace();
+        //}
+
+        String xmlString = "<xml>\n" +
+                "  <appid><![CDATA[wx35252cfa011412e8]]></appid>\n" +
+                "  <attach><![CDATA[支付测试]]></attach>\n" +
+                "  <bank_type><![CDATA[CFT]]></bank_type>\n" +
+                "  <fee_type><![CDATA[CNY]]></fee_type>\n" +
+                "  <is_subscribe><![CDATA[Y]]></is_subscribe>\n" +
+                "  <mch_id><![CDATA[1625017129]]></mch_id>\n" +
+                "  <nonce_str><![CDATA[5d2b6c2a8db53831f7eda20af46e531c]]></nonce_str>\n" +
+                "  <openid><![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]></openid>\n" +
+                "  <out_trade_no><![CDATA[1409811653]]></out_trade_no>\n" +
+                "  <result_code><![CDATA[SUCCESS]]></result_code>\n" +
+                "  <return_code><![CDATA[SUCCESS]]></return_code>\n" +
+                "  <sign><![CDATA[B552ED6B279343CB493C5DD0D78AB241]]></sign>\n" +
+                "  <sub_mch_id><![CDATA[10000100]]></sub_mch_id>\n" +
+                "  <time_end><![CDATA[20140903131540]]></time_end>\n" +
+                "  <total_fee>1</total_fee>\n" +
+                "  <trade_type><![CDATA[JSAPI]]></trade_type>\n" +
+                "  <transaction_id><![CDATA[1004400740201409030005092168]]></transaction_id>\n" +
+                "   <coupon_count>2</coupon_count>\n" +
+                "   <coupon_type_0><![CDATA[CASH]]></coupon_type_0>\n" +
+                "   <coupon_id_0>10000</coupon_id_0>\n" +
+                "   <coupon_fee_0>100</coupon_fee_0>\n" +
+                "   <coupon_type_1><![CDATA[NO_CASH]]></coupon_type_1>\n" +
+                "   <coupon_id_1>10001</coupon_id_1>\n" +
+                "   <coupon_fee_1>200</coupon_fee_1>\n" +
+                "</xml>";
+
+        XmlConfig.fastMode = true;
+        WxPayOrderNotifyResult result = null;
         try {
-            wxPayUnifiedOrderRequest.setBody("wzh");
-            wxPayUnifiedOrderRequest.setSpbillCreateIp("11.1.11.2");
-            wxPayUnifiedOrderRequest.setNotifyUrl("www.baidu.com");
-            wxPayUnifiedOrderRequest.setTradeType(WxPayConstants.TradeType.MWEB);
-            wxPayUnifiedOrderRequest.setOutTradeNo(System.currentTimeMillis() + "");
-            wxPayUnifiedOrderRequest.setTotalFee(100);
-            WxPayMwebOrderResult wxPayAppOrderResult = weChatV2PayUtils.createOrder(wxPayUnifiedOrderRequest);
-            System.out.println(JSONUtil.toJsonStr(wxPayAppOrderResult));
+            result = BaseWxPayResult.fromXML(xmlString, WxPayOrderNotifyResult.class);
+            result = wxService.parseOrderNotifyResult(xmlString);
         } catch (WxPayException e) {
-            e.printStackTrace();
+            System.out.println("----------------异常啦,回滚啦----------------");
+            System.out.println(e.getMessage());
+        }finally {
+            XmlConfig.fastMode = false;
+
         }
+        System.out.println(result);
     }
 
 

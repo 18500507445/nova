@@ -23,10 +23,10 @@ public class WeChatConfig {
      */
     public static WxPayService getWxV2PayService() {
         WxPayConfig payConfig = new WxPayConfig();
-        payConfig.setAppId("");
-        payConfig.setMchId("");
-        payConfig.setMchKey("");
-        payConfig.setKeyPath("");
+        payConfig.setAppId("wx35252cfa011412e8");
+        payConfig.setMchId("1625017129");
+        payConfig.setMchKey("365Fengkuang365Fengkuang36536212");
+        payConfig.setKeyPath("/Users/wangzehui/IdeaProjects/nova/nova-pay/src/main/resources/cert/1625017129/apiclient_cert.p12");
         // 可以指定是否使用沙箱环境
         payConfig.setUseSandboxEnv(false);
         WxPayService wxPayService = new WxPayServiceImpl();
@@ -41,13 +41,12 @@ public class WeChatConfig {
      */
     public static WxPayService getWxV3PayService() {
         WxPayConfig payConfig = new WxPayConfig();
-        payConfig.setAppId("");
-        payConfig.setMchId("");
-        payConfig.setMchKey("");
-        payConfig.setApiV3Key("");
-        payConfig.setCertSerialNo("");
-        payConfig.setPrivateKeyPath("");
-        payConfig.setPrivateCertPath("");
+        payConfig.setAppId("wxae6abcf7c685e716");
+        payConfig.setMchId("1625017129");
+        payConfig.setApiV3Key("365Fengkuang365Fengkuang36536212");
+        payConfig.setCertSerialNo("5F1F1A03BB37A9B39C70A0AB5684CCEDA6E2E4EA");
+        payConfig.setPrivateKeyPath("/Users/wangzehui/IdeaProjects/nova/nova-pay/src/main/resources/cert/1625017129/apiclient_key.pem");
+        payConfig.setPrivateCertPath("/Users/wangzehui/IdeaProjects/nova/nova-pay/src/main/resources/cert/1625017129/apiclient_cert.pem");
         // 可以指定是否使用沙箱环境
         payConfig.setUseSandboxEnv(false);
         WxPayService wxPayService = new WxPayServiceImpl();
@@ -79,10 +78,8 @@ public class WeChatConfig {
     public static WxMpService getWxMpService() {
         WxMpService wxMpService = new WxMpServiceImpl();
         WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
-        configStorage.setAppId("");
-        configStorage.setSecret("");
-        configStorage.setToken("");
-        configStorage.setAesKey("");
+        configStorage.setAppId("wxae6abcf7c685e716");
+        configStorage.setSecret("ada94b3aeb0996ab8e990d87cab33634");
         wxMpService.setWxMpConfigStorage(configStorage);
         return wxMpService;
     }

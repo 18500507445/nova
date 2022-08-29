@@ -1,4 +1,4 @@
-package com.nova.oldPay.config;
+package com.nova.pay.config;
 
 /**
  * @Description:

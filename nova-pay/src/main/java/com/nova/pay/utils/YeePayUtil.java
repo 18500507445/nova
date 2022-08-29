@@ -1,17 +1,13 @@
-package com.nova.oldPay.utils;
+package com.nova.pay.utils;
 
 
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.aliyun.ocr_api20210707.models.RecognizeIdcardRequest;
-import com.aliyun.ocr_api20210707.models.RecognizeIdcardResponse;
-import com.aliyun.teaopenapi.models.Config;
-import com.aliyun.teautil.models.RuntimeOptions;
-import com.nova.oldPay.config.YeePayConfig;
-import com.nova.oldPay.entity.YeePayData;
-import com.nova.oldPay.entity.YeePayRecordDto;
+import com.nova.pay.config.YeePayConfig;
+import com.nova.pay.entity.YeePayData;
+import com.nova.pay.entity.YeePayRecordDto;
 import com.yeepay.g3.sdk.yop.client.YopRequest;
 import com.yeepay.g3.sdk.yop.client.YopResponse;
 import com.yeepay.g3.sdk.yop.client.YopRsaClient;
@@ -423,34 +419,6 @@ public class YeePayUtil {
     }
 
     /**
-     * 身份证识别接口
-     */
-    public static Map<String, String> ocrIdCard(YeePayData data) {
-        RecognizeIdcardResponse resp;
-        Map<String, String> hashMap = new HashMap<>(16);
-        try {
-            com.aliyun.ocr_api20210707.Client client = createClient("", "");
-            RecognizeIdcardRequest recognizeIdcardRequest = new RecognizeIdcardRequest().setUrl(data.getIdCardUrl());
-            RuntimeOptions runtime = new RuntimeOptions();
-            resp = client.recognizeIdcardWithOptions(recognizeIdcardRequest, runtime);
-            if (null != resp && 200 == resp.getStatusCode()) {
-                JSONObject result = JSONObject.parseObject(resp.getBody().getData());
-                JSONObject json = JSONObject.parseObject(result.getString("data"));
-                JSONObject face = JSONObject.parseObject(json.getString("face"));
-                JSONObject jsonObject = JSONObject.parseObject(face.getString("data"));
-                String address = jsonObject.getString("address");
-                String idCard = jsonObject.getString("idNumber");
-                hashMap.put("address", address);
-                hashMap.put("idCard", idCard);
-            }
-        } catch (Exception ignored) {
-
-        }
-        return hashMap;
-    }
-
-
-    /**
      * 查询订单
      * <p>
      * {
@@ -550,25 +518,6 @@ public class YeePayUtil {
         return null;
     }
 
-
-    /**
-     * 使用AK&SK初始化账号Client
-     *
-     * @param accessKeyId
-     * @param accessKeySecret
-     * @return Client
-     * @throws Exception
-     */
-    public static com.aliyun.ocr_api20210707.Client createClient(String accessKeyId, String accessKeySecret) throws Exception {
-        Config config = new Config()
-                // 您的 AccessKey ID
-                .setAccessKeyId(accessKeyId)
-                // 您的 AccessKey Secret
-                .setAccessKeySecret(accessKeySecret);
-        // 访问的域名
-        config.endpoint = "ocr-api.cn-hangzhou.aliyuncs.com";
-        return new com.aliyun.ocr_api20210707.Client(config);
-    }
 
     /**
      * 获取获取sign

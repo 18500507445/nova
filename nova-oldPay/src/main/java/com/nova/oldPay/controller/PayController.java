@@ -1,6 +1,5 @@
 package com.nova.oldPay.controller;
 
-import com.nova.oldPay.utils.AliPayUtil;
 import com.nova.oldPay.utils.WeChatPayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

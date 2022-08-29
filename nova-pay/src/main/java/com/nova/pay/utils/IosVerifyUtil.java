@@ -1,10 +1,13 @@
-package com.nova.oldPay.utils;
+package com.nova.pay.utils;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.nova.oldPay.config.ApplePayConfig;
+
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.nova.pay.config.ApplePayConfig;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import javax.net.ssl.*;
 import java.io.BufferedOutputStream;
@@ -22,9 +25,11 @@ import java.util.Map;
  * 官网:https://developer.apple.com/documentation/storekit/in-app_purchase
  * 参考：https://blog.csdn.net/lbd_123/article/details/87276204
  * @Author: wangzehui
- * @Date: 2022/6/18 13:42
+ * @Date: 2022/3/18 13:42
  */
+@Component
 public class IosVerifyUtil {
+
 
     private static final Map<String, String> KEY_MAP = new HashMap<>();
 
@@ -33,6 +38,7 @@ public class IosVerifyUtil {
         KEY_MAP.put("27009000888", "99748f3a93184ff6af9f73baec4ecedb");
         KEY_MAP.put("27009000889", "7de5c39a64e144c290bbc03a2674f32d");
     }
+
 
     private static class TrustAnyTrustManager implements X509TrustManager {
 
@@ -156,7 +162,7 @@ public class IosVerifyUtil {
         String verifyState = "";
         String transactionId = "0";
         try {
-            if (ArrayUtils.contains(new String[]{"-1", "1.5"}, version)) {
+            if (ArrayUtils.contains(new String[]{"-1", "1.6", "1.7"}, version)) {
                 verifyState = "Sandbox";
             }
             String json = buyAppVerify(receipt, verifyState);
@@ -173,9 +179,9 @@ public class IosVerifyUtil {
 
     public static String getStatus(String receipt) {
         try {
-            JSONObject job = JSONObject.parseObject(receipt);
+            JSONObject job = JSONUtil.parseObj(receipt);
             if (job.containsKey("status")) {
-                return job.getString("status");
+                return job.getStr("status");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -186,7 +192,7 @@ public class IosVerifyUtil {
     public static String getTransactionId(String receipt) {
         String transactionId = "0";
         try {
-            JSONObject job = JSONObject.parseObject(receipt);
+            JSONObject job = JSONUtil.parseObj(receipt);
             if (job.containsKey("receipt")) {
                 JSONArray joa = job.getJSONObject("receipt").getJSONArray("in_app");
                 if (!joa.isEmpty()) {
@@ -197,10 +203,10 @@ public class IosVerifyUtil {
                             //说明是自动订阅的了 直接 就跳过
                             continue;
                         }
-                        String timeStr = jsonObject.getString("original_purchase_date_ms");
+                        String timeStr = jsonObject.getStr("original_purchase_date_ms");
                         if (StringUtils.isNotBlank(timeStr) && Long.parseLong(timeStr) > time) {
                             time = Long.parseLong(timeStr);
-                            transactionId = jsonObject.getString("transaction_id");
+                            transactionId = jsonObject.getStr("transaction_id");
                         }
                     }
                     return transactionId;

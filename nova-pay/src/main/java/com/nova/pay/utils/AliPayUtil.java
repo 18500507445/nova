@@ -1,4 +1,4 @@
-package com.nova.oldPay.utils;
+package com.nova.pay.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
@@ -7,10 +7,10 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.*;
 import com.alipay.api.response.*;
+import com.nova.pay.config.AliPayConfig;
+import com.nova.pay.entity.AliPayData;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
-import com.nova.oldPay.config.AliPayConfig;
-import com.nova.oldPay.entity.AliPayData;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 

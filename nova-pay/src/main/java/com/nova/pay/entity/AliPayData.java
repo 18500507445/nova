@@ -1,4 +1,4 @@
-package com.nova.oldPay.entity;
+package com.nova.pay.entity;
 
 import lombok.Data;
 

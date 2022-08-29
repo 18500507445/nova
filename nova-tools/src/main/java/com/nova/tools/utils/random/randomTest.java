@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-/** 微信红包算法 https://wenku.baidu.com/view/a15fee9cfe0a79563c1ec5da50e2524de518d092.html
+/**
+ * 微信红包算法 https://wenku.baidu.com/view/a15fee9cfe0a79563c1ec5da50e2524de518d092.html
+ *
  * @Description:
  * @Author: wangzehui
  * @Date: 2022/6/17 13:32
@@ -42,20 +44,18 @@ public class randomTest {
         return -1;
     }
 
-    public static String random(Map<String, String> map) {
-        Set<Map.Entry<String, String>> entries = map.entrySet();
+    public static Object random(Map<Object, Object> map) {
+        Set<Map.Entry<Object, Object>> entries = map.entrySet();
         Random random = new Random();
         int sum = 0;
-        for (Map.Entry<String, String> entry : entries) {
-            String value = entry.getValue();
-            int valueInt = Integer.parseInt(value);
+        for (Map.Entry<Object, Object> entry : entries) {
+            int valueInt = Integer.parseInt(String.valueOf(entry.getValue()));
             sum += valueInt;
         }
         int randomInt = random.nextInt(sum) + 1;
         int sumTemp = 0;
-        for (Map.Entry<String, String> entry : entries) {
-            String value = entry.getValue();
-            int valueInt = Integer.parseInt(value);
+        for (Map.Entry<Object, Object> entry : entries) {
+            int valueInt = Integer.parseInt(String.valueOf(entry.getValue()));
             sumTemp += valueInt;
             if (randomInt <= sumTemp) {
                 return entry.getKey();
@@ -65,7 +65,7 @@ public class randomTest {
     }
 
     public static void main(String[] args) {
-        Map<String, String> map = new HashMap<>(16);
+        Map<Object, Object> map = new HashMap<>(16);
         map.put("211439226724", "2");
         map.put("211439226042", "2");
         map.put("211439237059", "2");
@@ -76,17 +76,17 @@ public class randomTest {
         int sum3 = 0;
         int sum4 = 0;
         for (int i = 0; i < 1000; i++) {
-            String random = random(map);
-            if (StringUtils.equals("211439226724",random)) {
+            String random = random(map).toString();
+            if (StringUtils.equals("211439226724", random)) {
                 sum1++;
             }
-            if (StringUtils.equals("211439226042",random)) {
+            if (StringUtils.equals("211439226042", random)) {
                 sum2++;
             }
-            if (StringUtils.equals("211439237059",random)) {
+            if (StringUtils.equals("211439237059", random)) {
                 sum3++;
             }
-            if (StringUtils.equals("211439972426",random)) {
+            if (StringUtils.equals("211439972426", random)) {
                 sum4++;
             }
             System.out.println(random);

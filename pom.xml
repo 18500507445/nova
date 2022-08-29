@@ -23,7 +23,6 @@
         <module>nova-common</module>
         <module>nova-framework</module>
         <module>nova-database</module>
-        <module>nova-oldPay</module>
         <module>nova-pay</module>
         <module>nova-tools</module>
         <module>nova-redis</module>

@@ -13,6 +13,7 @@ import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.net.URLDecoder;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/6/17 13:11
  */
+@Component
 public class AliPayUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(AliPayUtil.class);

@@ -11,6 +11,8 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.nova.pay.config.WeChatConfig;
 
+import javax.annotation.Resource;
+
 /**
  * @Description: 微信支付v3工具类
  * @Author: wangzehui
@@ -18,7 +20,8 @@ import com.nova.pay.config.WeChatConfig;
  */
 public class WeChatV3PayUtils {
 
-    public static final WxPayService wxService = WeChatConfig.getWxV3PayService();
+    @Resource
+    private WeChatConfig wxService;
 
     public static void main(String[] args) throws WxPayException {
         WxPayUnifiedOrderV3Request request = new WxPayUnifiedOrderV3Request();
@@ -31,7 +34,8 @@ public class WeChatV3PayUtils {
         amount.setTotal(100);
         request.setAmount(amount);
 
-        WxPayUnifiedOrderV3Result.AppResult result = wxService.createOrderV3(TradeTypeEnum.APP, request);
+        WeChatConfig weChatConfig = new WeChatConfig();
+        WxPayUnifiedOrderV3Result.AppResult result = weChatConfig.getWxV3PayService().createOrderV3(TradeTypeEnum.APP, request);
         System.out.println(JSONUtil.toJsonStr(result));
     }
 
@@ -39,7 +43,7 @@ public class WeChatV3PayUtils {
     /**
      * 调用统一下单接口，并组装生成支付所需参数对象.
      */
-    public static void createOrder(String[] args) throws WxPayException {
+    public Object createOrder(String[] args) throws WxPayException {
         WxPayUnifiedOrderV3Request request = new WxPayUnifiedOrderV3Request();
         request.setOutTradeNo(System.currentTimeMillis() + "");
         request.setNotifyUrl("https://www.baidu.com");
@@ -57,8 +61,7 @@ public class WeChatV3PayUtils {
         amount.setTotal(100);
         request.setAmount(amount);
 
-        WxPayUnifiedOrderV3Result.AppResult result = wxService.createOrderV3(TradeTypeEnum.APP, request);
-        System.out.println(JSONUtil.toJsonStr(result));
+        return wxService.getWxV3PayService().<WxPayUnifiedOrderV3Result.AppResult>createOrderV3(TradeTypeEnum.APP, request);
     }
 
     /**
@@ -67,7 +70,7 @@ public class WeChatV3PayUtils {
     public void queryOrder(String outTradeNo) throws WxPayException {
         WxPayOrderQueryV3Request request = new WxPayOrderQueryV3Request();
         request.setOutTradeNo(outTradeNo);
-        WxPayOrderQueryV3Result result = wxService.queryOrderV3(request);
+        WxPayOrderQueryV3Result result = wxService.getWxV3PayService().queryOrderV3(request);
     }
 
     /**
@@ -79,7 +82,7 @@ public class WeChatV3PayUtils {
     public void closeOrder(String outTradeNo) throws WxPayException {
         WxPayOrderCloseV3Request request = new WxPayOrderCloseV3Request();
         request.setOutTradeNo(outTradeNo);
-        wxService.closeOrderV3(request);
+        wxService.getWxV3PayService().closeOrderV3(request);
     }
 
 
@@ -96,7 +99,7 @@ public class WeChatV3PayUtils {
         request.setOutRefundNo(orderId);
         request.setNotifyUrl("");
         request.setAmount(new WxPayRefundV3Request.Amount().setRefund(100).setTotal(100).setCurrency("CNY"));
-        WxPayRefundV3Result result = wxService.refundV3(request);
+        WxPayRefundV3Result result = wxService.getWxV3PayService().refundV3(request);
     }
 
     /**
@@ -105,7 +108,7 @@ public class WeChatV3PayUtils {
     public void queryRefund(String orderId) throws WxPayException {
         WxPayRefundQueryV3Request request = new WxPayRefundQueryV3Request();
         request.setOutRefundNo(orderId);
-        WxPayRefundQueryV3Result result = wxService.refundQueryV3(request);
+        WxPayRefundQueryV3Result result = wxService.getWxV3PayService().refundQueryV3(request);
     }
 
 }

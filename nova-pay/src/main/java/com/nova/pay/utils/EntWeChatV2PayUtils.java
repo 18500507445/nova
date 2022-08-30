@@ -4,6 +4,9 @@ import com.github.binarywang.wxpay.bean.entpay.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.nova.pay.config.WeChatConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * @Description: 企业微信支付v2工具类
@@ -13,7 +16,8 @@ import com.nova.pay.config.WeChatConfig;
  */
 public class EntWeChatV2PayUtils {
 
-    public static final WxPayService wxService = WeChatConfig.getEntWxPayService();
+    @Resource
+    public WeChatConfig wxService;
 
     /**
      * 企业付款到零钱
@@ -29,7 +33,7 @@ public class EntWeChatV2PayUtils {
      * @param request 请求对象
      */
     public EntPayResult entPay(EntPayRequest request) throws WxPayException {
-        return wxService.getEntPayService().entPay(request);
+        return wxService.getEntWxPayService().getEntPayService().entPay(request);
     }
 
     /**
@@ -44,7 +48,7 @@ public class EntWeChatV2PayUtils {
      * @param partnerTradeNo 商户订单号
      */
     public EntPayQueryResult queryEntPay(String partnerTradeNo) throws WxPayException {
-        return wxService.getEntPayService().queryEntPay(partnerTradeNo);
+        return wxService.getEntWxPayService().getEntPayService().queryEntPay(partnerTradeNo);
     }
 
 
@@ -69,7 +73,7 @@ public class EntWeChatV2PayUtils {
      * @throws WxPayException the wx pay exception
      */
     public String getPublicKey() throws WxPayException {
-        return wxService.getEntPayService().getPublicKey();
+        return wxService.getEntWxPayService().getEntPayService().getPublicKey();
     }
 
     /**
@@ -86,7 +90,7 @@ public class EntWeChatV2PayUtils {
      * @throws WxPayException the wx pay exception
      */
     public EntPayBankResult payBank(EntPayBankRequest request) throws WxPayException {
-        return wxService.getEntPayService().payBank(request);
+        return wxService.getEntWxPayService().getEntPayService().payBank(request);
     }
 
     /**
@@ -102,7 +106,7 @@ public class EntWeChatV2PayUtils {
      * @throws WxPayException the wx pay exception
      */
     public EntPayBankQueryResult queryPayBank(String partnerTradeNo) throws WxPayException {
-        return wxService.getEntPayService().queryPayBank(partnerTradeNo);
+        return wxService.getEntWxPayService().getEntPayService().queryPayBank(partnerTradeNo);
     }
 
 }

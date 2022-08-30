@@ -7,6 +7,8 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * @Description: 微信公众号工具类
  * @Author: wangzehui
@@ -15,11 +17,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class WeChatMpUtils {
 
-    public static final WxMpService wxMpService = WeChatConfig.getWxMpService();
+    @Resource
+    private WeChatConfig wxMpService;
 
     public static void main(String[] args) {
         WeChatMpUtils weChatMpUtils = new WeChatMpUtils();
-        System.out.println(weChatMpUtils.getUserInfo("o7vUD6ebtkEualtIMNXpDS6ixIDE","zh_CN"));
+        System.out.println(weChatMpUtils.getUserInfo("o7vUD6ebtkEualtIMNXpDS6ixIDE", "zh_CN"));
     }
 
     /**
@@ -31,7 +34,7 @@ public class WeChatMpUtils {
     public String getOpenid(String authCode) {
         String openId = "";
         try {
-            WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(authCode);
+            WxOAuth2AccessToken accessToken = wxMpService.getWxMpService().getOAuth2Service().getAccessToken(authCode);
             if (null != accessToken) {
                 openId = accessToken.getOpenId();
             }
@@ -52,7 +55,7 @@ public class WeChatMpUtils {
     public WxMpUser getUserInfo(String openid, String lang) {
         WxMpUser wxMpUser = null;
         try {
-            wxMpUser = wxMpService.getUserService().userInfo(openid, lang);
+            wxMpUser = wxMpService.getWxMpService().getUserService().userInfo(openid, lang);
 
         } catch (WxErrorException e) {
 
@@ -70,8 +73,8 @@ public class WeChatMpUtils {
     public WxMpUser getOAuth2UserInfo(String code, String lang) {
         WxMpUser wxMpUser = null;
         try {
-            WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(code);
-            wxMpUser = wxMpService.getUserService().userInfo(accessToken.getOpenId(), lang);
+            WxOAuth2AccessToken accessToken = wxMpService.getWxMpService().getOAuth2Service().getAccessToken(code);
+            wxMpUser = wxMpService.getWxMpService().getUserService().userInfo(accessToken.getOpenId(), lang);
         } catch (WxErrorException e) {
 
         }

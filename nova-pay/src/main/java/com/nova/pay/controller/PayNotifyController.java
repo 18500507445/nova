@@ -1,9 +1,20 @@
 package com.nova.pay.controller;
 
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
+import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
+import com.github.binarywang.wxpay.bean.result.BaseWxPayResult;
+import com.github.binarywang.wxpay.constant.WxPayConstants;
+import com.github.binarywang.wxpay.exception.WxPayException;
+import com.github.binarywang.wxpay.service.WxPayService;
+import com.github.binarywang.wxpay.util.XmlConfig;
 import com.nova.pay.config.AliPayConfig;
+import com.nova.pay.config.WeChatConfig;
 import com.nova.pay.config.YeePayConfig;
 import com.nova.pay.utils.AliPayUtil;
 import com.nova.pay.utils.YeePayUtil;
@@ -20,7 +31,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,13 +52,18 @@ public class PayNotifyController {
     @Resource
     private AliPayUtil aliPayUtil;
 
+    @Resource
+    private WeChatConfig weChatConfig;
+
     /**
      * 支付宝通知
      */
     @PostMapping("aLiPay")
-    public void aLiPay(HttpServletRequest request, HttpServletResponse response) {
+    public String aLiPay(HttpServletRequest request) {
         String orderId = "";
         String out = AliPayConfig.NOTIFY_FAIL;
+        int payFlag = 0;
+        String sign = "";
         //1.0 获取支付宝发送过来的信息
         Map<String, String> params = new HashMap<>(16);
         try {
@@ -78,31 +96,68 @@ public class PayNotifyController {
                 boolean check = aliPayUtil.rsaCheckV1(params, "publicKey");
                 logger.info("支付宝通知参数:{}------验签结果:{}", JSONObject.toJSONString(params), check);
                 if (check) {
-                    /**
-                     * 收到回调，延长过期时间
-                     */
-                    //int notifyOrderFlag = orderService.notifyOrder(orderId);
-                    //logger.info("aLiPay====>orderId:{}, notifyOrderFlag:{}", orderId, notifyOrderFlag);
 
-                    /**
-                     * 阿里回调修改成异步处理
-                     */
-                    Map<String, String> jmsParams = new HashMap<>(16);
-                    jmsParams.put("totalAmount", totalAmount);
-                    jmsParams.put("tradeStatus", tradeStatus);
-                    jmsParams.put("orderId", orderId);
-                    jmsParams.put("outTradeNo", outTradeNo);
-                    //rabbitTemplate.convertAndSend(NtPayOrder.aliPayNotifyListener, jmsParams);
-                    out = AliPayConfig.NOTIFY_SUCCESS;
+
                 }
             }
-
-            //只要验签成功了,就告诉阿里成功,这样就不会一直回调了
-            response.getWriter().write(out);
         } catch (Exception e) {
-            logger.error("支付宝通知异常:", e);
+            logger.error("aLiPayNotify异常:{}", e.getMessage());
+        } finally {
+            logger.info("aLiPayNotify====>orderId:{}, payFlag:{}, sign:{}", orderId, payFlag, sign);
         }
+        return out;
     }
+
+
+    /**
+     * 微信V2通知
+     */
+    @PostMapping("weChatV2Pay")
+    public String weChatV2Pay(HttpServletRequest request) {
+        String orderId = "";
+        String out = "";
+        int payFlag = 0;
+        String sign = "";
+        XmlConfig.fastMode = true;
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+            String line;
+            StringBuilder xmlString = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                xmlString.append(line);
+            }
+            //解析xml转对象
+            WxPayOrderNotifyResult notifyResult = BaseWxPayResult.fromXML(xmlString.toString(), WxPayOrderNotifyResult.class);
+            logger.info("weChatV2PayNotify：{}", JSONUtil.toJsonStr(notifyResult));
+            orderId = notifyResult.getOutTradeNo();
+            String tradeNo = notifyResult.getTransactionId();
+            //查询订单
+            if (ObjectUtil.isNotNull(null)) {
+                //回调改成:处理中
+
+                //查询配置参数，验签处理
+                if (ObjectUtil.isNotNull(null)) {
+                    WxPayService wxV2PayService = weChatConfig.getWxV2PayService("", "", "", "");
+                    notifyResult = wxV2PayService.parseOrderNotifyResult(xmlString.toString());
+                    if (StrUtil.equals(WxPayConstants.ResultCode.SUCCESS, notifyResult.getReturnCode())) {
+                        //成功逻辑
+                    } else {
+                        //失败逻辑
+                    }
+                }
+            }
+            out = WxPayNotifyResponse.success("OK");
+        } catch (IOException | WxPayException e) {
+            String message = e.getMessage();
+            out = WxPayNotifyResponse.success(message);
+            logger.error("weChatV2PayNotify异常:{}", message);
+        } finally {
+            XmlConfig.fastMode = false;
+            logger.info("weChatV2PayNotify====>orderId:{}, payFlag:{}, sign:{}", orderId, payFlag, sign);
+        }
+        return out;
+    }
+
 
     /**
      * 苹果通知

@@ -17,6 +17,7 @@ import com.github.binarywang.wxpay.util.XmlConfig;
 import com.nova.pay.config.WeChatConfig;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.util.Date;
 
@@ -29,14 +30,15 @@ import java.util.Date;
 @Component
 public class WeChatV2PayUtils {
 
-    public static final WxPayService wxService = WeChatConfig.getWxV2PayService();
+    @Resource
+    private WeChatConfig wxService;
 
     /**
      * unifiedOrder和createOrder都可以
      *
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         WeChatV2PayUtils weChatV2PayUtils = new WeChatV2PayUtils();
         WxPayUnifiedOrderRequest wxPayUnifiedOrderRequest = new WxPayUnifiedOrderRequest();
         try {
@@ -103,7 +105,7 @@ public class WeChatV2PayUtils {
      * @param request 请求对象，注意一些参数如appid、mchid等不用设置，方法内会自动从配置对象中获取到（前提是对应配置中已经设置）
      */
     public WxPayUnifiedOrderResult unifiedOrder(WxPayUnifiedOrderRequest request) throws WxPayException {
-        return wxService.unifiedOrder(request);
+        return wxService.getWxV2PayService().unifiedOrder(request);
     }
 
 
@@ -115,7 +117,7 @@ public class WeChatV2PayUtils {
      * @return WxPayAppOrderResult、WxPayMpOrderResult、WxPayMwebOrderResult、WxPayNativeOrderResult
      */
     public <T> T createOrder(WxPayUnifiedOrderRequest request) throws WxPayException {
-        return wxService.createOrder(request);
+        return wxService.getWxV2PayService().createOrder(request);
     }
 
     /**
@@ -133,11 +135,11 @@ public class WeChatV2PayUtils {
      * @param outTradeNo 商户系统内部的订单号
      */
     public WxPayOrderCloseResult closeOrder(String outTradeNo) throws WxPayException {
-        return wxService.closeOrder(outTradeNo);
+        return wxService.getWxV2PayService().closeOrder(outTradeNo);
     }
 
     public WxPayOrderCloseResult closeOrder(WxPayOrderCloseRequest wxPayOrderCloseRequest) throws WxPayException {
-        return wxService.closeOrder(wxPayOrderCloseRequest);
+        return wxService.getWxV2PayService().closeOrder(wxPayOrderCloseRequest);
     }
 
     /**
@@ -157,11 +159,11 @@ public class WeChatV2PayUtils {
      * @param outTradeNo    商户系统内部的订单号，当没提供transactionId时需要传这个。
      */
     public WxPayOrderQueryResult queryOrder(String transactionId, String outTradeNo) throws WxPayException {
-        return wxService.queryOrder(transactionId, outTradeNo);
+        return wxService.getWxV2PayService().queryOrder(transactionId, outTradeNo);
     }
 
     public WxPayOrderQueryResult queryOrder(WxPayOrderQueryRequest wxPayOrderQueryRequest) throws WxPayException {
-        return wxService.queryOrder(wxPayOrderQueryRequest);
+        return wxService.getWxV2PayService().queryOrder(wxPayOrderQueryRequest);
     }
 
     /**
@@ -175,7 +177,7 @@ public class WeChatV2PayUtils {
      * @return 退款操作结果
      */
     public WxPayRefundResult refund(WxPayRefundRequest request) throws WxPayException {
-        return wxService.refund(request);
+        return wxService.getWxV2PayService().refund(request);
     }
 
     /**
@@ -196,11 +198,11 @@ public class WeChatV2PayUtils {
      * @return 退款信息
      */
     public WxPayRefundQueryResult refundQuery(String transactionId, String outTradeNo, String outRefundNo, String refundId) throws WxPayException {
-        return wxService.refundQuery(transactionId, outTradeNo, outRefundNo, refundId);
+        return wxService.getWxV2PayService().refundQuery(transactionId, outTradeNo, outRefundNo, refundId);
     }
 
     public WxPayRefundQueryResult refundQuery(WxPayRefundQueryRequest wxPayRefundQueryRequest) throws WxPayException {
-        return wxService.refundQuery(wxPayRefundQueryRequest);
+        return wxService.getWxV2PayService().refundQuery(wxPayRefundQueryRequest);
     }
 
     /**
@@ -211,7 +213,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public String parseOrderNotifyResult(String xmlData) throws WxPayException {
-        final WxPayOrderNotifyResult notifyResult = wxService.parseOrderNotifyResult(xmlData);
+        final WxPayOrderNotifyResult notifyResult = wxService.getWxV2PayService().parseOrderNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象
         return WxPayNotifyResponse.success("成功");
     }
@@ -224,7 +226,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public String parseRefundNotifyResult(String xmlData) throws WxPayException {
-        final WxPayRefundNotifyResult result = wxService.parseRefundNotifyResult(xmlData);
+        final WxPayRefundNotifyResult result = wxService.getWxV2PayService().parseRefundNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象
         return WxPayNotifyResponse.success("成功");
     }
@@ -237,7 +239,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public String parseScanPayNotifyResult(String xmlData) throws WxPayException {
-        final WxScanPayNotifyResult result = wxService.parseScanPayNotifyResult(xmlData);
+        final WxScanPayNotifyResult result = wxService.getWxV2PayService().parseScanPayNotifyResult(xmlData);
         // TODO 根据自己业务场景需要构造返回对象
         return WxPayNotifyResponse.success("成功");
     }
@@ -256,7 +258,7 @@ public class WeChatV2PayUtils {
      * @param request 请求对象
      */
     public WxPaySendRedpackResult sendRedPack(WxPaySendRedpackRequest request) throws WxPayException {
-        return wxService.getRedpackService().sendRedpack(request);
+        return wxService.getWxV2PayService().getRedpackService().sendRedpack(request);
     }
 
     /**
@@ -271,7 +273,7 @@ public class WeChatV2PayUtils {
      * @param mchBillNo 商户发放红包的商户订单号，比如10000098201411111234567890
      */
     public WxPayRedpackQueryResult queryRedPack(String mchBillNo) throws WxPayException {
-        return wxService.getRedpackService().queryRedpack(mchBillNo);
+        return wxService.getWxV2PayService().getRedpackService().queryRedpack(mchBillNo);
     }
 
     /**
@@ -289,7 +291,7 @@ public class WeChatV2PayUtils {
      * @return 生成的二维码的字节数组
      */
     public byte[] createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
-        return wxService.createScanPayQrcodeMode1(productId, logoFile, sideLength);
+        return wxService.getWxV2PayService().createScanPayQrcodeMode1(productId, logoFile, sideLength);
     }
 
     /**
@@ -305,7 +307,7 @@ public class WeChatV2PayUtils {
      * @return 生成的二维码URL连接
      */
     public String createScanPayQrcodeMode1(String productId) {
-        return wxService.createScanPayQrcodeMode1(productId);
+        return wxService.getWxV2PayService().createScanPayQrcodeMode1(productId);
     }
 
     /**
@@ -322,7 +324,7 @@ public class WeChatV2PayUtils {
      * @return 生成的二维码的字节数组
      */
     public byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
-        return wxService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength);
+        return wxService.getWxV2PayService().createScanPayQrcodeMode2(codeUrl, logoFile, sideLength);
     }
 
     /**
@@ -337,7 +339,7 @@ public class WeChatV2PayUtils {
      * </pre>
      */
     public void report(WxPayReportRequest request) throws WxPayException {
-        wxService.report(request);
+        wxService.getWxV2PayService().report(request);
     }
 
     /**
@@ -360,7 +362,7 @@ public class WeChatV2PayUtils {
      * @return 保存到本地的临时文件
      */
     public WxPayBillResult downloadBill(String billDate, String billType, String tarType, String deviceInfo) throws WxPayException {
-        return wxService.downloadBill(billDate, billType, tarType, deviceInfo);
+        return wxService.getWxV2PayService().downloadBill(billDate, billType, tarType, deviceInfo);
     }
 
     /**
@@ -371,7 +373,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public WxPayBillResult downloadBill(WxPayDownloadBillRequest wxPayDownloadBillRequest) throws WxPayException {
-        return wxService.downloadBill(wxPayDownloadBillRequest);
+        return wxService.getWxV2PayService().downloadBill(wxPayDownloadBillRequest);
     }
 
     /**
@@ -387,7 +389,7 @@ public class WeChatV2PayUtils {
      * </pre>
      */
     public WxPayMicropayResult microPay(WxPayMicropayRequest request) throws WxPayException {
-        return wxService.micropay(request);
+        return wxService.getWxV2PayService().micropay(request);
     }
 
     /**
@@ -403,7 +405,7 @@ public class WeChatV2PayUtils {
      * </pre>
      */
     public WxPayOrderReverseResult reverseOrder(WxPayOrderReverseRequest request) throws WxPayException {
-        return wxService.reverseOrder(request);
+        return wxService.getWxV2PayService().reverseOrder(request);
     }
 
     /**
@@ -413,7 +415,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public String getSandboxSignKey() throws WxPayException {
-        return wxService.getSandboxSignKey();
+        return wxService.getWxV2PayService().getSandboxSignKey();
     }
 
     /**
@@ -424,7 +426,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public WxPayCouponSendResult sendCoupon(WxPayCouponSendRequest request) throws WxPayException {
-        return wxService.sendCoupon(request);
+        return wxService.getWxV2PayService().sendCoupon(request);
     }
 
     /**
@@ -435,7 +437,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public WxPayCouponStockQueryResult queryCouponStock(WxPayCouponStockQueryRequest request) throws WxPayException {
-        return wxService.queryCouponStock(request);
+        return wxService.getWxV2PayService().queryCouponStock(request);
     }
 
     /**
@@ -446,7 +448,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public WxPayCouponInfoQueryResult queryCouponInfo(WxPayCouponInfoQueryRequest request) throws WxPayException {
-        return wxService.queryCouponInfo(request);
+        return wxService.getWxV2PayService().queryCouponInfo(request);
     }
 
     /**
@@ -460,7 +462,7 @@ public class WeChatV2PayUtils {
      * @throws WxPayException
      */
     public String queryComment(Date beginDate, Date endDate, Integer offset, Integer limit) throws WxPayException {
-        return wxService.queryComment(beginDate, endDate, offset, limit);
+        return wxService.getWxV2PayService().queryComment(beginDate, endDate, offset, limit);
     }
 
 }

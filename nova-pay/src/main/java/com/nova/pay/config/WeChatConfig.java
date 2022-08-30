@@ -17,11 +17,33 @@ import org.springframework.stereotype.Component;
 public class WeChatConfig {
 
     /**
+     * 微信v2配置
+     *
+     * @param appId   应用id
+     * @param mchId   商户id
+     * @param mchKey  商户秘钥
+     * @param keyPath apiclient_cert.p12
+     * @return
+     */
+    public WxPayService getWxV2PayService(String appId, String mchId, String mchKey, String keyPath) {
+        WxPayConfig payConfig = new WxPayConfig();
+        payConfig.setAppId(appId);
+        payConfig.setMchId(mchId);
+        payConfig.setMchKey(mchKey);
+        payConfig.setKeyPath(keyPath);
+        // 可以指定是否使用沙箱环境
+        payConfig.setUseSandboxEnv(false);
+        WxPayService wxPayService = new WxPayServiceImpl();
+        wxPayService.setConfig(payConfig);
+        return wxPayService;
+    }
+
+    /**
      * 设置微信V2配置
      *
      * @return
      */
-    public static WxPayService getWxV2PayService() {
+    public WxPayService getWxV2PayService() {
         WxPayConfig payConfig = new WxPayConfig();
         payConfig.setAppId("");
         payConfig.setMchId("");
@@ -39,14 +61,14 @@ public class WeChatConfig {
      *
      * @return
      */
-    public static WxPayService getWxV3PayService() {
+    public WxPayService getWxV3PayService() {
         WxPayConfig payConfig = new WxPayConfig();
         payConfig.setAppId("");
         payConfig.setMchId("");
         payConfig.setApiV3Key("");
         payConfig.setCertSerialNo("");
-        payConfig.setPrivateKeyPath("/Users/wangzehui/IdeaProjects/nova/nova-pay/src/main/resources/cert/1625017129/apiclient_key.pem");
-        payConfig.setPrivateCertPath("/Users/wangzehui/IdeaProjects/nova/nova-pay/src/main/resources/cert/1625017129/apiclient_cert.pem");
+        payConfig.setPrivateKeyPath("");
+        payConfig.setPrivateCertPath("");
         // 可以指定是否使用沙箱环境
         payConfig.setUseSandboxEnv(false);
         WxPayService wxPayService = new WxPayServiceImpl();
@@ -59,7 +81,7 @@ public class WeChatConfig {
      *
      * @return
      */
-    public static WxPayService getEntWxPayService() {
+    public WxPayService getEntWxPayService() {
         WxPayConfig entWxPayConfig = new WxPayConfig();
         entWxPayConfig.setAppId("");
         entWxPayConfig.setMchId("");
@@ -75,7 +97,7 @@ public class WeChatConfig {
      *
      * @return
      */
-    public static WxMpService getWxMpService() {
+    public WxMpService getWxMpService() {
         WxMpService wxMpService = new WxMpServiceImpl();
         WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
         configStorage.setAppId("");

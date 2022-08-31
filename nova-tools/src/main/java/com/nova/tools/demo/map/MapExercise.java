@@ -9,6 +9,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toMap;
+
 /**
  * @Description:
  * @Author: wangzehui
@@ -64,6 +66,8 @@ public class MapExercise {
             map.put(people.getGroupId(), people.getGroupName());
         });
 
+        //Map<Integer, String> map = peopleResult.stream().collect(toMap(People::getGroupId, People::getGroupName));
+
         Map<Integer, List<People>> group = peopleResult.stream().collect(Collectors.groupingBy(People::getGroupId));
         for (Map.Entry<Integer, List<People>> next : group.entrySet()) {
             GroupPeople groupPeople = new GroupPeople();
@@ -85,6 +89,7 @@ public class MapExercise {
 
         System.out.println(JSONObject.toJSONString(groupList));
     }
+
 
     private static void hashMap() {
         /**

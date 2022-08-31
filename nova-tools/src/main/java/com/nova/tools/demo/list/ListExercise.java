@@ -1,5 +1,6 @@
 package com.nova.tools.demo.list;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
@@ -7,6 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 /**
  * @Description: list练习
@@ -18,7 +21,7 @@ public class ListExercise {
 
     public static void main(String[] args) {
         List<People> peopleList = Myself.EXERCISE_LIST;
-        listFilter(peopleList);
+        calculation(peopleList);
     }
 
     /**
@@ -26,7 +29,6 @@ public class ListExercise {
      */
     private static void listForEach(List<People> peopleList) {
         List<People> peopleListNew = new ArrayList<>();
-
         peopleList.forEach(people -> {
             People peopleNew = new People();
             peopleNew.setId(people.getId());
@@ -37,9 +39,7 @@ public class ListExercise {
             peopleNew.setDescription(people.getDescription());
             peopleListNew.add(peopleNew);
         });
-
         System.out.println(JSONObject.toJSONString(peopleListNew));
-
 
     }
 
@@ -108,6 +108,32 @@ public class ListExercise {
         //过滤掉二组
         List<People> filterList = peopleList.stream().filter(people -> "一组".equals(people.getGroupName())).collect(Collectors.toList());
         System.out.println(JSONObject.toJSONString(filterList));
+    }
+
+    /**
+     * list转map
+     */
+    private static void ToMap(List<People> people) {
+        Map<String, Integer> collect = people.stream().collect(toMap(People::getName, People::getAge));
+        System.out.println(JSONUtil.toJsonStr(collect));
+    }
+
+    /**
+     * 计算 求和，最大，最小，平均
+     */
+    private static void calculation(List<People> people) {
+        IntSummaryStatistics collect = people.stream().collect(summarizingInt(People::getAge));
+        System.out.println(collect.getSum());
+        System.out.println(collect.getMax());
+        System.out.println(collect.getMin());
+        System.out.println(collect.getAverage());
+
+
+        Double avg = people.stream().collect(averagingInt(People::getAge));
+        System.out.println(avg);
+
+        Integer sum = people.stream().collect(summingInt(People::getAge));
+        System.out.println(sum);
     }
 
 }

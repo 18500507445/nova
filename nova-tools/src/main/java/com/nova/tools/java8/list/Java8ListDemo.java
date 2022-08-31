@@ -1,4 +1,4 @@
-package com.nova.tools.demo.list;
+package com.nova.tools.java8.list;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;

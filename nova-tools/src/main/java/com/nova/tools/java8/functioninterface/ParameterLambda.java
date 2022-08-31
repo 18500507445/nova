@@ -1,4 +1,4 @@
-package com.nova.tools.demo.functioninterface;
+package com.nova.tools.java8.functioninterface;
 
 /**
  * @Description:

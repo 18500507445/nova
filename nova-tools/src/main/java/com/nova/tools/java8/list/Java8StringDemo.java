@@ -1,4 +1,4 @@
-package com.nova.tools.demo.list;
+package com.nova.tools.java8.list;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

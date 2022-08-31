@@ -129,10 +129,13 @@ public class ListExercise {
         System.out.println(collect.getAverage());
 
 
-        Double avg = people.stream().collect(averagingInt(People::getAge));
-        System.out.println(avg);
+        Double doubleAvg = people.stream().collect(averagingInt(People::getAge));
+        System.out.println(doubleAvg);
 
-        Integer sum = people.stream().collect(summingInt(People::getAge));
+        int sum = people.stream().mapToInt(People::getAge).sum();
+        int max = people.stream().mapToInt(People::getAge).max().getAsInt();
+        int min = people.stream().mapToInt(People::getAge).min().getAsInt();
+        double asDouble = people.stream().mapToInt(People::getAge).average().getAsDouble();
         System.out.println(sum);
     }
 

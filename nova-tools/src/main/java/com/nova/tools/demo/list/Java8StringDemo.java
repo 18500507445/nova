@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @Date: 2019/6/14 15:26
  */
 
-public class Java8Tester {
+public class Java8StringDemo {
     public static void main(String args[]) {
 
         // 计算空字符串

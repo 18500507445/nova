@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.*;
  * @Date: 2019/6/14 14:07
  */
 
-public class ListExercise {
+public class Java8ListDemo {
 
     public static void main(String[] args) {
         List<People> peopleList = Myself.EXERCISE_LIST;
@@ -120,6 +120,7 @@ public class ListExercise {
 
     /**
      * 计算 求和，最大，最小，平均
+     * 排序
      */
     private static void calculation(List<People> people) {
         IntSummaryStatistics collect = people.stream().collect(summarizingInt(People::getAge));
@@ -137,6 +138,16 @@ public class ListExercise {
         int min = people.stream().mapToInt(People::getAge).min().getAsInt();
         double asDouble = people.stream().mapToInt(People::getAge).average().getAsDouble();
         System.out.println(sum);
+
+        //找出最大的对象
+        People data = people.stream().max(Comparator.comparing(People::getAge)).get();
+
+        //排序-正序
+        people.sort(Comparator.comparing(People::getAge));
+        //倒序
+        people.sort((o1, o2) -> o2.getAge().compareTo(o1.getAge()));
+        //倒叙
+        people.sort(Comparator.comparing(People::getAge).reversed());
     }
 
 }

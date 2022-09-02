@@ -18,7 +18,7 @@ public class Lock4 {
         executor.submit(() -> {
             long stamp = lock.writeLock();
             try {
-                io.github.biezhi.java8.concurrent.ConcurrentUtils.sleep(1);
+                ConcurrentUtils.sleep(1);
                 map.put("foo", "bar");
             } finally {
                 lock.unlockWrite(stamp);
@@ -29,7 +29,7 @@ public class Lock4 {
             long stamp = lock.readLock();
             try {
                 System.out.println(map.get("foo"));
-                io.github.biezhi.java8.concurrent.ConcurrentUtils.sleep(1);
+                ConcurrentUtils.sleep(1);
             } finally {
                 lock.unlockRead(stamp);
             }
@@ -37,7 +37,7 @@ public class Lock4 {
         executor.submit(readTask);
         executor.submit(readTask);
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
     }
 
 }

@@ -22,7 +22,7 @@ public class Synchronized2 {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(Synchronized2::incrementSync));
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
 
         System.out.println(count);
     }

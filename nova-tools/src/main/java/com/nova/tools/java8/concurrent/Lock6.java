@@ -30,7 +30,7 @@ public class Lock6 {
             }
         });
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
     }
 
 }

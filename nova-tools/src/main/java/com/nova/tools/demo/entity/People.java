@@ -2,6 +2,7 @@ package com.nova.tools.demo.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -47,6 +48,12 @@ public class People {
      */
     public Date createTime;
 
+
+    /**
+     * 钱
+     */
+    private BigDecimal fee;
+
     public People() {
 
     }
@@ -58,7 +65,7 @@ public class People {
         this.description = description;
     }
 
-    public People(Integer id, Integer age, String name, Integer groupId, String groupName, String description, Date createTime) {
+    public People(Integer id, Integer age, String name, Integer groupId, String groupName, String description, Date createTime, BigDecimal fee) {
         this.id = id;
         this.age = age;
         this.groupId = groupId;
@@ -66,5 +73,6 @@ public class People {
         this.name = name;
         this.description = description;
         this.createTime = createTime;
+        this.fee = fee;
     }
 }

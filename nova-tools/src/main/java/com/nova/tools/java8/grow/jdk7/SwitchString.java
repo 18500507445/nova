@@ -1,6 +1,7 @@
 package com.nova.tools.java8.grow.jdk7;
 
-import io.github.biezhi.java8.growing.jdk5.EnumDemo;
+
+import com.nova.tools.java8.grow.jdk5.EnumDemo;
 
 /**
  * switch对String的支持

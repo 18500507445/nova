@@ -6,6 +6,7 @@ import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -148,6 +149,17 @@ public class Java8ListDemo {
         people.sort((o1, o2) -> o2.getAge().compareTo(o1.getAge()));
         //倒叙
         people.sort(Comparator.comparing(People::getAge).reversed());
+
+        //bigDecimal求和
+        BigDecimal reduce = people.stream().map(People::getFee).reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("bigDecimal:" + reduce);
+        //
+        Optional<People> maxPeople = people.stream().max(Comparator.comparing(People::getFee));
+        Optional<People> minPeople = people.stream().min(Comparator.comparing(People::getFee));
+        BigDecimal maxFee = maxPeople.get().getFee();
+        BigDecimal minFee = minPeople.get().getFee();
+        System.out.println(maxFee);
+        System.out.println(minFee);
     }
 
 }

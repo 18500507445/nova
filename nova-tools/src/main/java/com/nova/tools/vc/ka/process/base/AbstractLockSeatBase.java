@@ -26,4 +26,5 @@ public abstract class AbstractLockSeatBase {
     public AbstractLockSeatBase(TicketSystemEnum ticketSystemEnum) {
         this.ticketSystemEnum = ticketSystemEnum;
     }
+
 }

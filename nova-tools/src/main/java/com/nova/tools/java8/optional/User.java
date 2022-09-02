@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Optional;
 
+
 /**
  * User
  *
@@ -16,8 +17,8 @@ public class User {
     private String  username;
     private String  password;
     private Integer age;
-    private io.github.biezhi.java8.optional.Address address;
+    private Address address;
 
-    private Optional<io.github.biezhi.java8.optional.Address> optAddress;
+    private Optional<Address> optAddress;
 
 }

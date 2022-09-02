@@ -23,7 +23,7 @@ public class Synchronized1 {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(Synchronized1::incrementSync));
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
 
         System.out.println("   Sync: " + count);
     }
@@ -36,7 +36,7 @@ public class Synchronized1 {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(Synchronized1::increment));
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
 
         System.out.println("NonSync: " + count);
     }

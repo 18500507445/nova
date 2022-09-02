@@ -21,7 +21,7 @@ public class LongAccumulator1 {
         IntStream.range(0, 10)
                 .forEach(i -> executor.submit(() -> accumulator.accumulate(i)));
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
 
         System.out.format("Add: %d\n", accumulator.getThenReset());
     }

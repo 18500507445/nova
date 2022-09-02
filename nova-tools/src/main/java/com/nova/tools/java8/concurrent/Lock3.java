@@ -19,7 +19,7 @@ public class Lock3 {
         executor.submit(() -> {
             lock.writeLock().lock();
             try {
-                io.github.biezhi.java8.concurrent.ConcurrentUtils.sleep(1);
+                ConcurrentUtils.sleep(1);
                 map.put("foo", "bar");
             } finally {
                 lock.writeLock().unlock();
@@ -30,7 +30,7 @@ public class Lock3 {
             lock.readLock().lock();
             try {
                 System.out.println(map.get("foo"));
-                io.github.biezhi.java8.concurrent.ConcurrentUtils.sleep(1);
+                ConcurrentUtils.sleep(1);
             } finally {
                 lock.readLock().unlock();
             }
@@ -38,7 +38,7 @@ public class Lock3 {
         executor.submit(readTask);
         executor.submit(readTask);
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
     }
 
 }

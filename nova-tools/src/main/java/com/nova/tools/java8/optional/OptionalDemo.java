@@ -14,21 +14,21 @@ public class OptionalDemo {
      */
     public void createOptional() {
         // 声明一个空的Optional
-        Optional<io.github.biezhi.java8.optional.Address> optionalAddress = Optional.empty();
+        Optional<Address> optionalAddress = Optional.empty();
 
         // 依据一个非空值创建Optional
-        Optional<io.github.biezhi.java8.optional.Address> optionalAddress2 = Optional.of(new io.github.biezhi.java8.optional.Address());
+        Optional<Address> optionalAddress2 = Optional.of(new Address());
 
         // 可接受null的Optional
-        Optional<io.github.biezhi.java8.optional.Address> optionalAddress3 = Optional.ofNullable(new io.github.biezhi.java8.optional.Address());
+        Optional<Address> optionalAddress3 = Optional.ofNullable(new Address());
     }
 
     /**
      * 2. 使用 map 从 Optional 对象中提取和转换值
      */
     public void map() {
-        Optional<io.github.biezhi.java8.optional.Address> addressOptional = Optional.ofNullable(new io.github.biezhi.java8.optional.Address("达尔文路", "88号"));
-        Optional<String>  street          = addressOptional.map(io.github.biezhi.java8.optional.Address::getStreet);
+        Optional<Address> addressOptional = Optional.ofNullable(new Address("达尔文路", "88号"));
+        Optional<String>  street          = addressOptional.map(Address::getStreet);
     }
 
     /**
@@ -38,7 +38,7 @@ public class OptionalDemo {
         User           user         = new User();
         Optional<User> userOptional = Optional.of(user);
 //        userOptional.map(user -> user.getOptAddress())
-        Optional<String> stringOptional = userOptional.flatMap(User::getOptAddress).map(io.github.biezhi.java8.optional.Address::getStreet);
+        Optional<String> stringOptional = userOptional.flatMap(User::getOptAddress).map(Address::getStreet);
 
     }
 
@@ -46,8 +46,8 @@ public class OptionalDemo {
      * 4. 默认行为及解引用 Optional 对象
      */
     public void defaultValue() {
-        Optional<io.github.biezhi.java8.optional.Address> addressOptional = Optional.ofNullable(null);
-        String            street          = addressOptional.map(io.github.biezhi.java8.optional.Address::getStreet).orElse("北京二环");
+        Optional<Address> addressOptional = Optional.ofNullable(null);
+        String            street          = addressOptional.map(Address::getStreet).orElse("北京二环");
         System.out.println(street);
     }
 
@@ -55,7 +55,7 @@ public class OptionalDemo {
         User user = new User();
         user.setUsername("biezhi");
         user.setPassword("123456");
-        user.setOptAddress(Optional.of(new io.github.biezhi.java8.optional.Address("达尔文路", "88号")));
+        user.setOptAddress(Optional.of(new Address("达尔文路", "88号")));
         user.setAge(30);
 
 //        Address address1 = null;
@@ -78,7 +78,7 @@ public class OptionalDemo {
     public static String getStreet(Optional<User> user, int minAge) {
         return user.filter(u -> u.getAge() >= minAge)
                 .flatMap(User::getOptAddress)
-                .map(io.github.biezhi.java8.optional.Address::getStreet)
+                .map(Address::getStreet)
                 .orElse("没有");
     }
 

@@ -22,7 +22,7 @@ public class LongAdder1 {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(() -> adder.add(2)));
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
 
         System.out.format("Add: %d\n", adder.sumThenReset());
     }
@@ -33,7 +33,7 @@ public class LongAdder1 {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(adder::increment));
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
 
         System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, adder.sumThenReset());
     }

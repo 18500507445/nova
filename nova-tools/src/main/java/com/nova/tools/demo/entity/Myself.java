@@ -41,9 +41,9 @@ public class Myself {
 
     //exercise-list
     public static final List<People> EXERCISE_LIST = Arrays.asList(
-            new People(1, 15, "小明", 1, "一组", "", DateUtil.beginOfWeek(new Date())),
-            new People(2, 16, "小红", 1, "一组", "很高",DateUtil.date()),
-            new People(3, 17, "小李", 2, "二组", "很胖", DateUtil.beginOfMonth(new Date()))
+            new People(1, 15, "小明", 1, "一组", "", DateUtil.beginOfWeek(new Date()), new BigDecimal("12")),
+            new People(2, 16, "小红", 1, "一组", "很高", DateUtil.date(), new BigDecimal("1")),
+            new People(3, 17, "小李", 2, "二组", "很胖", DateUtil.beginOfMonth(new Date()), new BigDecimal("5"))
     );
 
     //string-arr

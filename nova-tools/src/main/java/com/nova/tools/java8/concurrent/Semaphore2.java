@@ -16,7 +16,7 @@ public class Semaphore2 {
         IntStream.range(0, 10)
                 .forEach(i -> executor.submit(Semaphore2::doWork));
 
-        io.github.biezhi.java8.concurrent.ConcurrentUtils.stop(executor);
+        ConcurrentUtils.stop(executor);
     }
 
     private static void doWork() {
@@ -25,7 +25,7 @@ public class Semaphore2 {
             permit = semaphore.tryAcquire(1, TimeUnit.SECONDS);
             if (permit) {
                 System.out.println("Semaphore acquired");
-                io.github.biezhi.java8.concurrent.ConcurrentUtils.sleep(5);
+                ConcurrentUtils.sleep(5);
             } else {
                 System.out.println("Could not acquire semaphore");
             }

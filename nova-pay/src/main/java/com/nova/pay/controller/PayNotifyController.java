@@ -1,6 +1,7 @@
 package com.nova.pay.controller;
 
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
@@ -20,7 +21,6 @@ import com.nova.pay.utils.AliPayUtil;
 import com.nova.pay.utils.YeePayUtil;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalEnvelopeDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +57,10 @@ public class PayNotifyController {
 
     /**
      * 支付宝通知
+     * 流程
+     * (1)先做幂等(查订单状态未支付的在做处理)，避免重复通知有垃圾数据
+     * (2)然做修改支付订单状态为处理中，进行验签
+     * (3)业务处理走消息队列
      */
     @PostMapping("aLiPay")
     public String aLiPay(HttpServletRequest request) {
@@ -78,17 +82,17 @@ public class PayNotifyController {
                 valueStr = new String(valueStr.getBytes(), StandardCharsets.UTF_8);
                 params.put(str, valueStr);
             }
+            orderId = MapUtil.getStr(params, "out_trade_no");
 
-            String totalAmount = MapUtils.getString(params, "total_amount");
-            String tradeStatus = MapUtils.getString(params, "trade_status");
+            String totalAmount = MapUtil.getStr(params, "total_amount");
+            String tradeStatus = MapUtil.getStr(params, "trade_status");
             if (StringUtils.equals(AliPayConfig.TRADE_SUCCESS, tradeStatus)) {
-                //体育订单id,支付宝交易流水号
-                orderId = MapUtils.getString(params, "out_trade_no");
-                String outTradeNo = MapUtils.getString(params, "trade_no");
+                //内部订单id,支付宝交易流水号
+                String outTradeNo = MapUtil.getStr(params, "trade_no");
                 //回调改成:处理中
                 //payService.update(new NtPayOrder(orderId, outTradeNo, 4, 1));
 
-                String appId = MapUtils.getString(params, "app_id");
+                String appId = MapUtil.getStr(params, "app_id");
                 //NtPayConfig ntPayConfig = ntPayConfigService.selectAliNtPayConfigByAppId(appId);
                 //String publicKey = ntPayConfig.getPublicKey();
                 //String privateKey = ntPayConfig.getPrivateKey();
@@ -96,7 +100,6 @@ public class PayNotifyController {
                 boolean check = aliPayUtil.rsaCheckV1(params, "publicKey");
                 logger.info("支付宝通知参数:{}------验签结果:{}", JSONObject.toJSONString(params), check);
                 if (check) {
-
 
                 }
             }
@@ -179,8 +182,8 @@ public class PayNotifyController {
                 valueStr = new String(valueStr.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
                 params.put(str, valueStr);
             }
-            String orderId = MapUtils.getString(params, "trade_no");
-            String sign = MapUtils.getString(params, "sign");
+            String orderId = MapUtil.getStr(params, "trade_no");
+            String sign = MapUtil.getStr(params, "sign");
             //String version = getValue("version");
             params.put("version", "version");
             logger.info("苹果通知:{}", JSONObject.toJSONString(params));

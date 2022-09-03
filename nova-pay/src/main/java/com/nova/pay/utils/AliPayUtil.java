@@ -229,6 +229,7 @@ public class AliPayUtil {
 
     /**
      * 查询订单
+     * 使用场景：调起支付超时，通知成功，但是通知响应超时，一般这种回调不会有重试通知了
      *
      * @param appId
      * @param orderId

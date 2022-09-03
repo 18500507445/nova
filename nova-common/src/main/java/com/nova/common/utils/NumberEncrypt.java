@@ -15,6 +15,7 @@ import java.math.BigInteger;
 @Data
 @Slf4j
 public class NumberEncrypt {
+
     //转换字符（0-9分别为["D","e","C","A","P","b","J","I","z","M"]
     private final static String CONVERT_KEY = "DeCAPbJIzM";
     //混淆字母
@@ -68,8 +69,8 @@ public class NumberEncrypt {
         String[] initArr = str.split("");
         int len = initArr.length;
         StringBuffer result = new StringBuffer();
-        for (int i = 0; i < len; i++) {
-            int k = CONVERT_KEY.indexOf(initArr[i]);
+        for (String s : initArr) {
+            int k = CONVERT_KEY.indexOf(s);
             if (k == -1) {
                 return str.getBytes();
             }

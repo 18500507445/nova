@@ -27,6 +27,7 @@
         <module>nova-tools</module>
         <module>nova-redis</module>
         <module>nova-mongodb</module>
+        <module>nova-mail</module>
         <module>nova-xxl</module>
     </modules>
 

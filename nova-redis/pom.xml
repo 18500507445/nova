@@ -30,10 +30,6 @@
             <artifactId>nova-framework</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.nova</groupId>
-            <artifactId>nova-common</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

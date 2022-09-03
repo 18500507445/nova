@@ -13,13 +13,20 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <jasypt.version>3.0.3</jasypt.version>
 
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.nova</groupId>
-            <artifactId>nova-common</artifactId>
+            <artifactId>nova-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- Spring Boot 邮件依赖 -->
@@ -28,5 +35,11 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!--jasypt配置文件加解密-->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>${jasypt.version}</version>
+        </dependency>
     </dependencies>
 </project>

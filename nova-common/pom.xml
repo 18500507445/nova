@@ -18,7 +18,7 @@
 
         <fastjson.version>2.0.7</fastjson.version>
         <lang3.version>3.12.0</lang3.version>
-        <hutool.version>5.8.4.M1</hutool.version>
+        <hutool.version>5.8.5</hutool.version>
         <collections4.version>4.4</collections4.version>
         <email.version>1.5</email.version>
         <guava.version>31.1-jre</guava.version>

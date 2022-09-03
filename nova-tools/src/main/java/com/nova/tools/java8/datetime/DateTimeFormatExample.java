@@ -15,9 +15,9 @@ import java.util.Locale;
 public class DateTimeFormatExample {
 
     public static void main(String[] args) {
-        DateTimeFormatter formatter          = DateTimeFormatter.BASIC_ISO_DATE;
-        String            formattedDate      = formatter.format(LocalDate.now());
-        String            formattedZonedDate = formatter.format(ZonedDateTime.now());
+        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
+        String formattedDate = formatter.format(LocalDate.now());
+        String formattedZonedDate = formatter.format(ZonedDateTime.now());
 
         System.out.println("LocalDate          : " + formattedDate);
         System.out.println("formattedZonedDate : " + formattedZonedDate);

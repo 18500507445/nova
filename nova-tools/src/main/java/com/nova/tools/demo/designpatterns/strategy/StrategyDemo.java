@@ -1,5 +1,6 @@
 package com.nova.tools.demo.designpatterns.strategy;
 
+import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
@@ -26,7 +27,7 @@ public class StrategyDemo {
 
     public static List<People> filterPeople(List<People> list, MyPredicate<People> mp) {
         List<People> result = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(list)) {
+        if (CollUtil.isNotEmpty(list)) {
             for (People people : list) {
                 if (mp.filter(people)) {
                     result.add(people);

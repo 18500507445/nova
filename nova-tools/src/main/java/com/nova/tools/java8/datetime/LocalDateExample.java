@@ -20,11 +20,11 @@ public class LocalDateExample {
         // 使用年月日信息构造出LocalDate对象
         LocalDate localDate2 = LocalDate.of(2018, 3, 3);
 
-        int       year       = localDate.getYear();
-        Month     month      = localDate.getMonth();
-        int       dayOfMonth = localDate.getDayOfMonth();
-        int       dayOfYear  = localDate.getDayOfYear();
-        DayOfWeek dayOfWeek  = localDate.getDayOfWeek();
+        int year = localDate.getYear();
+        Month month = localDate.getMonth();
+        int dayOfMonth = localDate.getDayOfMonth();
+        int dayOfYear = localDate.getDayOfYear();
+        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
         System.out.println("year       : " + year);
         System.out.println("month      : " + month.getValue());

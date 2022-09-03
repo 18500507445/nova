@@ -30,7 +30,7 @@ public class MapExercise {
     private static void forEachMapOld() {
         List<People> peopleResult = Myself.EXERCISE_LIST;
         HashMap<Integer, List<People>> map = new HashMap<>(16);
-        if (CollectionUtils.isNotEmpty(peopleResult)) {
+        if (CollUtil.isNotEmpty(peopleResult)) {
             for (People people : peopleResult) {
                 if (null != people.getGroupId()) {
                     List<People> peopleList = map.get(people.getGroupId());

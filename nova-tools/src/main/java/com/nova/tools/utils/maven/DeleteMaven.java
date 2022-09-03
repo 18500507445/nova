@@ -1,6 +1,7 @@
 package com.nova.tools.utils.maven;
 
 import java.io.File;
+import java.util.Objects;
 
 /**
  * @Description: maven 本地仓库清理类工具类
@@ -37,13 +38,13 @@ public class DeleteMaven {
 
     private static void checkAndDeleteFiles(File[] files) {
         for (File file : files) {
-            if (file.isDirectory() == true) {
-                if (file.listFiles().length == 0) {
+            if (file.isDirectory()) {
+                if (Objects.requireNonNull(file.listFiles()).length == 0) {
                     // 删除空文件夹
                     System.out.println("删除文件夹：" + file.getAbsolutePath());
                     file.delete();
                 } else {
-                    checkAndDeleteFiles(file.listFiles());
+                    checkAndDeleteFiles(Objects.requireNonNull(file.listFiles()));
                 }
             } else {
                 for (String suffix : SUFFIX) {

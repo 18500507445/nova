@@ -17,7 +17,7 @@ public class ZonedDateTimeExample {
         ZonedDateTime dateTime = ZonedDateTime.now();
 
         // 使用指定的年月日、时分秒、纳秒以及时区ID来新建对象
-        ZoneId        zoneId    = ZoneId.of("UTC+8");
+        ZoneId zoneId = ZoneId.of("UTC+8");
         ZonedDateTime dateTime2 = ZonedDateTime.of(2018, 3, 8, 23, 45, 59, 1234, zoneId);
 
         // 3天后

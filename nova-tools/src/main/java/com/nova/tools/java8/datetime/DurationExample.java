@@ -17,7 +17,7 @@ public class DurationExample {
         // 创建Duration实例
         Instant first = Instant.now();
         Thread.sleep(3000);
-        Instant  second   = Instant.now();
+        Instant second = Instant.now();
         Duration duration = Duration.between(first, second);
 
         // 访问Duration的时间
@@ -25,9 +25,9 @@ public class DurationExample {
 
         System.out.println("相差 : " + seconds + " 秒");
 
-        LocalDateTime from      = LocalDateTime.now();
-        LocalDateTime to        = from.plusDays(5);
-        Duration      duration2 = Duration.between(from, to);
+        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime to = from.plusDays(5);
+        Duration duration2 = Duration.between(from, to);
 
         System.out.println("从 from 到 to 相差 : " + duration2.toDays() + " 天");
     }

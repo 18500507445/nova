@@ -355,7 +355,7 @@ public class PayNotifyController {
                 String applicationNo = json.getString("applicationNo");
                 if (StringUtils.isNotBlank(applicationNo)) {
                     //List<NtUserSetting> dataList = ntUserSettingService.selectNtUserSettingList(new NtUserSetting(applicationNo));
-                    //if (CollectionUtils.isNotEmpty(dataList)) {
+                    //if (CollUtil.isNotEmpty(dataList)) {
                     //    NtUserSetting data = dataList.get(0);
                     //    String merchantNo = json.getString("merchantNo");
                     //    String auditOpinion = json.getString("auditOpinion");

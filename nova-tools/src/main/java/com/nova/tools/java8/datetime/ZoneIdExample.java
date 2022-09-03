@@ -14,7 +14,7 @@ public class ZoneIdExample {
     public static void main(String[] args) {
 
         // 获取系统默认时区
-        ZoneId defaultZoneId  = ZoneId.systemDefault();
+        ZoneId defaultZoneId = ZoneId.systemDefault();
         ZoneId shanghaiZoneId = ZoneId.of("Asia/Shanghai");
 
         // TimeZone 转换为 ZoneId

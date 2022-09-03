@@ -17,6 +17,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <fastjson.version>2.0.7</fastjson.version>
+        <lang3.version>3.12.0</lang3.version>
         <hutool.version>5.8.5</hutool.version>
         <email.version>1.5</email.version>
         <guava.version>31.1-jre</guava.version>
@@ -91,6 +92,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <!-- 邮箱验证码 https://mvnrepository.com/artifact/org.apache.commons/commons-email -->

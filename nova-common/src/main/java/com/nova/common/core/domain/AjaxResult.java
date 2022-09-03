@@ -1,17 +1,10 @@
 package com.nova.common.core.domain;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.nova.common.utils.ServletUtils;
-import com.nova.common.utils.security.SecurityUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * 操作消息提醒
@@ -361,4 +354,5 @@ public class AjaxResult extends HashMap<String, Object> {
                 .append("data", getData())
                 .toString();
     }
+
 }

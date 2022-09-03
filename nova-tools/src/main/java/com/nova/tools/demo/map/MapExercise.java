@@ -1,5 +1,6 @@
 package com.nova.tools.demo.map;
 
+import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.nova.tools.demo.entity.GroupPeople;
 import com.nova.tools.demo.entity.Myself;
@@ -8,8 +9,6 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toMap;
 
 /**
  * @Description:

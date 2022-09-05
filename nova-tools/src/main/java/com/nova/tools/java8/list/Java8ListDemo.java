@@ -151,9 +151,9 @@ public class Java8ListDemo {
         people.sort(Comparator.comparing(People::getAge).reversed());
 
         //bigDecimal求和
-        BigDecimal reduce = people.stream().map(People::getFee).reduce(BigDecimal.ZERO, BigDecimal::add);
-        System.out.println("bigDecimal:" + reduce);
-        //
+        BigDecimal add = people.stream().map(People::getFee).reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("bigDecimal-add:" + add);
+        //最大 最小
         Optional<People> maxPeople = people.stream().max(Comparator.comparing(People::getFee));
         Optional<People> minPeople = people.stream().min(Comparator.comparing(People::getFee));
         BigDecimal maxFee = maxPeople.get().getFee();

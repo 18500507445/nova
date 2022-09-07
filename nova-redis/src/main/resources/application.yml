@@ -24,7 +24,7 @@ spring:
     database: 0
     host: 47.100.174.176
     port: 6379
-    password:
+    password: '@wangzehui123'
     jedis:
       pool:
         #最大连接数

@@ -44,12 +44,12 @@ public class MongodbApplicationTest {
         topic.setCreated(new Date());
         topic.setDeleted(false);
         topic.setNote("计算机组成原理");
-        MongodbUtils.save(topic);
+        mongodbUtils.save(topic);
     }
 
     @Test
     public void testFind() {
-        List<Topic> all = MongodbUtils.findAll(Topic.class);
+        List<Topic> all = mongodbUtils.findAll(Topic.class);
         all.forEach(System.out::println);
     }
 }

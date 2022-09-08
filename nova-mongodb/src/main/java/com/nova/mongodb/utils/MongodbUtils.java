@@ -37,7 +37,7 @@ public class MongodbUtils {
      *
      * @param obj 数据对象
      */
-    public static void save(Object obj) {
+    public void save(Object obj) {
         mongodbUtils.mongoTemplate.save(obj);
     }
 
@@ -48,7 +48,7 @@ public class MongodbUtils {
      * @param obj            数据对象
      * @param collectionName 集合名
      */
-    public static void save(Object obj, String collectionName) {
+    public void save(Object obj, String collectionName) {
         mongodbUtils.mongoTemplate.save(obj, collectionName);
     }
 
@@ -57,7 +57,7 @@ public class MongodbUtils {
      *
      * @param obj 数据对象
      */
-    public static void remove(Object obj) {
+    public void remove(Object obj) {
         mongodbUtils.mongoTemplate.remove(obj);
     }
 
@@ -67,7 +67,7 @@ public class MongodbUtils {
      * @param obj            数据对象
      * @param collectionName 集合名
      */
-    public static void remove(Object obj, String collectionName) {
+    public void remove(Object obj, String collectionName) {
         mongodbUtils.mongoTemplate.remove(obj, collectionName);
     }
 
@@ -78,7 +78,7 @@ public class MongodbUtils {
      * @param value          值
      * @param collectionName 集合名
      */
-    public static void removeById(String key, Object value, String collectionName) {
+    public void removeById(String key, Object value, String collectionName) {
         Criteria criteria = Criteria.where(key).is(value);
         criteria.and(key).is(value);
         Query query = Query.query(criteria);
@@ -94,7 +94,7 @@ public class MongodbUtils {
      * @param updateValues   修改内容 value数组
      * @param collectionName 集合名
      */
-    public static void updateFirst(String accordingKey, Object accordingValue, String[] updateKeys, Object[] updateValues, String collectionName) {
+    public void updateFirst(String accordingKey, Object accordingValue, String[] updateKeys, Object[] updateValues, String collectionName) {
         Criteria criteria = Criteria.where(accordingKey).is(accordingValue);
         Query query = Query.query(criteria);
         Update update = new Update();
@@ -113,7 +113,7 @@ public class MongodbUtils {
      * @param updateValues   修改内容 value数组
      * @param collectionName 集合名
      */
-    public static void updateMulti(String accordingKey, Object accordingValue, String[] updateKeys, Object[] updateValues, String collectionName) {
+    public void updateMulti(String accordingKey, Object accordingValue, String[] updateKeys, Object[] updateValues, String collectionName) {
         Criteria criteria = Criteria.where(accordingKey).is(accordingValue);
         Query query = Query.query(criteria);
         Update update = new Update();
@@ -131,7 +131,7 @@ public class MongodbUtils {
      * @param findValues 查询条件 value
      * @return
      */
-    public static List<? extends Object> find(Object obj, String[] findKeys, Object[] findValues) {
+    public List<? extends Object> find(Object obj, String[] findKeys, Object[] findValues) {
         Criteria criteria = null;
         for (int i = 0; i < findKeys.length; i++) {
             if (i == 0) {
@@ -154,7 +154,7 @@ public class MongodbUtils {
      * @param collectionName 集合名
      * @return
      */
-    public static List<? extends Object> find(Object obj, String[] findKeys, Object[] findValues, String collectionName) {
+    public List<? extends Object> find(Object obj, String[] findKeys, Object[] findValues, String collectionName) {
         Criteria criteria = null;
         for (int i = 0; i < findKeys.length; i++) {
             if (i == 0) {
@@ -178,7 +178,7 @@ public class MongodbUtils {
      * @param sort           排序字段
      * @return
      */
-    public static List<? extends Object> find(Object obj, String[] findKeys, Object[] findValues, String collectionName, String sort) {
+    public List<? extends Object> find(Object obj, String[] findKeys, Object[] findValues, String collectionName, String sort) {
 
         Criteria criteria = null;
         for (int i = 0; i < findKeys.length; i++) {
@@ -202,7 +202,7 @@ public class MongodbUtils {
      * @param findValues 查询条件 value
      * @return
      */
-    public static Object findOne(Object obj, String[] findKeys, Object[] findValues) {
+    public Object findOne(Object obj, String[] findKeys, Object[] findValues) {
         Criteria criteria = null;
         for (int i = 0; i < findKeys.length; i++) {
             if (i == 0) {
@@ -225,7 +225,7 @@ public class MongodbUtils {
      * @param collectionName 集合名
      * @return
      */
-    public static Object findOne(Object obj, String[] findKeys, Object[] findValues, String collectionName) {
+    public Object findOne(Object obj, String[] findKeys, Object[] findValues, String collectionName) {
         Criteria criteria = null;
         for (int i = 0; i < findKeys.length; i++) {
             if (i == 0) {
@@ -245,7 +245,7 @@ public class MongodbUtils {
      * @param obj 数据对象
      * @return
      */
-    public static List<? extends Object> findAll(Object obj) {
+    public List<? extends Object> findAll(Object obj) {
         List<? extends Object> resultList = mongodbUtils.mongoTemplate.findAll(obj.getClass());
         return resultList;
     }
@@ -257,7 +257,7 @@ public class MongodbUtils {
      * @param <T>
      * @return
      */
-    public static <T> List<T> findAll(Class<T> clazz) {
+    public <T> List<T> findAll(Class<T> clazz) {
         List<T> resultList = mongodbUtils.mongoTemplate.findAll(clazz);
         return resultList;
     }
@@ -269,7 +269,7 @@ public class MongodbUtils {
      * @param collectionName 集合名
      * @return
      */
-    public static List<? extends Object> findAll(Object obj, String collectionName) {
+    public List<? extends Object> findAll(Object obj, String collectionName) {
         List<? extends Object> resultList = mongodbUtils.mongoTemplate.findAll(obj.getClass(), collectionName);
         return resultList;
     }
@@ -282,7 +282,7 @@ public class MongodbUtils {
      * @param <T>
      * @return
      */
-    public static <T> List<T> findAll(Class<T> clazz, String collectionName) {
+    public <T> List<T> findAll(Class<T> clazz, String collectionName) {
         List<T> resultList = mongodbUtils.mongoTemplate.findAll(clazz, collectionName);
         return resultList;
     }

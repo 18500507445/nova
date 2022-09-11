@@ -10,24 +10,23 @@ import javax.jms.MapMessage;
 import javax.jms.Message;
 
 /**
- * @Description: 测试监听器
+ * @Description: 测试active-mq监听器
  * @Author: wangzehui
  * @Date: 2022/9/11 09:01
  */
 @Component
-public class TestListener {
+public class ActiveMqListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActiveMqListener.class);
 
     @JmsListener(destination = Destination.TEST_DESTINATION)
-    public void testListener(Message msg) {
+    public void testActiveMqListener(Message msg) {
         MapMessage obj = (MapMessage) msg;
         try {
             String userId = obj.getString("userId");
-
+            System.out.println(userId);
         } catch (Exception e) {
-            logger.error("testListener异常:{}" + e.getMessage());
+            logger.error("testActiveMqListener异常:{}" + e.getMessage());
         }
-
     }
 }

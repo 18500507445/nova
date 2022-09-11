@@ -31,7 +31,7 @@ public class ActiveMqConfig {
         RedeliveryPolicy redeliveryPolicy = new RedeliveryPolicy();
         //是否在每次尝试重新发送失败后,增长这个等待时间
         redeliveryPolicy.setUseExponentialBackOff(true);
-        //重发次数,默认为6次   这里设置为10次
+        //重发次数,设置为10次
         redeliveryPolicy.setMaximumRedeliveries(10);
         //重发时间间隔,默认为1秒
         redeliveryPolicy.setInitialRedeliveryDelay(1);
@@ -71,7 +71,7 @@ public class ActiveMqConfig {
         bean.setPubSubDomain(true);
         bean.setRecoveryInterval(1000L);
         bean.setConcurrency("1-3");
-        // 创建连接的方法 如果不知道看上篇快速入门文章
+        // 创建连接的方法
         bean.setConnectionFactory(connectionFactory());
         return bean;
     }

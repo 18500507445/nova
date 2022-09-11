@@ -47,7 +47,7 @@ public class ActiveMqConfig {
     @Bean
     public ConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-        connectionFactory.setBrokerURL("failover:(tcp://xxx,tcp://xxx)?randomize=false&initialReconnectDelay=100&timeout=5000");
+        connectionFactory.setBrokerURL("failover:(tcp://ip:port,tcp://ip:port)?randomize=false&initialReconnectDelay=100&timeout=5000");
         connectionFactory.setRedeliveryPolicy(redeliveryPolicy());
         return connectionFactory;
     }

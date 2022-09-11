@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>com.nova</groupId>
-            <artifactId>nova-common</artifactId>
+            <artifactId>nova-framework</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>

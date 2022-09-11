@@ -1,4 +1,4 @@
-package com.nova.framework.config;
+package com.nova.mqactive.config;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.RedeliveryPolicy;
@@ -18,14 +18,13 @@ import javax.jms.DeliveryMode;
 import javax.jms.Session;
 
 /**
- * @Classname: ActiveMQConfig
  * @Description: ActiveMQConfig
- * @Date: 2022/3/15 11:40
- * @Created: by nieht
+ * @Author: wangzehui
+ * @Date: 2022/8/4 21:29
  */
 @Configuration
 @EnableJms
-public class ActiveMQConfig {
+public class ActiveMqConfig {
 
     @Bean
     public RedeliveryPolicy redeliveryPolicy() {

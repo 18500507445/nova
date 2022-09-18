@@ -1,4 +1,4 @@
-package com.nova.pay.entity;
+package com.nova.pay.entity.param;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @Date: 2022/7/1 17:32
  */
 @Data
-public class YeePayData implements Serializable {
+public class YeePayParam implements Serializable {
 
     private static final long serialVersionUID = 105489645203813170L;
 
@@ -151,11 +151,11 @@ public class YeePayData implements Serializable {
 
     private String endTime;
 
-    public YeePayData() {
+    public YeePayParam() {
 
     }
 
-    public YeePayData(String idCardUrl) {
+    public YeePayParam(String idCardUrl) {
         this.idCardUrl = idCardUrl;
     }
 

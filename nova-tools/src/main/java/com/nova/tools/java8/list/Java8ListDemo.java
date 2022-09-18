@@ -120,6 +120,15 @@ public class Java8ListDemo {
     }
 
     /**
+     * list转object
+     * @param people
+     */
+    private static void toObject(List<People> people){
+        List<Object> collect = people.stream().map(People::getAge).collect(toList());
+        System.out.println(collect);
+    }
+
+    /**
      * 计算 求和，最大，最小，平均
      * 排序
      */

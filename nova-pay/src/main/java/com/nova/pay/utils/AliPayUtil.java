@@ -8,7 +8,7 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.*;
 import com.alipay.api.response.*;
 import com.nova.pay.config.AliPayConfig;
-import com.nova.pay.entity.AliPayData;
+import com.nova.pay.entity.data.AliPayData;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 import org.apache.commons.collections4.MapUtils;

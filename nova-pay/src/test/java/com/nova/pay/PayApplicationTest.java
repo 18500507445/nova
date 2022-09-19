@@ -1,5 +1,6 @@
 package com.nova.pay;
 
+import cn.hutool.json.JSONUtil;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.strategy.PayTypeEnum;
@@ -16,7 +17,9 @@ class PayApplicationTest {
 
     @Test
     public void testPay() {
-        AjaxResult result = payStrategy.pay(PayTypeEnum.WECHAT, new PayParam());
-        System.out.println(result);
+        int payWay = 1;
+        PayTypeEnum payTypeEnum = PayTypeEnum.valuesOf(payWay);
+        AjaxResult result = payStrategy.pay(payTypeEnum, new PayParam());
+        System.out.println(JSONUtil.toJsonStr(result));
     }
 }

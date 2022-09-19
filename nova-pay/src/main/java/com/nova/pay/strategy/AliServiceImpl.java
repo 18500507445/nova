@@ -19,6 +19,6 @@ public class AliServiceImpl implements PayService {
 
     @Override
     public AjaxResult pay(PayParam payParam) {
-        return null;
+        return AjaxResult.success("阿里支付");
     }
 }

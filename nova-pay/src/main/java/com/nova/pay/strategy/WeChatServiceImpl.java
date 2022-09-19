@@ -19,6 +19,6 @@ public class WeChatServiceImpl implements PayService{
 
     @Override
     public AjaxResult pay(PayParam payParam) {
-        return null;
+        return AjaxResult.success("1000","微信支付",null);
     }
 }

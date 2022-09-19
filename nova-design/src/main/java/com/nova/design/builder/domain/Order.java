@@ -7,6 +7,7 @@ package com.nova.design.builder.domain;
 public class Order {
 
     private String orderId;
+
     private String orderName;
 
     public String getOrderId() {

@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by Landy on 2018/8/21.
  */
 public class JinGuBang implements Serializable {
+
     public float h = 100;
     public float d = 10;
 

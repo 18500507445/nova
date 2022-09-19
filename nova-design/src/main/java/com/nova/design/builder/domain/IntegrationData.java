@@ -1,4 +1,4 @@
-package com.nova.design.builder;
+package com.nova.design.builder.domain;
 
 
 import com.nova.design.builder.domain.Member;

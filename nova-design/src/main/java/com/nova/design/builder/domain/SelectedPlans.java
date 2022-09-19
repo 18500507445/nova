@@ -7,6 +7,7 @@ package com.nova.design.builder.domain;
 public class SelectedPlans {
 
     private String planId;
+
     private String planName;
 
     public String getPlanId() {

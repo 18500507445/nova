@@ -1,6 +1,7 @@
-package com.nova.design.builder;
+package com.nova.design.builder.service;
 
 
+import com.nova.design.builder.domain.IntegrationData;
 import com.nova.design.builder.domain.Member;
 import com.nova.design.builder.domain.Order;
 import com.nova.design.builder.domain.SelectedPlans;

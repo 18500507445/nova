@@ -1,10 +1,12 @@
-package com.nova.design.builder;
+package com.nova.design.builder.service.impl;
 
 
+import com.nova.design.builder.domain.IntegrationData;
 import com.nova.design.builder.domain.Member;
 import com.nova.design.builder.domain.Order;
 import com.nova.design.builder.domain.SelectedPlans;
 import com.nova.design.builder.domain.UserProfile;
+import com.nova.design.builder.service.IntegrationBuilder;
 
 /**
  * @author landyl
@@ -12,7 +14,7 @@ import com.nova.design.builder.domain.UserProfile;
  */
 public class XHFIntegrationBuilder implements IntegrationBuilder {
 
-    private IntegrationData integrationData;
+    private final IntegrationData integrationData;
 
     public XHFIntegrationBuilder() {
         this.integrationData = new IntegrationData();

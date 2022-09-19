@@ -1,5 +1,8 @@
 package com.nova.design.builder;
 
+import com.nova.design.builder.domain.IntegrationData;
+import com.nova.design.builder.service.IntegrationBuilder;
+
 /**
  * @author landyl
  * @create 10:32 AM 03/29/2018
@@ -7,6 +10,7 @@ package com.nova.design.builder;
 public class IntegrationDirector {
 
     public IntegrationData buildIntegrationData(IntegrationBuilder builder) {
+
         System.out.println("开始集成数据到业务系统....");
         //用户信息
         builder.buildUserProfile();
@@ -20,7 +24,6 @@ public class IntegrationDirector {
         //订单成员
         builder.buildMember();
 
-        IntegrationData data = builder.buildIntegrationData();
-        return data;
+        return builder.buildIntegrationData();
     }
 }

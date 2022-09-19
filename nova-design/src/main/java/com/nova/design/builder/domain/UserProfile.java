@@ -7,6 +7,7 @@ package com.nova.design.builder.domain;
 public class UserProfile {
 
     private String userId;
+
     private String userName;
 
     public String getUserId() {

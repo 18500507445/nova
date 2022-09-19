@@ -7,8 +7,8 @@ package com.nova.design.builder.domain;
 public class Member {
 
     private String memberId;
-    private String memberName;
 
+    private String memberName;
 
     public String getMemberId() {
         return memberId;

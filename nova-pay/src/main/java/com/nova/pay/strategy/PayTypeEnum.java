@@ -1,6 +1,5 @@
 package com.nova.pay.strategy;
 
-import com.nova.pay.enums.YeePayEnum;
 
 /**
  * @Description:

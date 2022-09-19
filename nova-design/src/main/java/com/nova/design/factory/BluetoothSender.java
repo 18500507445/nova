@@ -7,7 +7,6 @@ package com.nova.design.factory;
  */
 public class BluetoothSender implements Sender {
 
-
     @Override
     public void sendData(byte[] data) {
         System.out.println("Send data by Bluetooth");

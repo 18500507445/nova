@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +17,7 @@ public class StrategyDemo {
 
     public static void main(String[] args) {
         List<People> list = Myself.PEOPLE_LIST;
-
         List<People> result = filterPeople(list, new FilterByAge());
-
         System.out.println(JSONObject.toJSONString(result));
 
     }

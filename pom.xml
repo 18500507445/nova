@@ -28,6 +28,9 @@
         <module>nova-redis</module>
         <module>nova-mongodb</module>
         <module>nova-mail</module>
+        <module>nova-design</module>
+        <module>nova-mq-active</module>
+        <module>nova-mq-rabbit</module>
         <module>nova-xxl</module>
     </modules>
 

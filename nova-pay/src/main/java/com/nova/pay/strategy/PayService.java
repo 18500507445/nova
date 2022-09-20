@@ -2,6 +2,7 @@ package com.nova.pay.strategy;
 
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
+import com.nova.pay.enums.PayWayEnum;
 
 /**
  * @Description: 支付策略接口service

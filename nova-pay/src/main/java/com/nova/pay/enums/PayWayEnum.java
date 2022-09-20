@@ -1,4 +1,4 @@
-package com.nova.pay.strategy;
+package com.nova.pay.enums;
 
 
 /**
@@ -7,6 +7,8 @@ package com.nova.pay.strategy;
  * @Date: 2022/9/18 11:29
  */
 public enum PayWayEnum {
+
+    DEFAULT(0, ""),
 
     ALI(1, "苹果支付"),
 
@@ -43,8 +45,14 @@ public enum PayWayEnum {
         switch (payWay) {
             case 1:
                 return ALI;
-            default:
+            case 2:
                 return WECHAT;
+            case 3:
+                return APPLE;
+            case 4:
+                return YEE_PAY;
+            default:
+                return DEFAULT;
         }
     }
 }

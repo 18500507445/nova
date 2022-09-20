@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class AliServiceImpl implements PayService {
 
     @Override
-    public PayTypeEnum getPayType() {
-        return PayTypeEnum.ALI;
+    public PayWayEnum getPayType() {
+        return PayWayEnum.ALI;
     }
 
     @Override

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class WeChatServiceImpl implements PayService{
 
     @Override
-    public PayTypeEnum getPayType() {
-        return PayTypeEnum.WECHAT;
+    public PayWayEnum getPayType() {
+        return PayWayEnum.WECHAT;
     }
 
     @Override

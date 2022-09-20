@@ -3,7 +3,7 @@ package com.nova.pay;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
-import com.nova.pay.strategy.PayTypeEnum;
+import com.nova.pay.strategy.PayWayEnum;
 import com.nova.pay.strategy.PayStrategy;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ class PayApplicationTest {
     @Test
     public void testPay() {
         int payWay = 1;
-        PayTypeEnum payTypeEnum = PayTypeEnum.valuesOf(payWay);
-        AjaxResult result = payStrategy.pay(payTypeEnum, new PayParam());
+        PayWayEnum payWayEnum = PayWayEnum.valuesOf(payWay);
+        AjaxResult result = payStrategy.pay(payWayEnum, new PayParam());
         System.out.println(JSONUtil.toJsonStr(result));
     }
 }

@@ -15,7 +15,7 @@ public interface PayService {
      *
      * @return
      */
-    PayTypeEnum getPayType();
+    PayWayEnum getPayType();
 
     /**
      * 公共支付

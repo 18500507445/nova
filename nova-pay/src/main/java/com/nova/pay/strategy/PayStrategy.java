@@ -18,10 +18,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class PayStrategy implements ApplicationContextAware {
 
-    private final Map<PayTypeEnum, PayService> payMap = new ConcurrentHashMap<>();
+    private final Map<PayWayEnum, PayService> payMap = new ConcurrentHashMap<>();
 
-    public AjaxResult pay(PayTypeEnum payTypeEnum, PayParam payParam) {
-        PayService payService = payMap.get(payTypeEnum);
+    public AjaxResult pay(PayWayEnum payWayEnum, PayParam payParam) {
+        PayService payService = payMap.get(payWayEnum);
         if (null != payService) {
             return payService.pay(payParam);
         }

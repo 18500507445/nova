@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @Date: 2019/8/27 19:10
  */
 public class Status {
+
     @JsonProperty("statusCode")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private int statusCode = 0;

@@ -8,7 +8,6 @@ import com.nova.tools.demo.entity.Myself;
  * @Author: wangzehui
  * @Date: 2019/6/26 17:24
  */
-
 public class SpecifiedSort {
     public static String getFilmType(String filmType) {
         String[] s = Myself.FILM_ARR;

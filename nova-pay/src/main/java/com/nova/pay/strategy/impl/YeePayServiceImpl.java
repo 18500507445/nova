@@ -24,4 +24,29 @@ public class YeePayServiceImpl implements PayService {
     public AjaxResult pay(PayParam payParam) {
         return null;
     }
+
+    @Override
+    public AjaxResult refund(PayParam payParam) {
+        return null;
+    }
+
+    @Override
+    public AjaxResult queryOrder(PayParam payParam) {
+        return null;
+    }
+
+    @Override
+    public AjaxResult getOpenId(PayParam payParam) {
+        return null;
+    }
+
+    @Override
+    public AjaxResult closeOrder(PayParam payParam) {
+        return null;
+    }
+
+    @Override
+    public AjaxResult merchantTransfer(PayParam payParam) {
+        return null;
+    }
 }

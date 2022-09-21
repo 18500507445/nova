@@ -21,6 +21,25 @@ public class PayStrategy implements ApplicationContextAware {
 
     private final Map<PayWayEnum, PayService> payMap = new ConcurrentHashMap<>();
 
+    /**
+     * 把不同实现类放到map
+     *
+     * @param applicationContext
+     * @throws BeansException
+     */
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        Map<String, PayService> beansOfType = applicationContext.getBeansOfType(PayService.class);
+        beansOfType.values().forEach(payService -> payMap.put(payService.getPayType(), payService));
+    }
+
+    /**
+     * 公共支付方法
+     *
+     * @param payWayEnum
+     * @param payParam
+     * @return
+     */
     public AjaxResult pay(PayWayEnum payWayEnum, PayParam payParam) {
         PayService payService = payMap.get(payWayEnum);
         if (null != payService) {
@@ -30,14 +49,77 @@ public class PayStrategy implements ApplicationContextAware {
     }
 
     /**
-     * 把不同策略放到map
+     * 公共退款方法
      *
-     * @param applicationContext
-     * @throws BeansException
+     * @param payWayEnum
+     * @param payParam
+     * @return
      */
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        Map<String, PayService> beansOfType = applicationContext.getBeansOfType(PayService.class);
-        beansOfType.values().forEach(payService -> payMap.put(payService.getPayType(), payService));
+    public AjaxResult refund(PayWayEnum payWayEnum, PayParam payParam) {
+        PayService payService = payMap.get(payWayEnum);
+        if (null != payService) {
+            return payService.refund(payParam);
+        }
+        return null;
+    }
+
+    /**
+     * 公共查询订单方法
+     *
+     * @param payWayEnum
+     * @param payParam
+     * @return
+     */
+    public AjaxResult queryOrder(PayWayEnum payWayEnum, PayParam payParam) {
+        PayService payService = payMap.get(payWayEnum);
+        if (null != payService) {
+            return payService.queryOrder(payParam);
+        }
+        return null;
+    }
+
+    /**
+     * 获取openId
+     *
+     * @param payWayEnum
+     * @param payParam
+     * @return
+     */
+    public AjaxResult getOpenId(PayWayEnum payWayEnum, PayParam payParam) {
+        PayService payService = payMap.get(payWayEnum);
+        if (null != payService) {
+            return payService.getOpenId(payParam);
+        }
+        return null;
+    }
+
+    /**
+     * 关闭订单
+     *
+     * @param payWayEnum
+     * @param payParam
+     * @return
+     */
+    public AjaxResult closeOrder(PayWayEnum payWayEnum, PayParam payParam) {
+        PayService payService = payMap.get(payWayEnum);
+        if (null != payService) {
+            return payService.closeOrder(payParam);
+        }
+        return null;
+    }
+
+    /**
+     * 商家转账到个人
+     *
+     * @param payWayEnum
+     * @param payParam
+     * @return
+     */
+    public AjaxResult merchantTransfer(PayWayEnum payWayEnum, PayParam payParam) {
+        PayService payService = payMap.get(payWayEnum);
+        if (null != payService) {
+            return payService.merchantTransfer(payParam);
+        }
+        return null;
     }
 }

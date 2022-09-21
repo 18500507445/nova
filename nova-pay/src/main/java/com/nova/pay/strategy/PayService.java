@@ -19,10 +19,51 @@ public interface PayService {
     PayWayEnum getPayType();
 
     /**
-     * 公共支付
+     * 支付
      *
      * @param payParam
      * @return
      */
     AjaxResult pay(PayParam payParam);
+
+    /**
+     * 退款
+     *
+     * @param payParam
+     * @return
+     */
+    AjaxResult refund(PayParam payParam);
+
+    /**
+     * 查询订单
+     *
+     * @param payParam
+     * @return
+     */
+    AjaxResult queryOrder(PayParam payParam);
+
+    /**
+     * 获取openId
+     *
+     * @param payParam
+     * @return
+     */
+    AjaxResult getOpenId(PayParam payParam);
+
+    /**
+     * 关单
+     *
+     * @param payParam
+     * @return
+     */
+    AjaxResult closeOrder(PayParam payParam);
+
+    /**
+     * 商家转账
+     * 例如：微信商户号转给个人
+     *
+     * @param payParam
+     * @return
+     */
+    AjaxResult merchantTransfer(PayParam payParam);
 }

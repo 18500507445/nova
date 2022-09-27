@@ -206,7 +206,13 @@ public class AliPayUtil {
      * 订单退款
      * 文档：https://opendocs.alipay.com/mini/02j1c6
      *
-     * @param tradeNo 商户交易订单号
+     * @param appId
+     * @param privateKey
+     * @param publicKey
+     * @param tradeNo
+     * @param refundAmount
+     * @param refundReason
+     * @param tradeNo
      * @return
      */
     public AlipayTradeRefundResponse refund(String appId, String tradeNo, String refundAmount,
@@ -233,6 +239,8 @@ public class AliPayUtil {
      *
      * @param appId
      * @param orderId
+     * @param publicKey
+     * @param privateKey
      * @return
      */
     public AlipayTradeQueryResponse queryOrder(String appId, String orderId, String publicKey, String privateKey) {

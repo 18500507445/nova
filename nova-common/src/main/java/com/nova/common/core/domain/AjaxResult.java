@@ -314,6 +314,16 @@ public class AjaxResult extends HashMap<String, Object> {
         return new AjaxResult(code, msg, data);
     }
 
+    /**
+     * 返回错误消息
+     * @param code
+     * @param msg
+     * @return
+     */
+    public static AjaxResult error(String code, String msg) {
+        return new AjaxResult(code, msg, null);
+    }
+
     public Type getType() {
         return type;
     }

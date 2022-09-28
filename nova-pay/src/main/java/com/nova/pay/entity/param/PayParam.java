@@ -24,9 +24,14 @@ public class PayParam extends BaseParam {
     private Long payConfigId;
 
     /**
-     * 1H5支付,2小程序,3app支付 4 jsapi微信原生 5ios沙盒 6钱包 7快捷
+     * 支付类型:1H5支付,2小程序,3app支付 4 jsapi微信原生 5ios沙盒 6钱包 7快捷(银行卡) 8球币兑换
      */
     private String type;
+
+    /**
+     * 支付方式:1支付宝 2微信 3苹果 4易宝 5兑换
+     */
+    private Integer payWay;
 
     /**
      * 支付宝小程序支付 需要授权code来获取唯一标识userId
@@ -36,12 +41,13 @@ public class PayParam extends BaseParam {
     private String authCode;
 
     /**
-     * 微信用户id
+     * 用户id
      */
     private String openId;
 
     /**
-     * 商品的标题
+     * 支付宝：商品的标题
+     * 微信：对一笔交易的具体描述信息
      */
     private String subject = "球场大咖";
 
@@ -49,16 +55,6 @@ public class PayParam extends BaseParam {
      * 订单id
      */
     private String orderId;
-
-    /**
-     * 订单ids
-     */
-    private String orderIds;
-
-    /**
-     * 主订单id
-     */
-    private String masterOrderId;
 
     /**
      * 交易状态
@@ -71,11 +67,6 @@ public class PayParam extends BaseParam {
     private String totalAmount;
 
     /**
-     * 对一笔交易的具体描述信息 目前存放支付类型吧,回调通知的时候验签去这个参数进行判断
-     */
-    private String body = "球场大咖";
-
-    /**
      * 支付成功后回跳地址,H5支付特有
      */
     private String returnUrl;
@@ -86,30 +77,15 @@ public class PayParam extends BaseParam {
     private String appletUserId = "";
 
     /**
-     * 支付方式
-     * 1支付宝 2微信 3苹果 4易宝
+     * 语言类型
+     * zh_CN, zh_TW, en
      */
-    private Integer payWay;
+    private String lang = "zh_CN";
 
     /**
      * 产品id
      */
     private String productId;
-
-    /**
-     * 微信、支付宝 应用id
-     */
-    private String appId;
-
-    /**
-     * 支付宝公钥
-     */
-    private String publicKey;
-
-    /**
-     * 支付宝应用私钥
-     */
-    private String privateKey;
 
     public String getSubject() {
         if (ObjectUtil.isNotNull(subject)) {
@@ -125,10 +101,4 @@ public class PayParam extends BaseParam {
         return returnUrl;
     }
 
-    public String getBody() {
-        if (ObjectUtil.isNotNull(body)) {
-            body = URLDecoder.decode(body, StandardCharsets.UTF_8);
-        }
-        return body;
-    }
 }

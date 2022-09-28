@@ -10,6 +10,7 @@ import com.alipay.api.DefaultAlipayClient;
  * @Author: wangzehui
  * @Date: 2022/3/17 13:10
  */
+@Deprecated
 public class AliPayConfig {
 
     /**

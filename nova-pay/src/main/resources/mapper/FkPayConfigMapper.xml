@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nova.pay.mapper.FkPayConfigMapper">
+
+    <resultMap type="com.nova.pay.entity.result.FkPayConfig" id="FkPayConfigResult">
+        <result property="id" column="id"/>
+        <result property="payWay" column="pay_way"/>
+        <result property="appId" column="app_id"/>
+        <result property="appSecret" column="app_secret"/>
+        <result property="mchId" column="mch_id"/>
+        <result property="paySecret" column="pay_secret"/>
+        <result property="publicKey" column="public_key"/>
+        <result property="privateKey" column="private_key"/>
+        <result property="keyPath" column="key_path"/>
+        <result property="privateKeyPath" column="private_key_path"/>
+        <result property="privateCertPath" column="private_cert_path"/>
+        <result property="notifyUrl" column="notify_url"/>
+        <result property="weight" column="weight"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="source" column="source"/>
+        <result property="sid" column="sid"/>
+        <result property="payType" column="pay_type"/>
+        <result property="operator" column="operator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="serialNo" column="serial_no"/>
+        <result property="apiV3Key" column="api_v3_key"/>
+    </resultMap>
+
+    <sql id="selectFkPayConfigVo">
+        select id,
+               pay_way,
+               app_id,
+               app_secret,
+               mch_id,
+               pay_secret,
+               public_key,
+               private_key,
+               key_path,
+               private_key_path,
+               private_cert_path,
+               notify_url,
+               weight,
+               status,
+               remark,
+               source,
+               sid,
+               pay_type,
+               operator,
+               create_time,
+               update_time,
+               serial_no,
+               api_v3_key
+        from fk_pay_config
+    </sql>
+
+    <select id="selectFkPayConfigList" parameterType="com.nova.pay.entity.result.FkPayConfig" resultMap="FkPayConfigResult">
+        <include refid="selectFkPayConfigVo"/>
+        <where>
+            <if test="payWay != null "> and pay_way = #{payWay}</if>
+            <if test="appId != null  and appId != ''"> and app_id = #{appId}</if>
+            <if test="appSecret != null  and appSecret != ''"> and app_secret = #{appSecret}</if>
+            <if test="mchId != null  and mchId != ''"> and mch_id = #{mchId}</if>
+            <if test="paySecret != null  and paySecret != ''"> and pay_secret = #{paySecret}</if>
+            <if test="publicKey != null  and publicKey != ''"> and public_key = #{publicKey}</if>
+            <if test="privateKey != null  and privateKey != ''"> and private_key = #{privateKey}</if>
+            <if test="keyPath != null  and keyPath != ''"> and key_path = #{keyPath}</if>
+            <if test="privateKeyPath != null  and privateKeyPath != ''"> and private_key_path = #{privateKeyPath}</if>
+            <if test="privateCertPath != null  and privateCertPath != ''"> and private_cert_path = #{privateCertPath}</if>
+            <if test="notifyUrl != null  and notifyUrl != ''"> and notify_url = #{notifyUrl}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="source != null  and source != ''"> and source like concat('%',${source},'%')</if>
+            <if test="sid != null  and sid != ''"> and sid like concat('%',${sid},'%')</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+        </where>
+    </select>
+
+    <select id="selectFkPayConfigById" parameterType="Long" resultMap="FkPayConfigResult">
+        <include refid="selectFkPayConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFkPayConfig" parameterType="com.nova.pay.entity.result.FkPayConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into fk_pay_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payWay != null">pay_way,</if>
+            <if test="appId != null">app_id,</if>
+            <if test="appSecret != null">app_secret,</if>
+            <if test="mchId != null">mch_id,</if>
+            <if test="paySecret != null">pay_secret,</if>
+            <if test="publicKey != null">public_key,</if>
+            <if test="privateKey != null">private_key,</if>
+            <if test="keyPath != null">key_path,</if>
+            <if test="privateKeyPath != null">private_key_path,</if>
+            <if test="privateCertPath != null">private_cert_path,</if>
+            <if test="notifyUrl != null">notify_url,</if>
+            <if test="weight != null">weight,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="source != null">source,</if>
+            <if test="sid != null">sid,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="operator != null">operator,</if>
+            <if test="serialNo != null">serial_no,</if>
+            <if test="apiV3Key != null">api_v3_key,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payWay != null">#{payWay},</if>
+            <if test="appId != null">#{appId},</if>
+            <if test="appSecret != null">#{appSecret},</if>
+            <if test="mchId != null">#{mchId},</if>
+            <if test="paySecret != null">#{paySecret},</if>
+            <if test="publicKey != null">#{publicKey},</if>
+            <if test="privateKey != null">#{privateKey},</if>
+            <if test="keyPath != null">#{keyPath},</if>
+            <if test="privateKeyPath != null">#{privateKeyPath},</if>
+            <if test="privateCertPath != null">#{privateCertPath},</if>
+            <if test="notifyUrl != null">#{notifyUrl},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="source != null">#{source},</if>
+            <if test="sid != null">#{sid},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="serialNo != null">#{serialNo},</if>
+            <if test="apiV3Key != null">#{apiV3Key},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFkPayConfig" parameterType="com.nova.pay.entity.result.FkPayConfig">
+        update fk_pay_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="payWay != null">pay_way = #{payWay},</if>
+            <if test="appId != null">app_id = #{appId},</if>
+            <if test="appSecret != null">app_secret = #{appSecret},</if>
+            <if test="mchId != null">mch_id = #{mchId},</if>
+            <if test="paySecret != null">pay_secret = #{paySecret},</if>
+            <if test="publicKey != null">public_key = #{publicKey},</if>
+            <if test="privateKey != null">private_key = #{privateKey},</if>
+            <if test="keyPath != null">key_path = #{keyPath},</if>
+            <if test="privateKeyPath != null">private_key_path = #{privateKeyPath},</if>
+            <if test="privateCertPath != null">private_cert_path = #{privateCertPath},</if>
+            <if test="notifyUrl != null">notify_url = #{notifyUrl},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="sid != null">sid = #{sid},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="serialNo != null">serial_no = #{serialNo},</if>
+            <if test="apiV3Key != null">api_v3_key = #{apiV3Key},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFkPayConfigById" parameterType="Long">
+        delete from fk_pay_config where id = #{id}
+    </delete>
+
+    <delete id="deleteFkPayConfigByIds" parameterType="String">
+        delete from fk_pay_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

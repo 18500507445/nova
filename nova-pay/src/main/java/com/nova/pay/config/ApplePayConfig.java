@@ -5,6 +5,7 @@ package com.nova.pay.config;
  * @Author: wangzehui
  * @Date: 2022/6/18 13:36
  */
+@Deprecated
 public class ApplePayConfig {
 
     public static final String ZERO = "0";

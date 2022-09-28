@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nova.pay.mapper.FkPayListMapper">
+
+    <resultMap type="com.nova.pay.entity.result.FkPayList" id="FkPayListResult">
+        <result property="id" column="id"/>
+        <result property="source" column="source"/>
+        <result property="sid" column="sid"/>
+        <result property="aliH5" column="ali_h5"/>
+        <result property="aliApp" column="ali_app"/>
+        <result property="aliApplet" column="ali_applet"/>
+        <result property="aliLogoUrl" column="ali_logo_url"/>
+        <result property="wechatH5" column="wechat_h5"/>
+        <result property="wechatApp" column="wechat_app"/>
+        <result property="wechatJsapi" column="wechat_jsapi"/>
+        <result property="wechatLogoUrl" column="wechat_logo_url"/>
+        <result property="apple" column="apple"/>
+        <result property="appleLogoUrl" column="apple_logo_url"/>
+        <result property="yeePayQuick" column="yee_pay_quick"/>
+        <result property="yeePayWallet" column="yee_pay_wallet"/>
+        <result property="yeePayLogoUrl" column="yee_pay_logo_url"/>
+        <result property="operator" column="operator"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="ballCoin" column="ball_coin"/>
+        <result property="ballCoinLogoUrl" column="ball_coin_logo_url"/>
+    </resultMap>
+
+    <sql id="selectFkPayListVo">
+        select id,
+               source,
+               sid,
+               ali_h5,
+               ali_app,
+               ali_applet,
+               ali_logo_url,
+               wechat_h5,
+               wechat_app,
+               wechat_jsapi,
+               wechat_logo_url,
+               apple,
+               apple_logo_url,
+               yee_pay_quick,
+               yee_pay_wallet,
+               yee_pay_logo_url,
+               ball_coin,
+               ball_coin_logo_url,
+               operator,
+               remark,
+               create_time,
+               update_time
+        from fk_pay_list
+    </sql>
+
+    <select id="selectFkPayListList" parameterType="com.nova.pay.entity.result.FkPayList" resultMap="FkPayListResult">
+        <include refid="selectFkPayListVo"/>
+        <where>
+            <if test="source != null  and source != ''"> and source = #{source}</if>
+            <if test="sid != null  and sid != ''"> and sid = #{sid}</if>
+            <if test="aliH5 != null "> and ali_h5 = #{aliH5}</if>
+            <if test="aliApp != null "> and ali_app = #{aliApp}</if>
+            <if test="aliApplet != null "> and ali_applet = #{aliApplet}</if>
+            <if test="wechatH5 != null "> and wechat_h5 = #{wechatH5}</if>
+            <if test="wechatApp != null "> and wechat_app = #{wechatApp}</if>
+            <if test="wechatJsapi != null "> and wechat_jsapi = #{wechatJsapi}</if>
+            <if test="apple != null "> and apple = #{apple}</if>
+            <if test="yeePayQuick != null "> and yee_pay_quick = #{yeePayQuick}</if>
+            <if test="yeePayWallet != null "> and yee_pay_wallet = #{yeePayWallet}</if>
+            <if test="ballCoin != null "> and ball_coin = #{ballCoin}</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="aliLogoUrl != null  and aliLogoUrl != ''"> and ali_logo_url = #{aliLogoUrl}</if>
+            <if test="wechatLogoUrl != null  and wechatLogoUrl != ''"> and wechat_logo_url = #{wechatLogoUrl}</if>
+            <if test="appleLogoUrl != null  and appleLogoUrl != ''"> and apple_logo_url = #{appleLogoUrl}</if>
+            <if test="yeePayLogoUrl != null  and yeePayLogoUrl != ''"> and yee_pay_logo_url = #{yeePayLogoUrl}</if>
+            <if test="ballCoinLogoUrl != null  and ball_coin_logo_url != ''"> and yee_pay_logo_url = #{ballCoinLogoUrl}</if>
+        </where>
+    </select>
+
+    <select id="selectFkPayListById" parameterType="Long" resultMap="FkPayListResult">
+        <include refid="selectFkPayListVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFkPayList" parameterType="com.nova.pay.entity.result.FkPayList" useGeneratedKeys="true" keyProperty="id">
+        insert into fk_pay_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="source != null">source,</if>
+            <if test="sid != null and sid != ''">sid,</if>
+            <if test="aliH5 != null">ali_h5,</if>
+            <if test="aliApp != null">ali_app,</if>
+            <if test="aliApplet != null">ali_applet,</if>
+            <if test="wechatH5 != null">wechat_h5,</if>
+            <if test="wechatApp != null">wechat_app,</if>
+            <if test="wechatJsapi != null">wechat_jsapi,</if>
+            <if test="apple != null">apple,</if>
+            <if test="yeePayQuick != null">yee_pay_quick,</if>
+            <if test="yeePayWallet != null">yee_pay_wallet,</if>
+            <if test="operator != null">operator,</if>
+            <if test="remark != null">remark,</if>
+            <if test="aliLogoUrl != null">ali_logo_url,</if>
+            <if test="wechatLogoUrl != null">wechat_logo_url,</if>
+            <if test="appleLogoUrl != null">apple_logo_url,</if>
+            <if test="yeePayLogoUrl != null">yee_pay_logo_url,</if>
+            <if test="ballCoin != null">ball_coin,</if>
+            <if test="ballCoinLogoUrl != null">ball_coin_logo_url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="source != null">#{source},</if>
+            <if test="sid != null and sid != ''">#{sid},</if>
+            <if test="aliH5 != null">#{aliH5},</if>
+            <if test="aliApp != null">#{aliApp},</if>
+            <if test="aliApplet != null">#{aliApplet},</if>
+            <if test="wechatH5 != null">#{wechatH5},</if>
+            <if test="wechatApp != null">#{wechatApp},</if>
+            <if test="wechatJsapi != null">#{wechatJsapi},</if>
+            <if test="apple != null">#{apple},</if>
+            <if test="yeePayQuick != null">#{yeePayQuick},</if>
+            <if test="yeePayWallet != null">#{yeePayWallet},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="aliLogoUrl != null">#{aliLogoUrl},</if>
+            <if test="wechatLogoUrl != null">#{wechatLogoUrl},</if>
+            <if test="appleLogoUrl != null">#{appleLogoUrl},</if>
+            <if test="yeePayLogoUrl != null">#{yeePayLogoUrl},</if>
+            <if test="ballCoin != null">#{ballCoin},</if>
+            <if test="ballCoinLogoUrl != null">#{ballCoinLogoUrl},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFkPayList" parameterType="com.nova.pay.entity.result.FkPayList">
+        update fk_pay_list
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="source != null">source = #{source},</if>
+            <if test="sid != null and sid != ''">sid = #{sid},</if>
+            <if test="aliH5 != null">ali_h5 = #{aliH5},</if>
+            <if test="aliApp != null">ali_app = #{aliApp},</if>
+            <if test="aliApplet != null">ali_applet = #{aliApplet},</if>
+            <if test="wechatH5 != null">wechat_h5 = #{wechatH5},</if>
+            <if test="wechatApp != null">wechat_app = #{wechatApp},</if>
+            <if test="wechatJsapi != null">wechat_jsapi = #{wechatJsapi},</if>
+            <if test="apple != null">apple = #{apple},</if>
+            <if test="yeePayQuick != null">yee_pay_quick = #{yeePayQuick},</if>
+            <if test="yeePayWallet != null">yee_pay_wallet = #{yeePayWallet},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="aliLogoUrl != null  and aliLogoUrl != ''">ali_logo_url = #{aliLogoUrl},</if>
+            <if test="wechatLogoUrl != null  and wechatLogoUrl != ''">wechat_logo_url = #{wechatLogoUrl},</if>
+            <if test="appleLogoUrl != null  and appleLogoUrl != ''">apple_logo_url = #{appleLogoUrl},</if>
+            <if test="yeePayLogoUrl != null  and yeePayLogoUrl != ''">yee_pay_logo_url = #{yeePayLogoUrl},</if>
+            <if test="ballCoin != null">ball_coin = #{ballCoin},</if>
+            <if test="ballCoinLogoUrl != null  and ballCoinLogoUrl != ''">ball_coin_logo_url = #{ballCoinLogoUrl},</if>
+        </trim>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+        </where>
+    </update>
+
+    <delete id="deleteFkPayListById" parameterType="Long">
+        delete from fk_pay_list where id = #{id}
+    </delete>
+
+    <delete id="deleteFkPayListByIds" parameterType="String">
+        delete from fk_pay_list where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

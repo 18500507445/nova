@@ -1,6 +1,6 @@
 package com.nova.pay.entity.param;
 
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -10,9 +10,30 @@ import java.io.Serializable;
  * @Date: 2022/7/1 17:32
  */
 @Data
+@Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class YeePayParam implements Serializable {
 
     private static final long serialVersionUID = 105489645203813170L;
+
+
+    private String appKey;
+
+    private String publicKey;
+
+    private String privateKey;
+
+    /**
+     * 平台商户编号
+     */
+    private String parentMerchantNo;
+
+    /**
+     * 用户收款商户编号
+     */
+    private String merchantNo;
 
     /**
      * 支付类型 6钱包 7快捷支付
@@ -25,9 +46,9 @@ public class YeePayParam implements Serializable {
     private String collectionStatus;
 
     /**
-     * 用户id
+     * 用户名称
      */
-    private String userId;
+    private String userName;
 
     /**
      * 真实姓名
@@ -80,16 +101,6 @@ public class YeePayParam implements Serializable {
     private String idCardBackUrl;
 
     /**
-     * 平台商户编号
-     */
-    private String parentMerchantNo;
-
-    /**
-     * 用户收款商户编号
-     */
-    private String merchantNo;
-
-    /**
      * 手机号
      */
     private String mobile;
@@ -114,13 +125,15 @@ public class YeePayParam implements Serializable {
      */
     private String worksId;
 
+    /**
+     * 订单id
+     */
     private String orderId;
 
     /**
      * 入网请求号
      */
     private String requestNo;
-
 
     /**
      * 订单金额 0.02
@@ -143,6 +156,11 @@ public class YeePayParam implements Serializable {
     private String returnUrl;
 
     /**
+     * 支付通知地址
+     */
+    private String notifyUrl;
+
+    /**
      * uniqueOrderNo:易宝收款订单号
      */
     private String tradeNo;
@@ -150,10 +168,6 @@ public class YeePayParam implements Serializable {
     private String startTime;
 
     private String endTime;
-
-    public YeePayParam() {
-
-    }
 
     public YeePayParam(String idCardUrl) {
         this.idCardUrl = idCardUrl;

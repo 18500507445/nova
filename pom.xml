@@ -104,6 +104,20 @@
                 <version>${nova.version}</version>
             </dependency>
 
+            <!-- redis组件 -->
+            <dependency>
+                <groupId>com.nova</groupId>
+                <artifactId>nova-redis</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
+            <!-- mq-active组件 -->
+            <dependency>
+                <groupId>com.nova</groupId>
+                <artifactId>nova-mq-active</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

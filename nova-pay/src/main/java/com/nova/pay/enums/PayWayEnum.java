@@ -16,17 +16,19 @@ public enum PayWayEnum {
 
     APPLE(3, "苹果支付"),
 
-    YEE_PAY(4, "易宝支付");
+    YEE_PAY(4, "易宝支付"),
+
+    EXCHANGE(99, "金币兑换");
 
     /**
      * 支付方式
      */
-    private Integer payWay;
+    private final Integer payWay;
 
     /**
      * 支付名称
      */
-    private String name;
+    private final String name;
 
     public Integer getPayWay() {
         return payWay;
@@ -51,6 +53,8 @@ public enum PayWayEnum {
                 return APPLE;
             case 4:
                 return YEE_PAY;
+            case 99:
+                return EXCHANGE;
             default:
                 return DEFAULT;
         }

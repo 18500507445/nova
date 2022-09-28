@@ -18,7 +18,6 @@
         <weixin.pay.version>4.4.0</weixin.pay.version>
         <weixin.mp.version>4.4.0</weixin.mp.version>
         <alipay.version>4.31.12.ALL</alipay.version>
-
     </properties>
 
     <dependencies>
@@ -55,6 +54,16 @@
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-mq-active</artifactId>
         </dependency>
     </dependencies>
 </project>

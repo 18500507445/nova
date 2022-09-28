@@ -1,6 +1,10 @@
 package com.nova.pay.entity.param;
 
+import cn.hutool.core.util.StrUtil;
+import com.nova.common.core.controller.BaseController;
+import com.nova.common.utils.UserNameSecretUtil;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
@@ -9,8 +13,9 @@ import java.io.Serializable;
  * @Author: wangzehui
  * @Date: 2022/8/23 13:57
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class BaseParam implements Serializable {
+public abstract class BaseParam extends BaseController implements Serializable {
 
     private static final long serialVersionUID = -5289042149894135473L;
 
@@ -25,7 +30,7 @@ public class BaseParam implements Serializable {
     private String sid;
 
     /**
-     * 客户类型
+     * 客户类型:donggeqiu(金币充值)，fengkuangTY(金豆充值)
      */
     private String clientType;
 
@@ -62,4 +67,26 @@ public class BaseParam implements Serializable {
      */
     private String userName;
 
+    public String getUserName() {
+        if (StrUtil.isNotBlank(userName)) {
+            userName = UserNameSecretUtil.userNameDecrypt(userName);
+        }
+        return userName;
+    }
+
+    public String getSource() {
+        return getValue("source");
+    }
+
+    public String getSid() {
+        return getValue("sid");
+    }
+
+    public String getClientType() {
+        return getValue("clientType");
+    }
+
+    public String getNewVersion() {
+        return getValue("newVersion");
+    }
 }

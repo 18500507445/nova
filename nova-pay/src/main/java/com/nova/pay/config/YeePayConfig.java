@@ -5,6 +5,7 @@ package com.nova.pay.config;
  * @Author: wangzehui
  * @Date: 2022/7/1 10:20
  */
+@Deprecated
 public class YeePayConfig {
 
     /**

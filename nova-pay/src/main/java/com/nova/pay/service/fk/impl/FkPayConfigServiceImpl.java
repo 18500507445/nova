@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.nova.pay.config.Constants;
+import com.nova.common.constant.PayConstants;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.mapper.FkPayConfigMapper;
 import com.nova.pay.service.fk.FkPayConfigService;
@@ -108,7 +108,7 @@ public class FkPayConfigServiceImpl implements FkPayConfigService {
      */
     @Override
     public FkPayConfig getRandomConfigData(String source, String sid, String payWay) {
-        String key = Constants.REDIS_KEY + "randomConfig_" + source + "_" + sid + "_" + payWay;
+        String key = PayConstants.REDIS_KEY + "randomConfig_" + source + "_" + sid + "_" + payWay;
         FkPayConfig payConfig = null;
         List<FkPayConfig> payConfigList;
         try {
@@ -148,7 +148,7 @@ public class FkPayConfigServiceImpl implements FkPayConfigService {
     @Override
     public FkPayConfig getConfigData(Long payConfigId) {
         //获取支付配置
-        String key = Constants.REDIS_KEY + "payConfig_" + payConfigId;
+        String key = PayConstants.REDIS_KEY + "payConfig_" + payConfigId;
         FkPayConfig payConfig = null;
         try {
             Object o = redisService.get(key);

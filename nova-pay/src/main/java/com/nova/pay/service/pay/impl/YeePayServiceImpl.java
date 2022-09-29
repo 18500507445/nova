@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.nova.common.core.domain.AjaxResult;
-import com.nova.pay.config.Constants;
+import com.nova.common.constant.PayConstants;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.param.YeePayParam;
 import com.nova.pay.entity.result.FkPayConfig;
@@ -106,7 +106,7 @@ public class YeePayServiceImpl implements PayService {
                         .userName(userName);
 
                 Map<String, String> orderMap = yeePayUtil.tradeOrder(yeePayBuilder.build());
-                if (!orderMap.isEmpty() && StringUtils.equals(Constants.YEE_CODE, MapUtils.getString(orderMap, "code"))) {
+                if (!orderMap.isEmpty() && StringUtils.equals(PayConstants.YEE_CODE, MapUtils.getString(orderMap, "code"))) {
                     String token = MapUtils.getString(orderMap, "token");
                     String uniqueOrderNo = MapUtils.getString(orderMap, "uniqueOrderNo");
                     yeePayBuilder.token(token);

@@ -15,7 +15,7 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.util.XmlConfig;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
-import com.nova.pay.config.Constants;
+import com.nova.common.constant.PayConstants;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.entity.result.FkPayOrder;
 import com.nova.pay.service.fk.FkOrderService;
@@ -241,7 +241,7 @@ public class PayNotifyController extends BaseController {
                 Map<String, Object> verify = iosVerifyUtil.verify(sign, sid, version);
                 String transactionId = MapUtil.getStr(verify, "transaction_id");
                 String status = MapUtil.getStr(verify, "status");
-                boolean check = ArrayUtils.contains(new String[]{"0"}, status) && !StringUtils.equals(Constants.ZERO, transactionId);
+                boolean check = ArrayUtils.contains(new String[]{"0"}, status) && !StringUtils.equals(PayConstants.ZERO, transactionId);
                 logger.info("applePayNotify验签结果====>orderId:{}, verify:{}, check:{}", orderId, verify, check);
                 if (check && ObjectUtil.isEmpty(payOrder.getTradeNo())) {
                     //3.0 通知修改成处理中,存入sign、验签结果
@@ -299,13 +299,13 @@ public class PayNotifyController extends BaseController {
                         //回调改成:处理中
                         fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(4).build());
                         BigDecimal fee = payOrder.getFee();
-                        if (StrUtil.equals(Constants.SUCCESS, status) && ObjectUtil.equals(fee, new BigDecimal(orderAmount))) {
+                        if (StrUtil.equals(PayConstants.SUCCESS, status) && ObjectUtil.equals(fee, new BigDecimal(orderAmount))) {
                             payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).build());
                             if (payFlag > 0) {
                                 String userName = payOrder.getUserName();
                                 String payType = payConfig.getPayType();
                                 fkOrderService.recharge(orderId, userName, "1", fee.toString(), payType);
-                                result = Constants.SUCCESS;
+                                result = PayConstants.SUCCESS;
                             }
                         } else {
                             payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(2).build());
@@ -344,7 +344,7 @@ public class PayNotifyController extends BaseController {
      */
     @PostMapping("yeePay/divideApply")
     public void divideApply(HttpServletRequest request, HttpServletResponse response) {
-        String result = Constants.FAIL;
+        String result = PayConstants.FAIL;
         DigitalEnvelopeDTO dto = new DigitalEnvelopeDTO();
         try {
             String appKey = request.getParameter("customerIdentification");
@@ -358,7 +358,7 @@ public class PayNotifyController extends BaseController {
                 if (StringUtils.isNotBlank(plainText)) {
                     JSONObject json = JSONObject.parseObject(plainText);
                     logger.info("易宝清算通知解析json:{}", json.toJSONString());
-                    result = Constants.SUCCESS;
+                    result = PayConstants.SUCCESS;
                     Map<String, Object> params = JSONObject.parseObject(json.toJSONString(), new TypeReference<Map<String, Object>>() {
                     });
 

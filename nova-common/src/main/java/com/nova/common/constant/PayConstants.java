@@ -1,11 +1,11 @@
-package com.nova.pay.config;
+package com.nova.common.constant;
 
 /**
  * @Description: 常量类
  * @Author: wangzehui
  * @Date: 2022/8/23 14:58
  */
-public class Constants {
+public class PayConstants {
 
     public static final String ZERO = "0";
 

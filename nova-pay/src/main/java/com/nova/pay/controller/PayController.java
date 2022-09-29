@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
-import com.nova.pay.config.Constants;
+import com.nova.common.constant.PayConstants;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.result.FkPayList;
 import com.nova.pay.enums.PayWayEnum;
@@ -73,7 +73,7 @@ public class PayController extends BaseController {
             return AjaxResult.error("1000", "必要参数sid或source为空");
         }
         List<Map<String, String>> list = new ArrayList<>();
-        String key = Constants.REDIS_KEY + "payController_list_" + source + "_" + sid;
+        String key = PayConstants.REDIS_KEY + "payController_list_" + source + "_" + sid;
         Object o = redisService.get(key);
         if (null != o) {
             list = JSON.parseObject(JSONObject.toJSONString(redisService.get(key)), new TypeReference<List<Map<String, String>>>() {

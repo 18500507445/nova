@@ -4,7 +4,7 @@ package com.nova.pay.utils.open;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.nova.pay.config.Constants;
+import com.nova.common.constant.PayConstants;
 import com.nova.pay.entity.param.YeePayParam;
 import com.yeepay.g3.sdk.yop.client.YopRequest;
 import com.yeepay.g3.sdk.yop.client.YopResponse;
@@ -145,7 +145,7 @@ public class YeePayUtil {
             //页面重定向地址 钱包首页返回商户页面地址
             request.addParam("returnUrl", data.getReturnUrl());
             //服务器回调地址 开户完成后通知地址
-            request.addParam("notifyUrl", Constants.WALLET_NOTIFY_URL);
+            request.addParam("notifyUrl", PayConstants.WALLET_NOTIFY_URL);
             //商户请求流水号 UUID.randomUUID().toString().replaceAll("-", "")
             request.addParam("requestNo", UUID.randomUUID().toString().replaceAll("-", ""));
 
@@ -196,7 +196,7 @@ public class YeePayUtil {
              * 携带(merchantNo,parentMerchantNo,orderId,sign)
              */
             request.addParam("redirectUrl", data.getReturnUrl());
-            request.addParam("csUrl", Constants.CS_NOTIFY_URL);
+            request.addParam("csUrl", PayConstants.CS_NOTIFY_URL);
             //分账标识。不传，默认不分账 DELAY_SETTLE：分账
             request.addParam("fundProcessType", "DELAY_SETTLE");
 
@@ -319,7 +319,7 @@ public class YeePayUtil {
             productArray.add(productInfo);
             request.addParam("productInfo", productArray.toJSONString());
 
-            request.addParam("notifyUrl", Constants.MICRO_NOTIFY_URL);
+            request.addParam("notifyUrl", PayConstants.MICRO_NOTIFY_URL);
 
             YopResponse response = YopRsaClient.post("/rest/v2.0/mer/register/contribute/micro", request);
             if (null != response && StringUtils.isNotBlank(response.getStringResult())) {

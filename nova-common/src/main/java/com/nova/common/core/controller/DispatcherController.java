@@ -1,6 +1,7 @@
 package com.nova.common.core.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.nova.common.constant.Constants;
 import com.nova.common.exception.ServiceException;
 import com.nova.common.utils.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -58,13 +59,13 @@ public class DispatcherController extends BaseController {
                 while (it.hasNext()) {
                     Map.Entry<String, String> entry = it.next();
                     if ("function".equals(entry.getKey())) {
-                        function = URLDecoder.decode(entry.getValue(), "utf-8") + "?";
+                        function = URLDecoder.decode(entry.getValue(), Constants.UTF8) + "?";
                     } else {
                         //处理特殊参数带有http的 url进行编码
                         if (entry.getValue().contains("+") || (!entry.getKey().contains("avatar") && entry.getValue().contains("http"))) {
-                            param.append(entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "utf-8") + "&");
+                            param.append(entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), Constants.UTF8) + "&");
                         } else {
-                            param.append(entry.getKey() + "=" + URLDecoder.decode(entry.getValue(), "utf-8") + "&");
+                            param.append(entry.getKey() + "=" + URLDecoder.decode(entry.getValue(), Constants.UTF8) + "&");
                         }
                     }
                 }

@@ -59,4 +59,11 @@ public interface FkPayListService {
      * @return 结果
      */
     int deleteFkPayListById(Long id);
+
+    /**
+     * 批量插入
+     * @param list
+     * @return
+     */
+    int batchInsert(List<FkPayList> list);
 }

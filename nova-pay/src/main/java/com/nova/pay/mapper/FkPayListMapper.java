@@ -61,4 +61,11 @@ public interface FkPayListMapper {
      * @return 结果
      */
     int deleteFkPayListByIds(String[] ids);
+
+    /**
+     * 批量插入
+     * @param list
+     * @return
+     */
+    int batchInsert(List<FkPayList> list);
 }

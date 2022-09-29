@@ -86,4 +86,14 @@ public class FkPayListServiceImpl implements FkPayListService {
     public int deleteFkPayListById(Long id) {
         return fkPayListMapper.deleteFkPayListById(id);
     }
+
+    /**
+     * 批量插入
+     * @param list
+     * @return
+     */
+    @Override
+    public int batchInsert(List<FkPayList> list) {
+        return fkPayListMapper.batchInsert(list);
+    }
 }

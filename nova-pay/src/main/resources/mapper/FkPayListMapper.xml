@@ -169,4 +169,19 @@
             #{id}
         </foreach>
     </delete>
+
+    <insert id="batchInsert" parameterType="java.lang.Integer">
+        insert into fk_pay_list (source, sid, ali_h5, ali_app, ali_applet,
+        wechat_h5, wechat_app, wechat_jsapi, apple, yee_pay_quick,
+        yee_pay_wallet, operator, remark, ali_logo_url, wechat_logo_url,
+        apple_logo_url, yee_pay_logo_url, ball_coin, ball_coin_logo_url
+        ) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.source}, #{item.sid}, #{item.aliH5}, #{item.aliApp}, #{item.aliApplet},
+            #{item.wechatH5}, #{item.wechatApp}, #{item.wechatJsapi}, #{item.apple}, #{item.yeePayQuick},
+            #{item.yeePayWallet}, #{item.operator}, #{item.remark}, #{item.aliLogoUrl}, #{item.wechatLogoUrl},
+            #{item.appleLogoUrl}, #{item.yeePayLogoUrl}, #{item.ballCoin}, #{item.ballCoinLogoUrl}
+            )
+        </foreach>
+    </insert>
 </mapper>

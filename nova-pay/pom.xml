@@ -21,6 +21,21 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-mq-active</artifactId>
+        </dependency>
+
         <!-- 微信支付 -->
         <dependency>
             <groupId>com.github.binarywang</groupId>
@@ -51,19 +66,5 @@
             <systemPath>${basedir}/src/main/resources/lib/yop-java-sdk-3.2.25-jdk18json.jar</systemPath>
         </dependency>
 
-        <dependency>
-            <groupId>com.nova</groupId>
-            <artifactId>nova-framework</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nova</groupId>
-            <artifactId>nova-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nova</groupId>
-            <artifactId>nova-mq-active</artifactId>
-        </dependency>
     </dependencies>
 </project>

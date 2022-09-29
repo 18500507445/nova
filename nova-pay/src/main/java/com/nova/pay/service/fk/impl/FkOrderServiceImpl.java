@@ -4,9 +4,9 @@ import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.nova.common.constant.Constants;
 import com.nova.common.utils.Md5Utils;
 import com.nova.common.utils.http.HttpRequestProxy;
-import com.nova.common.constant.PayConstants;
 import com.nova.pay.service.fk.FkOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class FkOrderServiceImpl implements FkOrderService {
     @Override
     public String getOrderId(Map<String, String> map) {
         String orderId = "";
-        String json = HttpRequestProxy.doPost(PayConstants.CPAPI_URL, map, "UTF-8", "UTF-8");
+        String json = HttpRequestProxy.doPost(Constants.CPAPI_URL, map, "UTF-8", "UTF-8");
         if (StrUtil.isNotEmpty(json)) {
             JSONObject jsonObject = JSONUtil.parseObj(json);
             if (jsonObject.containsKey("code") && StrUtil.equals("0000", jsonObject.getStr("code"))) {
@@ -62,7 +62,7 @@ public class FkOrderServiceImpl implements FkOrderService {
     @Override
     public Map<String, String> getCommon(Map<String, String> map) {
         Map<String, String> result = new HashMap<>(16);
-        String json = HttpRequestProxy.doPost(PayConstants.CPAPI_URL, map, "UTF-8", "UTF-8");
+        String json = HttpRequestProxy.doPost(Constants.CPAPI_URL, map, "UTF-8", "UTF-8");
         if (StrUtil.isNotBlank(json)) {
             JSONObject jsonObject = JSONUtil.parseObj(json);
             if (jsonObject.containsKey("code")) {
@@ -99,19 +99,19 @@ public class FkOrderServiceImpl implements FkOrderService {
     @Override
     public void recharge(String orderId, String userName, String tradeStatus, String amount, String payType) {
         //拼接签名调用web进行加款
-        String param = orderId + tradeStatus + payType + amount + userName + PayConstants.MD5_KEY;
+        String param = orderId + tradeStatus + payType + amount + userName + Constants.MD5_KEY;
         String sign = Md5Utils.hash(param);
         logger.info("recharge--orderId:{},userName:{},tradeStatus:{},amount:{},payType:{},sign:{}", orderId, userName, tradeStatus, amount, payType, sign);
         threadPoolTaskExecutor.execute(() -> {
             Map<String, Object> message = new HashMap<>(16);
-            message.put("URL", PayConstants.PAY_URL);
+            message.put("URL", Constants.PAY_URL);
             message.put("ORDERNO", orderId);
             message.put("TRANSTAT", tradeStatus);
             message.put("ORDERAMT", amount);
             message.put("USERNAME", userName);
             message.put("PAYTYPE", payType);
             message.put("SIGN", sign);
-            jmsTemplate.convertAndSend(PayConstants.DESTINATION_NAME_RECHARGE, message);
+            jmsTemplate.convertAndSend(Constants.DESTINATION_NAME_RECHARGE, message);
         });
     }
 
@@ -132,7 +132,7 @@ public class FkOrderServiceImpl implements FkOrderService {
         param.put("remark", "充值开通");
         //延迟200ms防止加款没走完导致扣费展示余额不足
         ThreadUtil.safeSleep(200);
-        String json = HttpRequestProxy.doPost(PayConstants.CPAPI_URL, param, "UTF-8", "UTF-8");
+        String json = HttpRequestProxy.doPost(Constants.CPAPI_URL, param, "UTF-8", "UTF-8");
         if (StrUtil.isNotEmpty(json)) {
 
         }

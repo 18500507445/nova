@@ -1,7 +1,6 @@
 package com.nova.tools.java8.list;
 
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +39,8 @@ public class Java8ListDemo {
             peopleNew.setDescription(people.getDescription());
             peopleListNew.add(peopleNew);
         });
-        System.out.println(JSONObject.toJSONString(peopleListNew));
+        peopleListNew.forEach(System.out::println);
+        System.out.println(JSONUtil.toJsonStr(peopleListNew));
 
     }
 
@@ -59,36 +59,37 @@ public class Java8ListDemo {
     /**
      * list排序 按照某个属性
      */
-    private static void listSort(List<People> peopleList) {
+    private static void listSorted(List<People> peopleList) {
         //降序
         List<People> descList = peopleList.stream().sorted(Comparator.comparing(People::getAge).reversed()).collect(Collectors.toList());
         //升序
         List<People> ascList = peopleList.stream().sorted(Comparator.comparing(People::getAge)).collect(Collectors.toList());
-        System.out.println(JSONObject.toJSONString(descList));
-    }
 
+        System.out.println(JSONUtil.toJsonStr(descList));
+        System.out.println(JSONUtil.toJsonStr(ascList));
 
-    /**
-     * list排序 按照某个属性
-     */
-    private static void listSortNew(List<People> peopleList) {
+        //todo 排序方式 二 (正序)
+        peopleList.sort(Comparator.comparing(People::getAge));
+        //倒序
+        peopleList.sort((o1, o2) -> o2.getAge().compareTo(o1.getAge()));
+        //倒叙
         peopleList.sort(Comparator.comparing(People::getAge).reversed());
-        System.out.println(JSONObject.toJSONString(peopleList));
     }
+
 
     /**
      * list分组 按照某个属性
      */
     private static void listGrouping(List<People> peopleList) {
         Map<Integer, List<People>> peopleMap = peopleList.stream().collect(Collectors.groupingBy(People::getGroupId));
-        System.out.println(JSONObject.toJSONString(peopleMap));
+        System.out.println(JSONUtil.toJsonStr(peopleMap));
     }
 
 
     /**
-     * list对象 逗号拼接成字符串
+     * list对象 joining
      */
-    private static void listToStrJoinSymbol(List<People> peopleList) {
+    private static void listJoin(List<People> peopleList) {
         List<String> nameList = new ArrayList<>();
         for (People people : peopleList) {
             nameList.add(people.getName());
@@ -99,8 +100,15 @@ public class Java8ListDemo {
         //方式2
         String nameStr2 = StringUtils.join(nameList, ",");
 
-        System.out.println(JSONObject.toJSONString(nameStr1));
+        //方式3
+        String collect = peopleList.stream().map(People::getName).collect(joining(","));
+
+
+        System.out.println(JSONUtil.toJsonStr(nameStr1));
+        System.out.println(JSONUtil.toJsonStr(nameStr2));
+        System.out.println(JSONUtil.toJsonStr(collect));
     }
+
 
     /**
      * list过滤 按照指定条件过滤
@@ -108,67 +116,113 @@ public class Java8ListDemo {
     private static void listFilter(List<People> peopleList) {
         //过滤掉二组
         List<People> filterList = peopleList.stream().filter(people -> "一组".equals(people.getGroupName())).collect(Collectors.toList());
-        System.out.println(JSONObject.toJSONString(filterList));
+        System.out.println(JSONUtil.toJsonStr(filterList));
     }
 
     /**
      * list转map
      */
-    private static void ToMap(List<People> people) {
+    private static void listToMap(List<People> people) {
         Map<String, Integer> collect = people.stream().collect(toMap(People::getName, People::getAge));
         System.out.println(JSONUtil.toJsonStr(collect));
+
     }
 
     /**
      * list转object
+     *
      * @param people
      */
-    private static void toObject(List<People> people){
+    private static void listToObject(List<People> people) {
         List<Object> collect = people.stream().map(People::getAge).collect(toList());
-        System.out.println(collect);
+        System.out.println(JSONUtil.toJsonStr(collect));
     }
 
     /**
-     * 计算 求和，最大，最小，平均
-     * 排序
+     * list limit
+     */
+    private static void listLimit(List<People> people) {
+        List<People> collect = people.stream().limit(2).collect(toList());
+        System.out.println(JSONUtil.toJsonStr(collect));
+    }
+
+    /**
+     * list reduce
+     */
+    private static void listReduce(List<People> people) {
+        BigDecimal total = people.stream().map(People::getFee).reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("bigDecimal-add:" + total);
+    }
+
+    /**
+     * 求和，最大，最小，平均
      */
     private static void calculation(List<People> people) {
-        IntSummaryStatistics collect = people.stream().collect(summarizingInt(People::getAge));
-        System.out.println(collect.getSum());
-        System.out.println(collect.getMax());
-        System.out.println(collect.getMin());
-        System.out.println(collect.getAverage());
+        //方式一 属性bigDecimal
+        BigDecimal maxBigDecimal = people.stream().map(People::getFee).max(BigDecimal::compareTo).get();
 
+        //方式二
+        IntSummaryStatistics statistics = people.stream().collect(summarizingInt(People::getAge));
+        System.out.println("statistics--sum:" + statistics.getSum());
+        System.out.println("statistics--max:" + statistics.getMax());
+        System.out.println("statistics--min:" + statistics.getMin());
+        System.out.println("statistics--avg:" + statistics.getAverage());
 
         Double doubleAvg = people.stream().collect(averagingInt(People::getAge));
-        System.out.println(doubleAvg);
+        System.out.println("doubleAvg:" + doubleAvg);
 
+        //方式三
         int sum = people.stream().mapToInt(People::getAge).sum();
         int max = people.stream().mapToInt(People::getAge).max().getAsInt();
         int min = people.stream().mapToInt(People::getAge).min().getAsInt();
         double asDouble = people.stream().mapToInt(People::getAge).average().getAsDouble();
-        System.out.println(sum);
+        System.out.println("sum:" + sum);
+        System.out.println("max:" + max);
+        System.out.println("min:" + min);
+        System.out.println("asDouble:" + asDouble);
 
-        //找出最大的对象
-        People data = people.stream().max(Comparator.comparing(People::getAge)).get();
-
-        //排序-正序
-        people.sort(Comparator.comparing(People::getAge));
-        //倒序
-        people.sort((o1, o2) -> o2.getAge().compareTo(o1.getAge()));
-        //倒叙
-        people.sort(Comparator.comparing(People::getAge).reversed());
-
-        //bigDecimal求和
-        BigDecimal add = people.stream().map(People::getFee).reduce(BigDecimal.ZERO, BigDecimal::add);
-        System.out.println("bigDecimal-add:" + add);
-        //最大 最小
-        Optional<People> maxPeople = people.stream().max(Comparator.comparing(People::getFee));
-        Optional<People> minPeople = people.stream().min(Comparator.comparing(People::getFee));
-        BigDecimal maxFee = maxPeople.get().getFee();
-        BigDecimal minFee = minPeople.get().getFee();
-        System.out.println(maxFee);
-        System.out.println(minFee);
+        //方式四 找出最大、最小的对象
+        People maxData = people.stream().max(Comparator.comparing(People::getAge)).get();
+        People minData = people.stream().min(Comparator.comparing(People::getAge)).get();
+        System.out.println("maxData:" + JSONUtil.toJsonStr(maxData));
+        System.out.println("minData:" + JSONUtil.toJsonStr(minData));
     }
+
+    /**
+     * list 去重
+     */
+    private static void listDistinct(List<People> people) {
+        List<String> distinct = people.stream().map(People::getName).distinct().collect(toList());
+        System.out.println("distinct:" + JSONUtil.toJsonStr(distinct));
+    }
+
+
+    /**
+     * list match匹配
+     */
+    private static void listMatch(List<People> people) {
+        //所有人年龄是否都大于14岁
+        boolean allResult = people.stream().allMatch(i -> i.getAge().compareTo(14) > 0);
+        System.out.println("allResult:" + allResult);
+
+        //是否有大于14岁
+        boolean oneResult = people.stream().allMatch(i -> i.getAge().compareTo(14) > 0);
+        System.out.println("oneResult:" + oneResult);
+    }
+
+
+    /**
+     * list find查找元素
+     */
+    private static void listFind(List<People> people) {
+        People first = people.stream().findFirst().get();
+        System.out.println("findFirst:" + JSONUtil.toJsonStr(first));
+
+        //并行的情况，那就不能确保是第一个，串行时数据较少findAny()是为了更高效
+        People any = people.stream().findAny().get();
+        System.out.println("findAny:" + JSONUtil.toJsonStr(any));
+
+    }
+
 
 }

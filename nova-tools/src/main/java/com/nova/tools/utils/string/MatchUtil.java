@@ -1,4 +1,4 @@
-package com.nova.tools.utils.data;
+package com.nova.tools.utils.string;
 
 /**
  * @Description: 余弦相似度用向量空间中两个向量夹角的余弦值作为衡量两个个体间差异的大小。余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似，这就叫"余弦相似性"。
@@ -7,7 +7,9 @@ package com.nova.tools.utils.data;
  */
 
 public class MatchUtil {
+
     public static void main(String[] args) {
+
         long start = System.currentTimeMillis();
         //要比较的两个字符串
         String str1 = "今天是星期五";

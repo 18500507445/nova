@@ -1,5 +1,7 @@
 package com.nova.tools.utils.list;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
 import java.util.*;
@@ -11,7 +13,6 @@ import java.util.*;
  * https://blog.csdn.net/biewan0238/article/details/103061933 (true 和false排序)
  * @Date 2020/7/1 13:48
  */
-
 public class ListUtils {
     /**
      * 对list的元素按照多个属性名称排序,
@@ -198,5 +199,84 @@ public class ListUtils {
             resultMap.put(oneSetTmpStr, oneSetTmpList);
         }
         return resultMap;
+    }
+
+    /**
+     * 首先进行入参检查防止出现空指针异常
+     * 如果两个参数都为空，则返回true
+     * 如果有一项为空，则返回false
+     * 接着对第一个list进行遍历，如果某一项第二个list里面没有，则返回false
+     * 还要再将两个list反过来比较，因为可能一个list是两一个list的子集
+     * 如果成功遍历结束，返回true
+     *
+     * @param l0
+     * @param l1
+     * @return
+     */
+    public static boolean isListEqual(List l0, List l1) {
+        if (l0 == l1) {
+            return true;
+        }
+        if (l0 == null && l1 == null) {
+            return true;
+        }
+        if (l0 == null || l1 == null) {
+            return false;
+        }
+        if (l0.size() != l1.size()) {
+            return false;
+        }
+        for (Object o : l0) {
+            if (!l1.contains(o)) {
+                return false;
+            }
+        }
+        for (Object o : l1) {
+            if (!l0.contains(o)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 交叉输出集合list 使用链表list处理
+     *
+     * @param o1
+     * @param o2
+     * @return
+     */
+    public static <T> List<T> overlappingList(List<T> o1, List<T> o2) {
+        //分别将2个list放入链表队列
+        LinkedList<T> list1 = new LinkedList<>(o1);
+        LinkedList<T> list2 = new LinkedList<>(o2);
+
+        //计算较大的数组长度
+        List<Integer> nums = new ArrayList<>();
+        nums.add(list1.size());
+        nums.add(list2.size());
+        int max = Collections.max(nums);
+
+        //新建一个数组list，来接受最终结果
+        List<T> list = new ArrayList<>(o1.size() + o2.size());
+
+        //遍历较大长度，保证所有数据都能取到
+        for (int i = 0; i < max; i++) {
+            //如果队列还没取完，继续取
+            if (!list1.isEmpty()) {
+                list.add(list1.poll());
+            }
+            if (!list2.isEmpty()) {
+                list.add(list2.poll());
+            }
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> o1 = Arrays.asList(1, 2, 3);
+        List<Integer> o2 = Arrays.asList(4, 5, 6);
+        List<Integer> integers = overlappingList(o1, o2);
+        System.out.println(integers);
     }
 }

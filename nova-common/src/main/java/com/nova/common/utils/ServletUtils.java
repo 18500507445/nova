@@ -14,6 +14,7 @@ import java.io.IOException;
  * 客户端工具类
  */
 public class ServletUtils {
+
     /**
      * 定义移动端请求的所有可能类型
      */

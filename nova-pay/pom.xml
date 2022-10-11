@@ -17,7 +17,7 @@
 
         <weixin.pay.version>4.4.0</weixin.pay.version>
         <weixin.mp.version>4.4.0</weixin.mp.version>
-        <alipay.version>4.31.12.ALL</alipay.version>
+        <alipay.version>4.34.0.ALL</alipay.version>
     </properties>
 
     <dependencies>

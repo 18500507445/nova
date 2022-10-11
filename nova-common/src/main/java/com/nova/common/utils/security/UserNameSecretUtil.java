@@ -1,5 +1,6 @@
-package com.nova.common.utils;
+package com.nova.common.utils.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,16 +13,16 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * @Classname: UserNameSecretUtil
  * @Description: 用户名加密工具类
- * @Date: 2021/12/20 13:02
- * @Created: by nieht
+ * @Author: wangzehui
+ * @Date: 2022/10/11 17:15
  */
+@Slf4j
 public class UserNameSecretUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(UserNameSecretUtil.class);
-
-    //数字秘钥
+    /**
+     * 数字秘钥
+     */
     private final static long SECRET_KEY = 16000771L;
     //转换字符（0-9分别为["D","e","C","A","P","b","J","I","z","M"]
     private final static String CONVERT_KEY = "DeCAPbJIzM";
@@ -47,17 +48,13 @@ public class UserNameSecretUtil {
      */
     public static String retSecret(String str) {
         String retStr = str;
-        /**
-         * 需要加密的内容
-         */
+        //需要加密的内容
         try {
             Set<String> set = new HashSet<>();
 
             for (String userName : SECRET_KEY_LIST) {
                 String jsonStr = str;
-                /**
-                 * 如果不包含参数，直接返回就可以
-                 */
+                //如果不包含参数，直接返回就可以
                 if (retStr.indexOf(userName) < 0) {
                     continue;
                 }
@@ -68,9 +65,7 @@ public class UserNameSecretUtil {
                     jsonStr = jsonStr.substring(index + userName.length() + 3);
                     String content = jsonStr.substring(0, jsonStr.indexOf("\""));
                     if (content.split("@")[0].length() == 11) {
-                        /**
-                         * 如果是手机号在保存
-                         */
+                        //如果是手机号在保存
                         set.add(content);
                     }
                 }
@@ -109,9 +104,9 @@ public class UserNameSecretUtil {
             if (!isNumber(phone)) {
                 return str;
             }
-            String encrypt = encrypt(str.split("@")[0]) + "@" + str.split("@")[1] + "_" + SECRET_MSG_ENDING;
-            return encrypt;
-        } catch (Exception e) {
+            return encrypt(str.split("@")[0]) + "@" + str.split("@")[1] + "_" + SECRET_MSG_ENDING;
+        } catch (Exception ignored) {
+
         }
         return str;
     }

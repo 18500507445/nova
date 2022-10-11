@@ -2,7 +2,7 @@ package com.nova.pay.entity.param;
 
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.utils.UserNameSecretUtil;
+import com.nova.common.utils.security.UserNameSecretUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

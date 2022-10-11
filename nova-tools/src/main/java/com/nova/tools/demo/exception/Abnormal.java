@@ -13,6 +13,7 @@ import java.io.StringWriter;
  */
 
 public class Abnormal {
+
     public static void main(String[] args) {
         try {
             boolean a = Myself.BOOLEAN_TRUE;

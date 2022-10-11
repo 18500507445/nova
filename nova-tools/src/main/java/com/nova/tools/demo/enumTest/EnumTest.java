@@ -11,6 +11,7 @@ import com.nova.tools.utils.enumerate.RequestTypeEnum;
 public class EnumTest {
 
     public static void main(String[] args) {
+
         System.out.println(RequestTypeEnum.BUYTICKET);
 
         System.out.println(RequestTypeEnum.valuesOf(3));

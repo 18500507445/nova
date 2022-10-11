@@ -8,7 +8,6 @@ import java.math.RoundingMode;
  * @author wangzehui
  * @date 2018/5/25 16:03
  */
-
 public class FilmPrice {
 
     public static final String memberPrice = "94.16";

@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Data
 public class GroupPeople {
+
     /**
      * 分组id
      */

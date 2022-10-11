@@ -4,9 +4,17 @@ import com.nova.pay.config.WeChatConfig;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import me.chanjar.weixin.mp.bean.result.WxMpUserList;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
+import me.chanjar.weixin.mp.config.WxMpConfigStorage;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Description: 微信公众号工具类
@@ -78,6 +86,45 @@ public class WeChatMpUtils {
 
         }
         return wxMpUser;
+    }
+
+    /**
+     * 消息推送
+     *
+     * @param openId
+     * @param templateId
+     */
+    public String sendTemplateMsg(String openId, String templateId) {
+        WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                .toUser(openId)
+                .templateId(templateId)
+                .url("")
+                .build();
+
+        try {
+            templateMessage.addData(new WxMpTemplateData("first", "value", "#FF00FF"))
+                    .addData(new WxMpTemplateData("remark", "value", "#FF00FF"));
+            return wxMpService.getWxMpService().getTemplateMsgService().sendTemplateMsg(templateMessage);
+        } catch (WxErrorException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 获取模板列表
+     */
+    public List<WxMpTemplate> getTemplateList() throws Exception {
+        return wxMpService.getWxMpService().getTemplateMsgService().getAllPrivateTemplate();
+    }
+
+
+    /**
+     * 获取公众号用户列表
+     */
+    public WxMpUserList getUserList(String nextOpenId) throws Exception {
+        return wxMpService.getWxMpService().getUserService().userList(nextOpenId);
     }
 
 }

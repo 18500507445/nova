@@ -3,8 +3,7 @@ package com.nova.tools.demo.thread;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -18,9 +17,8 @@ import java.util.concurrent.*;
  * @Date: 2021/3/31 11:13
  * web:https://www.freesion.com/article/32671046670/
  */
+@Slf4j
 public class ManualCreate {
-
-    private static final Logger logger = LoggerFactory.getLogger(ManualCreate.class);
 
     //获取机器核数，作为线程池数量
     private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
@@ -75,14 +73,14 @@ public class ManualCreate {
     public void start() {
         try {
             if (StringUtils.isBlank(IP)) {
-                logger.error("未获取到主机ip地址");
+                log.error("未获取到主机ip地址");
                 return;
             }
             //todo 可做解锁ip处理 情景举例：一个任务执行失败了，扔到重试表里，重试表有个locker字段，定时任务一直扫表，哪台机器哪个线程抢到任务locker放ip，然后当任务被线程处理，locker清除ip
             System.out.println("模拟:清除该ip锁定的任务后,睡眠2s");
             Thread.sleep(1000 * 2);
         } catch (InterruptedException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             return;
         }
         System.out.println("------------准备处理业务------------");
@@ -124,9 +122,9 @@ public class ManualCreate {
                         QUEUE.put(i);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    log.error(e.getMessage());
                 } finally {
-                    logger.debug("休眠时间:" + DateUtil.now());
+                    log.debug("休眠时间:" + DateUtil.now());
                 }
             }
         }
@@ -155,7 +153,7 @@ public class ManualCreate {
         try {
             System.out.println("处理次数" + i);
         } catch (Exception exp) {
-            logger.error("重试异常" + exp);
+            log.error("重试异常" + exp);
         } finally {
             SEMAPHORE.release();
         }

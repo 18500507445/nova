@@ -17,6 +17,26 @@ import java.util.List;
 public class IoTest {
 
     /**
+     * 读取指定的文本文件的内容为一个字符串
+     */
+    @Test
+    public void test1() throws IOException {
+        String path = "E:\\ideaProjects2\\utils-demo\\src\\test\\resources\\1.txt";
+        String string = FileUtils.readFileToString(new File(path), StandardCharsets.UTF_8);
+        System.out.println(string);
+    }
+
+    /**
+     * 读取指定的文本文件的内容为List<String>
+     */
+    @Test
+    public void test2() throws IOException {
+        String path = "E:\\ideaProjects2\\utils-demo\\src\\test\\resources\\1.txt";
+        List<String> list = FileUtils.readLines(new File(path), StandardCharsets.UTF_8);
+        System.out.println(list.size());
+    }
+
+    /**
      * 获取文件的后缀
      * 获取文件的baseName
      */
@@ -27,24 +47,6 @@ public class IoTest {
         System.out.println(FilenameUtils.getBaseName(path));
         // 获取后缀
         System.out.println(FilenameUtils.getExtension(path));
-    }
-    /**
-     * 读取指定的文本文件的内容为List<String>
-     */
-    @Test
-    public void test2() throws IOException {
-        String path = "E:\\ideaProjects2\\utils-demo\\src\\test\\resources\\1.txt";
-        List<String> list = FileUtils.readLines(new File(path), StandardCharsets.UTF_8);
-        System.out.println(list.size());
-    }
-    /**
-     * 读取指定的文本文件的内容为一个字符串
-     */
-    @Test
-    public void test1() throws IOException {
-        String path = "E:\\ideaProjects2\\utils-demo\\src\\test\\resources\\1.txt";
-        String string = FileUtils.readFileToString(new File(path), StandardCharsets.UTF_8);
-        System.out.println(string);
     }
 
 }

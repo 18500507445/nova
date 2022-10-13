@@ -18,7 +18,6 @@ public class OptionalDemo {
 
         // 依据一个非空值创建Optional
         Optional<Address> optionalAddress2 = Optional.of(new Address());
-
         // 可接受null的Optional
         Optional<Address> optionalAddress3 = Optional.ofNullable(new Address());
     }

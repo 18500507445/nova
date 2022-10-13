@@ -186,6 +186,7 @@ public class Java8ListDemo {
         People minData = people.stream().min(Comparator.comparing(People::getAge)).get();
         System.out.println("maxData:" + JSONUtil.toJsonStr(maxData));
         System.out.println("minData:" + JSONUtil.toJsonStr(minData));
+
     }
 
     /**

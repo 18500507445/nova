@@ -1,4 +1,4 @@
-package com.nova.tools.java8.vavr;
+package com.nova.tools.demo.vavr;
 
 import io.vavr.Lazy;
 

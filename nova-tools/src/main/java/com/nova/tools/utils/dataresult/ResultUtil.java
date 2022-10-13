@@ -1,6 +1,6 @@
 package com.nova.tools.utils.dataresult;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.tools.utils.enumerate.ResultCode;
 
 import java.util.Map;

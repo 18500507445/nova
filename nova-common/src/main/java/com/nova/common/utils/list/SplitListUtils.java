@@ -1,6 +1,6 @@
 package com.nova.common.utils.list;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package com.nova.tools.vc.ka.process.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.tools.utils.dataresult.DataResult;
 import com.nova.tools.utils.enumerate.TicketSystemEnum;
 import com.nova.tools.vc.ka.process.base.AbstractLockSeatBase;

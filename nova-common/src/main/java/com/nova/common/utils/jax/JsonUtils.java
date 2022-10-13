@@ -1,6 +1,6 @@
 package com.nova.common.utils.jax;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -75,7 +75,6 @@ public class JsonUtils {
      * 将json结果集转化为Map
      *
      * @param jsonData json数据
-     * @param    对象中的object类型
      * @return
      */
     public static Map jsonToMap(String jsonData) {

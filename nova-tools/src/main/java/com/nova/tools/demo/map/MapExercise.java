@@ -1,7 +1,7 @@
 package com.nova.tools.demo.map;
 
 import cn.hutool.core.collection.CollUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.tools.demo.entity.GroupPeople;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;

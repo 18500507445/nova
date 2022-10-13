@@ -1,9 +1,10 @@
 package com.nova.pay.utils.open;
 
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.TypeReference;
 import com.nova.common.constant.Constants;
 import com.nova.pay.entity.param.YeePayParam;
 import com.yeepay.g3.sdk.yop.client.YopRequest;
@@ -25,6 +26,7 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -60,7 +62,7 @@ public class YeePayUtil {
 
             YopResponse response = YopRsaClient.post("/rest/v1.0/std/trade/order", request);
             if (null != response && StringUtils.isNotBlank(response.getStringResult())) {
-                return JSONObject.parseObject(response.getStringResult(), new TypeReference<Map<String, String>>() {
+                return JSON.parseObject(response.getStringResult(), new TypeReference<Map<String, String>>() {
                 });
             }
         } catch (IOException e) {

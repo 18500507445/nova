@@ -1,6 +1,6 @@
 package com.nova.common.core.domain;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -59,7 +59,7 @@ public class BaseEntity implements Serializable {
 
     public Map<String, Object> getParams() {
         if (params == null) {
-            params = new HashMap<>();
+            params = new HashMap<>(16);
         }
         return params;
     }

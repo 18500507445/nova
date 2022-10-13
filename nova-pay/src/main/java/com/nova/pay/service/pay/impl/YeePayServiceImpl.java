@@ -2,7 +2,7 @@ package com.nova.pay.service.pay.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.pay.entity.param.PayParam;

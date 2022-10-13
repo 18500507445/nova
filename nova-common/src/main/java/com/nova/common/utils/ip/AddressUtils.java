@@ -1,7 +1,7 @@
 package com.nova.common.utils.ip;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 
 import com.nova.common.config.Global;
 import com.nova.common.constant.Constants;

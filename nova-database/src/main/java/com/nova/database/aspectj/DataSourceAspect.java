@@ -3,6 +3,7 @@ package com.nova.database.aspectj;
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.database.annotation.DataSource;
 import com.nova.database.config.DynamicDataSourceContextHolder;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -22,9 +23,8 @@ import java.util.Objects;
 @Aspect
 @Order(1)
 @Component
+@Slf4j
 public class DataSourceAspect {
-
-    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Pointcut("@annotation(com.nova.database.annotation.DataSource)"
             + "|| @within(com.nova.database.annotation.DataSource)")

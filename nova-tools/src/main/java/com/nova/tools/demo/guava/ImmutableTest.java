@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 /**
- * @Description:
+ * @Description: 不可变集合
  * @Author: wangzehui
  * @Date: 2022/10/13 17:59
  */
-public class MapTest {
+public class ImmutableTest {
 
     @Test
     public void createMap(){

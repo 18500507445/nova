@@ -1,5 +1,8 @@
 package com.nova.common.utils.list;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
 import java.util.*;
@@ -269,6 +272,45 @@ public class ListUtils {
             }
         }
         return list;
+    }
+
+
+    /**
+     * 获取两个集合的差集
+     *
+     * @param big   大集合
+     * @param small 小集合
+     * @return 两个集合的差集 big left join small
+     */
+    public static <T> Collection<T> getDiffSection(Collection<T> big, Collection<T> small) {
+        Set<T> differenceSet = Sets.difference(Sets.newHashSet(big), Sets.newHashSet(small));
+        return Lists.newArrayList(differenceSet);
+    }
+
+
+    /**
+     * 获取两个集合的交集
+     *
+     * @param c1
+     * @param c2
+     * @return c1 inner join c2
+     */
+    public static <T> List<T> getInterSection(Collection<T> c1, Collection<T> c2) {
+        Set<T> intersections = Sets.intersection(Sets.newHashSet(c1), Sets.newHashSet(c2));
+        return Lists.newArrayList(intersections);
+    }
+
+    /**
+     * 获取两个集合的并集
+     *
+     * @param c1
+     * @param c2
+     * @return
+     */
+    public static <T> List<T> getUnionSection(Collection<T> c1, Collection<T> c2) {
+        c1.addAll(c2);
+        Set<T> newHashSet = Sets.newHashSet(c1);
+        return Lists.newArrayList(newHashSet);
     }
 
     public static void main(String[] args) {

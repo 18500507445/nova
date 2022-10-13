@@ -6,6 +6,7 @@ import com.nova.tools.demo.entity.GroupPeople;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
 import org.apache.commons.collections4.CollectionUtils;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,18 +16,13 @@ import java.util.stream.Collectors;
  * @Author: wangzehui
  * @Date: 2019/4/22 11:32
  */
-
 public class MapExercise {
-    public static void main(String[] args) {
-//        forEachMap();
-        treeMap();
-//        forEachMapOld();
-    }
 
     /**
      * Java 7 forEachMap
      */
-    private static void forEachMapOld() {
+    @Test
+    public void forEachMapOld(){
         List<People> peopleResult = Myself.EXERCISE_LIST;
         HashMap<Integer, List<People>> map = new HashMap<>(16);
         if (CollUtil.isNotEmpty(peopleResult)) {
@@ -54,7 +50,8 @@ public class MapExercise {
     /**
      * Java 8 forEachMap
      */
-    private static void forEachMap() {
+    @Test
+    public void forEachMap() {
         List<People> peopleResult = Myself.EXERCISE_LIST;
 
         List<GroupPeople> groupList = new ArrayList<>();
@@ -89,16 +86,16 @@ public class MapExercise {
         System.out.println(JSONObject.toJSONString(groupList));
     }
 
-
-    private static void hashMap() {
-        /**
-         *  数组方式存储key/value，线程非安全，允许null作为key和value，key不可以重复，value允许重复，
-         *  不保证元素迭代顺序是按照插入时的顺序，key的hash值是先计算key的hashcode值，然后再进行计算，
-         *  每次容量扩容会重新计算所以key的hash值，会消耗资源，要求key必须重写equals和hashcode方法.
-         *  默认初始容量16，加载因子0.75，扩容为旧容量乘2，查找元素快，如果key一样则比较value，如果value不一样，则按照链表结构存储value，就是一个key后面有多个value；
-         *
-         *  如果按照key的顺序 先进先出  那么用 LinkedHashMap
-         */
+    /**
+     *  数组方式存储key/value，线程非安全，允许null作为key和value，key不可以重复，value允许重复，
+     *  不保证元素迭代顺序是按照插入时的顺序，key的hash值是先计算key的hashcode值，然后再进行计算，
+     *  每次容量扩容会重新计算所以key的hash值，会消耗资源，要求key必须重写equals和hashcode方法.
+     *  默认初始容量16，加载因子0.75，扩容为旧容量乘2，查找元素快，如果key一样则比较value，如果value不一样，则按照链表结构存储value，就是一个key后面有多个value；
+     *
+     *  如果按照key的顺序 先进先出  那么用 LinkedHashMap
+     */
+    @Test
+    public void hashMap() {
         Map<String, String> map = new HashMap<>(16);
         map.put("1", "a");
         map.put("2", "b");
@@ -112,9 +109,7 @@ public class MapExercise {
 
         //第二种
         System.out.println("通过Map.entrySet使用iterator遍历key和value：");
-        Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, String> entry = it.next();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
 
@@ -131,18 +126,21 @@ public class MapExercise {
         }
     }
 
-    private static void treeMap() {
-        /**
-         * 基于红黑二叉树的NavigableMap的实现，线程非安全，不允许null，key不可以重复，value允许重复，
-         * 存入TreeMap的元素应当实现Comparable接口或者实现Comparator接口，会按照排序后的顺序迭代元素，
-         * 两个相比较的key不得抛出classCastException。主要用于存入元素的时候对元素进行自动排序，迭代输出的时候就按排序顺序输出
-         *
-         * TreeMap 是一个有序的key-value集合，它是通过红黑树实现的
-         * 继承于AbstractMap，所以它是一个Map，即一个key-value集合
-         * 实现了NavigableMap接口，意味着它支持一系列的导航方法，比如返回有序的key集合
-         * 实现了Cloneable接口，意味着它能被克隆
-         * 实现了Serializable接口，意味着它支持序列化
-         */
+
+    /**
+     * 基于红黑二叉树的NavigableMap的实现，线程非安全，不允许null，key不可以重复，value允许重复，
+     * 存入TreeMap的元素应当实现Comparable接口或者实现Comparator接口，会按照排序后的顺序迭代元素，
+     * 两个相比较的key不得抛出classCastException。主要用于存入元素的时候对元素进行自动排序，迭代输出的时候就按排序顺序输出
+     *
+     * TreeMap 是一个有序的key-value集合，它是通过红黑树实现的
+     * 继承于AbstractMap，所以它是一个Map，即一个key-value集合
+     * 实现了NavigableMap接口，意味着它支持一系列的导航方法，比如返回有序的key集合
+     * 实现了Cloneable接口，意味着它能被克隆
+     * 实现了Serializable接口，意味着它支持序列化
+     */
+    @Test
+    public void treeMap() {
+
         Map<String, String> map = new TreeMap<>();
         map.put("1", "a");
         map.put("3", "b");
@@ -162,10 +160,11 @@ public class MapExercise {
 
     }
 
-    private static void hashTable() {
-        /**
-         *key和value都不允许为null,方法是同步的，有人建议，涉及多线程使用时候，使用hashTable
-         */
+    /**
+     *key和value都不允许为null,方法是同步的，有人建议，涉及多线程使用时候，使用hashTable
+     */
+    @Test
+    public void hashTable() {
         Hashtable<String, String> hashTable = new Hashtable<>();
         hashTable.put("1", "a");
         hashTable.put("2", "b");

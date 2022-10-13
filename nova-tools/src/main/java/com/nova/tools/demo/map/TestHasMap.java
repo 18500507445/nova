@@ -9,6 +9,7 @@ import java.util.Map;
  */
 
 public class TestHasMap {
+
     public static void main(String[] args) {
         //定义数据量
         int aHundredMillion = 10000000;

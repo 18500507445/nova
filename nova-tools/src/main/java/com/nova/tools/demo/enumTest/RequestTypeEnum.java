@@ -4,14 +4,21 @@ package com.nova.tools.demo.enumTest;
  * Created by dongliu on 2017/7/6.
  */
 public enum RequestTypeEnum {
+
     LOCKSEAT(1, "锁座"),
+
     UNLOCKSEAT(2, "解锁"),
+
     BUYTICKET(3, "购票"),
+
     REFUNDTICKET(4, "退票"),
+
     OFFINEBUY(5, "会员卡扣款"),
+
     OFFINEREFUND(6, "会员卡退款");
 
     private int code;
+
     private String name;
 
     public int getCode() {

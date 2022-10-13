@@ -341,6 +341,8 @@ public class ListUtils {
     /**
      * 将一个list均分成n个list,主要通过偏移量来实现的
      *
+     * 新方法guava：Lists.partition(list, n)，n代表单个list max长度
+     *
      * @param source
      * @return
      */
@@ -375,7 +377,7 @@ public class ListUtils {
         int limit = countStep(list.size());
         cutList(list, limit);
 
-        List<List<Integer>> partition = Lists.partition(list, 2);
+        List<List<Integer>> partition = Lists.partition(list, 5);
         System.out.println(JSONUtil.toJsonStr(partition));
     }
 }

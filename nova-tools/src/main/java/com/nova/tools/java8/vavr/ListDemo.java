@@ -1,13 +1,7 @@
 package com.nova.tools.java8.vavr;
 
-import com.nova.tools.demo.entity.Myself;
-import com.nova.tools.demo.entity.People;
 import io.vavr.collection.List;
-import io.vavr.collection.Stream;
 import io.vavr.control.Option;
-import org.apache.poi.ss.formula.functions.T;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * @Description: list计算

@@ -26,7 +26,12 @@ public class FunctionsDemo {
         };
 
         // 创建方式三
-        Function2<Integer, Integer, Integer> sum = Function2.of((a, b) -> a + b);
+        Function2<Integer, Integer, Integer> sumThree = Function2.of((a, b) -> a + b);
+
+
+        //创建方式四
+        Function2<Integer, Integer, Integer> sumFour = Integer::sum;
+        System.out.println(sumFour.apply(100, 100));
     }
 
 

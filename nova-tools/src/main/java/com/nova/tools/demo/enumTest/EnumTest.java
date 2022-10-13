@@ -1,8 +1,6 @@
 package com.nova.tools.demo.enumTest;
 
 
-import com.nova.tools.utils.enumerate.RequestTypeEnum;
-
 /**
  * @author wangzehui
  * @date 2018/10/24 14:06

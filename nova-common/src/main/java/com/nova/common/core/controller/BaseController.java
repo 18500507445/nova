@@ -5,9 +5,9 @@ import com.github.pagehelper.PageInfo;
 
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.common.core.page.TableDataInfo;
-import com.nova.common.utils.IpUtils;
-import com.nova.common.utils.PageUtils;
-import com.nova.common.utils.ServletUtils;
+import com.nova.common.utils.ip.IpUtils;
+import com.nova.common.utils.list.PageUtils;
+import com.nova.common.utils.common.ServletUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

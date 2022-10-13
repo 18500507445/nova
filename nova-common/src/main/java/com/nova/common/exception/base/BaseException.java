@@ -2,7 +2,7 @@ package com.nova.common.exception.base;
 
 
 import cn.hutool.core.util.ObjectUtil;
-import com.nova.common.utils.MessageUtils;
+import com.nova.common.utils.common.MessageUtils;
 
 /**
  * 基础异常

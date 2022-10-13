@@ -3,6 +3,7 @@ package com.nova.common.utils.http;
 import cn.hutool.core.util.ObjectUtil;
 
 import com.nova.common.constant.Constants;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +19,8 @@ import java.util.Map;
 /**
  * 通用http发送方法
  */
+@Slf4j
 public class HttpUtils {
-    private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
 
     /**
      * 向指定 URL 发送GET方法的请求
@@ -100,9 +101,7 @@ public class HttpUtils {
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            Iterator<Map.Entry<String, Object>> it = headerParam.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<String, Object> entry = it.next();
+            for (Map.Entry<String, Object> entry : headerParam.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), ObjectUtil.toString(entry.getValue()));
             }
             connection.connect();

@@ -1,6 +1,6 @@
 package com.nova.framework.config;
 
-import com.nova.common.utils.Threads;
+import com.nova.common.utils.thread.Threads;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

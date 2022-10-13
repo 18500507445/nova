@@ -1,8 +1,8 @@
 package com.nova.tools.demo.thread;
 
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
-import com.nova.tools.utils.time.DateUtil;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -10,11 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import javax.annotation.PostConstruct;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
-import java.util.Date;
 import java.util.concurrent.*;
 
 /**
- * @Description:  问题:为什么使用线程池：创建和销毁线程耗费大量的时间,效率很低 为了提高线程的利用率使用线程池
+ * @Description: 问题:为什么使用线程池：创建和销毁线程耗费大量的时间,效率很低 为了提高线程的利用率使用线程池
  * @Author: wangzehui
  * @Date: 2021/3/31 11:13
  * web:https://www.freesion.com/article/32671046670/
@@ -116,7 +115,7 @@ public class ManualCreate {
 
                     if (taskNum > 0) {
                         //todo 比如根据taskNum 锁定重试任务表 where locker = ip limit taskNum
-                        System.out.println("获取业务，处理业务的机器为：" + IP + "时间:" + DateUtil.parse(new Date()));
+                        System.out.println("获取业务，处理业务的机器为：" + IP + "时间:" + DateUtil.now());
                     }
 
                     //QUEUE.put() 处理实体类
@@ -127,7 +126,7 @@ public class ManualCreate {
                 } catch (Exception e) {
                     logger.error(e.getMessage());
                 } finally {
-                    logger.debug("休眠时间:" + DateUtil.parse(new Date()));
+                    logger.debug("休眠时间:" + DateUtil.now());
                 }
             }
         }

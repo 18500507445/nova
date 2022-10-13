@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Data
 public class PageEntity<T> {
+
     //总页数
     private int totalPages;
     //总行数

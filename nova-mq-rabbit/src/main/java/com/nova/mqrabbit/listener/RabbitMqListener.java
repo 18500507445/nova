@@ -5,6 +5,7 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.map.MapUtil;
 import com.nova.common.constant.Destination;
 import com.rabbitmq.client.Channel;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
@@ -20,9 +21,8 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/9/11 09:25
  */
+@Slf4j
 public class RabbitMqListener {
-
-    private static final Logger logger = LoggerFactory.getLogger(RabbitMqListener.class);
 
     /**
      * 消息确认机制（ACK）
@@ -41,12 +41,12 @@ public class RabbitMqListener {
     public void testRabbitMqListener(Map<String, Object> msg, Message message, Channel channel) {
         TimeInterval timer = DateUtil.timer();
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
-        logger.info("testRabbitMqListener====>回调监听开始");
+        log.info("testRabbitMqListener====>回调监听开始");
         try {
             String userId = MapUtil.getStr(msg, "userId");
             System.out.println(userId);
         } catch (Exception e) {
-            logger.error("testRabbitMqListener异常:{}" + e.getMessage());
+            log.error("testRabbitMqListener异常:{}" + e.getMessage());
         } finally {
             try {
                 /**
@@ -67,7 +67,6 @@ public class RabbitMqListener {
                  */
                 //channel.basicNack(deliveryTag, true, false);
 
-
                 /**
                  * 拒绝消息，参数说明：
                  * long deliveryTag：唯一标识 ID。
@@ -78,9 +77,9 @@ public class RabbitMqListener {
                  */
                 //channel.basicReject(deliveryTag, true);
             } catch (IOException e) {
-                logger.error("testRabbitMqListener====>消费异常");
+                log.error("testRabbitMqListener====>消费异常");
             }
-            logger.info("testRabbitMqListener====>结束执行time:{}", timer.interval());
+            log.info("testRabbitMqListener====>结束执行time:{}", timer.interval());
         }
     }
 }

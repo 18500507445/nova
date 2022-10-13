@@ -13,6 +13,7 @@ public class Status {
     @JsonProperty("statusCode")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private int statusCode = 0;
+
     @JsonProperty("statusReason")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String statusReason;

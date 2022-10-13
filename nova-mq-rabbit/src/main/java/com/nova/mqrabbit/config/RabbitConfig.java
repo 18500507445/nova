@@ -1,6 +1,5 @@
 package com.nova.mqrabbit.config;
 
-import com.nova.common.utils.spring.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;

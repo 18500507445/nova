@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Constants;
-import com.nova.common.utils.Md5Utils;
+import com.nova.common.utils.jax.Md5Utils;
 import com.nova.common.utils.http.HttpRequestProxy;
 import com.nova.pay.service.fk.FkOrderService;
 import org.slf4j.Logger;

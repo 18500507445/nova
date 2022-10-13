@@ -1,13 +1,12 @@
 package com.nova.tools.demo.guava.ratelimit;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.alibaba.fastjson2.JSON;
 import com.google.common.util.concurrent.RateLimiter;
 import com.nova.common.annotation.ExtRateLimiter;
 import org.junit.jupiter.api.Test;
 
 /**
- * @Description: 令牌桶算法
+ * @Description: 令牌桶算法（单台服务器）
  * 令牌桶跟漏桶算法有点不一样，令牌桶算法也有一个大桶，桶中装的都是令牌，
  * 有一个固定的“人”在不停的往桶中放令牌，每个请求来的时候都要从桶中拿到令牌，要不然就无法进行请求操作
  * @Author: wangzehui

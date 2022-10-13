@@ -1,11 +1,15 @@
 package com.nova.common.utils.list;
 
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @Description wangzehui
@@ -15,6 +19,9 @@ import java.util.*;
  * @Date 2020/7/1 13:48
  */
 public class ListUtils {
+
+    private static final Integer MAX_NUMBER = 2;
+
     /**
      * 对list的元素按照多个属性名称排序,
      * list元素的属性可以是数字（byte、short、int、long、float、double等，支持正数、负数、0）、char、String、java.util.Date
@@ -218,9 +225,6 @@ public class ListUtils {
         if (l0 == l1) {
             return true;
         }
-        if (l0 == null && l1 == null) {
-            return true;
-        }
         if (l0 == null || l1 == null) {
             return false;
         }
@@ -313,10 +317,65 @@ public class ListUtils {
         return Lists.newArrayList(newHashSet);
     }
 
+    private static void cutList(List<Integer> list, int limit) {
+        //方法一：使用流遍历操作
+        Stream.iterate(0, n -> n + 1).limit(limit).forEach(i -> {
+            List<Integer> collect = list.stream().skip(i * MAX_NUMBER).limit(MAX_NUMBER).collect(Collectors.toList());
+            System.out.println(collect);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * 计算切分次数
+     */
+    private static Integer countStep(Integer size) {
+        return (size + MAX_NUMBER - 1) / MAX_NUMBER;
+    }
+
+
+    /**
+     * 将一个list均分成n个list,主要通过偏移量来实现的
+     *
+     * @param source
+     * @return
+     */
+    public static <T> List<List<T>> averageAssign(List<T> source, int n) {
+        if (n <= 0) {
+            n = 1;
+        }
+        List<List<T>> result = new ArrayList<>();
+        //(先计算出余数)
+        int remaider = source.size() % n;
+        //然后是商
+        int number = source.size() / n;
+        //偏移量
+        int offset = 0;
+        for (int i = 0; i < n; i++) {
+            List<T> value;
+            if (remaider > 0) {
+                value = source.subList(i * number + offset, (i + 1) * number + offset + 1);
+                remaider--;
+                offset++;
+            } else {
+                value = source.subList(i * number + offset, (i + 1) * number + offset);
+            }
+            result.add(value);
+        }
+        return result;
+    }
+
+
     public static void main(String[] args) {
-        List<Integer> o1 = Arrays.asList(1, 2, 3);
-        List<Integer> o2 = Arrays.asList(4, 5, 6);
-        List<Integer> integers = overlappingList(o1, o2);
-        System.out.println(integers);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        int limit = countStep(list.size());
+        cutList(list, limit);
+
+        List<List<Integer>> partition = Lists.partition(list, 2);
+        System.out.println(JSONUtil.toJsonStr(partition));
     }
 }

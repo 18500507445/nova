@@ -2,7 +2,6 @@ package com.nova.tools.java8.list;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
  * @Author: wangzehui
  * @Date: 2019/6/14 15:26
  */
-
 public class Java8StringDemo {
     
     public static final List<String> STRINGS = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");

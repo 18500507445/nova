@@ -20,12 +20,14 @@ public class RateLimiterTest {
      */
     public static final RateLimiter RATELIMITER = RateLimiter.create(5);
 
+    public static final int LIMIT_TIME = 1000;
+
     @Test
     public void test() {
         while (true) {
             System.out.println("time:" + RATELIMITER.acquire() + "s");
             //线程休眠，给足够的时间产生令牌
-            ThreadUtil.safeSleep(1000);
+            ThreadUtil.safeSleep(LIMIT_TIME);
         }
     }
 
@@ -39,7 +41,7 @@ public class RateLimiterTest {
     }
 
     @Test
-    @ExtRateLimiter(value = 5, timeOut = 1000)
+    @ExtRateLimiter(value = 5, timeOut = LIMIT_TIME)
     public void testAop() {
         System.out.println("测试接口限流");
     }

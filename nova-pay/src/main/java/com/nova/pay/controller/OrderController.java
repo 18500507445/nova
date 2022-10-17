@@ -9,6 +9,7 @@ import com.nova.pay.entity.param.OrderParam;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayConfigService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,10 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/8/23 17:28
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/order/")
 public class OrderController extends BaseController {
-
-    private static final Logger logger = LoggerFactory.getLogger(PayController.class);
 
     @Autowired
     private FkOrderService fkOrderService;
@@ -44,7 +44,7 @@ public class OrderController extends BaseController {
     @ResponseBody
     public AjaxResult getOrderId(OrderParam param) {
         Map<String, String> result = new HashMap<>(16);
-        logger.info("getOrderId请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("getOrderId请求入参：{}", JSONUtil.toJsonStr(param));
         String sid = param.getSid();
         String source = param.getSource();
         String newVersion = param.getNewVersion();
@@ -82,7 +82,7 @@ public class OrderController extends BaseController {
             result.put("orderId", orderId);
             result.put("productId", productId);
         } catch (Exception e) {
-            logger.error("getOrderId异常：{}", e.getMessage());
+            log.error("getOrderId异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }

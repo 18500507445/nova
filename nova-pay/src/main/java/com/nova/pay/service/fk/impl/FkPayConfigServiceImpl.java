@@ -9,11 +9,11 @@ import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.mapper.FkPayConfigMapper;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.redis.core.RedisService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -21,12 +21,11 @@ import java.util.*;
  * @Author: wangzehui
  * @Date: 2022/8/22 15:44
  */
+@Slf4j
 @Service
 public class FkPayConfigServiceImpl implements FkPayConfigService {
 
-    private static final Logger logger = LoggerFactory.getLogger(FkPayConfigServiceImpl.class);
-
-    @Autowired
+    @Resource
     private RedisService redisService;
 
     @Autowired
@@ -140,7 +139,7 @@ public class FkPayConfigServiceImpl implements FkPayConfigService {
                 }
             }
         } catch (Exception e) {
-            logger.error("getRandomConfig异常：{}", e.getMessage());
+            log.error("getRandomConfig异常：{}", e.getMessage());
         }
         return payConfig;
     }
@@ -161,7 +160,7 @@ public class FkPayConfigServiceImpl implements FkPayConfigService {
                 }
             }
         } catch (Exception e) {
-            logger.error("getRandomConfig异常：{}", e.getMessage());
+            log.error("getRandomConfig异常：{}", e.getMessage());
         }
         return payConfig;
     }

@@ -15,6 +15,7 @@ import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
 import com.nova.pay.utils.open.YeePayUtil;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +30,9 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/9/20 17:45
  */
+@Slf4j
 @Service
 public class YeePayServiceImpl implements PayService {
-
-    private static final Logger logger = LoggerFactory.getLogger(YeePayServiceImpl.class);
 
     @Autowired
     private YeePayUtil yeePayUtil;
@@ -125,7 +125,7 @@ public class YeePayServiceImpl implements PayService {
                 }
             }
         } catch (Exception e) {
-            logger.error("yeePay异常：{}", e.getMessage());
+            log.error("yeePay异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }

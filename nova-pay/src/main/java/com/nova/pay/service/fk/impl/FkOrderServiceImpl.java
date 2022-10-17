@@ -5,11 +5,10 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Constants;
-import com.nova.common.utils.jax.Md5Utils;
 import com.nova.common.utils.http.HttpRequestProxy;
+import com.nova.common.utils.jax.Md5Utils;
 import com.nova.pay.service.fk.FkOrderService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
@@ -23,10 +22,9 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/8/24 14:30
  */
+@Slf4j
 @Service
 public class FkOrderServiceImpl implements FkOrderService {
-
-    private static final Logger logger = LoggerFactory.getLogger(FkOrderServiceImpl.class);
 
     @Resource
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
@@ -101,7 +99,7 @@ public class FkOrderServiceImpl implements FkOrderService {
         //拼接签名调用web进行加款
         String param = orderId + tradeStatus + payType + amount + userName + Constants.MD5_KEY;
         String sign = Md5Utils.hash(param);
-        logger.info("recharge--orderId:{},userName:{},tradeStatus:{},amount:{},payType:{},sign:{}", orderId, userName, tradeStatus, amount, payType, sign);
+        log.info("recharge--orderId:{},userName:{},tradeStatus:{},amount:{},payType:{},sign:{}", orderId, userName, tradeStatus, amount, payType, sign);
         threadPoolTaskExecutor.execute(() -> {
             Map<String, Object> message = new HashMap<>(16);
             message.put("URL", Constants.PAY_URL);

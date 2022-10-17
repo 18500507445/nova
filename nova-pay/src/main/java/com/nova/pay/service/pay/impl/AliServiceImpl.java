@@ -17,6 +17,7 @@ import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
 import com.nova.pay.utils.open.AliPayUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,9 @@ import java.math.BigDecimal;
  * @Author: wangzehui
  * @Date: 2022/9/20 17:42
  */
+@Slf4j
 @Service
 public class AliServiceImpl implements PayService {
-
-    private static final Logger logger = LoggerFactory.getLogger(AliServiceImpl.class);
 
     @Autowired
     private AliPayUtil aliPayUtil;
@@ -111,7 +111,7 @@ public class AliServiceImpl implements PayService {
                 result.put("body", body);
             }
         } catch (Exception e) {
-            logger.error("aLiPay异常：{}", e.getMessage());
+            log.error("aLiPay异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }

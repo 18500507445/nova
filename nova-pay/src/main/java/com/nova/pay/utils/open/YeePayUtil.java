@@ -1,8 +1,8 @@
 package com.nova.pay.utils.open;
 
 
-import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.TypeReference;
 import com.nova.common.constant.Constants;
@@ -14,9 +14,8 @@ import com.yeepay.g3.sdk.yop.encrypt.CertTypeEnum;
 import com.yeepay.g3.sdk.yop.encrypt.DigestAlgEnum;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalSignatureDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import sun.misc.BASE64Decoder;
 
@@ -26,7 +25,6 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,10 +34,9 @@ import java.util.UUID;
  * @Author: wangzehui
  * @Date: 2022/6/30 18:10
  */
+@Slf4j
 @Component
 public class YeePayUtil {
-
-    private static final Logger logger = LoggerFactory.getLogger(YeePayUtil.class);
 
     /**
      * 交易下单银行卡
@@ -66,7 +63,7 @@ public class YeePayUtil {
                 });
             }
         } catch (IOException e) {
-            logger.error("tradeOrder异常:", e);
+            log.error("tradeOrder异常:", e);
         }
         return null;
     }
@@ -117,7 +114,7 @@ public class YeePayUtil {
                 });
             }
         } catch (Exception e) {
-            logger.error("refund异常:", e);
+            log.error("refund异常:", e);
         }
         return null;
     }
@@ -157,7 +154,7 @@ public class YeePayUtil {
                 });
             }
         } catch (Exception e) {
-            logger.error("walletIndex异常:", e);
+            log.error("walletIndex异常:", e);
         }
         return null;
     }
@@ -227,7 +224,7 @@ public class YeePayUtil {
                 });
             }
         } catch (IOException e) {
-            logger.error("secondTradeOrder异常:", e);
+            log.error("secondTradeOrder异常:", e);
         }
         return null;
     }
@@ -264,7 +261,7 @@ public class YeePayUtil {
                 });
             }
         } catch (IOException e) {
-            logger.error("authRealName异常:", e);
+            log.error("authRealName异常:", e);
         }
         return null;
     }
@@ -329,7 +326,7 @@ public class YeePayUtil {
                 });
             }
         } catch (Exception e) {
-            logger.error("特约商户入网-小微异常:", e);
+            log.error("特约商户入网-小微异常:", e);
         }
         return null;
     }
@@ -392,7 +389,7 @@ public class YeePayUtil {
                 });
             }
         } catch (Exception e) {
-            logger.error("分账接口异常:", e);
+            log.error("分账接口异常:", e);
         }
         return null;
     }
@@ -420,7 +417,7 @@ public class YeePayUtil {
                 });
             }
         } catch (Exception e) {
-            logger.error("完结分账接口异常:", e);
+            log.error("完结分账接口异常:", e);
         }
         return null;
     }
@@ -441,7 +438,7 @@ public class YeePayUtil {
                 });
             }
         } catch (IOException e) {
-            logger.error("multipleAuth异常:", e);
+            log.error("multipleAuth异常:", e);
         }
         return null;
     }
@@ -491,7 +488,7 @@ public class YeePayUtil {
                 });
             }
         } catch (IOException e) {
-            logger.error("authRealName异常:", e);
+            log.error("authRealName异常:", e);
         }
         return null;
     }
@@ -519,7 +516,7 @@ public class YeePayUtil {
                 });
             }
         } catch (IOException e) {
-            logger.error("settleCard异常:", e);
+            log.error("settleCard异常:", e);
         }
         return null;
     }
@@ -542,7 +539,7 @@ public class YeePayUtil {
                 });
             }
         } catch (IOException e) {
-            logger.error("queryRecords异常:", e);
+            log.error("queryRecords异常:", e);
         }
         return null;
     }

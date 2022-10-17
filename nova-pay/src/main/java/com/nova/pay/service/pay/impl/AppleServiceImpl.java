@@ -7,6 +7,7 @@ import com.nova.pay.entity.result.FkPayOrder;
 import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,9 @@ import java.math.BigDecimal;
  * @Author: wangzehui
  * @Date: 2022/9/20 17:44
  */
+@Slf4j
 @Service
 public class AppleServiceImpl implements PayService {
-
-    private static final Logger logger = LoggerFactory.getLogger(AppleServiceImpl.class);
 
     @Autowired
     private FkPayOrderService fkPayOrderService;
@@ -81,7 +81,7 @@ public class AppleServiceImpl implements PayService {
                 }
             }
         } catch (Exception e) {
-            logger.error("applePay异常：{}", e.getMessage());
+            log.error("applePay异常：{}", e.getMessage());
         }
         return AjaxResult.success();
     }

@@ -8,8 +8,7 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.*;
 import com.alipay.api.response.*;
 import com.nova.pay.entity.param.AliPayParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -19,10 +18,9 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/8/22 09:40
  */
+@Slf4j
 @Component
 public class AliPayUtil {
-
-    private static final Logger logger = LoggerFactory.getLogger(AliPayUtil.class);
 
     /**
      * 支付宝网关地址： 沙箱环境用：https://openapi.alipaydev.com/gateway.do
@@ -79,7 +77,7 @@ public class AliPayUtil {
             request.setBizContent(bizContent.toString());
             return alipayClient.pageExecute(request);
         } catch (Exception e) {
-            logger.error("aLiPayH5异常:", e);
+            log.error("aLiPayH5异常:", e);
         }
         return null;
     }
@@ -115,7 +113,7 @@ public class AliPayUtil {
             request.setReturnUrl(param.getReturnUrl());
             return alipayClient.pageExecute(request);
         } catch (AlipayApiException e) {
-            logger.error("aLiPayApp异常:", e);
+            log.error("aLiPayApp异常:", e);
         }
         return null;
     }

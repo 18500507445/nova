@@ -28,10 +28,9 @@ import com.nova.pay.utils.open.YeePayUtil;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalEnvelopeDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,11 +52,10 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/8/21 20:57
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/payNotify/")
 public class PayNotifyController extends BaseController {
-
-    private static final Logger logger = LoggerFactory.getLogger(PayController.class);
 
     @Resource
     private WeChatUtil weChatUtil;
@@ -112,7 +110,7 @@ public class PayNotifyController extends BaseController {
                 //查询配置参数，验签处理
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
                 boolean check = aliPayUtil.rsaCheckV1(params, payConfig.getPublicKey());
-                logger.info("aLiPayNotify通知参数:{}------验签结果:{}", JSONObject.toJSONString(params), check);
+                log.info("aLiPayNotify通知参数:{}------验签结果:{}", JSONObject.toJSONString(params), check);
                 BigDecimal fee = payOrder.getFee();
                 String userName = payOrder.getUserName();
                 if (check) {
@@ -129,9 +127,9 @@ public class PayNotifyController extends BaseController {
                 }
             }
         } catch (Exception e) {
-            logger.error("aLiPayNotify异常:{}", e.getMessage());
+            log.error("aLiPayNotify异常:{}", e.getMessage());
         } finally {
-            logger.info("aLiPayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
+            log.info("aLiPayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
         }
         return out;
     }
@@ -155,7 +153,7 @@ public class PayNotifyController extends BaseController {
             }
             //解析xml转对象
             WxPayOrderNotifyResult notifyResult = BaseWxPayResult.fromXML(xmlString.toString(), WxPayOrderNotifyResult.class);
-            logger.info("weChatV2PayNotify：{}", JSONUtil.toJsonStr(notifyResult));
+            log.info("weChatV2PayNotify：{}", JSONUtil.toJsonStr(notifyResult));
             orderId = notifyResult.getOutTradeNo();
             String tradeNo = notifyResult.getTransactionId();
             //查询订单
@@ -186,10 +184,10 @@ public class PayNotifyController extends BaseController {
         } catch (IOException | WxPayException e) {
             String message = e.getMessage();
             out = WxPayNotifyResponse.success(message);
-            logger.error("weChatV2PayNotify异常:{}", message);
+            log.error("weChatV2PayNotify异常:{}", message);
         } finally {
             XmlConfig.fastMode = false;
-            logger.info("weChatV2PayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
+            log.info("weChatV2PayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
         }
         return out;
     }
@@ -228,7 +226,7 @@ public class PayNotifyController extends BaseController {
             String sid = MapUtil.getStr(params, "sid");
             String version = getValue("version");
             params.put("version", version);
-            logger.info("applePay通知:{}", JSONObject.toJSONString(params));
+            log.info("applePay通知:{}", JSONObject.toJSONString(params));
             //查询订单
             FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 3);
             if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
@@ -242,7 +240,7 @@ public class PayNotifyController extends BaseController {
                 String transactionId = MapUtil.getStr(verify, "transaction_id");
                 String status = MapUtil.getStr(verify, "status");
                 boolean check = ArrayUtils.contains(new String[]{"0"}, status) && !StringUtils.equals(Constants.ZERO, transactionId);
-                logger.info("applePayNotify验签结果====>orderId:{}, verify:{}, check:{}", orderId, verify, check);
+                log.info("applePayNotify验签结果====>orderId:{}, verify:{}, check:{}", orderId, verify, check);
                 if (check && ObjectUtil.isEmpty(payOrder.getTradeNo())) {
                     //3.0 通知修改成处理中,存入sign、验签结果
                     payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).tradeNo(transactionId).remark("ture").build());
@@ -257,9 +255,9 @@ public class PayNotifyController extends BaseController {
                 }
             }
         } catch (Exception e) {
-            logger.error("applePayNotify异常:{}", e.getMessage());
+            log.error("applePayNotify异常:{}", e.getMessage());
         } finally {
-            logger.info("applePayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
+            log.info("applePayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
         }
         return AjaxResult.success(result);
     }
@@ -278,7 +276,7 @@ public class PayNotifyController extends BaseController {
         try {
             String appKey = request.getParameter("customerIdentification");
             String encrypt = request.getParameter("response");
-            logger.info("yeePay获取到的appKey为{},response为{}", appKey, encrypt);
+            log.info("yeePay获取到的appKey为{},response为{}", appKey, encrypt);
             dto.setCipherText(encrypt);
             FkPayConfig payConfig = fkPayConfigService.selectFkPayConfigById(2L);
             if (ObjectUtil.isNotNull(payConfig)) {
@@ -286,7 +284,7 @@ public class PayNotifyController extends BaseController {
                 String plainText = dto.getPlainText();
                 if (StringUtils.isNotBlank(plainText)) {
                     JSONObject json = JSONObject.parseObject(plainText);
-                    logger.info("易宝支付结果通知解析json:{}", json.toJSONString());
+                    log.info("易宝支付结果通知解析json:{}", json.toJSONString());
                     //易宝收款订单号
                     orderId = json.getString("orderId");
                     String outTradeNo = json.getString("uniqueOrderNo");
@@ -316,9 +314,9 @@ public class PayNotifyController extends BaseController {
                 response.getWriter().write(result);
             }
         } catch (Exception e) {
-            logger.error("yeePayNotify异常:" + e);
+            log.error("yeePayNotify异常:" + e);
         } finally {
-            logger.info("yeePayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
+            log.info("yeePayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
         }
     }
 
@@ -349,7 +347,7 @@ public class PayNotifyController extends BaseController {
         try {
             String appKey = request.getParameter("customerIdentification");
             String encrypt = request.getParameter("response");
-            logger.info("divideApply获取到的appKey为{},response为{}", appKey, encrypt);
+            log.info("divideApply获取到的appKey为{},response为{}", appKey, encrypt);
             dto.setCipherText(encrypt);
             FkPayConfig payConfig = fkPayConfigService.selectFkPayConfigById(2L);
             if (ObjectUtil.isNotNull(payConfig)) {
@@ -357,7 +355,7 @@ public class PayNotifyController extends BaseController {
                 String plainText = dto.getPlainText();
                 if (StringUtils.isNotBlank(plainText)) {
                     JSONObject json = JSONObject.parseObject(plainText);
-                    logger.info("易宝清算通知解析json:{}", json.toJSONString());
+                    log.info("易宝清算通知解析json:{}", json.toJSONString());
                     result = Constants.SUCCESS;
                     Map<String, Object> params = JSONObject.parseObject(json.toJSONString(), new TypeReference<Map<String, Object>>() {
                     });
@@ -367,7 +365,7 @@ public class PayNotifyController extends BaseController {
                 response.getWriter().write(result);
             }
         } catch (Exception e) {
-            logger.error("易宝清算通知异常:" + e);
+            log.error("易宝清算通知异常:" + e);
         }
     }
 

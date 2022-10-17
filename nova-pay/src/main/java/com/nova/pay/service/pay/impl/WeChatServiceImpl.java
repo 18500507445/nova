@@ -11,6 +11,7 @@ import com.github.binarywang.wxpay.bean.result.enums.TradeTypeEnum;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
@@ -22,16 +23,17 @@ import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
 import com.nova.pay.utils.open.WeChatUtil;
+import com.nova.redis.core.RedisService;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.commons.lang3.ArrayUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +43,9 @@ import java.util.List;
  * @Author: wangzehui
  * @Date: 2022/9/20 17:43
  */
+@Slf4j
 @Service
 public class WeChatServiceImpl implements PayService {
-
-    private static final Logger logger = LoggerFactory.getLogger(WeChatServiceImpl.class);
 
     @Autowired
     private WeChatUtil weChatUtil;
@@ -54,6 +55,9 @@ public class WeChatServiceImpl implements PayService {
 
     @Autowired
     private FkPayOrderService fkPayOrderService;
+
+    @Resource
+    private RedisService redisService;
 
     @Override
     public PayWayEnum getPayType() {
@@ -113,7 +117,7 @@ public class WeChatServiceImpl implements PayService {
                 }
             }
         } catch (Exception e) {
-            logger.error("weChatPay异常：{}", e.getMessage());
+            log.error("weChatPay异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }
@@ -144,7 +148,7 @@ public class WeChatServiceImpl implements PayService {
             }
             result = wxV2PayService.createOrder(requestBuilder.build());
         } catch (WxPayException e) {
-            logger.error("weChatV2Pay异常：{}", e.getMessage());
+            log.error("weChatV2Pay异常：{}", e.getMessage());
         }
         return result;
     }
@@ -180,7 +184,7 @@ public class WeChatServiceImpl implements PayService {
 
             }
         } catch (WxPayException e) {
-            logger.error("weChatV3Pay异常：{}", e.getMessage());
+            log.error("weChatV3Pay异常：{}", e.getMessage());
         }
         return result;
     }
@@ -221,7 +225,7 @@ public class WeChatServiceImpl implements PayService {
                 result = wxV3PayService.refundV3(request);
             }
         } catch (WxPayException e) {
-            logger.error("weChatPayRefund异常：{}", e.getMessage());
+            log.error("weChatPayRefund异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }
@@ -252,7 +256,7 @@ public class WeChatServiceImpl implements PayService {
                 result = wxV3PayService.queryOrderV3(request);
             }
         } catch (WxPayException e) {
-            logger.error("weChatPayQueryOrder异常：{}", e.getMessage());
+            log.error("weChatPayQueryOrder异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }
@@ -268,8 +272,10 @@ public class WeChatServiceImpl implements PayService {
         Object result = "";
         String authCode = param.getAuthCode();
         Long payConfigId = param.getPayConfigId();
-        if (ObjectUtil.hasEmpty(payConfigId, authCode)) {
-            return AjaxResult.error("1000", "缺少必要参数authCode或payConfigId");
+        String userName = param.getUserName();
+        Integer payWay = param.getPayWay();
+        if (ObjectUtil.hasEmpty(payConfigId, authCode, userName, payWay)) {
+            return AjaxResult.error("1000", "缺少必要参数authCode、payConfigId、userName、payWay");
         }
         //获取支付配置
         FkPayConfig payConfig = fkPayConfigService.getConfigData(payConfigId);
@@ -277,13 +283,26 @@ public class WeChatServiceImpl implements PayService {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
         try {
-            WxMpService wxMpService = weChatUtil.getWxMpService(payConfig.getAppId(), payConfig.getAppSecret());
-            WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(authCode);
-            if (null != accessToken) {
-                result = accessToken.getOpenId();
+            String key = Constants.REDIS_KEY + "getOpenId_" + payWay + "_" + payConfigId + "_" + userName;
+            Object o = redisService.get(key);
+            if (ObjectUtil.isNotNull(o)) {
+                result = o.toString();
+            } else {
+                WxMpService wxMpService = weChatUtil.getWxMpService(payConfig.getAppId(), payConfig.getAppSecret());
+                WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(authCode);
+                if (ObjectUtil.isNotNull(accessToken)) {
+                    //验证授权凭证失败 刷新后获取
+                    boolean b = wxMpService.getOAuth2Service().validateAccessToken(accessToken);
+                    if (!b) {
+                        accessToken = wxMpService.getOAuth2Service().refreshAccessToken(accessToken.getRefreshToken());
+                    }
+                    result = accessToken.getOpenId();
+                    redisService.set(key, result, 7000L);
+                }
+                log.debug("weChatPayGetOpenId返回：{}", JSONUtil.toJsonStr(accessToken));
             }
         } catch (WxErrorException e) {
-            logger.error("weChatPayGetOpenId异常：{}", e.getMessage());
+            log.error("weChatPayGetOpenId异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }
@@ -316,7 +335,7 @@ public class WeChatServiceImpl implements PayService {
                 wxV3PayService.closeOrderV3(orderId);
             }
         } catch (WxPayException e) {
-            logger.error("weChatPayCloseOrder异常：{}", e.getMessage());
+            log.error("weChatPayCloseOrder异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }
@@ -364,7 +383,7 @@ public class WeChatServiceImpl implements PayService {
 
             result = wxV3PayService.getMerchantTransferService().createTransfer(request);
         } catch (Exception e) {
-            logger.error("merchantTransfer异常：{}", e.getMessage());
+            log.error("merchantTransfer异常：{}", e.getMessage());
         }
         return AjaxResult.success(result);
     }
@@ -376,7 +395,7 @@ public class WeChatServiceImpl implements PayService {
      * @return
      */
     public AjaxResult getOAuth2UserInfo(WeChatMpParam param) {
-        logger.info("getOAuth2UserInfo请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("getOAuth2UserInfo请求入参：{}", JSONUtil.toJsonStr(param));
         WxMpUser wxMpUser = null;
         String authCode = param.getAuthCode();
         String lang = param.getLang();
@@ -390,7 +409,7 @@ public class WeChatServiceImpl implements PayService {
             WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(authCode);
             wxMpUser = wxMpService.getUserService().userInfo(accessToken.getOpenId(), lang);
         } catch (WxErrorException e) {
-            logger.info("getOAuth2UserInfo异常：{}", e.getMessage());
+            log.info("getOAuth2UserInfo异常：{}", e.getMessage());
         }
         return AjaxResult.success(wxMpUser);
     }

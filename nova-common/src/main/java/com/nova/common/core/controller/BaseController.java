@@ -8,6 +8,7 @@ import com.nova.common.core.page.TableDataInfo;
 import com.nova.common.utils.ip.IpUtils;
 import com.nova.common.utils.list.PageUtils;
 import com.nova.common.utils.common.ServletUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +20,8 @@ import java.util.List;
 /**
  * web层通用数据处理
  */
+@Slf4j
 public class BaseController {
-
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 设置请求分页数据

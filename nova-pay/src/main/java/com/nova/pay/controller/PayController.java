@@ -6,8 +6,8 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
@@ -18,15 +18,15 @@ import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayListService;
 import com.nova.pay.service.pay.PayStrategy;
 import com.nova.redis.core.RedisService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,13 +37,12 @@ import java.util.Map;
  * @Author: wangzehui
  * @Date: 2022/8/21 20:56
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/pay/")
 public class PayController extends BaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PayController.class);
-
-    @Autowired
+    @Resource
     private RedisService redisService;
 
     @Autowired
@@ -63,7 +62,7 @@ public class PayController extends BaseController {
     @PostMapping("list")
     @ResponseBody
     public AjaxResult list(PayParam param) {
-        logger.info("payList请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("payList请求入参：{}", JSONUtil.toJsonStr(param));
         boolean redisFlag = Boolean.TRUE;
         String source = param.getSource();
         String sid = param.getSid();
@@ -179,11 +178,11 @@ public class PayController extends BaseController {
     @Deprecated
     public AjaxResult weChatV2Pay(PayParam param) {
         AjaxResult result = new AjaxResult();
-        logger.info("weChatV2Pay请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("weChatV2Pay请求入参：{}", JSONUtil.toJsonStr(param));
         try {
             result = payStrategy.pay(PayWayEnum.WECHAT, param);
         } finally {
-            logger.info("weChatV2Pay返回：{}", JSONUtil.toJsonStr(result));
+            log.info("weChatV2Pay返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }
@@ -196,11 +195,11 @@ public class PayController extends BaseController {
     @Deprecated
     public AjaxResult aLiPay(PayParam param) {
         AjaxResult result = new AjaxResult();
-        logger.info("aLiPay请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("aLiPay请求入参：{}", JSONUtil.toJsonStr(param));
         try {
             result = payStrategy.pay(PayWayEnum.ALI, param);
         } finally {
-            logger.info("aLiPay返回：{}", JSONUtil.toJsonStr(result));
+            log.info("aLiPay返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }
@@ -209,7 +208,7 @@ public class PayController extends BaseController {
     @ResponseBody
     @Deprecated
     public AjaxResult applePay(PayParam param) {
-        logger.info("applePay请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("applePay请求入参：{}", JSONUtil.toJsonStr(param));
         return payStrategy.pay(PayWayEnum.ALI, param);
     }
 
@@ -222,7 +221,7 @@ public class PayController extends BaseController {
     @PostMapping("openPay")
     @ResponseBody
     public AjaxResult openPay(PayParam param) {
-        logger.info("openPay请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("openPay请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
         try {
             Integer payWay = param.getPayWay();
@@ -231,7 +230,7 @@ public class PayController extends BaseController {
             }
             result = payStrategy.pay(PayWayEnum.valuesOf(payWay), param);
         } finally {
-            logger.info("openPay返回：{}", JSONUtil.toJsonStr(result));
+            log.info("openPay返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }
@@ -245,7 +244,7 @@ public class PayController extends BaseController {
     @PostMapping("closeOrder")
     @ResponseBody
     public AjaxResult closeOrder(PayParam param) {
-        logger.info("closeOrder请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("closeOrder请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
         try {
             Integer payWay = param.getPayWay();
@@ -254,7 +253,7 @@ public class PayController extends BaseController {
             }
             result = payStrategy.closeOrder(PayWayEnum.valuesOf(payWay), param);
         } finally {
-            logger.info("closeOrder返回：{}", JSONUtil.toJsonStr(result));
+            log.info("closeOrder返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }
@@ -268,7 +267,7 @@ public class PayController extends BaseController {
     @PostMapping("queryOrder")
     @ResponseBody
     public AjaxResult queryOrder(PayParam param) {
-        logger.info("queryOrder请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("queryOrder请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
         try {
             Integer payWay = param.getPayWay();
@@ -277,7 +276,7 @@ public class PayController extends BaseController {
             }
             result = payStrategy.queryOrder(PayWayEnum.valuesOf(payWay), param);
         } finally {
-            logger.info("queryOrder返回：{}", JSONUtil.toJsonStr(result));
+            log.info("queryOrder返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }
@@ -291,7 +290,7 @@ public class PayController extends BaseController {
     @PostMapping("getOpenId")
     @ResponseBody
     public AjaxResult getOpenId(PayParam param) {
-        logger.info("getOpenId请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("getOpenId请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
         try {
             Integer payWay = param.getPayWay();
@@ -300,7 +299,7 @@ public class PayController extends BaseController {
             }
             result = payStrategy.getOpenId(PayWayEnum.valuesOf(payWay), param);
         } finally {
-            logger.info("getOpenId返回：{}", JSONUtil.toJsonStr(result));
+            log.info("getOpenId返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }
@@ -315,7 +314,7 @@ public class PayController extends BaseController {
     @PostMapping("refund")
     @ResponseBody
     public AjaxResult refund(PayParam param) {
-        logger.info("refund请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("refund请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
         try {
             Integer payWay = param.getPayWay();
@@ -324,7 +323,7 @@ public class PayController extends BaseController {
             }
             result = payStrategy.refund(PayWayEnum.valuesOf(payWay), param);
         } finally {
-            logger.info("refund返回：{}", JSONUtil.toJsonStr(result));
+            log.info("refund返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }
@@ -339,7 +338,7 @@ public class PayController extends BaseController {
     @PostMapping("merchantTransfer")
     @ResponseBody
     public AjaxResult merchantTransfer(PayParam param) {
-        logger.info("merchantTransfer请求入参：{}", JSONUtil.toJsonStr(param));
+        log.info("merchantTransfer请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
         try {
             Integer payWay = param.getPayWay();
@@ -348,7 +347,7 @@ public class PayController extends BaseController {
             }
             result = payStrategy.merchantTransfer(PayWayEnum.valuesOf(payWay), param);
         } finally {
-            logger.info("merchantTransfer返回：{}", JSONUtil.toJsonStr(result));
+            log.info("merchantTransfer返回：{}", JSONUtil.toJsonStr(result));
         }
         return result;
     }

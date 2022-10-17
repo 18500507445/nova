@@ -1,17 +1,15 @@
 package com.nova.database.config;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Description: 数据源切换处理
  * @Author: wangzehui
  * @Date: 2022/8/4 21:29
  */
+@Slf4j
 public class DynamicDataSourceContextHolder {
-
-    public static final Logger logger = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
 
     /**
      * 使用ThreadLocal维护变量，ThreadLocal为每个使用该变量的线程提供独立的变量副本，

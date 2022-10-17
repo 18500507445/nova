@@ -1,7 +1,6 @@
 package com.nova.common.utils.http;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
+@Slf4j
 public class HttpRequestProxy {
     /**
      * 连接超时
@@ -26,8 +25,6 @@ public class HttpRequestProxy {
      * 读取数据超时
      */
     private static int readTimeOut = 6000000;
-
-    private static final Log logger = LogFactory.getLog(HttpRequestProxy.class);
 
     /**
      * 请求编码
@@ -92,7 +89,7 @@ public class HttpRequestProxy {
             rd.close();
             in.close();
             long time22 = System.currentTimeMillis();
-            logger.debug(reqUrl + "http-get总耗时=" + (time22 - time11) + "毫秒");
+            log.debug(reqUrl + "http-get总耗时=" + (time22 - time11) + "毫秒");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

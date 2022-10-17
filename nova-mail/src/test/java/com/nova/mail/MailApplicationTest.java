@@ -22,6 +22,6 @@ public class MailApplicationTest {
 
     @Test
     public void testMqMessage() {
-        mailService.sendSimpleMail("123", "123", "123", "123");
+        mailService.sendSimpleMail("18500507445@163.com", "nova测试邮件", "你好啊");
     }
 }

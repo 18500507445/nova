@@ -1,6 +1,7 @@
 package com.nova.pay.utils.wechat;
 
 import com.nova.pay.config.WeChatConfig;
+import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
@@ -71,21 +72,20 @@ public class WeChatMpUtils {
     }
 
     /**
-     * 通过code获得基本用户信息
-     * 详情请见: http://mp.weixin.qq.com/wiki/14/bb5031008f1494a59c6f71fa0f319c66.html
+     * 用oauth2获取用户信息, 当前面引导授权时的scope是snsapi_userinfo的时候才可以.
      *
      * @param code code
      * @param lang zh_CN, zh_TW, en
      */
-    public WxMpUser getOAuth2UserInfo(String code, String lang) {
-        WxMpUser wxMpUser = null;
+    public WxOAuth2UserInfo getOAuth2UserInfo(String code, String lang) {
+        WxOAuth2UserInfo userInfo = null;
         try {
             WxOAuth2AccessToken accessToken = wxMpService.getWxMpService().getOAuth2Service().getAccessToken(code);
-            wxMpUser = wxMpService.getWxMpService().getUserService().userInfo(accessToken.getOpenId(), lang);
+            userInfo = wxMpService.getWxMpService().getOAuth2Service().getUserInfo(accessToken, lang);
         } catch (WxErrorException e) {
 
         }
-        return wxMpUser;
+        return userInfo;
     }
 
     /**

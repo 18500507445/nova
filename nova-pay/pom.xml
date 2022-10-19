@@ -18,6 +18,7 @@
         <weixin.pay.version>4.4.0</weixin.pay.version>
         <weixin.mp.version>4.4.0</weixin.mp.version>
         <alipay.version>4.34.0.ALL</alipay.version>
+        <google.pay.version>v3-rev142-1.25.0</google.pay.version>
     </properties>
 
     <dependencies>
@@ -64,6 +65,13 @@
             <version>3.2.25</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/lib/yop-java-sdk-3.2.25-jdk18json.jar</systemPath>
+        </dependency>
+
+        <!--谷歌支付api -->
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-androidpublisher</artifactId>
+            <version>${google.pay.version}</version>
         </dependency>
 
     </dependencies>

@@ -2,6 +2,7 @@ package com.nova.pay.service.fk.impl;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Constants;
@@ -41,7 +42,10 @@ public class FkOrderServiceImpl implements FkOrderService {
     @Override
     public String getOrderId(Map<String, String> map) {
         String orderId = "";
-        String json = HttpRequestProxy.doPost(Constants.CPAPI_URL, map, "UTF-8", "UTF-8");
+        String json = HttpUtil.createPost(Constants.CPAPI_URL)
+                .formStr(map)
+                .execute()
+                .body();
         if (StrUtil.isNotEmpty(json)) {
             JSONObject jsonObject = JSONUtil.parseObj(json);
             if (jsonObject.containsKey("code") && StrUtil.equals("0000", jsonObject.getStr("code"))) {
@@ -60,7 +64,10 @@ public class FkOrderServiceImpl implements FkOrderService {
     @Override
     public Map<String, String> getCommon(Map<String, String> map) {
         Map<String, String> result = new HashMap<>(16);
-        String json = HttpRequestProxy.doPost(Constants.CPAPI_URL, map, "UTF-8", "UTF-8");
+        String json = HttpUtil.createPost(Constants.CPAPI_URL)
+                .formStr(map)
+                .execute()
+                .body();
         if (StrUtil.isNotBlank(json)) {
             JSONObject jsonObject = JSONUtil.parseObj(json);
             if (jsonObject.containsKey("code")) {
@@ -130,7 +137,10 @@ public class FkOrderServiceImpl implements FkOrderService {
         param.put("remark", "充值开通");
         //延迟200ms防止加款没走完导致扣费展示余额不足
         ThreadUtil.safeSleep(200);
-        String json = HttpRequestProxy.doPost(Constants.CPAPI_URL, param, "UTF-8", "UTF-8");
+        String json = HttpUtil.createPost(Constants.CPAPI_URL)
+                .formStr(param)
+                .execute()
+                .body();
         if (StrUtil.isNotEmpty(json)) {
 
         }

@@ -1,6 +1,7 @@
 package com.nova.common.utils.random;
 
 
+import cn.hutool.core.lang.WeightRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -95,6 +96,27 @@ public class randomTest {
         System.out.println("sum3:" + sum3);
         System.out.println("sum4:" + sum4);
 
+        WeightRandom<String> random = WeightRandom.create();
+        random.add("A", 1);
+        random.add("B", 1);
+        random.add("C", 1);
+        int sum6 = 0, sum7 = 0, sum8 = 0;
+        for (int i = 0; i < 1000; i++) {
+            String result = random.next();
+
+            if (StringUtils.equals("A", result)) {
+                sum6++;
+            }
+            if (StringUtils.equals("B", result)) {
+                sum7++;
+            }
+            if (StringUtils.equals("C", result)) {
+                sum8++;
+            }
+        }
+        System.out.println("sum6:" + sum6);
+        System.out.println("sum7:" + sum7);
+        System.out.println("sum8:" + sum8);
     }
 
 

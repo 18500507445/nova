@@ -13,10 +13,6 @@ class RedisApplicationTest {
     @Autowired
     private RedisService redisService;
 
-    public static void main(String[] args) {
-
-    }
-
     @Test
     public void testRedis() {
         String group = "nova-redis:%s";

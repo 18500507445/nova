@@ -24,7 +24,7 @@ public class ScriptEngineDemo {
 
             Invocable invokableEngine = (Invocable) engine;
 
-            Object ret = invokableEngine.invokeFunction("test", null);
+            Object ret = invokableEngine.invokeFunction("test", (Object) null);
 
             System.out.println("The result is : " + ret);
         } catch (Exception e) {

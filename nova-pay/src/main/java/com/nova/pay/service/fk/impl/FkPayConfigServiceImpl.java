@@ -2,6 +2,7 @@ package com.nova.pay.service.fk.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.WeightRandom;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Constants;
@@ -127,16 +128,11 @@ public class FkPayConfigServiceImpl implements FkPayConfigService {
             }
             //进行权重随机
             if (CollUtil.isNotEmpty(payConfigList)) {
-                Map<Object, Object> randomMap = new HashMap<>(16);
-                Map<Long, FkPayConfig> payConfigMap = new HashMap<>(16);
-                payConfigList.forEach(data -> {
-                    randomMap.put(data.getId(), data.getWeight());
-                    payConfigMap.put(data.getId(), data);
-                });
-                Object id = randomByWeight(randomMap);
-                if (ObjectUtil.isNotNull(id)) {
-                    payConfig = payConfigMap.get(Long.parseLong(String.valueOf(id)));
+                WeightRandom<FkPayConfig> random = WeightRandom.create();
+                for (FkPayConfig fkPayConfig : payConfigList) {
+                    random.add(fkPayConfig,fkPayConfig.getWeight());
                 }
+                payConfig = random.next();
             }
         } catch (Exception e) {
             log.error("getRandomConfig异常：{}", e.getMessage());

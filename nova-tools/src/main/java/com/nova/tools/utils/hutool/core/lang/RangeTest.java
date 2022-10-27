@@ -1,0 +1,176 @@
+package com.nova.tools.utils.hutool.core.lang;
+
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateRange;
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.lang.Range;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.lang.Assert;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+/**
+ * {@link Range} 单元测试
+ *
+ * @author Looly
+ */
+public class RangeTest {
+
+	@Test
+	public void dateRangeTest() {
+		DateTime start = DateUtil.parse("2017-01-01");
+		DateTime end = DateUtil.parse("2017-01-02");
+
+		final Range<DateTime> range = new Range<>(start, end, (current, end1, index) -> {
+			if (current.isAfterOrEquals(end1)) {
+				return null;
+			}
+			return current.offsetNew(DateField.DAY_OF_YEAR, 1);
+		});
+
+		Assert.isTrue(range.hasNext());
+		Assert.equals(DateUtil.parse("2017-01-01"), range.next());
+		Assert.isTrue(range.hasNext());
+		Assert.equals(DateUtil.parse("2017-01-02"), range.next());
+		Assert.isFalse(range.hasNext());
+	}
+
+	@Test
+	public void dateRangeFuncTest() {
+		DateTime start = DateUtil.parse("2021-01-01");
+		DateTime end = DateUtil.parse("2021-01-03");
+
+		List<Integer> dayOfMonthList = DateUtil.rangeFunc(start, end, DateField.DAY_OF_YEAR, a -> DateTime.of(a).dayOfMonth());
+		Assert.equals(dayOfMonthList.toArray(new Integer[]{}), new Integer[]{1, 2, 3});
+
+		List<Integer> dayOfMonthList2 = DateUtil.rangeFunc(null, null, DateField.DAY_OF_YEAR, a -> DateTime.of(a).dayOfMonth());
+		Assert.equals(dayOfMonthList2.toArray(new Integer[]{}), new Integer[]{});
+	}
+
+	@Test
+	public void dateRangeConsumeTest() {
+		DateTime start = DateUtil.parse("2021-01-01");
+		DateTime end = DateUtil.parse("2021-01-03");
+
+		StringBuilder sb = new StringBuilder();
+		DateUtil.rangeConsume(start, end, DateField.DAY_OF_YEAR, a -> sb.append(DateTime.of(a).dayOfMonth()).append("#"));
+		Assert.equals(sb.toString(), "1#2#3#");
+
+		StringBuilder sb2 = new StringBuilder();
+		DateUtil.rangeConsume(null, null, DateField.DAY_OF_YEAR, a -> sb2.append(DateTime.of(a).dayOfMonth()).append("#"));
+		Assert.equals(sb2.toString(), StrUtil.EMPTY);
+	}
+
+	@Test
+	public void dateRangeTest2() {
+		DateTime start = DateUtil.parse("2021-01-31");
+		DateTime end = DateUtil.parse("2021-03-31");
+
+		final DateRange range = DateUtil.range(start, end, DateField.MONTH);
+
+		Assert.isTrue(range.hasNext());
+		Assert.equals(DateUtil.parse("2021-01-31"), range.next());
+		Assert.isTrue(range.hasNext());
+		Assert.equals(DateUtil.parse("2021-02-28"), range.next());
+		Assert.isTrue(range.hasNext());
+		Assert.equals(DateUtil.parse("2021-03-31"), range.next());
+		Assert.isFalse(range.hasNext());
+	}
+
+	@Test
+	public void intRangeTest() {
+		final Range<Integer> range = new Range<>(1, 1, (current, end, index) -> current >= end ? null : current + 10);
+
+		Assert.isTrue(range.hasNext());
+		Assert.equals(Integer.valueOf(1), range.next());
+		Assert.isFalse(range.hasNext());
+	}
+
+	@Test
+	public void rangeByStepTest() {
+		DateTime start = DateUtil.parse("2017-01-01");
+		DateTime end = DateUtil.parse("2017-01-03");
+
+		// 测试包含开始和结束情况下步进为1的情况
+		DateRange range = DateUtil.range(start, end, DateField.DAY_OF_YEAR);
+		Assert.equals(range.next(), DateUtil.parse("2017-01-01"));
+		Assert.equals(range.next(), DateUtil.parse("2017-01-02"));
+		Assert.equals(range.next(), DateUtil.parse("2017-01-03"));
+		try {
+			range.next();
+			System.out.println("已超过边界，下一个元素不应该存在！");
+		} catch (NoSuchElementException ignored) {
+		}
+
+		// 测试多步进的情况
+		range = new DateRange(start, end, DateField.DAY_OF_YEAR, 2);
+		Assert.equals(DateUtil.parse("2017-01-01"), range.next());
+		Assert.equals(DateUtil.parse("2017-01-03"), range.next());
+	}
+
+	@Test
+	public void rangeDayOfYearTest() {
+		DateTime start = DateUtil.parse("2017-01-01");
+		DateTime end = DateUtil.parse("2017-01-05");
+
+		// 测试不包含开始结束时间的情况
+		DateRange range = new DateRange(start, end, DateField.DAY_OF_YEAR, 1, false, false);
+		Assert.equals(DateUtil.parse("2017-01-02"), range.next());
+		Assert.equals(DateUtil.parse("2017-01-03"), range.next());
+		Assert.equals(DateUtil.parse("2017-01-04"), range.next());
+		try {
+			range.next();
+			System.out.println("不包含结束时间情况下，下一个元素不应该存在！");
+		} catch (NoSuchElementException ignored) {
+		}
+	}
+
+	@Test
+	public void rangeToListTest() {
+		DateTime start = DateUtil.parse("2017-01-01");
+		DateTime end = DateUtil.parse("2017-01-31");
+
+		List<DateTime> rangeToList = DateUtil.rangeToList(start, end, DateField.DAY_OF_YEAR);
+		Assert.equals(DateUtil.parse("2017-01-01"), rangeToList.get(0));
+		Assert.equals(DateUtil.parse("2017-01-02"), rangeToList.get(1));
+	}
+
+
+	@Test
+	public void rangeContains() {
+		// 开始区间
+		DateTime start = DateUtil.parse("2017-01-01");
+		DateTime end = DateUtil.parse("2017-01-31");
+		DateRange startRange = DateUtil.range(start, end, DateField.DAY_OF_YEAR);
+		// 结束区间
+		DateTime start1 = DateUtil.parse("2017-01-31");
+		DateTime end1 = DateUtil.parse("2017-02-02");
+		DateRange endRange = DateUtil.range(start1, end1, DateField.DAY_OF_YEAR);
+		// 交集
+		List<DateTime> dateTimes = DateUtil.rangeContains(startRange, endRange);
+		Assert.equals(1, dateTimes.size());
+		Assert.equals(DateUtil.parse("2017-01-31"), dateTimes.get(0));
+	}
+
+	@Test
+	public void rangeNotContains() {
+		// 开始区间
+		DateTime start = DateUtil.parse("2017-01-01");
+		DateTime end = DateUtil.parse("2017-01-30");
+		DateRange startRange = DateUtil.range(start, end, DateField.DAY_OF_YEAR);
+		// 结束区间
+		DateTime start1 = DateUtil.parse("2017-01-01");
+		DateTime end1 = DateUtil.parse("2017-01-31");
+		DateRange endRange = DateUtil.range(start1, end1, DateField.DAY_OF_YEAR);
+		// 差集
+		List<DateTime> dateTimes1 = DateUtil.rangeNotContains(startRange, endRange);
+
+		Assert.equals(1, dateTimes1.size());
+		Assert.equals(DateUtil.parse("2017-01-31"), dateTimes1.get(0));
+	}
+
+}

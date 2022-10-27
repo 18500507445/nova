@@ -1,9 +1,9 @@
 package com.nova.tools.vc.service;
 
 
-import com.nova.tools.utils.dataresult.DataResult;
-import com.nova.tools.vc.ka.process.entity.LockSeatBean;
-import com.nova.tools.vc.ka.process.entity.LockSeatParamBean;
+import com.nova.tools.vc.dataresult.DataResult;
+import com.nova.tools.vc.entity.LockSeatBean;
+import com.nova.tools.vc.entity.LockSeatParamBean;
 
 /**
  * @Description:
@@ -13,5 +13,10 @@ import com.nova.tools.vc.ka.process.entity.LockSeatParamBean;
 
 public interface LockSeatService {
 
+    /**
+     * 处理锁座
+     * @param lockSeatParam
+     * @return
+     */
     DataResult<LockSeatBean> processLockSeat(LockSeatParamBean lockSeatParam);
 }

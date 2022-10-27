@@ -1,10 +1,10 @@
 package com.nova.tools.vc.base;
 
 
-import com.nova.tools.utils.dataresult.DataResult;
-import com.nova.tools.utils.enumerate.TicketSystemEnum;
-import com.nova.tools.vc.ka.process.entity.LockSeatBean;
-import com.nova.tools.vc.ka.process.entity.LockSeatParamBean;
+import com.nova.tools.vc.dataresult.DataResult;
+import com.nova.tools.vc.enumerate.TicketSystemEnum;
+import com.nova.tools.vc.entity.LockSeatBean;
+import com.nova.tools.vc.entity.LockSeatParamBean;
 
 /**
  * @Description: 锁座抽象类

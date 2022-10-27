@@ -34,14 +34,14 @@ Stream<Map<String, Object>> mapStream = sourceList.stream().map(new Function<Map
 
 主查询使用hipiao库：
 
-####影院建立礼品卡 (影院名称、影院编码、创建数量、上架数量)
-select c.cname 影院名称, c.cinemacode 影院编码,COUNT(p.id) 创建数量,SUM(IF(p.publish=1,1,0)) 上架数量
- from vc_product p INNER JOIN hp_cinema_info c ON p.cinema_id = c.id
- where p.category=8 AND to_days(p.create_time)=to_days(now()) GROUP BY p.id;
+####影院建立礼品卡(影院名称、影院编码、创建数量、上架数量)
+selectc.cname影院名称,c.cinemacode影院编码,COUNT(p.id)创建数量,SUM(IF(p.publish=1,1,0))上架数量
+fromvc_productpINNERJOINhp_cinema_infocONp.cinema_id=c.id
+wherep.category=8ANDto_days(p.create_time)=to_days(now())GROUPBYp.id;
 
 
 
-####礼品卡售卖 (卡名称、影院名称、影院编码、卡状态（上架、下架）、已售卖、已绑卡、已使用、已退款、累计销售金额、累计抵扣票款金额)
+####礼品卡售卖(卡名称、影院名称、影院编码、卡状态（上架、下架）、已售卖、已绑卡、已使用、已退款、累计销售金额、累计抵扣票款金额)
 SELECT vp.id,vp.pname 卡名称, hci.cname 影院名称, hci.cinemacode 影院编码, 
 CASE WHEN vp.publish=0 OR vp.publish=4 THEN '待上架' WHEN vp.publish=1 THEN '上架' WHEN vp.publish=2 THEN '下架' WHEN vp.publish=3 THEN '已导出' END 卡状态,
 COUNT(sgso.sub_order_no) 已售卖,
@@ -61,7 +61,7 @@ where vp.category=8 AND to_days(sgso.create_time)=to_days(now()) GROUP BY vp.id;
 
 
 
-####礼品卡售卖 (卡名称、影院名称、影院编码、卡状态（上架、下架）、已售卖、已绑卡、已使用、已退款、累计销售金额、累计抵扣票款金额)
+####礼品卡售卖(卡名称、影院名称、影院编码、卡状态（上架、下架）、已售卖、已绑卡、已使用、已退款、累计销售金额、累计抵扣票款金额)
 card_name:卡名称
 cinema_name：影院名称
 cinema_code：影院编码

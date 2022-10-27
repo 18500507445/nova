@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
  */
 public class MongoDBTest {
 
-	@Test
-	@Ignore
-	public void mongoDSTest() {
-		//MongoDatabase db = MongoFactory.getDS("master").getDb("test");
-		//Assert.equals("test", db.getName());
-	}
+    @Test
+    @Ignore
+    public void mongoDSTest() {
+        //MongoDatabase db = MongoFactory.getDS("master").getDb("test");
+        //Assert.equals("test", db.getName());
+    }
 }

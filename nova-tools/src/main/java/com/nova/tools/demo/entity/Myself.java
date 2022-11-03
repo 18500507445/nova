@@ -16,29 +16,37 @@ public class Myself {
 
     public static final BigDecimal ZERO = BigDecimal.ZERO;
 
-    //int 0
+    /**
+     * int 0
+     */
     public static final int INT_ZERO = 0;
 
-    //string-success
+    /**
+     * string-success
+     */
     public static final String STRING_SUCCESS = "success";
 
     public static final String SEAT_CODE = "1_2_3";
 
-    //布尔 true
+    /**
+     * 布尔 true
+     */
     public static final Boolean BOOLEAN_TRUE = Boolean.TRUE;
 
-    //布尔 false
+    /**
+     * 布尔 false
+     */
     public static final Boolean BOOLEAN_FALSE = Boolean.FALSE;
 
     /**
      *
      */
     public static final List<People> PEOPLE_LIST = Arrays.asList(
-            new People(1, 12, "张三", "傻"),
-            new People(2, 16, "赵四", "白"),
-            new People(3, 18, "王五", "甜"),
-            new People(4, 21, "田六", "胖"),
-            new People(5, 25, "孙七", "高")
+            People.builder().id(1).age(12).name("张三").description("傻").build(),
+            People.builder().id(2).age(16).name("赵四").description("白").build(),
+            People.builder().id(3).age(18).name("王五").description("甜").build(),
+            People.builder().id(4).age(21).name("田六").description("胖").build(),
+            People.builder().id(5).age(25).name("孙七").description("高").build()
     );
 
 
@@ -46,20 +54,26 @@ public class Myself {
      * exercise-list
      */
     public static final List<People> EXERCISE_LIST = Arrays.asList(
-            new People(1, 15, "小明", 1, "一组", "", DateUtil.beginOfWeek(new Date()), new BigDecimal("12")),
-            new People(2, 16, "小红", 1, "一组", "很高", DateUtil.date(), new BigDecimal("1")),
-            new People(3, 17, "小李", 2, "二组", "很胖", DateUtil.beginOfMonth(new Date()), new BigDecimal("5")),
-            new People(4, 18, "小王", 3, "三组", "人很好", DateUtil.beginOfYear(new Date()), new BigDecimal("100")),
-            new People(5, 25, "小明", 3, "三组", "重名", DateUtil.beginOfHour(new Date()), new BigDecimal("99"))
+            People.builder().id(1).age(15).name("小明").groupId(1).groupName("一组").description("").createTime(DateUtil.beginOfWeek(new Date())).fee(new BigDecimal(12)).doubleFee(12.01).build(),
+            People.builder().id(2).age(16).name("小红").groupId(1).groupName("一组").description("很高").createTime(DateUtil.date()).fee(new BigDecimal(1)).doubleFee(11.05).build(),
+            People.builder().id(3).age(17).name("小李").groupId(2).groupName("二组").description("很胖").createTime(DateUtil.beginOfMonth(new Date())).fee(new BigDecimal(5)).doubleFee(4.66).build(),
+            People.builder().id(4).age(18).name("小王").groupId(3).groupName("三组").description("人很好").createTime(DateUtil.beginOfYear(new Date())).fee(new BigDecimal(100)).doubleFee(13.99).build(),
+            People.builder().id(5).age(25).name("小明").groupId(3).groupName("三组").description("重名").createTime(DateUtil.beginOfHour(new Date())).fee(new BigDecimal(99)).doubleFee(88.88).build()
     );
 
-    //string-arr
+    /**
+     * string-arr
+     */
     public static final String[] STRING_ARR = {"1,2,3,4,5"};
 
-    //film-arr
+    /**
+     * film-arr
+     */
     public static final String[] FILM_ARR = {"中国巨幕2K", "4K", "2K", "4D", "ATMOS", "IMAX3D", "巨幕3D", "IMAX", "巨幕", "3D"};
 
-    //int-arr
+    /**
+     * int-arr
+     */
     public static final int[] INT_ARR = {33, 23, 78, 90, 1, 5};
 
 }

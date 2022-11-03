@@ -1,6 +1,6 @@
 package com.nova.tools.demo.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
@@ -10,6 +10,10 @@ import java.util.List;
  * @Date: 2019/6/14 20:04
  */
 @Data
+@Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class GroupPeople {
 
     /**

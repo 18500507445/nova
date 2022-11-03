@@ -1,6 +1,6 @@
 package com.nova.tools.demo.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,6 +11,10 @@ import java.util.Date;
  * @Date: 2019/6/14 14:09
  */
 @Data
+@Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class People {
 
     /**
@@ -56,25 +60,4 @@ public class People {
 
     private Double doubleFee;
 
-    public People() {
-
-    }
-
-    public People(Integer id, Integer age, String name, String description) {
-        this.id = id;
-        this.age = age;
-        this.name = name;
-        this.description = description;
-    }
-
-    public People(Integer id, Integer age, String name, Integer groupId, String groupName, String description, Date createTime, BigDecimal fee) {
-        this.id = id;
-        this.age = age;
-        this.groupId = groupId;
-        this.groupName = groupName;
-        this.name = name;
-        this.description = description;
-        this.createTime = createTime;
-        this.fee = fee;
-    }
 }

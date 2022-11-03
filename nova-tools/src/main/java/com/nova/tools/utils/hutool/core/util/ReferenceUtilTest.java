@@ -12,6 +12,11 @@ import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
+/**
+ * {@link ReferenceUtil} 引用工具类，主要针对Reference 工具化封装
+ *
+ * @author
+ */
 public class ReferenceUtilTest {
 
 	@Test

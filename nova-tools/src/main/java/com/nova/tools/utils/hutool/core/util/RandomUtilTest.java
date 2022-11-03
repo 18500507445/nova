@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * {@link RandomUtil} 随机工具类
+ *
+ * @author
+ */
 public class RandomUtilTest {
 
 	@Test

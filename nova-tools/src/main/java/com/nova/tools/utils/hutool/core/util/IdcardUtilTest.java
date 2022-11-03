@@ -7,10 +7,9 @@ import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**
- * 身份证单元测试
+ * {@link IdcardUtil} 身份证单元测试
  *
  * @author Looly
- *
  */
 public class IdcardUtilTest {
 

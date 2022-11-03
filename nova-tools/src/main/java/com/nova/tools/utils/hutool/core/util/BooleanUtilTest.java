@@ -4,6 +4,11 @@ import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
+/**
+ * {@link BooleanUtil} 布尔类型工具 测试类
+ *
+ * @author
+ */
 public class BooleanUtilTest {
 
 	@Test

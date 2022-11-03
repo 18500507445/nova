@@ -5,6 +5,11 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
+/**
+ * {@link HashUtilTest} Hash算法大全
+ *
+ * @author looly
+ */
 public class HashUtilTest {
 
 	@Test

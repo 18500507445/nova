@@ -10,6 +10,12 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 
+/**
+ * {@link JNDIUtil} 它是为JAVA应用程序提供命名和目录访问服务的API
+ * （Application Programing Interface，应用程序编程接口）。
+ *
+ * @author
+ */
 public class JNDIUtilTest {
 
 	@Test

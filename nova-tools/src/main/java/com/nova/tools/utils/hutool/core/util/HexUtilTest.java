@@ -1,16 +1,16 @@
 package com.nova.tools.utils.hutool.core.util;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.HexUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 
 /**
- * HexUtil单元测试
- * @author Looly
+ * {@link HexUtil} 单元测试
  *
+ * @author
  */
 public class HexUtilTest {
 

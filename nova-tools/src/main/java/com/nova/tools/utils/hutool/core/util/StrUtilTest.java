@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 /**
+ * {@link StrUtil}
  * 字符串工具类单元测试
  *
  * @author Looly

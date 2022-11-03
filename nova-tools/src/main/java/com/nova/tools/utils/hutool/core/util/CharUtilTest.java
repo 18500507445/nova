@@ -1,9 +1,14 @@
 package com.nova.tools.utils.hutool.core.util;
 
-import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.CharUtil;
 import org.junit.jupiter.api.Test;
 
+/**
+ * {@link CharUtil} ClassLoader工具类 测试类
+ *
+ * @author
+ */
 public class CharUtilTest {
 
 	@Test

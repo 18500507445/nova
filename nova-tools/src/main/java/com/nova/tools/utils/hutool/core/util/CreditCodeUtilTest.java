@@ -4,6 +4,11 @@ import cn.hutool.core.util.CreditCodeUtil;
 import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
+/**
+ * {@link CreditCodeUtil} 统一社会信用代码 测试类
+ *
+ * @author
+ */
 public class CreditCodeUtilTest {
 
 	@Test

@@ -8,6 +8,11 @@ import org.junit.jupiter.api.Test;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+/**
+ * {@link RandomUtil} 随机工具类 测试类
+ *
+ * @author
+ */
 public class ByteUtilTest {
 	@Test
 	public void intAndBytesLittleEndianTest() {

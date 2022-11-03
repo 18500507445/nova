@@ -26,19 +26,17 @@ public interface FkOrderService {
     Map<String, String> getCommon(Map<String, String> map);
 
     /**
-     * 充值回调后加款
+     * 成功订单处理
      *
+     * @param source
+     * @param sid
+     * @param businessCode
      * @param orderId
      * @param userName
-     * @param tradeStatus -1失败 1成功
-     * @param amount      单位元
+     * @param tradeStatus
+     * @param amount
      * @param payType
-     * @return
      */
-    void recharge(String orderId, String userName, String tradeStatus, String amount, String payType);
+    void successOrderHandler(String source, String sid, int businessCode, String orderId, String userName, String tradeStatus, String amount, String payType);
 
-    /**
-     * 开通尊享会员
-     */
-    String openExclusiveVip(String userName, String fee);
 }

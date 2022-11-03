@@ -68,7 +68,8 @@ public class YeePayServiceImpl implements PayService {
         Long payConfigId = param.getPayConfigId();
         String productId = param.getProductId();
         String subject = param.getSubject();
-        if (ObjectUtil.hasEmpty(source, sid, payConfigId, orderId, type, userName, totalAmount, productId, subject)) {
+        int businessCode = param.getBusinessCode();
+        if (ObjectUtil.hasEmpty(source, sid, payConfigId, orderId, type, userName, totalAmount, productId, subject, businessCode)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
         try {
@@ -91,6 +92,7 @@ public class YeePayServiceImpl implements PayService {
                         .tradeStatus(0)
                         .payWay(4)
                         .type(type)
+                        .businessCode(businessCode)
                         .fee(new BigDecimal(totalAmount)).build();
 
                 //2.0 创建订单

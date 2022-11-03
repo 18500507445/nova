@@ -78,6 +78,7 @@ public class WeChatServiceImpl implements PayService {
         Long payConfigId = param.getPayConfigId();
         String productId = param.getProductId();
         String subject = param.getSubject();
+        int businessCode = param.getBusinessCode();
         if (ObjectUtil.hasEmpty(source, sid, payConfigId, orderId, type, userName, totalAmount, productId, subject)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
@@ -105,6 +106,7 @@ public class WeChatServiceImpl implements PayService {
                         .tradeStatus(0)
                         .payWay(2)
                         .type(type)
+                        .businessCode(businessCode)
                         .fee(new BigDecimal(totalAmount)).build();
                 int flag = fkPayOrderService.insertFkPayOrder(insert);
                 if (0 == flag) {

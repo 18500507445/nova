@@ -1,5 +1,7 @@
 package com.nova.pay.controller;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
@@ -13,6 +15,7 @@ import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.util.XmlConfig;
+import com.google.api.services.androidpublisher.model.ProductPurchase;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
@@ -21,10 +24,7 @@ import com.nova.pay.entity.result.FkPayOrder;
 import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
-import com.nova.pay.utils.open.AliPayUtil;
-import com.nova.pay.utils.open.IosVerifyUtil;
-import com.nova.pay.utils.open.WeChatUtil;
-import com.nova.pay.utils.open.YeePayUtil;
+import com.nova.pay.utils.open.*;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalEnvelopeDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
@@ -66,13 +66,16 @@ public class PayNotifyController extends BaseController {
     @Resource
     private IosVerifyUtil iosVerifyUtil;
 
-    @Autowired
+    @Resource
+    private GooglePayUtil googlePayUtil;
+
+    @Resource
     private FkPayOrderService fkPayOrderService;
 
-    @Autowired
+    @Resource
     private FkOrderService fkOrderService;
 
-    @Autowired
+    @Resource
     private FkPayConfigService fkPayConfigService;
 
     /**
@@ -117,8 +120,7 @@ public class PayNotifyController extends BaseController {
                     if (StringUtils.equals(AliPayUtil.TRADE_SUCCESS, tradeStatus) && ObjectUtil.equals(fee, new BigDecimal(totalAmount))) {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).build());
                         if (payFlag > 0) {
-                            String payType = payConfig.getPayType();
-                            fkOrderService.recharge(orderId, userName, "1", fee.toString(), payType);
+                            fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, userName, "1", fee.toString(), payConfig.getPayType());
                             out = AliPayUtil.NOTIFY_SUCCESS;
                         }
                     } else {
@@ -172,8 +174,7 @@ public class PayNotifyController extends BaseController {
                     if (StrUtil.equals(WxPayConstants.ResultCode.SUCCESS, notifyResult.getReturnCode())) {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).build());
                         if (payFlag > 0) {
-                            String payType = payConfig.getPayType();
-                            fkOrderService.recharge(orderId, userName, "1", fee.toString(), payType);
+                            fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, userName, "1", fee.toString(), payConfig.getPayType());
                         }
                     } else {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(2).build());
@@ -245,10 +246,7 @@ public class PayNotifyController extends BaseController {
                     //3.0 通知修改成处理中,存入sign、验签结果
                     payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).tradeNo(transactionId).remark("ture").build());
                     if (payFlag > 0) {
-                        BigDecimal fee = payOrder.getFee();
-                        String userName = payOrder.getUserName();
-                        String payType = payConfig.getPayType();
-                        fkOrderService.recharge(orderId, userName, "1", fee.toString(), payType);
+                        fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());
                     }
                 } else {
                     payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(2).build());
@@ -300,9 +298,7 @@ public class PayNotifyController extends BaseController {
                         if (StrUtil.equals(Constants.SUCCESS, status) && ObjectUtil.equals(fee, new BigDecimal(orderAmount))) {
                             payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).build());
                             if (payFlag > 0) {
-                                String userName = payOrder.getUserName();
-                                String payType = payConfig.getPayType();
-                                fkOrderService.recharge(orderId, userName, "1", fee.toString(), payType);
+                                fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", fee.toString(), payConfig.getPayType());
                                 result = Constants.SUCCESS;
                             }
                         } else {
@@ -369,5 +365,62 @@ public class PayNotifyController extends BaseController {
         }
     }
 
+    /**
+     * 谷歌支付通知
+     */
+    @PostMapping("googlePay")
+    public AjaxResult googlePay(HttpServletRequest request) {
+        TimeInterval timer = DateUtil.timer();
+        int payFlag = 0;
+        String orderId = "";
+        Map<String, String> params = new HashMap<>(16);
+        try {
+            //1.0 解析谷歌通知请求信息
+            Map<String, String[]> requestParams = request.getParameterMap();
+            for (String str : requestParams.keySet()) {
+                String[] values = requestParams.get(str);
+                String valueStr = "";
+                for (int i = 0; i < values.length; i++) {
+                    valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+                }
+                params.put(str, new String(valueStr.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
+            }
+            log.info("googlePay通知:{}", com.alibaba.fastjson.JSONObject.toJSONString(params));
+            orderId = MapUtil.getStr(params, "orderId");
+            String tradeNo = MapUtil.getStr(params, "tradeNo");
+            String productId = MapUtil.getStr(params, "productId");
+            String purchaseToken = MapUtil.getStr(params, "purchaseToken");
+            String packageName = MapUtil.getStr(params, "packageName");
+            //查询订单
+            FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 5);
+            if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
+                FkPayOrder.FkPayOrderBuilder orderBuilder = FkPayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(5);
+                //回调改成:处理中
+                fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(4).build());
+                //查询配置参数，验签处理
+                FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
+                //2.0 然后进行验证
+                ProductPurchase purchase = googlePayUtil.verify(packageName, "ScorePredict1x2", productId, purchaseToken, payConfig.getKeyPath());
+                log.info("googlePayNotify验签结果====>purchase:{}", JSONUtil.toJsonStr(purchase));
+                if (ObjectUtil.isNotNull(purchase)) {
+                    if (0 == purchase.getPurchaseState() && StringUtils.equals(tradeNo, purchase.getOrderId())) {
+                        payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).remark("ture").build());
+                        if (payFlag > 0) {
+                            fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());
+                        }
+                    } else {
+                        return AjaxResult.success("订单状态不正确或订单Id错误");
+                    }
+                } else {
+                    return AjaxResult.success("验签超时");
+                }
+            }
+        } catch (Exception e) {
+            log.error("googlePayNotify异常:{}", e.getMessage());
+        } finally {
+            log.info("googlePayNotify====>orderId:{}, payFlag:{}, 耗时:{}毫秒", orderId, payFlag, timer.interval());
+        }
+        return AjaxResult.success();
+    }
 
 }

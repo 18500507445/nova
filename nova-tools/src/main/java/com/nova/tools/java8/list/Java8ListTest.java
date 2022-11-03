@@ -166,6 +166,13 @@ public class Java8ListTest {
     public void calculation() {
         //方式一 属性bigDecimal
         BigDecimal maxBigDecimal = PEOPLE_LIST.stream().map(People::getFee).max(BigDecimal::compareTo).get();
+        System.out.println("statistics--maxBigDecimal:" + maxBigDecimal);
+
+
+        //属性double
+        double doubleFee = PEOPLE_LIST.stream().mapToDouble(People::getDoubleFee).sum();
+        System.out.println("statistics--doubleFee:" + doubleFee);
+
 
         //方式二
         IntSummaryStatistics statistics = PEOPLE_LIST.stream().collect(summarizingInt(People::getAge));

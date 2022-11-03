@@ -54,6 +54,8 @@ public class People {
      */
     private BigDecimal fee;
 
+    private Double doubleFee;
+
     public People() {
 
     }

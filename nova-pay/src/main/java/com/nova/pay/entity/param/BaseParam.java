@@ -43,6 +43,12 @@ public abstract class BaseParam extends BaseController implements Serializable {
     private String fromSource;
 
     /**
+     * 业务code 默认1充值
+     * {@link com.nova.pay.enums.BusinessEnum}
+     */
+    private int businessCode = 1;
+
+    /**
      * 页码
      */
     private Integer pageNum = 1;

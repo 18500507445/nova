@@ -1,8 +1,11 @@
 package com.nova.pay.service.fk.impl;
 
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Constants;
@@ -101,7 +104,6 @@ public class FkOrderServiceImpl implements FkOrderService {
      * @param payType
      * @return
      */
-    @Override
     public void recharge(String orderId, String userName, String tradeStatus, String amount, String payType) {
         //拼接签名调用web进行加款
         String param = orderId + tradeStatus + payType + amount + userName + Constants.MD5_KEY;
@@ -121,29 +123,76 @@ public class FkOrderServiceImpl implements FkOrderService {
     }
 
     /**
+     * 成功订单处理
+     *
+     * @param businessCode
+     * @param orderId
+     * @param userName
+     * @param tradeStatus
+     * @param amount
+     * @param payType
+     */
+    @Override
+    public void successOrderHandler(String source, String sid, int businessCode, String orderId, String userName, String tradeStatus, String amount, String payType) {
+        //先充值 除了海外版
+        if (businessCode > 0) {
+            recharge(orderId, userName, tradeStatus, amount, payType);
+        }
+        switch (businessCode) {
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                openUserVip(source, sid, userName, businessCode);
+                break;
+            case 14:
+                openExclusiveVip(sid, userName, amount, "1");
+                break;
+            case 15:
+                openExclusiveVip(sid, userName, amount, "2");
+                break;
+            case 16:
+                openExclusiveVip(sid, userName, amount, "3");
+                break;
+            default:
+        }
+    }
+
+    /**
      * 调用cpapi开通尊享会员
      *
      * @param userName
      * @param fee
+     * @param type     1白银 2黄金 3升级
      * @return
      */
-    @Override
-    public String openExclusiveVip(String userName, String fee) {
-        Map<String, String> param = new HashMap<>(16);
-        param.put("function", "openExclusiveVip");
-        param.put("userName", userName);
-        param.put("fee", fee);
-        param.put("operator", "fk_pay_center");
-        param.put("remark", "充值开通");
-        //延迟200ms防止加款没走完导致扣费展示余额不足
-        ThreadUtil.safeSleep(200);
-        String json = HttpUtil.createPost(Constants.CPAPI_URL)
-                .formStr(param)
-                .execute()
-                .body();
-        if (StrUtil.isNotEmpty(json)) {
+    public void openExclusiveVip(String sid, String userName, String fee, String type) {
+        log.info("openExclusiveVip--userName:{},fee:{},type:{}", userName, fee, type);
+        //延迟1s防止加款没走完导致扣费展示余额不足
+        ThreadUtil.safeSleep(1000);
+        threadPoolTaskExecutor.execute(() -> {
+            Map<String, String> param = new HashMap<>(16);
+            param.put("function", "openExclusiveVip");
+            param.put("userName", userName);
+            param.put("fee", fee);
+            param.put("sid", sid);
+            param.put("operator", "fk_pay_center");
+            param.put("remark", "充值开通");
+            param.put("type", type);
+            this.getCommon(param);
+        });
+    }
 
-        }
-        return null;
+    /**
+     * 开通vip会员
+     */
+    public void openUserVip(String source, String sid, String userName, int businessCode) {
+        log.info("openUserVip--source:{},sid:{},userName:{},businessCode:{}", source, sid, userName, businessCode);
+        ThreadUtil.safeSleep(1000);
+        threadPoolTaskExecutor.execute(() -> {
+
+        });
     }
 }

@@ -98,6 +98,11 @@ public class FkPayOrder implements Serializable {
     private String remark;
 
     /**
+     * 业务code 对应BusinessEnum枚举类
+     */
+    private Integer businessCode;
+
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
+/**
+ * 通过生日计算星座
+ */
 public class ZodiacTest {
 
 	@Test

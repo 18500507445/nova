@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * {@link TemporalAccessorUtil} 工具类封装
+ */
 public class TemporalAccessorUtilTest {
 
 	@Test
@@ -35,6 +38,9 @@ public class TemporalAccessorUtilTest {
 		Assert.equals("1624636800000", today2);
 	}
 
+	/**
+	 * 当前日期是否在日期指定范围内
+	 */
 	@Test
 	public void isInTest(){
 		final String sourceStr = "2022-04-19 00:00:00";

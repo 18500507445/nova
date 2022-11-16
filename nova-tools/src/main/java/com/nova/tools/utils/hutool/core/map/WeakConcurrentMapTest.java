@@ -10,44 +10,44 @@ import org.junit.jupiter.api.Test;
 
 public class WeakConcurrentMapTest {
 
-	@Test
-	public void putAndGetTest(){
-		final WeakConcurrentMap<Object, Object> map = new WeakConcurrentMap<>();
-		Object
-				key1 = new Object(), value1 = new Object(),
-				key2 = new Object(), value2 = new Object(),
-				key3 = new Object(), value3 = new Object(),
-				key4 = new Object(), value4 = new Object();
-		map.put(key1, value1);
-		map.put(key2, value2);
-		map.put(key3, value3);
-		map.put(key4, value4);
+    @Test
+    public void putAndGetTest() {
+        final WeakConcurrentMap<Object, Object> map = new WeakConcurrentMap<>();
+        Object
+                key1 = new Object(), value1 = new Object(),
+                key2 = new Object(), value2 = new Object(),
+                key3 = new Object(), value3 = new Object(),
+                key4 = new Object(), value4 = new Object();
+        map.put(key1, value1);
+        map.put(key2, value2);
+        map.put(key3, value3);
+        map.put(key4, value4);
 
-		Assert.equals(value1, map.get(key1));
-		Assert.equals(value2, map.get(key2));
-		Assert.equals(value3, map.get(key3));
-		Assert.equals(value4, map.get(key4));
+        Assert.equals(value1, map.get(key1));
+        Assert.equals(value2, map.get(key2));
+        Assert.equals(value3, map.get(key3));
+        Assert.equals(value4, map.get(key4));
 
-		// 清空引用
-		//noinspection UnusedAssignment
-		key1 = null;
-		//noinspection UnusedAssignment
-		key2 = null;
+        // 清空引用
+        //noinspection UnusedAssignment
+        key1 = null;
+        //noinspection UnusedAssignment
+        key2 = null;
 
-		System.gc();
-		ThreadUtil.sleep(200L);
+        System.gc();
+        ThreadUtil.sleep(200L);
 
-		Assert.equals(2, map.size());
-	}
+        Assert.equals(2, map.size());
+    }
 
-	@Test
-	public void getConcurrencyTest(){
-		final WeakConcurrentMap<String, String> cache = new WeakConcurrentMap<>();
-		final ConcurrencyTester tester = new ConcurrencyTester(9000);
-		tester.test(()-> cache.computeIfAbsent("aaa" + RandomUtil.randomInt(2), (key)-> "aaaValue"));
+    @Test
+    public void getConcurrencyTest() {
+        final WeakConcurrentMap<String, String> cache = new WeakConcurrentMap<>();
+        final ConcurrencyTester tester = new ConcurrencyTester(9000);
+        tester.test(() -> cache.computeIfAbsent("aaa" + RandomUtil.randomInt(2), (key) -> "aaaValue"));
 
-		Assert.isTrue(tester.getInterval() > 0);
-		String value = ObjectUtil.defaultIfNull(cache.get("aaa0"), cache.get("aaa1"));
-		Assert.equals("aaaValue", value);
-	}
+        Assert.isTrue(tester.getInterval() > 0);
+        String value = ObjectUtil.defaultIfNull(cache.get("aaa0"), cache.get("aaa1"));
+        Assert.equals("aaaValue", value);
+    }
 }

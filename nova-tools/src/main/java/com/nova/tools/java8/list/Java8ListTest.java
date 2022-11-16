@@ -151,7 +151,7 @@ public class Java8ListTest {
     }
 
     /**
-     * list reduce
+     * list reduce计算
      */
     @Test
     public void listReduce() {

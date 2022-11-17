@@ -1,4 +1,6 @@
-package com.nova.tools.demo.time;
+package com.nova.tools.demo.datatype;
+
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,10 +13,10 @@ import java.time.format.DateTimeFormatter;
  * @Date: 2018/12/20 18:29
  */
 
-public class TimeExercise {
+public class TimeDemo {
 
-    public static void main(String[] args) {
-
+    @Test
+    public void localDateDemo() {
         //LocalDate类型对应Mysql数据库Date类型
         LocalDate now = LocalDate.now();
         System.out.println("LocalDate类型对应Mysql数据库Date类型:" + now);
@@ -39,7 +41,7 @@ public class TimeExercise {
         DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime parse1 = LocalDateTime.parse(str1, format1);
         System.out.println("字符串日期解析成LocalDateTime类型，对应Mysql数据库DateTime类型:" + parse1);
-
-
     }
+
+
 }

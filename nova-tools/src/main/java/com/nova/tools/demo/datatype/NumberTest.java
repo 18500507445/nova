@@ -1,6 +1,5 @@
 package com.nova.tools.demo.datatype;
 
-
 import com.nova.tools.demo.entity.Myself;
 import org.junit.jupiter.api.Test;
 
@@ -8,10 +7,35 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
- * @author wangzehui
- * @date 2018/7/17 15:12
+ * @Description: 数字运算demo
+ * @Author: wangzehui
+ * @Date: 2022/11/17 20:15
  */
-public class BigDecimalExercise {
+public class NumberTest {
+
+    /**
+     * 测试float
+     */
+    @Test
+    public void floatDemo(){
+        System.out.println(0.9f - 0.8f);
+        System.out.println(1f - 0.7f);
+        System.out.println("1" + "2");
+    }
+
+    /**
+     * 测试double
+     */
+    @Test
+    public void doubleDemo() {
+        double m = 1.01;
+        double n = 365 * 1;
+        //m的n次幂
+        Double pow = Math.pow(m, n);
+        //Double转long类型
+        long l = pow.longValue();
+        System.out.println(l);
+    }
 
     /**
      * 商，余。
@@ -62,7 +86,6 @@ public class BigDecimalExercise {
         System.out.println(price);
         System.out.println(s);
     }
+
+
 }
-
-
-

@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.crypto;
 
-import cn.hutool.crypto.CryptoException;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.GlobalBouncyCastleProvider;
 import cn.hutool.crypto.KeyUtil;
-import cn.hutool.core.lang.Assert;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 

@@ -30,7 +30,6 @@ public class SignTest {
 		Sign sign = SecureUtil.sign(SignAlgorithm.SHA1withRSA, privateKey, null);
 		// 签名
 		byte[] signed = sign.sign(content.getBytes());
-		System.out.println(JSONUtil.toJsonStr(signed));
 		sign = SecureUtil.sign(SignAlgorithm.SHA1withRSA, null, publicKey);
 		// 验证签名
 		boolean verify = sign.verify(content.getBytes(), signed);

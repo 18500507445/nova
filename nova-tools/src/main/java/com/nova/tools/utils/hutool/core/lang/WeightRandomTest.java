@@ -2,11 +2,14 @@ package com.nova.tools.utils.hutool.core.lang;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.WeightRandom;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import cn.hutool.core.collection.CollUtil;
 
+
+/**
+ * 随机权重测试类
+ */
 public class WeightRandomTest {
 
 	@Test

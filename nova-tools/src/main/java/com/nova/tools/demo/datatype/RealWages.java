@@ -1,4 +1,4 @@
-package com.nova.tools.demo.price;
+package com.nova.tools.demo.datatype;
 
 import java.util.Scanner;
 

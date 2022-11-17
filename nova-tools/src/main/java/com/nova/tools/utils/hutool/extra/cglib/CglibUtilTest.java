@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.extra.cglib;
 
-import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.cglib.CglibUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class CglibUtilTest {

@@ -1,5 +1,6 @@
-package cn.hutool.captcha;
+package com.nova.tools.utils.hutool.captcha;
 
+import cn.hutool.captcha.*;
 import cn.hutool.captcha.generator.MathGenerator;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Assert;

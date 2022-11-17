@@ -8,6 +8,7 @@ package com.nova.tools.demo.datatype;
 public class DoubleExercise {
 
     public static void main(String[] args) {
+
         double m = 1.01;
         double n = 365 * 1;
         /**

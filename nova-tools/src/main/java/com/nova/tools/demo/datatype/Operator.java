@@ -7,6 +7,7 @@ package com.nova.tools.demo.datatype;
  */
 
 public class Operator {
+
     public static void main (String[] args){
 
         /**

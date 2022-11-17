@@ -9,9 +9,8 @@ import com.nova.tools.demo.entity.Myself;
  */
 
 public class Obj {
+
     public static void main(String[] args) {
-
-
         String[] str1 = Myself.STRING_ARR;
         System.out.println("str1地址" + str1);
 

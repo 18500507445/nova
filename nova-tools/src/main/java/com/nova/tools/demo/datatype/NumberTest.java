@@ -23,7 +23,6 @@ public class NumberTest {
         System.out.println("1" + "2");
     }
 
-
     /**
      * 测试double
      */

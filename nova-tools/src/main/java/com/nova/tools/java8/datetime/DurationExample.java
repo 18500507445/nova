@@ -1,5 +1,7 @@
 package com.nova.tools.java8.datetime;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -12,8 +14,8 @@ import java.time.LocalDateTime;
  */
 public class DurationExample {
 
-    public static void main(String[] args) throws InterruptedException {
-
+    @Test
+    public void demoA() throws InterruptedException {
         // 创建Duration实例
         Instant first = Instant.now();
         Thread.sleep(3000);
@@ -31,4 +33,5 @@ public class DurationExample {
 
         System.out.println("从 from 到 to 相差 : " + duration2.toDays() + " 天");
     }
+
 }

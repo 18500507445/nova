@@ -1,22 +1,28 @@
 package com.nova.tools.java8.datetime;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.Clock;
 import java.time.Instant;
 import java.util.Date;
 
 /**
- * Clock 示例
- *
- * @author biezhi
- * @date 2018/3/3
+ * @Description: dateTimeDemo类
+ * @Author: wangzehui
+ * @Date: 2022/11/18 13:53
  */
 public class ClockExample {
 
-    public static void main(String[] args) {
+    /**
+     * Clock 示例
+     */
+    @Test
+    public void demoA() {
         Clock clock = Clock.systemDefaultZone();
         long millis = clock.millis();
         Instant instant = clock.instant();
-        Date legacyDate = Date.from(instant);   // legacy java.util.Date
+        // legacy java.util.Date
+        Date legacyDate = Date.from(instant);
         System.out.println(millis);
         System.out.println(legacyDate);
     }

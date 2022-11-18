@@ -6,6 +6,7 @@ package com.nova.common.constant;
  * @Date: 2022/8/4 21:29
  */
 public class Constants {
+
     /**
      * UTF-8 字符集
      */

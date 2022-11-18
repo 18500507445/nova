@@ -1,7 +1,6 @@
 package com.nova.common.utils.list;
 
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -340,7 +339,7 @@ public class ListUtils {
 
     /**
      * 将一个list均分成n个list,主要通过偏移量来实现的
-     *
+     * <p>
      * 新方法guava：Lists.partition(list, n)，n代表单个list max长度
      *
      * @param source

@@ -1,20 +1,23 @@
 package com.nova.tools.java8.concurrent;
 
+
+import org.junit.jupiter.api.Test;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 
-public class ConcurrentHashMap1 {
+/**
+ * @Description: 并发hashMap
+ * @Author: wangzehui
+ * @Date: 2022/11/18 14:54
+ */
+public class ConcurrentExample {
 
-    public static void main(String[] args) {
+    @Test
+    public void testReduce() {
         System.out.println("Parallelism: " + ForkJoinPool.getCommonPoolParallelism());
 
-        testForEach();
-//        testSearch();
-//        testReduce();
-    }
-
-    private static void testReduce() {
-        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
+        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(16);
         map.putIfAbsent("foo", "bar");
         map.putIfAbsent("han", "solo");
         map.putIfAbsent("r2", "d2");
@@ -26,8 +29,9 @@ public class ConcurrentHashMap1 {
         System.out.println(reduced);
     }
 
-    private static void testSearch() {
-        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
+    @Test
+    public void testSearch() {
+        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(16);
         map.putIfAbsent("foo", "bar");
         map.putIfAbsent("han", "solo");
         map.putIfAbsent("r2", "d2");
@@ -58,7 +62,8 @@ public class ConcurrentHashMap1 {
         System.out.println(result2);
     }
 
-    private static void testForEach() {
+    @Test
+    public void testForEach() {
         ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
         map.putIfAbsent("foo", "bar");
         map.putIfAbsent("han", "solo");
@@ -70,5 +75,4 @@ public class ConcurrentHashMap1 {
 
         System.out.println(map.mappingCount());
     }
-
 }

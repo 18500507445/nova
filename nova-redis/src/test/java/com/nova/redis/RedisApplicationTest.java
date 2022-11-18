@@ -9,14 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class RedisApplicationTest {
 
-
     @Autowired
     private RedisService redisService;
 
     @Test
     public void testRedis() {
         String group = "nova-redis:%s";
-        String key = String.format(group, "nova-redis-key");
+        String key = String.format(group, "testRedis");
 
         redisService.set(key, "1", 5 * 60L);
         Object o = redisService.get(key);

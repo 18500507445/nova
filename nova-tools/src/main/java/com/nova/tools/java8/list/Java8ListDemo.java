@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,9 +18,41 @@ import static java.util.stream.Collectors.*;
  * @Author: wangzehui
  * @Date: 2019/6/14 14:07
  */
-public class Java8ListTest {
+public class Java8ListDemo {
 
     public static final List<People> PEOPLE_LIST = Myself.EXERCISE_LIST;
+
+    public static final List<String> STRINGS = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
+
+    public static final List<Integer> NUMBERS = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+
+    /**
+     * 测试统计list
+     */
+    @Test
+    public void processList() {
+        long count = STRINGS.stream().filter(String::isEmpty).count();
+        System.out.println("空字符串数量为: " + count);
+
+        count = STRINGS.stream().filter(string -> string.length() == 3).count();
+        System.out.println("字符串长度为 3 的数量为: " + count);
+
+        List<String> filtered = STRINGS.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
+        System.out.println("筛选后的列表: " + filtered);
+
+        String mergedString = STRINGS.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
+        System.out.println("合并字符串: " + mergedString);
+
+        List<Integer> squaresList = NUMBERS.stream().map(i -> i * i).distinct().collect(Collectors.toList());
+        System.out.println("Squares List: " + squaresList);
+
+        SecureRandom random = new SecureRandom();
+        random.ints().limit(10).sorted().forEach(System.out::println);
+
+        // 并行处理
+        count = STRINGS.parallelStream().filter(string -> string.isEmpty()).count();
+        System.out.println("空字符串的数量为: " + count);
+    }
 
     /**
      * list循环遍历

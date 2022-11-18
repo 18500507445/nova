@@ -1,76 +1,69 @@
 package com.nova.tools.java8.concurrent;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
- * 原子变量
- * <p>
- * AtomicInteger
- * LongAdder
- * LongAccumulator
- *
- * @author biezhi
- * @date 2018/3/5
+ * @Description: 原子变量 AtomicInteger,LongAdder,LongAccumulator
+ * @Author: wangzehui
+ * @Date: 2022/11/18 14:49
  */
-public class Atomic1 {
+public class AtomicExample {
 
     private static final int NUM_INCREMENTS = 1000;
 
-    private static AtomicInteger atomicInt = new AtomicInteger(0);
+    private static AtomicInteger ATOMIC_INT = new AtomicInteger(0);
 
-    public static void main(String[] args) {
-        testIncrement();
-//        testAccumulate();
-//        testUpdate();
+    @Test
+    public void testUpdate() {
+        ATOMIC_INT.set(0);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        IntStream.range(0, NUM_INCREMENTS)
+                .forEach(i -> {
+                    Runnable task = () ->
+                            ATOMIC_INT.updateAndGet(n -> n + 2);
+                    executor.submit(task);
+                });
+
+        ConcurrentUtils.stop(executor);
+
+        System.out.format("Update: %d\n", ATOMIC_INT.get());
     }
 
-    private static void testUpdate() {
-        atomicInt.set(0);
+    @Test
+    public void testAccumulate() {
+        ATOMIC_INT.set(0);
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> {
                     Runnable task = () ->
-                            atomicInt.updateAndGet(n -> n + 2);
+                            ATOMIC_INT.accumulateAndGet(i, (n, m) -> n + m);
                     executor.submit(task);
                 });
 
         ConcurrentUtils.stop(executor);
 
-        System.out.format("Update: %d\n", atomicInt.get());
+        System.out.format("Accumulate: %d\n", ATOMIC_INT.get());
     }
 
-    private static void testAccumulate() {
-        atomicInt.set(0);
+    @Test
+    public void testIncrement() {
+        ATOMIC_INT.set(0);
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
         IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> {
-                    Runnable task = () ->
-                            atomicInt.accumulateAndGet(i, (n, m) -> n + m);
-                    executor.submit(task);
-                });
+                .forEach(i -> executor.submit(ATOMIC_INT::incrementAndGet));
 
         ConcurrentUtils.stop(executor);
 
-        System.out.format("Accumulate: %d\n", atomicInt.get());
-    }
-
-    private static void testIncrement() {
-        atomicInt.set(0);
-
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(atomicInt::incrementAndGet));
-
-        ConcurrentUtils.stop(executor);
-
-        System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, atomicInt.get());
+        System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, ATOMIC_INT.get());
     }
 }

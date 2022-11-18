@@ -1,5 +1,7 @@
 package com.nova.tools.java8.datetime;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.*;
 import java.util.Date;
 
@@ -17,10 +19,12 @@ public class ConvertExample {
      * @param localDate
      * @return
      */
-    public static Date toDate(LocalDate localDate) {
+    @Test
+    public void toDate(LocalDate localDate) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDate.atStartOfDay().atZone(zone).toInstant();
-        return Date.from(instant);
+        Date from = Date.from(instant);
+        System.out.println(from);
     }
 
     /**
@@ -29,10 +33,12 @@ public class ConvertExample {
      * @param localDateTime
      * @return
      */
-    public static Date toDate(LocalDateTime localDateTime) {
+    @Test
+    public void toDate(LocalDateTime localDateTime) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
-        return Date.from(instant);
+        Date from = Date.from(instant);
+        System.out.println(from);
     }
 
     /**
@@ -41,12 +47,14 @@ public class ConvertExample {
      * @param localTime
      * @return
      */
-    public static Date toDate(LocalTime localTime) {
+    @Test
+    public void toDate(LocalTime localTime) {
         LocalDate localDate = LocalDate.now();
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
-        return Date.from(instant);
+        Date from = Date.from(instant);
+        System.out.println(from);
     }
 
     /**
@@ -55,11 +63,13 @@ public class ConvertExample {
      * @param date
      * @return
      */
-    public static LocalDate toLocalDate(Date date) {
+    @Test
+    public void toLocalDate(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
-        return localDateTime.toLocalDate();
+        LocalDate localDate = localDateTime.toLocalDate();
+        System.out.println(localDate);
     }
 
     /**
@@ -68,10 +78,12 @@ public class ConvertExample {
      * @param date
      * @return
      */
-    public static LocalDateTime toLocalDateTime(Date date) {
+    @Test
+    public void toLocalDateTime(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
-        return LocalDateTime.ofInstant(instant, zone);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
+        System.out.println(localDateTime);
     }
 
     /**
@@ -80,11 +92,13 @@ public class ConvertExample {
      * @param date
      * @return
      */
-    public static LocalTime toLocalTime(Date date) {
+    @Test
+    public void toLocalTime(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
-        return localDateTime.toLocalTime();
+        LocalTime localTime = localDateTime.toLocalTime();
+        System.out.println(localTime);
     }
 
 

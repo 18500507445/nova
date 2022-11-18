@@ -1,23 +1,23 @@
 package com.nova.tools.java8.concurrent;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.concurrent.TimeUnit;
 
-public class Threads1 {
+/**
+ *
+ */
+public class ThreadExample {
 
-    public static void main(String[] args) {
-        test1();
-//        test2();
-//        test3();
-    }
 
-    private static void test3() {
+    @Test
+    public void demoA() {
         Runnable runnable = () -> {
             try {
                 System.out.println("Foo " + Thread.currentThread().getName());
                 TimeUnit.SECONDS.sleep(1);
                 System.out.println("Bar " + Thread.currentThread().getName());
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         };
@@ -26,14 +26,14 @@ public class Threads1 {
         thread.start();
     }
 
-    private static void test2() {
+    @Test
+    public void demoB() {
         Runnable runnable = () -> {
             try {
                 System.out.println("Foo " + Thread.currentThread().getName());
                 Thread.sleep(1000);
                 System.out.println("Bar " + Thread.currentThread().getName());
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         };
@@ -42,7 +42,8 @@ public class Threads1 {
         thread.start();
     }
 
-    private static void test1() {
+    @Test
+    public void demoC() {
         Runnable runnable = () -> {
             String threadName = Thread.currentThread().getName();
             System.out.println("Hello " + threadName);

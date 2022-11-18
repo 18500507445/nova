@@ -1,6 +1,8 @@
 package com.nova.tools.demo.map;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.tools.demo.entity.GroupPeople;
 import com.nova.tools.demo.entity.Myself;
@@ -19,10 +21,41 @@ import java.util.stream.Collectors;
 public class MapExercise {
 
     /**
+     * 初始化容量的影响
+     */
+    @Test
+    public void testHashMap() {
+        TimeInterval timer = DateUtil.timer();
+        //定义数据量
+        int aHundredMillion = 10000000;
+
+        Map<Integer, Integer> map1 = new HashMap<>(16);
+        for (int i = 0; i < aHundredMillion; i++) {
+            map1.put(i, i);
+        }
+        System.out.println("未初始化容量，耗时 ： " + timer.interval());
+        timer.restart();
+
+        Map<Integer, Integer> map2 = new HashMap<>(aHundredMillion / 2);
+        for (int i = 0; i < aHundredMillion; i++) {
+            map2.put(i, i);
+        }
+        System.out.println("初始化容量5000000，耗时 ： " + timer.interval());
+        timer.restart();
+
+        Map<Integer, Integer> map3 = new HashMap<>(aHundredMillion);
+        for (int i = 0; i < aHundredMillion; i++) {
+            map3.put(i, i);
+        }
+        System.out.println("初始化容量为10000000，耗时 ： " + timer.interval());
+    }
+
+
+    /**
      * Java 7 forEachMap
      */
     @Test
-    public void forEachMapOld(){
+    public void forEachMapOld() {
         List<People> peopleResult = Myself.EXERCISE_LIST;
         HashMap<Integer, List<People>> map = new HashMap<>(16);
         if (CollUtil.isNotEmpty(peopleResult)) {
@@ -87,12 +120,12 @@ public class MapExercise {
     }
 
     /**
-     *  数组方式存储key/value，线程非安全，允许null作为key和value，key不可以重复，value允许重复，
-     *  不保证元素迭代顺序是按照插入时的顺序，key的hash值是先计算key的hashcode值，然后再进行计算，
-     *  每次容量扩容会重新计算所以key的hash值，会消耗资源，要求key必须重写equals和hashcode方法.
-     *  默认初始容量16，加载因子0.75，扩容为旧容量乘2，查找元素快，如果key一样则比较value，如果value不一样，则按照链表结构存储value，就是一个key后面有多个value；
-     *
-     *  如果按照key的顺序 先进先出  那么用 LinkedHashMap
+     * 数组方式存储key/value，线程非安全，允许null作为key和value，key不可以重复，value允许重复，
+     * 不保证元素迭代顺序是按照插入时的顺序，key的hash值是先计算key的hashcode值，然后再进行计算，
+     * 每次容量扩容会重新计算所以key的hash值，会消耗资源，要求key必须重写equals和hashcode方法.
+     * 默认初始容量16，加载因子0.75，扩容为旧容量乘2，查找元素快，如果key一样则比较value，如果value不一样，则按照链表结构存储value，就是一个key后面有多个value；
+     * <p>
+     * 如果按照key的顺序 先进先出  那么用 LinkedHashMap
      */
     @Test
     public void hashMap() {
@@ -131,7 +164,7 @@ public class MapExercise {
      * 基于红黑二叉树的NavigableMap的实现，线程非安全，不允许null，key不可以重复，value允许重复，
      * 存入TreeMap的元素应当实现Comparable接口或者实现Comparator接口，会按照排序后的顺序迭代元素，
      * 两个相比较的key不得抛出classCastException。主要用于存入元素的时候对元素进行自动排序，迭代输出的时候就按排序顺序输出
-     *
+     * <p>
      * TreeMap 是一个有序的key-value集合，它是通过红黑树实现的
      * 继承于AbstractMap，所以它是一个Map，即一个key-value集合
      * 实现了NavigableMap接口，意味着它支持一系列的导航方法，比如返回有序的key集合
@@ -157,11 +190,10 @@ public class MapExercise {
         for (Map.Entry<String, String> entry : mapNew.entrySet()) {
             System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
-
     }
 
     /**
-     *key和value都不允许为null,方法是同步的，有人建议，涉及多线程使用时候，使用hashTable
+     * key和value都不允许为null,方法是同步的，有人建议，涉及多线程使用时候，使用hashTable
      */
     @Test
     public void hashTable() {

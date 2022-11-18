@@ -1,12 +1,12 @@
 package com.nova.tools.demo.thread;
 
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
+import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @Description:
@@ -20,7 +20,12 @@ public class ThreadPoolDemo {
      */
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
-    public static void main(String[] args) throws InterruptedException {
+    private static final ThreadPoolExecutor service = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+
+    private static final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
+
+    @Test
+    public void demoA() {
         // 使用 ThreadFactoryBuilder 创建自定义线程名称的 ThreadFactory
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();
 
@@ -33,17 +38,48 @@ public class ThreadPoolDemo {
                 namedThreadFactory,
                 new ThreadPoolExecutor.AbortPolicy());
 
-        executor.execute(new Test());
+        executor.execute(new DemoA());
         // 优雅关闭线程池
         executor.shutdown();
         // 任务执行完毕后打印"Done"
         System.out.println("Done");
     }
 
-    private static class Test implements Runnable {
+    @Test
+    public void demoB() throws InterruptedException {
+        TimeInterval timer = DateUtil.timer();
+        for (int i = 0; i < 100000; i++) {
+            queue.put(i);
+        }
+        for (int j = 0; j < 50; j++) {
+            service.submit(new DemoB());
+        }
+        System.out.println("耗时:" + timer.interval());
+
+        // 优雅关闭线程池
+        service.shutdown();
+        service.awaitTermination(1000L, TimeUnit.SECONDS);
+    }
+
+    private static class DemoA implements Runnable {
         @Override
         public void run() {
             System.out.println("--" + Thread.currentThread().getId());
+        }
+    }
+
+    private static class DemoB implements Runnable {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    System.out.println(queue.take() + "--" + Thread.currentThread().getId());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
         }
     }
 }

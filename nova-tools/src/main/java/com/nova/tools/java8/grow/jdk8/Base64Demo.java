@@ -1,5 +1,7 @@
 package com.nova.tools.java8.grow.jdk8;
 
+import org.junit.jupiter.api.Test;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -11,7 +13,8 @@ import java.util.Base64;
  */
 public class Base64Demo {
 
-    public static void main(String[] args) {
+    @Test
+    public void demoA() {
         final String text = "Lets Learn Java 8!";
 
         final String encoded = Base64

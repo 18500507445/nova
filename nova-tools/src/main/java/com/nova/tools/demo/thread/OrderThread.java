@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 public class OrderThread {
 
     public static void main(String[] args) {
-        for(int j=0;j<1000;++j) {
+        for (int j = 0; j < 1000; ++j) {
             Thread thread = new Thread(new Worker(j));
             thread.start();
             try {
@@ -26,7 +26,7 @@ public class OrderThread {
     /**
      * 创建single线程池
      */
-    void Pool(){
+    void Pool() {
         ExecutorService pool = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 100; ++i) {
             final int number = i;
@@ -38,6 +38,7 @@ public class OrderThread {
     public static class Worker implements Runnable {
 
         private int number;
+
         public Worker(int i) {
             number = i;
         }

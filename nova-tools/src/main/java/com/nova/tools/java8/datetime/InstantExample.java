@@ -1,5 +1,7 @@
 package com.nova.tools.java8.datetime;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.Instant;
 
 /**
@@ -10,8 +12,8 @@ import java.time.Instant;
  */
 public class InstantExample {
 
-    public static void main(String[] args) {
-
+    @Test
+    public void testA() {
         // 创建一个Instant实例
         Instant now = Instant.now();
 
@@ -30,4 +32,5 @@ public class InstantExample {
         System.out.println("later   : " + later);
         System.out.println("earlier : " + earlier);
     }
+
 }

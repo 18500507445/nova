@@ -20,7 +20,9 @@ import java.util.concurrent.*;
 @Slf4j
 public class ManualCreate {
 
-    //获取机器核数，作为线程池数量
+    /**
+     * 获取机器核数，作为线程池数量
+     */
     private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
 
     private static final ThreadFactory NAME_THREAD_FACTORY = new ThreadFactoryBuilder().build();
@@ -45,7 +47,7 @@ public class ManualCreate {
         }
     }
 
-    /*
+    /**
      * corePoolSize => 线程池核心线程数量
      * maximumPoolSize => 线程池最大数量,必须大于等于1
      * keepAliveTime => 空闲线程存活时间,当空闲时间到达此值,多余线程会被销毁到核心线程数量

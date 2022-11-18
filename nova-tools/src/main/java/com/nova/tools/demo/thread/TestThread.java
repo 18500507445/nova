@@ -7,6 +7,7 @@ package com.nova.tools.demo.thread;
  */
 
 public class TestThread {
+
     public static void main(String[] args) {
         RunnableDemo R1 = new RunnableDemo( "Thread-1");
         R1.start();

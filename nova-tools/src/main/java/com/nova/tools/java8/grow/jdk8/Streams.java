@@ -10,7 +10,7 @@ public class Streams {
     }
 
     private static final class Task {
-        private final Status  status;
+        private final Status status;
         private final Integer points;
 
         Task(final Status status, final Integer points) {

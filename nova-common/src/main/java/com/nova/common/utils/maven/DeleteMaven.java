@@ -30,10 +30,12 @@ public class DeleteMaven {
             return;
         }
         File[] files = mavenRep.listFiles();
-        checkAndDeleteFiles(files);
-        /*第一次不会删除 删除（lastUpdated，progress）之后变成空的文件夹*/
-        checkAndDeleteFiles(files);
-        System.out.println("Clean lastUpdated files and in-progess jar finished.");
+        if (null != files) {
+            checkAndDeleteFiles(files);
+            /*第一次不会删除 删除（lastUpdated，progress）之后变成空的文件夹*/
+            checkAndDeleteFiles(files);
+            System.out.println("Clean lastUpdated files and in-progess jar finished.");
+        }
     }
 
     private static void checkAndDeleteFiles(File[] files) {

@@ -16,12 +16,15 @@
 * [《@Transactional原理和常见的坑？》](https://mp.weixin.qq.com/s/dRa99ziZPjUKyFhxFoTaKQ)
 * [《你见过哪些目瞪口呆的Java代码技巧？》](https://mp.weixin.qq.com/s/LdX3_bg1UuZx5FygbZUCxw)
 * [《你认识强大的Stream和Optional吗？》](https://mp.weixin.qq.com/s/l0mqinIXvXHhZJtU1p_mcg)
+* [《阿里的项目到处都是GoogleGuava工具包！》](https://mp.weixin.qq.com/s/OlOHGEfdaFZBqwp9D3DIJw)
+* [《Java几种常用JSON库性能比较》](https://mp.weixin.qq.com/s/n0NgvpnXSAddD-eyuuPwFw)
 
 ### SQL
 
 * [《52条SQL语句，性能优化》](https://mp.weixin.qq.com/s/R3i6BgHP6yvRLXAxFYsdmA)
 * [《SQL优化最强总结 (建议收藏~)》](https://mp.weixin.qq.com/s/SGYJoTYiAilNnNODgGkk3g)
 * [《SQL优化万能公式：5大步骤+10个案例》](https://mp.weixin.qq.com/s/_zi661XsJXql68YL8N93Lw)
+* [《为什么说MySQL单表行数不要超过2000w? 》](https://mp.weixin.qq.com/s/YEFIe5U-J8Stnh5MvokdLg)
 * [《char和varchar有哪些区别？varchar最大长度是多少？》](https://mp.weixin.qq.com/s/Alqk60lcXWrEMFcxj8abAA)
 
 ### 线程
@@ -38,6 +41,8 @@
 * [《从0搭建SpringCloud服务》](https://mp.weixin.qq.com/s/EMae8yQKa9WhiKsYSrT4zw)
 * [《Mybatis插入大量数据效率对比》](https://mp.weixin.qq.com/s/npAkhEHCOEkWXoIzJcYrqQ)
 * [《MyBatis批量插入别再乱用foreach了》](https://mp.weixin.qq.com/s/rE5hV1muC-HhPPkvsaB5Bg)
+* [《16个有用的SpringBoot扩展接口》](https://mp.weixin.qq.com/s/r8Y3BBY2jOIJTDXUCqnQfw)
+* [《最全的Spring依赖注入方式，你都会了吗？》](https://mp.weixin.qq.com/s/rJ358sJ5YJ6dCNF4Qm6uEw)
 
 ### 消息队列
 

@@ -139,6 +139,20 @@ public class GooglePayUtil {
      * 3.如果是已购买未消耗的情况下才继续往下走
      * 4.更新数据库订单记录，通过obfuscatedExternalProfileId透传的订单号查询数据库找到该笔订单
      * 5.通知服务发放道具
+     *
+     *  备注：验签最好拆分一个服务 启动类配置
+     *  Properties systemProperties = System.getProperties();
+     *  systemProperties.setProperty("http.proxyHost", HOST_NAME);
+     *  systemProperties.setProperty("http.proxyPort", PORT);
+     *  systemProperties.setProperty("https.proxyHost", HOST_NAME);
+     *  systemProperties.setProperty("https.proxyPort", PORT);
+     *  systemProperties.setProperty("socksProxyHost", HOST_NAME);
+     *  systemProperties.setProperty("socksProxyPort", PORT);
+     *  systemProperties.setProperty("http.nonProxyHosts", "localhost");
+     *  systemProperties.setProperty("https.nonProxyHosts", "localhost");
+     *  //（单位：毫秒）
+     *  System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(8000));
+     *  System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2,SSLv3");
      */
     public ProductPurchase verify(String packageName, String applicationName, String productId, String purchaseToken, String keyPath) {
         try {

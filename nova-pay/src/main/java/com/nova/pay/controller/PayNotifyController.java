@@ -17,6 +17,7 @@ import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.util.XmlConfig;
+import com.google.api.services.androidpublisher.model.ProductPurchase;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
@@ -421,19 +422,22 @@ public class PayNotifyController extends BaseController {
                 fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(4).build());
                 //查询配置参数，验签处理
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
+
                 //2.0 然后进行验证
-                Map<String, Object> map = new HashMap<>(16);
-                map.put("packageName", packageName);
-                map.put("applicationName", "ScorePredict1x2");
-                map.put("productId", productId);
-                map.put("purchaseToken", purchaseToken);
-                map.put("keyPath", payConfig.getKeyPath());
-                String purchase = HttpUtil.createPost(Constants.GOOGLE_VERIFY_URL).form(map).execute().body();
+                /**
+                 *  如果单走服务器验证用这个方式
+                 *  Map<String, Object> map = new HashMap<>(16);
+                 *  map.put("packageName", packageName);
+                 *  map.put("applicationName", "ScorePredict1x2");
+                 *  map.put("productId", productId);
+                 *  map.put("purchaseToken", purchaseToken);
+                 *  map.put("keyPath", payConfig.getKeyPath());
+                 *  String purchase = HttpUtil.createPost(Constants.GOOGLE_VERIFY_URL).form(map).execute().body();
+                 */
+                ProductPurchase purchase = googlePayUtil.verify(packageName, "ScorePredict1x2", productId, purchaseToken, payConfig.getKeyPath());
                 log.info("googlePayNotify验签结果====>purchase:{}", JSONUtil.toJsonStr(purchase));
                 if (ObjectUtil.isNotNull(purchase)) {
-                    JSONObject jsonObject = JSONUtil.parseObj(purchase);
-                    JSONObject data = jsonObject.getJSONObject("data");
-                    if (data.containsKey("purchaseState") && 0 == data.getInt("purchaseState") && data.containsKey("orderId") && StringUtils.equals(tradeNo, data.getStr("orderId"))) {
+                    if (0 == purchase.getPurchaseState() && StringUtils.equals(tradeNo, purchase.getOrderId())) {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).remark("ture").build());
                         if (payFlag > 0) {
                             fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());

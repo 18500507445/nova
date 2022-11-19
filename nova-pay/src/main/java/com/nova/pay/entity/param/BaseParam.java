@@ -73,6 +73,11 @@ public abstract class BaseParam extends BaseController implements Serializable {
      */
     private String userName;
 
+    /**
+     * 请求ip
+     */
+    private String requestIp = getIp();
+
     public String getUserName() {
         if (StrUtil.isNotBlank(userName)) {
             userName = UserNameSecretUtil.userNameDecrypt(userName);

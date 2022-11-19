@@ -36,9 +36,13 @@ public class Constants {
 
     public static final String YEE_CODE = "OPR00000";
 
+    public static final int KS_CODE = 1;
+
     public static final String CPAPI_URL = "http://cpapi.fengkuangtiyu.cn/api/mobileClientApi.action";
 
     public static final String CPAPI_URL_DEV = "http://cpapics.fengkuangtiyu.cn/api/mobileClientApi.action";
+
+    public static final String GOOGLE_VERIFY_URL = "http://gpay.fengkuangtiyu.cn/api/google/verify";
 
     /**
      * 加款接口url,调用用户加款—web（AccountAction.chargeBack）--ChargeBackAfterService.after--chargeToHd

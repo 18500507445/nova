@@ -2,8 +2,9 @@ package com.nova.pay.entity.param;
 
 import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.util.ObjectUtil;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import cn.hutool.core.util.StrUtil;
+import com.nova.pay.enums.PayWayEnum;
+import lombok.*;
 
 import java.nio.charset.StandardCharsets;
 
@@ -14,6 +15,10 @@ import java.nio.charset.StandardCharsets;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class PayParam extends BaseParam {
 
     private static final long serialVersionUID = -8461630040383707935L;
@@ -24,21 +29,15 @@ public class PayParam extends BaseParam {
     private Long payConfigId;
 
     /**
-     * 支付类型:1H5支付,2小程序,3app支付 4 jsapi微信原生 5ios沙盒 6钱包 7快捷(银行卡) 8球币兑换
+     * 支付类型:1H5支付,2小程序,3app支付 4 jsapi微信原生 5ios沙盒 6钱包
+     * 7快捷(银行卡) 8球币兑换 9微信(四方支付) 10支付宝(四方支付)
      */
     private String type;
 
     /**
-     * 支付方式:1支付宝 2微信 3苹果 4易宝 5兑换
+     * 支付方式: {@link com.nova.pay.enums.PayWayEnum}
      */
     private Integer payWay;
-
-    /**
-     * 支付宝小程序支付 需要授权code来获取唯一标识userId
-     * <p>
-     * 微信小程序、原生微信内支付也需要授权code来换取openId
-     */
-    private String authCode;
 
     /**
      * 用户id
@@ -49,7 +48,7 @@ public class PayParam extends BaseParam {
      * 支付宝：商品的标题
      * 微信：对一笔交易的具体描述信息
      */
-    private String subject = "球场大咖";
+    private String subject;
 
     /**
      * 订单id
@@ -59,7 +58,7 @@ public class PayParam extends BaseParam {
     /**
      * 交易状态
      */
-    private Integer tradeStatus = 0;
+    private Integer tradeStatus;
 
     /**
      * 金额 单位元
@@ -74,24 +73,36 @@ public class PayParam extends BaseParam {
     /**
      * 授权后拿到的userId
      */
-    private String appletUserId = "";
+    private String appletUserId;
 
     /**
      * 语言类型
      * zh_CN, zh_TW, en
      */
-    private String lang = "zh_CN";
+    private String lang;
 
     /**
      * 产品id
      */
     private String productId;
 
+    /**
+     * 货币种类
+     * CNY：人民币
+     * USD：美元
+     * HKD：港币
+     * JPY：日元
+     * GBP：英镑
+     * EUR：欧元
+     */
+    private String currencyType = "CNY";
+
+
     public String getSubject() {
         if (ObjectUtil.isNotNull(subject)) {
             subject = URLDecoder.decode(subject, StandardCharsets.UTF_8);
         }
-        return subject;
+        return StrUtil.isBlank(subject) ? "球场大咖" : subject;
     }
 
     public String getReturnUrl() {

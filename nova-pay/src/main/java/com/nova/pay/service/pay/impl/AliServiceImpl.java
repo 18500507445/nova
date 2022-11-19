@@ -137,17 +137,21 @@ public class AliServiceImpl implements PayService {
                 .totalAmount(totalAmount)
                 .reason("退款").build();
         AlipayTradeRefundResponse response = aliPayUtil.refund(aliPayParam);
-        return AjaxResult.success(response.getSubMsg(), response.getBody());
+        return AjaxResult.success(response.getSubMsg(), response);
     }
 
     @Override
     public AjaxResult queryOrder(PayParam param) {
         String orderId = param.getOrderId();
-        Long payConfigId = param.getPayConfigId();
-        if (ObjectUtil.hasEmpty(payConfigId, orderId)) {
+        Integer payWay = param.getPayWay();
+        if (ObjectUtil.hasEmpty(orderId)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
-        FkPayConfig payConfig = fkPayConfigService.getConfigData(payConfigId);
+        FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, payWay);
+        if (ObjectUtil.isNull(payOrder)) {
+            return AjaxResult.error("1000", "没有查询到订单信息");
+        }
+        FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -155,8 +159,7 @@ public class AliServiceImpl implements PayService {
                 .publicKey(payConfig.getPublicKey())
                 .privateKey(payConfig.getPrivateKey())
                 .outTradeNo(orderId).build();
-        AlipayTradeQueryResponse response = aliPayUtil.queryOrder(aliPayParam);
-        return AjaxResult.success(response.getSubMsg(), response.getBody());
+        return AjaxResult.success(aliPayUtil.queryOrder(aliPayParam));
     }
 
     @Override

@@ -5,9 +5,11 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONConfig;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson2.JSONObject;
-import com.alibaba.fastjson2.TypeReference;
+import com.alibaba.fastjson.TypeReference;
 import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.result.BaseWxPayResult;
@@ -15,26 +17,28 @@ import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.util.XmlConfig;
-import com.google.api.services.androidpublisher.model.ProductPurchase;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
+import com.nova.pay.entity.param.KsPayParam;
+import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.entity.result.FkPayOrder;
 import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
+import com.nova.pay.service.pay.impl.KsPayServiceImpl;
 import com.nova.pay.utils.open.*;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalEnvelopeDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +74,12 @@ public class PayNotifyController extends BaseController {
     private GooglePayUtil googlePayUtil;
 
     @Resource
+    private KsPayUtil ksPayUtil;
+
+    @Resource
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
+    @Resource
     private FkPayOrderService fkPayOrderService;
 
     @Resource
@@ -77,6 +87,9 @@ public class PayNotifyController extends BaseController {
 
     @Resource
     private FkPayConfigService fkPayConfigService;
+
+    @Autowired
+    private KsPayServiceImpl ksPayService;
 
     /**
      * 支付宝通知
@@ -113,7 +126,7 @@ public class PayNotifyController extends BaseController {
                 //查询配置参数，验签处理
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
                 boolean check = aliPayUtil.rsaCheckV1(params, payConfig.getPublicKey());
-                log.info("aLiPayNotify通知参数:{}------验签结果:{}", JSONObject.toJSONString(params), check);
+                log.info("aLiPayNotify通知参数:{},验签结果:{}", JSONUtil.toJsonStr(params), check);
                 BigDecimal fee = payOrder.getFee();
                 String userName = payOrder.getUserName();
                 if (check) {
@@ -155,7 +168,7 @@ public class PayNotifyController extends BaseController {
             }
             //解析xml转对象
             WxPayOrderNotifyResult notifyResult = BaseWxPayResult.fromXML(xmlString.toString(), WxPayOrderNotifyResult.class);
-            log.info("weChatV2PayNotify：{}", JSONUtil.toJsonStr(notifyResult));
+            log.info("weChatV2PayNotify:{}", JSONUtil.toJsonStr(notifyResult));
             orderId = notifyResult.getOutTradeNo();
             String tradeNo = notifyResult.getTransactionId();
             //查询订单
@@ -205,6 +218,7 @@ public class PayNotifyController extends BaseController {
      */
     @PostMapping("applePay")
     public AjaxResult applePay(HttpServletRequest request) {
+        TimeInterval timer = DateUtil.timer();
         String result = "ok";
         int payFlag = 0;
         String orderId = "";
@@ -227,7 +241,7 @@ public class PayNotifyController extends BaseController {
             String sid = MapUtil.getStr(params, "sid");
             String version = getValue("version");
             params.put("version", version);
-            log.info("applePay通知:{}", JSONObject.toJSONString(params));
+            log.info("applePayNotify:{}", JSONUtil.toJsonStr(params));
             //查询订单
             FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 3);
             if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
@@ -255,7 +269,7 @@ public class PayNotifyController extends BaseController {
         } catch (Exception e) {
             log.error("applePayNotify异常:{}", e.getMessage());
         } finally {
-            log.info("applePayNotify====>orderId:{}, payFlag:{}", orderId, payFlag);
+            log.info("applePayNotify====>orderId:{}, payFlag:{}, 耗时:{}毫秒", orderId, payFlag, timer.interval());
         }
         return AjaxResult.success(result);
     }
@@ -274,20 +288,20 @@ public class PayNotifyController extends BaseController {
         try {
             String appKey = request.getParameter("customerIdentification");
             String encrypt = request.getParameter("response");
-            log.info("yeePay获取到的appKey为{},response为{}", appKey, encrypt);
+            log.info("yeePayNotify====>appKey:{},response:{}", appKey, encrypt);
             dto.setCipherText(encrypt);
             FkPayConfig payConfig = fkPayConfigService.selectFkPayConfigById(2L);
             if (ObjectUtil.isNotNull(payConfig)) {
                 dto = DigitalEnvelopeUtils.decrypt(dto, YeePayUtil.getPrivateKey(payConfig.getPrivateKey()), YeePayUtil.getPubKey(payConfig.getPublicKey()));
                 String plainText = dto.getPlainText();
                 if (StringUtils.isNotBlank(plainText)) {
-                    JSONObject json = JSONObject.parseObject(plainText);
-                    log.info("易宝支付结果通知解析json:{}", json.toJSONString());
+                    cn.hutool.json.JSONObject json = JSONUtil.parseObj(plainText);
+                    log.info("易宝支付结果通知解析json:{}", json.toString());
                     //易宝收款订单号
-                    orderId = json.getString("orderId");
-                    String outTradeNo = json.getString("uniqueOrderNo");
-                    String status = json.getString("status");
-                    String orderAmount = json.getString("orderAmount");
+                    orderId = json.getStr("orderId");
+                    String outTradeNo = json.getStr("uniqueOrderNo");
+                    String status = json.getStr("status");
+                    String orderAmount = json.getStr("orderAmount");
                     //查询订单
                     FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 4);
                     if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
@@ -343,17 +357,17 @@ public class PayNotifyController extends BaseController {
         try {
             String appKey = request.getParameter("customerIdentification");
             String encrypt = request.getParameter("response");
-            log.info("divideApply获取到的appKey为{},response为{}", appKey, encrypt);
+            log.info("divideApplyNotify====>appKey:{},response:{}", appKey, encrypt);
             dto.setCipherText(encrypt);
             FkPayConfig payConfig = fkPayConfigService.selectFkPayConfigById(2L);
             if (ObjectUtil.isNotNull(payConfig)) {
                 dto = DigitalEnvelopeUtils.decrypt(dto, YeePayUtil.getPrivateKey(payConfig.getPrivateKey()), YeePayUtil.getPubKey(payConfig.getPublicKey()));
                 String plainText = dto.getPlainText();
                 if (StringUtils.isNotBlank(plainText)) {
-                    JSONObject json = JSONObject.parseObject(plainText);
-                    log.info("易宝清算通知解析json:{}", json.toJSONString());
+                    JSONObject json = JSONUtil.parseObj(plainText);
+                    log.info("易宝清算通知解析json:{}", json.toString());
                     result = Constants.SUCCESS;
-                    Map<String, Object> params = JSONObject.parseObject(json.toJSONString(), new TypeReference<Map<String, Object>>() {
+                    Map<String, Object> params = com.alibaba.fastjson.JSONObject.parseObject(json.toString(), new TypeReference<Map<String, Object>>() {
                     });
 
                 }
@@ -385,42 +399,219 @@ public class PayNotifyController extends BaseController {
                 }
                 params.put(str, new String(valueStr.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
             }
-            log.info("googlePay通知:{}", com.alibaba.fastjson.JSONObject.toJSONString(params));
-            orderId = MapUtil.getStr(params, "orderId");
-            String tradeNo = MapUtil.getStr(params, "tradeNo");
-            String productId = MapUtil.getStr(params, "productId");
-            String purchaseToken = MapUtil.getStr(params, "purchaseToken");
-            String packageName = MapUtil.getStr(params, "packageName");
+            String original = MapUtil.getStr(params, "originalJson");
+            if (ObjectUtil.hasNull(original)) {
+                return AjaxResult.error("1000", "missing required parameter:originalJson");
+            }
+            JSONObject originalJson = JSONUtil.parseObj(original);
+            String packageName = originalJson.getStr("packageName", "");
+            orderId = originalJson.getStr("obfuscatedProfileId", "");
+            String tradeNo = originalJson.getStr("orderId", "");
+            String productId = originalJson.getStr("productId", "");
+            String purchaseToken = originalJson.getStr("purchaseToken", "");
+            log.info("googlePay通知:====>originalJson:{},orderId:{},tradeNo:{},productId:{},packageName:{},purchaseToken:{}", original, orderId, tradeNo, productId, packageName, purchaseToken);
             //查询订单
             FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 5);
-            if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
+            if (ObjectUtil.hasNull(payOrder, packageName, orderId, tradeNo, productId, purchaseToken)) {
+                return AjaxResult.error("1000", "missing required parameter");
+            }
+            if (1 != payOrder.getTradeStatus()) {
                 FkPayOrder.FkPayOrderBuilder orderBuilder = FkPayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(5);
                 //回调改成:处理中
                 fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(4).build());
                 //查询配置参数，验签处理
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
                 //2.0 然后进行验证
-                ProductPurchase purchase = googlePayUtil.verify(packageName, "ScorePredict1x2", productId, purchaseToken, payConfig.getKeyPath());
+                Map<String, Object> map = new HashMap<>(16);
+                map.put("packageName", packageName);
+                map.put("applicationName", "ScorePredict1x2");
+                map.put("productId", productId);
+                map.put("purchaseToken", purchaseToken);
+                map.put("keyPath", payConfig.getKeyPath());
+                String purchase = HttpUtil.createPost(Constants.GOOGLE_VERIFY_URL).form(map).execute().body();
                 log.info("googlePayNotify验签结果====>purchase:{}", JSONUtil.toJsonStr(purchase));
                 if (ObjectUtil.isNotNull(purchase)) {
-                    if (0 == purchase.getPurchaseState() && StringUtils.equals(tradeNo, purchase.getOrderId())) {
+                    JSONObject jsonObject = JSONUtil.parseObj(purchase);
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    if (data.containsKey("purchaseState") && 0 == data.getInt("purchaseState") && data.containsKey("orderId") && StringUtils.equals(tradeNo, data.getStr("orderId"))) {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).remark("ture").build());
                         if (payFlag > 0) {
                             fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());
+                            return AjaxResult.success("pay success");
                         }
                     } else {
-                        return AjaxResult.success("订单状态不正确或订单Id错误");
+                        return AjaxResult.error("google orderId status error or orderId error");
                     }
                 } else {
-                    return AjaxResult.success("验签超时");
+                    return AjaxResult.error("verify order result is null");
                 }
+            } else {
+                return AjaxResult.error("google order status error ");
             }
         } catch (Exception e) {
             log.error("googlePayNotify异常:{}", e.getMessage());
         } finally {
             log.info("googlePayNotify====>orderId:{}, payFlag:{}, 耗时:{}毫秒", orderId, payFlag, timer.interval());
         }
-        return AjaxResult.success();
+        return AjaxResult.error("fail");
+    }
+
+    /**
+     * 快手小程序支付回调通知
+     */
+    @ResponseBody
+    @PostMapping("ksPay")
+    public JSONObject ksPay(@RequestBody Object body, HttpServletRequest request) {
+        JSONObject result = new JSONObject();
+        TimeInterval timer = DateUtil.timer();
+        int payFlag = 0;
+        String orderId = "";
+        try {
+            //1.0 处理快手通知过来的请求信息
+            String ksSign = request.getHeader("kwaisign");
+            JSONObject jsonObject = JSONUtil.parseObj(body, JSONConfig.create().setIgnoreNullValue(false));
+            String jsonStr = JSONUtil.toJsonStr(jsonObject);
+            log.info("ksPayNotify====>jsonStr:{}, ksSign:{}", jsonStr, ksSign);
+            //2.0 验签
+            if (ObjectUtil.isAllNotEmpty(ksSign, jsonStr)) {
+                JSONObject data = jsonObject.getJSONObject("data");
+                orderId = data.getStr("out_order_no");
+                //订单支付状态 PROCESSING-处理中｜SUCCESS-成功｜FAILED-失败
+                String status = data.getStr("status");
+                //快手小程序平台订单号
+                String ksOrderNo = data.getStr("ks_order_no");
+                //交易编号
+                String tradeNo = data.getStr("trade_no");
+                //3.0 查询订单 查询配置参数 验签
+                FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 6);
+                FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
+                if (ObjectUtil.isAllNotEmpty(payOrder, payConfig) && 1 != payOrder.getTradeStatus()) {
+                    boolean check = StrUtil.equals(ksSign, DigestUtils.md5Hex(jsonStr + payConfig.getAppSecret()));
+                    FkPayOrder.FkPayOrderBuilder orderBuilder = FkPayOrder.builder().orderId(orderId).payWay(6).sign(ksOrderNo);
+                    //回调改成:处理中 存入ksOrderNo
+                    fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(4).build());
+                    if (check && StrUtil.equals(Constants.SUCCESS, status)) {
+                        //4.0 修改状态、加款
+                        payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).tradeNo(tradeNo).build());
+                        if (payFlag > 0) {
+                            result.set("result", 1);
+                            result.set("message_id", jsonObject.getStr("message_id"));
+                            fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());
+                            //5.0 同步快手订单，后续结算需要
+                            AjaxResult accessTokenResult = ksPayService.getOpenId(PayParam.builder().payConfigId(payOrder.getPayConfigId()).build());
+                            if (ObjectUtil.isNotNull(accessTokenResult)) {
+                                JSONObject accessTokenJson = JSONUtil.parseObj(accessTokenResult);
+                                if (accessTokenJson.containsKey("data") && StrUtil.isNotBlank(accessTokenJson.getStr("data"))) {
+                                    String finalOrderId = orderId;
+                                    threadPoolTaskExecutor.execute(() -> {
+                                        KsPayParam report = KsPayParam.builder()
+                                                .appId(payConfig.getAppId())
+                                                .accessToken(accessTokenJson.getStr("data"))
+                                                .outOrderNo(finalOrderId)
+                                                .openId(payOrder.getOperator())
+                                                .build();
+                                        Map<String, Object> reportMap = ksPayUtil.reportOrder(report);
+                                        log.warn("ksPayNotifyReportMap====>:{}", JSONUtil.toJsonStr(reportMap));
+                                    });
+                                }
+                            }
+                        }
+                    } else {
+                        payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(2).build());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("ksPayNotify异常:{}", e.getMessage());
+        } finally {
+            log.info("ksPayNotify====>orderId:{}, payFlag:{}, 耗时:{}毫秒", orderId, payFlag, timer.interval());
+        }
+        return result;
+    }
+
+
+    /**
+     * 快手小程序结算回调通知
+     */
+    @ResponseBody
+    @PostMapping("ksPaySettle")
+    public JSONObject ksPaySettle(@RequestBody Object body, HttpServletRequest request) {
+        JSONObject result = new JSONObject();
+        TimeInterval timer = DateUtil.timer();
+        int updateFlag = 0;
+        String orderId = "";
+        try {
+            String ksSign = request.getHeader("kwaisign");
+            JSONObject jsonObject = JSONUtil.parseObj(body, JSONConfig.create().setIgnoreNullValue(false));
+            String jsonStr = JSONUtil.toJsonStr(jsonObject);
+            log.info("ksPaySettleNotify====>jsonStr:{}, ksSign:{}", jsonStr, ksSign);
+            if (ObjectUtil.isAllNotEmpty(ksSign, jsonStr)) {
+                JSONObject data = jsonObject.getJSONObject("data");
+                /**
+                 * 外部结算单号，即开发者结算请求的单号 job里传入的结算单号和体育的订单号一致
+                 * {@link com.fk.pay.job.PayOrderJob#ksSettleOrderJob}
+                 */
+                orderId = data.getStr("out_settle_no");
+                String status = data.getStr("status");
+                FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 6);
+                if (ObjectUtil.isNotNull(payOrder)) {
+                    FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
+                    boolean check = StrUtil.equals(ksSign, DigestUtils.md5Hex(jsonStr + payConfig.getAppSecret()));
+                    if (check && StrUtil.equals(Constants.SUCCESS, status) && ObjectUtil.equals(1, payOrder.getTradeStatus())) {
+                        updateFlag = fkPayOrderService.updateFkPayOrder(FkPayOrder.builder().orderId(orderId).remark("已结算").build());
+                        if (updateFlag > 0) {
+                            result.set("result", 1);
+                            result.set("message_id", jsonObject.getStr("message_id"));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("ksPaySettleNotify异常:{}", e.getMessage());
+        } finally {
+            log.info("ksPaySettleNotify====>orderId:{}, updateFlag:{}, 耗时:{}毫秒", orderId, updateFlag, timer.interval());
+        }
+        return result;
+    }
+
+    /**
+     * 快手小程序退款回调通知
+     */
+    @ResponseBody
+    @PostMapping("ksRefund")
+    public JSONObject ksRefund(@RequestBody Object body, HttpServletRequest request) {
+        JSONObject result = new JSONObject();
+        TimeInterval timer = DateUtil.timer();
+        int updateFlag = 0;
+        String orderId = "";
+        try {
+            String ksSign = request.getHeader("kwaisign");
+            JSONObject jsonObject = JSONUtil.parseObj(body, JSONConfig.create().setIgnoreNullValue(false));
+            String jsonStr = JSONUtil.toJsonStr(jsonObject);
+            log.info("ksRefundNotify====>jsonStr:{}, ksSign:{}", jsonStr, ksSign);
+            if (ObjectUtil.isAllNotEmpty(ksSign, jsonStr)) {
+                JSONObject data = jsonObject.getJSONObject("data");
+                orderId = data.getStr("out_refund_no");
+                String status = data.getStr("status");
+                FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 6);
+                if (ObjectUtil.isNotNull(payOrder)) {
+                    FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
+                    boolean check = StrUtil.equals(ksSign, DigestUtils.md5Hex(jsonStr + payConfig.getAppSecret()));
+                    if (check && StrUtil.equals(Constants.SUCCESS, status) && ObjectUtil.equals(1, payOrder.getTradeStatus())) {
+                        updateFlag = fkPayOrderService.updateFkPayOrder(FkPayOrder.builder().tradeStatus(3).orderId(orderId).remark("已退款").build());
+                        if (updateFlag > 0) {
+                            result.set("result", 1);
+                            result.set("message_id", jsonObject.getStr("message_id"));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("ksRefundNotify异常:{}", e.getMessage());
+        } finally {
+            log.info("ksRefundNotify====>orderId:{}, updateFlag:{}, 耗时:{}毫秒", orderId, updateFlag, timer.interval());
+        }
+        return result;
     }
 
 }

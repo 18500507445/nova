@@ -234,14 +234,18 @@ public class WeChatServiceImpl implements PayService {
 
     @Override
     public AjaxResult queryOrder(PayParam param) {
-        Long payConfigId = param.getPayConfigId();
         String orderId = param.getOrderId();
+        Integer payWay = param.getPayWay();
         Object result = "";
-        if (ObjectUtil.hasEmpty(payConfigId, orderId)) {
+        if (ObjectUtil.hasEmpty(orderId)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
+        FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, payWay);
+        if (ObjectUtil.isNull(payOrder)) {
+            return AjaxResult.error("1000", "没有查询到订单信息");
+        }
         //获取支付配置
-        FkPayConfig payConfig = fkPayConfigService.getConfigData(payConfigId);
+        FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }

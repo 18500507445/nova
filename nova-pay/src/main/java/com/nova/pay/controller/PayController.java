@@ -13,9 +13,11 @@ import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.result.FkPayList;
+import com.nova.pay.entity.result.FkPayOrder;
 import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayListService;
+import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayStrategy;
 import com.nova.redis.core.RedisService;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +55,9 @@ public class PayController extends BaseController {
 
     @Autowired
     private FkOrderService fkOrderService;
+
+    @Autowired
+    private FkPayOrderService fkPayOrderService;
 
     /**
      * 支付列表
@@ -124,17 +129,29 @@ public class PayController extends BaseController {
                         aLiMap.put("payWay", "1");
                         list.add(aLiMap);
                     }
+                    //易宝支付
                     Integer yeePayQuick = data.getYeePayQuick();
                     String yeePayLogoUrl = data.getYeePayLogoUrl();
                     if (1 == yeePayQuick) {
-                        Map<String, String> yeeMap = new HashMap<>(16);
-                        yeeMap.put("name", "银行卡支付");
-                        yeeMap.put("logoUrl", yeePayLogoUrl);
-                        yeeMap.put("content", "免手续费，1万/笔，2万/日，5万/月");
-                        yeeMap.put("freeContent", "(推荐)");
-                        yeeMap.put("type", "7");
-                        yeeMap.put("payWay", "4");
+                        Map<String, String> yeeMap = MapUtil.builder(new HashMap<String, String>(16))
+                                .put("name", "银行卡支付")
+                                .put("logoUrl", yeePayLogoUrl)
+                                .put("content", "免手续费，1万/笔，2万/日，5万/月")
+                                .put("freeContent", "(推荐)")
+                                .put("type", "7")
+                                .put("payWay", "4").build();
                         list.add(yeeMap);
+                    }
+                    //谷歌支付
+                    if (1 == data.getGooglePay()) {
+                        Map<String, String> googleMap = MapUtil.builder(new HashMap<String, String>(16))
+                                .put("name", "谷歌支付")
+                                .put("logoUrl", data.getGoogleLogoUrl())
+                                .put("content", "")
+                                .put("freeContent", "(推荐)")
+                                .put("type", "3")
+                                .put("payWay", "5").build();
+                        list.add(googleMap);
                     }
                     if (StrUtil.equals("fengkuangTY", clientType) && ObjectUtil.equals(1, data.getBallCoin()) && StrUtil.isNotBlank(userName)) {
                         Map<String, String> ballCoinMap = new HashMap<>(16);
@@ -317,10 +334,23 @@ public class PayController extends BaseController {
         log.info("refund请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
         try {
+            String orderId = param.getOrderId();
             Integer payWay = param.getPayWay();
             if (ObjectUtil.isNull(payWay)) {
                 return AjaxResult.error("1000", "缺少参数：payWay（支付方式）");
             }
+            if (StrUtil.isBlank(orderId)) {
+                return AjaxResult.error("1000", "缺少参数：orderId");
+            }
+            FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, payWay);
+            if (ObjectUtil.isNull(payOrder)) {
+                return AjaxResult.error("1000", "没有查询到订单信息");
+            }
+            if (!ObjectUtil.equals(1, payOrder.getTradeStatus())) {
+                return AjaxResult.error("1000", "非成功订单不能进行退款操作");
+            }
+            param.setTotalAmount(payOrder.getFee().toPlainString());
+            param.setPayConfigId(payOrder.getPayConfigId());
             result = payStrategy.refund(PayWayEnum.valuesOf(payWay), param);
         } finally {
             log.info("refund返回：{}", JSONUtil.toJsonStr(result));

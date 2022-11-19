@@ -82,30 +82,6 @@ public class FkPayList implements Serializable {
     private Integer yeePayWallet;
 
     /**
-     * 备注
-     */
-    private String remark;
-
-    /**
-     * 操作人
-     */
-    private String operator;
-
-    /**
-     * 创建时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
-
-    /**
      * 阿里logo
      */
     private String aliLogoUrl;
@@ -134,6 +110,41 @@ public class FkPayList implements Serializable {
      * 球币兑换logo
      */
     private String ballCoinLogoUrl;
+
+    /**
+     * 谷歌支付
+     */
+    private Integer googlePay;
+
+    /**
+     * 谷歌支付logo
+     */
+    private String googleLogoUrl;
+
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 操作人
+     */
+    private String operator;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    /**
+     * 修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 
 
 }

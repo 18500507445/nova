@@ -1,12 +1,12 @@
 package com.nova.mongodb.utils;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -141,8 +141,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        List<? extends Object> resultList = mongodbUtils.mongoTemplate.find(query, obj.getClass());
-        return resultList;
+        return mongodbUtils.mongoTemplate.find(query, obj.getClass());
     }
 
     /**
@@ -164,8 +163,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        List<? extends Object> resultList = mongodbUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
-        return resultList;
+        return mongodbUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -179,7 +177,6 @@ public class MongodbUtils {
      * @return
      */
     public List<? extends Object> find(Object obj, String[] findKeys, Object[] findValues, String collectionName, String sort) {
-
         Criteria criteria = null;
         for (int i = 0; i < findKeys.length; i++) {
             if (i == 0) {
@@ -190,8 +187,7 @@ public class MongodbUtils {
         }
         Query query = Query.query(criteria);
         query.with(Sort.by(Direction.DESC, sort));
-        List<? extends Object> resultList = mongodbUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
-        return resultList;
+        return mongodbUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -212,8 +208,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        Object resultObj = mongodbUtils.mongoTemplate.findOne(query, obj.getClass());
-        return resultObj;
+        return mongodbUtils.mongoTemplate.findOne(query, obj.getClass());
     }
 
     /**
@@ -235,8 +230,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        Object resultObj = mongodbUtils.mongoTemplate.findOne(query, obj.getClass(), collectionName);
-        return resultObj;
+        return mongodbUtils.mongoTemplate.findOne(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -246,8 +240,7 @@ public class MongodbUtils {
      * @return
      */
     public List<? extends Object> findAll(Object obj) {
-        List<? extends Object> resultList = mongodbUtils.mongoTemplate.findAll(obj.getClass());
-        return resultList;
+        return mongodbUtils.mongoTemplate.findAll(obj.getClass());
     }
 
     /**
@@ -258,8 +251,7 @@ public class MongodbUtils {
      * @return
      */
     public <T> List<T> findAll(Class<T> clazz) {
-        List<T> resultList = mongodbUtils.mongoTemplate.findAll(clazz);
-        return resultList;
+        return mongodbUtils.mongoTemplate.findAll(clazz);
     }
 
     /**
@@ -270,8 +262,7 @@ public class MongodbUtils {
      * @return
      */
     public List<? extends Object> findAll(Object obj, String collectionName) {
-        List<? extends Object> resultList = mongodbUtils.mongoTemplate.findAll(obj.getClass(), collectionName);
-        return resultList;
+        return mongodbUtils.mongoTemplate.findAll(obj.getClass(), collectionName);
     }
 
     /**
@@ -283,7 +274,6 @@ public class MongodbUtils {
      * @return
      */
     public <T> List<T> findAll(Class<T> clazz, String collectionName) {
-        List<T> resultList = mongodbUtils.mongoTemplate.findAll(clazz, collectionName);
-        return resultList;
+        return mongodbUtils.mongoTemplate.findAll(clazz, collectionName);
     }
 }

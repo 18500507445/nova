@@ -26,6 +26,9 @@ public class MongodbApplicationTest {
 
     }
 
+    /**
+     * 保存demo
+     */
     @Test
     public void testSave() {
         Topic topic = new Topic();
@@ -47,6 +50,9 @@ public class MongodbApplicationTest {
         mongodbUtils.save(topic);
     }
 
+    /**
+     * 查询demo
+     */
     @Test
     public void testFind() {
         List<Topic> all = mongodbUtils.findAll(Topic.class);

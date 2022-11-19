@@ -36,4 +36,8 @@
 12.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
 
+13.nova-limit
+* 接口限流
 
+14.nova-validation
+* 接口校验

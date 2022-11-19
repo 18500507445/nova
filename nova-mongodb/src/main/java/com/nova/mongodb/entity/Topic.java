@@ -15,6 +15,7 @@ import java.util.Map;
 @Document(collection = "tb_topic")
 @Data
 public class Topic {
+
     /**
      * id
      */

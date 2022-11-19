@@ -32,6 +32,7 @@
         <module>nova-mq-active</module>
         <module>nova-mq-rabbit</module>
         <module>nova-xxl</module>
+        <module>nova-limit</module>
     </modules>
 
     <properties>
@@ -40,7 +41,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <nova.version>1.0-SNAPSHOT</nova.version>
-        <boot.version>2.7.0</boot.version>
+        <boot.version>2.7.5</boot.version>
 
         <xxljob.version>2.3.1</xxljob.version>
         <shiro.version>1.8.0</shiro.version>

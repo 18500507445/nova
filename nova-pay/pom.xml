@@ -7,9 +7,10 @@
         <groupId>com.nova</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>nova-pay</artifactId>
+    <description>支付模块</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

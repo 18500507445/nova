@@ -31,7 +31,7 @@
 * redis组件
 
 11.nova-tools
-* 练习组件（老项目迁移）
+* demo,java8,hutool测试类,guava测试类,vavr测试类
 
 12.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0

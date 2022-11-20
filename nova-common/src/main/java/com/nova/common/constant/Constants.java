@@ -38,6 +38,8 @@ public class Constants {
 
     public static final int KS_CODE = 1;
 
+    public static final boolean IS_OPEN = true;
+
     public static final String CPAPI_URL = "http://cpapi.fengkuangtiyu.cn/api/mobileClientApi.action";
 
     public static final String CPAPI_URL_DEV = "http://cpapics.fengkuangtiyu.cn/api/mobileClientApi.action";

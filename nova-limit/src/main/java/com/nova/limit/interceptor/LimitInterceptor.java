@@ -7,12 +7,10 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.limit.annotation.AccessLimit;
-import com.nova.redis.core.RedisService;
-import org.springframework.messaging.handler.HandlerMethod;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
@@ -26,6 +24,17 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class LimitInterceptor implements HandlerInterceptor {
+
+    /**
+     * 用guava的代替redis
+     */
+    public static final Cache<String, Object> cache = CacheBuilder.newBuilder()
+            //设置缓存最大容量
+            .maximumSize(100)
+            //过期策略，写入失效时间
+            .expireAfterWrite(10, TimeUnit.SECONDS)
+            .build();
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -41,26 +50,19 @@ public class LimitInterceptor implements HandlerInterceptor {
             int seconds = accessLimit.seconds();
             int maxCount = accessLimit.maxCount();
             boolean login = accessLimit.needLogin();
+            String message = accessLimit.message();
             String key = request.getRequestURI();
             //如果需要登录
             if (login) {
                 //获取登录的session进行判断 这里假设用户是1,项目中是动态获取的userId
                 key += "" + "1";
             }
-
-            Cache<String, Object> cache = CacheBuilder.newBuilder()
-                    //设置缓存最大容量
-                    .maximumSize(100)
-                    //过期策略，写入失效时间
-                    .expireAfterWrite(seconds, TimeUnit.MINUTES)
-                    .build();
-
             Object value = cache.getIfPresent(key);
             if (ObjectUtil.isNotNull(value)) {
                 int count = Convert.toInt(value);
                 if (count > maxCount) {
                     //超出访问次数，返回
-                    render(response);
+                    render(response, message);
                     return false;
                 } else {
                     count += 1;
@@ -74,10 +76,10 @@ public class LimitInterceptor implements HandlerInterceptor {
 
     }
 
-    private void render(HttpServletResponse response) throws Exception {
+    private void render(HttpServletResponse response, String message) throws Exception {
         response.setContentType("application/json;charset=UTF-8");
         OutputStream out = response.getOutputStream();
-        String str = JSON.toJSONString(AjaxResult.error("超出访问次数，已被限流"));
+        String str = JSON.toJSONString(AjaxResult.error(message));
         out.write(str.getBytes(StandardCharsets.UTF_8));
         out.flush();
         out.close();

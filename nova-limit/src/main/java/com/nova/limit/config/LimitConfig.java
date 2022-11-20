@@ -8,12 +8,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 
 /**
- * @Description:
+ * @Description: 加载配置
  * @Author: wangzehui
  * @Date: 2022/11/19 17:18
  */
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class LimitConfig implements WebMvcConfigurer {
 
     @Resource
     private LimitInterceptor limitInterceptor;

@@ -7,7 +7,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @Description:
+ * @Description: 限流注解
  * @Author: wangzehui
  * @Date: 2022/11/19 16:29
  */
@@ -19,5 +19,16 @@ public @interface AccessLimit {
 
     int maxCount();
 
-    boolean needLogin()default false;
+    /**
+     * 是否需要登录
+     *
+     * @return
+     */
+    boolean needLogin() default false;
+
+    /**
+     * 提示消息
+     */
+    String message() default "超出访问次数，已被限流";
+
 }

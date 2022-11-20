@@ -57,11 +57,4 @@ public class BaseEntity implements Serializable {
      */
     private Map<String, Object> params;
 
-    public Map<String, Object> getParams() {
-        if (params == null) {
-            params = new HashMap<>(16);
-        }
-        return params;
-    }
-
 }

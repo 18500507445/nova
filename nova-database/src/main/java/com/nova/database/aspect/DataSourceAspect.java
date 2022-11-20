@@ -1,4 +1,4 @@
-package com.nova.database.aspectj;
+package com.nova.database.aspect;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.database.annotation.DataSource;
@@ -9,8 +9,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;

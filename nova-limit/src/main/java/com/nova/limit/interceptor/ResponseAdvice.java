@@ -1,5 +1,6 @@
 package com.nova.limit.interceptor;
 
+import com.nova.common.constant.Constants;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * @Description: 响应拦截器
+ * @Description: 响应拦截器 (@ResponseBody的返回生效)
  * @Author: wangzehui
  * @Date: 2022/8/30 15:30
  */
@@ -17,11 +18,13 @@ public class ResponseAdvice implements ResponseBodyAdvice {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        return false;
+        System.out.println("ResponseAdvice-supports:" + Constants.IS_OPEN);
+        return Constants.IS_OPEN;
     }
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        return null;
+        System.out.println("beforeBodyWrite");
+        return body;
     }
 }

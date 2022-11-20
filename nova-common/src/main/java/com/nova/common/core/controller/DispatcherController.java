@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -55,24 +54,24 @@ public class DispatcherController extends BaseController {
                 for (String str : arrUrl) {
                     urlParam.put(str.substring(0, str.indexOf("=")), str.substring(str.indexOf("=") + 1));
                 }
-                Iterator<Map.Entry<String, String>> it = urlParam.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, String> entry = it.next();
+                for (Map.Entry<String, String> entry : urlParam.entrySet()) {
                     if ("function".equals(entry.getKey())) {
                         function = URLDecoder.decode(entry.getValue(), Constants.UTF8) + "?";
                     } else {
                         //处理特殊参数带有http的 url进行编码
                         if (entry.getValue().contains("+") || (!entry.getKey().contains("avatar") && entry.getValue().contains("http"))) {
-                            param.append(entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), Constants.UTF8) + "&");
+                            param.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), Constants.UTF8)).append("&");
                         } else {
-                            param.append(entry.getKey() + "=" + URLDecoder.decode(entry.getValue(), Constants.UTF8) + "&");
+                            param.append(entry.getKey()).append("=").append(URLDecoder.decode(entry.getValue(), Constants.UTF8)).append("&");
                         }
                     }
                 }
             } else {
                 function = request.getParameter("function") + "?";
             }
-            param.append("sid=" + sid + "&source=" + source + "&version=" + version + "&newVersion=" + newVersion + "&clientType=" + clientType);
+            param.append("sid=").append(sid).append("&source=").append(source)
+                    .append("&version=").append(version).append("&newVersion=")
+                    .append(newVersion).append("&clientType=").append(clientType);
             String url = function + param;
             request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception e) {

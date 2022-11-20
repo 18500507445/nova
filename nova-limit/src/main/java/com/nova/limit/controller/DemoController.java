@@ -1,5 +1,6 @@
 package com.nova.limit.controller;
 
+import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.limit.annotation.AccessLimit;
 import lombok.extern.slf4j.Slf4j;
@@ -12,16 +13,16 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/test/")
-public class DemoController {
+@RequestMapping("/api/")
+public class DemoController extends BaseController {
 
     /**
-     * demo
+     * demoA
      */
-    @GetMapping("demo")
+    @PostMapping("demoA")
     @ResponseBody
-    @AccessLimit(seconds = 5, maxCount = 5, needLogin = false)
-    public AjaxResult demo() {
-        return AjaxResult.success();
+    @AccessLimit(seconds = 5, maxCount = 5)
+    public AjaxResult demoA(@RequestBody Object body) {
+        return AjaxResult.success(body);
     }
 }

@@ -10,6 +10,7 @@ import java.util.HashMap;
  * 操作消息提醒
  */
 public class AjaxResult extends HashMap<String, Object> {
+
     private static final long serialVersionUID = 1L;
 
     public static final String CODE_TAG = "code";
@@ -288,7 +289,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 警告消息
      */
     public static AjaxResult error(String msg) {
-        return AjaxResult.error(msg, null);
+        return AjaxResult.error(Type.ERROR.value, msg);
     }
 
     /**

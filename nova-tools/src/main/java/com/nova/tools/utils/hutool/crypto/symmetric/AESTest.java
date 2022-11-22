@@ -14,6 +14,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import java.security.SecureRandom;
 
+/**
+ * {@link AES}
+ */
 public class AESTest {
 
 	@Test

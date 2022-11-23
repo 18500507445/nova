@@ -1,0 +1,21 @@
+支付宝h5支付
+https://opendocs.alipay.com/apis/api_1/alipay.trade.wap.pay?scene=common
+
+v2微信支付文档地址：https://pay.weixin.qq.com/wiki/doc/api/index.html
+微信小程序v2：https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=11_1
+微信jsapi：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=11_1
+
+支付宝通知
+json
+{"gmt_create":"2021-03-21 01:02:25","charset":"utf-8","seller_email":"vodone@163.com","gmt_payment":"2021-03-21 01:02:34","notify_time":"2022-03-21 10:31:03","subject":"ball-coin","sign":"coMUXNzNnBYoJc/Z1r9AUL+9NMgVIjuQ6LN/dERTlVA4D3D4jQ7pGvXcgqKf5rlNNqPvfY5bz2a1gy3g7JfmuqhPY/KOol46kwedRyAMRIdALoC66b42/adCjyJy+QOgbYbm/O7RuK8L0js5hg7KFodzo92HQ+EguB4XJLYJTGDzSMQ+82Cs3x8zintpQnRvsQXIuRboeW2Y18Ksqw8RZ9PfwPAG8uFV7q6onLxUhBihkfH+wMC5vPLvLwxkTo5scX0kj9vtEGPwxiRvweLyIymFPN0Md0vRgG3JCRpaw8D3DCOf//FaFAaz5KDdf5E3y17hL/YzCgIHyIBModi1gA\u003d\u003d","buyer_id":"2088212563620933","version":"1.0","notify_id":"2022032100222010323020931424072294","notify_type":"trade_status_sync","out_trade_no":"16162597256823103","total_amount":"37.70","trade_status":"TRADE_FINISHED","refund_fee":"0.00","trade_no":"2021032122001420931435058356","auth_app_id":"2021001190697345","buyer_logon_id":"ser***@vip.163.com","gmt_close":"2022-03-21 01:03:23","app_id":"2021001190697345","sign_type":"RSA2","seller_id":"2088931376182246"}
+
+微信通知
+xml
+{appid=wx832866101a0e1ecd, bank_type=OTHERS, cash_fee=800, fee_type=CNY, is_subscribe=N, mch_id=1609587553, nonce_str=Me6HtoziD7moiJUQL0I6Wupj1h8aPhCn, openid=oy4AixD9mYSgMKODuMnhYWHmS6OA, out_trade_no=16478289565632253, result_code=SUCCESS, return_code=SUCCESS, sign=91EBE3D62A78DC0F486DDD77F8875EF2, time_end=20220321101604, total_fee=800, trade_type=APP, transaction_id=4200001297202203210053236652}
+
+//用户有宝箱的话，往这个里面写就行
+HD_SJB_PRIZE_DETAIL 
+    
+1.中藏优先购发放
+2.世界杯拉新接口添加限流，时间判断
+3.拉新job添加    

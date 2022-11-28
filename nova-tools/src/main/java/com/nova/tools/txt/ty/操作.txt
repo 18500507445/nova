@@ -4,6 +4,7 @@ nohup java -Xms6G -Xmx6G -XX:MaxNewSize=2G -XX:+UseConcMarkSweepGC -jar /app/ysw
 
 <property name="log.path" value="/Users/wangzehui/Documents/opt/logbak/fk_pay_center"/>
 
+
 1.订阅分成
 2.用户明细表具体分成
 3.兼容老用户分成,做个标识

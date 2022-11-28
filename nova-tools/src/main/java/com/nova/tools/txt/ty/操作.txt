@@ -4,8 +4,7 @@ nohup java -Xms6G -Xmx6G -XX:MaxNewSize=2G -XX:+UseConcMarkSweepGC -jar /app/ysw
 
 <property name="log.path" value="/Users/wangzehui/Documents/opt/logbak/fk_pay_center"/>
 
+1.订阅分成
+2.用户明细表具体分成
+3.兼容老用户分成,做个标识
 
-1.微信限额商户下掉
-2.积分商城三方兑换问题排查、解决
-3.红单接口适配爱卡渠道
-4.红单方案分布接口修改、报表后台活跃用户数据排查

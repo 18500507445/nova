@@ -33,6 +33,7 @@
         <module>nova-mq-rabbit</module>
         <module>nova-xxl</module>
         <module>nova-limit</module>
+        <module>nova-validation</module>
     </modules>
 
     <properties>

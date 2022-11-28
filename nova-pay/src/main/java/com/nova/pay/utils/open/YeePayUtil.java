@@ -93,6 +93,10 @@ public class YeePayUtil {
 
     /**
      * 退款接口
+     * <p>
+     * 退款、通知文档
+     *
+     * @see <a href="https://open.yeepay.com/docs/apis/ptssfk/jiaoyi/options__rest__v1.0__trade__refund#anchor7</a>
      */
     public Map<String, String> refund(YeePayParam data) {
         try {

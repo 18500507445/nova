@@ -53,11 +53,12 @@ public class AliPayUtil {
 
     /**
      * H5请求支付宝支付
-     * 文档地址：https://opendocs.alipay.com/apis/api_1/alipay.trade.wap.pay
-     * 手机网站支付接口2.0
      *
      * @param param
      * @return
+     * @see <a href="https://opendocs.alipay.com/open/02ivbs?scene=21"</a>
+     * 文档地址：
+     * 手机网站支付接口2.0
      */
     public AlipayTradeWapPayResponse aLiPayH5(AliPayParam param) {
         try {
@@ -87,6 +88,7 @@ public class AliPayUtil {
      *
      * @param param
      * @return
+     * @see <a href="https://opendocs.alipay.com/open/02e7gq?scene=20"</a>
      */
     public AlipayTradeAppPayResponse aLiPayApp(AliPayParam param) {
         try {
@@ -158,7 +160,7 @@ public class AliPayUtil {
 
     /**
      * 订单退款
-     * 文档：https://opendocs.alipay.com/mini/02j1c6
+     * @see <a href="https://opendocs.alipay.com/open/02e7go"</a>
      *
      * @param param
      * @return
@@ -182,9 +184,9 @@ public class AliPayUtil {
 
     /**
      * 关闭订单
-     * 文档：https://opendocs.alipay.com/open/02e7gn
      *
      * @param param
+     * @see <a href="https://opendocs.alipay.com/open/02e7gn"</a>
      */
     public AlipayTradeCloseResponse closeOrder(AliPayParam param) {
         try {

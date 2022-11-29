@@ -209,6 +209,11 @@ public class CompletableFutureExample {
                 }).get();
     }
 
+    /***
+     * 多个线程 数据合并取结果
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @Test
     public void demoK() throws ExecutionException, InterruptedException {
         TimeInterval timer = DateUtil.timer();

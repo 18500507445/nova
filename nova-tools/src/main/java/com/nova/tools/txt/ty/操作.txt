@@ -17,7 +17,7 @@ nohup java -Xms6G -Xmx6G -XX:MaxNewSize=2G -XX:+UseConcMarkSweepGC -jar /app/ysw
 
 1.用户订阅发送系统消息
 2.专家分成job开发
-3.
+3.支付中心添加后台功能
 
 专家分成比例表：ER_EXPERTS_ROLE
 专家分成表：ER_EXPERTS_ROLE_STATISTICS

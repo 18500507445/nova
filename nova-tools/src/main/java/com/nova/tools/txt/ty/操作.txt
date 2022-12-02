@@ -14,7 +14,14 @@ nohup java -Xms6G -Xmx6G -XX:MaxNewSize=2G -XX:+UseConcMarkSweepGC -jar /app/ysw
 
 27003100045
 
+正则：\s末尾添并且转行操作
+
 日报
+1.红单专家屏蔽、升级加密key
+2.渠道数据对账、数据处理
+3.
+
+172.30.16.110
 
 
 

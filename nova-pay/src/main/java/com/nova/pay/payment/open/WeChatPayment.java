@@ -1,4 +1,4 @@
-package com.nova.pay.utils.open;
+package com.nova.pay.payment.open;
 
 import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/8/19 10:19
  */
 @Component
-public class WeChatUtil {
+public class WeChatPayment {
 
     /**
      * 微信v2配置

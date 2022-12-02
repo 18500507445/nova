@@ -1,4 +1,4 @@
-package com.nova.pay.utils.wechat;
+package com.nova.pay.payment.wechat;
 
 import com.github.binarywang.wxpay.bean.merchanttransfer.TransferCreateRequest;
 import com.github.binarywang.wxpay.bean.merchanttransfer.TransferCreateResult;

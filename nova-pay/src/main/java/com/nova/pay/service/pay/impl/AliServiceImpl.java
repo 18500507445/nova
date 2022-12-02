@@ -5,7 +5,6 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.alipay.api.AlipayResponse;
 import com.alipay.api.response.AlipayTradeCloseResponse;
-import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.pay.entity.param.AliPayParam;
@@ -16,10 +15,8 @@ import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
-import com.nova.pay.utils.open.AliPayUtil;
+import com.nova.pay.payment.open.AliPayment;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +32,7 @@ import java.math.BigDecimal;
 public class AliServiceImpl implements PayService {
 
     @Autowired
-    private AliPayUtil aliPayUtil;
+    private AliPayment aliPayment;
 
     @Autowired
     private FkPayOrderService fkPayOrderService;
@@ -103,9 +100,9 @@ public class AliServiceImpl implements PayService {
                         .notifyUrl(payConfig.getNotifyUrl()).build();
                 AlipayResponse response = null;
                 if (ArrayUtil.contains(new int[]{1}, type)) {
-                    response = aliPayUtil.aLiPayH5(data);
+                    response = aliPayment.aLiPayH5(data);
                 } else if (ArrayUtil.contains(new int[]{3}, type)) {
-                    response = aliPayUtil.aLiPayApp(data);
+                    response = aliPayment.aLiPayApp(data);
                 }
                 if (ObjectUtil.isNotNull(response) && response.isSuccess()) {
                     body = response.getBody();
@@ -136,7 +133,7 @@ public class AliServiceImpl implements PayService {
                 .outTradeNo(orderId)
                 .totalAmount(totalAmount)
                 .reason("退款").build();
-        AlipayTradeRefundResponse response = aliPayUtil.refund(aliPayParam);
+        AlipayTradeRefundResponse response = aliPayment.refund(aliPayParam);
         return AjaxResult.success(response.getSubMsg(), response);
     }
 
@@ -159,7 +156,7 @@ public class AliServiceImpl implements PayService {
                 .publicKey(payConfig.getPublicKey())
                 .privateKey(payConfig.getPrivateKey())
                 .outTradeNo(orderId).build();
-        return AjaxResult.success(aliPayUtil.queryOrder(aliPayParam));
+        return AjaxResult.success(aliPayment.queryOrder(aliPayParam));
     }
 
     @Override
@@ -182,7 +179,7 @@ public class AliServiceImpl implements PayService {
                 .publicKey(payConfig.getPublicKey())
                 .privateKey(payConfig.getPrivateKey())
                 .outTradeNo(orderId).build();
-        AlipayTradeCloseResponse response = aliPayUtil.closeOrder(aliPayParam);
+        AlipayTradeCloseResponse response = aliPayment.closeOrder(aliPayParam);
         return AjaxResult.success(response.getSubMsg(), response.getBody());
     }
 

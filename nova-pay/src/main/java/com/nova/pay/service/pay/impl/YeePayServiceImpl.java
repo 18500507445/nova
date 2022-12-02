@@ -13,12 +13,10 @@ import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
-import com.nova.pay.utils.open.YeePayUtil;
+import com.nova.pay.payment.open.YeePayment;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +33,7 @@ import java.util.Map;
 public class YeePayServiceImpl implements PayService {
 
     @Autowired
-    private YeePayUtil yeePayUtil;
+    private YeePayment yeePayment;
 
     @Autowired
     private FkPayOrderService fkPayOrderService;
@@ -107,7 +105,7 @@ public class YeePayServiceImpl implements PayService {
                         .goodsName(subject)
                         .userName(userName);
 
-                Map<String, String> orderMap = yeePayUtil.tradeOrder(yeePayBuilder.build());
+                Map<String, String> orderMap = yeePayment.tradeOrder(yeePayBuilder.build());
                 if (!orderMap.isEmpty() && StringUtils.equals(Constants.YEE_CODE, MapUtils.getString(orderMap, "code"))) {
                     String token = MapUtils.getString(orderMap, "token");
                     String uniqueOrderNo = MapUtils.getString(orderMap, "uniqueOrderNo");
@@ -120,7 +118,7 @@ public class YeePayServiceImpl implements PayService {
                         return AjaxResult.error("1000", "创建支付订单失败,请从新下单");
                     }
                     //3.0 唤起收银台
-                    body = yeePayUtil.cashier(yeePayBuilder.build());
+                    body = yeePayment.cashier(yeePayBuilder.build());
                     if (StringUtils.isNotBlank(body)) {
                         result.put("body", body);
                     }
@@ -152,7 +150,7 @@ public class YeePayServiceImpl implements PayService {
                     .amount(totalAmount)
                     .tradeNo(order.getTradeNo())
                     .build();
-            Map<String, String> refundMap = yeePayUtil.refund(yeePayParam);
+            Map<String, String> refundMap = yeePayment.refund(yeePayParam);
             if (!refundMap.isEmpty()) {
                 result = JSONUtil.toJsonStr(refundMap);
             }

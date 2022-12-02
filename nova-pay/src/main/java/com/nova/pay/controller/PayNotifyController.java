@@ -5,7 +5,6 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -29,7 +28,7 @@ import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.impl.KsPayServiceImpl;
-import com.nova.pay.utils.open.*;
+import com.nova.pay.payment.open.*;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalEnvelopeDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
@@ -63,19 +62,19 @@ import java.util.Map;
 public class PayNotifyController extends BaseController {
 
     @Resource
-    private WeChatUtil weChatUtil;
+    private WeChatPayment weChatPayment;
 
     @Resource
-    private AliPayUtil aliPayUtil;
+    private AliPayment aliPayment;
 
     @Resource
-    private IosVerifyUtil iosVerifyUtil;
+    private ApplePayment applePayment;
 
     @Resource
-    private GooglePayUtil googlePayUtil;
+    private GooglePayment googlePayment;
 
     @Resource
-    private KsPayUtil ksPayUtil;
+    private KsPayment ksPayment;
 
     @Resource
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
@@ -98,7 +97,7 @@ public class PayNotifyController extends BaseController {
     @PostMapping("aLiPay")
     public String aLiPay(HttpServletRequest request) {
         String orderId = "";
-        String out = AliPayUtil.NOTIFY_FAIL;
+        String out = AliPayment.NOTIFY_FAIL;
         int payFlag = 0;
         Map<String, String> params = new HashMap<>(16);
         try {
@@ -126,16 +125,16 @@ public class PayNotifyController extends BaseController {
                 fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(4).build());
                 //查询配置参数，验签处理
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
-                boolean check = aliPayUtil.rsaCheckV1(params, payConfig.getPublicKey());
+                boolean check = aliPayment.rsaCheckV1(params, payConfig.getPublicKey());
                 log.info("aLiPayNotify通知参数:{},验签结果:{}", JSONUtil.toJsonStr(params), check);
                 BigDecimal fee = payOrder.getFee();
                 String userName = payOrder.getUserName();
                 if (check) {
-                    if (StringUtils.equals(AliPayUtil.TRADE_SUCCESS, tradeStatus) && ObjectUtil.equals(fee, new BigDecimal(totalAmount))) {
+                    if (StringUtils.equals(AliPayment.TRADE_SUCCESS, tradeStatus) && ObjectUtil.equals(fee, new BigDecimal(totalAmount))) {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).build());
                         if (payFlag > 0) {
                             fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, userName, "1", fee.toString(), payConfig.getPayType());
-                            out = AliPayUtil.NOTIFY_SUCCESS;
+                            out = AliPayment.NOTIFY_SUCCESS;
                         }
                     } else {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(2).build());
@@ -181,7 +180,7 @@ public class PayNotifyController extends BaseController {
                 //查询配置参数，验签处理
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
                 if (ObjectUtil.isNotNull(payConfig) && 1 != payOrder.getTradeStatus()) {
-                    WxPayService wxV2PayService = weChatUtil.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
+                    WxPayService wxV2PayService = weChatPayment.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
                     notifyResult = wxV2PayService.parseOrderNotifyResult(xmlString.toString());
                     BigDecimal fee = payOrder.getFee();
                     String userName = payOrder.getUserName();
@@ -252,7 +251,7 @@ public class PayNotifyController extends BaseController {
                 //查询配置参数，验签处理
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
                 //2.0 然后进行验证
-                Map<String, Object> verify = iosVerifyUtil.verify(sign, sid, version);
+                Map<String, Object> verify = applePayment.verify(sign, sid, version);
                 String transactionId = MapUtil.getStr(verify, "transaction_id");
                 String status = MapUtil.getStr(verify, "status");
                 boolean check = ArrayUtils.contains(new String[]{"0"}, status) && !StringUtils.equals(Constants.ZERO, transactionId);
@@ -293,7 +292,7 @@ public class PayNotifyController extends BaseController {
             dto.setCipherText(encrypt);
             FkPayConfig payConfig = fkPayConfigService.selectFkPayConfigById(2L);
             if (ObjectUtil.isNotNull(payConfig)) {
-                dto = DigitalEnvelopeUtils.decrypt(dto, YeePayUtil.getPrivateKey(payConfig.getPrivateKey()), YeePayUtil.getPubKey(payConfig.getPublicKey()));
+                dto = DigitalEnvelopeUtils.decrypt(dto, YeePayment.getPrivateKey(payConfig.getPrivateKey()), YeePayment.getPubKey(payConfig.getPublicKey()));
                 String plainText = dto.getPlainText();
                 if (StringUtils.isNotBlank(plainText)) {
                     cn.hutool.json.JSONObject json = JSONUtil.parseObj(plainText);
@@ -362,7 +361,7 @@ public class PayNotifyController extends BaseController {
             dto.setCipherText(encrypt);
             FkPayConfig payConfig = fkPayConfigService.selectFkPayConfigById(2L);
             if (ObjectUtil.isNotNull(payConfig)) {
-                dto = DigitalEnvelopeUtils.decrypt(dto, YeePayUtil.getPrivateKey(payConfig.getPrivateKey()), YeePayUtil.getPubKey(payConfig.getPublicKey()));
+                dto = DigitalEnvelopeUtils.decrypt(dto, YeePayment.getPrivateKey(payConfig.getPrivateKey()), YeePayment.getPubKey(payConfig.getPublicKey()));
                 String plainText = dto.getPlainText();
                 if (StringUtils.isNotBlank(plainText)) {
                     JSONObject json = JSONUtil.parseObj(plainText);
@@ -434,7 +433,7 @@ public class PayNotifyController extends BaseController {
                  *  map.put("keyPath", payConfig.getKeyPath());
                  *  String purchase = HttpUtil.createPost(Constants.GOOGLE_VERIFY_URL).form(map).execute().body();
                  */
-                ProductPurchase purchase = googlePayUtil.verify(packageName, "ScorePredict1x2", productId, purchaseToken, payConfig.getKeyPath());
+                ProductPurchase purchase = googlePayment.verify(packageName, "ScorePredict1x2", productId, purchaseToken, payConfig.getKeyPath());
                 log.info("googlePayNotify验签结果====>purchase:{}", JSONUtil.toJsonStr(purchase));
                 if (ObjectUtil.isNotNull(purchase)) {
                     if (0 == purchase.getPurchaseState() && StringUtils.equals(tradeNo, purchase.getOrderId())) {
@@ -514,7 +513,7 @@ public class PayNotifyController extends BaseController {
                                                 .outOrderNo(finalOrderId)
                                                 .openId(payOrder.getOperator())
                                                 .build();
-                                        Map<String, Object> reportMap = ksPayUtil.reportOrder(report);
+                                        Map<String, Object> reportMap = ksPayment.reportOrder(report);
                                         log.warn("ksPayNotifyReportMap====>:{}", JSONUtil.toJsonStr(reportMap));
                                     });
                                 }

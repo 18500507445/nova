@@ -1,4 +1,4 @@
-package com.nova.pay.utils.open;
+package com.nova.pay.payment.open;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.alipay.api.AlipayApiException;
@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class AliPayUtil {
+public class AliPayment {
 
     /**
      * 支付宝网关地址： 沙箱环境用：https://openapi.alipaydev.com/gateway.do
@@ -130,7 +130,7 @@ public class AliPayUtil {
     public boolean rsaCheckV1(Map<String, String> params, String publicKey) {
         boolean result = false;
         try {
-            result = AlipaySignature.rsaCheckV1(params, publicKey, AliPayUtil.CHARSET, AliPayUtil.SIGN_TYPE);
+            result = AlipaySignature.rsaCheckV1(params, publicKey, AliPayment.CHARSET, AliPayment.SIGN_TYPE);
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
@@ -167,8 +167,8 @@ public class AliPayUtil {
      */
     public AlipayTradeRefundResponse refund(AliPayParam param) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(AliPayUtil.GATEWAY_URL, param.getAppId(), param.getPrivateKey(),
-                    AliPayUtil.FORMAT, AliPayUtil.CHARSET, param.getPublicKey(), AliPayUtil.SIGN_TYPE);
+            AlipayClient alipayClient = new DefaultAlipayClient(AliPayment.GATEWAY_URL, param.getAppId(), param.getPrivateKey(),
+                    AliPayment.FORMAT, AliPayment.CHARSET, param.getPublicKey(), AliPayment.SIGN_TYPE);
             AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
             JSONObject bizContent = new JSONObject();
             bizContent.put("out_trade_no", param.getOutTradeNo());
@@ -190,8 +190,8 @@ public class AliPayUtil {
      */
     public AlipayTradeCloseResponse closeOrder(AliPayParam param) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(AliPayUtil.GATEWAY_URL, param.getAppId(), param.getPrivateKey(),
-                    AliPayUtil.FORMAT, AliPayUtil.CHARSET, param.getPublicKey(), AliPayUtil.SIGN_TYPE);
+            AlipayClient alipayClient = new DefaultAlipayClient(AliPayment.GATEWAY_URL, param.getAppId(), param.getPrivateKey(),
+                    AliPayment.FORMAT, AliPayment.CHARSET, param.getPublicKey(), AliPayment.SIGN_TYPE);
             AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
             JSONObject bizContent = new JSONObject();
             bizContent.put("trade_no", param.getOutTradeNo());

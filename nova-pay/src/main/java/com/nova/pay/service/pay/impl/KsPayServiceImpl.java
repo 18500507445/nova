@@ -16,7 +16,7 @@ import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
-import com.nova.pay.utils.open.KsPayUtil;
+import com.nova.pay.payment.open.KsPayment;
 import com.nova.redis.core.RedisService;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ import java.util.Map;
 public class KsPayServiceImpl implements PayService {
 
     @Resource
-    private KsPayUtil ksPayUtil;
+    private KsPayment ksPayment;
 
     @Resource
     private RedisService redisService;
@@ -111,7 +111,7 @@ public class KsPayServiceImpl implements PayService {
                                 .payType(type)
                                 .notifyUrl(payConfig.getNotifyUrl())
                                 .build();
-                        Map<String, Object> orderMap = ksPayUtil.tradeOrder(data);
+                        Map<String, Object> orderMap = ksPayment.tradeOrder(data);
                         if (!orderMap.isEmpty() && ObjectUtil.equals(Constants.KS_CODE, MapUtils.getIntValue(orderMap, "result", 0))) {
                             int flag = fkPayOrderService.insertFkPayOrder(insert);
                             if (0 == flag) {
@@ -157,7 +157,7 @@ public class KsPayServiceImpl implements PayService {
                         .accessToken(jsonObject.getStr("data"))
                         .outOrderNo(param.getOrderId())
                         .build();
-                return AjaxResult.success(ksPayUtil.refund(data));
+                return AjaxResult.success(ksPayment.refund(data));
             }
         }
         return AjaxResult.success();
@@ -196,7 +196,7 @@ public class KsPayServiceImpl implements PayService {
                         .accessToken(jsonObject.getStr("data"))
                         .outOrderNo(orderId)
                         .build();
-                return AjaxResult.success(ksPayUtil.queryOrder(data));
+                return AjaxResult.success(ksPayment.queryOrder(data));
             }
         }
         return AjaxResult.error();
@@ -229,7 +229,7 @@ public class KsPayServiceImpl implements PayService {
                     .appId(payConfig.getAppId())
                     .appSecret(payConfig.getAppSecret())
                     .build();
-            Map<String, Object> tokenMap = ksPayUtil.getAccessToken(data);
+            Map<String, Object> tokenMap = ksPayment.getAccessToken(data);
             if (MapUtil.isNotEmpty(tokenMap) && ObjectUtil.equals(1, MapUtil.getInt(tokenMap, "result", 0))) {
                 accessToken = MapUtil.getStr(tokenMap, "access_token");
                 redisService.set(key, accessToken, MapUtil.getLong(tokenMap, "expires_in") - 3600);
@@ -266,7 +266,7 @@ public class KsPayServiceImpl implements PayService {
                         .accessToken(jsonObject.getStr("data"))
                         .outOrderNo(param.getOrderId())
                         .build();
-                return AjaxResult.success(ksPayUtil.cancelOrder(data));
+                return AjaxResult.success(ksPayment.cancelOrder(data));
             }
         }
         return AjaxResult.success();

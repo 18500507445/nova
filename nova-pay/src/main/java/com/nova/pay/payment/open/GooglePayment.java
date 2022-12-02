@@ -1,4 +1,4 @@
-package com.nova.pay.utils.open;
+package com.nova.pay.payment.open;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
@@ -37,7 +37,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class GooglePayUtil {
+public class GooglePayment {
 
     public static String PRIVATE_KEYS;
 
@@ -199,7 +199,7 @@ public class GooglePayUtil {
     public static synchronized String load(String file) {
         if (PRIVATE_KEYS == null) {
             if (!file.startsWith("/")) {
-                file = GooglePayUtil.class.getResource("/").getFile() + File.separator + file;
+                file = GooglePayment.class.getResource("/").getFile() + File.separator + file;
             }
             File f = new File(file);
             try (InputStreamReader reader = new InputStreamReader(new FileInputStream(f), StandardCharsets.UTF_8);) {

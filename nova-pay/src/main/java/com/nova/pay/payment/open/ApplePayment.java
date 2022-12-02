@@ -1,4 +1,4 @@
-package com.nova.pay.utils.open;
+package com.nova.pay.payment.open;
 
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -26,7 +26,7 @@ import java.util.Map;
  * @Date: 2022/3/18 13:42
  */
 @Component
-public class IosVerifyUtil {
+public class ApplePayment {
 
     /**
      * 沙盒地址

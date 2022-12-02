@@ -13,7 +13,7 @@ import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
-import com.nova.pay.utils.open.GooglePayUtil;
+import com.nova.pay.payment.open.GooglePayment;
 import com.nova.redis.core.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class GoogleServiceImpl implements PayService {
     private RedisService redisService;
 
     @Resource
-    private GooglePayUtil googlePayUtil;
+    private GooglePayment googlePayment;
 
     @Override
     public PayWayEnum getPayType() {
@@ -118,7 +118,7 @@ public class GoogleServiceImpl implements PayService {
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
-        Map<String, String> tokenMap = googlePayUtil.getAccessToken(payConfig.getAppId(), payConfig.getAppSecret(), payConfig.getPaySecret(), "1");
+        Map<String, String> tokenMap = googlePayment.getAccessToken(payConfig.getAppId(), payConfig.getAppSecret(), payConfig.getPaySecret(), "1");
         if (MapUtil.isNotEmpty(tokenMap)) {
             String accessToken = MapUtil.getStr(tokenMap, "accessToken");
             String key = Constants.REDIS_KEY + "_getAccessToken_" + payConfig.getId();

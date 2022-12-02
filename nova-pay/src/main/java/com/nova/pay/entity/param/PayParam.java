@@ -40,6 +40,13 @@ public class PayParam extends BaseParam {
     private Integer payWay;
 
     /**
+     * 支付宝小程序支付 需要授权code来获取唯一标识userId
+     * <p>
+     * 微信小程序、原生微信内支付也需要授权code来换取openId
+     */
+    private String authCode;
+
+    /**
      * 用户id
      */
     private String openId;

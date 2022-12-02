@@ -1,10 +1,8 @@
-package com.nova.pay.utils.wechat;
+package com.nova.pay.payment.wechat;
 
 import com.github.binarywang.wxpay.bean.entpay.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
-import com.github.binarywang.wxpay.service.WxPayService;
 import com.nova.pay.config.WeChatConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 

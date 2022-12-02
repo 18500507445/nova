@@ -1,4 +1,4 @@
-package com.nova.pay.utils.wechat;
+package com.nova.pay.payment.wechat;
 
 import com.nova.pay.config.WeChatConfig;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
@@ -9,12 +9,9 @@ import me.chanjar.weixin.mp.bean.result.WxMpUserList;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
-import me.chanjar.weixin.mp.config.WxMpConfigStorage;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 /**

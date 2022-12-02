@@ -1,4 +1,4 @@
-package com.nova.pay.utils.open;
+package com.nova.pay.payment.open;
 
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.map.MapUtil;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-public class KsPayUtil {
+public class KsPayment {
 
     /**
      * queryParamUrl

@@ -1,4 +1,4 @@
-package com.nova.pay.utils.wechat;
+package com.nova.pay.payment.wechat;
 
 import cn.hutool.json.JSONUtil;
 import com.github.binarywang.wxpay.bean.request.*;

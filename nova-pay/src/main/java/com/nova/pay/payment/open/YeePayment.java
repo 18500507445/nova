@@ -1,4 +1,4 @@
-package com.nova.pay.utils.open;
+package com.nova.pay.payment.open;
 
 
 import com.alibaba.fastjson2.JSON;
@@ -36,7 +36,7 @@ import java.util.UUID;
  */
 @Slf4j
 @Component
-public class YeePayUtil {
+public class YeePayment {
 
     /**
      * 交易下单银行卡
@@ -607,7 +607,7 @@ public class YeePayUtil {
 
     public static void main(String[] args) {
 
-        YeePayUtil yeePayUtil = new YeePayUtil();
+        YeePayment yeePayment = new YeePayment();
         YeePayParam data = new YeePayParam();
 
         Map<String, String> result;
@@ -648,7 +648,7 @@ public class YeePayUtil {
         data.setMerchantNo("10088550672");
         data.setBankCard("6210307001099730");
         data.setBankCardCode("BCCB");
-        result = yeePayUtil.settleCard(data);
+        result = yeePayment.settleCard(data);
         System.out.println(JSONObject.toJSONString(result));
 
         //data.setMerchantNo("10088599227");

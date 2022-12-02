@@ -22,7 +22,7 @@ import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
-import com.nova.pay.utils.open.WeChatUtil;
+import com.nova.pay.payment.open.WeChatPayment;
 import com.nova.redis.core.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
@@ -48,7 +48,7 @@ import java.util.List;
 public class WeChatServiceImpl implements PayService {
 
     @Autowired
-    private WeChatUtil weChatUtil;
+    private WeChatPayment weChatPayment;
 
     @Autowired
     private FkPayConfigService fkPayConfigService;
@@ -134,7 +134,7 @@ public class WeChatServiceImpl implements PayService {
         String subject = param.getSubject();
         try {
             //v2支付,注意本地调用keyPath换成自己的项目路径
-            WxPayService wxV2PayService = weChatUtil.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
+            WxPayService wxV2PayService = weChatPayment.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
             //构造支付对象
             WxPayUnifiedOrderRequest.WxPayUnifiedOrderRequestBuilder requestBuilder = WxPayUnifiedOrderRequest.newBuilder().body(subject)
                     .spbillCreateIp(new BaseController().getIp())
@@ -164,7 +164,7 @@ public class WeChatServiceImpl implements PayService {
         String totalAmount = param.getTotalAmount();
         try {
             //v3支付
-            WxPayService wxV3PayService = weChatUtil.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
+            WxPayService wxV3PayService = weChatPayment.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
             //构造支付对象
             WxPayUnifiedOrderV3Request request = new WxPayUnifiedOrderV3Request();
             request.setOutTradeNo(orderId);
@@ -208,7 +208,7 @@ public class WeChatServiceImpl implements PayService {
         try {
             int fee = NumberUtil.mul(totalAmount, "100").intValue();
             if (ObjectUtil.isNull(payConfig.getApiV3Key())) {
-                WxPayService wxV2PayService = weChatUtil.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
+                WxPayService wxV2PayService = weChatPayment.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
                 WxPayRefundRequest request = new WxPayRefundRequest();
                 request.setOutTradeNo(orderId);
                 request.setOutRefundNo(orderId);
@@ -216,7 +216,7 @@ public class WeChatServiceImpl implements PayService {
                 request.setRefundFee(fee);
                 result = wxV2PayService.refundV2(request);
             } else {
-                WxPayService wxV3PayService = weChatUtil.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
+                WxPayService wxV3PayService = weChatPayment.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
                 WxPayRefundV3Request request = new WxPayRefundV3Request();
                 request.setOutTradeNo(orderId);
                 WxPayRefundV3Request.Amount amount = new WxPayRefundV3Request.Amount();
@@ -251,12 +251,12 @@ public class WeChatServiceImpl implements PayService {
         }
         try {
             if (ObjectUtil.isNull(payConfig.getApiV3Key())) {
-                WxPayService wxV2PayService = weChatUtil.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
+                WxPayService wxV2PayService = weChatPayment.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
                 WxPayOrderQueryRequest request = new WxPayOrderQueryRequest();
                 request.setOutTradeNo(orderId);
                 result = wxV2PayService.queryOrder(request);
             } else {
-                WxPayService wxV3PayService = weChatUtil.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
+                WxPayService wxV3PayService = weChatPayment.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
                 WxPayOrderQueryV3Request request = new WxPayOrderQueryV3Request();
                 request.setOutTradeNo(orderId);
                 result = wxV3PayService.queryOrderV3(request);
@@ -294,7 +294,7 @@ public class WeChatServiceImpl implements PayService {
             if (ObjectUtil.isNotNull(o)) {
                 result = o.toString();
             } else {
-                WxMpService wxMpService = weChatUtil.getWxMpService(payConfig.getAppId(), payConfig.getAppSecret());
+                WxMpService wxMpService = weChatPayment.getWxMpService(payConfig.getAppId(), payConfig.getAppSecret());
                 WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(authCode);
                 if (ObjectUtil.isNotNull(accessToken)) {
                     //验证授权凭证失败 刷新后获取
@@ -334,10 +334,10 @@ public class WeChatServiceImpl implements PayService {
         }
         try {
             if (ObjectUtil.isNull(payConfig.getApiV3Key())) {
-                WxPayService wxV2PayService = weChatUtil.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
+                WxPayService wxV2PayService = weChatPayment.getWxV2PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getPaySecret(), payConfig.getKeyPath());
                 result = wxV2PayService.closeOrder(orderId);
             } else {
-                WxPayService wxV3PayService = weChatUtil.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
+                WxPayService wxV3PayService = weChatPayment.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
                 wxV3PayService.closeOrderV3(orderId);
             }
         } catch (WxPayException e) {
@@ -369,7 +369,7 @@ public class WeChatServiceImpl implements PayService {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
         try {
-            WxPayService wxV3PayService = weChatUtil.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
+            WxPayService wxV3PayService = weChatPayment.getWxV3PayService(payConfig.getAppId(), payConfig.getMchId(), payConfig.getApiV3Key(), payConfig.getSerialNo(), payConfig.getPrivateKeyPath(), payConfig.getPrivateCertPath());
             TransferCreateRequest request = new TransferCreateRequest();
             request.setBatchName(subject);
             request.setBatchRemark(subject);
@@ -411,7 +411,7 @@ public class WeChatServiceImpl implements PayService {
         }
         try {
             FkPayConfig payConfig = fkPayConfigService.getConfigData(payConfigId);
-            WxMpService wxMpService = weChatUtil.getWxMpService(payConfig.getAppId(), payConfig.getAppSecret());
+            WxMpService wxMpService = weChatPayment.getWxMpService(payConfig.getAppId(), payConfig.getAppSecret());
             WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(authCode);
             wxMpUser = wxMpService.getUserService().userInfo(accessToken.getOpenId(), lang);
         } catch (WxErrorException e) {

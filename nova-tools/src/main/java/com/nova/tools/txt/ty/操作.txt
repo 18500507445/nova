@@ -15,9 +15,6 @@ nohup java -Xms6G -Xmx6G -XX:MaxNewSize=2G -XX:+UseConcMarkSweepGC -jar /app/ysw
 27003100045
 
 日报
-1.专家屏蔽追加
-2.快手小程序订单结算跟踪
-3.
 
 
 

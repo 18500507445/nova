@@ -187,5 +187,12 @@
             <version>${c3p0.version}</version>
         </dependency>
 
+        <!-- 阿里云oss上传图片 -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.15.0</version>
+        </dependency>
+
     </dependencies>
 </project>

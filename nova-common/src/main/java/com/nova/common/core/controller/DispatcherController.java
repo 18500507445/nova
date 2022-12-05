@@ -2,7 +2,7 @@ package com.nova.common.core.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.constant.Constants;
-import com.nova.common.exception.ServiceException;
+import com.nova.common.exception.base.GlobalException;
 import com.nova.common.utils.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,7 +75,7 @@ public class DispatcherController extends BaseController {
             String url = function + param;
             request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception e) {
-            throw new ServiceException("请求参数解析异常");
+            throw new GlobalException("请求参数解析异常");
         }
     }
 

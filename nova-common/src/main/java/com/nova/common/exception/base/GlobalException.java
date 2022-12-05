@@ -1,9 +1,10 @@
-package com.nova.common.exception;
+package com.nova.common.exception.base;
 
 /**
- * 业务异常
+ * 全局异常
  */
-public final class ServiceException extends RuntimeException {
+public class GlobalException extends RuntimeException {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -21,10 +22,10 @@ public final class ServiceException extends RuntimeException {
     /**
      * 空构造方法，避免反序列化问题
      */
-    public ServiceException() {
+    public GlobalException() {
     }
 
-    public ServiceException(String message) {
+    public GlobalException(String message) {
         this.message = message;
     }
 
@@ -32,7 +33,7 @@ public final class ServiceException extends RuntimeException {
         return detailMessage;
     }
 
-    public ServiceException setDetailMessage(String detailMessage) {
+    public GlobalException setDetailMessage(String detailMessage) {
         this.detailMessage = detailMessage;
         return this;
     }
@@ -42,7 +43,7 @@ public final class ServiceException extends RuntimeException {
         return message;
     }
 
-    public ServiceException setMessage(String message) {
+    public GlobalException setMessage(String message) {
         this.message = message;
         return this;
     }

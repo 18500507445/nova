@@ -1,4 +1,4 @@
-package com.nova.common.exception;
+package com.nova.common.exception.file;
 
 /**
  * 工具类异常

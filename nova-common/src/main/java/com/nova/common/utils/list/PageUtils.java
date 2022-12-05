@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.nova.common.core.page.PageDomain;
 import com.nova.common.core.page.TableSupport;
-import com.nova.common.exception.UtilException;
+import com.nova.common.exception.file.UtilException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 

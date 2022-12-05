@@ -1,0 +1,13 @@
+彩博后台
+admin
+crazy@2021
+
+专家后台
+德玛西李
+123159a
+
+待办事项
+(1)USER_NAME = '16723867@cibn',er_vip_order_detail 用户订单归属问题
+(2)红单后台OutDataDetailServiceImpl cibn问题
+(3)红单后台取消订阅资格，然后查询过期时间>sysdate，然后修改成退订状态
+(4)海外版对账，pay_type_info修改，按照fk_pay_order里面sid和渠道号从新定义payType

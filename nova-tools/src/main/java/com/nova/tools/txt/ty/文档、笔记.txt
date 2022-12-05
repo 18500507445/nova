@@ -1,0 +1,15 @@
+央视启动
+nohup java -Xms6G -Xmx6G -XX:MaxNewSize=2G -XX:+UseConcMarkSweepGC -jar /app/ysw-api.jar >/dev/null 2>&1 &
+
+<property name="log.path" value="/Users/wangzehui/Documents/opt/logbak/fk_pay_center"/>
+
+正则：\s末尾添并且转行操作
+
+
+
+
+
+
+
+
+

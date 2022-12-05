@@ -17,7 +17,7 @@ import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * {@link IdUtil} 单元测试
+ * {@link IdUtil} Id工具类单元测试
  *
  * @author looly
  *

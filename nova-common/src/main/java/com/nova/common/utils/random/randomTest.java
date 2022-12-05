@@ -2,7 +2,7 @@ package com.nova.common.utils.random;
 
 
 import cn.hutool.core.lang.WeightRandom;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,6 +64,10 @@ public class randomTest {
         return "";
     }
 
+    /**
+     * 方式二 参照huTool WeightRandom
+     * @param args
+     */
     public static void main(String[] args) {
         Map<Object, Object> map = new HashMap<>(16);
         map.put("211439226724", "2");
@@ -77,16 +81,16 @@ public class randomTest {
         int sum4 = 0;
         for (int i = 0; i < 1000; i++) {
             String random = random(map).toString();
-            if (StringUtils.equals("211439226724", random)) {
+            if (StrUtil.equals("211439226724", random)) {
                 sum1++;
             }
-            if (StringUtils.equals("211439226042", random)) {
+            if (StrUtil.equals("211439226042", random)) {
                 sum2++;
             }
-            if (StringUtils.equals("211439237059", random)) {
+            if (StrUtil.equals("211439237059", random)) {
                 sum3++;
             }
-            if (StringUtils.equals("211439972426", random)) {
+            if (StrUtil.equals("211439972426", random)) {
                 sum4++;
             }
             System.out.println(random);
@@ -104,13 +108,13 @@ public class randomTest {
         for (int i = 0; i < 1000; i++) {
             String result = random.next();
 
-            if (StringUtils.equals("A", result)) {
+            if (StrUtil.equals("A", result)) {
                 sum6++;
             }
-            if (StringUtils.equals("B", result)) {
+            if (StrUtil.equals("B", result)) {
                 sum7++;
             }
-            if (StringUtils.equals("C", result)) {
+            if (StrUtil.equals("C", result)) {
                 sum8++;
             }
         }

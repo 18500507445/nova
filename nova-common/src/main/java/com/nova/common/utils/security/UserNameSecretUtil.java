@@ -55,7 +55,7 @@ public class UserNameSecretUtil {
             for (String userName : SECRET_KEY_LIST) {
                 String jsonStr = str;
                 //如果不包含参数，直接返回就可以
-                if (retStr.indexOf(userName) < 0) {
+                if (!retStr.contains(userName)) {
                     continue;
                 }
                 int frontLength = 0;

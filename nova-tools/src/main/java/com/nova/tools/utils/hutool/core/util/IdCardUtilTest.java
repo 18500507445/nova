@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Looly
  */
-public class IdcardUtilTest {
+public class IdCardUtilTest {
 
 	private static final String ID_18 = "321083197812162119";
 	private static final String ID_15 = "150102880730303";

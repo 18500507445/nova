@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * {@link EnumUtil} 单元测试
+ * {@link EnumUtil} 枚举单元测试
  *
  * @author looly
  */

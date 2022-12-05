@@ -294,6 +294,8 @@ public class ListUtils {
     /**
      * 获取两个集合的交集
      *
+     * 还有一种方式：CollUtil.disjunction(huTool)
+     *
      * @param c1
      * @param c2
      * @return c1 inner join c2

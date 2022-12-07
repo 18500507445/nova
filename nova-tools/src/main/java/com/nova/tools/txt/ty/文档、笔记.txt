@@ -10,8 +10,3 @@ nohup java -Xms6G -Xmx6G -XX:MaxNewSize=2G -XX:+UseConcMarkSweepGC -jar /app/ysw
 
 
 
-
-
-
-
-

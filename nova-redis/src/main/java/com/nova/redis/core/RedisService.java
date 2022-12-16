@@ -661,6 +661,12 @@ public class RedisService {
         return redisTemplate.execute(connection -> deserializeValues(connection.lRange(rawKey, start, end), valueSerializer), true);
     }
 
+    /**
+     * redis 模糊匹配结果集
+     *
+     * @param key 键
+     * @return List
+     */
     public Set<String> getKeys(String key) {
         return redisTemplate.keys(key + "*");
     }

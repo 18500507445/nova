@@ -48,5 +48,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
+        <!-- SpringBoot validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

@@ -31,8 +31,7 @@ import java.util.SortedMap;
 public class TraceWebFilter extends GenericFilterBean {
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain)
-            throws IOException, ServletException {
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
         long start = System.currentTimeMillis();
         HttpServletRequest request = (HttpServletRequest) req;
         String traceId = String.valueOf(request.getHeader(

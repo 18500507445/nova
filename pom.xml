@@ -25,7 +25,7 @@
         <module>nova-database</module>
         <module>nova-pay</module>
         <module>nova-tools</module>
-        <module>nova-redis</module>
+        <module>nova-cache</module>
         <module>nova-mongodb</module>
         <module>nova-mail</module>
         <module>nova-design</module>

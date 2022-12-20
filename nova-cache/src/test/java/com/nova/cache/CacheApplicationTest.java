@@ -1,13 +1,13 @@
-package com.nova.redis;
+package com.nova.cache;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.nova.redis.core.RedisService;
+import com.nova.cache.core.RedisService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RedisApplicationTest {
+class CacheApplicationTest {
 
     @Autowired
     private RedisService redisService;

@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>nova-redis</artifactId>
-    <description>redisDemo</description>
+    <description>本地cache、redis、分布式锁</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

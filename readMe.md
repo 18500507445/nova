@@ -2,42 +2,42 @@
 * 简介:项目积累代码
 
 ### 结构介绍
-1.nova-common
+1.nova-cache
+* 本地cache、redis、分布式锁
+
+2.nova-common
 * 通用工具包
 
-2.nova-database
+3.nova-database
 * 数据库组件(动态数据源)
 
-3.nova-design
+4.nova-design
 * 设计模式
 
-4.nova-framework
+5.nova-framework
 * 框架核心组件
 
-5.nova-mail
+6.nova-limit
+* 接口限流、请求响应拦截器、validation(自定义)
+
+7.nova-mail
 * 邮件
 
-6.nova-mongodb
+8.nova-mongodb
 * mongodb
 
-7.nova-mq-active
+9.nova-mq-active
 
-8.nova-mq-rabbit
+10.nova-mq-rabbit
 
-9.nova-pay
+11.nova-pay
 * 支付组件
 
-10.nova-redis
-* redis组件
-
-11.nova-tools
+12.nova-tools
 * demo,java8,hutool测试类,guava测试类,vavr测试类
 
-12.nova-xxl
+13.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
 
-13.nova-limit
-* 接口限流
 
-14.nova-validation
-* 接口校验
+

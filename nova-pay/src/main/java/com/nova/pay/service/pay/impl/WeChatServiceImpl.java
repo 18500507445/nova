@@ -23,7 +23,7 @@ import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
 import com.nova.pay.payment.open.WeChatPayment;
-import com.nova.redis.core.RedisService;
+import com.nova.cache.core.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;

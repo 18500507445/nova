@@ -19,7 +19,7 @@ import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayListService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayStrategy;
-import com.nova.redis.core.RedisService;
+import com.nova.cache.core.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

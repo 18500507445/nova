@@ -17,7 +17,7 @@ import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
 import com.nova.pay.service.pay.PayService;
 import com.nova.pay.payment.open.KsPayment;
-import com.nova.cache.core.RedisService;
+import com.nova.cache.redis.RedisService;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

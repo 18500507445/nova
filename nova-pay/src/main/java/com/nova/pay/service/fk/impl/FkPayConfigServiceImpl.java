@@ -9,7 +9,7 @@ import com.nova.common.constant.Constants;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.mapper.FkPayConfigMapper;
 import com.nova.pay.service.fk.FkPayConfigService;
-import com.nova.cache.core.RedisService;
+import com.nova.cache.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

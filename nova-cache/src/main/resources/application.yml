@@ -37,3 +37,11 @@ spring:
         min-idle: 0
         #连接超时时间
     timeout: 10000
+
+
+#caffeine 本地缓存配置
+caffeine:
+  cacheNames: caffeine
+  initCapacity: 100
+  maxSize: 1000
+  expireAfterAccess: 600

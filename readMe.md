@@ -3,7 +3,7 @@
 
 ### 结构介绍
 1.nova-cache
-* 本地cache、redis、分布式锁
+* Memcache、caffeine、redis、分布式锁
 
 2.nova-common
 * 通用工具包

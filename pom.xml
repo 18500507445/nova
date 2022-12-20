@@ -29,8 +29,7 @@
         <module>nova-mongodb</module>
         <module>nova-mail</module>
         <module>nova-design</module>
-        <module>nova-mq-active</module>
-        <module>nova-mq-rabbit</module>
+        <module>nova-mq</module>
         <module>nova-xxl</module>
         <module>nova-limit</module>
     </modules>
@@ -115,7 +114,7 @@
             <!-- mq-active组件 -->
             <dependency>
                 <groupId>com.nova</groupId>
-                <artifactId>nova-mq-active</artifactId>
+                <artifactId>nova-mq</artifactId>
                 <version>${nova.version}</version>
             </dependency>
 

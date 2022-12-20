@@ -35,7 +35,7 @@
 
         <dependency>
             <groupId>com.nova</groupId>
-            <artifactId>nova-mq-active</artifactId>
+            <artifactId>nova-mq</artifactId>
         </dependency>
 
         <!-- 微信支付 -->

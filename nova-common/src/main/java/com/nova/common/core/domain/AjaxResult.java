@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.HashMap;
 
 /**
- * 操作消息提醒
+ * 返回实体类
  */
 public class AjaxResult extends HashMap<String, Object> {
 

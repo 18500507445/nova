@@ -4,15 +4,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @author wangzehuit
+ * @author wangzehui
  * @Title: Global
  * @ProjectName crazy
  * @Description: 全局配置类
  * @date 2021/7/18 16:19
  */
 @Component
-@ConfigurationProperties(prefix = "nft")
+@ConfigurationProperties(prefix = "nova")
 public class Global {
+
     /**
      * 项目名称
      */

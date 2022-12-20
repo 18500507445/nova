@@ -3,15 +3,12 @@ package com.nova.common.core.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageInfo;
-
 import com.nova.common.core.domain.AjaxResult;
 import com.nova.common.core.page.TableDataInfo;
+import com.nova.common.utils.common.ServletUtils;
 import com.nova.common.utils.ip.IpUtils;
 import com.nova.common.utils.list.PageUtils;
-import com.nova.common.utils.common.ServletUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

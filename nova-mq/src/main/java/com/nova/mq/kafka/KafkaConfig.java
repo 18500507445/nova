@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class KafkaConfig {
 
     @Bean
-    public KafkaProducerUtil KafkaProducerUtil() {
+    public KafkaProducerUtil kafkaProducerUtil() {
         return new KafkaProducerUtil();
     }
 }

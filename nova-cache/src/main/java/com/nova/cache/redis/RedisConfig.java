@@ -18,7 +18,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @Description:
+ * @Description: 换存redis配置类
  * @Author: wangzehui
  * @Date: 2022/6/19 15:40
  */

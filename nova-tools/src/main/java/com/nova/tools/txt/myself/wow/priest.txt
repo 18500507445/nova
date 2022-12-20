@@ -1,9 +1,0 @@
-#showtooltip 惩击
-/cast [@mouseover,exists,harm][harm,nodead][@targettarget,harm,nodead]惩击
-
-#showtooltip 真言术：盾
-/cast [@mouseover,help][help,nodead][@targettarget,help,nodead][]真言术：盾
-
-#showtooltip
-/cast [@player] 天堂之羽
-/stopspelltarget

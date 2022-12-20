@@ -1,5 +1,0 @@
-抓贼宏
-#showtooltip 闷棍
-/cleartarget
-/targetenemy
-/cast 闷棍

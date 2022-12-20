@@ -1,0 +1,147 @@
+-------------------------------------------------------------通用宏-------------------------------------------------------------
+鼠标指向区域技能释放
+#showtooltip xx
+/cast [@cursor] xx
+
+脚下区域技能释放
+#showtooltip xx
+/cast [@player]xx
+
+目标的目标释放技能
+#showtooltip xx
+/cast [@targettarget]xx
+
+焦点打断宏
+#showtooltip xx
+/cast [@mouseover,harm,nodead,exists] [@focus,harm,nodead,exists][]xx
+
+当前目标敌方释放xx,友方释放xx
+#showtooltip xx
+/cast [@target,help]xx
+/cast [@target,harm]xx
+
+任何地方查看低保
+/run LoadAddOn("Blizzard_WeeklyRewards"); WeeklyRewardsFrame:Show()
+
+离开队伍宏
+/run C_PartyInfo.LeaveParty()
+
+-------------------------------------------------------------DK-------------------------------------------------------------
+吸血鬼提示倒计时
+#showtooltip 吸血鬼之血
+/cast 吸血鬼之血
+/y 我已开启吸血鬼之血
+/in 3 /y 吸血鬼之血还有5秒结束
+/in 4 /y 5
+/in 5 /y 4
+/in 6 /y 3
+/in 7 /y 2
+/in 8  /y 1
+/in 9 /y 吸血鬼结束
+
+#showtooltip 寒冰锁链
+/cast [@focus,harm,modifier:shift]寒冰锁链; [@mouseover,harm]寒冰锁链; 寒冰锁链
+
+-------------------------------------------------------------德鲁伊-------------------------------------------------------------
+#showtooltip 回春术
+/cast [@mouseover,help][help,nodead][@targettarget,help,nodead][]回春术
+
+#showtooltip 纠缠根须
+/stopattack
+/cast [@mouseover,harm][]纠缠根须
+
+/use [nostealth,mod:alt,@player]回春术
+/cast [mod:alt]!潜行
+/cast [nomod,nostance]!猎豹形态
+
+猫德 非战斗中在室外旅行形态，室内豹形态、战斗中不是豹形态直接变豹子，是豹形态施放愈合且不变形
+/cast [combat,nostance:2]猎豹形态(变形)
+/cast [outdoors,nocombat,stance:3]猎豹形态(变形)
+/cast [outdoors,nocombat]旅行形态
+/cast [indoors,nocombat]猎豹形态(变形)
+/console autounshift 0
+/cast 愈合
+/console autounshift
+
+-------------------------------------------------------------猎人-------------------------------------------------------------
+#showtooltip 误导
+/施放 [@mouseover,help] [@target,help] [@targettarget,help] [@focus,help] [@pet] []误导
+
+若焦点友善,对焦点使用误导,若焦点的目标是友善,对焦点的目标使用误导。若目标友善,对其使用误导。若目标的目标友善,对其使用误导,若宠物存在,对宠物使用误导
+#showtooltip 误导
+/cast [target=focus, help]误导
+/cast [target=focustarget, help]误导
+/cast [target=target, help]误导
+/cast [target=targettarget, help]误导
+/cast [target=pet, nodead, exists]误导
+
+#showtooltip 反制射击
+/cast [@mouseover,harm,nodead,exists] [@focus,harm,nodead,exists][]反制射击
+
+没宠物召唤宠物1,宠物死亡复活,宠物未死亡治疗
+#showtooltips 宝宝
+/cast [nopet]召唤宠物 1; [@pet,dead]复活宠物;[@pet,nodead]治疗宠物
+
+多重射击
+#showtooltip 多重射击
+/startattack
+/cast [@mouseover,harm,nodead][]多重射击
+
+-------------------------------------------------------------法师-------------------------------------------------------------
+法师-冰箱
+#showtooltip 寒冰屏障
+/stopcasting
+/cancelAura 寒冰屏障
+/cast 寒冰屏障
+
+冰枪 (注释：冰枪扫图宏 - 有鼠标指向优先冰枪指向目标，无指向自动冰枪附近目标)
+#showtooltips 冰枪术
+/startattack
+/cast [@mouseover,exists,harm,nodead]  [@target,exists,harm,nodead] [] 冰枪术
+
+#showtooltips
+/cast [@cursor,spec:2] 烈焰风暴; [@cursor,spec:3] 暴风雪
+
+-------------------------------------------------------------骑士-------------------------------------------------------------
+#showtooltip
+/cast [@mouseover,harm]愤怒之锤
+/cast [@target,harm]愤怒之锤
+/cast 愤怒之锤
+
+奶骑:
+#showtooltip 十字军打击
+/cast [@target,harm] [@targettarget,harm] [@targettargettarget,harm]十字军打击
+
+#showtooltip
+/cast [@mouseover,harm]审判
+/cast [@target,harm]审判
+/cast 审判
+
+#showtooltip 审判
+/cast [@target,help]圣光闪现
+/cast [@target,harm]审判
+
+#showtooltip 复仇者之盾
+/focus target
+/cleartarget[@mouseover,noexists][@mouseover,dead]
+/targetenemy[@target,noexists]
+/cast[@mouseover,harm] []复仇者之盾
+/target focus
+/clear focus
+/startattack
+
+#showtooltip 复仇者之盾
+/cast [@mouseover,harm]复仇者之盾
+/cast [@target,harm]复仇者之盾
+/cast 复仇者之盾
+
+-------------------------------------------------------------牧师-------------------------------------------------------------
+#showtooltip 惩击
+/cast [@mouseover,exists,harm][harm,nodead][@targettarget,harm,nodead]惩击
+
+#showtooltip 真言术：盾
+/cast [@mouseover,help][help,nodead][@targettarget,help,nodead][]真言术：盾
+
+#showtooltip
+/cast [@player] 天堂之羽
+/stopspelltarget

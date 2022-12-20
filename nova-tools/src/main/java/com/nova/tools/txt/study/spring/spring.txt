@@ -14,12 +14,12 @@ Spring框架至今已集成了20多个模块。这些模块主要被分如下图
 （3）工厂设计模式
 （4）反射
 使用工厂类解耦和操作：
-容器：Spring包含并管理应用对象的配置和生命周期，在这个意义上它是 一种容器.
+容器：Spring包含并管理应用对象的配置和生命周期，在这个意义上它是一种容器.
 框架：Spring可以将简单的组件配置、组合成为复杂的应用。
-* 核心技术 IoC 和 AOP
-* 数据访问 （持久层解决方案）
-* Web层解决方案  SpringMVC
-* 集成 （整合其他开源框架）
+*核心技术IoC和AOP
+*数据访问（持久层解决方案）
+* Web层解决方案 SpringMVC
+*集成（整合其他开源框架）
 
 2、spring常用注解？
 
@@ -65,21 +65,21 @@ ApplicationContext：提供框架的实现，包括BeanFactory的所有功能
 使用”org.springframework.jdbc.datasource.DriverManagerDataSource”数据源来配置数据库驱动。示例如下：
 
 <bean id=”dataSource”>
-        <property name=”driverClassName”>
-        <value>org.hsqldb.jdbcDriver</value> </property>
-        <property name=”url”>
-            <value>jdbc:hsqldb:db/appfuse</value>
-        </property>
-        <property name=”username”><value>sa</value></property>
-        <property name=”password”><value></value></property>
+ <property name=”driverClassName”>
+ <value>org.hsqldb.jdbcDriver</value> </property>
+ <property name=”url”>
+ <value>jdbc:hsqldb:db/appfuse</value>
+ </property>
+ <property name=”username”><value>sa</value></property>
+ <property name=”password”><value></value></property>
 </bean>
 
 6、介绍一下Spring的事务管理？
-事务就是对一系列的数据库操作（比如插入多条数据）进行统一的提交或回滚操作，如果插入成功，那么一起成功，如果中间有一条出现异常，那么回滚之 前的所有操作。
+事务就是对一系列的数据库操作（比如插入多条数据）进行统一的提交或回滚操作，如果插入成功，那么一起成功，如果中间有一条出现异常，那么回滚之前的所有操作。
 
 这样可以防止出现脏数据，防止数据库数据出现问题。
 
-开发中为了避免这种情况一般都会进行事务管理。Spring中也有自己的事务管理机制，一般是使用TransactionMananger进行管 理，可以通过Spring的注入来完成此功能。
+开发中为了避免这种情况一般都会进行事务管理。Spring中也有自己的事务管理机制，一般是使用TransactionMananger进行管理，可以通过Spring的注入来完成此功能。
 
 spring提供了几个关于事务处理的类：
 
@@ -87,7 +87,7 @@ TransactionDefinition //事务属性定义
 
 TransactionStatus //代表了当前的事务，可以提交，回滚。
 
-PlatformTransactionManager这个是spring提供的用于管理事务的基础接口，其下有一个实现的抽象类 AbstractPlatformTransactionManager,我们使用的事务管理类.
+PlatformTransactionManager这个是spring提供的用于管理事务的基础接口，其下有一个实现的抽象类AbstractPlatformTransactionManager,我们使用的事务管理类.
 
 例如DataSourceTransactionManager等都是这个类的子类。
 

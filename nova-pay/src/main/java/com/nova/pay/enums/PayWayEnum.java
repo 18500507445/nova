@@ -22,6 +22,8 @@ public enum PayWayEnum {
 
     KS_PAY(6, "快手支付"),
 
+    HUA_WEI_PAY(7, "华为支付"),
+
     EXCHANGE(99, "金币兑换");
 
     /**
@@ -61,6 +63,8 @@ public enum PayWayEnum {
                 return GOOGLE_PAY;
             case 6:
                 return KS_PAY;
+            case 7:
+                return HUA_WEI_PAY;
             case 99:
                 return EXCHANGE;
             default:

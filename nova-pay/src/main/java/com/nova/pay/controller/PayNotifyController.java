@@ -3,6 +3,7 @@ package com.nova.pay.controller;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONConfig;
@@ -20,15 +21,17 @@ import com.google.api.services.androidpublisher.model.ProductPurchase;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
+import com.nova.pay.entity.param.HuaweiPayParam;
 import com.nova.pay.entity.param.KsPayParam;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.entity.result.FkPayOrder;
+import com.nova.pay.payment.open.*;
 import com.nova.pay.service.fk.FkOrderService;
 import com.nova.pay.service.fk.FkPayConfigService;
 import com.nova.pay.service.fk.FkPayOrderService;
+import com.nova.pay.service.pay.impl.HuaweiServiceImpl;
 import com.nova.pay.service.pay.impl.KsPayServiceImpl;
-import com.nova.pay.payment.open.*;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalEnvelopeDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
@@ -77,6 +80,9 @@ public class PayNotifyController extends BaseController {
     private KsPayment ksPayment;
 
     @Resource
+    private HuaweiPayment huaweiPayment;
+
+    @Resource
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Resource
@@ -90,6 +96,9 @@ public class PayNotifyController extends BaseController {
 
     @Autowired
     private KsPayServiceImpl ksPayService;
+
+    @Autowired
+    private HuaweiServiceImpl huaweiService;
 
     /**
      * 支付宝通知
@@ -615,6 +624,81 @@ public class PayNotifyController extends BaseController {
             log.info("ksRefundNotify====>orderId:{}, updateFlag:{}, 耗时:{}毫秒", orderId, updateFlag, timer.interval());
         }
         return result;
+    }
+
+    /**
+     * 华为支付通知
+     */
+    @PostMapping("huaweiPay")
+    public AjaxResult huaweiPay(HttpServletRequest request) {
+        TimeInterval timer = DateUtil.timer();
+        int payFlag = 0;
+        String orderId = "";
+        Map<String, String> params = new HashMap<>(16);
+        try {
+            //1.0 解析华为通知请求信息
+            Map<String, String[]> requestParams = request.getParameterMap();
+            for (String str : requestParams.keySet()) {
+                String[] values = requestParams.get(str);
+                String valueStr = "";
+                for (int i = 0; i < values.length; i++) {
+                    valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+                }
+                params.put(str, URLDecoder.decode(new String(valueStr.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8), StandardCharsets.UTF_8));
+            }
+            log.info("huaweiPayNotify====>jsonStr:{}", JSONUtil.toJsonStr(params));
+            String consumePurchaseData = MapUtil.getStr(params, "consumePurchaseData");
+            String dataSignature = MapUtil.getStr(params, "dataSignature");
+            if (ObjectUtil.isAllNotEmpty(consumePurchaseData, dataSignature)) {
+                JSONObject content = JSONUtil.parseObj(consumePurchaseData);
+                orderId = content.getStr("developerPayload");
+                String purchaseToken = content.getStr("purchaseToken");
+                String productId = content.getStr("productId");
+                String tradeNo = content.getStr("payOrderId");
+                //2.0 查询订单
+                FkPayOrder payOrder = fkPayOrderService.selectNtPayOrderByOrderIdAndPayWay(orderId, 7);
+                if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
+                    FkPayOrder.FkPayOrderBuilder orderBuilder = FkPayOrder.builder().orderId(orderId).payWay(6);
+
+                    //3.0 rsa验签后 回调改成:处理中
+                    fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(4).build());
+
+                    //4.0 查询配置参数、查询凭证、验证购买
+                    FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
+                    AjaxResult accessTokenResult = huaweiService.getOpenId(PayParam.builder().payConfigId(payOrder.getPayConfigId()).build());
+                    if (ObjectUtil.isNotNull(accessTokenResult)) {
+                        JSONObject accessTokenJson = JSONUtil.parseObj(accessTokenResult);
+                        if (accessTokenJson.containsKey("data") && StrUtil.isNotBlank(accessTokenJson.getStr("data"))) {
+                            String verify = huaweiPayment.verify(HuaweiPayParam.builder().productId(productId).purchaseToken(purchaseToken).accessToken(accessTokenJson.getStr("data")).build());
+                            log.info("huaweiPayNotify验签结果====>verify:{}", JSONUtil.toJsonStr(verify));
+                            if (ObjectUtil.isNotNull(verify)) {
+                                JSONObject verifyJsonObject = JSONUtil.parseObj(verify);
+                                if (StrUtil.equals(Constants.ZERO, verifyJsonObject.getStr("responseCode"))) {
+                                    payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).tradeNo(tradeNo).remark("ture").build());
+                                    if (payFlag > 0) {
+                                        fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(),
+                                                payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());
+                                        return AjaxResult.success("pay success");
+                                    }
+                                } else {
+                                    return AjaxResult.error("huawei orderId status error or orderId error");
+                                }
+                            } else {
+                                return AjaxResult.error("verify order result is null");
+                            }
+                        }
+                    }
+                } else {
+                    return AjaxResult.error("order status error or order not found");
+                }
+            }
+            return AjaxResult.success("pay success");
+        } catch (Exception e) {
+            log.error("huaweiPayPayNotify异常:{}", e.getMessage());
+        } finally {
+            log.info("huaweiPayNotify====>orderId:{}, payFlag:{}, 耗时:{}毫秒", orderId, payFlag, timer.interval());
+        }
+        return AjaxResult.error("fail");
     }
 
 }

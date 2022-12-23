@@ -84,6 +84,33 @@ public class AliPayment {
     }
 
     /**
+     * 网站扫码支付
+     *
+     * @param param
+     * @return
+     */
+    public AlipayTradePagePayResponse aLiPayQr(AliPayParam param) {
+        try {
+            AlipayClient alipayClient = getDefaultClient(param.getAppId(), param.getPrivateKey(), param.getPublicKey());
+
+            com.alibaba.fastjson.JSONObject bizContent = new com.alibaba.fastjson.JSONObject();
+            bizContent.put("out_trade_no", param.getOutTradeNo());
+            //单位元
+            bizContent.put("total_amount", param.getTotalAmount());
+            bizContent.put("subject", param.getSubject());
+            bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
+            bizContent.put("body", param.getBody());
+
+            AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
+            request.setBizContent(bizContent.toString());
+            return alipayClient.pageExecute(request);
+        } catch (AlipayApiException e) {
+            log.error("aLiPayQr异常:", e);
+        }
+        return null;
+    }
+
+    /**
      * app请求支付宝支付
      *
      * @param param

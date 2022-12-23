@@ -30,7 +30,7 @@ public class PayParam extends BaseParam {
 
     /**
      * 支付类型:1H5支付,2小程序,3app支付 4 jsapi微信原生 5ios沙盒 6钱包
-     * 7快捷(银行卡) 8球币兑换 9微信(四方支付) 10支付宝(四方支付)
+     * 7快捷(银行卡) 8球币兑换 9微信(四方支付) 10支付宝(四方支付) 11扫码(微信、支付宝)
      */
     private String type;
 

@@ -103,6 +103,8 @@ public class AliServiceImpl implements PayService {
                     response = aliPayment.aLiPayH5(data);
                 } else if (ArrayUtil.contains(new int[]{3}, type)) {
                     response = aliPayment.aLiPayApp(data);
+                } else if (ArrayUtil.contains(new int[]{11}, type)) {
+                    response = aliPayment.aLiPayQr(data);
                 }
                 if (ObjectUtil.isNotNull(response) && response.isSuccess()) {
                     body = response.getBody();

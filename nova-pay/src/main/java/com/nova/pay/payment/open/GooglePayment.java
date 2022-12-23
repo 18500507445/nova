@@ -154,12 +154,36 @@ public class GooglePayment {
      *  System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(8000));
      *  System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2,SSLv3");
      */
-    public ProductPurchase verify(String packageName, String applicationName, String productId, String purchaseToken, String keyPath) {
+    public ProductPurchase verify(String packageName, String applicationName, String productId, String purchaseToken, String keyPath, boolean isProxy) {
         try {
             List<String> scopes = new ArrayList<>();
             scopes.add(AndroidPublisherScopes.ANDROIDPUBLISHER);
             //使用服务帐户Json文件获取Google凭据
             GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream(keyPath)).createScoped(scopes);
+            //代理模式
+            if (isProxy) {
+                //方式一：api设置代理模式（经过测试不好使）
+
+                //NetHttpTransport.Builder builder = new NetHttpTransport.Builder();
+                //builder.trustCertificates(GoogleUtils.getCertificateTrustStore());
+                //builder.setProxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(HOST_NAME, PORT)));
+                //httpTransport = builder.build();
+
+                //方式二：设置系统变量 但是会影响到其他的api 经过测试微信支付掉不起来
+
+                //Properties systemProperties = System.getProperties();
+                //systemProperties.setProperty("http.proxyHost", HOST_NAME);
+                //systemProperties.setProperty("http.proxyPort", PORT);
+                //systemProperties.setProperty("https.proxyHost", HOST_NAME);
+                //systemProperties.setProperty("https.proxyPort", PORT);
+                //systemProperties.setProperty("socksProxyHost", HOST_NAME);
+                //systemProperties.setProperty("socksProxyPort", PORT);
+                //systemProperties.setProperty("http.nonProxyHosts", "localhost");
+                //systemProperties.setProperty("https.nonProxyHosts", "localhost");
+                //（单位：毫秒）
+                //System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(8000));
+                //System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2,SSLv3");
+            }
             //使用谷歌凭据和收据从谷歌获取购买信息
             HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
             JsonFactory jsonFactory = new JacksonFactory();

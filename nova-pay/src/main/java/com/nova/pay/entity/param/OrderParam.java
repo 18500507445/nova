@@ -31,4 +31,29 @@ public class OrderParam extends BaseParam {
      * 支付配置id
      */
     private Long payConfigId;
+
+    /**
+     * 应用程序包名
+     */
+    private String packageName;
+
+    /**
+     * 应用名称(ScorePredict1x2)
+     */
+    private String applicationName;
+
+    /**
+     * 商品id
+     */
+    private String productId;
+
+    /**
+     * 谷歌返回的收据
+     */
+    private String purchaseToken;
+
+    /**
+     * 证书json文件地址
+     */
+    private String keyPath;
 }

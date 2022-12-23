@@ -6,6 +6,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -432,23 +433,23 @@ public class PayNotifyController extends BaseController {
                 FkPayConfig payConfig = fkPayConfigService.getConfigData(payOrder.getPayConfigId());
 
                 //2.0 然后进行验证
-                /**
-                 *  如果单走服务器验证用这个方式
-                 *  Map<String, Object> map = new HashMap<>(16);
-                 *  map.put("packageName", packageName);
-                 *  map.put("applicationName", "ScorePredict1x2");
-                 *  map.put("productId", productId);
-                 *  map.put("purchaseToken", purchaseToken);
-                 *  map.put("keyPath", payConfig.getKeyPath());
-                 *  String purchase = HttpUtil.createPost(Constants.GOOGLE_VERIFY_URL).form(map).execute().body();
-                 */
-                ProductPurchase purchase = googlePayment.verify(packageName, "ScorePredict1x2", productId, purchaseToken, payConfig.getKeyPath());
+                Map<String, Object> map = new HashMap<>(16);
+                map.put("packageName", packageName);
+                map.put("applicationName", payConfig.getMchId());
+                map.put("productId", productId);
+                map.put("purchaseToken", purchaseToken);
+                map.put("keyPath", payConfig.getKeyPath());
+                String purchase = HttpUtil.createPost(Constants.GOOGLE_VERIFY_URL).form(map).execute().body();
                 log.info("googlePayNotify验签结果====>purchase:{}", JSONUtil.toJsonStr(purchase));
+
                 if (ObjectUtil.isNotNull(purchase)) {
-                    if (0 == purchase.getPurchaseState() && StringUtils.equals(tradeNo, purchase.getOrderId())) {
+                    JSONObject jsonObject = JSONUtil.parseObj(purchase);
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    if (data.containsKey("purchaseState") && 0 == data.getInt("purchaseState") && data.containsKey("orderId") && StringUtils.equals(tradeNo, data.getStr("orderId"))) {
                         payFlag = fkPayOrderService.updateFkPayOrder(orderBuilder.tradeStatus(1).remark("ture").build());
                         if (payFlag > 0) {
-                            fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());
+                            fkOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(),
+                                    orderId, payOrder.getUserName(), "1", payOrder.getFee().toString(), payConfig.getPayType());
                             return AjaxResult.success("pay success");
                         }
                     } else {

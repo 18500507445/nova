@@ -26,17 +26,16 @@
 8.nova-mongodb
 * mongodb
 
-9.nova-mq-active
+9.nova-mq
+* active,kafka,rabbit
 
-10.nova-mq-rabbit
-
-11.nova-pay
+10.nova-pay
 * 支付组件
 
-12.nova-tools
+11.nova-tools
 * demo,java8,hutool测试类,guava测试类,vavr测试类
 
-13.nova-xxl
+12.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
 
 

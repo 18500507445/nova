@@ -11,7 +11,7 @@
  Target Server Version : 50719 (5.7.19-1-log)
  File Encoding         : 65001
 
- Date: 18/11/2022 15:33:36
+ Date: 23/12/2022 15:10:24
 */
 
 SET NAMES utf8mb4;
@@ -26,11 +26,11 @@ CREATE TABLE `fk_pay_config` (
   `pay_type` varchar(8) DEFAULT NULL COMMENT '体育红单支付类型：对应老红单uc_paytype_info表',
   `source` varchar(128) DEFAULT NULL,
   `sid` varchar(4096) DEFAULT NULL COMMENT '渠道号',
-  `pay_way` tinyint(2) DEFAULT NULL COMMENT '1支付宝 2微信 3苹果 4易宝 5谷歌支付 6快手支付 99兑换 ',
-  `app_id` varchar(32) DEFAULT NULL COMMENT '微信appId/支付宝appId/易宝appKey/谷歌clientId\n',
-  `app_secret` varchar(255) DEFAULT NULL COMMENT '微信应用秘钥/谷歌应用秘钥(clientSecret)\n',
-  `mch_id` varchar(32) DEFAULT NULL COMMENT '微信商户号/易宝商户编号/谷歌account_id',
-  `pay_secret` varchar(255) DEFAULT NULL COMMENT '微信支付秘钥/谷歌refreshToken\n',
+  `pay_way` tinyint(2) DEFAULT NULL COMMENT '1支付宝 2微信 3苹果 4易宝 5谷歌支付 6快手支付 7华为支付 99兑换 ',
+  `app_id` varchar(32) DEFAULT NULL COMMENT '微信appId/支付宝appId/易宝appKey/华为client_id\n',
+  `app_secret` varchar(255) DEFAULT NULL COMMENT '微信应用秘钥/华为client_secret',
+  `mch_id` varchar(32) DEFAULT NULL COMMENT '微信商户号/易宝商户编号/谷歌应用名称',
+  `pay_secret` varchar(255) DEFAULT NULL COMMENT '微信支付秘钥',
   `serial_no` varchar(64) DEFAULT NULL COMMENT '证书号',
   `api_v3_key` varchar(64) DEFAULT NULL COMMENT '商户支付v3key，有值微信v3支付，空就是v2支付',
   `public_key` varchar(512) DEFAULT NULL COMMENT '支付宝公钥/易宝公钥',
@@ -99,8 +99,8 @@ CREATE TABLE `fk_pay_order` (
   `trade_no` varchar(64) DEFAULT NULL COMMENT '交易订单号 支付宝同字段、微信和苹果：transaction_id',
   `trade_status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0默认，1成功，2失败，3退款, 4处理中',
   `fee` decimal(10,2) DEFAULT '0.00' COMMENT '金额',
-  `type` tinyint(2) NOT NULL COMMENT '1h5 2小程序 3app 4微信原生jsapi 5沙盒 6钱包 7快捷 8球币兑换 9微信(四方支付) 10支付宝(四方支付)',
-  `pay_way` tinyint(2) NOT NULL COMMENT '1支付宝 2微信 3苹果 4yeePay 5谷歌 6快手 99金币兑换',
+  `type` tinyint(2) NOT NULL COMMENT '1h5 2小程序 3app 4微信原生jsapi 5沙盒 6钱包 7快捷 8球币兑换 9微信(四方支付) 10支付宝(四方支付) 11扫码(微信、支付宝)',
+  `pay_way` tinyint(2) NOT NULL COMMENT '1支付宝 2微信 3苹果 4yeePay 5谷歌 6快手 7华为支付 99金币兑换',
   `currency_type` varchar(16) NOT NULL DEFAULT 'CNY' COMMENT '货币种类   CNY：人民币,USD：美元,HKD：港币,JPY：日元,GBP：英镑,EUR：欧元',
   `sign` blob COMMENT '苹果支付 sign、易宝支付token、快手的小程序平台订单号',
   `business_code` tinyint(2) NOT NULL DEFAULT '0' COMMENT '对应BusinessEnum枚举类\n0:默认\n1:充值\n2:包月会员\n3:包季会员\n4:包年会员\n5:连续包月会员\n6:连续包季会员\n7:连续包年会员\n8:订阅1周\n9:订阅2周\n10:订阅1个月\n11:套餐卡周\n12:套餐卡月\n13:购买方案\n14:开通尊享白银会员\n15:开通尊享黄金会员\n16:尊享会员升级\n17:大数据\n18:红单数据模型\n19:赛事锦囊',

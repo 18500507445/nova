@@ -5,6 +5,7 @@ import com.nova.common.core.domain.AjaxResult;
 import com.nova.common.core.domain.ValidatorReqDto;
 import com.nova.common.utils.common.ValidatorUtil;
 import com.nova.limit.annotation.AccessLimit;
+import com.nova.limit.config.LimitConfig;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Description:
@@ -37,6 +40,15 @@ public class DemoController extends BaseController {
     @ResponseBody
     @AccessLimit(seconds = 5, maxCount = 5)
     public AjaxResult limit(@RequestBody Object body) {
+        System.out.println("applicationContext = " + applicationContext);
+        System.out.println("webApplicationContext = " + webApplicationContext);
+
+        Map<String, LimitConfig> beansOfType = applicationContext.getBeansOfType(LimitConfig.class);
+        System.out.println("beansOfType = " + beansOfType);
+
+        LimitConfig bean = applicationContext.getBean(LimitConfig.class);
+        System.out.println("bean = " + bean);
+
         return AjaxResult.success(body);
     }
 

@@ -5,9 +5,15 @@ import com.nova.common.core.domain.AjaxResult;
 import com.nova.common.core.domain.ValidatorReqDto;
 import com.nova.common.utils.common.ValidatorUtil;
 import com.nova.limit.annotation.AccessLimit;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
+
+import javax.annotation.Resource;
 
 /**
  * @Description:
@@ -15,9 +21,14 @@ import org.springframework.web.bind.annotation.*;
  * @Date: 2022/11/19 17:19
  */
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/")
 public class DemoController extends BaseController {
+
+    private final ApplicationContext applicationContext;
+
+    private final WebApplicationContext webApplicationContext;
 
     /**
      * 限流demo

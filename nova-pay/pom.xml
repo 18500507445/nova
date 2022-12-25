@@ -38,6 +38,11 @@
             <artifactId>nova-mq</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-database</artifactId>
+        </dependency>
+
         <!-- 微信支付 -->
         <dependency>
             <groupId>com.github.binarywang</groupId>

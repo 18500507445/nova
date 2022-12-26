@@ -7,7 +7,7 @@ server:
 redisson:
   lock:
     server:
-      address: 172.30.0.139:6379
+      address: 47.100.174.176:63799
       type: standalone
-      password:
-      database: 1
+      password: '@wangzehui123'
+      database: 0

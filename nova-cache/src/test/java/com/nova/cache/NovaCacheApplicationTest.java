@@ -9,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @SpringBootTest
-class CacheApplicationTest {
+class NovaCacheApplicationTest {
 
     @Autowired
     private RedisService redisService;

@@ -26,12 +26,11 @@ import java.util.concurrent.TimeUnit;
 @Data
 public class RedissonLock {
 
-    RedissonManager redissonManager;
+    private RedissonManager redissonManager;
 
     public RLock getLock(String lockKey) {
         return redissonManager.getRedisson().getLock(lockKey);
     }
-
 
     public void lock(String lockKey) {
         RLock lock = redissonManager.getRedisson().getLock(lockKey);

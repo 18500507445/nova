@@ -17,25 +17,24 @@ import org.redisson.config.Config;
 @Slf4j
 public class RedissonManager {
 
-    private Config config = new Config();
-
     private Redisson redisson = null;
 
+    public Redisson getRedisson() {
+        return redisson;
+    }
+
     public RedissonManager() {
+
     }
 
     public RedissonManager(RedissonProperties redissonProperties) {
         try {
-            config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
+            Config config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
             redisson = (Redisson) Redisson.create(config);
         } catch (Exception e) {
             log.error("Redisson init error", e);
             throw new IllegalArgumentException("please input correct configurations," + "connectionType must in standalone/sentinel/cluster/masterslave");
         }
-    }
-
-    public Redisson getRedisson() {
-        return redisson;
     }
 
     /**
@@ -45,6 +44,7 @@ public class RedissonManager {
     static class RedissonConfigFactory {
 
         private RedissonConfigFactory() {
+
         }
 
         private static volatile RedissonConfigFactory factory = null;
@@ -59,8 +59,6 @@ public class RedissonManager {
             }
             return factory;
         }
-
-        private Config config = new Config();
 
         /**
          * 根据连接类型获取对应连接方式的配置,基于策略模式

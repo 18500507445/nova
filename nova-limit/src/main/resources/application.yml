@@ -3,3 +3,11 @@ server:
   port: 8080
   servlet:
     context-path: /
+
+redisson:
+  lock:
+    server:
+      address: 172.30.0.139:6379
+      type: standalone
+      password:
+      database: 1

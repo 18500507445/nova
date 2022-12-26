@@ -1,6 +1,7 @@
 package com.nova.common.utils.common;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.ObjectUtil;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -66,14 +67,22 @@ public class ServletUtils {
      * 获取request
      */
     public static HttpServletRequest getRequest() {
-        return getRequestAttributes().getRequest();
+        ServletRequestAttributes requestAttributes = getRequestAttributes();
+        if (ObjectUtil.isNotNull(requestAttributes)) {
+            return getRequestAttributes().getRequest();
+        }
+        return null;
     }
 
     /**
      * 获取response
      */
     public static HttpServletResponse getResponse() {
-        return getRequestAttributes().getResponse();
+        ServletRequestAttributes requestAttributes = getRequestAttributes();
+        if (ObjectUtil.isNotNull(requestAttributes)) {
+            return getRequestAttributes().getResponse();
+        }
+        return null;
     }
 
     /**

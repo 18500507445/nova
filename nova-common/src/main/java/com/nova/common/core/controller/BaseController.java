@@ -43,10 +43,13 @@ public class BaseController {
      * @return
      */
     public String getValue(String key) {
+        String value = "";
         HttpServletRequest request = getRequest();
-        String value = request.getParameter(key);
-        if (ObjectUtil.isEmpty(value)) {
-            value = request.getHeader(key);
+        if (ObjectUtil.isNotNull(request)) {
+            value = request.getParameter(key);
+            if (ObjectUtil.isEmpty(value)) {
+                value = request.getHeader(key);
+            }
         }
         return value;
     }

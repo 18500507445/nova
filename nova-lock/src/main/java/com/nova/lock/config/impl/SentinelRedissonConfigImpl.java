@@ -1,20 +1,21 @@
-package com.nova.lock.config.strategy;
+package com.nova.lock.config.impl;
 
-import com.nova.lock.common.GlobalConstant;
+import com.nova.lock.common.RedissonEnum;
+import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 /**
- * SentinelRedissonConfigStrategyImpl
+ * SentinelRedissonConfigImpl
  * 哨兵方式Redis连接配置
  *
  * @author wangzehui
  * @date 2022/12/26 23:10
  */
 @Slf4j
-public class SentinelRedissonConfigStrategyImpl implements RedissonConfigStrategy {
+public class SentinelRedissonConfigImpl implements RedissonConfigStrategy {
 
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {
@@ -34,7 +35,7 @@ public class SentinelRedissonConfigStrategyImpl implements RedissonConfigStrateg
             }
             // 设置sentinel节点的服务IP和端口
             for (int i = 1; i < addrTokens.length; i++) {
-                config.useSentinelServers().addSentinelAddress(GlobalConstant.REDIS_CONNECTION_PREFIX.getConstant_value() + addrTokens[i]);
+                config.useSentinelServers().addSentinelAddress(RedissonEnum.REDIS_CONNECTION_PREFIX.getConstant_value() + addrTokens[i]);
             }
             log.info("初始化[sentinel]方式Config,redisAddress:" + address);
         } catch (Exception e) {

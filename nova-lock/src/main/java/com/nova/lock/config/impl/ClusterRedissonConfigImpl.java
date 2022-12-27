@@ -1,6 +1,7 @@
-package com.nova.lock.config.strategy;
+package com.nova.lock.config.impl;
 
-import com.nova.lock.common.GlobalConstant;
+import com.nova.lock.common.RedissonEnum;
+import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +14,7 @@ import org.redisson.config.Config;
  * @date 2022/12/26 23:10
  */
 @Slf4j
-public class ClusterRedissonConfigStrategyImpl implements RedissonConfigStrategy {
+public class ClusterRedissonConfigImpl implements RedissonConfigStrategy {
 
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {
@@ -24,7 +25,7 @@ public class ClusterRedissonConfigStrategyImpl implements RedissonConfigStrategy
             String[] addrTokens = address.split(",");
             // 设置cluster节点的服务IP和端口
             for (String addrToken : addrTokens) {
-                config.useClusterServers().addNodeAddress(GlobalConstant.REDIS_CONNECTION_PREFIX.getConstant_value() + addrToken);
+                config.useClusterServers().addNodeAddress(RedissonEnum.REDIS_CONNECTION_PREFIX.getConstant_value() + addrToken);
                 if (StringUtils.isNotBlank(password)) {
                     config.useClusterServers().setPassword(password);
                 }

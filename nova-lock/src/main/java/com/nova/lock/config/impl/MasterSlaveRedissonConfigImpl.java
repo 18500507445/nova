@@ -1,6 +1,7 @@
-package com.nova.lock.config.strategy;
+package com.nova.lock.config.impl;
 
-import com.nova.lock.common.GlobalConstant;
+import com.nova.lock.common.RedissonEnum;
+import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +19,7 @@ import java.util.List;
  * @date 2022/12/26 23:10
  */
 @Slf4j
-public class MasterslaveRedissonConfigStrategyImpl implements RedissonConfigStrategy {
+public class MasterSlaveRedissonConfigImpl implements RedissonConfigStrategy {
 
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {
@@ -38,7 +39,7 @@ public class MasterslaveRedissonConfigStrategyImpl implements RedissonConfigStra
             // 设置从节点，移除第一个节点，默认第一个为主节点
             List<String> slaveList = new ArrayList<>();
             for (String addrToken : addrTokens) {
-                slaveList.add(GlobalConstant.REDIS_CONNECTION_PREFIX.getConstant_value() + addrToken);
+                slaveList.add(RedissonEnum.REDIS_CONNECTION_PREFIX.getConstant_value() + addrToken);
             }
             slaveList.remove(0);
 

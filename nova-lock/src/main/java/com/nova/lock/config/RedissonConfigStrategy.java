@@ -1,6 +1,5 @@
-package com.nova.lock.config.strategy;
+package com.nova.lock.config;
 
-import com.nova.lock.config.RedissonProperties;
 import org.redisson.config.Config;
 
 /**

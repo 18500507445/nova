@@ -2,7 +2,7 @@ package com.nova.lock.config;
 
 import com.google.common.base.Preconditions;
 import com.nova.lock.common.RedisConnectionType;
-import com.nova.lock.config.strategy.*;
+import com.nova.lock.config.impl.*;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
@@ -75,13 +75,13 @@ public class RedissonManager {
             // 声明配置上下文
             RedissonConfigContext redissonConfigContext;
             if (connectionType.equals(RedisConnectionType.STANDALONE.getConnection_type())) {
-                redissonConfigContext = new RedissonConfigContext(new StandaloneRedissonConfigStrategyImpl());
+                redissonConfigContext = new RedissonConfigContext(new StandaloneRedissonConfigImpl());
             } else if (connectionType.equals(RedisConnectionType.SENTINEL.getConnection_type())) {
-                redissonConfigContext = new RedissonConfigContext(new SentinelRedissonConfigStrategyImpl());
+                redissonConfigContext = new RedissonConfigContext(new SentinelRedissonConfigImpl());
             } else if (connectionType.equals(RedisConnectionType.CLUSTER.getConnection_type())) {
-                redissonConfigContext = new RedissonConfigContext(new ClusterRedissonConfigStrategyImpl());
+                redissonConfigContext = new RedissonConfigContext(new ClusterRedissonConfigImpl());
             } else if (connectionType.equals(RedisConnectionType.MASTER_SLAVE.getConnection_type())) {
-                redissonConfigContext = new RedissonConfigContext(new MasterslaveRedissonConfigStrategyImpl());
+                redissonConfigContext = new RedissonConfigContext(new MasterSlaveRedissonConfigImpl());
             } else {
                 throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
             }

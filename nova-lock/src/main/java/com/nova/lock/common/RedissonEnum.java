@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum GlobalConstant {
+public enum RedissonEnum {
 
     /**
      * Redis地址连接前缀

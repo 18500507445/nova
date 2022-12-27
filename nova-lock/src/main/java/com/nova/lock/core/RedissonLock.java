@@ -34,7 +34,7 @@ public class RedissonLock {
      */
     public boolean lock(String lockName, long expireSeconds) {
         RLock rLock = redissonManager.getRedisson().getLock(lockName);
-        boolean getLock = false;
+        boolean getLock;
         try {
             getLock = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
             if (getLock) {

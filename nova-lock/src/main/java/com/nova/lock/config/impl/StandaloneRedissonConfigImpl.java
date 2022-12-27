@@ -1,20 +1,21 @@
-package com.nova.lock.config.strategy;
+package com.nova.lock.config.impl;
 
-import com.nova.lock.common.GlobalConstant;
+import com.nova.lock.common.RedissonEnum;
+import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 /**
- * StandaloneRedissonConfigStrategyImpl
+ * StandaloneRedissonConfigImpl
  * 单机方式Redisson配置
  *
  * @author wangzehui
  * @date 2022/12/26 23:10
  */
 @Slf4j
-public class StandaloneRedissonConfigStrategyImpl implements RedissonConfigStrategy {
+public class StandaloneRedissonConfigImpl implements RedissonConfigStrategy {
 
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {
@@ -23,7 +24,7 @@ public class StandaloneRedissonConfigStrategyImpl implements RedissonConfigStrat
             String address = redissonProperties.getAddress();
             String password = redissonProperties.getPassword();
             int database = redissonProperties.getDatabase();
-            String redisAddr = GlobalConstant.REDIS_CONNECTION_PREFIX.getConstant_value() + address;
+            String redisAddr = RedissonEnum.REDIS_CONNECTION_PREFIX.getConstant_value() + address;
             config.useSingleServer().setAddress(redisAddr);
             config.useSingleServer().setDatabase(database);
             if (StringUtils.isNotBlank(password)) {

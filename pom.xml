@@ -20,19 +20,20 @@
     </developers>
 
     <modules>
-        <module>nova-common</module>
-        <module>nova-framework</module>
-        <module>nova-database</module>
-        <module>nova-pay</module>
-        <module>nova-tools</module>
         <module>nova-cache</module>
-        <module>nova-mongodb</module>
-        <module>nova-mail</module>
-        <module>nova-lock</module>
+        <module>nova-common</module>
+        <module>nova-database</module>
         <module>nova-design</module>
-        <module>nova-mq</module>
-        <module>nova-xxl</module>
+        <module>nova-framework</module>
         <module>nova-limit</module>
+        <module>nova-lock</module>
+        <module>nova-mail</module>
+        <module>nova-mongodb</module>
+        <module>nova-mq</module>
+        <module>nova-pay</module>
+        <module>nova-sql</module>
+        <module>nova-tools</module>
+        <module>nova-xxl</module>
     </modules>
 
     <properties>

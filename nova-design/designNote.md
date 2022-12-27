@@ -50,7 +50,6 @@
 11. [解释器（Interpreter）]()
 
 ##### 相关资料
-
 - 23种设计模式-思维导图 https://www.processon.com/view/link/61dce52ef346fb06cb8f047a
 - 23种设计模式-UML类图 https://www.processon.com/view/link/61dba3ad0e3e7441577314a5
 - 图说设计模式 https://design-patterns.readthedocs.io/zh_CN/latest/index.html

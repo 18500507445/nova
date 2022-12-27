@@ -1,4 +1,4 @@
-package com.nova.limit.config;
+package com.nova.lock.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

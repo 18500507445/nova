@@ -1,7 +1,7 @@
-package com.nova.limit.config.strategy;
+package com.nova.lock.config.strategy;
 
-import com.nova.limit.common.GlobalConstant;
-import com.nova.limit.config.RedissonProperties;
+import com.nova.lock.common.GlobalConstant;
+import com.nova.lock.config.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;

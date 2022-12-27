@@ -4,10 +4,3 @@ server:
   servlet:
     context-path: /
 
-redisson:
-  lock:
-    server:
-      address: 47.100.174.176:63799
-      type: standalone
-      password: '@wangzehui123'
-      database: 0

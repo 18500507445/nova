@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>nova</artifactId>
         <groupId>com.nova</groupId>
@@ -8,19 +9,26 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>nova-limit</artifactId>
-    <description>接口限流、请求和响应拦截器处理数据、validation</description>
+    <artifactId>nova-lock</artifactId>
+    <description>redisson</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
+        <redission.version>3.18.0</redission.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>${redission.version}</version>
         </dependency>
 
     </dependencies>

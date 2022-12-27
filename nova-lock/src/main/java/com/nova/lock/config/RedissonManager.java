@@ -1,8 +1,8 @@
-package com.nova.limit.config;
+package com.nova.lock.config;
 
 import com.google.common.base.Preconditions;
-import com.nova.limit.common.RedisConnectionType;
-import com.nova.limit.config.strategy.*;
+import com.nova.lock.common.RedisConnectionType;
+import com.nova.lock.config.strategy.*;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
@@ -73,7 +73,7 @@ public class RedissonManager {
             Preconditions.checkNotNull(redissonProperties.getDatabase(), "redisson.lock.server.database cannot be NULL");
             String connectionType = redissonProperties.getType();
             // 声明配置上下文
-            RedissonConfigContext redissonConfigContext = null;
+            RedissonConfigContext redissonConfigContext;
             if (connectionType.equals(RedisConnectionType.STANDALONE.getConnection_type())) {
                 redissonConfigContext = new RedissonConfigContext(new StandaloneRedissonConfigStrategyImpl());
             } else if (connectionType.equals(RedisConnectionType.SENTINEL.getConnection_type())) {

@@ -1,6 +1,6 @@
-package com.nova.limit.config;
+package com.nova.lock.config;
 
-import com.nova.limit.core.RedissonLock;
+import com.nova.lock.core.RedissonLock;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

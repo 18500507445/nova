@@ -8,15 +8,12 @@ import com.nova.limit.annotation.AccessLimit;
 import com.nova.limit.config.LimitConfig;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @Description:
@@ -70,4 +67,5 @@ public class DemoController extends BaseController {
         ValidatorUtil.validate(reqDto);
         return AjaxResult.success("成功");
     }
+
 }

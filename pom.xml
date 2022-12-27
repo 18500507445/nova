@@ -28,10 +28,12 @@
         <module>nova-cache</module>
         <module>nova-mongodb</module>
         <module>nova-mail</module>
+        <module>nova-lock</module>
         <module>nova-design</module>
         <module>nova-mq</module>
         <module>nova-xxl</module>
         <module>nova-limit</module>
+        <module>nova-lock</module>
     </modules>
 
     <properties>

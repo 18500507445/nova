@@ -1,4 +1,4 @@
-package com.nova.limit.common;
+package com.nova.lock.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

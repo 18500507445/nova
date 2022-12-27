@@ -1,6 +1,6 @@
-package com.nova.limit.config.strategy;
+package com.nova.lock.config.strategy;
 
-import com.nova.limit.config.RedissonProperties;
+import com.nova.lock.config.RedissonProperties;
 import lombok.AllArgsConstructor;
 import org.redisson.config.Config;
 

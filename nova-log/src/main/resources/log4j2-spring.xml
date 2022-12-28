@@ -6,6 +6,7 @@
 
     <!--变量配置-->
     <Properties>
+        <!-- 定义日志存储的路径 -->
         <property name="FILE_PATH" value="/Users/wangzehui/Documents/opt/logbak/nova/nova-log"/>
 <!--        <property name="FILE_PATH" value="/opt/logbak/nova/nova-log" />-->
 
@@ -13,7 +14,6 @@
         <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
         <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
-        <!-- 定义日志存储的路径 -->
     </Properties>
 
     <!--https://logging.apache.org/log4j/2.x/manual/appenders.html-->
@@ -45,31 +45,25 @@
             <DefaultRolloverStrategy max="15"/>
         </RollingFile>
 
-        <!-- 这个会打印出所有的warn及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <!-- 这个会打印出所有的warn及以下级别的信息....-->
         <RollingFile name="RollingFileWarn" fileName="${FILE_PATH}/warn.log" filePattern="${FILE_PATH}/${FILE_NAME}-WARN-%d{yyyy-MM-dd}_%i.log.gz">
-            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
                 <TimeBasedTriggeringPolicy interval="1"/>
                 <SizeBasedTriggeringPolicy size="1024MB"/>
             </Policies>
-            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
         </RollingFile>
 
-        <!-- 这个会打印出所有的error及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <!-- 这个会打印出所有的error及以下级别的信息....-->
         <RollingFile name="RollingFileError" fileName="${FILE_PATH}/error.log" filePattern="${FILE_PATH}/${FILE_NAME}-ERROR-%d{yyyy-MM-dd}_%i.log.gz">
-            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <!--interval属性用来指定多久滚动一次，默认是1 hour-->
                 <TimeBasedTriggeringPolicy interval="1"/>
                 <SizeBasedTriggeringPolicy size="1024MB"/>
             </Policies>
-            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
         </RollingFile>
 
@@ -83,6 +77,7 @@
         <logger name="org.mybatis" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </logger>
+
         <!--监控系统信息-->
         <!--若是additivity设为false，则子Logger只会在自己的appender里输出，而不会在父Logger的appender里输出。-->
         <Logger name="org.springframework" level="info" additivity="false">
@@ -93,17 +88,21 @@
             <appender-ref ref="RollingFileInfo"/>
         </AsyncLogger>
 
-<!--        <AsyncRoot level="info" includeLocation="true">-->
-<!--            <AppenderRef ref="RollingFileInfo" />-->
-<!--        </AsyncRoot>-->
+        <AsyncRoot level="info" includeLocation="true">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFileInfo" />
+            <AppenderRef ref="RollingFileWarn" />
+            <AppenderRef ref="RollingFileError" />
+        </AsyncRoot>
 
-        <root level="info">
-            <appender-ref ref="Console"/>
-            <appender-ref ref="RollingFileInfo"/>
-            <appender-ref ref="RollingFileWarn"/>
-            <appender-ref ref="RollingFileError"/>
-            <appender-ref ref="fileLog"/>
-        </root>
+<!--        <root level="info">-->
+<!--            <appender-ref ref="Console"/>-->
+<!--            <appender-ref ref="RollingFileInfo"/>-->
+<!--            <appender-ref ref="RollingFileWarn"/>-->
+<!--            <appender-ref ref="RollingFileError"/>-->
+<!--            <appender-ref ref="fileLog"/>-->
+<!--        </root>-->
+
     </loggers>
 
 </configuration>

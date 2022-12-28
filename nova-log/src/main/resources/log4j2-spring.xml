@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
 <!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
-<configuration status="INFO" monitorInterval="5">
+<configuration status="INFO" monitorInterval="30">
     <!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
 
     <!--变量配置-->
@@ -27,7 +27,7 @@
         </console>
 
         <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，适合临时测试用-->
-        <File name="fileLog" fileName="${FILE_PATH}/temp.log" append="false">
+        <File name="fileLog" fileName="${FILE_PATH}/dev.log" append="false">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </File>
 
@@ -93,6 +93,7 @@
             <AppenderRef ref="RollingFileInfo" />
             <AppenderRef ref="RollingFileWarn" />
             <AppenderRef ref="RollingFileError" />
+            <AppenderRef ref="fileLog" />
         </AsyncRoot>
 
 <!--        <root level="info">-->

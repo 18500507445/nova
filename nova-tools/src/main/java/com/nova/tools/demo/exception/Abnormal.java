@@ -25,9 +25,9 @@ public class Abnormal {
         } catch (Exception e) {
             StringWriter stringWriter = new StringWriter();
             e.printStackTrace(new PrintWriter(stringWriter));
-            System.out.println(stringWriter.toString());
+            System.out.println(stringWriter);
 
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

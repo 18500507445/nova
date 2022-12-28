@@ -23,26 +23,29 @@
 7.nova-lock
 * [redisson分布式锁](nova-lock/lockNote.md)
 
-8.nova-mail
+8.nova-log
+* [异步log](nova-log/logNote.md)
+
+9.nova-mail
 * 邮件
 
-9.nova-mongodb
+10.nova-mongodb
 * mongodb
 
-10.nova-mq
+11.nova-mq
 * active,kafka,rabbit
 
-11.nova-pay
+12.nova-pay
 * [支付组件](nova-pay/payNote.md)
 
-12.nova-sql
+13.nova-sql
 * [sql练习](nova-sql/sqlNote.md)
 
-13.nova-tools
+14.nova-tools
 * [练习demo,java8,hutool、guava测试类，微信公众号](nova-tools/toolsNote.md)
 * [互联网 Java 工程师进阶知识完全扫盲](summary.md)
 
-14.nova-xxl
+15.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
 
 

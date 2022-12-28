@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Description: 苹果退款通知类
- * @Author: wangzehui
- * @Date: 2022/6/18 17:06
+ * @description: 苹果退款通知类
+ * @author: wangzehui
+ * @date: 2022/6/18 17:06
  */
 @Data
 public class RefundIosDto implements Serializable {

@@ -1,7 +1,7 @@
 package com.nova.design.sum.adapter.interfaceadapter;
 
 /**
- * @author: landy
+ * @author: wangzehui
  * @date: 2019/5/19 12:07
  * @description:
  */

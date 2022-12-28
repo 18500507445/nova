@@ -3,9 +3,9 @@ package com.nova.tools.utils.vavr;
 import io.vavr.Function1;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/10/13 16:19
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/10/13 16:19
  */
 public class CompositionDemo {
 

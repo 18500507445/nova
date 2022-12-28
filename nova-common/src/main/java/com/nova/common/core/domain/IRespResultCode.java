@@ -1,9 +1,9 @@
 package com.nova.common.core.domain;
 
 /**
- * @Description: 基础的返回码对象(基础的返回码)
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: 基础的返回码对象(基础的返回码)
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 public interface IRespResultCode {
 

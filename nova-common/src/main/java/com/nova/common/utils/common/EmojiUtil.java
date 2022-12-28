@@ -9,9 +9,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @Description: emoji表情编码处理
- * @Author: wangzehui
- * @Date: 2022/8/4 21:29
+ * @description: emoji表情编码处理
+ * @author: wangzehui
+ * @date: 2022/8/4 21:29
  */
 public class EmojiUtil {
 

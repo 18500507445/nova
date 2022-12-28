@@ -3,9 +3,9 @@ package com.nova.mail.service;
 import javax.mail.MessagingException;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/3 19:47
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/3 19:47
  */
 public interface MailService {
     /**

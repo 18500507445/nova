@@ -5,10 +5,10 @@ import io.vavr.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description: Vavr通过Future简化了线程的使用方式，不用再像Java定义任务，创建线程，再执行，直接创建一个Future对象即可。
+ * @description: Vavr通过Future简化了线程的使用方式，不用再像Java定义任务，创建线程，再执行，直接创建一个Future对象即可。
  * Future提供的所有操作都是非阻塞的，其底层的ExecutorService用于执行异步处理程序
- * @Author: wangzehui
- * @Date: 2022/10/13 16:30
+ * @author: wangzehui
+ * @date: 2022/10/13 16:30
  */
 public class FutureDemo {
 

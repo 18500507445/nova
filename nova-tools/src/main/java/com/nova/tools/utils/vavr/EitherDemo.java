@@ -4,11 +4,11 @@ import io.vavr.Function1;
 import io.vavr.control.Either;
 
 /**
- * @Description: Either表示可能有两种不同类型的值，分别称为左值和右值，只能是其中一种情况，
+ * @description: Either表示可能有两种不同类型的值，分别称为左值和右值，只能是其中一种情况，
  * Either通常用来表示成功或者失败两种情况，惯例是把成功的值作为右值，失败的值作为左值。
  * 可以在Either后添加应用于左值或又值的计算，当中在实际运行中只会产生左值或右值中的其中一种，也就是说添加的计算也只有一个会生效。
- * @Author: wangzehui
- * @Date: 2022/10/13 16:32
+ * @author: wangzehui
+ * @date: 2022/10/13 16:32
  */
 public class EitherDemo {
 

@@ -28,9 +28,9 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 /**
- * @Description: 快手支付实现类
- * @Author: wangzehui
- * @Date: 2022/11/15 14:04
+ * @description: 快手支付实现类
+ * @author: wangzehui
+ * @date: 2022/11/15 14:04
  */
 @Slf4j
 @Service

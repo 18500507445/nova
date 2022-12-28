@@ -5,9 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description: Caffeine本地缓存配置
- * @Author: wangzehui
- * @Date: 2022/12/20 15:40
+ * @description: Caffeine本地缓存配置
+ * @author: wangzehui
+ * @date: 2022/12/20 15:40
  */
 @Data
 @Component

@@ -4,9 +4,9 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @Description: Redisson配置映射类
- * @Author: wangzehui
- * @Date: 2022/11/19 17:18
+ * @description: Redisson配置映射类
+ * @author: wangzehui
+ * @date: 2022/11/19 17:18
  */
 @Data
 @ConfigurationProperties(prefix = "redisson.lock.server")

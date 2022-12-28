@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Description: 易宝银行卡结算dto
- * @Author: wangzehui
- * @Date: 2022/7/27 10:42
+ * @description: 易宝银行卡结算dto
+ * @author: wangzehui
+ * @date: 2022/7/27 10:42
  */
 @Data
 public class YeePayRecordDto implements Serializable {

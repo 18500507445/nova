@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 支付配置对象 fk_pay_config
- * @Author: wangzehui
- * @Date: 2022/8/22 15:37
+ * @description: 支付配置对象 fk_pay_config
+ * @author: wangzehui
+ * @date: 2022/8/22 15:37
  */
 @Data
 public class FkPayConfig implements Serializable {

@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2019/6/14 14:09
+ * @description:
+ * @author: wangzehui
+ * @date: 2019/6/14 14:09
  */
 @Data
 @Builder

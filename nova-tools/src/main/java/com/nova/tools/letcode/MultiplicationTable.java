@@ -1,9 +1,9 @@
 package com.nova.tools.letcode;
 
 /**
- * @Description: 打印99乘法表
- * @Author: wangzehui
- * @Date: 2021/3/3 11:05
+ * @description: 打印99乘法表
+ * @author: wangzehui
+ * @date: 2021/3/3 11:05
  */
 
 public class MultiplicationTable {

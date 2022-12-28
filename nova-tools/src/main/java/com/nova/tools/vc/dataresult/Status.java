@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2019/8/27 19:10
+ * @description:
+ * @author: wangzehui
+ * @date: 2019/8/27 19:10
  */
 public class Status {
 

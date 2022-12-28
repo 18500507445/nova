@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @author wangzehui
  * @Title: Global
  * @ProjectName crazy
- * @Description: 全局配置类
+ * @description: 全局配置类
  * @date 2021/7/18 16:19
  */
 @Component

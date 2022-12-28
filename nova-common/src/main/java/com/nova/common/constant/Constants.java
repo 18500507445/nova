@@ -1,9 +1,9 @@
 package com.nova.common.constant;
 
 /**
- * @Description: 通用常量信息
- * @Author: wangzehui
- * @Date: 2022/8/4 21:29
+ * @description: 通用常量信息
+ * @author: wangzehui
+ * @date: 2022/8/4 21:29
  */
 public class Constants {
 

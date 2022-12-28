@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @Description: 获取请求参数工具类
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: 获取请求参数工具类
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 @Slf4j
 public class RequestParamsUtil {

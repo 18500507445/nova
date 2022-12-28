@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @Description: 支付策略实现类
- * @Author: wangzehui
- * @Date: 2022/9/20 17:46
+ * @description: 支付策略实现类
+ * @author: wangzehui
+ * @date: 2022/9/20 17:46
  */
 @Component
 public class PayStrategy implements ApplicationContextAware {

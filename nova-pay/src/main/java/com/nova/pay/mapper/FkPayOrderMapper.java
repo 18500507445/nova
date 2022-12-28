@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @Description: 支付订单明细Mapper接口
- * @Author: wangzehui
- * @Date: 2022/8/22 15:48
+ * @description: 支付订单明细Mapper接口
+ * @author: wangzehui
+ * @date: 2022/8/22 15:48
  */
 @Mapper
 public interface FkPayOrderMapper {

@@ -22,9 +22,9 @@ import java.util.Map;
 import java.util.SortedMap;
 
 /**
- * @Description: web端链路过滤器处理(设置traceId, spanId)
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: web端链路过滤器处理(设置traceId, spanId)
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 @Component
 @Slf4j

@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: Memcache工具类
- * @Author: wangzehui
- * @Date: 2022/12/20 15:40
+ * @description: Memcache工具类
+ * @author: wangzehui
+ * @date: 2022/12/20 15:40
  */
 @Component
 public class MemcacheUtil implements Serializable {

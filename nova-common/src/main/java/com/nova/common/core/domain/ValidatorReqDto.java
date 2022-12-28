@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.validation.constraints.*;
 
 /**
- * @Description: Validator请求对象
- * @Author: wangzehui
- * @Date: 2022/12/19 20:58
+ * @description: Validator请求对象
+ * @author: wangzehui
+ * @date: 2022/12/19 20:58
  */
 @Data
 public class ValidatorReqDto {

@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
- * @Description: 数字运算demo
- * @Author: wangzehui
- * @Date: 2022/11/17 20:15
+ * @description: 数字运算demo
+ * @author: wangzehui
+ * @date: 2022/11/17 20:15
  */
 public class NumberTest {
 

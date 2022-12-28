@@ -5,9 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Description: Trace对象
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: Trace对象
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 @Data
 public class Trace implements Serializable {

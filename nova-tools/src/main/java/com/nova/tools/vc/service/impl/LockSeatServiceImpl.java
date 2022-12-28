@@ -19,9 +19,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2019/5/25 16:59
+ * @description:
+ * @author: wangzehui
+ * @date: 2019/5/25 16:59
  */
 @Service
 @Slf4j

@@ -3,9 +3,9 @@ package com.nova.tools.demo.init;
 import org.springframework.boot.CommandLineRunner;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/10/11 10:40
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/10/11 10:40
  */
 public class InitDemo3 implements CommandLineRunner {
 

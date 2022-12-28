@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/11/19 17:19
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/11/19 17:19
  */
 @Slf4j
 @AllArgsConstructor

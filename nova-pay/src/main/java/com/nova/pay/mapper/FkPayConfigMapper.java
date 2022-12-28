@@ -7,9 +7,9 @@ import java.util.List;
 
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/8/22 15:40
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/8/22 15:40
  */
 @Mapper
 public interface FkPayConfigMapper {

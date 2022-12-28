@@ -1,9 +1,9 @@
 package com.nova.tools.letcode;
 
 /**
- * @Description: 数字翻转，非int类型返回0
- * @Author: wangzehui
- * @Date: 2021/2/23 17:13
+ * @description: 数字翻转，非int类型返回0
+ * @author: wangzehui
+ * @date: 2021/2/23 17:13
  */
 
 public class Reverse {

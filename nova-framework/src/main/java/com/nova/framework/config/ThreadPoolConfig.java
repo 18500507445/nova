@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author wangzehui
- * @Description: 线程池配置
+ * @description: 线程池配置
  * @date 2022/7/18 16:24
  */
 @Configuration

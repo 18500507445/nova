@@ -9,9 +9,9 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * @Description: 公共请求参数
- * @Author: wangzehui
- * @Date: 2022/8/23 13:57
+ * @description: 公共请求参数
+ * @author: wangzehui
+ * @date: 2022/8/23 13:57
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

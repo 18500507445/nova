@@ -3,9 +3,9 @@ package com.nova.pay.service.fk;
 import java.util.Map;
 
 /**
- * @Description: 订单接口
- * @Author: wangzehui
- * @Date: 2022/8/24 14:30
+ * @description: 订单接口
+ * @author: wangzehui
+ * @date: 2022/8/24 14:30
  */
 public interface FkOrderService {
 

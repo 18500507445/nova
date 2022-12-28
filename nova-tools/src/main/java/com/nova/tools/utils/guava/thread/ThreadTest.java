@@ -8,9 +8,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @Description: https://blog.csdn.net/qq_36042938/article/details/109182992
- * @Author: wangzehui
- * @Date: 2022/10/13 20:05
+ * @description: https://blog.csdn.net/qq_36042938/article/details/109182992
+ * @author: wangzehui
+ * @date: 2022/10/13 20:05
  */
 public class ThreadTest {
 

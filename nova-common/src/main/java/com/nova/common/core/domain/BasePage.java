@@ -3,9 +3,9 @@ package com.nova.common.core.domain;
 import java.io.Serializable;
 
 /**
- * @Description: 基础分页对象
- * @Author: wangzehui
- * @Date: 2022/12/19 20:58
+ * @description: 基础分页对象
+ * @author: wangzehui
+ * @date: 2022/12/19 20:58
  */
 public class BasePage implements Serializable {
 

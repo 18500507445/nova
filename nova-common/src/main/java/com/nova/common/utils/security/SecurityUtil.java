@@ -20,9 +20,9 @@ import java.util.Map;
 
 /**
  * @ClassName: SecurityUtil.java
- * @Description: 请求URL地址加密解密工具类
+ * @description: 请求URL地址加密解密工具类
  * @author: wangzehui
- * @Date: 2021/11/21 10:56
+ * @date: 2021/11/21 10:56
  */
 public class SecurityUtil {
 

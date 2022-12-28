@@ -4,7 +4,7 @@ package com.nova.design.sum.adapter.classadapter;
 import com.nova.design.sum.adapter.domain.PS2;
 
 /**
- * @author: landy
+ * @author: wangzehui
  * @date: 2019/5/19 11:39
  * @description:
  */

@@ -4,9 +4,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @Description: 从运行结果可以看出，当一个线程运行完毕后才把锁释放，其他线程才能执行，其他线程的执行顺序是不确定的
- * @Author: wangzehui
- * @Date: 2021/4/25 11:19
+ * @description: 从运行结果可以看出，当一个线程运行完毕后才把锁释放，其他线程才能执行，其他线程的执行顺序是不确定的
+ * @author: wangzehui
+ * @date: 2021/4/25 11:19
  */
 
 public class JavaLock {

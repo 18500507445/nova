@@ -18,9 +18,9 @@ import java.util.Map;
 
 /**
  * @ClassName: DispatcherController.java
- * @Description: 内部跳转controller
+ * @description: 内部跳转controller
  * @author: wangzehui
- * @Date: 2022/11/21 10:56
+ * @date: 2022/11/21 10:56
  */
 @RestController
 @RequestMapping("/api")

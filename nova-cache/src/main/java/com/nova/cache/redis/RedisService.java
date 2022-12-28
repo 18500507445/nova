@@ -20,9 +20,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description: redis工具类
- * @Author: wangzehui
- * @Date: 2022/6/19 15:40
+ * @description: redis工具类
+ * @author: wangzehui
+ * @date: 2022/6/19 15:40
  */
 @Slf4j
 @Component

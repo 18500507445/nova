@@ -6,9 +6,9 @@ import java.io.*;
 import java.net.URLDecoder;
 
 /**
- * @Description: 文件路径读取文件内容工具类
- * @Author: wangzehui
- * @Date: 2022/12/5 21:36
+ * @description: 文件路径读取文件内容工具类
+ * @author: wangzehui
+ * @date: 2022/12/5 21:36
  */
 public class FileContentUtil {
 

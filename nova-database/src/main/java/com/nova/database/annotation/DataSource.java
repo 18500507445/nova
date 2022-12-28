@@ -6,9 +6,9 @@ import com.nova.common.enums.DataSourceType;
 import java.lang.annotation.*;
 
 /**
- * @Description: 自定义多数据源切换注解
- * @Author: wangzehui
- * @Date: 2022/8/4 21:29
+ * @description: 自定义多数据源切换注解
+ * @author: wangzehui
+ * @date: 2022/8/4 21:29
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

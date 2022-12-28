@@ -6,9 +6,9 @@ import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
 
 /**
- * @Description: 支付宝配置类
- * @Author: wangzehui
- * @Date: 2022/3/17 13:10
+ * @description: 支付宝配置类
+ * @author: wangzehui
+ * @date: 2022/3/17 13:10
  */
 @Deprecated
 public class AliPayConfig {

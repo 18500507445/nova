@@ -10,9 +10,9 @@ import org.springframework.core.NamedThreadLocal;
 import java.util.UUID;
 
 /**
- * @Description: traceId和spanId工具类
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: traceId和spanId工具类
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 public class TraceHelper {
 

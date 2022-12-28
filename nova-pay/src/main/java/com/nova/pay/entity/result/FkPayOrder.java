@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/8/22 15:45
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/8/22 15:45
  */
 @Data
 @Builder

@@ -1,9 +1,9 @@
 package com.nova.tools.vc.enumerate;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/21 17:24
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/21 17:24
  */
 public enum ResultCode {
 

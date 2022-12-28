@@ -4,9 +4,9 @@ package com.nova.tools.vc.dataresult;
 import java.io.Serializable;
 
 /**
- * @Description:
- * @Author: vc
- * @Date: 2019/8/27 19:10
+ * @description:
+ * @author: vc
+ * @date: 2019/8/27 19:10
  */
 
 abstract class BaseResult implements Serializable {

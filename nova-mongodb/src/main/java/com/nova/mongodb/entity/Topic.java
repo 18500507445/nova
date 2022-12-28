@@ -8,9 +8,9 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/8 21:47
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/8 21:47
  */
 @Document(collection = "tb_topic")
 @Data

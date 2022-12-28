@@ -8,9 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
- * @Description: 原子变量 AtomicInteger,LongAdder,LongAccumulator
- * @Author: wangzehui
- * @Date: 2022/11/18 14:49
+ * @description: 原子变量 AtomicInteger,LongAdder,LongAccumulator
+ * @author: wangzehui
+ * @date: 2022/11/18 14:49
  */
 public class AtomicExample {
 

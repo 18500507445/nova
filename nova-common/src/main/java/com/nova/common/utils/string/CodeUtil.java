@@ -4,8 +4,8 @@ import java.util.Random;
 
 /**
  * @Classname: CodeUtil
- * @Description: 唯一ID生成唯一邀请码
- * @Date: 2022/5/16 17:48
+ * @description: 唯一ID生成唯一邀请码
+ * @date: 2022/5/16 17:48
  * @Created: by wangzehui
  */
 public class CodeUtil {

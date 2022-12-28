@@ -5,9 +5,9 @@ import com.nova.pay.entity.result.FkPayOrder;
 import java.util.List;
 
 /**
- * @Description: 支付订单明细Service接口
- * @Author: wangzehui
- * @Date: 2022/8/22 15:49
+ * @description: 支付订单明细Service接口
+ * @author: wangzehui
+ * @date: 2022/8/22 15:49
  */
 public interface FkPayOrderService {
 

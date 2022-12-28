@@ -3,9 +3,9 @@ package com.nova.tools.demo.init;
 import javax.annotation.PostConstruct;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/10/11 10:35
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/10/11 10:35
  */
 public class InitDemo1 {
 

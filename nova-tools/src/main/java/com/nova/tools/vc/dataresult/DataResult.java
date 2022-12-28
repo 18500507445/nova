@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2019/8/27 19:10
+ * @description:
+ * @author: wangzehui
+ * @date: 2019/8/27 19:10
  */
 
 public class DataResult<T> extends BaseResult implements Serializable {

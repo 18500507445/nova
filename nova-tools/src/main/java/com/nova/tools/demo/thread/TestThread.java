@@ -1,9 +1,9 @@
 package com.nova.tools.demo.thread;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2019/4/22 11:39
+ * @description:
+ * @author: wangzehui
+ * @date: 2019/4/22 11:39
  */
 
 public class TestThread {

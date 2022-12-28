@@ -15,9 +15,9 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/3 19:48
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/3 19:48
  */
 @Service
 @AllArgsConstructor

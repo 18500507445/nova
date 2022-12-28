@@ -3,9 +3,9 @@ package com.nova.tools.utils.vavr;
 import io.vavr.Lazy;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/10/13 16:28
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/10/13 16:28
  */
 public class LazyDemo {
 

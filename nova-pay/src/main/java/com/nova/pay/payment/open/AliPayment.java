@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @Description: 支付宝配置
- * @Author: wangzehui
- * @Date: 2022/8/22 09:40
+ * @description: 支付宝配置
+ * @author: wangzehui
+ * @date: 2022/8/22 09:40
  */
 @Slf4j
 @Component

@@ -3,9 +3,9 @@ package com.nova.tools.demo.init;
 import org.springframework.boot.SpringApplication;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/10/11 10:40
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/10/11 10:40
  */
 //@SpringBootApplication
 public class InitDemo4 {

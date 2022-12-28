@@ -22,9 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description: 华为支付工具类
- * @Author: wangzehui
- * @Date: 2022/12/2 10:22
+ * @description: 华为支付工具类
+ * @author: wangzehui
+ * @date: 2022/12/2 10:22
  */
 @Slf4j
 @Component

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * @Description: 响应拦截器 (@ResponseBody的返回生效)
- * @Author: wangzehui
- * @Date: 2022/8/30 15:30
+ * @description: 响应拦截器 (@ResponseBody的返回生效)
+ * @author: wangzehui
+ * @date: 2022/8/30 15:30
  */
 @ControllerAdvice
 public class ResponseAdvice implements ResponseBodyAdvice {

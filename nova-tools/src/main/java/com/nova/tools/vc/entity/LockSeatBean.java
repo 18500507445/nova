@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * @Description: 锁定返回实体类
- * @Author: wangzehui
- * @Date: 2019/5/27 9:21
+ * @description: 锁定返回实体类
+ * @author: wangzehui
+ * @date: 2019/5/27 9:21
  */
 @Data
 public class LockSeatBean implements Serializable {

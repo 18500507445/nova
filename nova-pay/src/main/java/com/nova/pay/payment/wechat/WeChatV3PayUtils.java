@@ -13,9 +13,9 @@ import com.nova.pay.config.WeChatConfig;
 import javax.annotation.Resource;
 
 /**
- * @Description: 微信支付v3工具类
- * @Author: wangzehui
- * @Date: 2022/8/16 20:32
+ * @description: 微信支付v3工具类
+ * @author: wangzehui
+ * @date: 2022/8/16 20:32
  */
 public class WeChatV3PayUtils {
 

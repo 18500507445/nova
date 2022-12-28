@@ -7,10 +7,10 @@ import com.nova.pay.config.WeChatConfig;
 import javax.annotation.Resource;
 
 /**
- * @Description: 企业微信支付v2工具类
+ * @description: 企业微信支付v2工具类
  * 文档地址：http://www.binary.ac.cn/weixin-java-pay-javadoc/com/github/binarywang/wxpay/service/EntPayService.html
- * @Author: wangzehui
- * @Date: 2022/8/4 22:17
+ * @author: wangzehui
+ * @date: 2022/8/4 22:17
  */
 public class EntWeChatV2PayUtils {
 

@@ -5,9 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Description: 锁定座位请求参数
- * @Author: wangzehui
- * @Date: 2019/5/27 9:18
+ * @description: 锁定座位请求参数
+ * @author: wangzehui
+ * @date: 2019/5/27 9:18
  */
 @Data
 public class LockSeatParamBean implements Serializable {

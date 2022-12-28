@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/11/18 15:05
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/11/18 15:05
  */
 public class ExecutorsDemo {
 

@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @Description: body reader请求
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: body reader请求
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 @Slf4j
 public class ReqGetBody {

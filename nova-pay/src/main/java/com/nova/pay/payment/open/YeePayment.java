@@ -29,10 +29,10 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * @Description: 易宝数藏钱包接入指引
+ * @description: 易宝数藏钱包接入指引
  * https://open.yeepay.com/docs/products/ptssfk/quick-start/62580d1b4fb56f003e54b455
- * @Author: wangzehui
- * @Date: 2022/6/30 18:10
+ * @author: wangzehui
+ * @date: 2022/6/30 18:10
  */
 @Slf4j
 @Component

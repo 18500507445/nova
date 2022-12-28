@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/3 20:37
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/3 20:37
  */
 @SpringBootTest
 public class MailApplicationTest {

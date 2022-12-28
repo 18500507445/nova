@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 
 
 /**
- * @Description: rabbitMq配置类
- * @Author: wangzehui
- * @Date: 2022/9/3 19:47
+ * @description: rabbitMq配置类
+ * @author: wangzehui
+ * @date: 2022/9/3 19:47
  */
 @Configuration
 @Slf4j

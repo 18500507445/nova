@@ -3,9 +3,9 @@ package com.nova.pay.entity.param;
 import lombok.*;
 
 /**
- * @Description: 快手支付请求实体类
- * @Author: wangzehui
- * @Date: 2022/11/15 14:36
+ * @description: 快手支付请求实体类
+ * @author: wangzehui
+ * @date: 2022/11/15 14:36
  */
 @Data
 @Builder

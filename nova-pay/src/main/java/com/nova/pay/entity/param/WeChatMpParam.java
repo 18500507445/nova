@@ -3,9 +3,9 @@ package com.nova.pay.entity.param;
 import lombok.Data;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/8/23 21:19
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/8/23 21:19
  */
 @Data
 public class WeChatMpParam extends BaseParam {

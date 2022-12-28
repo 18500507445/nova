@@ -9,9 +9,9 @@ import lombok.*;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @Description: 支付请求公共参数类
- * @Author: wangzehui
- * @Date: 2022/8/23 14:00
+ * @description: 支付请求公共参数类
+ * @author: wangzehui
+ * @date: 2022/8/23 14:00
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

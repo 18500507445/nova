@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/8 19:43
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/8 19:43
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class MongodbApplication {

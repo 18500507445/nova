@@ -4,9 +4,9 @@ import io.vavr.collection.List;
 import io.vavr.control.Option;
 
 /**
- * @Description: list计算
- * @Author: wangzehui
- * @Date: 2022/10/13 16:22
+ * @description: list计算
+ * @author: wangzehui
+ * @date: 2022/10/13 16:22
  */
 public class ListDemo {
 

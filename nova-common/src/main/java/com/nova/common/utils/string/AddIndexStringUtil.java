@@ -3,9 +3,9 @@ package com.nova.common.utils.string;
 import java.math.BigDecimal;
 
 /**
- * @Description: 字符串间隔下标插入
- * @Author: wangzehui
- * @Date: 2020/12/24 15:37
+ * @description: 字符串间隔下标插入
+ * @author: wangzehui
+ * @date: 2020/12/24 15:37
  */
 
 public class AddIndexStringUtil {

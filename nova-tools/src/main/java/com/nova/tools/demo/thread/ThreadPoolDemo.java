@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.*;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/3/31 10:38
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/3/31 10:38
  */
 public class ThreadPoolDemo {
 

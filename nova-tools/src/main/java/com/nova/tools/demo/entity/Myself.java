@@ -8,9 +8,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description: 数据类
- * @Author: wangzehui
- * @Date: 2021/10/16 12:00 下午
+ * @description: 数据类
+ * @author: wangzehui
+ * @date: 2021/10/16 12:00 下午
  */
 public class Myself {
 

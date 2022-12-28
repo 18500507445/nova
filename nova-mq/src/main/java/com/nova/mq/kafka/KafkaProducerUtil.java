@@ -8,9 +8,9 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import javax.annotation.Resource;
 
 /**
- * @Description: kafka生产者工具类
- * @Author: wangzehui
- * @Date: 2022/12/20 21:29
+ * @description: kafka生产者工具类
+ * @author: wangzehui
+ * @date: 2022/12/20 21:29
  */
 @Slf4j
 public class KafkaProducerUtil {

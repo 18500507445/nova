@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Description: 商家微信支付工具类
- * @Author: wangzehui
- * @Date: 2022/9/15 15:13
+ * @description: 商家微信支付工具类
+ * @author: wangzehui
+ * @date: 2022/9/15 15:13
  */
 public class McWeChatV3PayUtils {
 

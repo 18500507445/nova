@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @Description: trace http header 枚举
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: trace http header 枚举
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 @Getter
 @AllArgsConstructor

@@ -17,9 +17,9 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * @Description: 测试rabbit-mq监听器
- * @Author: wangzehui
- * @Date: 2022/9/11 09:25
+ * @description: 测试rabbit-mq监听器
+ * @author: wangzehui
+ * @date: 2022/9/11 09:25
  */
 @Slf4j
 public class RabbitMqListener {

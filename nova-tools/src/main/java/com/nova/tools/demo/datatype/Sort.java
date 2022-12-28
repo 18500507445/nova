@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 /**
- * @Description: 排序练习类
- * @Author: wangzehui
- * @Date: 2019/4/18 17:04
+ * @description: 排序练习类
+ * @author: wangzehui
+ * @date: 2019/4/18 17:04
  */
 public class Sort {
 

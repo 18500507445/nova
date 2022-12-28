@@ -6,9 +6,9 @@ import com.nova.pay.entity.result.FkPayConfig;
 import java.util.List;
 
 /**
- * @Description: 支付配置Service接口
- * @Author: wangzehui
- * @Date: 2022/8/22 15:43
+ * @description: 支付配置Service接口
+ * @author: wangzehui
+ * @date: 2022/8/22 15:43
  */
 public interface FkPayConfigService {
 

@@ -1,9 +1,9 @@
 package com.nova.pay.config;
 
 /**
- * @Description: 苹果支付配置类
- * @Author: wangzehui
- * @Date: 2022/6/18 13:36
+ * @description: 苹果支付配置类
+ * @author: wangzehui
+ * @date: 2022/6/18 13:36
  */
 @Deprecated
 public class ApplePayConfig {

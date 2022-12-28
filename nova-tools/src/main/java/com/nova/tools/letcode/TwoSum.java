@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description: 从数组找出 两数之和等于一个目标数 返回下标
- * @Author: wangzehui
- * @Date: 2020/6/16 13:38
+ * @description: 从数组找出 两数之和等于一个目标数 返回下标
+ * @author: wangzehui
+ * @date: 2020/6/16 13:38
  */
 
 public class TwoSum {

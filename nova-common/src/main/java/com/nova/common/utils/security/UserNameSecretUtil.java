@@ -13,9 +13,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * @Description: 用户名加密工具类
- * @Author: wangzehui
- * @Date: 2022/10/11 17:15
+ * @description: 用户名加密工具类
+ * @author: wangzehui
+ * @date: 2022/10/11 17:15
  */
 @Slf4j
 public class UserNameSecretUtil {

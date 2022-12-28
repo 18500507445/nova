@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * @Description: DateExample
- * @Author: wangzehui
- * @Date: 2022/11/18 14:06
+ * @description: DateExample
+ * @author: wangzehui
+ * @date: 2022/11/18 14:06
  */
 public class DateExample {
 

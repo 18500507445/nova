@@ -9,9 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Description: 通用返回结果对象
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: 通用返回结果对象
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 @Data
 public class RespResult<T> implements Serializable {

@@ -8,9 +8,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2018/12/20 18:29
+ * @description:
+ * @author: wangzehui
+ * @date: 2018/12/20 18:29
  */
 
 public class TimeDemo {

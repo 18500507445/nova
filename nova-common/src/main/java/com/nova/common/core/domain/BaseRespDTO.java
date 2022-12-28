@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 基本返回信息DTO(常见的几个字段)
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: 基本返回信息DTO(常见的几个字段)
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 @Data
 public class BaseRespDTO implements Serializable {

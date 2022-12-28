@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
- * @Date:Created in 17:34 2018/10/30
+ * @date:Created in 17:34 2018/10/30
  */
 
 public class CompletableFutureDemo {

@@ -9,9 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 /**
- * @Description: 阿里云图片上传
- * @Author: wangzehui
- * @Date: 2022/12/5 20:39
+ * @description: 阿里云图片上传
+ * @author: wangzehui
+ * @date: 2022/12/5 20:39
  */
 public class AliUploadImage {
 

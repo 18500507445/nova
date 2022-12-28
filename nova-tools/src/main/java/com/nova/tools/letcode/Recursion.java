@@ -1,9 +1,9 @@
 package com.nova.tools.letcode;
 
 /**
- * @Description: 求和1-100 递归
- * @Author: wangzehui
- * @Date: 2021/2/22 14:27
+ * @description: 求和1-100 递归
+ * @author: wangzehui
+ * @date: 2021/2/22 14:27
  */
 public class Recursion {
     public static void main(String[] args) {

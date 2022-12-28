@@ -4,9 +4,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @Description: 1.使用newSingleThreadExecutor  2使用join方法 3ThreadPoolExecutor，设置它的核心线程数为1
- * @Author: wangzehui
- * @Date: 2021/4/25 11:29
+ * @description: 1.使用newSingleThreadExecutor  2使用join方法 3ThreadPoolExecutor，设置它的核心线程数为1
+ * @author: wangzehui
+ * @date: 2021/4/25 11:29
  */
 
 public class OrderThread {

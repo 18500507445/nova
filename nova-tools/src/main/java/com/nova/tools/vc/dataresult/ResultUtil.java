@@ -6,9 +6,9 @@ import com.nova.tools.vc.enumerate.ResultCode;
 import java.util.Map;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/21 17:24
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/21 17:24
  */
 public class ResultUtil {
 

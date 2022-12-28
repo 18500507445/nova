@@ -5,9 +5,9 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
- * @Description: 支付宝支付实体类
- * @Author: wangzehui
- * @Date: 2022/3/17 13:13
+ * @description: 支付宝支付实体类
+ * @author: wangzehui
+ * @date: 2022/3/17 13:13
  */
 @Data
 @Builder

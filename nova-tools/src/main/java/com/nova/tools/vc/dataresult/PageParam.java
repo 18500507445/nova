@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Author: wangzehui
+ * @author: wangzehui
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

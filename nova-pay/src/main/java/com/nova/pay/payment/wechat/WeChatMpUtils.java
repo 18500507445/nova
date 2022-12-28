@@ -15,9 +15,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @Description: 微信公众号工具类
- * @Author: wangzehui
- * @Date: 2022/8/5 09:10
+ * @description: 微信公众号工具类
+ * @author: wangzehui
+ * @date: 2022/8/5 09:10
  */
 @Component
 public class WeChatMpUtils {

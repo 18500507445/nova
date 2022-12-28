@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description: Guava中的缓存实现
+ * @description: Guava中的缓存实现
  * Guava中的缓存是本地缓存的实现，与ConcurrentMap相似，但不完全一样。最基本的区别就是，
  * ConcurrentMap会一直保存添加进去的元素，除非你主动remove掉。而Guava Cache为了限制内存的使用，通常都会设置自动回收
  * <p>
@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
  * 以空间换取时间，就是你愿意用内存的消耗来换取读取性能的提升
  * 你已经预测到某些数据会被频繁的查询
  * 缓存中存放的数据不会超过内存空间
- * @Author: wangzehui
- * @Date: 2022/10/13 19:37
+ * @author: wangzehui
+ * @date: 2022/10/13 19:37
  */
 public class CacheTest {
 

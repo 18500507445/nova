@@ -18,9 +18,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description: 限流
- * @Author: wangzehui
- * @Date: 2022/11/19 16:34
+ * @description: 限流
+ * @author: wangzehui
+ * @date: 2022/11/19 16:34
  */
 @Component
 public class LimitInterceptor implements HandlerInterceptor {

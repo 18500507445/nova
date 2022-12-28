@@ -39,9 +39,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Description: 微信支付实现类
- * @Author: wangzehui
- * @Date: 2022/9/20 17:43
+ * @description: 微信支付实现类
+ * @author: wangzehui
+ * @date: 2022/9/20 17:43
  */
 @Slf4j
 @Service

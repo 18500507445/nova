@@ -3,9 +3,9 @@ package com.nova.pay.entity.param;
 import lombok.*;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/8/23 19:44
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/8/23 19:44
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

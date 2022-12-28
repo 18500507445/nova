@@ -1,9 +1,9 @@
 package com.nova.tools.java8.functioninterface;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2021/4/20 21:14
+ * @description:
+ * @author: wangzehui
+ * @date: 2021/4/20 21:14
  */
 
 public class ParameterLambda {

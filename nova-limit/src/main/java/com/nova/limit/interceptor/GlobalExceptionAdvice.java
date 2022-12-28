@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 
 /**
- * @Description: 全局异常拦截器
- * @Author: wangzehui
- * @Date: 2022/12/19 20:47
+ * @description: 全局异常拦截器
+ * @author: wangzehui
+ * @date: 2022/12/19 20:47
  */
 @Slf4j
 @RestControllerAdvice

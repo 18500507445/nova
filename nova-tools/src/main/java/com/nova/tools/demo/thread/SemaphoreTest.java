@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2021/3/31 14:33
+ * @description:
+ * @author: wangzehui
+ * @date: 2021/3/31 14:33
  */
 
 public class SemaphoreTest {

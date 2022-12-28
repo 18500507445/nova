@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.Objects;
 
 /**
- * @Description: maven 本地仓库清理类工具类
+ * @description: maven 本地仓库清理类工具类
  * 删除本地maven仓库中的空文件夹
  * 删除本地maven仓库中含有后缀为.lastUpdated的文件的文件夹
  * 删除本地maven仓库中后缀为.jar-in-progress的文件的文件夹
- * @Author: wangzehui
- * @Date: 2022/8/6 13:17
+ * @author: wangzehui
+ * @date: 2022/8/6 13:17
  */
 public class DeleteMaven {
 

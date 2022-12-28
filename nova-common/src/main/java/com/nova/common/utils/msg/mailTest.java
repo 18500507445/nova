@@ -5,9 +5,9 @@ import org.apache.commons.mail.HtmlEmail;
 import java.util.Random;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2021/9/14 9:40 上午
+ * @description:
+ * @author: wangzehui
+ * @date: 2021/9/14 9:40 上午
  */
 public class mailTest {
 

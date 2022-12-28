@@ -18,9 +18,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/11/15 14:10
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/11/15 14:10
  * @see <a href="https://mp.kuaishou.com/docs/develop/server/epay/interfaceDefinitionWithoutChannel.html">支付流程图</a>
  */
 @Slf4j

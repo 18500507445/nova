@@ -9,9 +9,9 @@ import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description: 微信配置
- * @Author: wangzehui
- * @Date: 2022/8/4 21:29
+ * @description: 微信配置
+ * @author: wangzehui
+ * @date: 2022/8/4 21:29
  */
 @Component
 public class WeChatConfig {

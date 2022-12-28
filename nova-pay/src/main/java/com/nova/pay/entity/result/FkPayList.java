@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 支付列表
- * @Author: wangzehui
- * @Date: 2022/8/22 13:22
+ * @description: 支付列表
+ * @author: wangzehui
+ * @date: 2022/8/22 13:22
  */
 @Data
 @Builder

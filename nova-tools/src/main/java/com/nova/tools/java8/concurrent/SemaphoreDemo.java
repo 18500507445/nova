@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/11/18 15:15
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/11/18 15:15
  */
 public class SemaphoreDemo {
 

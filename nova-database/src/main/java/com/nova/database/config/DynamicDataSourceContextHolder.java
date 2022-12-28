@@ -4,9 +4,9 @@ package com.nova.database.config;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Description: 数据源切换处理
- * @Author: wangzehui
- * @Date: 2022/8/4 21:29
+ * @description: 数据源切换处理
+ * @author: wangzehui
+ * @date: 2022/8/4 21:29
  */
 @Slf4j
 public class DynamicDataSourceContextHolder {

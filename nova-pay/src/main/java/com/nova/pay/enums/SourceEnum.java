@@ -5,9 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 
 /**
- * @Description: 目前yt_source表没有维护，手动维护枚举类
- * @Author: wangzehui
- * @Date: 2021/5/31 8:12 下午
+ * @description: 目前yt_source表没有维护，手动维护枚举类
+ * @author: wangzehui
+ * @date: 2021/5/31 8:12 下午
  */
 @Deprecated
 public enum SourceEnum {

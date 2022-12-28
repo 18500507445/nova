@@ -6,9 +6,9 @@ import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.enums.PayWayEnum;
 
 /**
- * @Description: 支付接口
- * @Author: wangzehui
- * @Date: 2022/9/20 17:35
+ * @description: 支付接口
+ * @author: wangzehui
+ * @date: 2022/9/20 17:35
  */
 public interface PayService {
 

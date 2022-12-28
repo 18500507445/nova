@@ -9,9 +9,9 @@ import com.nova.tools.vc.entity.LockSeatParamBean;
 import org.springframework.stereotype.Service;
 
 /**
- * @Description: 处理满天星锁座
- * @Author: wangzehui
- * @Date: 2019/5/25 15:19
+ * @description: 处理满天星锁座
+ * @author: wangzehui
+ * @date: 2019/5/25 15:19
  */
 @Service
 public class CMTSLockSeatProcess extends AbstractLockSeatBase {

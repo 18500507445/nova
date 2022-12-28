@@ -9,9 +9,9 @@ import javax.jms.MapMessage;
 import javax.jms.Message;
 
 /**
- * @Description: 测试active-mq监听器
- * @Author: wangzehui
- * @Date: 2022/9/11 09:01
+ * @description: 测试active-mq监听器
+ * @author: wangzehui
+ * @date: 2022/9/11 09:01
  */
 @Slf4j
 @Component

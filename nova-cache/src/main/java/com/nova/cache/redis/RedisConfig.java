@@ -18,9 +18,9 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @Description: 换存redis配置类
- * @Author: wangzehui
- * @Date: 2022/6/19 15:40
+ * @description: 换存redis配置类
+ * @author: wangzehui
+ * @date: 2022/6/19 15:40
  */
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)

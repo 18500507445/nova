@@ -15,9 +15,9 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description: Caffeine manager配置
- * @Author: wangzehui
- * @Date: 2022/12/20 15:40
+ * @description: Caffeine manager配置
+ * @author: wangzehui
+ * @date: 2022/12/20 15:40
  */
 @Component
 public class CaffeineManagerConfig {

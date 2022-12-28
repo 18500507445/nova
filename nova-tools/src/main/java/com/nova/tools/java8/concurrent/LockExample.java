@@ -13,9 +13,9 @@ import java.util.concurrent.locks.StampedLock;
 import java.util.stream.IntStream;
 
 /**
- * @Description: 锁demo
- * @Author: wangzehui
- * @Date: 2022/11/18 15:11
+ * @description: 锁demo
+ * @author: wangzehui
+ * @date: 2022/11/18 15:11
  */
 public class LockExample {
 

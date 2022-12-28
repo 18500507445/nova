@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 
 /**
- * @Description: body reader请求
- * @Author: wangzehui
- * @Date: 2022/12/20 11:16
+ * @description: body reader请求
+ * @author: wangzehui
+ * @date: 2022/12/20 11:16
  */
 public class BodyReaderRequestWrapper extends HttpServletRequestWrapper {
 

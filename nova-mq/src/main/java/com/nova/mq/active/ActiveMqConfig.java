@@ -18,9 +18,9 @@ import javax.jms.DeliveryMode;
 import javax.jms.Session;
 
 /**
- * @Description: ActiveMQConfig
- * @Author: wangzehui
- * @Date: 2022/8/4 21:29
+ * @description: ActiveMQConfig
+ * @author: wangzehui
+ * @date: 2022/8/4 21:29
  */
 @Configuration
 @EnableJms

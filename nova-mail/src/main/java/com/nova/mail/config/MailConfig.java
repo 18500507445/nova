@@ -13,9 +13,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import javax.annotation.Resource;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2022/9/3 19:43
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/3 19:43
  */
 @Configuration
 @AutoConfigureAfter(MailSenderAutoConfiguration.class)

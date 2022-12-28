@@ -6,9 +6,9 @@ import com.nova.tools.vc.entity.LockSeatBean;
 import com.nova.tools.vc.entity.LockSeatParamBean;
 
 /**
- * @Description:
- * @Author: wangzehui
- * @Date: 2019/5/25 17:19
+ * @description:
+ * @author: wangzehui
+ * @date: 2019/5/25 17:19
  */
 
 public interface LockSeatService {

@@ -24,9 +24,12 @@
         <module>nova-common</module>
         <module>nova-database</module>
         <module>nova-design</module>
+        <module>nova-excel</module>
         <module>nova-framework</module>
         <module>nova-limit</module>
         <module>nova-lock</module>
+        <module>nova-log</module>
+        <module>nova-login</module>
         <module>nova-mail</module>
         <module>nova-mongodb</module>
         <module>nova-mq</module>
@@ -34,7 +37,6 @@
         <module>nova-sql</module>
         <module>nova-tools</module>
         <module>nova-xxl</module>
-        <module>nova-log</module>
     </modules>
 
     <properties>

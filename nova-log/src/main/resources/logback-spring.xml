@@ -19,7 +19,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-info.log</fileNamePattern>
-            <!-- 日志最大的历史 60天 -->
+            <!-- 日志最大的历史 xx天 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -36,9 +36,7 @@
     <appender name="file_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/sys-debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 按天回滚 daily -->
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-debug.log</fileNamePattern>
-            <!-- 日志最大的历史 60天 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -56,7 +54,6 @@
         <file>${log.path}/sys-error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-error.log</fileNamePattern>
-            <!-- 日志最大的历史 60天 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -73,9 +70,7 @@
     <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/sys-user.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 按天回滚 daily -->
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-user.log</fileNamePattern>
-            <!-- 日志最大的历史 60天 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>

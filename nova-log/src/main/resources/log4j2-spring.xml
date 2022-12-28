@@ -6,7 +6,7 @@
 
     <!--变量配置-->
     <Properties>
-        <property name="log.path" value="/Users/wangzehui/Documents/opt/logbak/nova/nova-log"/>
+        <property name="FILE_PATH" value="/Users/wangzehui/Documents/opt/logbak/nova/nova-log"/>
 <!--        <property name="FILE_PATH" value="/opt/logbak/nova/nova-log" />-->
 
         <property name="FILE_NAME" value="nova-log.log" />
@@ -39,7 +39,7 @@
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
                 <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="1024MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
@@ -53,7 +53,7 @@
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
                 <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="1024MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
@@ -67,7 +67,7 @@
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
                 <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="1024MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
@@ -93,9 +93,9 @@
             <appender-ref ref="RollingFileInfo"/>
         </AsyncLogger>
 
-        <AsyncRoot level="info" includeLocation="true">
-            <AppenderRef ref="RollingFileInfo" />
-        </AsyncRoot>
+<!--        <AsyncRoot level="info" includeLocation="true">-->
+<!--            <AppenderRef ref="RollingFileInfo" />-->
+<!--        </AsyncRoot>-->
 
         <root level="info">
             <appender-ref ref="Console"/>

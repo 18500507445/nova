@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-<!--    <property name="log.path" value="/Users/wangzehui/Documents/opt/logbak/nova/nova-log"/>-->
-    <property name="log.path" value="/opt/logbak/nova/nova-log"/>
+    <property name="log.path" value="/Users/wangzehui/Documents/opt/logbak/nova/nova-log"/>
+<!--    <property name="log.path" value="/opt/logbak/nova/nova-log"/>-->
     <property name="log.maxHistory" value="15"/>
     <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 
@@ -13,7 +13,7 @@
         </encoder>
     </appender>
 
-    <!-- 系统日志输出 -->
+    <!-- 系统info日志输出 -->
     <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/sys-info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -32,7 +32,7 @@
         </filter>
     </appender>
 
-    <!-- 系统日志输出 -->
+    <!-- 程序debug日志输出 -->
     <appender name="file_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/sys-debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -51,6 +51,7 @@
         </filter>
     </appender>
 
+    <!-- 系统error日志输出 -->
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/sys-error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">

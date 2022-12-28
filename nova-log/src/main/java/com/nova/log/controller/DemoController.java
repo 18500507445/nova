@@ -5,7 +5,7 @@ import cn.hutool.core.date.TimeInterval;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.domain.AjaxResult;
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Author: wangzehui
  * @Date: 2022/11/19 17:19
  */
-@Log4j2
+@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/")
@@ -32,7 +32,7 @@ public class DemoController extends BaseController {
         for (int i = 0; i < 100000; i++) {
             log.info("这是{}条日志！", i);
         }
-        log.info("当前耗时：{}", timer.interval());
+        log.info("当前耗时：{}ms", timer.interval());
         return AjaxResult.success("ok");
     }
 

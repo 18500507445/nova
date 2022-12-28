@@ -58,12 +58,12 @@ public class CalPriceFactory {
     //处理注解，我们传入一个策略类，返回它的注解
     private PriceRegion handleAnnotation(Class<? extends CalPrice> clazz) {
         Annotation[] annotations = clazz.getDeclaredAnnotations();
-        if (annotations == null || annotations.length == 0) {
+        if (annotations.length == 0) {
             return null;
         }
-        for (int i = 0; i < annotations.length; i++) {
-            if (annotations[i] instanceof PriceRegion) {
-                return (PriceRegion) annotations[i];
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof PriceRegion) {
+                return (PriceRegion) annotation;
             }
         }
         return null;
@@ -84,10 +84,10 @@ public class CalPriceFactory {
         } catch (ClassNotFoundException e1) {
             throw new RuntimeException("未找到策略接口");
         }
-        for (int i = 0; i < resources.length; i++) {
+        for (File resource : resources) {
             try {
                 //载入包下的类
-                Class<?> clazz = classLoader.loadClass(CAL_PRICE_PACKAGE + "." + resources[i].getName().replace(".class", ""));
+                Class<?> clazz = classLoader.loadClass(CAL_PRICE_PACKAGE + "." + resource.getName().replace(".class", ""));
                 //判断是否是CalPrice的实现类并且不是CalPrice它本身，满足的话加入到策略列表
                 if (CalPrice.class.isAssignableFrom(clazz) && clazz != calPriceClazz) {
                     calPriceList.add((Class<? extends CalPrice>) clazz);
@@ -104,10 +104,8 @@ public class CalPriceFactory {
             File file = new File(classLoader.getResource(CAL_PRICE_PACKAGE.replace(".", "/")).toURI());
             return file.listFiles(new FileFilter() {
                 public boolean accept(File pathname) {
-                    if (pathname.getName().endsWith(".class")) {//我们只扫描class文件
-                        return true;
-                    }
-                    return false;
+                    //我们只扫描class文件
+                    return pathname.getName().endsWith(".class");
                 }
             });
         } catch (URISyntaxException e) {

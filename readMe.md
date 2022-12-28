@@ -3,18 +3,18 @@
 
 ### 结构介绍
 1.nova-cache
-* Memcache、caffeine、redis、分布式锁
+* Memcache、caffeine、redis
 
 2.nova-common
-* 通用工具包
+* 通用工具包（包括常量类，工具类，枚举类，异常类）
 
 3.nova-database
-* 数据库组件(动态数据源)
+* 数据库组件（动态数据源）
 
-4.nova-design(待补充)
+4.nova-design（待补充）
 * [设计模式](nova-design/designNote.md)
 
-5.nova-excel(未开始)
+5.nova-excel（未开始）
 * [excel工具类](nova-excel/excelNote.md)
 
 6.nova-framework
@@ -26,10 +26,10 @@
 8.nova-lock
 * [redisson分布式锁](nova-lock/lockNote.md)
 
-9.nova-log(待补充)
+9.nova-log（待补充）
 * [异步log](nova-log/logNote.md)
 
-10.nova-login(未开始)
+10.nova-login（未开始）
 * [三方登录JustAuth](nova-login/loginNote.md)
 
 11.nova-mail

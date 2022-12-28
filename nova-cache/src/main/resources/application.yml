@@ -5,35 +5,24 @@ server:
     context-path: /
 
 spring:
-#  #redis
-#  redis:
-#    timeout: 6000ms
-#    password:
-#    cluster:
-#      max-redirects: 3  # 获取失败 最大重定向次数
-#      nodes:
-#        - redis1.cpnb.com:6379
-#    lettuce:
-#      pool:
-#        max-active: 100  #连接池最大连接数（使用负值表示没有限制）
-#        max-idle: 10 # 连接池中的最大空闲连接
-#        min-idle: 5 # 连接池中的最小空闲连接
-#        max-wait: 5000 # 连接池最大阻塞等待时间（使用负值表示没有限制）
   redis:
-    #数据库索引
+    # redis数据库索引（默认为0）
     database: 0
+    # redis服务器地址
     host: 47.100.174.176
+    # redis服务器连接端口
     port: 63799
+    # redis服务器连接密码（尽量设置密码，防止远程注入服务器挖矿）
     password: '@wangzehui123'
     jedis:
       pool:
-        #最大连接数
+        # 连接池最大连接数（使用负值表示没有限制）
         max-active: 8
-        #最大阻塞等待时间(负数表示没限制)
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1
-        #最大空闲
+        # 连接池中的最大空闲连接
         max-idle: 8
-        #最小空闲
+        # 连接池中的最小空闲连接
         min-idle: 0
         #连接超时时间
     timeout: 10000

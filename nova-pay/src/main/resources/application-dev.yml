@@ -2,13 +2,14 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
     druid:
       # 主库数据源
       master:
         url: jdbc:mysql://47.100.174.176:3306/pay_center?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
         password: '@wangzehui123'
+        # 驱动 mysql：com.mysql.cj.jdbc.Driver oracle：oracle.jdbc.OracleDriver
+        driver-class-name: com.mysql.cj.jdbc.Driver
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
@@ -56,21 +57,16 @@ spring:
           config:
             multi-statement-allow: true
 
+
   redis:
-    #数据库索引
     database: 0
     host: 47.100.174.176
     port: 63799
     password: '@wangzehui123'
     jedis:
       pool:
-        #最大连接数
         max-active: 8
-        #最大阻塞等待时间(负数表示没限制)
         max-wait: -1
-        #最大空闲
         max-idle: 8
-        #最小空闲
         min-idle: 0
-        #连接超时时间
     timeout: 10000

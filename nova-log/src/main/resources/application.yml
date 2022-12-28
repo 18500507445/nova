@@ -3,9 +3,3 @@ server:
   port: 8080
   servlet:
     context-path: /
-
-# 日志配置
-logging:
-  level:
-    com.fk.pay: debug
-    org.springframework: warn

@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nova-redis</artifactId>
+    <artifactId>nova-cache</artifactId>
     <description>本地cache、redis、分布式锁</description>
 
     <properties>

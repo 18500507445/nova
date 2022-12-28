@@ -82,10 +82,10 @@
                 <version>${nova.version}</version>
             </dependency>
 
-            <!-- redis组件 -->
+            <!-- cache组件 -->
             <dependency>
                 <groupId>com.nova</groupId>
-                <artifactId>nova-redis</artifactId>
+                <artifactId>nova-cache</artifactId>
                 <version>${nova.version}</version>
             </dependency>
 

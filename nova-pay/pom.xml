@@ -30,7 +30,7 @@
 
         <dependency>
             <groupId>com.nova</groupId>
-            <artifactId>nova-redis</artifactId>
+            <artifactId>nova-cache</artifactId>
         </dependency>
 
         <dependency>

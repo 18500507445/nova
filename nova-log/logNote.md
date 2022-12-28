@@ -3,7 +3,9 @@
 * 异步日志
 * springboot默认 `spring-boot-starter-logging`依赖，配置读取的logback-spring.xml
 * 如何开启异步日志呢，切换到Log4j2(异步性能好)、引入disruptor依赖，排除springboot默认的logback依赖，
-  配置读取的log4j2-spring.xml，启动类添加`System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");`
+  配置读取的log4j2-spring.xml，启动类添加
+  `System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");`
+  开启全局异步
 ~~~xml
 <dependencies>
     

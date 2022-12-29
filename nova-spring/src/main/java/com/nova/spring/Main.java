@@ -1,9 +1,12 @@
 package com.nova.spring;
 
+import com.nova.spring.config.MainConfiguration;
+import com.nova.spring.entity.Card;
 import com.nova.spring.entity.People;
 import com.nova.spring.entity.Student;
 import com.nova.spring.entity.Teacher;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -66,6 +69,19 @@ public class Main {
         people.say("卢本伟牛皮");
         //people.test();
 
+    }
+
+    /**
+     * 测试注解装配bean
+     * 默认单例模式 原型模式 @Scope("prototype")
+     * 单例模式 创建content之后，然后new Card()交给容器，每次去getBean获取的都是同一个对象;
+     * 原型模式 每次getBean去new Card();
+     */
+    @Test
+    public void testAnnotation() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfiguration.class);
+        Card card = context.getBean(Card.class);
+        System.out.println("card = " + card);
     }
 
 }

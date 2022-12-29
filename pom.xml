@@ -45,7 +45,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <nova.version>1.0-SNAPSHOT</nova.version>
-        <boot.version>2.7.6</boot.version>
+        <boot.version>2.7.7</boot.version>
 
         <shiro.version>1.8.0</shiro.version>
         <bitwalker.version>1.21</bitwalker.version>

@@ -1,10 +1,8 @@
 package com.nova.spring;
 
 import com.nova.spring.config.MainConfiguration;
-import com.nova.spring.entity.Card;
-import com.nova.spring.entity.People;
-import com.nova.spring.entity.Student;
-import com.nova.spring.entity.Teacher;
+import com.nova.spring.config.TestConfiguration;
+import com.nova.spring.entity.*;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -81,7 +79,44 @@ public class Main {
     public void testAnnotation() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfiguration.class);
         Card card = context.getBean(Card.class);
+
         System.out.println("card = " + card);
+
+        People people = context.getBean(People.class);
+        People people2 = context.getBean(People.class);
+        System.out.println("people = " + people);
+        System.out.println("people2 = " + people2);
     }
+
+    /**
+     * 测试扫描装配bean
+     */
+    @Test
+    public void testScanAnnotation() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfiguration.class);
+        CardScan cardScan = context.getBean(CardScan.class);
+        System.out.println("cardScan = " + cardScan);
+    }
+
+
+    /**
+     * 配置注解实现AOP操作
+     * EnableAspectJAutoProxy
+     */
+    @Test
+    public void testAnnotationAop() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfiguration.class);
+        Card card = context.getBean(Card.class);
+        card.test("卢本伟牛皮");
+    }
+
+    /**
+     * 测试import注解导入bean
+     */
+    @Test
+    public void testImportConfig() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
+    }
+
 
 }

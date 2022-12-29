@@ -1,13 +1,10 @@
 package com.nova.spring.entity;
 
-import lombok.ToString;
-
 /**
  * @description:
  * @author: wangzehui
  * @date: 2022/12/29 15:25
  */
-@ToString
 public class People {
 
     private String name;

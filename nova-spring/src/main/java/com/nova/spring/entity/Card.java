@@ -7,7 +7,12 @@ package com.nova.spring.entity;
  */
 public class Card {
 
-    public Card(){
+    public Card() {
         System.out.println("我是card");
+    }
+
+    public int test(String str) {
+        System.out.println("我被调用了:" + str);
+        return str.length();
     }
 }

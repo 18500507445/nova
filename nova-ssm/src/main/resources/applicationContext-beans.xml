@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean name="student" class="com.nova.ssm.entity.Student" init-method="init" destroy-method="destroy">
+        <property name="name" value="小明"/>
+        <property name="age" value="1"/>
+        <property name="card" ref="card"/>
+
+        <property name="list">
+            <list>
+                <value type="java.lang.String">小红</value>
+                <value type="java.lang.String">小刚</value>
+            </list>
+        </property>
+
+        <property name="score">
+            <map>
+                <entry key="语文" value="100"/>
+                <entry key="数学" value="100"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- (1)scope="prototype" 多例模式 每次new() 是不同的一个对象 (2)depends-on="student"指定顺序 -->
+    <bean name="card" class="com.nova.ssm.entity.Card" depends-on="student">
+
+    </bean>
+
+    <!-- autowire="byType" 根据类型自动注入，不需要写property了 -->
+    <bean name="teacher" class="com.nova.ssm.entity.Teacher" autowire="byType">
+        <constructor-arg index="0" type="java.lang.String" value="李老师"/>
+        <constructor-arg index="1" type="java.lang.Integer" value="18"/>
+    </bean>
+
+    <bean name="people" class="com.nova.ssm.entity.People" />
+    <bean name="aopTest" class="com.nova.ssm.aop.AopTest" />
+
+    <aop:config>
+        <aop:aspect ref="aopTest">
+            <aop:pointcut id="say" expression="execution(* com.nova.ssm.entity.People.say(String))"/>
+            <aop:before method="before" pointcut-ref="say"/>
+            <aop:after-returning method="after" pointcut-ref="say"/>
+        </aop:aspect>
+
+        <aop:aspect ref="aopTest">
+            <aop:pointcut id="test" expression="@annotation(Deprecated)"/>
+            <aop:after-returning method="before" pointcut-ref="test"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

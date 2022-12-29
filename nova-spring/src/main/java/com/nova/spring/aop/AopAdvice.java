@@ -1,4 +1,4 @@
-package com.nova.ssm.aop;
+package com.nova.spring.aop;
 
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;

@@ -1,4 +1,4 @@
-package com.nova.ssm.aop;
+package com.nova.spring.aop;
 
 import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.ProceedingJoinPoint;

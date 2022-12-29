@@ -22,17 +22,19 @@ public class People {
 ~~~
 
 #### 通过使用aop:config来添加一个新的AOP配置：
+
 ~~~xml
+
 <aop:config>
     <aop:aspect ref="aopTest">
-        <aop:pointcut id="say" expression="execution(* com.nova.ssm.entity.People.say(String))"/>
-<!--        <aop:before method="before" pointcut-ref="say"/>-->
-<!--        <aop:after-returning method="after" pointcut-ref="say"/>-->
+        <aop:pointcut id="say" expression="execution(* com.nova.spring.entity.People.say(String))"/>
+        <!--        <aop:before method="before" pointcut-ref="say"/>-->
+        <!--        <aop:after-returning method="after" pointcut-ref="say"/>-->
         <aop:around method="around" pointcut-ref="say"/>
 
     </aop:aspect>
 
-<!--    <aop:advisor advice-ref="aopAdvice" pointcut-ref="say"/>-->
+    <!--    <aop:advisor advice-ref="aopAdvice" pointcut-ref="say"/>-->
 
     <aop:aspect ref="aopTest">
         <aop:pointcut id="test" expression="@annotation(Deprecated)"/>

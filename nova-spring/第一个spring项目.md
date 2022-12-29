@@ -95,9 +95,10 @@ public class Student {
 ~~~
 
 #### 我们还可以手动指定Bean的加载顺序，若某个Bean需要保证一定在另一个Bean加载之前加载，那么就可以使用depend-on属性
+
 ~~~xml
 <!-- scope="prototype" 多例模式 每次new() 是不同的一个对象 -->
-<bean name="card" class="com.nova.ssm.entity.Card" scope="prototype" depends-on="student">
+<bean name="card" class="com.nova.spring.entity.Card" scope="prototype" depends-on="student">
 
 </bean>
 ~~~
@@ -120,8 +121,10 @@ public class Main {
 ~~~
 
 #### 构造注入
+
 ~~~xml
-<bean name="teacher" class="com.nova.ssm.entity.Teacher">
+
+<bean name="teacher" class="com.nova.spring.entity.Teacher">
     <constructor-arg index="0" type="java.lang.String" value="李老师"/>
     <constructor-arg index="1" type="java.lang.Integer" value="18"/>
 </bean>

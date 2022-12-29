@@ -1,8 +1,8 @@
-package com.nova.ssm;
+package com.nova.spring;
 
-import com.nova.ssm.entity.People;
-import com.nova.ssm.entity.Student;
-import com.nova.ssm.entity.Teacher;
+import com.nova.spring.entity.People;
+import com.nova.spring.entity.Student;
+import com.nova.spring.entity.Teacher;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

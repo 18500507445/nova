@@ -1,4 +1,4 @@
-package com.nova.ssm.entity;
+package com.nova.spring.entity;
 
 import lombok.ToString;
 

@@ -115,7 +115,10 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      * @return 当前的环境配置
      */
     public static String[] getActiveProfiles() {
-        return applicationContext.getEnvironment().getActiveProfiles();
+        if (null != applicationContext) {
+            return applicationContext.getEnvironment().getActiveProfiles();
+        }
+        return null;
     }
 
     /**

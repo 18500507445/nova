@@ -35,7 +35,7 @@
         <module>nova-mq</module>
         <module>nova-pay</module>
         <module>nova-sql</module>
-        <module>nova-tools</module>
+        <module>nova-tool</module>
         <module>nova-xxl</module>
     </modules>
 

@@ -1,7 +1,6 @@
 package com.nova.design.sum.strategy.pay.enums;
 
 
-import com.nova.design.strategy.pay.payport.*;
 import com.nova.design.sum.strategy.pay.payport.*;
 
 /**

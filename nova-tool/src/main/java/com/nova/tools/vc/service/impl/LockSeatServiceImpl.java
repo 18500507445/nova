@@ -28,10 +28,6 @@ import java.util.HashMap;
 public class LockSeatServiceImpl implements LockSeatService {
 
     @Autowired
-    @Qualifier(value = "remoteRestTemplate")
-    protected RestTemplate restTemplate;
-
-    @Autowired
     private ChenXingLockSeatProcess chenXingLockSeatProcess;
 
     @Autowired

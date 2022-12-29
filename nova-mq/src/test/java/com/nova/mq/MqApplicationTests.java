@@ -18,7 +18,7 @@ import java.util.Map;
 
 @SpringBootTest
 @Slf4j
-class NovaMqApplicationTests {
+class MqApplicationTests {
 
     @Autowired
     private JmsTemplate jmsTemplate;

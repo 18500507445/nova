@@ -1,14 +1,19 @@
-package com.nova.tools;
+package com.nova.excel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+/**
+ * @description:
+ * @author: wangzehui
+ * @date: 2022/9/8 19:43
+ */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class NovaToolsApplication {
+public class ExcelApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NovaToolsApplication.class, args);
+        SpringApplication.run(ExcelApplication.class, args);
     }
 
 }

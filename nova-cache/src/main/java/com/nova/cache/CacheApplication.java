@@ -1,14 +1,14 @@
-package com.nova.mq;
+package com.nova.cache;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class NovaMqApplication {
+public class CacheApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NovaMqApplication.class, args);
+        SpringApplication.run(CacheApplication.class, args);
     }
 
 }

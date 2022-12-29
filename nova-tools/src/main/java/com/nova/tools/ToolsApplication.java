@@ -1,14 +1,14 @@
-package com.nova.cache;
+package com.nova.tools;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class NovaCacheApplication {
+public class ToolsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NovaCacheApplication.class, args);
+        SpringApplication.run(ToolsApplication.class, args);
     }
 
 }

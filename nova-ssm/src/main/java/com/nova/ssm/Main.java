@@ -54,7 +54,8 @@ public class Main {
     }
 
     /**
-     * 测试Aop 通过CGLIB第三方库
+     * 测试Aop before(前置)，after(后置)，around(环绕)
+     * 通过CGLIB第三方库
      */
     @Test
     public void testAop() {
@@ -63,9 +64,7 @@ public class Main {
 
         System.out.println("people.getClass() = " + people.getClass());
         people.say("卢本伟牛皮");
-
-
-        people.test();
+        //people.test();
 
     }
 

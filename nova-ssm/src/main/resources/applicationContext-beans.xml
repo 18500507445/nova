@@ -38,13 +38,18 @@
 
     <bean name="people" class="com.nova.ssm.entity.People" />
     <bean name="aopTest" class="com.nova.ssm.aop.AopTest" />
+    <bean name="aopAdvice" class="com.nova.ssm.aop.AopAdvice" />
 
     <aop:config>
         <aop:aspect ref="aopTest">
             <aop:pointcut id="say" expression="execution(* com.nova.ssm.entity.People.say(String))"/>
-            <aop:before method="before" pointcut-ref="say"/>
-            <aop:after-returning method="after" pointcut-ref="say"/>
+<!--            <aop:before method="before" pointcut-ref="say"/>-->
+<!--            <aop:after-returning method="after" pointcut-ref="say"/>-->
+            <aop:around method="around" pointcut-ref="say"/>
+
         </aop:aspect>
+
+<!--        <aop:advisor advice-ref="aopAdvice" pointcut-ref="say"/>-->
 
         <aop:aspect ref="aopTest">
             <aop:pointcut id="test" expression="@annotation(Deprecated)"/>

@@ -9,8 +9,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>nova-ssm</artifactId>
-    <description>ssm</description>
+    <artifactId>nova-spring</artifactId>
+    <description>springXml方式和注解方式</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

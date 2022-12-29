@@ -34,10 +34,10 @@
         <module>nova-mongo</module>
         <module>nova-mq</module>
         <module>nova-pay</module>
+        <module>nova-spring</module>
         <module>nova-sql</module>
         <module>nova-tools</module>
         <module>nova-xxl</module>
-        <module>nova-ssm</module>
     </modules>
 
     <properties>

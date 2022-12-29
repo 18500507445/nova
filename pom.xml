@@ -31,7 +31,7 @@
         <module>nova-log</module>
         <module>nova-login</module>
         <module>nova-mail</module>
-        <module>nova-mongodb</module>
+        <module>nova-mongo</module>
         <module>nova-mq</module>
         <module>nova-pay</module>
         <module>nova-sql</module>

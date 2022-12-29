@@ -1,4 +1,4 @@
-package com.nova.mongodb.utils;
+package com.nova.mongo.utils;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -18,17 +18,17 @@ import java.util.List;
  * @date: 2022/9/8 21:37
  */
 @Component
-public class MongodbUtils {
+public class MongoUtils {
 
-    public static MongodbUtils mongodbUtils;
+    public static MongoUtils mongoUtils;
 
     @Resource
     private MongoTemplate mongoTemplate;
 
     @PostConstruct
     public void init() {
-        mongodbUtils = this;
-        mongodbUtils.mongoTemplate = this.mongoTemplate;
+        mongoUtils = this;
+        mongoUtils.mongoTemplate = this.mongoTemplate;
     }
 
 
@@ -38,7 +38,7 @@ public class MongodbUtils {
      * @param obj 数据对象
      */
     public void save(Object obj) {
-        mongodbUtils.mongoTemplate.save(obj);
+        mongoUtils.mongoTemplate.save(obj);
     }
 
 
@@ -49,7 +49,7 @@ public class MongodbUtils {
      * @param collectionName 集合名
      */
     public void save(Object obj, String collectionName) {
-        mongodbUtils.mongoTemplate.save(obj, collectionName);
+        mongoUtils.mongoTemplate.save(obj, collectionName);
     }
 
     /**
@@ -58,7 +58,7 @@ public class MongodbUtils {
      * @param obj 数据对象
      */
     public void remove(Object obj) {
-        mongodbUtils.mongoTemplate.remove(obj);
+        mongoUtils.mongoTemplate.remove(obj);
     }
 
     /**
@@ -68,7 +68,7 @@ public class MongodbUtils {
      * @param collectionName 集合名
      */
     public void remove(Object obj, String collectionName) {
-        mongodbUtils.mongoTemplate.remove(obj, collectionName);
+        mongoUtils.mongoTemplate.remove(obj, collectionName);
     }
 
     /**
@@ -82,7 +82,7 @@ public class MongodbUtils {
         Criteria criteria = Criteria.where(key).is(value);
         criteria.and(key).is(value);
         Query query = Query.query(criteria);
-        mongodbUtils.mongoTemplate.remove(query, collectionName);
+        mongoUtils.mongoTemplate.remove(query, collectionName);
     }
 
     /**
@@ -101,7 +101,7 @@ public class MongodbUtils {
         for (int i = 0; i < updateKeys.length; i++) {
             update.set(updateKeys[i], updateValues[i]);
         }
-        mongodbUtils.mongoTemplate.updateFirst(query, update, collectionName);
+        mongoUtils.mongoTemplate.updateFirst(query, update, collectionName);
     }
 
     /**
@@ -120,7 +120,7 @@ public class MongodbUtils {
         for (int i = 0; i < updateKeys.length; i++) {
             update.set(updateKeys[i], updateValues[i]);
         }
-        mongodbUtils.mongoTemplate.updateMulti(query, update, collectionName);
+        mongoUtils.mongoTemplate.updateMulti(query, update, collectionName);
     }
 
     /**
@@ -141,7 +141,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        return mongodbUtils.mongoTemplate.find(query, obj.getClass());
+        return mongoUtils.mongoTemplate.find(query, obj.getClass());
     }
 
     /**
@@ -163,7 +163,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        return mongodbUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
+        return mongoUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -187,7 +187,7 @@ public class MongodbUtils {
         }
         Query query = Query.query(criteria);
         query.with(Sort.by(Direction.DESC, sort));
-        return mongodbUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
+        return mongoUtils.mongoTemplate.find(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -208,7 +208,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        return mongodbUtils.mongoTemplate.findOne(query, obj.getClass());
+        return mongoUtils.mongoTemplate.findOne(query, obj.getClass());
     }
 
     /**
@@ -230,7 +230,7 @@ public class MongodbUtils {
             }
         }
         Query query = Query.query(criteria);
-        return mongodbUtils.mongoTemplate.findOne(query, obj.getClass(), collectionName);
+        return mongoUtils.mongoTemplate.findOne(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -240,7 +240,7 @@ public class MongodbUtils {
      * @return
      */
     public List<? extends Object> findAll(Object obj) {
-        return mongodbUtils.mongoTemplate.findAll(obj.getClass());
+        return mongoUtils.mongoTemplate.findAll(obj.getClass());
     }
 
     /**
@@ -251,7 +251,7 @@ public class MongodbUtils {
      * @return
      */
     public <T> List<T> findAll(Class<T> clazz) {
-        return mongodbUtils.mongoTemplate.findAll(clazz);
+        return mongoUtils.mongoTemplate.findAll(clazz);
     }
 
     /**
@@ -262,7 +262,7 @@ public class MongodbUtils {
      * @return
      */
     public List<? extends Object> findAll(Object obj, String collectionName) {
-        return mongodbUtils.mongoTemplate.findAll(obj.getClass(), collectionName);
+        return mongoUtils.mongoTemplate.findAll(obj.getClass(), collectionName);
     }
 
     /**
@@ -274,6 +274,6 @@ public class MongodbUtils {
      * @return
      */
     public <T> List<T> findAll(Class<T> clazz, String collectionName) {
-        return mongodbUtils.mongoTemplate.findAll(clazz, collectionName);
+        return mongoUtils.mongoTemplate.findAll(clazz, collectionName);
     }
 }

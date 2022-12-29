@@ -1,7 +1,7 @@
-package com.nova.mongodb;
+package com.nova.mongo;
 
-import com.nova.mongodb.entity.Topic;
-import com.nova.mongodb.utils.MongodbUtils;
+import com.nova.mongo.entity.Topic;
+import com.nova.mongo.utils.MongoUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,10 +17,10 @@ import java.util.Map;
  * @date: 2022/9/8 21:50
  */
 @SpringBootTest
-public class MongodbApplicationTest {
+public class MongoApplicationTest {
 
     @Autowired
-    private MongodbUtils mongodbUtils;
+    private MongoUtils mongoUtils;
 
     public static void main(String[] args) {
 
@@ -47,7 +47,7 @@ public class MongodbApplicationTest {
         topic.setCreated(new Date());
         topic.setDeleted(false);
         topic.setNote("计算机组成原理");
-        mongodbUtils.save(topic);
+        mongoUtils.save(topic);
     }
 
     /**
@@ -55,7 +55,7 @@ public class MongodbApplicationTest {
      */
     @Test
     public void testFind() {
-        List<Topic> all = mongodbUtils.findAll(Topic.class);
+        List<Topic> all = mongoUtils.findAll(Topic.class);
         all.forEach(System.out::println);
     }
 }

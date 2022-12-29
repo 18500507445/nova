@@ -35,8 +35,8 @@
 11.nova-mail
 * 邮件
 
-12.nova-mongodb
-* mongodb
+12.nova-mongo
+* mongo
 
 13.nova-mq
 * active,kafka,rabbit

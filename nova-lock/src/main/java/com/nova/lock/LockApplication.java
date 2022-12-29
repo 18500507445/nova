@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class NovaLockApplication {
+public class LockApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NovaLockApplication.class, args);
+        SpringApplication.run(LockApplication.class, args);
     }
 
 }

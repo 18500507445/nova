@@ -1,4 +1,4 @@
-package com.nova.excel;
+package com.nova.login;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @date: 2022/12/29 11:34
  */
 @SpringBootTest
-public class ExcelApplicationTest {
+public class LoginApplicationTest {
 
 
 }

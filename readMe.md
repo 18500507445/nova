@@ -57,4 +57,3 @@
 17.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
 
-测试

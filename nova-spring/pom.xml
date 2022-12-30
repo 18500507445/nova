@@ -54,6 +54,13 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+        <!-- mybatis (和父类pom spring-mybatis-starter里 mybatis版本保持一致)-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.9</version>
+        </dependency>
     </dependencies>
 
 </project>

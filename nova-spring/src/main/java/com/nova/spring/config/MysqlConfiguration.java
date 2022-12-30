@@ -13,6 +13,11 @@ import java.sql.SQLException;
  */
 public class MysqlConfiguration {
 
+    /**
+     * 获取jdbc连接
+     * @return
+     * @throws SQLException
+     */
     @Bean
     public Connection getConnection() throws SQLException {
         System.out.println("创建新的连接！");

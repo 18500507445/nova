@@ -33,6 +33,7 @@ public class Main {
 
     /**
      * 测试依赖注入
+     * name、age、list、map属性赋值
      */
     @Test
     public void testDi() {

@@ -8,9 +8,32 @@
 而学习了Mybatis之后，我们就不用再去使用DriverManager为我们提供连接对象，而是直接使用Mybatis为我们提供的SqlSessionFactory工具类来获取对应的SqlSession通过会话对象去操作数据库。
 那么，它到底是如何封装JDBC的呢？我们可以试着来猜想一下，会不会是Mybatis每次都是帮助我们调用DriverManager来实现的数据库连接创建？我们可以看看Mybatis的源码：
 
+源码SqlSessionFactory接口
 ~~~java
-public SqlSession openSession(boolean autoCommit) {
-    return this.openSessionFromDataSource(this.configuration.getDefaultExecutorType(), (TransactionIsolationLevel)null, autoCommit);
+public class DefaultSqlSessionFactory implements SqlSessionFactory {
+
+    private final Configuration configuration;
+   
+    @Override
+    public SqlSession openSession(Connection connection) {
+        return openSessionFromConnection(configuration.getDefaultExecutorType(), connection);
+    }
+
+    private SqlSession openSessionFromDataSource(ExecutorType execType, TransactionIsolationLevel level, boolean autoCommit) {
+        Transaction tx = null;
+        try {
+            final Environment environment = configuration.getEnvironment();
+            final TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);
+            tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);
+            final Executor executor = configuration.newExecutor(tx, execType);
+            return new DefaultSqlSession(configuration, executor, autoCommit);
+        } catch (Exception e) {
+            closeTransaction(tx); // may have fetched a connection so lets call close()
+            throw ExceptionFactory.wrapException("Error opening session.  Cause: " + e, e);
+        } finally {
+            ErrorContext.instance().reset();
+        }
+    }
 }
 ~~~
 

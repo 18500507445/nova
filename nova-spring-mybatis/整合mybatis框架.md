@@ -129,7 +129,7 @@ public class MybatisConfiguration {
         return bean;
     }
 
-}
+}   
 ~~~
 
 首先我们需要创建一个数据源的实现类，因为这是数据库最基本的信息，然后再给到SqlSessionFactoryBean实例，  

@@ -29,6 +29,8 @@ public class MybatisTests {
      */
     @Test
     public void testConfig(){
-
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MybatisConfiguration.class);
+        StudentMapper studentMapper = context.getBean(StudentMapper.class);
+        System.out.println(studentMapper.getStudent());
     }
 }

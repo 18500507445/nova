@@ -23,12 +23,23 @@ import java.io.IOException;
 @MapperScan("com.nova.mybatis.mapper")
 public class MybatisConfiguration {
 
+    /**
+     * 读取xml配置
+     *
+     * @return
+     * @throws IOException
+     */
     @Bean
     public SqlSessionTemplate sqlSessionTemplate() throws IOException {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader("mybatis-config.xml"));
         return new SqlSessionTemplate(factory);
     }
 
+    /**
+     * 直接配置数据源连接放入SqlSessionFactoryBean中
+     *
+     * @return
+     */
     @Bean
     public DataSource dataSource(){
         return new PooledDataSource("com.mysql.cj.jdbc.Driver",

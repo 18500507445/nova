@@ -12,7 +12,7 @@ public class LazyNoSafe {
     /**
      * 私有实例
      */
-    private static LazyNoSafe instance = null;
+    private static LazyNoSafe instance;
 
     /**
      * 私有构造方法

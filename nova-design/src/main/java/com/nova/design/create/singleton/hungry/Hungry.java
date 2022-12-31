@@ -2,7 +2,7 @@ package com.nova.design.create.singleton.hungry;
 
 
 /**
- * @description: 饿汉模式
+ * @description: 饿汉模式(浪费性能)
  * @author: wzh
  * @date: 2022/12/31 10:38
  */

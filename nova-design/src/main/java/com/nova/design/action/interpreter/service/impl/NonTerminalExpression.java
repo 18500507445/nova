@@ -1,6 +1,6 @@
-package com.nova.design.action.interceptor.service.impl;
+package com.nova.design.action.interpreter.service.impl;
 
-import com.nova.design.action.interceptor.service.Expression;
+import com.nova.design.action.interpreter.service.Expression;
 
 /**
  * @description: 抽象非终结符表达式

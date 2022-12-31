@@ -1,6 +1,6 @@
-package com.nova.design.action.interceptor.service;
+package com.nova.design.action.interpreter.service;
 
-import com.nova.design.action.interceptor.Context;
+import com.nova.design.action.interpreter.Context;
 
 /**
  * @description: 解释器接口

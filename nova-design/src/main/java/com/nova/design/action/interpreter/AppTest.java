@@ -1,8 +1,8 @@
-package com.nova.design.action.interceptor;
+package com.nova.design.action.interpreter;
 
-import com.nova.design.action.interceptor.service.impl.MinusOperation;
-import com.nova.design.action.interceptor.service.impl.PlusOperation;
-import com.nova.design.action.interceptor.service.impl.TerminalExpression;
+import com.nova.design.action.interpreter.service.impl.MinusOperation;
+import com.nova.design.action.interpreter.service.impl.PlusOperation;
+import com.nova.design.action.interpreter.service.impl.TerminalExpression;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -1,8 +1,8 @@
 package com.nova.design.action.chain;
 
 import com.nova.design.action.chain.handler.AbstractHandler;
-import com.nova.design.action.chain.handler.Level1Handler;
-import com.nova.design.action.chain.handler.Level2Handler;
+import com.nova.design.action.chain.handler.LevelAHandler;
+import com.nova.design.action.chain.handler.LevelBHandler;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,7 +14,7 @@ public class AppTest {
 
     @Test
     public void test() throws Exception {
-        AbstractHandler abstractHandler = new Level2Handler().appendNext(new Level1Handler());
+        AbstractHandler abstractHandler = new LevelBHandler().appendNext(new LevelAHandler());
         boolean result = abstractHandler.approve("通过");
         System.out.println(result);
     }

@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * @description: emoji表情编码处理
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/4 21:29
  */
 public class EmojiUtil {

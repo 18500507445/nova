@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @description: jwt工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/11 17:15
  */
 public class JwtUtils {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @description: Caffeine本地缓存配置
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 15:40
  */
 @Data

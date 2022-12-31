@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @description: Vavr通过Future简化了线程的使用方式，不用再像Java定义任务，创建线程，再执行，直接创建一个Future对象即可。
  * Future提供的所有操作都是非阻塞的，其底层的ExecutorService用于执行异步处理程序
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 16:30
  */
 public class FutureDemo {

@@ -17,7 +17,7 @@ import java.util.concurrent.*;
  * 降低了并发编程的复杂度。
  * 在JDK8之前我们使用多线程的大部分情况都是Thead+Runnable或者使用Thread + Callable等方法来完成。* 如果我们需要多个并发任务同时执行，并且又关系他们的执行同步关系的话可能会在加上CountDownLatch、*CyclicBarrier等线程同步工具，这样就会导致并发编程变得比较复杂。
  * 而CompletableFuture帮我们封装很多任务提交、同步方法，让我们可以很轻松简单的来完成任务的提交、同步编排。
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/18 13:41
  */
 public class CompletableFutureExample {

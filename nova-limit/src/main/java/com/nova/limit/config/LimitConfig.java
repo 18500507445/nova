@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * @description: 加载配置
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/19 17:18
  */
 @Configuration

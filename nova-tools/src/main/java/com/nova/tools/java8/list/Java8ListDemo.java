@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.*;
 
 /**
  * @description: list练习
- * @author: wangzehui
+ * @author: wzh
  * @date: 2019/6/14 14:07
  */
 public class Java8ListDemo {

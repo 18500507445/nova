@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * @description: 从数组找出 两数之和等于一个目标数 返回下标
- * @author: wangzehui
+ * @author: wzh
  * @date: 2020/6/16 13:38
  */
 

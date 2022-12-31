@@ -10,7 +10,7 @@ import javax.jms.Message;
 
 /**
  * @description: 测试active-mq监听器
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/11 09:01
  */
 @Slf4j

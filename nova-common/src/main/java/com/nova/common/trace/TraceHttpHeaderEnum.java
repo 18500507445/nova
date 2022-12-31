@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * @description: trace http header 枚举
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 11:16
  */
 @Getter

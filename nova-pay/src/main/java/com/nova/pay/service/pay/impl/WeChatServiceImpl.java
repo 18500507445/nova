@@ -40,7 +40,7 @@ import java.util.List;
 
 /**
  * @description: 微信支付实现类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/20 17:43
  */
 @Slf4j

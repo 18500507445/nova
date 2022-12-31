@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
  * @description: 响应拦截器 (@ResponseBody的返回生效)
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/30 15:30
  */
 @ControllerAdvice

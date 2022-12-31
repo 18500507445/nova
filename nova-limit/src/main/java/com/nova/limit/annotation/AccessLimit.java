@@ -8,7 +8,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * @description: 限流注解
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/19 16:29
  */
 @Retention(RUNTIME)

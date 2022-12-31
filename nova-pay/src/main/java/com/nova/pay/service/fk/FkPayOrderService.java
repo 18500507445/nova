@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @description: 支付订单明细Service接口
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/22 15:49
  */
 public interface FkPayOrderService {

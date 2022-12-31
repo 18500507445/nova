@@ -5,7 +5,7 @@ import com.nova.design.action.command.cook.service.CuisineService;
 
 /**
  * @description: 北京菜实现类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 8:20
  */
 public class BeijingCuisineImpl implements CuisineService {

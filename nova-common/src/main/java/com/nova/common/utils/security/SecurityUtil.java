@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * @ClassName: SecurityUtil.java
  * @description: 请求URL地址加密解密工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/11/21 10:56
  */
 public class SecurityUtil {

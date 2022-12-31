@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @description: 数据类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/10/16 12:00 下午
  */
 public class Myself {

@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 /**
  * @description: 排序练习类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2019/4/18 17:04
  */
 public class Sort {

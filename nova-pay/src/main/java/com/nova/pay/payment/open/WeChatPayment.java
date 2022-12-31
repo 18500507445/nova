@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @description: 微信配置
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/19 10:19
  */
 @Component

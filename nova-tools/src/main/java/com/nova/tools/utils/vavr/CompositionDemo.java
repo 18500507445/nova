@@ -4,7 +4,7 @@ import io.vavr.Function1;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 16:19
  */
 public class CompositionDemo {

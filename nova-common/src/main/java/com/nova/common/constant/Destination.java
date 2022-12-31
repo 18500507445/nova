@@ -2,7 +2,7 @@ package com.nova.common.constant;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/11 09:03
  */
 public class Destination {

@@ -5,7 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/29 15:27
  */
 public class AopTest {

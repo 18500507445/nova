@@ -4,7 +4,7 @@ import io.vavr.Lazy;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 16:28
  */
 public class LazyDemo {

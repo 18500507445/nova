@@ -4,7 +4,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/11 10:39
  */
 public class InitDemo2 implements InitializingBean {

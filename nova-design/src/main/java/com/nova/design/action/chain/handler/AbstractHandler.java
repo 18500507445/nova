@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * @description: 责任链 抽象类处理器
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 8:20
  */
 @Component

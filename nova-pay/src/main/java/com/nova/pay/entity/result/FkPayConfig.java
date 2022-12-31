@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * @description: 支付配置对象 fk_pay_config
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/22 15:37
  */
 @Data

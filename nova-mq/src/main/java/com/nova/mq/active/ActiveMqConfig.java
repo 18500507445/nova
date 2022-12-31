@@ -19,7 +19,7 @@ import javax.jms.Session;
 
 /**
  * @description: ActiveMQConfig
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/4 21:29
  */
 @Configuration

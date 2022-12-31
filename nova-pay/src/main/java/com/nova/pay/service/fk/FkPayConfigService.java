@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @description: 支付配置Service接口
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/22 15:43
  */
 public interface FkPayConfigService {

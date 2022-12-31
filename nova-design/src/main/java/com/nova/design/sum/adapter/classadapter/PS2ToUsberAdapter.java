@@ -5,7 +5,7 @@ import com.nova.design.sum.adapter.domain.PS2;
 import com.nova.design.sum.adapter.domain.Usber;
 
 /**
- * @author: wangzehui
+ * @author: wzh
  * @date: 2019/5/19 11:37
  * @description:
  */

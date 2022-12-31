@@ -4,7 +4,7 @@ package com.nova.tools.java8.functioninterface;
  * @description: 推导lambda表达式
  * 函数式接口定义：任何接口，如果只包含"唯一一个"抽象方法，那么它就是一个函数式接口
  * 对于函数式接口，我们可以通过Lambda表达式来创建该接口的对象
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/4/20 20:58
  */
 

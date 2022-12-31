@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @description: 从运行结果可以看出，当一个线程运行完毕后才把锁释放，其他线程才能执行，其他线程的执行顺序是不确定的
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/4/25 11:19
  */
 

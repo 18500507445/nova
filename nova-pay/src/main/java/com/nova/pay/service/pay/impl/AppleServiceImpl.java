@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 
 /**
  * @description: 苹果支付实现类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/20 17:44
  */
 @Slf4j

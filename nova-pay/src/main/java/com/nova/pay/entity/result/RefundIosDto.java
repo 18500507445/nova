@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @description: 苹果退款通知类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/6/18 17:06
  */
 @Data

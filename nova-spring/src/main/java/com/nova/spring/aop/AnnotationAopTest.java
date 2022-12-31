@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 /**
  * @description: 注解实现切面
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/29 20:13
  */
 @Component

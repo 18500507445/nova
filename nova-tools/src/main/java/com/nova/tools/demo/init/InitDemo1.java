@@ -4,7 +4,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/11 10:35
  */
 public class InitDemo1 {

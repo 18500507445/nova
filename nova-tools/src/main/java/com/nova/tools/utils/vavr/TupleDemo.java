@@ -5,7 +5,7 @@ import io.vavr.Tuple2;
 
 /**
  * @description: 元组是将多个不同类型的数据包裹的一个容器，比如可以将字符串，数字，数组用一个元组包裹，这样即可以通过一个元组变量获取到包括的任一数据。
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 16:06
  */
 public class TupleDemo {

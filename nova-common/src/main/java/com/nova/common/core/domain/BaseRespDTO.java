@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * @description: 基本返回信息DTO(常见的几个字段)
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 11:16
  */
 @Data

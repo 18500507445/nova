@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * 以空间换取时间，就是你愿意用内存的消耗来换取读取性能的提升
  * 你已经预测到某些数据会被频繁的查询
  * 缓存中存放的数据不会超过内存空间
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 19:37
  */
 public class CacheTest {

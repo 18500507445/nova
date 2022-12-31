@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 限流
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/19 16:34
  */
 @Component

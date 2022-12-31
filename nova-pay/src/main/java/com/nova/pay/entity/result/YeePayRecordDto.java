@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @description: 易宝银行卡结算dto
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/7/27 10:42
  */
 @Data

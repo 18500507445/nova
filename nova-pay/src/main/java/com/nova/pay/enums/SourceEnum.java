@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * @description: 目前yt_source表没有维护，手动维护枚举类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/5/31 8:12 下午
  */
 @Deprecated

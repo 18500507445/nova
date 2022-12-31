@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/29 13:44
  */
 public class Main {

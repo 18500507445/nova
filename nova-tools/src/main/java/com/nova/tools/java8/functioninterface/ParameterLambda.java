@@ -2,7 +2,7 @@ package com.nova.tools.java8.functioninterface;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/4/20 21:14
  */
 

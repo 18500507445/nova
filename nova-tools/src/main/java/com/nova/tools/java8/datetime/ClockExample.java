@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * @description: dateTimeDemo类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/18 13:53
  */
 public class ClockExample {

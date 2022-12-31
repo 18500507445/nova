@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @description: 1.使用newSingleThreadExecutor  2使用join方法 3ThreadPoolExecutor，设置它的核心线程数为1
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/4/25 11:29
  */
 

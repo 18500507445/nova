@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @description: 锁定座位请求参数
- * @author: wangzehui
+ * @author: wzh
  * @date: 2019/5/27 9:18
  */
 @Data

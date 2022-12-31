@@ -13,7 +13,7 @@ import java.util.Set;
  * 微信红包算法 https://wenku.baidu.com/view/a15fee9cfe0a79563c1ec5da50e2524de518d092.html
  *
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/6/17 13:32
  */
 public class randomTest {

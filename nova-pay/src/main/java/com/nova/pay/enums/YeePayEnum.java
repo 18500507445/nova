@@ -2,7 +2,7 @@ package com.nova.pay.enums;
 
 /**
  * @description: 易宝入网枚举
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/7/8 11:55
  */
 public enum YeePayEnum {

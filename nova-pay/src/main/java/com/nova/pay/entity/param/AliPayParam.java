@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @description: 支付宝支付实体类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/3/17 13:13
  */
 @Data

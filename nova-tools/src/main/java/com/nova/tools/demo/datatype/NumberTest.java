@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 /**
  * @description: 数字运算demo
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/17 20:15
  */
 public class NumberTest {

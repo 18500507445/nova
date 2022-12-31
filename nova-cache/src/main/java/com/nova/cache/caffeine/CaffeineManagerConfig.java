@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @description: Caffeine manager配置
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 15:40
  */
 @Component

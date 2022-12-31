@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * @description: 微信支付v2工具类
  * 文档地址：http://www.binary.ac.cn/weixin-java-pay-javadoc/com/github/binarywang/wxpay/service/WxPayService.html
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/4 21:44
  */
 @Component

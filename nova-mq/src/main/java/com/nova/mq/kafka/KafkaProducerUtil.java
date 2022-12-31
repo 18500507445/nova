@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * @description: kafka生产者工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 21:29
  */
 @Slf4j

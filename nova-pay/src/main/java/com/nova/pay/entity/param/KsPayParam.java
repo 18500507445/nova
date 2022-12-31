@@ -4,7 +4,7 @@ import lombok.*;
 
 /**
  * @description: 快手支付请求实体类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/15 14:36
  */
 @Data

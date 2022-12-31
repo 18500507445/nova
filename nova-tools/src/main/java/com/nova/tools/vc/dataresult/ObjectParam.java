@@ -3,7 +3,7 @@ package com.nova.tools.vc.dataresult;
 import java.io.Serializable;
 
 /**
- * @author: wangzehui
+ * @author: wzh
  */
 public class ObjectParam implements Serializable {
     private static final long serialVersionUID = -4759249614246684897L;

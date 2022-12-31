@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 18:24
  */
 public class ArrayUtilsTest {

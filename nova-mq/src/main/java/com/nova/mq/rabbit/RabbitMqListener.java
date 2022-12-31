@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * @description: 测试rabbit-mq监听器
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/11 09:25
  */
 @Slf4j

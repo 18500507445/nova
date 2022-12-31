@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/21 17:24
  */
 public class ResultUtil {

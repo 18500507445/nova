@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * @ClassName: DispatcherController.java
  * @description: 内部跳转controller
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/21 10:56
  */
 @RestController

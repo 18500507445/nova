@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @description: 全局异常拦截器
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/19 20:47
  */
 @Slf4j

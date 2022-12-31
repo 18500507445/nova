@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * @description: 华为支付实现类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/2 10:19
  */
 @Slf4j

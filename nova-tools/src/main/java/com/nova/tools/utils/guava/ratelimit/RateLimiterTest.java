@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  * @description: 令牌桶算法（单台服务器）
  * 令牌桶跟漏桶算法有点不一样，令牌桶算法也有一个大桶，桶中装的都是令牌，
  * 有一个固定的“人”在不停的往桶中放令牌，每个请求来的时候都要从桶中拿到令牌，要不然就无法进行请求操作
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 19:40
  */
 public class RateLimiterTest {

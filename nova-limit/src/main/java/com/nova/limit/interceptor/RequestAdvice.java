@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 
 /**
  * @description: 请求拦截器 (@RequestBody的请求生效) 该接口主要是用于给请求体参数做前后增强处理的
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/30 15:29
  */
 @Slf4j

@@ -2,7 +2,7 @@ package com.nova.pay.config;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/7/1 10:20
  */
 @Deprecated

@@ -23,7 +23,7 @@ import java.util.SortedMap;
 
 /**
  * @description: web端链路过滤器处理(设置traceId, spanId)
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 11:16
  */
 @Component

@@ -4,7 +4,7 @@ import javax.mail.MessagingException;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/3 19:47
  */
 public interface MailService {

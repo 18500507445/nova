@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * @description: 支付宝配置
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/22 09:40
  */
 @Slf4j

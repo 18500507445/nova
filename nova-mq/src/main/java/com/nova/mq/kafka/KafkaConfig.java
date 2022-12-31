@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @description: kafka配置
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 21:29
  */
 @Slf4j

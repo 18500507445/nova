@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * @description: 锁定返回实体类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2019/5/27 9:21
  */
 @Data

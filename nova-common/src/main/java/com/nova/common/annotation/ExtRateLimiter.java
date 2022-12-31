@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 20:26
  */
 @Target(value = ElementType.METHOD)

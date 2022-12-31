@@ -2,7 +2,7 @@ package com.nova.tools.demo.thread;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2019/4/22 11:39
  */
 

@@ -5,7 +5,7 @@ import io.vavr.control.Option;
 
 /**
  * @description: list计算
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 16:22
  */
 public class ListDemo {

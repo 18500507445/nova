@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/18 15:15
  */
 public class SemaphoreDemo {

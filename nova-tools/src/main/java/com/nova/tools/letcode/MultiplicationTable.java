@@ -2,7 +2,7 @@ package com.nova.tools.letcode;
 
 /**
  * @description: 打印99乘法表
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/3/3 11:05
  */
 

@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @description: 支付请求公共参数类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/23 14:00
  */
 @EqualsAndHashCode(callSuper = true)

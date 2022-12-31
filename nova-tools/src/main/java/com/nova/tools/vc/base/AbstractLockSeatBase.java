@@ -8,7 +8,7 @@ import com.nova.tools.vc.entity.LockSeatParamBean;
 
 /**
  * @description: 锁座抽象类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2019/5/25 11:40
  */
 

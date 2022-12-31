@@ -2,7 +2,7 @@ package com.nova.pay.config;
 
 /**
  * @description: 苹果支付配置类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/6/18 13:36
  */
 @Deprecated

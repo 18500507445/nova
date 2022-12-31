@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @description: 商家微信支付工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/15 15:13
  */
 public class McWeChatV3PayUtils {

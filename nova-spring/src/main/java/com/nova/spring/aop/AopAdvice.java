@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 
 /**
  * @description: 使用接口实现AOP
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/29 16:12
  */
 public class AopAdvice implements MethodBeforeAdvice, AfterReturningAdvice {

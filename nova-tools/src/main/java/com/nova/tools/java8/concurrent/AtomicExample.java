@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 /**
  * @description: 原子变量 AtomicInteger,LongAdder,LongAccumulator
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/18 14:49
  */
 public class AtomicExample {

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * @description: 公共请求参数
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/23 13:57
  */
 @EqualsAndHashCode(callSuper = true)

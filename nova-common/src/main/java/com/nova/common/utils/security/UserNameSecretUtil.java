@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 /**
  * @description: 用户名加密工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/11 17:15
  */
 @Slf4j

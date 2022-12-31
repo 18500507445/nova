@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @description: 阿里云图片上传
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/5 20:39
  */
 public class AliUploadImage {

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.*;
 
 /**
  * @description: 自动化配置
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/29 17:21
  */
 @EnableAspectJAutoProxy

@@ -7,7 +7,7 @@ import com.nova.pay.enums.PayWayEnum;
 
 /**
  * @description: 支付接口
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/20 17:35
  */
 public interface PayService {

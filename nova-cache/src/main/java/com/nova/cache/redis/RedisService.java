@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @description: redis工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/6/19 15:40
  */
 @Slf4j

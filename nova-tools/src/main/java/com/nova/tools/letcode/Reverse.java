@@ -2,7 +2,7 @@ package com.nova.tools.letcode;
 
 /**
  * @description: 数字翻转，非int类型返回0
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/2/23 17:13
  */
 

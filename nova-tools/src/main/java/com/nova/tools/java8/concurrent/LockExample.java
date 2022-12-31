@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 
 /**
  * @description: 锁demo
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/18 15:11
  */
 public class LockExample {

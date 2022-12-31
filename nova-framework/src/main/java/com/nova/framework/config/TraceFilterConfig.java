@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * @description: 配置Trace filter
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 11:16
  */
 @Configuration

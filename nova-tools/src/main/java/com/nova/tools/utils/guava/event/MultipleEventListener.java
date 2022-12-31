@@ -5,7 +5,7 @@ import com.google.common.eventbus.Subscribe;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 19:55
  */
 public class MultipleEventListener {

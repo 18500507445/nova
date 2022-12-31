@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/15 14:10
  * @see <a href="https://mp.kuaishou.com/docs/develop/server/epay/interfaceDefinitionWithoutChannel.html">支付流程图</a>
  */

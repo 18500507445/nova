@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/18 15:05
  */
 public class ExecutorsDemo {

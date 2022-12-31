@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/11 10:40
  */
 //@SpringBootApplication

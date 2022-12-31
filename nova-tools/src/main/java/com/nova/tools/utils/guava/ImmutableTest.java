@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * @description: 不可变集合
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 17:59
  */
 public class ImmutableTest {

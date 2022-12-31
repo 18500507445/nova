@@ -2,7 +2,7 @@ package com.nova.pay.enums;
 
 /**
  * @description: 业务枚举类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/10 11:53
  */
 public enum BusinessEnum {

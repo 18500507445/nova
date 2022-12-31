@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @description: Trace对象
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 11:16
  */
 @Data

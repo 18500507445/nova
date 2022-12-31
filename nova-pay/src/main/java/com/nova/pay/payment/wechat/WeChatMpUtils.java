@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description: 微信公众号工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/5 09:10
  */
 @Component

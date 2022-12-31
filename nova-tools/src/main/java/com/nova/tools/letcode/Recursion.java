@@ -2,7 +2,7 @@ package com.nova.tools.letcode;
 
 /**
  * @description: 求和1-100 递归
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/2/22 14:27
  */
 public class Recursion {

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @description: 责任链测试类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 8:24
  */
 public class AppTest {
@@ -15,7 +15,7 @@ public class AppTest {
     @Test
     public void test() throws Exception {
         AbstractHandler abstractHandler = new Level2Handler().appendNext(new Level1Handler());
-        boolean result = abstractHandler.approve("你好");
+        boolean result = abstractHandler.approve("通过");
         System.out.println(result);
     }
 }

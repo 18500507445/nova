@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @description: 通用返回结果对象
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 11:16
  */
 @Data

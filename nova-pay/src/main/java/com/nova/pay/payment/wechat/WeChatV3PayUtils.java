@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 /**
  * @description: 微信支付v3工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/16 20:32
  */
 public class WeChatV3PayUtils {

@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * @description: 快手支付实现类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/15 14:04
  */
 @Slf4j

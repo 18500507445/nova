@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * @description: 华为支付工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/2 10:22
  */
 @Slf4j

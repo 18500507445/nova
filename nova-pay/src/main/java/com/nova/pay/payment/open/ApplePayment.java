@@ -22,7 +22,7 @@ import java.util.Map;
  * @description: 苹果IAP内购验证工具类
  * 官网:https://developer.apple.com/documentation/storekit/in-app_purchase
  * 参考：https://blog.csdn.net/lbd_123/article/details/87276204
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/3/18 13:42
  */
 @Component

@@ -3,7 +3,7 @@ package com.nova.pay.enums;
 
 /**
  * @description: 支付方式枚举类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/9/18 11:29
  */
 public enum PayWayEnum {

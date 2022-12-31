@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @description: https://blog.csdn.net/qq_36042938/article/details/109182992
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/10/13 20:05
  */
 public class ThreadTest {

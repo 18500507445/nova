@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 /**
  * @description: 企业微信支付v2工具类
  * 文档地址：http://www.binary.ac.cn/weixin-java-pay-javadoc/com/github/binarywang/wxpay/service/EntPayService.html
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/4 22:17
  */
 public class EntWeChatV2PayUtils {

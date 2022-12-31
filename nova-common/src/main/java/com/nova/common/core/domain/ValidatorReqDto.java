@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 
 /**
  * @description: Validator请求对象
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/19 20:58
  */
 @Data

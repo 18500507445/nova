@@ -2,7 +2,7 @@ package com.nova.common.utils.string;
 
 /**
  * @description: 余弦相似度用向量空间中两个向量夹角的余弦值作为衡量两个个体间差异的大小。余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似，这就叫"余弦相似性"。
- * @author: wangzehui   https://blog.csdn.net/fycghy0803/article/details/79880452
+ * @author: wzh   https://blog.csdn.net/fycghy0803/article/details/79880452
  * @date: 2020/4/20 19:27
  */
 

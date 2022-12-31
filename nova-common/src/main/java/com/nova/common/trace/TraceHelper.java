@@ -11,7 +11,7 @@ import java.util.UUID;
 
 /**
  * @description: traceId和spanId工具类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/20 11:16
  */
 public class TraceHelper {

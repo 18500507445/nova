@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @description: 基础分页对象
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/19 20:58
  */
 public class BasePage implements Serializable {

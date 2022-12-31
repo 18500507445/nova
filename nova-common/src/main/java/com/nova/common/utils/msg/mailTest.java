@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2021/9/14 9:40 上午
  */
 public class mailTest {

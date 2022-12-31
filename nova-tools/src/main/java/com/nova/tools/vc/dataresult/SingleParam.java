@@ -3,7 +3,7 @@ package com.nova.tools.vc.dataresult;
 import java.io.Serializable;
 
 /**
- * @author: wangzehui
+ * @author: wzh
  * 单个对象返回对象
  */
 public class SingleParam<T> extends ObjectParam implements Serializable {

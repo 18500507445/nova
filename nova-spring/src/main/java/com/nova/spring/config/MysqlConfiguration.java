@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/29 20:31
  */
 public class MysqlConfiguration {

@@ -2,7 +2,7 @@ package com.nova.common.constant;
 
 /**
  * @description: 通用常量信息
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/8/4 21:29
  */
 public class Constants {

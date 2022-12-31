@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @description: Redisson配置映射类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/11/19 17:18
  */
 @Data

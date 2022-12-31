@@ -1,6 +1,6 @@
 ## nova-spring-mybatis
 ### 简介:
-* (1) 
+* (1) spring整合mybatis   
 
 
 ### 收集的知识

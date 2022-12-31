@@ -6,4 +6,5 @@ package com.nova.mybatis;
  * @date: 2022/12/31 17:43
  */
 public class DemoTest {
+
 }

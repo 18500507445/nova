@@ -47,13 +47,19 @@
 15.nova-sql
 * [sql练习](nova-sql/sqlNote.md)
 
-16.nova-ssm
-* [ssm练习](nova-ssm/ssmNote.md)
+16.nova-spring
+* [spring学习](nova-spring/springNote.md)
 
-16.nova-tools
+17.nova-spring-mvc
+* [spring-mvc学习](nova-spring-mvc/springMvcNote.md)
+
+18.nova-spring-mybatis
+* [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)
+
+19.nova-tools
 * [练习demo,java8,hutool、guava测试类，微信公众号](nova-tools/toolsNote.md)
 * [互联网 Java 工程师进阶知识完全扫盲](summary.md)
 
-17.nova-xxl
+20.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
 

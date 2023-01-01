@@ -28,4 +28,4 @@ public class MybatisTests {
 
 `@ExtendWith`是由JUnit提供的注解，等同于旧版本的`@RunWith`注解，然后使用SpringTest模块提供的`@ContextConfiguration`注解来表示要加载哪一个配置文件，可以是XML文件也可以是类，我们这里就直接使用类进行加载。
 
-配置完成后，我们可以直接使用`@Autowired`来进行依赖注入，并且直接在测试方法中使用注入的Bean，现在就非常方便了。
+配置完成后，我们可以直接使用`@Autowired(不推荐会标黄)`或者`@Resource`来进行依赖注入，并且直接在测试方法中使用注入的Bean，现在就非常方便了。

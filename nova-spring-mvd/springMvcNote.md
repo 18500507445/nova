@@ -1,6 +1,6 @@
 ## nova-spring-mvc
 ### 简介:
-* (1) 
+* (1) spring-mvc
 
 
 ### 收集的知识

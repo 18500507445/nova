@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>nova-spring-mvd</artifactId>
+    <artifactId>nova-spring-mvc</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

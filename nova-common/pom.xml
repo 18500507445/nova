@@ -31,6 +31,8 @@
         <oshi.version>6.2.2</oshi.version>
         <c3p0.version>0.9.5.5</c3p0.version>
         <pagehelper.boot.version>1.4.3</pagehelper.boot.version>
+        <oss.version>3.15.0</oss.version>
+        <detector.version>0.1.23</detector.version>
     </properties>
 
     <dependencies>
@@ -192,7 +194,14 @@
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.15.0</version>
+            <version>${oss.version}</version>
+        </dependency>
+
+        <!-- 文本url提取 -->
+        <dependency>
+            <groupId>io.github.url-detector</groupId>
+            <artifactId>url-detector</artifactId>
+            <version>${detector.version}</version>
         </dependency>
 
     </dependencies>

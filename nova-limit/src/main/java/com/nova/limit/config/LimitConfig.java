@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 
 /**
- * @description: 加载配置
+ * @description: 配置
  * @author: wzh
  * @date: 2022/11/19 17:18
  */
@@ -18,6 +18,10 @@ public class LimitConfig implements WebMvcConfigurer {
     @Resource
     private LimitInterceptor limitInterceptor;
 
+    /**
+     * 注册拦截器
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(limitInterceptor);

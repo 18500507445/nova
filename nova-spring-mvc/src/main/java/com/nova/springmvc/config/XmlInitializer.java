@@ -7,7 +7,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * @author: wzh
  * @date: 2023/1/1 11:30
  */
-public class MainInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class XmlInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {

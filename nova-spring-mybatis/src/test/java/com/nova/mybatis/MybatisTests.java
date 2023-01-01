@@ -2,6 +2,8 @@ package com.nova.mybatis;
 
 import com.nova.mybatis.config.MybatisConfiguration;
 import com.nova.mybatis.mapper.StudentMapper;
+import com.nova.mybatis.service.StudentService;
+import com.nova.mybatis.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,19 +23,78 @@ public class MybatisTests {
     @Resource
     public StudentMapper studentMapper;
 
-    /**
-     * xml方式
-     */
-    @Test
-    public void testXml() {
-        System.out.println(studentMapper.getStudent());
-    }
+    @Resource
+    public StudentService studentService;
+
+    @Resource
+    public TransactionService transactionService;
 
     /**
-     * 直接配置数据源
+     * xml方式或者配置数据源
      */
     @Test
     public void testConfig() {
         System.out.println(studentMapper.getStudent());
     }
+
+
+    /**
+     * 测试事务
+     */
+    @Test
+    public void testTransactional(){
+        transactionService.testTransactional();
+    }
+
+    /**
+     * 默认
+     */
+    @Test
+    public void testDefault(){
+        transactionService.testDefault();
+    }
+
+    /**
+     * Supports
+     */
+    @Test
+    public void testSupports(){
+        //transactionService.testSupports();
+        studentService.insertThree();
+    }
+
+    /**
+     * Mandatory
+     */
+    @Test
+    public void testMandatory(){
+        transactionService.testMandatory();
+        //studentService.insertFour();
+    }
+
+    /**
+     * Nested
+     */
+    @Test
+    public void testNested(){
+        transactionService.testNested();
+    }
+
+    /**
+     * Never
+     */
+    @Test
+    public void testNever(){
+        //transactionService.testNever();
+        studentService.insertSix();
+    }
+
+    /**
+     * New
+     */
+    @Test
+    public void testNew(){
+        transactionService.testNew();
+    }
+
 }

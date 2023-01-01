@@ -37,7 +37,7 @@
 
 因此，下一个隔离级别可重复读就能够解决这样的问题（MySQL的默认隔离级别），它规定在其他事务执行时，不允许修改数据，这样，就可以有效地避免不可重复读的问题，但是这样就一定安全了吗？这里仅仅是禁止了事务执行过程中的UPDATE操作，但是它并没有禁止INSERT这类操作，因此，如果事务A执行过程中事务B插入了新的数据，那么A这时是毫不知情的，比如：
 
-
+![可重复读](D:\Tools\IdeaProjects\nova\nova-spring-mybatis\src\main\picture\可重复读.png)
 
 
 两个人同时报名一个活动，两个报名的事务同时在进行，但是他们一开始读取到的人数都是5，而这时，它们都会认为报名成功后人数应该变成6，而正常情况下应该是7，因此这个时候就发生了数据的幻读现象。
@@ -52,3 +52,33 @@
 
 （对于虚读和幻读的区分：虚读是某个数据前后读取不一致，幻读是整个表的记录数量前后读取不一致）
 
+
+最后这张图，请务必记在你的脑海，记在你的心中，记在你的全世界：
+![隔离级别](D:\Tools\IdeaProjects\nova\nova-spring-mybatis\src\main\picture\隔离级别.png)
+
+
+Mybatis对于数据库的事务管理，也有着相应的封装。一个事务无非就是创建、提交、回滚、关闭，因此这些操作被Mybatis抽象为一个接口：
+~~~java
+public interface Transaction {
+    Connection getConnection() throws SQLException;
+
+    void commit() throws SQLException;
+
+    void rollback() throws SQLException;
+
+    void close() throws SQLException;
+
+    Integer getTimeout() throws SQLException;
+}
+~~~
+
+对于此接口的实现，MyBatis的事务管理分为两种形式：
+
+1. 使用JDBC的事务管理机制：即利用对应数据库的驱动生成的Connection对象完成对事务的提交（commit()）、回滚（rollback()）、关闭（close()）等，对应的实现类为JdbcTransaction
+2. 使用MANAGED的事务管理机制：这种机制MyBatis自身不会去实现事务管理，而是让程序的容器（比如Spring）来实现对事务的管理，对应的实现类为ManagedTransaction
+
+而我们之前一直使用的其实就是JDBC的事务，相当于直接使用Connection对象（之前JavaWeb阶段已经讲解过了）在进行事务操作，并没有额外的管理机制，对应的配置为：
+
+~~~xml
+<transactionManager type="JDBC"/>
+~~~

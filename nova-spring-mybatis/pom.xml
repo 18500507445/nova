@@ -37,6 +37,12 @@
             <artifactId>junit-jupiter</artifactId>
         </dependency>
 
+        <!-- spring test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+
         <!-- Mysql驱动包 -->
         <dependency>
             <groupId>mysql</groupId>

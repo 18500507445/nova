@@ -24,7 +24,7 @@ import java.io.IOException;
 public class MybatisConfiguration {
 
     /**
-     * 读取xml配置
+     * 方式一：读取xml配置
      *
      * @return
      * @throws IOException
@@ -36,18 +36,24 @@ public class MybatisConfiguration {
     }
 
     /**
-     * 直接配置数据源连接放入SqlSessionFactoryBean中
+     * 方式二：DataSource注入bean配置数据源连接
      *
      * @return
      */
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         return new PooledDataSource("com.mysql.cj.jdbc.Driver",
                 "jdbc:mysql://47.100.174.176:3306/study", "root", "@wangzehui123");
     }
 
+    /**
+     * 放入SqlSessionFactoryBean中
+     *
+     * @param dataSource
+     * @return
+     */
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean(@Autowired DataSource dataSource){
+    public SqlSessionFactoryBean sqlSessionFactoryBean(@Autowired DataSource dataSource) {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         return bean;

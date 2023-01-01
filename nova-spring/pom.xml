@@ -31,12 +31,6 @@
             <artifactId>junit-jupiter</artifactId>
         </dependency>
 
-        <!-- spring test -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
-
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

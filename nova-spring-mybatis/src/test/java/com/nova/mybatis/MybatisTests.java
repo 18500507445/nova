@@ -2,7 +2,7 @@ package com.nova.mybatis;
 
 import com.nova.mybatis.config.MybatisConfiguration;
 import com.nova.mybatis.mapper.StudentMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

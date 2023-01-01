@@ -25,6 +25,12 @@
             <artifactId>spring-context</artifactId>
         </dependency>
 
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+
         <!-- spring test -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -35,12 +41,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-
-        <!-- 单元测试 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
         </dependency>
 
         <!-- spring aop -->

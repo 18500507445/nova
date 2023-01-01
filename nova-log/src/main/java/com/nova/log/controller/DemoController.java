@@ -26,7 +26,6 @@ public class DemoController extends BaseController {
      * log
      */
     @PostMapping("log")
-    @ResponseBody
     public AjaxResult limit() {
         TimeInterval timer = DateUtil.timer();
         for (int i = 0; i < 100000; i++) {

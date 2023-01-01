@@ -34,7 +34,6 @@ public class DemoController extends BaseController {
      * 限流demo
      */
     @PostMapping("limit")
-    @ResponseBody
     @AccessLimit(seconds = 5, maxCount = 5)
     public AjaxResult limit(@RequestBody Object body) {
         System.out.println("applicationContext = " + applicationContext);
@@ -53,7 +52,6 @@ public class DemoController extends BaseController {
      * validator
      */
     @PostMapping("validator")
-    @ResponseBody
     public AjaxResult validator(@Validated ValidatorReqDto reqDto) {
         return AjaxResult.success("成功");
     }
@@ -62,7 +60,6 @@ public class DemoController extends BaseController {
      * 自定义validator
      */
     @PostMapping("customValidator")
-    @ResponseBody
     public AjaxResult customValidator(ValidatorReqDto reqDto) {
         ValidatorUtil.validate(reqDto);
         return AjaxResult.success("成功");

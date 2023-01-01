@@ -472,7 +472,6 @@ public class PayNotifyController extends BaseController {
     /**
      * 快手小程序支付回调通知
      */
-    @ResponseBody
     @PostMapping("ksPay")
     public JSONObject ksPay(@RequestBody Object body, HttpServletRequest request) {
         JSONObject result = new JSONObject();
@@ -546,7 +545,6 @@ public class PayNotifyController extends BaseController {
     /**
      * 快手小程序结算回调通知
      */
-    @ResponseBody
     @PostMapping("ksPaySettle")
     public JSONObject ksPaySettle(@RequestBody Object body, HttpServletRequest request) {
         JSONObject result = new JSONObject();
@@ -590,7 +588,6 @@ public class PayNotifyController extends BaseController {
     /**
      * 快手小程序退款回调通知
      */
-    @ResponseBody
     @PostMapping("ksRefund")
     public JSONObject ksRefund(@RequestBody Object body, HttpServletRequest request) {
         JSONObject result = new JSONObject();

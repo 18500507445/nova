@@ -33,7 +33,6 @@ public class GooglePayController {
      * 谷歌校验
      */
     @PostMapping("verify")
-    @ResponseBody
     public AjaxResult verify(OrderParam param) {
         Map<String, Object> result = new HashMap<>(16);
         log.info("verify请求入参：{}", JSONUtil.toJsonStr(param));

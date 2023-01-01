@@ -65,7 +65,6 @@ public class PayController extends BaseController {
      * @return
      */
     @PostMapping("list")
-    @ResponseBody
     public AjaxResult list(PayParam param) {
         log.info("payList请求入参：{}", JSONUtil.toJsonStr(param));
         boolean redisFlag = Boolean.TRUE;
@@ -191,7 +190,6 @@ public class PayController extends BaseController {
      * 微信v2支付
      */
     @PostMapping("weChatV2Pay")
-    @ResponseBody
     @Deprecated
     public AjaxResult weChatV2Pay(PayParam param) {
         AjaxResult result = new AjaxResult();
@@ -208,7 +206,6 @@ public class PayController extends BaseController {
      * 支付宝pay
      */
     @PostMapping("aLiPay")
-    @ResponseBody
     @Deprecated
     public AjaxResult aLiPay(PayParam param) {
         AjaxResult result = new AjaxResult();
@@ -222,7 +219,6 @@ public class PayController extends BaseController {
     }
 
     @PostMapping("applePay")
-    @ResponseBody
     @Deprecated
     public AjaxResult applePay(PayParam param) {
         log.info("applePay请求入参：{}", JSONUtil.toJsonStr(param));
@@ -236,7 +232,6 @@ public class PayController extends BaseController {
      * @return
      */
     @PostMapping("openPay")
-    @ResponseBody
     public AjaxResult openPay(PayParam param) {
         log.info("openPay请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
@@ -259,7 +254,6 @@ public class PayController extends BaseController {
      * @return
      */
     @PostMapping("closeOrder")
-    @ResponseBody
     public AjaxResult closeOrder(PayParam param) {
         log.info("closeOrder请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
@@ -282,7 +276,6 @@ public class PayController extends BaseController {
      * @return
      */
     @PostMapping("queryOrder")
-    @ResponseBody
     public AjaxResult queryOrder(PayParam param) {
         log.info("queryOrder请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
@@ -305,7 +298,6 @@ public class PayController extends BaseController {
      * @return
      */
     @PostMapping("getOpenId")
-    @ResponseBody
     public AjaxResult getOpenId(PayParam param) {
         log.info("getOpenId请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
@@ -329,7 +321,6 @@ public class PayController extends BaseController {
      * @return
      */
     @PostMapping("refund")
-    @ResponseBody
     public AjaxResult refund(PayParam param) {
         log.info("refund请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();
@@ -366,7 +357,6 @@ public class PayController extends BaseController {
      * @return
      */
     @PostMapping("merchantTransfer")
-    @ResponseBody
     public AjaxResult merchantTransfer(PayParam param) {
         log.info("merchantTransfer请求入参：{}", JSONUtil.toJsonStr(param));
         AjaxResult result = new AjaxResult();

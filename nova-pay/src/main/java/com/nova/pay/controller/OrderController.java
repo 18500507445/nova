@@ -38,7 +38,6 @@ public class OrderController extends BaseController {
      * 获取订单id
      */
     @PostMapping("getOrderId")
-    @ResponseBody
     public AjaxResult getOrderId(OrderParam param) {
         Map<String, String> result = new HashMap<>(16);
         log.info("getOrderId请求入参：{}", JSONUtil.toJsonStr(param));

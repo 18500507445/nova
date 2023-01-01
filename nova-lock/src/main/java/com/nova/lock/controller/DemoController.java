@@ -25,7 +25,6 @@ public class DemoController extends BaseController {
      * redisson
      */
     @PostMapping("redisson")
-    @ResponseBody
     public AjaxResult redisson(ValidatorReqDto reqDto) {
         return AjaxResult.success(reqDto);
     }

@@ -3,7 +3,7 @@ package com.nova.log.controller;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.model.result.AjaxResult;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

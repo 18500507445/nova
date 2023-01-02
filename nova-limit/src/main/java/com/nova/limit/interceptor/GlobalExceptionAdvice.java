@@ -1,6 +1,6 @@
 package com.nova.limit.interceptor;
 
-import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.exception.base.ParamException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;

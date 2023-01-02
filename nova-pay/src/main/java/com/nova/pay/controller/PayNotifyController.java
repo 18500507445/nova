@@ -20,7 +20,7 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.util.XmlConfig;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.model.result.AjaxResult;
 import com.nova.pay.entity.param.HuaweiPayParam;
 import com.nova.pay.entity.param.KsPayParam;
 import com.nova.pay.entity.param.PayParam;

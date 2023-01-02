@@ -1,8 +1,8 @@
 package com.nova.limit.controller;
 
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.entity.AjaxResult;
-import com.nova.common.core.entity.ValidatorReqDTO;
+import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.utils.common.ValidatorUtil;
 import com.nova.limit.annotation.AccessLimit;
 import com.nova.limit.config.LimitConfig;

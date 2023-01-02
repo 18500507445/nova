@@ -1,4 +1,4 @@
-package com.nova.common.core.entity;
+package com.nova.common.core.model.business;
 
 import lombok.Data;
 

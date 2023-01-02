@@ -3,7 +3,7 @@ package com.nova.pay.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.google.api.services.androidpublisher.model.ProductPurchase;
-import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.model.result.AjaxResult;
 import com.nova.pay.entity.param.OrderParam;
 import com.nova.pay.payment.open.GooglePayment;
 import lombok.extern.slf4j.Slf4j;

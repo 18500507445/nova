@@ -2,7 +2,7 @@ package com.nova.pay.service.pay.impl;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.model.result.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.fk.FkOrderService;

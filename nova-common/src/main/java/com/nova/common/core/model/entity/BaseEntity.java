@@ -1,4 +1,4 @@
-package com.nova.common.core.entity;
+package com.nova.common.core.model.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;

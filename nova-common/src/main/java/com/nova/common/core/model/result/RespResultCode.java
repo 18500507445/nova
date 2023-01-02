@@ -1,4 +1,4 @@
-package com.nova.common.core.entity;
+package com.nova.common.core.model.result;
 
 /**
  * 通用返回码对象(主要放各个模块的通用错误码)

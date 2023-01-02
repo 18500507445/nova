@@ -1,4 +1,6 @@
-package com.nova.common.core.entity;
+package com.nova.common.core.model.pojo;
+
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -7,7 +9,8 @@ import java.io.Serializable;
  * @author: wzh
  * @date: 2022/12/19 20:58
  */
-public class BasePage implements Serializable {
+@ToString
+public class BasePageDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,12 +28,12 @@ public class BasePage implements Serializable {
      */
     private Integer pageSize;
 
-    public BasePage() {
+    public BasePageDTO() {
         this.pageNo = DEFAULT_PAGE_NO;
         this.pageSize = DEFAULT_SIZE;
     }
 
-    public BasePage(Integer pageNo, Integer pageSize) {
+    public BasePageDTO(Integer pageNo, Integer pageSize) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
     }

@@ -1,4 +1,4 @@
-package com.nova.common.core.entity;
+package com.nova.common.core.model.pojo;
 
 import lombok.Data;
 
@@ -6,12 +6,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @description: 基本返回信息DTO(常见的几个字段)
+ * 数据传输对象（Data Transfer Object）用于展示层和逻辑层之间的数据传输。
+ * @description: 基本的请求DTO
  * @author: wzh
  * @date: 2022/12/20 11:16
  */
 @Data
-public class BaseRespDTO implements Serializable {
+public class BaseReqDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

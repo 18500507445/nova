@@ -10,7 +10,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.model.result.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.result.FkPayList;
 import com.nova.pay.entity.result.FkPayOrder;

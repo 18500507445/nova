@@ -1,7 +1,7 @@
 package com.nova.pay;
 
 import cn.hutool.json.JSONUtil;
-import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.model.result.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.enums.PayWayEnum;
 import com.nova.pay.service.pay.PayStrategy;

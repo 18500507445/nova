@@ -1,4 +1,4 @@
-package com.nova.common.core.entity;
+package com.nova.common.core.model.result;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nova.common.trace.TraceHelper;

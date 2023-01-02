@@ -31,4 +31,20 @@ public class BaseResDTO implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    /**
+     * 是否删除
+     */
+    private Integer delFlag;
+
+    /**
+     * 操作人
+     */
+    private String operator;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+
 }

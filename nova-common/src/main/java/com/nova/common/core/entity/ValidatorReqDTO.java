@@ -1,4 +1,4 @@
-package com.nova.common.core.domain;
+package com.nova.common.core.entity;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
  * @date: 2022/12/19 20:58
  */
 @Data
-public class ValidatorReqDto {
+public class ValidatorReqDTO {
 
     /**
      * 主键

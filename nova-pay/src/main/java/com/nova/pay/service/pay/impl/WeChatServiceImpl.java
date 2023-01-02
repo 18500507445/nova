@@ -13,7 +13,7 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.domain.AjaxResult;
+import com.nova.common.core.entity.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.param.WeChatMpParam;
 import com.nova.pay.entity.result.FkPayConfig;

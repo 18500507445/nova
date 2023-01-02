@@ -6,7 +6,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.alipay.api.AlipayResponse;
 import com.alipay.api.response.AlipayTradeCloseResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
-import com.nova.common.core.domain.AjaxResult;
+import com.nova.common.core.entity.AjaxResult;
 import com.nova.pay.entity.param.AliPayParam;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.result.FkPayConfig;

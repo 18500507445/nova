@@ -3,7 +3,7 @@ package com.nova.common.core.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageInfo;
-import com.nova.common.core.domain.AjaxResult;
+import com.nova.common.core.entity.AjaxResult;
 import com.nova.common.core.page.TableDataInfo;
 import com.nova.common.utils.common.ServletUtils;
 import com.nova.common.utils.ip.IpUtils;

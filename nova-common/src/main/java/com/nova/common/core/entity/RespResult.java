@@ -1,4 +1,4 @@
-package com.nova.common.core.domain;
+package com.nova.common.core.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nova.common.trace.TraceHelper;

@@ -1,8 +1,8 @@
 package com.nova.limit.controller;
 
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.domain.AjaxResult;
-import com.nova.common.core.domain.ValidatorReqDto;
+import com.nova.common.core.entity.AjaxResult;
+import com.nova.common.core.entity.ValidatorReqDTO;
 import com.nova.common.utils.common.ValidatorUtil;
 import com.nova.limit.annotation.AccessLimit;
 import com.nova.limit.config.LimitConfig;
@@ -52,7 +52,7 @@ public class DemoController extends BaseController {
      * validator
      */
     @PostMapping("validator")
-    public AjaxResult validator(@Validated ValidatorReqDto reqDto) {
+    public AjaxResult validator(@Validated ValidatorReqDTO reqDto) {
         return AjaxResult.success("成功");
     }
 
@@ -60,7 +60,7 @@ public class DemoController extends BaseController {
      * 自定义validator
      */
     @PostMapping("customValidator")
-    public AjaxResult customValidator(ValidatorReqDto reqDto) {
+    public AjaxResult customValidator(ValidatorReqDTO reqDto) {
         ValidatorUtil.validate(reqDto);
         return AjaxResult.success("成功");
     }

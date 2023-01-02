@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 
 import com.nova.common.constant.Constants;
-import com.nova.common.core.domain.AjaxResult;
+import com.nova.common.core.entity.AjaxResult;
 import com.nova.pay.entity.param.PayParam;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.entity.result.FkPayOrder;

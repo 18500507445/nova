@@ -1,10 +1,9 @@
 package com.nova.tools.controller;
 
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.domain.RespResult;
+import com.nova.common.core.entity.RespResult;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**

@@ -1,4 +1,4 @@
-package com.nova.common.core.domain;
+package com.nova.common.core.entity;
 
 import java.io.Serializable;
 

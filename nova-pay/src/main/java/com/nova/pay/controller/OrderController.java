@@ -3,7 +3,7 @@ package com.nova.pay.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.domain.AjaxResult;
+import com.nova.common.core.entity.AjaxResult;
 import com.nova.pay.entity.param.OrderParam;
 import com.nova.pay.entity.result.FkPayConfig;
 import com.nova.pay.service.fk.FkOrderService;
@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;

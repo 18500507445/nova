@@ -1,4 +1,4 @@
-package com.nova.common.core.domain;
+package com.nova.common.core.entity;
 
 import cn.hutool.core.util.ObjectUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;

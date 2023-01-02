@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSON;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.nova.common.core.domain.AjaxResult;
+import com.nova.common.core.entity.AjaxResult;
 import com.nova.limit.annotation.AccessLimit;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;

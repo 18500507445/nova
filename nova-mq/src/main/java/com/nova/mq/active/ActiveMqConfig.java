@@ -58,10 +58,12 @@ public class ActiveMqConfig {
         //定义持久化后节点挂掉以后，重启可以继续消费.NON_PERSISTENT 表示非持久化，PERSISTENT 表示持久化
         jmsTemplate.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
         jmsTemplate.setConnectionFactory(connectionFactory());
-//        Session.AUTO_ACKNOWLEDGE  消息自动签收
-//        Session.CLIENT_ACKNOWLEDGE  客户端调用acknowledge方法手动签收
-//        Session.DUPS_OK_ACKNOWLEDGE 不必必须签收，消息可能会重复发送
-        jmsTemplate.setSessionAcknowledgeMode(Session.AUTO_ACKNOWLEDGE);//客户端签收模式
+        /**
+         * Session.AUTO_ACKNOWLEDGE  消息自动签收
+         * Session.CLIENT_ACKNOWLEDGE  客户端调用acknowledge方法手动签收
+         * Session.DUPS_OK_ACKNOWLEDGE 不必必须签收，消息可能会重复发送
+         */
+        jmsTemplate.setSessionAcknowledgeMode(Session.AUTO_ACKNOWLEDGE);
         return jmsTemplate;
     }
 

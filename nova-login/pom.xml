@@ -15,12 +15,20 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
+        <justauth.version>1.4.0</justauth.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-framework</artifactId>
+        </dependency>
+
+        <!-- spring-boot 集成JustAuth三方登录 -->
+        <dependency>
+            <groupId>com.xkcoding.justauth</groupId>
+            <artifactId>justauth-spring-boot-starter</artifactId>
+            <version>${justauth.version}</version>
         </dependency>
 
     </dependencies>

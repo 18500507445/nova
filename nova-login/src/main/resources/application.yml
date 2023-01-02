@@ -1,0 +1,43 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+justauth:
+  enabled: true
+  type:
+    github:
+      client-id: 101d********b3a
+      client-secret: 58e**************************095edd
+      redirect-uri: http://127.0.0.1/demo/oauth/github/callback
+    qq:
+      client-id: 10******85
+      client-secret: 1f7d************************d629e
+      redirect-uri: http://127.0.0.1/demo/oauth/qq/callback
+    wechat:
+      client-id: wxdcb******4ff4
+      client-secret: b4e9dc************************a08ed6d
+      redirect-uri: http://127.0.0.1/demo/oauth/wechat/callback
+    google:
+      client-id: 716******17-6db******vh******ttj320i******userco******t.com
+      client-secret: 9IBorn************7-E
+      redirect-uri: http://127.0.0.1/demo/oauth/google/callback
+    microsoft:
+      client-id: 7bdce8******************e194ad76c1b
+      client-secret: Iu0zZ4************************tl9PWan_.
+      redirect-uri: https://127.0.0.1/demo/oauth/microsoft/callback
+    mi:
+      client-id: 288************2994
+      client-secret: nFeTt89************************==
+      redirect-uri: http://127.0.0.1/demo/oauth/mi/callback
+    wechat_enterprise:
+      client-id: ww58******f3************fbc
+      client-secret: 8G6PCr00j************************rgk************AyzaPc78
+      redirect-uri: http://127.0.0.1/demo/oauth/wechat_enterprise/callback
+      agent-id: 1*******2
+  cache:
+    type: default
+    prefix: 'SOCIAL::STATE::'
+    timeout: 1h
+

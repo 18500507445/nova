@@ -1,4 +1,4 @@
-package com.nova.common.core.page;
+package com.nova.common.core.backstage;
 
 import java.io.Serializable;
 import java.util.List;

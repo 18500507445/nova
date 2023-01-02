@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageInfo;
 import com.nova.common.core.model.result.AjaxResult;
-import com.nova.common.core.page.TableDataInfo;
+import com.nova.common.core.backstage.TableDataInfo;
 import com.nova.common.utils.common.ServletUtils;
 import com.nova.common.utils.ip.IpUtils;
 import com.nova.common.utils.list.PageUtils;

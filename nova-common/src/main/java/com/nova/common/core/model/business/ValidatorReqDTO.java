@@ -1,6 +1,8 @@
 package com.nova.common.core.model.business;
 
+import com.nova.common.core.model.pojo.BaseReqDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.*;
 
@@ -9,8 +11,9 @@ import javax.validation.constraints.*;
  * @author: wzh
  * @date: 2022/12/19 20:58
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class ValidatorReqDTO {
+public class ValidatorReqDTO extends BaseReqDTO {
 
     /**
      * 主键

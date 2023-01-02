@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @ClassName: DispatcherController.java
  * @description: 内部跳转controller
  * @author: wzh
  * @date: 2022/11/21 10:56
@@ -31,7 +30,7 @@ public class DispatcherController extends BaseController {
      * 请求内部转发机制
      *
      * @param request  入参
-     *                 apiUrl: 转发地址 function=/api/gameBBS/gameBBSTest&username=123 AES加密结果
+     * apiUrl: 转发地址 function=/api/gameBBS/gameBBSTest&username=123 AES加密结果
      * @param response
      */
     @PostMapping(value = {"/forward", "/dispatcher"})

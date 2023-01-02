@@ -1,6 +1,9 @@
 package com.nova.common.core.model.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * Data Object
@@ -9,5 +12,9 @@ import lombok.Data;
  * @date: 2023/1/2 16:52
  */
 @Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseDO {
+
 }

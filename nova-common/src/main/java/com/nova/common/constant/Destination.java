@@ -9,4 +9,12 @@ public class Destination {
 
     public static final String TEST_DESTINATION = "wzhTest";
 
+    public static final String RABBIT_ONE = "";
+
+    public static final String ACTIVE_ONE = "";
+
+    public static final String KAFKA_ONE = "";
+
+    public static final String ROCKET_ONE = "";
+
 }

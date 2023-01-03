@@ -9,7 +9,10 @@ public class Destination {
 
     public static final String TEST_DESTINATION = "wzhTest";
 
-    public static final String RABBIT_ONE = "";
+    /**
+     * 普通的消息
+     */
+    public static final String RABBIT_DEFAULT = "rabbit-default";
 
     public static final String ACTIVE_ONE = "";
 

@@ -42,8 +42,6 @@
         <module>nova-sql</module>
         <module>nova-tools</module>
         <module>nova-xxl</module>
-        <module>nova-mq-rabbit</module>
-        <module>rabbit</module>
 
     </modules>
 

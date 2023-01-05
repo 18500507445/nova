@@ -1,4 +1,4 @@
-package com.nova.mq.kafka;
+package com.nova.mq.kafka.listener;
 
 import com.nova.common.constant.Destination;
 import lombok.extern.slf4j.Slf4j;

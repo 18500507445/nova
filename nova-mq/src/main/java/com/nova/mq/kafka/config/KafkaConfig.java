@@ -1,5 +1,6 @@
-package com.nova.mq.kafka;
+package com.nova.mq.kafka.config;
 
+import com.nova.mq.kafka.utils.KafkaProducerUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

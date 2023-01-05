@@ -1,9 +1,11 @@
 package com.nova.mq.rabbit.config;
 
-import lombok.extern.slf4j.Slf4j;
+import com.nova.common.constant.Destination;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,6 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2022/9/3 19:47
  */
 @Configuration
-@Slf4j
 public class RabbitConfig {
 
     @Value("${spring.rabbitmq.addresses}")
@@ -44,6 +45,40 @@ public class RabbitConfig {
     @Bean
     public RabbitTemplate rabbitTemplate() {
         return new RabbitTemplate(rabbitConnectionFactory());
+    }
+
+    /**
+     * 定义交换机Bean，可以很多个
+     * @return
+     */
+    @Bean("directExchange")
+    public Exchange exchange(){
+        return ExchangeBuilder.directExchange(Destination.RABBIT_EXCHANGE_DIRECT).build();
+    }
+
+    /**
+     * 定义消息队列
+     * @return
+     */
+    @Bean(Destination.RABBIT_QUEUE_DEFAULT)
+    public Queue queue(){
+        return QueueBuilder
+                .nonDurable(Destination.RABBIT_QUEUE_DEFAULT)
+                .build();
+    }
+
+    @Bean("binding")
+    public Binding binding(@Qualifier("directExchange") Exchange exchange,
+                           @Qualifier(Destination.RABBIT_QUEUE_DEFAULT) Queue queue){
+        //将我们刚刚定义的交换机和队列进行绑定
+        return BindingBuilder
+                //绑定队列
+                .bind(queue)
+                //到交换机
+                .to(exchange)
+                //使用自定义的routingKey
+                .with("routing-key")
+                .noargs();
     }
 
 }

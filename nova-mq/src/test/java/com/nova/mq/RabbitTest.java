@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class RabbitTest {
 
-    public static final String QUEUE_NAME = Destination.RABBIT_DEFAULT;
+    public static final String QUEUE_NAME = Destination.RABBIT_QUEUE_DEFAULT;
 
     @Test
     public void send() throws IOException {

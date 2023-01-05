@@ -6,8 +6,6 @@ import cn.hutool.core.map.MapUtil;
 import com.nova.common.constant.Destination;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -37,7 +35,7 @@ public class RabbitMqListener {
      * @param channel
      */
     @RabbitHandler
-    @org.springframework.amqp.rabbit.annotation.RabbitListener(queuesToDeclare = @Queue(Destination.TEST_DESTINATION), concurrency = "1-3", ackMode = "MANUAL")
+    @RabbitListener(queuesToDeclare = @Queue(Destination.TEST_DESTINATION), concurrency = "1-3", ackMode = "MANUAL")
     public void testRabbitMqListener(Map<String, Object> msg, Message message, Channel channel) {
         TimeInterval timer = DateUtil.timer();
         long deliveryTag = message.getMessageProperties().getDeliveryTag();

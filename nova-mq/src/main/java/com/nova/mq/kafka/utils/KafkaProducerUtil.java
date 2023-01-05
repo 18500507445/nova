@@ -1,4 +1,4 @@
-package com.nova.mq.kafka;
+package com.nova.mq.kafka.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

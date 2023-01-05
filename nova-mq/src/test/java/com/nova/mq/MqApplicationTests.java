@@ -2,10 +2,7 @@ package com.nova.mq;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Destination;
-import com.nova.mq.kafka.KafkaProducerUtil;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.nova.mq.kafka.utils.KafkaProducerUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,10 +13,8 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeoutException;
 
 @SpringBootTest
 @Slf4j
@@ -28,6 +23,9 @@ class MqApplicationTests {
     @Autowired
     private JmsTemplate jmsTemplate;
 
+    /**
+     * RabbitTemplate为我们封装了大量的RabbitMQ操作，已经由Starter提供，因此直接注入使用即可
+     */
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
@@ -48,10 +46,10 @@ class MqApplicationTests {
      * rabbitMq测试
      */
     @Test
-    public void rabbitMqTest() {
+    public void rabbitPublisher() {
         Map<String, String> params = new HashMap<>(16);
         params.put("userId", "wzhTest");
-        rabbitTemplate.convertAndSend(Destination.RABBIT_DEFAULT, params);
+        rabbitTemplate.convertAndSend("amq.direct", Destination.RABBIT_QUEUE_DEFAULT, params);
     }
 
     /**

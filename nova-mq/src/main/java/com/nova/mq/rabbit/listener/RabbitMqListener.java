@@ -32,6 +32,14 @@ public class RabbitMqListener {
      * AcknowledgeMode.AUTO：根据情况确认。
      * AcknowledgeMode.MANUAL：手动确认。
      *
+     * RabbitListener 是用来绑定队列的,queuesToDeclare属性： 用来创建队列的，如果没有就创建队列，否则不创建，和@Queue搭配使用
+     *
+     * Queue：用来配置一个队列，主要有以下属性:
+     *
+     *
+     *
+     * concurrency min-max 表示并发数，表示有多少个消费者处理队列里的消息 最小-最大数
+     *
      * @param msg
      * @param message
      * @param channel
@@ -50,14 +58,13 @@ public class RabbitMqListener {
         } finally {
             try {
                 /**
-                 * 确认消息，参数说明：long deliveryTag：唯一标识 ID。
+                 * ack表示确认消息，参数说明：long deliveryTag：唯一标识 ID。
                  * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
                  */
                 channel.basicAck(deliveryTag, false);
 
                 /**
                  * 否定消息，参数说明：
-                 * long deliveryTag：唯一标识 ID。
                  * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
                  * boolean requeue：如果 requeue 参数设置为 true，
                  * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
@@ -68,7 +75,6 @@ public class RabbitMqListener {
 
                 /**
                  * 拒绝消息，参数说明：
-                 * long deliveryTag：唯一标识 ID。
                  * boolean requeue：如果 requeue 参数设置为 true，
                  * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
                  * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，

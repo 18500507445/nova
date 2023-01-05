@@ -15,5 +15,6 @@ public class RabbitConstants {
     /**
      * 队列
      */
-    public static final String QUEUE_DEFAULT = "rabbit-default";
+    public static final String QUEUE_DIRECT = "rabbit-direct";
+
 }

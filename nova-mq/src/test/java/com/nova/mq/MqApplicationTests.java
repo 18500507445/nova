@@ -2,6 +2,7 @@ package com.nova.mq;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Destination;
+import com.nova.mq.entity.MessageStruct;
 import com.nova.mq.kafka.utils.KafkaProducerUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -47,11 +48,9 @@ class MqApplicationTests {
      */
     @Test
     public void rabbitTestDefault() {
-
         Map<String, String> params = new HashMap<>(16);
         params.put("userId", "wzhTest");
-
-        //rabbitTemplate.convertAndSend(Destination.TEST_DESTINATION, params);
+        rabbitTemplate.convertAndSend(Destination.TEST_DESTINATION, params);
 
     }
 
@@ -59,19 +58,25 @@ class MqApplicationTests {
      * rabbitMq测试
      */
     @Test
-    public void rabbitTestOne() {
+    public void rabbitDirectTest() {
         //发送消息
-        rabbitTemplate.convertAndSend("amq.direct", "routing-key", "Hello World!");
-
+        //rabbitTemplate.convertAndSend("amq.direct", "routing-key", "Hello World!");
 
         //发送消息并接收返回
-        Object res = rabbitTemplate.convertSendAndReceive("amq.direct", "routing-key", "Hello World!");
-        System.out.println("res = " + res);
+        //Object res = rabbitTemplate.convertSendAndReceive("amq.direct", "routing-key", "Hello World!");
+        //System.out.println("res = " + res);
 
         //发送json,监听器用实体类接收
-        rabbitTemplate.convertAndSend("amq.direct", "routing-key", "Hello World!");
+        rabbitTemplate.convertAndSend("amq.direct", "routing-key", MessageStruct.builder().message("Hello World!").build());
 
     }
+
+    @Test
+    public void rabbitDelayTest() {
+        //发送消息
+        rabbitTemplate.convertAndSend("amq.direct", "my-yyds", "Hello World!");
+    }
+
 
     /**
      * kafka测试

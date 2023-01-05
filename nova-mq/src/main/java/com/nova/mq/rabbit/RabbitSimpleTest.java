@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/1/3 09:52
  */
-public class RabbitMqTest {
+public class RabbitSimpleTest {
 
     public static final String QUEUE_NAME = RabbitConstants.QUEUE_DIRECT;
 

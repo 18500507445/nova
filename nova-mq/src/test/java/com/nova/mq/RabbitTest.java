@@ -1,7 +1,7 @@
 package com.nova.mq;
 
 import com.nova.common.constant.Destination;
-import com.nova.mq.rabbit.RabbitClient;
+import com.nova.mq.rabbit.utlis.RabbitClient;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import org.junit.jupiter.api.Test;
@@ -42,8 +42,8 @@ public class RabbitTest {
 
         //创建一个基本的消费者
         channel.basicConsume(QUEUE_NAME, false, (s, delivery) -> {
-            System.out.println(new String(delivery.getBody()));
 
+            System.out.println("msg = " + new String(delivery.getBody()));
             /**
              *  basicAck是确认应答，第一个参数是当前的消息标签，后面的参数是
              *  是否批量处理消息队列中所有的消息，如果为false表示只处理当前消息

@@ -1,4 +1,4 @@
-package com.nova.mq.rabbit;
+package com.nova.mq.rabbit.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;

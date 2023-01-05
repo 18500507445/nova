@@ -1,4 +1,4 @@
-package com.nova.mq.active;
+package com.nova.mq.active.listener;
 
 import com.nova.common.constant.Destination;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import javax.jms.Message;
  */
 @Slf4j
 @Component
-public class ActiveMqListener {
+public class ActiveListener {
 
     @JmsListener(destination = Destination.TEST_DESTINATION)
     public void testActiveMqListener(Message msg) {

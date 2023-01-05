@@ -1,4 +1,4 @@
-package com.nova.mq.rabbit;
+package com.nova.mq.rabbit.utlis;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;

@@ -1,4 +1,4 @@
-package com.nova.mq.rabbit;
+package com.nova.mq.rabbit.listener;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
@@ -22,7 +22,7 @@ import java.util.Map;
  * @date: 2022/9/11 09:25
  */
 @Slf4j
-public class RabbitMqListener {
+public class RabbitListener {
 
     /**
      * 消息确认机制（ACK）
@@ -37,7 +37,7 @@ public class RabbitMqListener {
      * @param channel
      */
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(Destination.TEST_DESTINATION), concurrency = "1-3", ackMode = "MANUAL")
+    @org.springframework.amqp.rabbit.annotation.RabbitListener(queuesToDeclare = @Queue(Destination.TEST_DESTINATION), concurrency = "1-3", ackMode = "MANUAL")
     public void testRabbitMqListener(Map<String, Object> msg, Message message, Channel channel) {
         TimeInterval timer = DateUtil.timer();
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
@@ -58,8 +58,7 @@ public class RabbitMqListener {
                 /**
                  * 否定消息，参数说明：
                  * long deliveryTag：唯一标识 ID。
-                 * boolean multiple：是否批处理，当该参数为 true 时，
-                 * 则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
+                 * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
                  * boolean requeue：如果 requeue 参数设置为 true，
                  * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
                  * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，

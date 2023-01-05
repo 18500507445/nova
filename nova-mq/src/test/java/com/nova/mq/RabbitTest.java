@@ -1,6 +1,6 @@
 package com.nova.mq;
 
-import com.nova.common.constant.Destination;
+import com.nova.common.constant.RabbitConstants;
 import com.nova.mq.rabbit.utlis.RabbitClient;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class RabbitTest {
 
-    public static final String QUEUE_NAME = Destination.RABBIT_QUEUE_DEFAULT;
+    public static final String QUEUE_NAME = RabbitConstants.QUEUE_DEFAULT;
 
     @Test
     public void send() throws IOException {

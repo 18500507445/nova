@@ -1,10 +1,11 @@
 package com.nova.mq.rabbit.config;
 
-import com.nova.common.constant.Destination;
+import com.nova.common.constant.RabbitConstants;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -49,27 +50,29 @@ public class RabbitConfig {
 
     /**
      * 定义交换机Bean，可以很多个
+     *
      * @return
      */
     @Bean("directExchange")
-    public Exchange exchange(){
-        return ExchangeBuilder.directExchange(Destination.RABBIT_EXCHANGE_DIRECT).build();
+    public Exchange exchange() {
+        return ExchangeBuilder.directExchange(RabbitConstants.EXCHANGE_DIRECT).build();
     }
 
     /**
      * 定义消息队列
+     *
      * @return
      */
-    @Bean(Destination.RABBIT_QUEUE_DEFAULT)
-    public Queue queue(){
+    @Bean(RabbitConstants.QUEUE_DEFAULT)
+    public Queue queue() {
         return QueueBuilder
-                .nonDurable(Destination.RABBIT_QUEUE_DEFAULT)
+                .nonDurable(RabbitConstants.QUEUE_DEFAULT)
                 .build();
     }
 
     @Bean("binding")
     public Binding binding(@Qualifier("directExchange") Exchange exchange,
-                           @Qualifier(Destination.RABBIT_QUEUE_DEFAULT) Queue queue){
+                           @Qualifier(RabbitConstants.QUEUE_DEFAULT) Queue queue) {
         //将我们刚刚定义的交换机和队列进行绑定
         return BindingBuilder
                 //绑定队列
@@ -79,6 +82,14 @@ public class RabbitConfig {
                 //使用自定义的routingKey
                 .with("routing-key")
                 .noargs();
+    }
+
+    /**
+     * 直接创建一个用于JSON转换的Bean
+     */
+    @Bean("jacksonConverter")
+    public Jackson2JsonMessageConverter converter() {
+        return new Jackson2JsonMessageConverter();
     }
 
 }

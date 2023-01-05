@@ -14,7 +14,7 @@ import javax.jms.Message;
  * @date: 2022/9/11 09:01
  */
 @Slf4j
-@Component
+//@Component
 public class ActiveMqListener {
 
     @JmsListener(destination = Destination.TEST_DESTINATION)

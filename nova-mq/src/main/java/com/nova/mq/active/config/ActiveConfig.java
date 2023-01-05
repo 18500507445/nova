@@ -22,7 +22,7 @@ import javax.jms.Session;
  * @author: wzh
  * @date: 2022/8/4 21:29
  */
-@Configuration
+//@Configuration
 @EnableJms
 public class ActiveConfig {
 

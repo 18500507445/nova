@@ -10,6 +10,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @date: 2022/9/11 09:25
  */
 @Slf4j
+@Component
 public class RabbitMqListener {
 
     /**

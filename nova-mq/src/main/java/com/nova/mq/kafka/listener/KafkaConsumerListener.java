@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @date: 2022/12/20 21:27
  */
 @Slf4j
-@Component
+//@Component
 public class KafkaConsumerListener {
 
     @KafkaListener(groupId = "nova-kafka-consumer", topics = {Destination.TEST_DESTINATION})

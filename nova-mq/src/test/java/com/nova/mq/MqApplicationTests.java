@@ -46,10 +46,31 @@ class MqApplicationTests {
      * rabbitMq测试
      */
     @Test
-    public void rabbitPublisher() {
+    public void rabbitTestDefault() {
+
         Map<String, String> params = new HashMap<>(16);
         params.put("userId", "wzhTest");
-        rabbitTemplate.convertAndSend("amq.direct", Destination.RABBIT_QUEUE_DEFAULT, params);
+
+        //rabbitTemplate.convertAndSend(Destination.TEST_DESTINATION, params);
+
+    }
+
+    /**
+     * rabbitMq测试
+     */
+    @Test
+    public void rabbitTestOne() {
+        //发送消息
+        rabbitTemplate.convertAndSend("amq.direct", "routing-key", "Hello World!");
+
+
+        //发送消息并接收返回
+        Object res = rabbitTemplate.convertSendAndReceive("amq.direct", "routing-key", "Hello World!");
+        System.out.println("res = " + res);
+
+        //发送json,监听器用实体类接收
+        rabbitTemplate.convertAndSend("amq.direct", "routing-key", "Hello World!");
+
     }
 
     /**

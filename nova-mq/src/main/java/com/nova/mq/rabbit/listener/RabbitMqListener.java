@@ -22,7 +22,7 @@ import java.util.Map;
  * @date: 2022/9/11 09:25
  */
 @Slf4j
-public class RabbitListener {
+public class RabbitMqListener {
 
     /**
      * 消息确认机制（ACK）

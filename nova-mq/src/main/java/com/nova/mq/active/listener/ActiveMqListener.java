@@ -15,7 +15,7 @@ import javax.jms.Message;
  */
 @Slf4j
 @Component
-public class ActiveListener {
+public class ActiveMqListener {
 
     @JmsListener(destination = Destination.TEST_DESTINATION)
     public void testActiveMqListener(Message msg) {

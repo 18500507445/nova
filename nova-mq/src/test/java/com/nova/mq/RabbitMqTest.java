@@ -177,20 +177,32 @@ public class RabbitMqTest {
 
     /**
      * 简单模式6
-     * {@link SimpleListener#six(Message)}
+     * {@link SimpleListener#six(Message, Channel)}
      */
     @Test
     public void simpleSix(){
         rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_SIX, MSG);
     }
 
+
     /**
-     * 简单模式7
-     * {@link SimpleListener#seven(Message, Channel)}
+     * 工作轮询模式-轮询
      */
     @Test
-    public void simpleSeven(){
-        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_SEVEN, MSG);
+    public void workPolling() {
+        for (int i = 0; i < 10; i++) {
+            rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_WORK_ONE, MSG);
+        }
+    }
+
+    /**
+     * 工作轮询模式-线程
+     */
+    @Test
+    public void workThread() {
+        for (int i = 0; i < 20; i++) {
+            rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_WORK_TWO, MSG);
+        }
     }
 
     /**

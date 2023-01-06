@@ -18,20 +18,21 @@ public class RabbitConstants {
     public static final String QUEUE_DIRECT = "rabbit-direct";
 
     /**
-     * 简单队列
+     * 简单模式队列
      */
     public static final String QUEUE_SIMPLE_ONE = "queue-simple-one";
-
     public static final String QUEUE_SIMPLE_TWO = "queue-simple-two";
-
     public static final String QUEUE_SIMPLE_THREE = "queue-simple-three";
-
     public static final String QUEUE_SIMPLE_FOUR = "queue-simple-four";
-
     public static final String QUEUE_SIMPLE_FIVE = "queue-simple-five";
-
     public static final String QUEUE_SIMPLE_SIX = "queue-simple-six";
 
-    public static final String QUEUE_SIMPLE_SEVEN = "queue-simple-seven";
+    /**
+     * 工作模式队列
+     */
+    public static final String QUEUE_WORK_ONE = "queue-work-one";
+    public static final String QUEUE_WORK_TWO = "queue-work-two";
+    public static final String QUEUE_WORK_THREE = "queue-work-three";
+
 
 }

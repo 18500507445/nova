@@ -2,6 +2,7 @@ package com.nova.mq.rabbit.config;
 
 import com.nova.common.constant.RabbitConstants;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -47,6 +48,15 @@ public class RabbitConfig {
         return new RabbitTemplate(rabbitConnectionFactory());
     }
 
+    @Bean(name = "listenerContainer")
+    public SimpleRabbitListenerContainerFactory listenerContainer() {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(rabbitConnectionFactory());
+        //将PrefetchCount设定为1表示一次只能取一个
+        factory.setPrefetchCount(1);
+        return factory;
+    }
+
     /**
      * 直连交换机
      *
@@ -87,15 +97,6 @@ public class RabbitConfig {
         return new Queue(RabbitConstants.QUEUE_SIMPLE_TWO);
     }
 
-    /**
-     * 简单队列3
-     *
-     * @return
-     */
-    @Bean
-    public Queue queueSimpleThree() {
-        return new Queue(RabbitConstants.QUEUE_SIMPLE_THREE);
-    }
 
     /**
      * 定义消息队列

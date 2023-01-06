@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @description: 简单模式监听器
+ * @description: 简单队列模式监听器，绑定到默认的交换机上(amqp-default)
+ * https://img-blog.csdnimg.cn/15dc5ce2c06548cd8f61154496134b5a.png#pic_center
+ * 默认交换机绑定到每个队列，路由key等于队列名称。无法显式绑定到默认交换或从默认交换解除绑定。它也不能被删除。
  * @author: wzh
  * @date: 2023/1/6 15:42
  */
@@ -37,7 +39,7 @@ public class SimpleListener {
 
     /**
      * 简单队列2 (有返回值)
-     *
+     * {@link RabbitConfig#queueSimpleTwo()}} 需要申明队列
      * @param message
      * @return
      */
@@ -85,17 +87,6 @@ public class SimpleListener {
         System.out.println("简单模式five消息：" + JSONUtil.toJsonStr(msg));
     }
 
-    /**
-     * 简单队列6 多线程创建队列处理消息
-     * concurrency = "2" 2个线程
-     * concurrency = "1-3"，表示并发数，表示有多少个消费者处理队列里的消息 最小-最大数 1-3个线程
-     * <p>
-     * https://img-blog.csdnimg.cn/5f4117cc52ea4f8888c6894803f1a1d6.jpeg#pic_center
-     */
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_SIX), concurrency = "2")
-    public void six(Message message) {
-        System.out.println("简单模式six消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
-    }
 
     /**
      * 简单队列7 消息确认机制（ACK）
@@ -106,12 +97,12 @@ public class SimpleListener {
      * AcknowledgeMode.MANUAL：手动确认
      */
     @SneakyThrows
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_SEVEN), ackMode = "MANUAL")
-    public void seven(Message message, Channel channel) {
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_SIX), ackMode = "MANUAL")
+    public void six(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
         try {
             String body = new String(message.getBody());
-            System.out.println("简单模式seven消息：" + body);
+            System.out.println("简单模式six消息：" + body);
         } finally {
             /**
              * ack表示确认消息，参数说明：long deliveryTag：唯一标识 ID。

@@ -226,7 +226,7 @@ public class RabbitMqTest {
 
     /**
      * 直连模式2
-     * 过期进入死信队列
+     * 拒绝进入死信队列
      */
     @Test
     public void directTestDlx() {

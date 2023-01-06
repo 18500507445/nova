@@ -2,8 +2,7 @@ package com.nova.mq.rabbit.listener;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.RabbitConstants;
-import com.nova.mq.entity.MessageStruct;
-import org.springframework.amqp.core.Message;
+import com.nova.common.core.model.business.MessageBO;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -37,7 +36,7 @@ public class DirectListener {
 
     @RabbitHandler
     @RabbitListener(queues = RabbitConstants.QUEUE_DIRECT)
-    public void three(MessageStruct message) {
+    public void three(MessageBO message) {
         System.out.println("直连消息队列监听器:=" + JSONUtil.toJsonStr(message));
     }
 

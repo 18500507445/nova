@@ -53,7 +53,7 @@ public class RabbitConfig {
      * @return
      */
     @Bean("directExchange")
-    public Exchange exchange() {
+    public Exchange directExchange() {
         return ExchangeBuilder.directExchange(RabbitConstants.EXCHANGE_DIRECT).build();
     }
 
@@ -62,9 +62,39 @@ public class RabbitConfig {
      *
      * @return
      */
-    @Bean("directDlExchange")
+    @Bean("dlExchange")
     public Exchange dlExchange() {
         return ExchangeBuilder.directExchange("dlx.direct").build();
+    }
+
+    /**
+     * 简单队列1
+     *
+     * @return
+     */
+    @Bean
+    public Queue queueSimpleOne() {
+        return new Queue(RabbitConstants.QUEUE_SIMPLE_ONE);
+    }
+
+    /**
+     * 简单队列2
+     *
+     * @return
+     */
+    @Bean
+    public Queue queueSimpleTwo() {
+        return new Queue(RabbitConstants.QUEUE_SIMPLE_TWO);
+    }
+
+    /**
+     * 简单队列3
+     *
+     * @return
+     */
+    @Bean
+    public Queue queueSimpleThree() {
+        return new Queue(RabbitConstants.QUEUE_SIMPLE_THREE);
     }
 
     /**
@@ -113,7 +143,7 @@ public class RabbitConfig {
      * @return
      */
     @Bean("dlBinding")
-    public Binding dlBinding(@Qualifier("directDlExchange") Exchange exchange,
+    public Binding dlBinding(@Qualifier("dlExchange") Exchange exchange,
                              @Qualifier("yydsDlQueue") Queue queue) {
         return BindingBuilder
                 .bind(queue)
@@ -142,7 +172,7 @@ public class RabbitConfig {
 
     @Bean("bindingYyds")
     public Binding bindingYyds(@Qualifier("directExchange") Exchange exchange,
-                           @Qualifier("yydsQueue") Queue queue){
+                               @Qualifier("yydsQueue") Queue queue) {
         //将我们刚刚定义的交换机和队列进行绑定
         return BindingBuilder
                 .bind(queue)   //绑定队列

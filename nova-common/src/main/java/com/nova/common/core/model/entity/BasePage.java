@@ -1,5 +1,7 @@
 package com.nova.common.core.model.entity;
 
+import lombok.experimental.SuperBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,7 @@ import java.io.Serializable;
  * @author: wzh
  * @date: 2022/12/19 20:58
  */
+@SuperBuilder
 public class BasePage implements Serializable {
 
     private static final long serialVersionUID = 1L;

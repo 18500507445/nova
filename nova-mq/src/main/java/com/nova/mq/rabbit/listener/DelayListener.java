@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DelayListener {
 
-    //@RabbitHandler
-    //@RabbitListener(queues = "yyds")
-    //public void one(Message message) {
-    //    System.out.println("正常消息队列监听器:=" + new String(message.getBody()));
-    //}
+    @RabbitHandler
+    @RabbitListener(queues = "yyds")
+    public void one(Message message) {
+        System.out.println("正常消息队列监听器:=" + new String(message.getBody()));
+    }
 
     @RabbitHandler
     @RabbitListener(queues = "dl-yyds")

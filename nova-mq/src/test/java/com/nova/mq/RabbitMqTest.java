@@ -1,20 +1,44 @@
-package com.nova.mq.rabbit;
+package com.nova.mq;
 
+import com.nova.common.constant.Destination;
 import com.nova.common.constant.RabbitConstants;
+import com.nova.common.core.model.business.MessageBO;
+import com.nova.mq.rabbit.listener.SimpleListener;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description:
  * @author: wzh
- * @date: 2023/1/3 09:52
+ * @date: 2023/1/6 15:44
  */
-public class RabbitSimpleTest {
+@SpringBootTest
+@Slf4j
+public class RabbitMqTest {
 
     public static final String QUEUE_NAME = RabbitConstants.QUEUE_DIRECT;
 
+    public static final String MSG = "Hello World!";
+
+    /**
+     * RabbitTemplate为我们封装了大量的RabbitMQ操作，已经由Starter提供，因此直接注入使用即可
+     */
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    /**
+     * 生产者
+     */
     @Test
     public void producer() {
         // 1: 创建连接工厂
@@ -28,7 +52,6 @@ public class RabbitSimpleTest {
 
         Connection connection;
         Channel channel;
-
         try {
             // 3: 从连接工厂中获取连接
             connection = connectionFactory.newConnection("测试");
@@ -64,26 +87,23 @@ public class RabbitSimpleTest {
         }
     }
 
-
+    /**
+     * 消费者
+     *
+     * @throws Exception
+     */
     @Test
     public void consumer() throws Exception {
-        // 1: 创建连接工厂
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        // 2: 设置连接属性
         connectionFactory.setHost("47.100.174.176");
         connectionFactory.setPort(5672);
         connectionFactory.setVirtualHost("/");
         connectionFactory.setUsername("root");
         connectionFactory.setPassword("@wangzehui123");
-
-        // 3: 从连接工厂中获取连接
         Connection connection = connectionFactory.newConnection("测试");
-        // 4: 从连接中获取通道channel
         Channel channel = connection.createChannel();
-
         //创建一个基本的消费者
         channel.basicConsume(QUEUE_NAME, false, (s, delivery) -> {
-
             System.out.println("msg = " + new String(delivery.getBody()));
             /**
              *  basicAck是确认应答，第一个参数是当前的消息标签，后面的参数是
@@ -105,4 +125,87 @@ public class RabbitSimpleTest {
         });
     }
 
+
+    /**
+     * 简单模式1
+     * {@link SimpleListener#one(Message)}
+     */
+    @Test
+    public void simpleOne() {
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_ONE, MSG);
+    }
+
+    /**
+     * 简单模式2
+     * {@link SimpleListener#two(Message)}
+     */
+    @Test
+    public void simpleTwo() {
+        Object receive = rabbitTemplate.convertSendAndReceive(RabbitConstants.QUEUE_SIMPLE_TWO, MSG);
+        System.out.println("receive = " + receive);
+    }
+
+    /**
+     * 简单模式3
+     * {@link SimpleListener#three(Message)}
+     */
+    @Test
+    public void simpleThree() {
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_THREE, MSG);
+    }
+
+    /**
+     * 简单模式4
+     * {@link SimpleListener#four(MessageBO)}
+     */
+    @Test
+    public void simpleFour() {
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FOUR, MessageBO.builder().id(1).message(MSG).build());
+    }
+
+    /**
+     * 简单模式5
+     * {@link SimpleListener#five(Map, Message)}
+     */
+    @Test
+    public void simpleFive() {
+        Map<String, Object> map = new HashMap<>(16);
+        map.put("id", 1);
+        map.put("message", MSG);
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FIVE, map);
+    }
+
+
+    /**
+     * rabbitMq测试
+     */
+    @Test
+    public void rabbitTestDefault() {
+        Map<String, String> params = new HashMap<>(16);
+        params.put("userId", "wzhTest");
+        rabbitTemplate.convertAndSend(Destination.TEST_DESTINATION, params);
+
+    }
+
+    /**
+     * rabbitMq测试
+     */
+    @Test
+    public void rabbitDirectTest() {
+        //发送消息
+        //rabbitTemplate.convertAndSend("amq.direct", "routing-key", "Hello World!");
+
+        //发送消息并接收返回
+        //Object res = rabbitTemplate.convertSendAndReceive("amq.direct", "routing-key", "Hello World!");
+        //System.out.println("res = " + res);
+
+        //发送json,监听器用实体类接收
+        rabbitTemplate.convertAndSend("amq.direct", "routing-key", MessageBO.builder().message("Hello World!").build());
+    }
+
+    @Test
+    public void rabbitDelayTest() {
+        //发送消息
+        rabbitTemplate.convertAndSend("amq.direct", "my-yyds", "Hello World!");
+    }
 }

@@ -2,7 +2,11 @@ package com.nova.common.core.model.pojo;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,6 +17,9 @@ import java.util.Date;
  * @date: 2023/1/2 17:00
  */
 @Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseResDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;

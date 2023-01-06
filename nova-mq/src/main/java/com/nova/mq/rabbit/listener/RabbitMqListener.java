@@ -32,13 +32,7 @@ public class RabbitMqListener {
      * AcknowledgeMode.AUTO：根据情况确认。
      * AcknowledgeMode.MANUAL：手动确认。
      *
-     * RabbitListener 是用来绑定队列的,queuesToDeclare属性： 用来创建队列的，如果没有就创建队列，否则不创建，和@Queue搭配使用
-     *
-     * Queue：用来配置一个队列，主要有以下属性:
-     *
-     *
-     *
-     * concurrency min-max 表示并发数，表示有多少个消费者处理队列里的消息 最小-最大数
+     * concurrency
      *
      * @param msg
      * @param message

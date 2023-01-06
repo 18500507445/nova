@@ -13,14 +13,14 @@ public class RabbitConstants {
     public static final String EXCHANGE_DIRECT = "amq.direct";
 
     /**
+     * 死信交换机
+     */
+    public static final String EXCHANGE_DIRECT_DLX = "dlx.direct";
+
+    /**
      * 广播交换机(自带)
      */
     public static final String EXCHANGE_FANOUT = "amq.fanout";
-
-    /**
-     * 队列
-     */
-    public static final String QUEUE_DIRECT = "rabbit-direct";
 
     /**
      * 简单模式队列
@@ -49,5 +49,7 @@ public class RabbitConstants {
      * 直连模式队列
      */
     public static final String QUEUE_DIRECT_ONE = "queue-direct-one";
+    public static final String QUEUE_DIRECT_TWO = "queue-direct-two";
+    public static final String QUEUE_DIRECT_DLX = "queue-direct-dlx";
 
 }

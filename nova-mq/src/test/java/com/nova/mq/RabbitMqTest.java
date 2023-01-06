@@ -25,7 +25,7 @@ import java.util.Map;
 @Slf4j
 public class RabbitMqTest {
 
-    public static final String QUEUE_NAME = RabbitConstants.QUEUE_DIRECT;
+    public static final String QUEUE_NAME = "queue-default";
 
     public static final String MSG = "Hello World!";
 
@@ -216,16 +216,22 @@ public class RabbitMqTest {
 
     /**
      * 直连模式1
+     * 过期进入死信队列
      */
     @Test
-    public void directTest() {
+    public void directTestOne() {
         //发送json,监听器用实体类接收
-        rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "direct", MSG);
+        rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "directOne", MSG);
     }
 
+    /**
+     * 直连模式2
+     * 过期进入死信队列
+     */
     @Test
-    public void rabbitDelayTest() {
-        //发送消息
-        rabbitTemplate.convertAndSend("amq.direct", "my-yyds", "Hello World!");
+    public void directTestDl() {
+        //发送json,监听器用实体类接收
+        rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "directTwo", MSG);
     }
+
 }

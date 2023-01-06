@@ -6,7 +6,6 @@ import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFacto
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -83,9 +82,9 @@ public class RabbitConfig {
      *
      * @return
      */
-    @Bean("dlExchange")
-    public Exchange dlExchange() {
-        return ExchangeBuilder.directExchange("dlx.direct").build();
+    @Bean("directDlExchange")
+    public Exchange directDlExchange() {
+        return ExchangeBuilder.directExchange(RabbitConstants.EXCHANGE_DIRECT_DLX).build();
     }
 
     /**
@@ -145,104 +144,60 @@ public class RabbitConfig {
     }
 
     /**
-     * 直连队列
+     * 直连队列1
      */
     @Bean
-    public Queue queueDirect() {
+    public Queue queueDirectOne() {
         return new Queue(RabbitConstants.QUEUE_DIRECT_ONE);
     }
 
     /**
-     * 绑定直连交换机
+     * 绑定直连交换机1
      */
     @Bean
-    public Binding bindingDirect() {
-        return BindingBuilder.bind(queueDirect()).to(directExchange()).with("direct").noargs();
+    public Binding bindingDirectOne() {
+        return BindingBuilder.bind(queueDirectOne()).to(directExchange()).with("directOne").noargs();
     }
 
-    /**
-     * 定义消息队列
-     *
-     * @return
-     */
-    @Bean(RabbitConstants.QUEUE_DIRECT)
-    public Queue queue() {
-        return QueueBuilder
-                .nonDurable(RabbitConstants.QUEUE_DIRECT)
-                .build();
-    }
-
-    @Bean("binding")
-    public Binding binding(@Qualifier("directExchange") Exchange exchange,
-                           @Qualifier(RabbitConstants.QUEUE_DIRECT) Queue queue) {
-        //将我们刚刚定义的交换机和队列进行绑定
-        return BindingBuilder
-                //绑定队列
-                .bind(queue)
-                //到交换机
-                .to(exchange)
-                //使用自定义的routingKey
-                .with("routing-key")
-                .noargs();
-    }
 
     /**
      * 死信队列
-     *
-     * @return
      */
-    @Bean("yydsDlQueue")
-    public Queue dlQueue() {
-        return QueueBuilder
-                .nonDurable("dl-yyds")
-                .build();
+    @Bean
+    public Queue queueDirectDl() {
+        return new Queue(RabbitConstants.QUEUE_DIRECT_DLX);
     }
 
     /**
-     * 死信交换机和死信队列进绑定
-     *
-     * @param exchange
-     * @param queue
-     * @return
+     * 绑定直连死信交换机
      */
-    @Bean("dlBinding")
-    public Binding dlBinding(@Qualifier("dlExchange") Exchange exchange,
-                             @Qualifier("yydsDlQueue") Queue queue) {
-        return BindingBuilder
-                .bind(queue)
-                .to(exchange)
-                .with("dl-yyds")
-                .noargs();
+    @Bean
+    public Binding bindingDirectDl() {
+        return BindingBuilder.bind(queueDirectDl()).to(directExchange()).with("directDl").noargs();
     }
 
     /**
-     * 正常队列
-     *
-     * @return
+     * 直连队列2-指定死信队列和交换机
      */
-    @Bean("yydsQueue")
-    public Queue yydsQueue() {
+    @Bean
+    public Queue queueDirectTwo() {
         return QueueBuilder
-                .nonDurable("yyds")
+                .nonDurable(RabbitConstants.QUEUE_DIRECT_TWO)
                 //指定死信交换机
-                .deadLetterExchange("dlx.direct")
+                .deadLetterExchange(RabbitConstants.EXCHANGE_DIRECT_DLX)
                 //指定死信RoutingKey
-                .deadLetterRoutingKey("dl-yyds")
+                .deadLetterRoutingKey("directDl")
                 //如果5秒没处理，就自动删除
                 .ttl(1000 * 5)
                 .build();
     }
 
-    @Bean("bindingYyds")
-    public Binding bindingYyds(@Qualifier("directExchange") Exchange exchange,
-                               @Qualifier("yydsQueue") Queue queue) {
-        //将我们刚刚定义的交换机和队列进行绑定
-        return BindingBuilder
-                .bind(queue)   //绑定队列
-                .to(exchange)  //到交换机
-                .with("my-yyds")   //使用自定义的routingKey
-                .noargs();
+    /**
+     * 绑定直连交换机2
+     */
+    @Bean
+    public Binding bindingDirectTwo() {
+        return BindingBuilder.bind(queueDirectTwo()).to(directExchange()).with("directTwo").noargs();
     }
-
 
 }

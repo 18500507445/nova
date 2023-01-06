@@ -91,7 +91,7 @@ public class WorkListener {
     @SneakyThrows
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_THREE), ackMode = "MANUAL")
-    public void three(Message message, Channel channel) {
+    public void fairOne(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
         try {
             ThreadUtil.sleep(500);
@@ -130,7 +130,7 @@ public class WorkListener {
     @SneakyThrows
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_THREE), ackMode = "MANUAL")
-    public void four(Message message, Channel channel) {
+    public void fairTwo(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
         try {
             ThreadUtil.sleep(1000);

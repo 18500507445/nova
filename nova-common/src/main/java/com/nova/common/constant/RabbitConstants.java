@@ -8,9 +8,14 @@ package com.nova.common.constant;
 public class RabbitConstants {
 
     /**
-     * 交换机
+     * 直连交换机(自带)
      */
     public static final String EXCHANGE_DIRECT = "amq.direct";
+
+    /**
+     * 广播交换机(自带)
+     */
+    public static final String EXCHANGE_FANOUT = "amq.fanout";
 
     /**
      * 队列
@@ -33,5 +38,16 @@ public class RabbitConstants {
     public static final String QUEUE_WORK_TWO = "queue-work-two";
     public static final String QUEUE_WORK_THREE = "queue-work-three";
 
+
+    /**
+     * 广播模式队列
+     */
+    public static final String QUEUE_FANOUT_EMAIL = "queue-fanout-email";
+    public static final String QUEUE_FANOUT_SMS = "queue-fanout-sms";
+
+    /**
+     * 直连模式队列
+     */
+    public static final String QUEUE_DIRECT_ONE = "queue-direct-one";
 
 }

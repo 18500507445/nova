@@ -68,6 +68,17 @@ public class RabbitConfig {
     }
 
     /**
+     * 广播交换机
+     *
+     * @return
+     */
+    @Bean("fanoutExchange")
+    public Exchange fanoutExchange() {
+        //默认持久化，不自动删除
+        return ExchangeBuilder.fanoutExchange(RabbitConstants.EXCHANGE_FANOUT).build();
+    }
+
+    /**
      * 死信交换机
      *
      * @return
@@ -97,6 +108,57 @@ public class RabbitConfig {
         return new Queue(RabbitConstants.QUEUE_SIMPLE_TWO);
     }
 
+    /**
+     * 广播队列-email
+     */
+    @Bean
+    public Queue queueFanoutEmail() {
+        return new Queue(RabbitConstants.QUEUE_FANOUT_EMAIL);
+    }
+
+    /**
+     * 广播队列-sms
+     */
+    @Bean
+    public Queue queueFanoutSms() {
+        return new Queue(RabbitConstants.QUEUE_FANOUT_SMS);
+    }
+
+    /**
+     * 将email队列绑定到广播交换机
+     *
+     * @return
+     */
+    @Bean
+    public Binding bindingFanoutEmail() {
+        return BindingBuilder.bind(queueFanoutEmail()).to(fanoutExchange()).with("").noargs();
+    }
+
+    /**
+     * 将sms队列绑定到广播交换机
+     *
+     * @return
+     */
+    @Bean
+    public Binding bindingFanoutSms() {
+        return BindingBuilder.bind(queueFanoutSms()).to(fanoutExchange()).with("").noargs();
+    }
+
+    /**
+     * 直连队列
+     */
+    @Bean
+    public Queue queueDirect() {
+        return new Queue(RabbitConstants.QUEUE_DIRECT_ONE);
+    }
+
+    /**
+     * 绑定直连交换机
+     */
+    @Bean
+    public Binding bindingDirect() {
+        return BindingBuilder.bind(queueDirect()).to(directExchange()).with("direct").noargs();
+    }
 
     /**
      * 定义消息队列

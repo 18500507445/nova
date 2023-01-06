@@ -1,6 +1,5 @@
 package com.nova.mq;
 
-import com.nova.common.constant.Destination;
 import com.nova.common.constant.RabbitConstants;
 import com.nova.common.core.model.business.MessageBO;
 import com.nova.mq.rabbit.listener.SimpleListener;
@@ -197,19 +196,31 @@ public class RabbitMqTest {
     }
 
     /**
-     * rabbitMq测试
+     * 工作轮询模式-公平
      */
     @Test
-    public void rabbitDirectTest() {
-        //发送消息
-        //rabbitTemplate.convertAndSend("amq.direct", "routing-key", "Hello World!");
+    public void workFair() {
+        for (int i = 0; i < 20; i++) {
+            rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_WORK_THREE, MSG);
+        }
+    }
 
-        //发送消息并接收返回
-        //Object res = rabbitTemplate.convertSendAndReceive("amq.direct", "routing-key", "Hello World!");
-        //System.out.println("res = " + res);
+    /**
+     * 广播模式
+     */
+    @Test
+    public void fanoutTest() {
+        String exchangeName = RabbitConstants.EXCHANGE_FANOUT;
+        rabbitTemplate.convertAndSend(exchangeName, "", MSG);
+    }
 
+    /**
+     * 直连模式1
+     */
+    @Test
+    public void directTest() {
         //发送json,监听器用实体类接收
-        rabbitTemplate.convertAndSend("amq.direct", "routing-key", MessageBO.builder().message("Hello World!").build());
+        rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "direct", MSG);
     }
 
     @Test

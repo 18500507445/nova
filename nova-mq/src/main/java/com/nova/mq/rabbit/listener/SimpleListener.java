@@ -4,8 +4,6 @@ import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.RabbitConstants;
 import com.nova.common.core.model.business.MessageBO;
 import com.nova.mq.rabbit.config.RabbitConfig;
-import com.rabbitmq.client.Channel;
-import lombok.SneakyThrows;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

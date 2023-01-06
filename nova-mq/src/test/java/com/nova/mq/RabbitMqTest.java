@@ -229,7 +229,7 @@ public class RabbitMqTest {
      * 过期进入死信队列
      */
     @Test
-    public void directTestDl() {
+    public void directTestDlx() {
         //发送json,监听器用实体类接收
         rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "directTwo", MSG);
     }

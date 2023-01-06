@@ -97,22 +97,22 @@ public class WorkListener {
             ThreadUtil.sleep(500);
         } finally {
             /**
-             * ack表示确认消息，参数说明：long deliveryTag：唯一标识 ID。
+             * ack表示确认消息
+             * 参数说明：long deliveryTag：唯一标识 ID。
              * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
              */
             channel.basicAck(tag, false);
 
             /**
-             * 否定消息，参数说明：
+             * 否定消息
              * boolean requeue：如果 requeue 参数设置为 true，RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
              * 反之设置为false，则 RabbitMQ 立即会还把消息从队列中移除，而不会把它发送给新的消费者。
              */
             //channel.basicNack(tag, false, true);
 
             /**
-             * 拒绝消息，参数说明：
-             * boolean requeue：如果 requeue 参数设置为 true，
-             * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
+             * 拒绝消息
+             * 如果 requeue 参数设置为 true，则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
              * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，
              * 而不会把它发送给新的消费者。
              */

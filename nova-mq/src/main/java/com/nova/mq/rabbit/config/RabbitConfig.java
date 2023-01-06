@@ -173,7 +173,7 @@ public class RabbitConfig {
      */
     @Bean
     public Binding bindingDirectDl() {
-        return BindingBuilder.bind(queueDirectDl()).to(directExchange()).with("directDl").noargs();
+        return BindingBuilder.bind(queueDirectDl()).to(directDlExchange()).with("directDl").noargs();
     }
 
     /**

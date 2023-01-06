@@ -175,22 +175,13 @@ public class RabbitMqTest {
         rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FIVE, map);
     }
 
-    /**
-     * 简单模式6
-     * {@link SimpleListener#six(Message, Channel)}
-     */
-    @Test
-    public void simpleSix(){
-        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_SIX, MSG);
-    }
-
 
     /**
      * 工作轮询模式-轮询
      */
     @Test
     public void workPolling() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_WORK_ONE, MSG);
         }
     }

@@ -88,44 +88,4 @@ public class SimpleListener {
     }
 
 
-    /**
-     * 简单队列7 消息确认机制（ACK）
-     * <p>
-     * 消息确认模式有：
-     * AcknowledgeMode.NONE：自动确认
-     * AcknowledgeMode.AUTO：根据情况确认
-     * AcknowledgeMode.MANUAL：手动确认
-     */
-    @SneakyThrows
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_SIX), ackMode = "MANUAL")
-    public void six(Message message, Channel channel) {
-        long tag = message.getMessageProperties().getDeliveryTag();
-        try {
-            String body = new String(message.getBody());
-            System.out.println("简单模式six消息：" + body);
-        } finally {
-            /**
-             * ack表示确认消息，参数说明：long deliveryTag：唯一标识 ID。
-             * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
-             */
-            channel.basicAck(tag, false);
-
-            /**
-             * 否定消息，参数说明：
-             * boolean requeue：如果 requeue 参数设置为 true，RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
-             * 反之设置为false，则 RabbitMQ 立即会还把消息从队列中移除，而不会把它发送给新的消费者。
-             */
-            //channel.basicNack(tag, false, true);
-
-            /**
-             * 拒绝消息，参数说明：
-             * boolean requeue：如果 requeue 参数设置为 true，
-             * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
-             * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，
-             * 而不会把它发送给新的消费者。
-             */
-            //channel.basicReject(tag, true);
-        }
-    }
-
 }

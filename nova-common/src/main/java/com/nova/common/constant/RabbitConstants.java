@@ -25,7 +25,6 @@ public class RabbitConstants {
     public static final String QUEUE_SIMPLE_THREE = "queue-simple-three";
     public static final String QUEUE_SIMPLE_FOUR = "queue-simple-four";
     public static final String QUEUE_SIMPLE_FIVE = "queue-simple-five";
-    public static final String QUEUE_SIMPLE_SIX = "queue-simple-six";
 
     /**
      * 工作模式队列

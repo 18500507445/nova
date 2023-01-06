@@ -36,9 +36,10 @@ public class WorkListener {
      */
     @SneakyThrows
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE))
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE), containerFactory = "listenerContainer")
     public void pollingOne(Message message, Channel channel) {
         channel.basicQos(1);
+        ThreadUtil.sleep(500);
         long tag = message.getMessageProperties().getDeliveryTag();
         System.out.println("工作轮询模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
@@ -51,9 +52,10 @@ public class WorkListener {
      */
     @SneakyThrows
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE))
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE), containerFactory = "listenerContainer")
     public void pollingTwo(Message message, Channel channel) {
         channel.basicQos(1);
+        ThreadUtil.sleep(1000);
         long tag = message.getMessageProperties().getDeliveryTag();
         System.out.println("工作轮询模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
@@ -67,6 +69,7 @@ public class WorkListener {
      *
      * @param message
      */
+    @SneakyThrows
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_TWO), concurrency = "2", containerFactory = "listenerContainer")
     public void pollingThread(Message message) {
@@ -76,15 +79,46 @@ public class WorkListener {
     }
 
     /**
-     * 工作队列2-1
-     * 公平
+     * 工作队列-公平
+     * 改成手动应答模式就变成公平了，能者多劳
+     * 消息确认机制（ACK）
+     * AcknowledgeMode.NONE：自动确认
+     * AcknowledgeMode.AUTO：根据情况确认
+     * AcknowledgeMode.MANUAL：手动确认
      *
      * @param message
      */
+    @SneakyThrows
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_THREE))
-    public void three(Message message) {
-        System.out.println("工作轮询模式2-1消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_THREE), ackMode = "MANUAL")
+    public void three(Message message, Channel channel) {
+        long tag = message.getMessageProperties().getDeliveryTag();
+        try {
+            ThreadUtil.sleep(500);
+        } finally {
+            /**
+             * ack表示确认消息，参数说明：long deliveryTag：唯一标识 ID。
+             * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
+             */
+            channel.basicAck(tag, false);
+
+            /**
+             * 否定消息，参数说明：
+             * boolean requeue：如果 requeue 参数设置为 true，RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
+             * 反之设置为false，则 RabbitMQ 立即会还把消息从队列中移除，而不会把它发送给新的消费者。
+             */
+            //channel.basicNack(tag, false, true);
+
+            /**
+             * 拒绝消息，参数说明：
+             * boolean requeue：如果 requeue 参数设置为 true，
+             * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
+             * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，
+             * 而不会把它发送给新的消费者。
+             */
+            //channel.basicReject(tag, true);
+            System.out.println("工作公平模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        }
     }
 
     /**
@@ -93,10 +127,17 @@ public class WorkListener {
      *
      * @param message
      */
+    @SneakyThrows
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_THREE))
-    public void four(Message message) {
-        System.out.println("工作轮询模式2-2消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_THREE), ackMode = "MANUAL")
+    public void four(Message message, Channel channel) {
+        long tag = message.getMessageProperties().getDeliveryTag();
+        try {
+            ThreadUtil.sleep(1000);
+        } finally {
+            channel.basicAck(tag, false);
+            System.out.println("工作公平模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        }
     }
 
 

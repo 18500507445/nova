@@ -4,6 +4,8 @@ import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.RabbitConstants;
 import com.nova.common.core.model.business.MessageBO;
 import com.nova.mq.rabbit.config.RabbitConfig;
+import com.rabbitmq.client.Channel;
+import lombok.SneakyThrows;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -74,12 +76,12 @@ public class SimpleListener {
     /**
      * 简单队列5 map接收参数
      *
-     * @param message
+     * @param msg
      * @return
      */
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_FIVE))
-    public void five(Map<String, Object> msg, Message message) {
+    public void five(Map<String, Object> msg) {
         System.out.println("简单模式five消息：" + JSONUtil.toJsonStr(msg));
     }
 
@@ -96,16 +98,47 @@ public class SimpleListener {
     }
 
     /**
-     * 简单队列6 手动确认消息
+     * 简单队列7 消息确认机制（ACK）
      * <p>
      * 消息确认模式有：
      * AcknowledgeMode.NONE：自动确认
      * AcknowledgeMode.AUTO：根据情况确认
      * AcknowledgeMode.MANUAL：手动确认
      */
+    @SneakyThrows
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_SEVEN), ackMode = "MANUAL")
-    public void seven(Message message) {
-        System.out.println("简单模式seven消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
+    public void seven(Message message, Channel channel) {
+        long tag = message.getMessageProperties().getDeliveryTag();
+        String body = null;
+        try {
+            body = new String(message.getBody());
+            System.out.println("简单模式seven消息：" + body);
+        } finally {
+            /**
+             * ack表示确认消息，参数说明：long deliveryTag：唯一标识 ID。
+             * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
+             */
+            channel.basicAck(tag, false);
+
+            /**
+             * 否定消息，参数说明：
+             * boolean multiple：是否批处理，当该参数为 true 时，则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
+             * boolean requeue：如果 requeue 参数设置为 true，
+             * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
+             * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，
+             * 而不会把它发送给新的消费者。
+             */
+            //channel.basicNack(deliveryTag, true, false);
+
+            /**
+             * 拒绝消息，参数说明：
+             * boolean requeue：如果 requeue 参数设置为 true，
+             * 则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
+             * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，
+             * 而不会把它发送给新的消费者。
+             */
+            //channel.basicReject(deliveryTag, true);
+        }
     }
 
 }

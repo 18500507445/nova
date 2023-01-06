@@ -165,7 +165,7 @@ public class RabbitMqTest {
 
     /**
      * 简单模式5
-     * {@link SimpleListener#five(Map, Message)}
+     * {@link SimpleListener#five(Map)}
      */
     @Test
     public void simpleFive() {
@@ -175,16 +175,22 @@ public class RabbitMqTest {
         rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FIVE, map);
     }
 
-
     /**
-     * rabbitMq测试
+     * 简单模式6
+     * {@link SimpleListener#six(Message)}
      */
     @Test
-    public void rabbitTestDefault() {
-        Map<String, String> params = new HashMap<>(16);
-        params.put("userId", "wzhTest");
-        rabbitTemplate.convertAndSend(Destination.TEST_DESTINATION, params);
+    public void simpleSix(){
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_SIX, MSG);
+    }
 
+    /**
+     * 简单模式7
+     * {@link SimpleListener#seven(Message, Channel)}
+     */
+    @Test
+    public void simpleSeven(){
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_SEVEN, MSG);
     }
 
     /**

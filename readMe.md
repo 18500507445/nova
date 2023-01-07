@@ -66,6 +66,9 @@
 * [练习demo,java8,hutool、guava测试类，微信公众号](nova-tools/toolsNote.md)
 * [互联网 Java 工程师进阶知识完全扫盲](summary.md)
 
-22.nova-xxl
+22.nova-websocket
+* websocket学习
+
+23.nova-xxl
 * xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
 

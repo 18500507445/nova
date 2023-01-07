@@ -5,15 +5,16 @@ import com.nova.common.constant.RabbitConstants;
 import com.rabbitmq.client.Channel;
 import lombok.SneakyThrows;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
 
 /**
  * @description: 主题模式
  * @author: wzh
  * @date: 2023/1/7 08:52
  */
+@Component
 public class TopicListener {
 
     @SneakyThrows

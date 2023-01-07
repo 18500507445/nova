@@ -233,6 +233,9 @@ public class RabbitConfig {
 
     /**
      * 绑定主题交换机1
+     * <p>
+     * ● * - 表示任意的一个单词
+     * ● # - 表示0个或多个单词
      */
     @Bean
     public Binding bindingTopicOne() {
@@ -241,6 +244,7 @@ public class RabbitConfig {
 
     /**
      * 绑定主题交换机2
+     * routingKey：three.one.two,只会1、3接收
      */
     @Bean
     public Binding bindingTopicTwo() {
@@ -249,6 +253,7 @@ public class RabbitConfig {
 
     /**
      * 绑定主题交换机3
+     * routingKey：one.three,只会1接收
      */
     @Bean
     public Binding bindingTopicThree() {

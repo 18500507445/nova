@@ -23,6 +23,11 @@ public class RabbitConstants {
     public static final String EXCHANGE_FANOUT = "amq.fanout";
 
     /**
+     * 主题交换机(自带)
+     */
+    public static final String EXCHANGE_TOPIC = "amq.topic";
+
+    /**
      * 简单模式队列
      */
     public static final String QUEUE_SIMPLE_ONE = "queue-simple-one";
@@ -51,5 +56,13 @@ public class RabbitConstants {
     public static final String QUEUE_DIRECT_ONE = "queue-direct-one";
     public static final String QUEUE_DIRECT_TWO = "queue-direct-two";
     public static final String QUEUE_DIRECT_DLX = "queue-direct-dlx";
+
+    /**
+     * 主体模式队列
+     */
+    public static final String QUEUE_TOPIC_ONE = "queue-topic-one";
+    public static final String QUEUE_TOPIC_TWO = "queue-topic-two";
+    public static final String QUEUE_TOPIC_THREE = "queue-topic-three";
+
 
 }

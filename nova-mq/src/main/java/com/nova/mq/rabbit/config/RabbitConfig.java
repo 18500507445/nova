@@ -88,6 +88,14 @@ public class RabbitConfig {
     }
 
     /**
+     * 主题交换机
+     */
+    @Bean("topicExchange")
+    public Exchange topicExchange() {
+        return ExchangeBuilder.topicExchange(RabbitConstants.EXCHANGE_TOPIC).build();
+    }
+
+    /**
      * 简单队列1
      *
      * @return
@@ -159,7 +167,6 @@ public class RabbitConfig {
         return BindingBuilder.bind(queueDirectOne()).to(directExchange()).with("directOne").noargs();
     }
 
-
     /**
      * 死信队列
      */
@@ -200,4 +207,51 @@ public class RabbitConfig {
         return BindingBuilder.bind(queueDirectTwo()).to(directExchange()).with("directTwo").noargs();
     }
 
+    /**
+     * 主题队列1
+     */
+    @Bean
+    public Queue queueTopicOne() {
+        return new Queue(RabbitConstants.QUEUE_TOPIC_ONE);
+    }
+
+    /**
+     * 主题队列2
+     */
+    @Bean
+    public Queue queueTopicTwo() {
+        return new Queue(RabbitConstants.QUEUE_TOPIC_TWO);
+    }
+
+    /**
+     * 主题队列3
+     */
+    @Bean
+    public Queue queueTopicThree() {
+        return new Queue(RabbitConstants.QUEUE_TOPIC_THREE);
+    }
+
+    /**
+     * 绑定主题交换机1
+     */
+    @Bean
+    public Binding bindingTopicOne() {
+        return BindingBuilder.bind(queueTopicOne()).to(topicExchange()).with("#.one.#").noargs();
+    }
+
+    /**
+     * 绑定主题交换机2
+     */
+    @Bean
+    public Binding bindingTopicTwo() {
+        return BindingBuilder.bind(queueTopicTwo()).to(topicExchange()).with("*.two.#").noargs();
+    }
+
+    /**
+     * 绑定主题交换机3
+     */
+    @Bean
+    public Binding bindingTopicThree() {
+        return BindingBuilder.bind(queueTopicThree()).to(topicExchange()).with("three.#").noargs();
+    }
 }

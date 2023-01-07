@@ -220,7 +220,6 @@ public class RabbitMqTest {
      */
     @Test
     public void directTestOne() {
-        //发送json,监听器用实体类接收
         rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "directOne", MSG);
     }
 
@@ -230,8 +229,15 @@ public class RabbitMqTest {
      */
     @Test
     public void directTestDlx() {
-        //发送json,监听器用实体类接收
         rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "directTwo", MSG);
+    }
+
+    /**
+     * 主体模式
+     */
+    @Test
+    public void topicTest(){
+        rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_TOPIC, "three.two.one", MSG);
     }
 
 }

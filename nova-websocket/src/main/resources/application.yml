@@ -1,0 +1,10 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  thymeleaf:
+    mode: HTML5
+

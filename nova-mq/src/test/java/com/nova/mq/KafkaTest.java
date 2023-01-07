@@ -5,10 +5,7 @@ import com.nova.common.constant.Destination;
 import com.nova.mq.kafka.utils.KafkaProducerUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
@@ -16,31 +13,23 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @description: kafka测试类
+ * @author: wzh
+ * @date: 2023/1/7 14:48
+ */
 @SpringBootTest
 @Slf4j
-class MqApplicationTests {
-
-    @Autowired
-    private JmsTemplate jmsTemplate;
+public class KafkaTest {
 
     @Resource
     private KafkaProducerUtil kafkaProducerUtil;
 
     /**
-     * activeMq测试
-     */
-    @Test
-    public void activeMqTest() {
-        Map<String, String> params = new HashMap<>(16);
-        params.put("userId", "wzhTest");
-        jmsTemplate.convertAndSend(Destination.TEST_DESTINATION, params);
-    }
-
-    /**
      * kafka测试
      */
     @Test
-    public void KafkaTest() {
+    public void test() {
         Map<String, String> params = new HashMap<>(16);
         params.put("userId", "wzhTest");
 

@@ -22,7 +22,6 @@ import java.util.Map;
  * @date: 2023/1/6 15:44
  */
 @SpringBootTest
-@Slf4j
 public class RabbitMqTest {
 
     public static final String QUEUE_NAME = "queue-default";

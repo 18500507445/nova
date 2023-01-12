@@ -19,7 +19,7 @@
 
 ### 创建型
 提供创建对象的机制， 能够提升已有代码的灵活性和可复用性。
-1. [工厂方法（Factory Method）]()
+1. [工厂方法（Factory Method）](nova-design/src/main/java/com/nova/design/create/abstract_factory/抽象工厂模式.md)
 2. [抽象工厂（AbstractFactory）]()
 3. [建造者（Builder）]()
 4. [原型（Prototype）]()

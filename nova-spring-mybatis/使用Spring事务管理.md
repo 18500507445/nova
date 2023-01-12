@@ -200,3 +200,11 @@ public class StudentServiceImpl implements StudentService {
     }
 }
 ~~~
+
+spring事务失效的场景
+* 方法内的自调用
+* 方法是private的
+* 方法是final的
+* 单独的线程调用方法
+* 异常被吃掉
+* 类没有被spring管理

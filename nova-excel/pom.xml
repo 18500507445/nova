@@ -16,16 +16,23 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
+        <easyexcel.verson>3.1.5</easyexcel.verson>
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-framework</artifactId>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${easyexcel.verson}</version>
+        </dependency>
 
+    </dependencies>
 
 </project>
 

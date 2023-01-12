@@ -24,6 +24,9 @@ import java.util.Objects;
 @Slf4j
 public class DataSourceAspect {
 
+    /**
+     * 配置织入点
+     */
     @Pointcut("@annotation(com.nova.database.annotation.DataSource)"
             + "|| @within(com.nova.database.annotation.DataSource)")
     public void dsPointCut() {

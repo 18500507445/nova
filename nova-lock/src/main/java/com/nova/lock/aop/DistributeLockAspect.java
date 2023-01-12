@@ -27,6 +27,9 @@ public class DistributeLockAspect {
     @Resource
     private RedissonLock redissonLock;
 
+    /**
+     * 配置织入点
+     */
     @Pointcut("@annotation(com.nova.lock.annotation.Lock)")
     private void pointcut() {
 

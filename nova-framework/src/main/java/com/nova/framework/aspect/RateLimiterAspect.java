@@ -32,8 +32,11 @@ public class RateLimiterAspect {
     /**
      * 存放接口是否已经存在
      */
-    private static final ConcurrentHashMap<String, RateLimiter> RATE_LIMITER_MAP = new ConcurrentHashMap<String, RateLimiter>();
+    private static final ConcurrentHashMap<String, RateLimiter> RATE_LIMITER_MAP = new ConcurrentHashMap<>();
 
+    /**
+     * 配置织入点
+     */
     @Pointcut("@annotation(com.nova.common.annotation.ExtRateLimiter)"
             + "|| @within(com.nova.common.annotation.ExtRateLimiter)")
     public void rlAop() {

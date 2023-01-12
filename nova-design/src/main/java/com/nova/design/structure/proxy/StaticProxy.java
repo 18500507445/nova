@@ -1,4 +1,4 @@
-package com.nova.tools.demo.thread;
+package com.nova.design.structure.proxy;
 
 /**
  * @description: 动态代理模式对比Thread, 动态代理模式总结 真是对象和代理对象都实现了同一个接口
@@ -9,24 +9,19 @@ package com.nova.tools.demo.thread;
 
 public class StaticProxy {
 
-    public static void main(String[] args) {
-        You you = new You();
-        you.happyMarry();
-
-        new Thread(() -> System.out.println("我爱你")).start();
-        new WeddingCompany(new You()).happyMarry();
-    }
-
-
 }
 
-//结婚动作
+/**
+ * 结婚动作
+ */
 interface Marry {
 
     void happyMarry();
 }
 
-//真是角色
+/**
+ * 真实角色
+ */
 class You implements Marry {
 
     @Override
@@ -35,10 +30,12 @@ class You implements Marry {
     }
 }
 
-//代理角色,帮助你结婚
+/**
+ * 代理角色,帮助你结婚
+ */
 class WeddingCompany implements Marry {
 
-    private Marry target;
+    private final Marry target;
 
     public WeddingCompany(Marry target) {
         this.target = target;

@@ -47,7 +47,7 @@ public class JavaLock {
 
     static public class MyThread extends Thread {
 
-        private MyService service;
+        private final MyService service;
 
         public MyThread(MyService service) {
             super();

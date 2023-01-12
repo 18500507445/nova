@@ -16,7 +16,6 @@ import java.util.stream.Stream;
 /**
  * @date:Created in 17:34 2018/10/30
  */
-
 public class CompletableFutureDemo {
 
     public static void main(String[] args) {

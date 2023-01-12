@@ -14,7 +14,7 @@
 4.nova-design
 * [设计模式](nova-design/designNote.md)
 
-5.nova-excel（未开始）
+5.nova-excel
 * [excel工具类](nova-excel/excelNote.md)
 
 6.nova-framework

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @description:
+ * @description: 异步logController
  * @author: wzh
  * @date: 2022/11/19 17:19
  */
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/")
-public class DemoController extends BaseController {
+public class LogController extends BaseController {
 
     /**
      * log

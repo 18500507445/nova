@@ -6,7 +6,7 @@ import com.nova.tools.java8.grow.jdk5.EnumDemo;
 /**
  * switch对String的支持
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class SwitchString {

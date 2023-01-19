@@ -3,7 +3,7 @@ package com.nova.tools.java8.grow.jdk8;
 /**
  * 更好的类型推断
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class TypeInference<T> {

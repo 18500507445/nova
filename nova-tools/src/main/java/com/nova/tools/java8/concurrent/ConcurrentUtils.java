@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 并发工具类
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/3/11
  */
 public class ConcurrentUtils {

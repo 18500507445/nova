@@ -7,7 +7,7 @@ import javax.script.ScriptException;
 /**
  * Nashorn JavaScript引擎
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class NashornDemo {

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * 住址对象
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/11
  */
 @Data

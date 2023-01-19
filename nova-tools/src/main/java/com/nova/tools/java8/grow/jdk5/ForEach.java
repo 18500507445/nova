@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * for each
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class ForEach {

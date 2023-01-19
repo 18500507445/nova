@@ -8,14 +8,14 @@ import java.util.Optional;
 /**
  * User
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/11
  */
 @Data
 public class User {
 
-    private String  username;
-    private String  password;
+    private String username;
+    private String password;
     private Integer age;
     private Address address;
 

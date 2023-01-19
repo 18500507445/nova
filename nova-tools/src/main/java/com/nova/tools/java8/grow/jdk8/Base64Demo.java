@@ -8,7 +8,7 @@ import java.util.Base64;
 /**
  * Base64 增强
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class Base64Demo {

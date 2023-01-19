@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Lambda 表达式
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class Lambda {

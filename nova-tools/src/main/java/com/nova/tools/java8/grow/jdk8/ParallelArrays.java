@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 并行数组
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class ParallelArrays {

@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.Properties;
 
 /**
- * @author biezhi
+ * @author wzh
  * @date 2018/2/11
  */
 public class OptionalDemo {
@@ -52,7 +52,7 @@ public class OptionalDemo {
 
     public static void main(String[] args) {
         User user = new User();
-        user.setUsername("biezhi");
+        user.setUsername("wzh");
         user.setPassword("123456");
         user.setOptAddress(Optional.of(new Address("达尔文路", "88号")));
         user.setAge(30);

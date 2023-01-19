@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 类型推断
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class TypeInference {

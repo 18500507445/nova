@@ -3,7 +3,7 @@ package com.nova.tools.java8.grow.jdk8;
 /**
  * 函数式接口
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 @FunctionalInterface

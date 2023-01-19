@@ -1,7 +1,7 @@
 package com.nova.tools.java8.optional;
 
 /**
- * @author biezhi
+ * @author wzh
  * @date 2018/2/11
  */
 public class BeforeJava8 {

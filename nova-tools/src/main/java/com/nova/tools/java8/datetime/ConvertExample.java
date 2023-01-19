@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 日期转换示例
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/3/3
  */
 public class ConvertExample {

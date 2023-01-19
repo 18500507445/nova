@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 并发库
  *
- * @author biezhi
+ * @author wzh
  * @date 2018/2/8
  */
 public class Concurrent {

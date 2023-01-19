@@ -18,11 +18,11 @@ public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         // 消息格式 [长度][消息体]
-        pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4));
+        pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
         // 计算当前待大宋消息的长度，写入到前4个字节中
         pipeline.addLast(new LengthFieldPrepender(4));
-        pipeline.addLast(new ObjectEncoder());
 
+        pipeline.addLast(new ObjectEncoder());
         pipeline.addLast(new ObjectDecoder(new ClassResolver() {
             @Override
             public Class<?> resolve(String className) throws ClassNotFoundException {

@@ -1,4 +1,4 @@
-package com.nova.rpc.manual.version_1.service;
+package com.nova.rpc.manual.service;
 
 
 import com.nova.rpc.manual.entity.UserBO;
@@ -17,4 +17,7 @@ public interface UserService {
      * @return
      */
     UserBO getUserByUserId(Integer id);
+
+    Integer insertUserId(UserBO user);
+
 }

@@ -1,8 +1,8 @@
-package com.nova.rpc.manual.version_1.service.impl;
+package com.nova.rpc.manual.service.impl;
 
 
 import com.nova.rpc.manual.entity.UserBO;
-import com.nova.rpc.manual.version_1.service.UserService;
+import com.nova.rpc.manual.service.UserService;
 
 import java.util.Random;
 import java.util.UUID;
@@ -22,5 +22,11 @@ public class UserServiceImpl implements UserService {
         return UserBO.builder().userName(UUID.randomUUID().toString())
                 .id(id)
                 .sex(random.nextBoolean()).build();
+    }
+
+    @Override
+    public Integer insertUserId(UserBO user) {
+        System.out.println("插入数据成功：" + user);
+        return 1;
     }
 }

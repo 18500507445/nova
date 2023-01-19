@@ -54,9 +54,6 @@
         <java.version>1.8</java.version>
         <nova.version>1.0-SNAPSHOT</nova.version>
         <boot.version>2.7.7</boot.version>
-
-        <shiro.version>1.8.0</shiro.version>
-        <bitwalker.version>1.21</bitwalker.version>
     </properties>
 
     <!-- 依赖声明-->
@@ -69,13 +66,6 @@
                 <version>${boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- 解析客户端操作系统、浏览器等 -->
-            <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${bitwalker.version}</version>
             </dependency>
 
             <!-- 模块集成开始 -->

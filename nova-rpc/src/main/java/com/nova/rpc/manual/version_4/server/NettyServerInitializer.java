@@ -25,21 +25,21 @@ public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
-        // 方式一
-        pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
-        pipeline.addLast(new LengthFieldPrepender(4));
-        // 这里使用的还是java 序列化方式， netty的自带的解码编码支持传输这种结构
-        pipeline.addLast(new ObjectEncoder());
-        pipeline.addLast(new ObjectDecoder(new ClassResolver() {
-            @Override
-            public Class<?> resolve(String className) throws ClassNotFoundException {
-                return Class.forName(className);
-            }
-        }));
+
+        // 方式一 这里使用的还是java 序列化方式， netty的自带的解码编码支持传输这种结构
+        //pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
+        //pipeline.addLast(new LengthFieldPrepender(4));
+        //pipeline.addLast(new ObjectEncoder());
+        //pipeline.addLast(new ObjectDecoder(new ClassResolver() {
+        //    @Override
+        //    public Class<?> resolve(String className) throws ClassNotFoundException {
+        //        return Class.forName(className);
+        //    }
+        //}));
 
         //方式二
-        //pipeline.addLast(new MyDecode());
-        //pipeline.addLast(new MyEncode(new JsonSerializer()));
+        pipeline.addLast(new MyDecode());
+        pipeline.addLast(new MyEncode(new JsonSerializer()));
 
         pipeline.addLast(new NettyServerHandler(serviceProvider));
     }

@@ -1,12 +1,11 @@
 package com.nova.rpc.manual.codec;
 
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.nova.rpc.manual.entity.RPCRequest;
 import com.nova.rpc.manual.entity.RPCResponse;
 
-import java.nio.charset.StandardCharsets;
 
 /**
  * 由于json序列化的方式是通过把对象转化成字符串，丢失了Data对象的类信息，所以deserialize需要
@@ -16,7 +15,8 @@ public class JsonSerializer implements Serializer {
 
     @Override
     public byte[] serialize(Object obj) {
-        return JSONObject.toJSONString(obj).getBytes(StandardCharsets.UTF_8);
+
+        return JSONObject.toJSONBytes(obj);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class JsonSerializer implements Serializer {
                 for (int i = 0; i < objects.length; i++) {
                     Class<?> paramsType = request.getParamsTypes()[i];
                     if (!paramsType.isAssignableFrom(request.getParams()[i].getClass())) {
-                        objects[i] = JSONObject.parseObject((String) request.getParams()[i], request.getParamsTypes()[i]);
+                        objects[i] = JSONObject.toJavaObject((JSONObject) request.getParams()[i], request.getParamsTypes()[i]);
                     } else {
                         objects[i] = request.getParams()[i];
                     }
@@ -49,7 +49,7 @@ public class JsonSerializer implements Serializer {
                 RPCResponse response = JSON.parseObject(bytes, RPCResponse.class);
                 Class<?> dataType = response.getDataType();
                 if (!dataType.isAssignableFrom(response.getData().getClass())) {
-                    response.setData(JSONObject.parseObject((String) response.getData(), dataType));
+                    response.setData(JSONObject.toJavaObject((JSONObject) response.getData(), dataType));
                 }
                 obj = response;
                 break;

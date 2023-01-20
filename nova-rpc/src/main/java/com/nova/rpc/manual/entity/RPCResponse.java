@@ -1,8 +1,10 @@
 package com.nova.rpc.manual.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -13,6 +15,8 @@ import java.io.Serializable;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RPCResponse implements Serializable {
 
     /**
@@ -33,7 +37,7 @@ public class RPCResponse implements Serializable {
     private Class<?> dataType;
 
     public static RPCResponse success(Object data) {
-        return RPCResponse.builder().code(200).data(data).build();
+        return RPCResponse.builder().code(200).data(data).dataType(data.getClass()).build();
     }
 
     public static RPCResponse fail() {

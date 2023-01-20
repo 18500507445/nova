@@ -4,7 +4,11 @@ import java.io.*;
 
 public class ObjectSerializer implements Serializer{
 
-    // 利用java IO 对象 -> 字节数组
+    /**
+     * 利用java IO 对象 -> 字节数组
+     * @param obj
+     * @return
+     */
     @Override
     public byte[] serialize(Object obj) {
         byte[] bytes = null;
@@ -23,7 +27,13 @@ public class ObjectSerializer implements Serializer{
         return bytes;
     }
 
-    // 字节数组 -> 对象
+
+    /**
+     * 字节数组 -> 对象
+     * @param bytes
+     * @param messageType
+     * @return
+     */
     @Override
     public Object deserialize(byte[] bytes, int messageType) {
         Object obj = null;
@@ -39,7 +49,10 @@ public class ObjectSerializer implements Serializer{
         return obj;
     }
 
-    // 0 代表java原生序列化器
+    /**
+     * 0 代表java原生序列化器
+     * @return
+     */
     @Override
     public int getType() {
         return 0;

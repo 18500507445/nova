@@ -36,38 +36,22 @@
 
 client 调用远程方法-> request序列化 -> 协议编码 -> 网络传输-> 服务端 -> 反序列化request -> 调用本地方法得到response -> 序列化 ->编码->…..
 
-
-
 ------
-
-
 
 ## 版本迭代过程
 
 ### 目录
-
-从0开始的RPC的迭代过程：
-
-- [version0版本](#0.一个最简单的RPC调用)：以不到百行的代码完成一个RPC例子
-- [version1版本](#1.MyRPC版本1)：完善通用消息格式（request，response），客户端的动态代理完成对request消息格式的封装
-- [version2版本](#2.MyRPC版本2)：支持服务端暴露多个服务接口， 服务端程序抽象化，规范化
-- [version3版本](#3.MyRPC版本3)：使用高性能网络框架netty的实现网络通信，以及客户端代码的重构
-- [version4版本](#4.MyRPC版本4)：自定义消息格式，支持多种序列化方式（java原生， json…）
-- [version5版本](#5.MyRPC版本5):   服务器注册与发现的实现，zookeeper作为注册中心
-- [version6版本](#MyRPC版本6):   负载均衡的策略的实现
-- [version7版本](#7.MyRPC版本7):   客户端缓存服务地址列表, zookeeper监听服务提供者状态，更新客户端缓存**（待实现）**
-- [version8版本](#8.MyRPC版本8)： 跨语言的RPC通信（protobuf）**（待实现）**
-
-
+- [version1版本](#1.一个最简单的RPC调用)：以不到百行的代码完成一个RPC例子
+- [version2版本](#2.MyRPC版本2)：完善通用消息格式（request，response），客户端的动态代理完成对request消息格式的封装
+- [version3版本](#3.MyRPC版本3)：支持服务端暴露多个服务接口， 服务端程序抽象化，规范化
+- [version4版本](#4.MyRPC版本4)：使用高性能网络框架netty的实现网络通信，以及客户端代码的重构、自定义消息格式，支持多种序列化方式（java原生， json…）
+- [version5版本](#5.MyRPC版本5): 服务器注册与发现的实现，zookeeper作为注册中心
+- [version6版本](#6.MyRPC版本6): 负载均衡的策略的实现
 
 ------
 
-
-
-### 0.一个最简单的RPC调用
-
+### 1.一个最简单的RPC调用
 #### **背景知识**
-
 - java基础
 - java socket编程入门
 - 项目使用maven搭建，暂时只引入了lombok包
@@ -216,12 +200,9 @@ public class RPCServer {
 3. 客户端不够通用，host，port， 与调用的方法都特定（需要抽象）
 
 
-
 ------
 
-
-
-### 1.MyRPC版本1
+### 2.MyRPC版本2
 
 #### 背景知识
 
@@ -450,13 +431,9 @@ public class RPCClient {
 2. 服务端以BIO的方式性能是否太低，
 3. 服务端功能太复杂：监听，处理。需要松耦合
 
-
-
 ------
 
-
-
-### 2.MyRPC 版本2
+### 3.MyRPC 版本3
 
 #### 背景知识
 
@@ -753,9 +730,7 @@ System.out.println("从服务端得到的blog为：" + blogById);
 
 ------
 
-
-
-### 3.MyRPC版本3
+### 4.MyRPC版本4
 
 #### 背景知识
 
@@ -1052,13 +1027,9 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RPCResponse>
 
 
 ------
-
-
-
-### 4.MyRPC版本4
+### 4.1MyRPC版本4.1
 
 #### 背景知识
-
 - 各种序列化方式以及比较，（Java原生序列化， json，protobuf，kryo..）[参考博客](https://www.jianshu.com/p/937883b6b2e5)
 - 自定义协议
 - java IO 了解
@@ -1320,16 +1291,10 @@ public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
 
 - 服务端与客户端通信的host与port预先就必须知道的，每一个客户端都必须知道对应服务的ip与端口号， 并且如果服务挂了或者换地址了，就很麻烦。扩展性也不强
 
-
-
 ------
 
-
-
 ### 5.MyRPC版本5
-
 #### 背景知识
-
 - zookeeper安装， 基本概念
 - 了解curator开源zookeeper客户端中的使用
 

@@ -20,4 +20,6 @@ public interface UserService {
 
     Integer insertUserId(UserBO user);
 
+    String hello();
+
 }

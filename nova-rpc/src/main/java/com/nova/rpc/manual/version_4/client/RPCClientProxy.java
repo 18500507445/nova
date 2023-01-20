@@ -21,10 +21,9 @@ public class RPCClientProxy implements InvocationHandler {
      * @param method
      * @param args
      * @return
-     * @throws Throwable
      */
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) {
         // request的构建，使用了lombok中的builder，代码简洁
         RPCRequest request = RPCRequest.builder().interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
@@ -34,7 +33,7 @@ public class RPCClientProxy implements InvocationHandler {
         return response.getData();
     }
 
-    <T> T getProxy(Class<T> clazz) {
+    public <T> T getProxy(Class<T> clazz) {
         Object o = Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, this);
         return (T) o;
     }

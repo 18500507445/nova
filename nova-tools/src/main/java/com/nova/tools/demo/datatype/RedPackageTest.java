@@ -192,7 +192,7 @@ public class RedPackageTest {
             } else {
                 remain = BigDecimal.ZERO;
             }
-            sum = sum.add(min.add(redpeck)).setScale(2, BigDecimal.ROUND_HALF_UP);
+            sum = sum.add(min.add(redpeck)).setScale(2, RoundingMode.HALF_UP);
             System.out.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck));
         }
         System.out.println("红包总额：" + sum);

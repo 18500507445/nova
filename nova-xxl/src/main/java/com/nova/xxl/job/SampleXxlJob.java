@@ -29,21 +29,18 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class SampleXxlJob {
 
-    private static Logger logger = LoggerFactory.getLogger(SampleXxlJob.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(SampleXxlJob.class);
 
     /**
      * 1、简单任务示例（Bean模式）
      */
     @XxlJob("demoJobHandler")
     public void demoJobHandler() throws Exception {
-        //XxlJobHelper.log("XXL-JOB, Hello World.");
-
+        XxlJobHelper.log("XXL-JOB, Hello World.");
         for (int i = 0; i < 5; i++) {
             XxlJobHelper.log("beat at:" + i);
             TimeUnit.SECONDS.sleep(2);
         }
-        // default success
     }
 
 
@@ -52,7 +49,6 @@ public class SampleXxlJob {
      */
     @XxlJob("shardingJobHandler")
     public void shardingJobHandler() throws Exception {
-
         // 分片参数
         int shardIndex = XxlJobHelper.getShardIndex();
         int shardTotal = XxlJobHelper.getShardTotal();
@@ -127,7 +123,6 @@ public class SampleXxlJob {
      */
     @XxlJob("httpJobHandler")
     public void httpJobHandler() throws Exception {
-
         // param parse
         String param = XxlJobHelper.getJobParam();
         if (param == null || param.trim().length() == 0) {

@@ -5,4 +5,4 @@
 
 那么DispatcherServlet会帮助我们做什么呢？
 
-![](/Users/wangzehui/IdeaProjects/nova/nova-spring-mvc/src/main/picture/DispatcherServlet流程.jpeg)
+![](/Users/wangzehui/IdeaProjects/nova/nova-spring/src/main/picture/DispatcherServlet流程.jpeg)

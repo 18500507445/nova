@@ -1,8 +1,10 @@
 package com.nova.tools.demo.thread;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -19,7 +21,7 @@ import java.util.stream.Stream;
 public class CompletableFutureDemo {
 
     public static void main(String[] args) {
-        long start = System.currentTimeMillis();
+        TimeInterval timer = DateUtil.timer();
         // 结果集
         List<String> list = new ArrayList<>();
 
@@ -31,7 +33,7 @@ public class CompletableFutureDemo {
         BiConsumer<String, Throwable> biConsumer = new BiConsumer<String, Throwable>() {
             @Override
             public void accept(String s, Throwable e) {
-                System.out.println("任务" + s + "完成!result=" + s + "，异常 e=" + e + "," + new Date());
+                System.out.println("任务" + s + "完成!result=" + s + "，异常e =" + e + "," + DateUtil.now());
                 list.add(s);
             }
         };
@@ -68,7 +70,7 @@ public class CompletableFutureDemo {
         for (Integer i : taskList) {
             list.add(calc(i).toString());
         }
-        System.out.println("list=" + list + ",耗时=" + ((System.currentTimeMillis() - start) / 1000 + "s"));
+        System.out.println("list=" + list + ",耗时=" + timer.interval() + "ms");
     }
 
     public static Integer calc(Integer i) {
@@ -84,7 +86,7 @@ public class CompletableFutureDemo {
                 Thread.sleep(1000);
             }
             System.out.println("task线程：" + Thread.currentThread().getName()
-                    + "任务i=" + i + ",完成！+" + new Date());
+                    + "，任务i= " + i + "，完成时间点：+" + DateUtil.now());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

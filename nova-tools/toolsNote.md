@@ -33,6 +33,8 @@ nova-tools
 * [《阿里的项目到处都是GoogleGuava工具包！》](https://mp.weixin.qq.com/s/OlOHGEfdaFZBqwp9D3DIJw)
 * [《Java几种常用JSON库性能比较》](https://mp.weixin.qq.com/s/n0NgvpnXSAddD-eyuuPwFw)
 * [《保证接口数据安全的10种方案》](https://mp.weixin.qq.com/s/ftcY--lukUb7LI3OpLDObQ)
+* [《生产中遇到cpu过高，我们该如何排查》](https://www.bilibili.com/video/BV1yR4y1r76E/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [《秒杀下单-库存超卖》](https://www.bilibili.com/video/BV1Lm4y1P7oY/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
 
 
 ### 设计模式
@@ -49,6 +51,10 @@ nova-tools
 * [《一次SQL查询优化原理分析（900W+ 数据，从17s到300ms》](https://mp.weixin.qq.com/s/vFTxYZmGfML-4PTg4eaQ7g)
 * [《8种常被忽视的SQL错误用法 》](https://mp.weixin.qq.com/s/FyzXRZCEUqhWnjP3IJZy9Q)
 * [《一次非常有意思的SQL优化经历：从30248.271s到0.001s 》](https://mp.weixin.qq.com/s/tcEoMlz2rdWLsO5q5lO0gw)
+* [《MySQL的on duplicate key update语法有死锁隐患》](https://www.bilibili.com/video/BV16v4y127eG/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [《MySQL update 锁住整张表》](https://www.bilibili.com/video/BV1XW4y1u7x2/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [《MySQL update 死锁演示》](https://www.bilibili.com/video/BV1SM411B7bC/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [《select...for update是锁表还是锁行？》](https://www.bilibili.com/video/BV15f4y137sf/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
 
 ### 线程
 * [《如何中断一个线程，谈谈具体实现》](https://mp.weixin.qq.com/s/8ZRC4GIteJrXgcAptTAQaw)

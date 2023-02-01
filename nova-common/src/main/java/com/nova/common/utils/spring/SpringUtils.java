@@ -132,15 +132,6 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
     }
 
     /**
-     * 是否是生产环境
-     *
-     * @return true 生产环境
-     */
-    public static boolean isOnline() {
-        return !isDev();
-    }
-
-    /**
      * 是否是测试
      *
      * @return true 测试环境
@@ -150,9 +141,18 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
     }
 
     /**
-     * 是否是后台
+     * 是否是正式
      *
-     * @return true 测试环境
+     * @return true 正式环境
+     */
+    public static boolean isPro() {
+        return StringUtils.equals(getActiveProfile(), "pro");
+    }
+
+    /**
+     * 是否是本地
+     *
+     * @return true 本地环境
      */
     public static boolean isLocal() {
         return StringUtils.equals(getActiveProfile(), "local");
@@ -161,10 +161,10 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
     /**
      * 是否是后台
      *
-     * @return true 测试环境
+     * @return true 后台环境
      */
-    public static boolean isHt() {
-        return StringUtils.equals(getActiveProfile(), "ht");
+    public static boolean isAdmin() {
+        return StringUtils.equals(getActiveProfile(), "admin");
     }
 
 }

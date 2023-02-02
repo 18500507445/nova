@@ -22,6 +22,13 @@ public class InnerClass {
     }
 
     /**
+     * 类方法
+     */
+    public void process() {
+
+    }
+
+    /**
      * 私有静态内部类
      */
     private static class SingletonHolder {

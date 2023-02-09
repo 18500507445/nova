@@ -1,15 +1,11 @@
 package com.nova.pay.service.fk.impl;
 
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Constants;
-import com.nova.common.utils.http.HttpRequestProxy;
 import com.nova.common.utils.jax.Md5Utils;
 import com.nova.pay.service.fk.FkOrderService;
 import lombok.extern.slf4j.Slf4j;

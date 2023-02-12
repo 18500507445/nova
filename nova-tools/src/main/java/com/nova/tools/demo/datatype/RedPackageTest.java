@@ -13,60 +13,15 @@ import java.util.Random;
  */
 public class RedPackageTest {
 
-    static class RedPackage {
-        int remainSize;
-        BigDecimal remainMoney;
-    }
-
-    public static BigDecimal getRandomMoney(RedPackage redPackage) {
-        // remainSize 剩余的红包数量 remainMoney 剩余的钱
-        if (redPackage.remainSize == 1) {
-            redPackage.remainSize--;
-            return redPackage.remainMoney.setScale(2, RoundingMode.DOWN);
-        }
-
-        BigDecimal random = BigDecimal.valueOf(Math.random());
-        BigDecimal min = BigDecimal.valueOf(0.01);
-
-        BigDecimal halfRemainSize = BigDecimal.valueOf(redPackage.remainSize).divide(new BigDecimal(2), RoundingMode.UP);
-        BigDecimal max1 = redPackage.remainMoney.divide(halfRemainSize, RoundingMode.DOWN);
-        BigDecimal minRemainAmount = min.multiply(BigDecimal.valueOf(redPackage.remainSize - 1)).setScale(2, RoundingMode.DOWN);
-        BigDecimal max2 = redPackage.remainMoney.subtract(minRemainAmount);
-        BigDecimal max = (max1.compareTo(max2) < 0) ? max1 : max2;
-
-        BigDecimal money = random.multiply(max).setScale(2, RoundingMode.DOWN);
-        money = money.compareTo(min) < 0 ? min : money;
-
-        redPackage.remainSize--;
-        redPackage.remainMoney = redPackage.remainMoney.subtract(money).setScale(2, RoundingMode.DOWN);
-        return money;
-    }
-
-
-    @Test
-    public void demoA() {
-        for (int i = 0; i < 50; i++) {
-            RedPackage moneyPackage = new RedPackage();
-            moneyPackage.remainMoney = BigDecimal.valueOf(100);
-            moneyPackage.remainSize = 5;
-
-            while (moneyPackage.remainSize != 0) {
-                System.out.print(getRandomMoney(moneyPackage) + "   ");
-            }
-
-            System.out.println();
-        }
-    }
-
     /**
      * 剩余金额随机法
-     * 算法一是不推荐使用的，听名字就知道这个方法是将剩余的金额进行随机分配，我们先来看代码。
+     * 算法一是不推荐使用的，听名字就知道这个方法是将剩余的金额进行随机分配
      *
      * @param amount
      * @param min
      * @param num
      */
-    public static void testPocket(BigDecimal amount, BigDecimal min, BigDecimal num) {
+    public static void function1(BigDecimal amount, BigDecimal min, BigDecimal num) {
         BigDecimal remain = amount.subtract(min.multiply(num));
         final Random random = new Random();
         final BigDecimal hundred = new BigDecimal("100");
@@ -100,7 +55,7 @@ public class RedPackageTest {
      * @param min
      * @param num
      */
-    private static void testPocket2(BigDecimal amount, BigDecimal min, BigDecimal num) {
+    private static void function2(BigDecimal amount, BigDecimal min, BigDecimal num) {
         final Random random = new Random();
         final int[] rand = new int[num.intValue()];
         BigDecimal sum1 = BigDecimal.ZERO;
@@ -123,8 +78,8 @@ public class RedPackageTest {
             } else {
                 remain = BigDecimal.ZERO;
             }
-            sum1 = sum1.add(min.add(redpeck)).setScale(2, BigDecimal.ROUND_HALF_UP);
-            System.out.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck).setScale(2, BigDecimal.ROUND_HALF_UP));
+            sum1 = sum1.add(min.add(redpeck)).setScale(2, RoundingMode.HALF_UP);
+            System.out.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck).setScale(2, RoundingMode.HALF_UP));
         }
 
         System.out.println("红包总额：" + sum1);
@@ -139,7 +94,7 @@ public class RedPackageTest {
      * @param min
      * @param num
      */
-    public static void testPocket3(BigDecimal amount, BigDecimal min, BigDecimal num) {
+    public static void function3(BigDecimal amount, BigDecimal min, BigDecimal num) {
         final Random random = new Random();
         final int[] rand = new int[num.intValue()];
         BigDecimal sum1 = BigDecimal.ZERO;
@@ -173,7 +128,7 @@ public class RedPackageTest {
     /**
      * 算法四就是微信红包目前所采用的的算法（大致思路，代码模拟），二倍均值计算公式：2 * 剩余金额/剩余红包数。
      */
-    public static void testPocket4(BigDecimal amount, BigDecimal min, BigDecimal num) {
+    public static void function4(BigDecimal amount, BigDecimal min, BigDecimal num) {
         BigDecimal remain = amount.subtract(min.multiply(num));
         final Random random = new Random();
         final BigDecimal hundred = new BigDecimal("100");
@@ -198,36 +153,35 @@ public class RedPackageTest {
         System.out.println("红包总额：" + sum);
     }
 
+    @Test
+    public void demoA() {
+        BigDecimal amount = new BigDecimal(100).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal min = new BigDecimal("0.01").setScale(2, RoundingMode.HALF_UP);
+        BigDecimal num = new BigDecimal(10).setScale(2, RoundingMode.HALF_UP);
+        function1(amount, min, num);
+    }
 
     @Test
     public void demoB() {
-        BigDecimal amount = new BigDecimal(100).setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal min = new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal num = new BigDecimal(10).setScale(2, BigDecimal.ROUND_HALF_UP);
-        testPocket(amount, min, num);
+        BigDecimal amount = new BigDecimal(100).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal min = new BigDecimal("0.01").setScale(2, RoundingMode.HALF_UP);
+        BigDecimal num = new BigDecimal(10).setScale(2, RoundingMode.HALF_UP);
+        function2(amount, min, num);
     }
 
     @Test
     public void demoC() {
-        BigDecimal amount = new BigDecimal(100).setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal min = new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal num = new BigDecimal(10).setScale(2, BigDecimal.ROUND_HALF_UP);
-        testPocket2(amount, min, num);
+        BigDecimal amount = new BigDecimal(100).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal min = new BigDecimal("0.01").setScale(2, RoundingMode.HALF_UP);
+        BigDecimal num = new BigDecimal(10).setScale(2, RoundingMode.HALF_UP);
+        function3(amount, min, num);
     }
 
     @Test
     public void demoD() {
-        BigDecimal amount = new BigDecimal(100).setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal min = new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal num = new BigDecimal(10).setScale(2, BigDecimal.ROUND_HALF_UP);
-        testPocket3(amount, min, num);
-    }
-
-    @Test
-    public void demoE() {
-        BigDecimal amount = new BigDecimal(100).setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal min = new BigDecimal("0.01").setScale(2, BigDecimal.ROUND_HALF_UP);
-        BigDecimal num = new BigDecimal(10).setScale(2, BigDecimal.ROUND_HALF_UP);
-        testPocket4(amount, min, num);
+        BigDecimal amount = new BigDecimal(100).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal min = new BigDecimal("0.01").setScale(2, RoundingMode.HALF_UP);
+        BigDecimal num = new BigDecimal(10).setScale(2, RoundingMode.HALF_UP);
+        function4(amount, min, num);
     }
 }

@@ -47,7 +47,7 @@ public class Sort {
                     }
                 }
             }
-            System.out.println(a.toString());
+            System.out.println(a);
         }
     }
 

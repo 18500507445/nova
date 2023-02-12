@@ -4,6 +4,8 @@ package com.nova.tools.demo.datatype;
 import com.nova.tools.demo.entity.Myself;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 /**
  * @author wangzehui
  * @date 2018/10/19 13:47
@@ -14,10 +16,10 @@ public class ObjTest {
     @Test
     public void testObj() {
         String[] str1 = Myself.STRING_ARR;
-        System.out.println("str1地址" + str1);
+        System.out.println("str1地址" + Arrays.toString(str1));
 
         String[] str2 = str1.clone();
-        System.out.println("str2地址" + str2);
+        System.out.println("str2地址" + Arrays.toString(str2));
 
         String[] str3 = Myself.STRING_ARR;
 

@@ -24,6 +24,7 @@
         <module>nova-common</module>
         <module>nova-database</module>
         <module>nova-design</module>
+        <module>nova-ebook</module>
         <module>nova-excel</module>
         <module>nova-framework</module>
         <module>nova-limit</module>

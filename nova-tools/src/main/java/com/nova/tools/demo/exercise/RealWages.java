@@ -1,4 +1,4 @@
-package com.nova.tools.demo.datatype;
+package com.nova.tools.demo.exercise;
 
 import java.util.Scanner;
 

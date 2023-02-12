@@ -59,8 +59,6 @@ MCS开发：http://mcs.vcdianying.cn/signin
 <2>火凤凰排期Id在影院信息-排期管理查看
 <3>鼎新锁座码需要锁座之后的报文里查找
 
-
-
 四.问题分类
 1.支付
 微信公众平台https://mp.weixin.qq.com/
@@ -106,5 +104,3 @@ https://pay.weixin.qq.com/static/pay_setting/appid_protocol.shtml
 （4）火凤凰影院：是否针对VC渠道进行定价（渠道市场价），是否勾选VC渠道
 （5）Vista影院：需要设置标准票的票类和“VC”渠道的票类
 （6）火烈鸟影院：针对VC渠道是否属于开售状态
-
-

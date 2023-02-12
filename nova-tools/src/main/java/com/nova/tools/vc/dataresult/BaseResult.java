@@ -13,6 +13,7 @@ abstract class BaseResult implements Serializable {
     private static final long serialVersionUID = -5308103810673743579L;
 
     BaseResult() {
+
     }
 
     public abstract Status getStatus();

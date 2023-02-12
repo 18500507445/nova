@@ -85,8 +85,6 @@ UPDATE coupon_apply_339158 ca
 SET ca.consume_count = ( SELECT dca.consume_count FROM data_conver_db.coupon_apply_339158 dca WHERE ca.id = dca.id ),
 ca.consume_amount = ( SELECT dca.consume_amount FROM data_conver_db.coupon_apply_339158 dca WHERE ca.id = dca.id );
 
-
-
 大地定制版开发
 Pos
 http://dadidevpos.oristarcloud.com/login

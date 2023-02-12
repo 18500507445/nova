@@ -1,4 +1,4 @@
-package com.nova.tools.demo.datatype;
+package com.nova.tools.demo.exercise;
 
 
 import cn.hutool.json.JSONUtil;
@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author: wzh
  * @date: 2019/4/18 17:04
  */
-public class Sort {
+public class SortTest {
 
     /**
      * 合并数组

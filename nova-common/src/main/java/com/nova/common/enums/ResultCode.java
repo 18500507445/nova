@@ -1,4 +1,4 @@
-package com.nova.tools.vc.enumerate;
+package com.nova.common.enums;
 
 /**
  * @description:

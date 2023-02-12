@@ -1,7 +1,7 @@
-package com.nova.tools.vc.dataresult;
+package com.nova.common.core.model.result;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.nova.tools.vc.enumerate.ResultCode;
+import com.nova.common.enums.ResultCode;
 
 import java.util.Map;
 

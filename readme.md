@@ -51,7 +51,7 @@
 * [sql练习](nova-sql/sqlNote.md)
 
 17.nova-rpc
-* [rpc学习](nova-rpc/rpcNote.md)
+* [手写rpc框架、dubbo调用(待补充)](nova-rpc/rpcNote.md)
 
 18.nova-spring
 * [spring学习](nova-spring/springNote.md)

@@ -16,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class PayParam extends BaseParam {

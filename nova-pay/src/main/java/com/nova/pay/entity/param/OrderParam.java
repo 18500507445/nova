@@ -10,7 +10,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderParam extends BaseParam {

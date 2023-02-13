@@ -9,7 +9,6 @@ import lombok.*;
  */
 @Data
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class HuaweiPayParam {

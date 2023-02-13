@@ -11,7 +11,6 @@ import java.io.Serializable;
  */
 @Data
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class AliPayParam implements Serializable {

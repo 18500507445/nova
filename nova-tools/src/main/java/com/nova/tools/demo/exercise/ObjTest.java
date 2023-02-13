@@ -21,8 +21,6 @@ public class ObjTest {
         String[] str2 = str1.clone();
         System.out.println("str2地址" + Arrays.toString(str2));
 
-        String[] str3 = Myself.STRING_ARR;
-
         for (String s : str1) {
             System.out.println(s);
         }

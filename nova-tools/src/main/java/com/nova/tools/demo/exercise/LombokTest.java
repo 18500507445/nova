@@ -14,9 +14,7 @@ public class LombokTest {
 
     @Data
     static class DemoA {
-
         private String name;
-
     }
 
     @NoArgsConstructor
@@ -32,6 +30,12 @@ public class LombokTest {
         private Integer age;
 
         private String remark;
+    }
+
+    @Data
+    @Builder
+    static class DemoC {
+        private String name;
     }
 
     /**
@@ -60,29 +64,37 @@ public class LombokTest {
     }
 
     /**
-     *  NoArgsConstructor：无参的构造方法
-     *  AllArgsConstructor：所有字段的构造方法
-     *  Slf4j：private static final Logger log = LoggerFactory.getLogger(xx.class);
-     *
-     *  Accessors:
-     *  1）该注解主要作用是：当属性字段在生成 getter 和 setter 方法时，做一些相关的设置
-     *  2）当它可作用于类上时，修饰类中所有字段，当作用于具体字段时，只对该字段有效
-     *
-     *  fluent 属性
+     * NoArgsConstructor：无参的构造方法
+     * AllArgsConstructor：所有字段的构造方法
+     * Slf4j：private static final Logger log = LoggerFactory.getLogger(xx.class);
+     * <p>
+     * Accessors:
+     * 1）该注解主要作用是：当属性字段在生成 getter 和 setter 方法时，做一些相关的设置
+     * 2）当它可作用于类上时，修饰类中所有字段，当作用于具体字段时，只对该字段有效
+     * <p>
+     * fluent 属性
      * 不写默认为false，当该值为true时，对应字段的getter方法前面就没有get，setter方法就不会有set
-     *
-     *  chain 属性
+     * <p>
+     * chain 属性
      * 不写默认为false，当该值为true时，对应字段的setter方法调用后，会返回当前对象
-     * 
-     *  prefix 属性
+     * <p>
+     * prefix 属性
      * 该属性是一个字符串数组，当该数组有值时，表示忽略字段中对应的前缀，生成对应的getter和 setter方法
      */
     @Test
-    public void demoB(){
+    public void demoB() {
         DemoB demoB = new DemoB().setAge(1).setName("wzh").setRemark("ok");
         System.out.println("demoB = " + demoB.toString());
     }
 
+    /**
+     * Builder开启建造者模式
+     */
+    @Test
+    public void demoC() {
+        DemoC demoC = DemoC.builder().name("wzh").build();
+        System.out.println("demoC = " + demoC);
+    }
 
 
 }

@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author: wzh
  * @date: 2023/2/13 20:05
  */
-public class BlackCat extends Cat {
+class BlackCat extends Cat {
 
     public BlackCat() {
         super();

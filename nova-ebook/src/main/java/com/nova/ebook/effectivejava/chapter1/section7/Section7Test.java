@@ -11,8 +11,9 @@ import org.junit.jupiter.api.Test;
 public class Section7Test {
 
     @Test
-    public void demoA() {
-
+    public void demoA() throws Throwable {
+        Cat cat = new Cat();
+        cat.finalize();
     }
 
 }

@@ -16,7 +16,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cat {
+class Cat {
 
     private Integer id;
 

@@ -13,7 +13,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/2/13 16:52
  */
-public class Section6Test {
+class Section6Test {
 
     public static final Map<Integer, Object> MAP = new LinkedHashMap<>();
 

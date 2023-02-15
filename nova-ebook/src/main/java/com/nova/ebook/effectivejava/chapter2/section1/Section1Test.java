@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/2/13 19:44
  */
-public class Section1Test {
+class Section1Test {
 
     /**
      * 模拟两次数据是从数据库查出来的，需要做比较

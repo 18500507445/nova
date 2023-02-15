@@ -10,7 +10,7 @@ import java.util.Date;
  * @author: wzh
  * @date: 2023/2/13 16:52
  */
-public class Section5Test {
+class Section5Test {
 
     private static final Date DATE_ONE = new Date(1990, Calendar.JANUARY, 0);
     private static final Date DATE_TWO = new Date(2000, Calendar.JANUARY, 0);

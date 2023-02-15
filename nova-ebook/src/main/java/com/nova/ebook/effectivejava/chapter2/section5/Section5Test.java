@@ -13,7 +13,7 @@ import java.util.List;
  * @author: wzh
  * @date: 2023/2/14 20:20
  */
-public class Section5Test {
+class Section5Test {
 
     public static List<Cat> cats = new ArrayList<>(Arrays.asList(new Cat(2), new Cat(1)));
 

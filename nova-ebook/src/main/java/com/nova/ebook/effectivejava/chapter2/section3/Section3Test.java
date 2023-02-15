@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/2/14 19:23
  */
-public class Section3Test {
+class Section3Test {
 
     @Test
     public void demoA() {

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/2/13 16:52
  */
-public class Section7Test {
+class Section7Test {
 
     @Test
     public void demoA() throws Throwable {

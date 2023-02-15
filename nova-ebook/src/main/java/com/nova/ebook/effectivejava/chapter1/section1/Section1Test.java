@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/2/12 15:06
  */
-public class Section1Test {
+class Section1Test {
 
     public static final int NUM = 3;
 

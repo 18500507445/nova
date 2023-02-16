@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>nova-ebbok</artifactId>
+    <artifactId>nova-ebook</artifactId>
     <description>电子书</description>
 
     <properties>

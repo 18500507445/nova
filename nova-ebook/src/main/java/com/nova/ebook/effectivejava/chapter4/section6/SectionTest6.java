@@ -23,10 +23,12 @@ class SectionTest6 {
     }
 
     @Test
-    public void demoB(){
+    public void demoB() {
+        InstanceContainer.putInstance(SectionTest6.class, new SectionTest6());
+
+        SectionTest6 instance = InstanceContainer.getInstance(SectionTest6.class);
 
     }
-
 
 
 }

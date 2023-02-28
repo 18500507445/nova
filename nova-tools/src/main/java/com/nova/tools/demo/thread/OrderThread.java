@@ -1,10 +1,5 @@
 package com.nova.tools.demo.thread;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 /**
  * @description: 1.使用newSingleThreadExecutor  2使用join方法 3ThreadPoolExecutor，设置它的核心线程数为1
  * @author: wzh
@@ -39,19 +34,6 @@ public class OrderThread {
         public synchronized void run() {
             System.out.println("I am " + number);
         }
-    }
-
-    /**
-     * 创建single线程池
-     */
-    @Test
-    void Pool() {
-        ExecutorService pool = Executors.newSingleThreadExecutor();
-        for (int i = 1; i <= TOTAL; ++i) {
-            final int number = i;
-            pool.execute(() -> System.out.println("I am " + number));
-        }
-        pool.shutdown();
     }
 
 

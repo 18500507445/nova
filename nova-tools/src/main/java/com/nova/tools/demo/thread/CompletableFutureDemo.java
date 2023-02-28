@@ -71,6 +71,7 @@ public class CompletableFutureDemo {
             list.add(calc(i).toString());
         }
         System.out.println("list=" + list + ",耗时=" + timer.interval() + "ms");
+        System.exit(0);
     }
 
     public static Integer calc(Integer i) {

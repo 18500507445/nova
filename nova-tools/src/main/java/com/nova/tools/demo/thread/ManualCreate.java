@@ -95,10 +95,6 @@ public class ManualCreate {
         }
     }
 
-    public static void main(String[] args) {
-
-    }
-
     class RetryTask implements Runnable {
         @Override
         public void run() {

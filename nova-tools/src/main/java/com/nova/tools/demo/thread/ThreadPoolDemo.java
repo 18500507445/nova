@@ -61,6 +61,19 @@ public class ThreadPoolDemo {
         service.awaitTermination(1000L, TimeUnit.SECONDS);
     }
 
+    /**
+     * 创建single线程池
+     */
+    @Test
+    public void demoC() {
+        ExecutorService pool = Executors.newSingleThreadExecutor();
+        for (int i = 1; i <= 1000; ++i) {
+            final int number = i;
+            pool.execute(() -> System.out.println("I am " + number));
+        }
+        pool.shutdown();
+    }
+
     private static class DemoA implements Runnable {
         @Override
         public void run() {

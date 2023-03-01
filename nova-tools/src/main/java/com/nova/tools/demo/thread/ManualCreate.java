@@ -146,7 +146,11 @@ public class ManualCreate {
         }
     }
 
-    //处理业务完成 释放信号
+    /**
+     * 处理业务完成 释放信号
+     *
+     * @param i
+     */
     private void consume(Integer i) {
         try {
             System.out.println("处理次数" + i);

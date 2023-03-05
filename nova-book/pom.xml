@@ -10,7 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nova-book</artifactId>
-    <description>Java书籍，数据结构与算法、设计模式、effectiveJava、深入理解Java虚拟机、juc</description>
+    <description>书籍和学习笔记：数据结构与算法、设计模式、effectiveJava、深入理解Java虚拟机、Java并发编程</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

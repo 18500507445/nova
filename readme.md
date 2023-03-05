@@ -3,7 +3,7 @@
 
 ### 结构介绍
 1.nova-book
-* [简介](nova-book/bookNote.md)
+* [书籍和学习笔记](nova-book/bookNote.md)
 * [数据结构与算法](nova-book/algorithm.md)
 * [设计模式](nova-book/design.md)
 * [并发编程](nova-book/juc.md)

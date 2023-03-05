@@ -20,12 +20,10 @@
     </developers>
 
     <modules>
+        <module>nova-book</module>
         <module>nova-cache</module>
         <module>nova-common</module>
         <module>nova-database</module>
-        <module>nova-datastructures</module>
-        <module>nova-design</module>
-        <module>nova-ebook</module>
         <module>nova-excel</module>
         <module>nova-framework</module>
         <module>nova-juc</module>

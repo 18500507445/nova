@@ -3,9 +3,10 @@
 
 ### 结构介绍
 1.nova-book
-* 简介：数据结构与算法、设计模式、effectiveJava、深入理解Java虚拟机
-* [电子书](nova-book/bookNote.md)
+* [简介](nova-book/bookNote.md)
+* [数据结构与算法](nova-book/algorithm.md)
 * [设计模式](nova-book/design.md)
+* [并发编程](nova-book/juc.md)
 
 2.nova-cache
 * Memcache、caffeine、redis
@@ -22,58 +23,55 @@
 6.nova-framework
 * 框架核心组件
 
-7.nova-juc(待开始)
-* java并发编程
-
-8.nova-limit
+7.nova-limit
 * [接口限流、请求响应拦截器、validation](nova-limit/limitNote.md)
 
-9.nova-lock
+8.nova-lock
 * [redisson分布式锁](nova-lock/lockNote.md)
 
-10.nova-log
+9.nova-log
 * [异步log](nova-log/logNote.md)
 
-11.nova-login
+10.nova-login
 * [三方登录JustAuth](nova-login/loginNote.md)
 
-12.nova-mail
+11.nova-mail
 * 邮件
 
-13.nova-mongo
+12.nova-mongo
 * mongo
 
-14.nova-mq
+13.nova-mq
 * active，kafka，rabbit(完结)
 
-15.nova-pay
+14.nova-pay
 * [支付组件](nova-pay/payNote.md)
 
-16.nova-sql
+15.nova-sql
 * [sql练习](nova-sql/sqlNote.md)
 
-17.nova-rpc
+16.nova-rpc
 * [手写rpc框架、dubbo调用(待补充)](nova-rpc/rpcNote.md)
 
-18.nova-spring
+17.nova-spring
 * [spring学习](nova-spring/springNote.md)
 
-19.nova-spring-boot(待开始)
+18.nova-spring-boot(待开始)
 * [spring-boot学习](nova-spring-boot/springBootNote.md)
 
-20.nova-spring-cloud(待开始)
+19.nova-spring-cloud(待开始)
 * [spring-cloud学习](nova-spring-cloud/springCloudNote.md)
 
-21.nova-spring-mybatis
+20.nova-spring-mybatis
 * [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)
 
-22.nova-tools
+21.nova-tools
 * [练习demo,java8,hutool、guava测试类，微信公众号](nova-tools/toolsNote.md)
 * [互联网 Java 工程师进阶知识完全扫盲](summary.md)
 
-23.nova-websocket
+22.nova-websocket
 * websocket学习
 
-24.nova-xxl
+23.nova-xxl
 * xxl-job执行器，mysql2.3.1sql文件，oracle2.1.0
 

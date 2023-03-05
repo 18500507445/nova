@@ -26,7 +26,6 @@
         <module>nova-database</module>
         <module>nova-excel</module>
         <module>nova-framework</module>
-        <module>nova-juc</module>
         <module>nova-limit</module>
         <module>nova-lock</module>
         <module>nova-log</module>

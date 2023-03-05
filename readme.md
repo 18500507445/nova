@@ -1,5 +1,5 @@
 ## 欢迎来到nova
-* 简介:项目积累代码
+* 简介:积累代码、设计模式、电子书笔记、算法笔记
 
 ### 结构介绍
 1.nova-cache
@@ -14,8 +14,9 @@
 4.nova-design
 * [设计模式](nova-design/designNote.md)
 
-5.nova-design
+5.nova-ebook
 * [电子书](nova-ebook/ebookNote.md)
+* 已整理完笔记：effective java第二版
 
 6.nova-excel
 * [excel工具类](nova-excel/excelNote.md)
@@ -42,7 +43,7 @@
 * mongo
 
 14.nova-mq
-* active,kafka,rabbit
+* active，kafka，rabbit(完结)
 
 15.nova-pay
 * [支付组件](nova-pay/payNote.md)
@@ -56,10 +57,10 @@
 18.nova-spring
 * [spring学习](nova-spring/springNote.md)
 
-19.nova-spring-boot
+19.nova-spring-boot(待补充)
 * [spring-boot学习](nova-spring-boot/springBootNote.md)
 
-20.nova-spring-cloud
+20.nova-spring-cloud(待补充)
 * [spring-cloud学习](nova-spring-cloud/springCloudNote.md)
 
 21.nova-spring-mybatis
@@ -73,5 +74,5 @@
 * websocket学习
 
 24.nova-xxl
-* xxl-job执行器,mysql2.3.1sql文件,oracle2.1.0
+* xxl-job执行器，mysql2.3.1sql文件，oracle2.1.0
 

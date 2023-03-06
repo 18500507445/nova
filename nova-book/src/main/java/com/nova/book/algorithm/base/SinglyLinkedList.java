@@ -2,6 +2,7 @@ package com.nova.book.algorithm.base;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.function.Consumer;
 
 /**
@@ -11,7 +12,7 @@ import java.util.function.Consumer;
  * @author: wzh
  * @date: 2023/3/6 18:04
  */
-class SinglyLinkedList {
+class SinglyLinkedList implements Iterable<Integer> {
 
     /**
      * 头指针
@@ -22,7 +23,6 @@ class SinglyLinkedList {
      * 节点类，因为链表和节点是组合关系，所以当做内部类，对外隐藏实现细节
      */
     private static class Node {
-
         //值
         int value;
 
@@ -51,7 +51,7 @@ class SinglyLinkedList {
     /**
      * 遍历链表
      */
-    public void forEach(Consumer<Integer> consumer) {
+    public void forEach1(Consumer<Integer> consumer) {
         Node p = head;
         while (null != p) {
             consumer.accept(p.value);
@@ -63,6 +63,138 @@ class SinglyLinkedList {
         for (Node p = head; null != p; p = p.next) {
             consumer.accept(p.value);
         }
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+            Node p = head;
+
+            @Override
+            public boolean hasNext() {
+                return null != p;
+            }
+
+            @Override
+            public Integer next() {
+                int value = p.value;
+                p = p.next;
+                return value;
+            }
+        };
+    }
+
+
+    /**
+     * 找到最后一个节点
+     *
+     * @param value
+     * @return
+     */
+    private Node findLast(int value) {
+        if (null == head) {
+            return null;
+        }
+        Node p = head;
+        while (null != p.next) {
+            p = p.next;
+        }
+        return p;
+    }
+
+    /**
+     * 尾插
+     *
+     * @param value
+     */
+    public void addLast(int value) {
+        Node last = findLast(value);
+        if (null == last) {
+            addFirst(value);
+            return;
+        }
+        last.next = new Node(value, null);
+    }
+
+    /**
+     * 根据下标找节点
+     *
+     * @param index
+     * @return
+     */
+    private Node findNode(int index) {
+        int i = 0;
+        for (Node p = head; p != null; p = p.next, i++) {
+            if (i == index) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据下标找value
+     *
+     * @param index
+     * @return
+     */
+    public int get(int index) {
+        Node node = findNode(index);
+        if (null == node) {
+            throw new IllegalArgumentException(String.format("index [%d] 不合法", index));
+        }
+        return node.value;
+    }
+
+    /**
+     * 插入
+     *
+     * @param index
+     * @param value
+     */
+    public void insert(int index, int value) {
+        if (0 == value) {
+            addFirst(value);
+            return;
+        }
+        //找到上一个节点
+        Node prev = findNode(index - 1);
+        if (null == prev) {
+            throw new IllegalArgumentException(String.format("index [%d] 不合法", index));
+        }
+        prev.next = new Node(value, prev.next);
+    }
+
+    /**
+     * 删除首个，相当于就是head指向head.next(第二个节点)
+     */
+    public void removeFirst() {
+        if (head == null) {
+            throw new IllegalArgumentException(String.format("index [%d] 不合法", 0));
+        }
+        head = head.next;
+    }
+
+    /**
+     * 索引删除
+     * 下标的前一个节点指向删除的对象
+     *
+     * @param index
+     */
+    public void remove(int index) {
+        if (index == 0) {
+            removeFirst();
+            return;
+        }
+        Node prev = findNode(index - 1);
+        if (null == prev) {
+            throw new IllegalArgumentException(String.format("index [%d] 不合法", index));
+        }
+        Node remove = prev.next;
+        if (null == remove) {
+            throw new IllegalArgumentException(String.format("index [%d] 不合法", index));
+        }
+        prev.next = remove.next;
     }
 
 }
@@ -81,8 +213,47 @@ class LinkedTest {
         for (int i = 0; i < 4; i++) {
             list.addFirst(i);
         }
-        list.forEach(System.out::println);
+        list.forEach1(System.out::println);
     }
+
+    /**
+     * 测试尾插
+     */
+    @Test
+    public void demoB() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        for (int i = 0; i < 4; i++) {
+            list.addLast(i);
+        }
+        list.forEach1(System.out::println);
+    }
+
+    /**
+     * 测试索引查找
+     */
+    @Test
+    public void demoC() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        for (int i = 0; i < 4; i++) {
+            list.addLast(i);
+        }
+        int i = list.get(0);
+        System.out.println("i = " + i);
+    }
+
+    /**
+     * 测试插入
+     */
+    @Test
+    public void demoD() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        for (int i = 0; i < 4; i++) {
+            list.addLast(i);
+        }
+        list.insert(4, 4);
+        list.forEach1(System.out::println);
+    }
+
 
 }
 

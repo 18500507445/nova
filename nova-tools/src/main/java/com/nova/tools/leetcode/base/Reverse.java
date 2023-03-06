@@ -1,4 +1,6 @@
-package com.nova.tools.letcode;
+package com.nova.tools.leetcode.base;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @description: 数字翻转，非int类型返回0
@@ -9,8 +11,27 @@ package com.nova.tools.letcode;
 public class Reverse {
 
     public static void main(String[] args) {
-        int x = 9646;
+        int x = 1001;
         System.out.println(calculation(x));
+    }
+
+    @Test
+    public void demoC() {
+        boolean palindrome = isPalindrome(5665);
+        System.out.println("palindrome = " + palindrome);
+    }
+
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        int a = x;
+        int sum = 0;
+        while (x != 0) {
+            sum = sum * 10 + x % 10;
+            x /= 10;
+        }
+        return sum == a;
     }
 
     public static int calculation(int x) {

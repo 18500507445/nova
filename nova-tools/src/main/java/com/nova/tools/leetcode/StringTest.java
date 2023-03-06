@@ -1,4 +1,4 @@
-package com.nova.tools.letcode;
+package com.nova.tools.leetcode;
 
 /**
  * @description:

@@ -44,7 +44,7 @@ class SinglyLinkedList implements Iterable<Integer> {
         //1.链表为空 头部节点指向第一个节点
         //head = new Node(value, null);
 
-        //2.链表非空 头部节点指向新节点，新节点指向第一个节点
+        //2.链表非空 头部节点指向新节点，新节点指向第一个节点，无线套娃
         head = new Node(value, head);
     }
 
@@ -86,7 +86,7 @@ class SinglyLinkedList implements Iterable<Integer> {
 
 
     /**
-     * 找到最后一个节点
+     * 循环遍历找到最后一个节点
      *
      * @param value
      * @return
@@ -147,7 +147,7 @@ class SinglyLinkedList implements Iterable<Integer> {
     }
 
     /**
-     * 插入
+     * 下标插入法
      *
      * @param index
      * @param value
@@ -166,12 +166,13 @@ class SinglyLinkedList implements Iterable<Integer> {
     }
 
     /**
-     * 删除首个，相当于就是head指向head.next(第二个节点)
+     * 删除首个
      */
     public void removeFirst() {
         if (head == null) {
             throw new IllegalArgumentException(String.format("index [%d] 不合法", 0));
         }
+        //相当于就是head指向head.next(第二个节点)
         head = head.next;
     }
 
@@ -194,6 +195,7 @@ class SinglyLinkedList implements Iterable<Integer> {
         if (null == remove) {
             throw new IllegalArgumentException(String.format("index [%d] 不合法", index));
         }
+        //上一个节点的指针--->被删除的指针，这样删除就断开了，等待gc回收
         prev.next = remove.next;
     }
 

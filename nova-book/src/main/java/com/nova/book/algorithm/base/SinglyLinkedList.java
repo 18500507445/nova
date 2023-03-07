@@ -36,7 +36,7 @@ class SinglyLinkedList implements Iterable<Integer> {
     }
 
     /**
-     * 向链表头部添加
+     * 头插法
      *
      * @param value
      */

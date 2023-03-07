@@ -46,11 +46,13 @@ class DynamicArray implements Iterable<Integer> {
      * <p>
      * index后的下标移动一个位置
      * <p>
-     * System.arraycopy(arr, index, targetArr, index, length)
+     * 数组内拷贝复制
+     * System.arraycopy(拷贝数组, 起始下标, 目标数组, 起始下标, 拷贝长度)
      */
     public void add(int index, int element) {
         checkAndGrow();
         if (index >= 0 && index < size) {
+            //数组从index开始往后移动一个位置，留出index的空间复制给element
             System.arraycopy(array, index, array, index + 1, size - index);
         }
         array[index] = element;
@@ -120,6 +122,7 @@ class DynamicArray implements Iterable<Integer> {
         int removed = array[index];
         //小于最后一个下标不复制
         if (index < size - 1) {
+            //数组从index+1开始往前移动一个位置
             System.arraycopy(array, index + 1, array, index, size - index - 1);
         }
         size--;

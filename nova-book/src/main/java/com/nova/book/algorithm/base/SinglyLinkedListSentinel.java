@@ -9,7 +9,7 @@ import java.util.function.Consumer;
  * @author: wzh
  * @date: 2023/3/6 18:04
  */
-class SinglyLinkedSentinelList {
+class SinglyLinkedListSentinel {
 
     /**
      * 头指针指向哨兵节点（值无所谓），下次判断Node ==null 的时候可以去掉，因为肯定不为null了
@@ -151,7 +151,7 @@ class LinkedSentinelTest {
      */
     @Test
     public void demoA() {
-        SinglyLinkedSentinelList list = new SinglyLinkedSentinelList();
+        SinglyLinkedListSentinel list = new SinglyLinkedListSentinel();
         for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
@@ -163,7 +163,7 @@ class LinkedSentinelTest {
      */
     @Test
     public void demoB() {
-        SinglyLinkedSentinelList list = new SinglyLinkedSentinelList();
+        SinglyLinkedListSentinel list = new SinglyLinkedListSentinel();
         for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
@@ -176,7 +176,7 @@ class LinkedSentinelTest {
      */
     @Test
     public void demoC() {
-        SinglyLinkedSentinelList list = new SinglyLinkedSentinelList();
+        SinglyLinkedListSentinel list = new SinglyLinkedListSentinel();
         for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
@@ -189,7 +189,7 @@ class LinkedSentinelTest {
      */
     @Test
     public void demoD() {
-        SinglyLinkedSentinelList list = new SinglyLinkedSentinelList();
+        SinglyLinkedListSentinel list = new SinglyLinkedListSentinel();
         for (int i = 1; i <= 4; i++) {
             list.addFirst(i);
         }

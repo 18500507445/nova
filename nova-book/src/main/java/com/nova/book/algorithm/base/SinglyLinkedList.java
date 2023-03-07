@@ -65,6 +65,25 @@ class SinglyLinkedList implements Iterable<Integer> {
         }
     }
 
+    /**
+     * 递归遍历
+     */
+    public void forEach3() {
+        recursion(head);
+    }
+
+    /**
+     * 针对某个节点进行的操作
+     */
+    private void recursion(Node curr) {
+        if (null == curr) {
+            return;
+        }
+        System.out.println("before:" + curr.value);
+        recursion(curr.next);
+        System.out.println("after:" + curr.value);
+    }
+
     @Override
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
@@ -212,7 +231,7 @@ class LinkedTest {
     @Test
     public void demoA() {
         SinglyLinkedList list = new SinglyLinkedList();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             list.addFirst(i);
         }
         list.forEach1(System.out::println);
@@ -224,7 +243,7 @@ class LinkedTest {
     @Test
     public void demoB() {
         SinglyLinkedList list = new SinglyLinkedList();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
         list.forEach1(System.out::println);
@@ -236,7 +255,7 @@ class LinkedTest {
     @Test
     public void demoC() {
         SinglyLinkedList list = new SinglyLinkedList();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
         int i = list.get(0);
@@ -249,11 +268,23 @@ class LinkedTest {
     @Test
     public void demoD() {
         SinglyLinkedList list = new SinglyLinkedList();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
         list.insert(4, 4);
         list.forEach1(System.out::println);
+    }
+
+    /**
+     * 递归调用
+     */
+    @Test
+    public void demoE() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        for (int i = 1; i <= 4; i++) {
+            list.addLast(i);
+        }
+        list.forEach3();
     }
 
 

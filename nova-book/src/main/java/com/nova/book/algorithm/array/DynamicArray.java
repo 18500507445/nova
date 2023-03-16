@@ -1,4 +1,4 @@
-package com.nova.book.algorithm.base;
+package com.nova.book.algorithm.array;
 
 import cn.hutool.core.date.StopWatch;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 /**
- * @description: 动态数组
+ * @description: 动态数组（ArrayList底层）
  * 数组中的元素是[连续存储]的，数组中元素的地址，可以通过索引计算
  * @author: wzh
  * @date: 2023/3/5 21:47

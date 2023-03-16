@@ -1,6 +1,6 @@
 ### 数据结构与算法
 * [《Java版：黑马的数据结构与算法》](https://www.bilibili.com/video/BV1Lv4y1e7HL/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)  
-* P94看完
+* P94看完，二叉树待看
 
 ## 1.基础数据结构
 
@@ -23,7 +23,6 @@
 假设链表中有 3 个节点，value 分别为 1，2，3，以上代码的执行流程就类似于下面的**伪码**
 ```java
 // 1 -> 2 -> 3 -> null  f(1)
-
 void f(Node node = 1) {
     println("before:" + node.value) // 1
     void f(Node node = 2) {

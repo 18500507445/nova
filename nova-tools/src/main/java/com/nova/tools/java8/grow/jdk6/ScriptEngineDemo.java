@@ -16,7 +16,7 @@ public class ScriptEngineDemo {
     public static void main(String[] args) {
 
         ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine        engine  = manager.getEngineByName("ECMAScript");
+        ScriptEngine engine = manager.getEngineByName("ECMAScript");
         try {
             String jsPath = ScriptEngineDemo.class.getResource("/test.js").getPath();
 

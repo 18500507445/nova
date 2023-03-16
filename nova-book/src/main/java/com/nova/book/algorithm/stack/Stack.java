@@ -1,7 +1,7 @@
 package com.nova.book.algorithm.stack;
 
 /**
- * @description: 栈(后进先出)
+ * @description: 栈(后进先出)，记忆方式类似：弹夹
  * @author: wzh
  * @date: 2023/3/16 10:38
  */

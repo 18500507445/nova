@@ -1,4 +1,4 @@
-package com.nova.book.algorithm.base;
+package com.nova.book.algorithm.list;
 
 import org.junit.jupiter.api.Test;
 
@@ -144,7 +144,7 @@ class SinglyLinkedListSentinel {
 /**
  * 哨兵链表测试类
  */
-class LinkedSentinelTest {
+class SinglyLinkedListSentinelTest {
 
     /**
      * 尾插测试

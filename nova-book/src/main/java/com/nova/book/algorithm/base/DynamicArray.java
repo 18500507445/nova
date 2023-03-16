@@ -154,7 +154,7 @@ class DynamicArray implements Iterable<Integer> {
 /**
  * 动态数组测试类
  */
-class ArrayTest {
+class DynamicArrayTest {
 
     /**
      * 下标对应0，1，2，3

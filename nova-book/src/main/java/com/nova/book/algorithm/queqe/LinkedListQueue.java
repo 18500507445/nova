@@ -1,4 +1,4 @@
-package com.nova.book.algorithm.base;
+package com.nova.book.algorithm.queqe;
 
 import java.util.Iterator;
 
@@ -30,7 +30,7 @@ class LinkedListQueue<E> implements Queue<E>, Iterable<E> {
     }
 
     /**
-     * 向队列尾插入值
+     * 尾插
      *
      * @param value 待插入值
      * @return 插入成功返回 true, 插入失败返回 false

@@ -1,4 +1,4 @@
-package com.nova.book.algorithm.base;
+package com.nova.book.algorithm.list;
 
 import org.junit.jupiter.api.Test;
 
@@ -146,7 +146,7 @@ public class DoublyLinkedListSentinel {
     }
 }
 
-class DoublyLinkedListTest {
+class DoublyLinkedListSentinelTest {
 
     /**
      * 头插测试

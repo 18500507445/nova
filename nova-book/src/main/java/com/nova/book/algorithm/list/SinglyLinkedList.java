@@ -1,4 +1,4 @@
-package com.nova.book.algorithm.base;
+package com.nova.book.algorithm.list;
 
 import org.junit.jupiter.api.Test;
 
@@ -223,7 +223,7 @@ class SinglyLinkedList implements Iterable<Integer> {
 /**
  * 链表测试类
  */
-class LinkedTest {
+class SinglyLinkedListTest {
 
     /**
      * 打印结果3、2、1、0，每次插入都是头部插入链表

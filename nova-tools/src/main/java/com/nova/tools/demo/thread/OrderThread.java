@@ -1,7 +1,9 @@
 package com.nova.tools.demo.thread;
 
 /**
- * @description: 1.使用newSingleThreadExecutor  2使用join方法 3ThreadPoolExecutor，设置它的核心线程数为1
+ * @description:
+ * 1.使用newSingleThreadExecutor
+ * 2.使用join方法 3ThreadPoolExecutor，设置它的核心线程数为1
  * @author: wzh
  * @date: 2021/4/25 11:29
  */

@@ -10,9 +10,9 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
- * @Author:jihai
- * @Date:2022/5/26
- * @Description:
+ * @description:
+ * @author: jihai
+ * @date: 2022/10/11 10:35
  */
 public class KillDemo {
     /**

@@ -12,7 +12,8 @@ import java.net.UnknownHostException;
 import java.util.concurrent.*;
 
 /**
- * @description: 问题:为什么使用线程池：创建和销毁线程耗费大量的时间,效率很低 为了提高线程的利用率使用线程池
+ * @description: 为什么使用线程池
+ * 答：创建和销毁线程耗费大量的时间,效率很低 为了提高线程的利用率使用线程池
  * @author: wzh
  * @date: 2021/3/31 11:13
  * web:https://www.freesion.com/article/32671046670/

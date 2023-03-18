@@ -87,7 +87,7 @@ public class CompletableFutureDemo {
                 Thread.sleep(1000);
             }
             System.out.println("task线程：" + Thread.currentThread().getName()
-                    + "，任务i= " + i + "，完成时间点：+" + DateUtil.now());
+                    + "，任务i= " + i + "，完成时间点：" + DateUtil.now());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

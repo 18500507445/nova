@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ class Soft {
         List<SoftReference<byte[]>> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             SoftReference<byte[]> ref = new SoftReference<>(new byte[_4MB]);
-            System.out.println(ref.get());
+            System.out.println(Arrays.toString(ref.get()));
             list.add(ref);
             System.out.println(list.size());
 

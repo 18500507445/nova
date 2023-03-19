@@ -29,11 +29,11 @@ java调用本地方法，由C或者C++语言编写的本地方法去操作系统
 - 有垃圾回收机制，不再被引用的对象，释放空闲内存
 
 **_诊断工具_**
+- jmap （jdk自带）jps展示进程id，jmap -heap pid
 - jconsole（jdk自带）
 
 #### 1.5 方法区
 jvm启动创建方法区
-
 
 #### 1.6直接内存
 ![直接内存](https://img-blog.csdnimg.cn/6ba8e4fc774a4a55aa4b9f1982c5235d.png#pic_center)
@@ -44,16 +44,27 @@ jvm启动创建方法区
 可达性分析算法
 - 哪些对象可以作为gc root对象（相当于一串葡萄，掉落在盘子里的是可以回收的对象）
 
-四种引用
-强引用：用得到并且不回收
-软引用：没用到不回收，内存满了才回收
-弱引用：被发现就回收
-虚引用：弱引用+引用队列
+四种引用  
+强引用：用得到并且不回收  
+软引用：没用到不回收，内存满了才回收  
+弱引用：被发现就回收  
+虚引用：弱引用+引用队列  
 
 #### 2.2 垃圾回收算法
+![标记清除](https://img-blog.csdnimg.cn/43527a2f3065445a88a8eaaa3dc698b9.png#pic_center)
+- 标记清除（没有gc root引用的标记清除，优点：速度快，缺点：空间有碎片，不连续）
+![标记整理](https://img-blog.csdnimg.cn/d6e26f59c6834867b64adbe0745b48df.png#pic_center)
+- 标记整理（优点：整理空间碎片，内存紧凑，空间连续，缺点：移动碎片，地址重排，效率低）
+![复制](https://img-blog.csdnimg.cn/1bf7a870c7bc4c3fa8beea2a23e2894e.png#pic_center)
+- 复制（创建一个新的空间，把标记的拷贝过来，空间换时间，占用内存双倍空间）
 
 #### 2.3 分代垃圾回收
+![分代垃圾回收](https://img-blog.csdnimg.cn/76b2569661ff4f0ab0660f67dda60dce.png#pic_center)
+
+![相关VM参数](https://img-blog.csdnimg.cn/26133884fe48458186725bc7bb843692.png#pic_center)
 
 #### 2.4 垃圾回收器
-
+- 串行 
+- 吞吐量优先
+- 响应时间优先
 #### 2.5 垃圾回收调优

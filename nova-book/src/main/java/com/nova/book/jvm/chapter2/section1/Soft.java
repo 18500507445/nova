@@ -1,4 +1,4 @@
-package com.nova.book.jvm.chapter2;
+package com.nova.book.jvm.chapter2.section1;
 
 import org.junit.jupiter.api.Test;
 

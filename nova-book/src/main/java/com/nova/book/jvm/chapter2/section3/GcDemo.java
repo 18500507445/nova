@@ -15,7 +15,6 @@ public class GcDemo {
     private static final int _7MB = 7 * 1024 * 1024;
     private static final int _8MB = 8 * 1024 * 1024;
 
-
     /**
      * idea添加 vm options 如下
      * -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC

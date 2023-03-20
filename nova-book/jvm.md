@@ -64,7 +64,24 @@ jvm启动创建方法区
 ![相关VM参数](https://img-blog.csdnimg.cn/26133884fe48458186725bc7bb843692.png#pic_center)
 
 #### 2.4 垃圾回收器
-- 串行 
-- 吞吐量优先
-- 响应时间优先
-#### 2.5 垃圾回收调优
+1. 串行 
+- 单线程
+- 堆内存较小，适合个人电脑
+2. 吞吐量优先（parallel，jdk8默认）
+- 多线程
+- 堆内存较大，多核 cpu
+- 让单位时间内，STW 的时间最短 0.2 0.2 = 0.4，垃圾回收时间占比最低，这样就称吞吐量高（多吃少餐）
+3. 响应时间优先（cms）
+- 多线程
+- 堆内存较大，多核 cpu
+- 尽可能让单次 STW 的时间最短 0.1 0.1 0.1 0.1 0.1 = 0.5（少吃多餐）
+4. Garbage First（g1，jdk9默认）
+- 同时注重吞吐量（Throughput）和低延迟（Low latency），默认的暂停目标是200ms
+- 超大堆内存，会将堆划分为多个大小相等的Region
+- 整体上是标记+整理算法，两个区域之间是复制算法
+
+![串行](https://img-blog.csdnimg.cn/65b5ce87a6dd4c62bb65b527d7eb4b6a.png#pic_center)
+![并行-吞吐量优先-parallel](https://img-blog.csdnimg.cn/8378f656251a4c14a94980bf839007c0.png#pic_center)
+![并发-响应时间优先-cms](https://img-blog.csdnimg.cn/c9c81b98ad944306a3384c03ea672b86.png#pic_center)
+
+#### 2.5 垃圾回收调优  

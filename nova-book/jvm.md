@@ -125,7 +125,7 @@ jvm启动创建方法区
 > -XX:CMSInitiatingOccupancyFraction=percent（值越低，GC频率越高）
 
 调优-案例
-- 案例1FullGC和MinorGC频繁
+- 案例1 FullGC和MinorGC频繁
 > GC特别频繁尤其MinorGC，说明空间紧张，新生代塞满了，后果幸存区空间紧张，晋升阈值降低，老年代也空间紧张，导致FullGC也频繁  
 > 尝试调整新生代内存空间，晋升阈值提高，尽可能留在新生代，MinorGC频率也降低，FullGC频率也降低
 - 案例2（CMS垃圾回收期）请求高峰期发生FullGC，单次暂停时间特别长 
@@ -135,13 +135,15 @@ jvm启动创建方法区
 
 ### 3.类加载与字节码技术
 #### 3.1 类文件结构
-
+Oracle提供了javap工具来反编译class文件，javap -v HelloWorld.class
 #### 3.2 字节码指令
 
 #### 3.3 编译期处理
 
 #### 3.4 类加载阶段
+启动类加载器
 
+扩展类加载器
 #### 3.5 类加载器
 
 #### 3.6 运行期优化

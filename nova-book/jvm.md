@@ -145,8 +145,29 @@ Oracle提供了javap工具来反编译class文件，javap -v HelloWorld.class
 
 扩展类加载器
 #### 3.5 类加载器
+![类加载器](https://img-blog.csdnimg.cn/8965fec2fcfd47d1b434fcac73896f0e.png#pic_center)
+
+![双亲委派](https://img-blog.csdnimg.cn/abddcfb5addb42f5a88e7a7e8a533ae4.png#pic_center)
 
 #### 3.6 运行期优化
 
 
+### 4.内存模型
+#### 4.1 java内存模型
+- 很多人将【java内存结构】与【java内存模型】傻傻分不清，【java内存模型】是 Java Memory Model（JMM）的意思。  
+- 简单的说，JMM 定义了一套在多线程读写共享数据时（成员变量、数组）时，对数据的可见性、有序性、和原子性的规则和保障
 
+#### 4.2 可见性
+![可见性](https://img-blog.csdnimg.cn/3d61bcff0aa84128affd210fe8a301c0.png#pic_center)
+#### 4.3 有序性
+![指令重排](https://img-blog.csdnimg.cn/879be774e78d4e468379260dcdf2710f.png#pic_center)
+#### 4.4 CAS与原子类
+![CAS](https://img-blog.csdnimg.cn/bd3a0bcbcf5f4d11bd57fc1afc0b838b.png#pic_center)
+- CAS是基于乐观锁的思想：最乐观估计，不怕别的线程来修改共享变量，就算改了也没关系，我吃亏点再重试呗。
+- synchronized是基于悲观锁的思想：最悲观估计，得防着其它线程来修改共享变量，我上了锁你们都别想改，我改完了解开锁，你们才有机会。
+- juc（java.util.concurrent）中提供了原子操作类，可以提供线程安全的操作，例如：AtomicInteger、 AtomicBoolean等，它们底层就是采用CAS技术+volatile来实现。
+#### 4.5 synchronized优化
+- jdk1.6之后对synchronized进行优化，某些场景下比CAS性能更好
+- 减少上锁时间synchronized修饰的代码块尽可能的少
+- 减少锁的粒度，将一个所拆分为多个锁，例如ConcurrentHashMap对比HashTable，一个锁链表头，一个锁table对象
+- 锁粗化，new StringBuffer().append("a").append("b")。多次循环进入同步块，不如同步块内多次循环

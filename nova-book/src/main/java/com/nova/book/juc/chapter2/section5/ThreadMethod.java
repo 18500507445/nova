@@ -65,6 +65,29 @@ class ThreadMethod {
     }
 
     /**
+     * 优雅停止，自己判断，料理后事
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void interruptFor() throws InterruptedException {
+        Thread t3 = new Thread(() -> {
+            while (true) {
+                boolean interrupted = Thread.currentThread().isInterrupted();
+                if (interrupted) {
+                    log.debug("被打断了，退出循环");
+                    break;
+                }
+            }
+        }, "t3");
+        t3.start();
+        TimeUnit.SECONDS.sleep(1);
+        log.debug("interrupt....");
+        t3.interrupt();
+    }
+
+
+    /**
      * 让出资源
      *
      * @throws InterruptedException
@@ -151,6 +174,31 @@ class ThreadMethod {
         };
         t6.start();
         t6.join(1500);
+        log.debug("main，结果为：{}", r);
+    }
+
+    /**
+     * 守护线程
+     */
+    @Test
+    public void daemon() throws InterruptedException {
+        Thread t7 = new Thread("t7") {
+            @SneakyThrows
+            @Override
+            public void run() {
+                while (true) {
+                    boolean interrupted = Thread.currentThread().isInterrupted();
+                    if (interrupted) {
+                        log.debug("被打断了，退出循环");
+                        break;
+                    }
+                }
+            }
+        };
+        //设置该线程为守护线程
+        t7.setDaemon(true);
+        t7.start();
+        TimeUnit.SECONDS.sleep(1);
         log.debug("main，结果为：{}", r);
     }
 

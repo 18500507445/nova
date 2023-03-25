@@ -41,7 +41,7 @@ class Example {
      */
     @Test
     public void manyThreadJoin() throws InterruptedException {
-        Thread t6 = new Thread("t6") {
+        Thread t1 = new Thread("t1") {
             @SneakyThrows
             @Override
             public void run() {
@@ -50,7 +50,7 @@ class Example {
             }
         };
 
-        Thread t7 = new Thread("t7") {
+        Thread t2 = new Thread("t2") {
             @SneakyThrows
             @Override
             public void run() {
@@ -59,14 +59,102 @@ class Example {
             }
         };
 
-        t6.start();
-        t7.start();
+        t1.start();
+        t2.start();
 
         TimeInterval timer = DateUtil.timer();
 
-        t7.join();
-        t6.join();
+        t2.join();
+        t1.join();
         log.debug("r：{}，r1：{}，cost：{}", r, r1, timer.interval());
     }
+
+    /**
+     * 两阶段终止模式
+     */
+    @Test
+    public void twoPhaseTermination() throws InterruptedException {
+        TwoPhaseTermination monitor = new TwoPhaseTermination();
+        monitor.start();
+        TimeUnit.SECONDS.sleep(3);
+        monitor.stop();
+    }
+
+    /**
+     * 统筹规划，喝茶
+     * 洗水壶1s、烧开水5s
+     * 洗茶壶、洗茶杯、拿茶叶 4s
+     * 最后泡茶
+     */
+    public static void main(String[] args) {
+        Thread t1 = new Thread("t1") {
+            @SneakyThrows
+            @Override
+            public void run() {
+                log.debug("洗水壶");
+                TimeUnit.SECONDS.sleep(1);
+                log.debug("烧开水");
+                TimeUnit.SECONDS.sleep(5);
+            }
+        };
+
+        Thread t2 = new Thread("t2") {
+            @SneakyThrows
+            @Override
+            public void run() {
+                log.debug("洗茶壶");
+                TimeUnit.SECONDS.sleep(1);
+                log.debug("洗茶杯");
+                TimeUnit.SECONDS.sleep(1);
+                log.debug("拿茶叶");
+                TimeUnit.SECONDS.sleep(1);
+                t1.join();
+                log.debug("泡茶");
+            }
+        };
+
+        t1.start();
+        t2.start();
+    }
+
+}
+
+@Slf4j
+class TwoPhaseTermination {
+    private Thread monitor;
+
+    /**
+     * 开启
+     */
+    public void start() {
+        monitor = new Thread(() -> {
+            while (true) {
+                Thread current = Thread.currentThread();
+                if (current.isInterrupted()) {
+                    log.debug("料理后事的isInterrupted");
+                    break;
+                }
+                try {
+                    log.debug("执行监控记录");
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    //重新设置打断标记，因为catch后变为false
+                    log.debug("重置前的isInterrupted：{}", current.isInterrupted());
+                    current.interrupt();
+                    log.debug("重置后的isInterrupted：{}", current.isInterrupted());
+                }
+            }
+        });
+        monitor.start();
+    }
+
+    /**
+     * 停止线程
+     */
+    public void stop() {
+        monitor.interrupt();
+    }
+
 
 }

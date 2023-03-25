@@ -47,7 +47,7 @@ public class KillDemo {
         }
 
         System.out.println("------- 客户端响应 -------");
-        Thread.sleep(1000);
+        TimeUnit.SECONDS.sleep(1);
         requestFutureMap.entrySet().forEach(entry -> {
             try {
                 Result result = entry.getValue().get(300, TimeUnit.MILLISECONDS);

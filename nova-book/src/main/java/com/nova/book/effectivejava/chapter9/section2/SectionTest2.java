@@ -5,6 +5,7 @@ import cn.hutool.core.date.TimeInterval;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -20,7 +21,7 @@ class SectionTest2 {
             @Override
             public boolean add(Integer s) {
                 try {
-                    Thread.sleep(1000);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -32,7 +33,7 @@ class SectionTest2 {
             final int x = i;
             new Thread(() -> pool.add(x)).start();
         }
-        Thread.sleep(4000);
+        TimeUnit.SECONDS.sleep(4);
         System.out.println("pool.size() = " + pool.size());
     }
 

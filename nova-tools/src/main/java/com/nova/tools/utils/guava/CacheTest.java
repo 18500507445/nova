@@ -43,7 +43,7 @@ public class CacheTest {
                 .build(new CacheLoader<String, String>() {
                     @Override
                     public String load(String key) throws Exception {
-                        Thread.sleep(1000);
+                        TimeUnit.SECONDS.sleep(1);
                         System.out.println(key + " load data");
                         return key + " add value";
                     }
@@ -109,7 +109,7 @@ public class CacheTest {
         while (true) {
             System.out.println("第" + i + "秒获取到的数据为：" + cache.getIfPresent("a"));
             i++;
-            Thread.sleep(1000);
+            TimeUnit.SECONDS.sleep(1);
         }
     }
 

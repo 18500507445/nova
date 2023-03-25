@@ -2,6 +2,8 @@ package com.nova.book.effectivejava.chapter9.section1;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @description:
  * @author: wzh
@@ -30,7 +32,7 @@ public class VolatileThread {
                 }
             }).start();
         }
-        Thread.sleep(1000);
+        TimeUnit.SECONDS.sleep(1);
         System.out.println("count = " + count);
     }
 
@@ -51,7 +53,7 @@ public class VolatileThread {
                 }
             }).start();
         }
-        Thread.sleep(1000);
+        TimeUnit.SECONDS.sleep(1);
         System.out.println("sum = " + sum);
     }
 

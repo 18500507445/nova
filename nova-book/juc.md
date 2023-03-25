@@ -80,3 +80,21 @@ linux
 就是程序计数器（ProgramCounterRegister），它的作用是记住下一条jvm指令的执行地址，是线程私有的
 > - 状态包括程序计数器、虚拟机栈中每个栈帧的信息，如局部变量、操作数栈、返回地址等
 > - Context Switch频繁发生会影响性能
+
+#### 2.5常见方法
+- run：直接调用run是在主线程中执行了run，没有启动新的线程
+- start：使用start是启动新的线程，通过新的线程间接执行run中的代码
+
+> sleep
+> - 调用sleep会让当前线程从Running进入TimedWaiting状态（阻塞）
+> - 其它线程可以使用interrupt方法打断正在睡眠的线程，这时sleep方法会抛出InterruptedException
+> - 睡眠结束后的线程未必会立刻得到执行
+> - 建议用TimeUnit的sleep代替Thread的sleep来获得更好的可读性
+
+> yield
+> - 调用yield会让当前线程从Running进入Runnable就绪状态，然后调度执行其它线程
+> - 具体的实现依赖于操作系统的任务调度器
+
+> 线程优先级
+> - 线程优先级会提示（hint）调度器优先调度该线程，但它仅仅是一个提示，调度器可以忽略它
+> - 如果cpu比较忙，那么优先级高的线程会获得更多的时间片，但cpu闲时，优先级几乎没作用

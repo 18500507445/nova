@@ -1,5 +1,7 @@
 package com.nova.book.jvm.chapter4.section2;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @description: volatile只能保证可见性，不能保证原子性
  * 场景：仅用在一个写线程，多个读线程的情况，性能比synchronized强
@@ -18,7 +20,7 @@ class Visibility {
         });
         t.start();
 
-        Thread.sleep(1000);
+        TimeUnit.SECONDS.sleep(1);
         // 如果不加volatile关键字，线程t不会如预想的停下来
         run = false;
         System.out.println("线程停止");

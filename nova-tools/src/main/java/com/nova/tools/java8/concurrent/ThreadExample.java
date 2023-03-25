@@ -31,7 +31,7 @@ public class ThreadExample {
         Runnable runnable = () -> {
             try {
                 System.out.println("Foo " + Thread.currentThread().getName());
-                Thread.sleep(1000);
+                TimeUnit.SECONDS.sleep(1);
                 System.out.println("Bar " + Thread.currentThread().getName());
             } catch (InterruptedException e) {
                 e.printStackTrace();

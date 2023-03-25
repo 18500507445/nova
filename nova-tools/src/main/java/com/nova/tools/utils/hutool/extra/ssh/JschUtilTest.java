@@ -10,6 +10,8 @@ import com.jcraft.jsch.Session;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Jsch工具类单元测试
  * 
@@ -60,7 +62,7 @@ public class JschUtilTest {
 		Console.log("打印pwd: " + sftp.pwd());
 		Console.log("cd / : " + sftp.cd("/"));
 		Console.log("休眠一段时间，查看是否超时");
-		Thread.sleep(30 * 1000);
+		TimeUnit.SECONDS.sleep(30);
 
 		try{
 			// 当连接超时时，isConnected()仍然返回true，pwd命令也能正常返回，因此，利用发送cd命令的返回结果，来判断是否连接超时

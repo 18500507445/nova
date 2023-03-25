@@ -3,6 +3,8 @@ package com.nova.book.effectivejava.chapter9.section1;
 import cn.hutool.core.date.DateUtil;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @description:
  * @author: wzh
@@ -37,7 +39,7 @@ class StopThread {
             System.out.println(DateUtil.now());
         });
         t.start();
-        Thread.sleep(1000);
+        TimeUnit.SECONDS.sleep(1);
         stop = true;
     }
 
@@ -67,7 +69,7 @@ class StopThread {
             System.out.println(DateUtil.now());
         });
         t.start();
-        Thread.sleep(1000);
+        TimeUnit.SECONDS.sleep(1);
         setStop();
     }
 

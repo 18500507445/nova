@@ -75,7 +75,7 @@ public class Concurrent {
         try {
             semaphore.acquire();
             System.out.println(Thread.currentThread().getName() + " is working");
-            Thread.sleep(1000);
+            TimeUnit.SECONDS.sleep(1);
             semaphore.release();
             System.out.println(Thread.currentThread().getName() + " is over");
         } catch (InterruptedException e) {

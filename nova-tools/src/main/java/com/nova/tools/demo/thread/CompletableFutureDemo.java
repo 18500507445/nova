@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -78,13 +79,13 @@ public class CompletableFutureDemo {
         try {
             if (i == 1) {
                 //任务1耗时3秒
-                Thread.sleep(3000);
+                TimeUnit.SECONDS.sleep(3);
             } else if (i == 5) {
                 //任务5耗时5秒
-                Thread.sleep(5000);
+                TimeUnit.SECONDS.sleep(5);
             } else {
                 //其它任务耗时1秒
-                Thread.sleep(1000);
+                TimeUnit.SECONDS.sleep(1);
             }
             System.out.println("task线程：" + Thread.currentThread().getName()
                     + "，任务i= " + i + "，完成时间点：" + DateUtil.now());

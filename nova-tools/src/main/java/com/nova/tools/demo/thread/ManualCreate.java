@@ -106,7 +106,7 @@ public class ManualCreate {
                     System.out.println("------------允许TASK个数：" + taskNum);
 
                     if (taskNum == 0) {
-                        Thread.sleep(1000);
+                        TimeUnit.SECONDS.sleep(1);
                         continue;
                     }
 

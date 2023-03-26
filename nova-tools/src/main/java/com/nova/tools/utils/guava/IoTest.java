@@ -14,7 +14,7 @@ import java.util.List;
  * @author: wzh
  * @date: 2022/10/13 18:24
  */
-public class IoTest {
+class IoTest {
 
     /**
      * 读取指定的文本文件的内容为一个字符串

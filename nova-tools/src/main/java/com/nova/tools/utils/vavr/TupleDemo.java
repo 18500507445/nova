@@ -8,7 +8,7 @@ import io.vavr.Tuple2;
  * @author: wzh
  * @date: 2022/10/13 16:06
  */
-public class TupleDemo {
+class TupleDemo {
 
     public static final Tuple2<String, Integer> JAVA8 = Tuple.of("Java", 8);
 

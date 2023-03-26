@@ -1,4 +1,4 @@
-package com.nova.tools.utils.guava.thread;
+package com.nova.tools.utils.guava;
 
 import com.google.common.util.concurrent.*;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
  * @author: wzh
  * @date: 2022/10/13 20:05
  */
-public class ThreadTest {
+class ThreadTest {
 
     @Test
     public void testA() {

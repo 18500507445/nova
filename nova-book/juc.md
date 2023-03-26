@@ -133,13 +133,12 @@ static void decrement() {
  counter--;
 }
 ~~~
-#### 3.2 synchronized
+#### 3.2 synchronized（Thread8Lock-线程8锁）
 为了避免临界区的竞态条件发生，有多种手段可以达到目的。
 - 阻塞式的解决方案：synchronized，Lock
 - 非阻塞式的解决方案：原子变量
 
-线程8锁看Thread8Lock例子
-#### 3.3 线程安全分析
+#### 3.3 线程安全分析（SafeAnalysis-安全分析）
 成员变量和静态变量是否线程安全？
 - 如果它们没有共享，则线程安全
 - 如果它们被共享了，根据它们的状态是否能够改变，又分两种情况
@@ -154,12 +153,40 @@ static void decrement() {
 
 常见的线程安全类：String、Integer、StringBuffer、Random、Vector、Hashtable、juc包下的类
 
-安全分析demo-->SafeAnalysis
-
 例子：ExerciseSell（卖票问题）、ExerciseTransfer（转账问题）
 
-#### 3.4 Monitor（监视器）
+#### 3.4 Monitor（监视器、锁）
+synchronized原理进阶
+- 轻量级锁：如果一个对象虽然有多线程访问，但多线程访问的时间是错开的（没有竞争），那么就可以用轻量级锁来优化
+~~~java
+static final Object obj = new Object();
 
+public static void m1(){
+    synchronized(obj){
+        //同步块a
+        m2();
+    }
+}
 
-#### 3.5 wait、notify
+public static void m2(){
+    synchronized(obj){
+        //同步块b
+  }
+}
+~~~
+
+- 自旋锁就是线程重试加锁（多核cpu下才有意义，jvm自动调整自旋次数）
+
+#### 3.5 wait / notify（WaitNotify、SleepAndWait）
+- obj.wait()让进入object监视器的线程到waitSet等待
+- obj.notify()在object上正在waitSet等待的线程中挑一个唤醒
+- obj.notifyAll()让object上正在waitSet等待的线程全部唤醒
+
+sleep(long n)和wait(long n)的区别
+- sleep是Thread方法，而wait是Object的方法
+- sleep不需要强制和synchronized配合使用，但wait需要和synchronized一起用
+- sleep在睡眠的同时，不会释放对象锁的，但wait在等待的时候会释放对象锁
+- 它们状态TIMED_WAITING
+
+wait notify的正确姿势（CorrectPostureStep）
 

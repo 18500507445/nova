@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author: wzh
  * @date: 2022/10/13 19:37
  */
-public class CacheTest {
+class CacheTest {
 
     @Test
     public void cacheCreateTest() {

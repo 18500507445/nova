@@ -15,7 +15,6 @@ public class EventTest {
         eventBus.register(new MultipleEventListener());
         //发送不同类型的事件
         eventBus.post(new EventA("EventA Message"));
-        eventBus.post(new EventA("EventA Message"));
         eventBus.post(new EventB("EventB Message"));
     }
 }

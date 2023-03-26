@@ -8,14 +8,15 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.*;
 
 /**
- * @description: 一.什么是CompletableFuture?
+ * @description:
+ * 一.什么是CompletableFuture?
  * 通俗的理解，CompletableFuture其实是一个线程任务编排工具类，
  * 他里面提供不同的静态方法让开发人员比较方便的去提交任务和组织任务的执行关系以及聚合任务执行结果等等，
  * 他是在JDK1.8之后才有的(包含JDK1.8)。所以在这里你先记着他是一个工具类。
  * <p>
- * 二.为什么有CompletableFuture
- * 降低了并发编程的复杂度。
- * 在JDK8之前我们使用多线程的大部分情况都是Thead+Runnable或者使用Thread + Callable等方法来完成。* 如果我们需要多个并发任务同时执行，并且又关系他们的执行同步关系的话可能会在加上CountDownLatch、*CyclicBarrier等线程同步工具，这样就会导致并发编程变得比较复杂。
+ * 二.为什么有CompletableFuture？降低了并发编程的复杂度
+ * 在JDK8之前我们使用多线程的大部分情况都是Thead+Runnable或者使用Thread + Callable等方法来完成。
+ * 如果我们需要多个并发任务同时执行，并且又关系他们的执行同步关系的话可能会在加上CountDownLatch、*CyclicBarrier等线程同步工具，这样就会导致并发编程变得比较复杂。
  * 而CompletableFuture帮我们封装很多任务提交、同步方法，让我们可以很轻松简单的来完成任务的提交、同步编排。
  * @author: wzh
  * @date: 2022/11/18 13:41

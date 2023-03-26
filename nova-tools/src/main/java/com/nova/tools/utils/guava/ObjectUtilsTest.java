@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2022/10/13 18:25
  */
-public class ObjectUtilsTest {
+class ObjectUtilsTest {
 
     /**
      * System.identityHashCode(obj):不管obj所在的类有没有重写hashcode方法，identityHashCode

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2022/10/13 19:40
  */
-public class RateLimiterTest {
+class RateLimiterTest {
 
     /**
      * 每秒5个令牌

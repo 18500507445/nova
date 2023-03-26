@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Looly
  */
-public class AopTest {
+class AopTest {
 
 	@Test
 	public void aopTest() {

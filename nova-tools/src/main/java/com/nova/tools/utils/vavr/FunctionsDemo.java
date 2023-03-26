@@ -11,7 +11,7 @@ import io.vavr.Function2;
  * @author: wzh
  * @date: 2022/10/13 16:15
  */
-public class FunctionsDemo {
+class FunctionsDemo {
 
     public static void main(String[] args) {
         // 创建方式一

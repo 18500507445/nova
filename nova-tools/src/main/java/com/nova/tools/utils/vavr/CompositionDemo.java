@@ -7,7 +7,7 @@ import io.vavr.Function1;
  * @author: wzh
  * @date: 2022/10/13 16:19
  */
-public class CompositionDemo {
+class CompositionDemo {
 
     public static void main(String[] args) {
         // (2 + 1) * 3 = 6

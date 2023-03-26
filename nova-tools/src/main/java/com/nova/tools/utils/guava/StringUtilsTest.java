@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2022/10/13 18:26
  */
-public class StringUtilsTest {
+class StringUtilsTest {
 
     /**
      * 12345678911

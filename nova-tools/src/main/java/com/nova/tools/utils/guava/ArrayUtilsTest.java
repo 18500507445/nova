@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2022/10/13 18:24
  */
-public class ArrayUtilsTest {
+class ArrayUtilsTest {
 
     /**
      * 给已有数组添加元素

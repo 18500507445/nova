@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @author: wzh
  * @date: 2022/10/13 18:26
  */
-public class GuavaTest {
+class GuavaTest {
 
     @Test
     public void test8() {

@@ -8,7 +8,7 @@ import io.vavr.control.Option;
  * @author: wzh
  * @date: 2022/10/13 16:22
  */
-public class ListDemo {
+class ListDemo {
 
     public static void main(String[] args) {
 

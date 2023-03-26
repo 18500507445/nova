@@ -9,7 +9,7 @@ import java.util.Random;
  * @author: wzh
  * @date: 2023/3/26 10:14
  */
-@Slf4j
+@Slf4j(topic = "ExerciseTransfer")
 public class ExerciseTransfer {
 
     /**

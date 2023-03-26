@@ -12,7 +12,7 @@ import java.util.Vector;
  * @author: wzh
  * @date: 2023/3/26 10:02
  */
-@Slf4j
+@Slf4j(topic = "ExerciseSell")
 public class ExerciseSell {
 
     public static void main(String[] args) throws InterruptedException {

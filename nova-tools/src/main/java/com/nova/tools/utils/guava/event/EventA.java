@@ -19,3 +19,14 @@ public class EventA {
     private String message;
 
 }
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+class EventB {
+
+    private String message;
+
+}
+

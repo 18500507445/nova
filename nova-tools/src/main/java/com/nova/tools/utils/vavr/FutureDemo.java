@@ -10,16 +10,15 @@ import java.util.concurrent.TimeUnit;
  * @author: wzh
  * @date: 2022/10/13 16:30
  */
-public class FutureDemo {
+class FutureDemo {
 
     public static void main(String[] args) {
-
         System.out.println("当前线程名称：" + Thread.currentThread().getName());
         Integer result = Future.of(() -> {
-            System.out.println("future线程名称：" + Thread.currentThread().getName());
-            Thread.sleep(2000);
-            return 100;
-        })
+                    System.out.println("future线程名称：" + Thread.currentThread().getName());
+                    Thread.sleep(2000);
+                    return 100;
+                })
                 .map(i -> i * 10)
                 .await(3000, TimeUnit.MILLISECONDS)
                 .get();

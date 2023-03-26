@@ -7,7 +7,7 @@ import io.vavr.Lazy;
  * @author: wzh
  * @date: 2022/10/13 16:28
  */
-public class LazyDemo {
+class LazyDemo {
 
     public static void main(String[] args) {
         Lazy<String> name = Lazy.of(() -> "Deepak");

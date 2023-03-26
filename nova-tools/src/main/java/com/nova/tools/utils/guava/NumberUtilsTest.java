@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2022/10/13 18:25
  */
-public class NumberUtilsTest {
+class NumberUtilsTest {
 
     /**
      * 给我判断一个参数是不是数字(整数、浮点数)

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 布隆过滤器
  */
-public class BitMapBloomFilterTest {
+class BitMapBloomFilterTest {
 
     @Test
     public void filterTest() {

@@ -11,7 +11,7 @@ import java.util.List;
  * @author: wzh
  * @date: 2022/10/13 18:23
  */
-public class CollectionsUtilsTest {
+class CollectionsUtilsTest {
 
     /**
      * 交集、并集、差集

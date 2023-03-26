@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author looly
  */
-public class CacheConcurrentTest {
+class CacheConcurrentTest {
 
     @Test
     @Ignore

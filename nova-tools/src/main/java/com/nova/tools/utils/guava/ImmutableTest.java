@@ -11,7 +11,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2022/10/13 17:59
  */
-public class ImmutableTest {
+class ImmutableTest {
 
     @Test
     public void createMap(){

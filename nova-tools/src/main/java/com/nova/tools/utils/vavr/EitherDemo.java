@@ -10,7 +10,7 @@ import io.vavr.control.Either;
  * @author: wzh
  * @date: 2022/10/13 16:32
  */
-public class EitherDemo {
+class EitherDemo {
 
     public static void main(String[] args) {
         // 大于0，返回成功（右值），小于等于0，返回失败（左值）

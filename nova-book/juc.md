@@ -117,8 +117,7 @@ linux
 ### 3. 共享模型之管程
 #### 3.1 共享问题
 临界区Critical Section  
-一个程序运行多个线程本身是没有问题的
-问题出在多个线程访问共享资源
+一个程序运行多个线程本身是没有问题的，问题出在多个线程访问共享资源
 - 多个线程读共享资源其实也没有问题
 - 在多个线程对共享资源读写操作时发生指令交错，就会出现问题
 
@@ -156,5 +155,11 @@ static void decrement() {
 常见的线程安全类：String、Integer、StringBuffer、Random、Vector、Hashtable、juc包下的类
 
 安全分析demo-->SafeAnalysis
-#### 3.4 Monitor
+
+例子：ExerciseSell（卖票问题）、ExerciseTransfer（转账问题）
+
+#### 3.4 Monitor（监视器）
+
+
 #### 3.5 wait、notify
+

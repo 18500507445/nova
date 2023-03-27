@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author: wzh
  * @date: 2023/3/24 21:36
  */
-@Slf4j
+@Slf4j(topic = "SeeThread")
 class SeeThread {
 
     public static void main(String[] args) {

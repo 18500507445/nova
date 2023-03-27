@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author: wzh
  * @date: 2023/3/25 08:03
  */
-@Slf4j
+@Slf4j(topic = "ThreadMethod")
 class ThreadMethod {
 
     static int r = 0;

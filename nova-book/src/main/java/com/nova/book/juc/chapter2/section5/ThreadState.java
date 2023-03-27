@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * @author: wzh
  * @date: 2023/3/25 13:17
  */
-@Slf4j
+@Slf4j(topic = "ThreadState")
 class ThreadState {
 
     static final Object obj = new Object();

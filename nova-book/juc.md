@@ -189,4 +189,19 @@ sleep(long n)和wait(long n)的区别
 - 它们状态TIMED_WAITING
 
 wait notify的正确姿势（CorrectPostureStep）
+~~~java
+synchronized(lock) {
+    while(条件不成立) {
+        lock.wait();
+ }
+ // 干活
+}
+
+//另一个线程
+synchronized(lock) {
+    lock.notifyAll();
+}
+~~~
+
+设计模式之保护性暂停（Guarded例子）
 

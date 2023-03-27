@@ -12,7 +12,7 @@ import java.util.concurrent.FutureTask;
  * @author: wzh
  * @date: 2023/3/24 21:14
  */
-@Slf4j
+@Slf4j(topic = "CreateThread")
 class CreateThread {
 
     /**
@@ -54,13 +54,10 @@ class CreateThread {
      */
     @Test
     public void demoC() throws ExecutionException, InterruptedException {
-        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                log.debug("FutureTask创建方式");
-                Thread.sleep(2000);
-                return 100;
-            }
+        FutureTask<Integer> task = new FutureTask<>(() -> {
+            log.debug("FutureTask创建方式");
+            Thread.sleep(2000);
+            return 100;
         });
         Thread t = new Thread(task, "t3");
         t.start();

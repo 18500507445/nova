@@ -205,3 +205,4 @@ synchronized(lock) {
 
 设计模式之保护性暂停（Guarded例子）
 
+异步模式之生产者、消费者

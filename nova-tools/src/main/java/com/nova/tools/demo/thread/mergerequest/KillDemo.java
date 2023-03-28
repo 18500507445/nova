@@ -1,6 +1,10 @@
 package com.nova.tools.demo.thread.mergerequest;
 
 import com.google.common.collect.Lists;
+import com.nova.common.utils.thread.Threads;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +19,20 @@ import java.util.stream.Collectors;
  * @date: 2022/10/11 10:35
  */
 public class KillDemo {
+
+    /**
+     * 模拟数据库操作日志表
+     * order_id_operate_type uk
+     */
+    private final List<OperateChangeLog> operateChangeLogList = new ArrayList<>();
+
+    /**
+     * 模拟数据库行
+     */
+    private Integer stock = 6;
+
+    private final BlockingQueue<RequestPromise> queue = new LinkedBlockingQueue<>(10);
+
     /**
      * 启动10个用户线程
      * 库存6个
@@ -25,7 +43,7 @@ public class KillDemo {
         ExecutorService executorService = Executors.newCachedThreadPool();
         KillDemo killDemo = new KillDemo();
         killDemo.mergeJob();
-        Thread.sleep(2000);
+        Threads.sleep(2000);
 
         CountDownLatch countDownLatch = new CountDownLatch(10);
 
@@ -35,7 +53,7 @@ public class KillDemo {
         Map<UserRequest, Future<Result>> requestFutureMap = new HashMap<>(16);
         for (int i = 0; i < 10; i++) {
             final Long orderId = i + 100L;
-            final Long userId = Long.valueOf(i);
+            final Long userId = (long) i;
             UserRequest userRequest = new UserRequest(orderId, userId, 1);
             Future<Result> future = executorService.submit(() -> {
                 countDownLatch.countDown();
@@ -53,7 +71,7 @@ public class KillDemo {
                 Result result = entry.getValue().get(300, TimeUnit.MILLISECONDS);
                 System.out.println(Thread.currentThread().getName() + ":客户端请求响应:" + result);
 
-                if (!result.isSuccess() && result.getMsg().equals("等待超时")) {
+                if (!result.getSuccess() && result.getMsg().equals("等待超时")) {
                     // 超时，发送请求回滚
                     System.out.println(entry.getKey() + " 发起回滚操作");
                     killDemo.rollback(entry.getKey());
@@ -90,17 +108,12 @@ public class KillDemo {
             if (hasRollback) {
                 return;
             }
-            System.out.println(" 最终回滚");
+            System.out.println("最终回滚");
             stock += userRequest.getCount();
             saveChangeLog(Lists.newArrayList(userRequest), 2);
         }
         // 忽略
     }
-
-    //模拟数据库行
-    private Integer stock = 6;
-
-    private final BlockingQueue<RequestPromise> queue = new LinkedBlockingQueue<>(10);
 
     /**
      * 用户库存扣减
@@ -134,12 +147,8 @@ public class KillDemo {
             List<RequestPromise> list = new ArrayList<>();
             while (true) {
                 if (queue.isEmpty()) {
-                    try {
-                        Thread.sleep(10);
-                        continue;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Threads.sleep(10);
+                    continue;
                 }
 
                 int batchSize = 3;
@@ -153,11 +162,7 @@ public class KillDemo {
 
                 // 用户ID=5的批次和之后的批次，请求都会超时
                 if (list.stream().anyMatch(e -> e.getUserRequest().getUserId().equals(5L))) {
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Threads.sleep(200);
                 }
 
                 System.out.println(Thread.currentThread().getName() + ":合并扣减库存:" + list);
@@ -199,9 +204,6 @@ public class KillDemo {
         }, "mergeThread").start();
     }
 
-    // 模拟数据库操作日志表
-    // order_id_operate_type uk
-    private List<OperateChangeLog> operateChangeLogList = new ArrayList<>();
 
     /**
      * 写库存流水
@@ -216,52 +218,22 @@ public class KillDemo {
     }
 }
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 class OperateChangeLog {
     private Long orderId;
     private Integer count;
-    // 1-扣减，2-回滚
+
+    /**
+     * 1-扣减，2-回滚
+     */
     private Integer operateType;
-
-    public OperateChangeLog(Long orderId, Integer count, Integer operateType) {
-        this.orderId = orderId;
-        this.count = count;
-        this.operateType = operateType;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public Integer getOperateType() {
-        return operateType;
-    }
-
-    public void setOperateType(Integer operateType) {
-        this.operateType = operateType;
-    }
-
-    @Override
-    public String toString() {
-        return "OperateChangeLog{" +
-                "orderId=" + orderId +
-                ", count=" + count +
-                ", operateType=" + operateType +
-                '}';
-    }
 }
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 class RequestPromise {
     private UserRequest userRequest;
     private Result result;
@@ -269,112 +241,23 @@ class RequestPromise {
     public RequestPromise(UserRequest userRequest) {
         this.userRequest = userRequest;
     }
-
-    public RequestPromise(UserRequest userRequest, Result result) {
-        this.userRequest = userRequest;
-        this.result = result;
-    }
-
-    public UserRequest getUserRequest() {
-        return userRequest;
-    }
-
-    public void setUserRequest(UserRequest userRequest) {
-        this.userRequest = userRequest;
-    }
-
-    public Result getResult() {
-        return result;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
-    }
-
-    @Override
-    public String toString() {
-        return "RequestPromise{" +
-                "userRequest=" + userRequest +
-                ", result=" + result +
-                '}';
-    }
 }
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 class Result {
     private Boolean success;
     private String msg;
-
-    public Result(boolean success, String msg) {
-        this.success = success;
-        this.msg = msg;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    @Override
-    public String toString() {
-        return "Result{" +
-                "success=" + success +
-                ", msg='" + msg + '\'' +
-                '}';
-    }
 }
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 class UserRequest {
     private Long orderId;
     private Long userId;
     private Integer count;
 
-    public UserRequest(Long orderId, Long userId, Integer count) {
-        this.orderId = orderId;
-        this.userId = userId;
-        this.count = count;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    @Override
-    public String toString() {
-        return "UserRequest{" +
-                "orderId=" + orderId +
-                ", userId=" + userId +
-                ", count=" + count +
-                '}';
-    }
 }

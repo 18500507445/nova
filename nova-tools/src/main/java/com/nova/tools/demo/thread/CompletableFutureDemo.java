@@ -17,7 +17,8 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
- * @date:Created in 17:34 2018/10/30
+ * @description: CompletableFutureDemo
+ * @author: wzh
  */
 public class CompletableFutureDemo {
 
@@ -87,8 +88,7 @@ public class CompletableFutureDemo {
                 //其它任务耗时1秒
                 TimeUnit.SECONDS.sleep(1);
             }
-            System.out.println("task线程：" + Thread.currentThread().getName()
-                    + "，任务i= " + i + "，完成时间点：" + DateUtil.now());
+            System.out.println("task线程：" + Thread.currentThread().getName() + "，任务i= " + i + "，完成时间点：" + DateUtil.now());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

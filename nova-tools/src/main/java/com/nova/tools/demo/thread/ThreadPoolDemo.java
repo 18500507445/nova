@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.*;
 
 /**
- * @description:
+ * @description: 线程池demo
  * @author: wzh
  * @date: 2022/3/31 10:38
  */

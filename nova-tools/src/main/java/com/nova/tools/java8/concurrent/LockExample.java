@@ -22,7 +22,7 @@ public class LockExample {
 
     private static final int NUM_INCREMENTS = 10000;
 
-    private static ReentrantLock lock = new ReentrantLock();
+    private static final ReentrantLock lock = new ReentrantLock();
 
     private static int count = 0;
 
@@ -43,7 +43,7 @@ public class LockExample {
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(LockExample::increment));
 
-         Threads.stop(executor);
+        Threads.stop(executor);
 
         System.out.println(count);
     }
@@ -51,8 +51,6 @@ public class LockExample {
     @Test
     public void demoB() {
         ExecutorService executor = Executors.newFixedThreadPool(2);
-
-        ReentrantLock lock = new ReentrantLock();
 
         executor.submit(() -> {
             lock.lock();
@@ -70,7 +68,7 @@ public class LockExample {
             System.out.println("Lock acquired: " + locked);
         });
 
-         Threads.stop(executor);
+        Threads.stop(executor);
     }
 
     @Test
@@ -103,7 +101,7 @@ public class LockExample {
         executor.submit(readTask);
         executor.submit(readTask);
 
-         Threads.stop(executor);
+        Threads.stop(executor);
     }
 
 
@@ -137,7 +135,7 @@ public class LockExample {
         executor.submit(readTask);
         executor.submit(readTask);
 
-         Threads.stop(executor);
+        Threads.stop(executor);
     }
 
     @Test
@@ -170,7 +168,7 @@ public class LockExample {
             }
         });
 
-         Threads.stop(executor);
+        Threads.stop(executor);
     }
 
     @Test
@@ -196,6 +194,6 @@ public class LockExample {
             }
         });
 
-         Threads.stop(executor);
+        Threads.stop(executor);
     }
 }

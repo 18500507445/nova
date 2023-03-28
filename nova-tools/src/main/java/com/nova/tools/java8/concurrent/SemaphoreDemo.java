@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
- * @description:
+ * @description: 信号量
  * @author: wzh
  * @date: 2022/11/18 15:15
  */

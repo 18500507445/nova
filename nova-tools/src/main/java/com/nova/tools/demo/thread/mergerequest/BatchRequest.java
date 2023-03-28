@@ -16,7 +16,7 @@ public class BatchRequest {
     /**
      * 缓存队列
      */
-    private static final ArrayBlockingQueue<RequestPromise> BLOCKING_QUEUE = new ArrayBlockingQueue(200);
+    private static final ArrayBlockingQueue<RequestPromise> BLOCKING_QUEUE = new ArrayBlockingQueue<>(200);
 
     /**
      * 每批合并处理数量

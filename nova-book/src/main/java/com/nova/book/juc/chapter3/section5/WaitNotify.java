@@ -1,4 +1,4 @@
-package com.nova.book.juc.chapter3;
+package com.nova.book.juc.chapter3.section5;
 
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;

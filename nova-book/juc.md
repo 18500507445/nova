@@ -133,12 +133,12 @@ static void decrement() {
  counter--;
 }
 ~~~
-#### 3.2 synchronized（Thread8Lock-线程8锁）
+#### 3.2 synchronized
 为了避免临界区的竞态条件发生，有多种手段可以达到目的。
 - 阻塞式的解决方案：synchronized，Lock
 - 非阻塞式的解决方案：原子变量
 
-#### 3.3 线程安全分析（SafeAnalysis-安全分析）
+#### 3.3 线程安全分析
 成员变量和静态变量是否线程安全？
 - 如果它们没有共享，则线程安全
 - 如果它们被共享了，根据它们的状态是否能够改变，又分两种情况
@@ -206,3 +206,4 @@ synchronized(lock) {
 设计模式之保护性暂停（Guarded例子）
 
 异步模式之生产者、消费者
+

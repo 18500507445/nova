@@ -1,4 +1,4 @@
-package com.nova.book.juc.chapter3;
+package com.nova.book.juc.chapter3.section3;
 
 import lombok.extern.slf4j.Slf4j;
 

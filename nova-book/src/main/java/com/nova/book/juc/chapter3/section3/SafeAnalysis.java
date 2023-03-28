@@ -1,4 +1,4 @@
-package com.nova.book.juc.chapter3;
+package com.nova.book.juc.chapter3.section3;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

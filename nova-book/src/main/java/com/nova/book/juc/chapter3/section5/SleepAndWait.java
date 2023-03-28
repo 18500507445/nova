@@ -1,8 +1,7 @@
 package com.nova.book.juc.chapter3.section5;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: sleep和wait的区别
@@ -20,7 +19,7 @@ class SleepAndWait {
                 log.debug("t1 获得锁");
 
                 try {
-                    //TimeUnit.SECONDS.sleep(2000);
+                    Threads.sleep(2000);
 
                     lock.wait();
                 } catch (InterruptedException e) {
@@ -29,7 +28,7 @@ class SleepAndWait {
             }
         }, "t1").start();
 
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         synchronized (lock) {
             log.debug("main 获得锁");
         }

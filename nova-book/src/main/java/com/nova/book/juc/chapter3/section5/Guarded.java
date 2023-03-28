@@ -2,12 +2,12 @@ package com.nova.book.juc.chapter3.section5;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 同步模式之保护性暂停
@@ -44,11 +44,7 @@ class Guarded {
 
         new Thread(() -> {
             log.debug("执行计算");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Threads.sleep(2000);
             guarded.complete(6 + 2);
         }, "t2").start();
     }
@@ -66,11 +62,7 @@ class Guarded {
 
         new Thread(() -> {
             log.debug("执行计算");
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Threads.sleep(1000);
             guarded.complete(6 - 2);
         }, "t2").start();
     }
@@ -83,11 +75,7 @@ class Guarded {
         for (int i = 0; i < 3; i++) {
             new People().start();
         }
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Threads.sleep(1000);
         for (Integer id : Mailboxes.getIds()) {
             new Postman(id, "" + id).start();
         }

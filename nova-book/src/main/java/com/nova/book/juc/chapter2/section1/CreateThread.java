@@ -1,9 +1,9 @@
 package com.nova.book.juc.chapter2.section1;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
@@ -56,7 +56,7 @@ class CreateThread {
     public void demoC() throws ExecutionException, InterruptedException {
         FutureTask<Integer> task = new FutureTask<>(() -> {
             log.debug("FutureTask创建方式");
-            Thread.sleep(2000);
+            Threads.sleep(2000);
             return 100;
         });
         Thread t = new Thread(task, "t3");

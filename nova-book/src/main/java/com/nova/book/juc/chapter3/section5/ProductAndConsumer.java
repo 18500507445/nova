@@ -1,5 +1,6 @@
 package com.nova.book.juc.chapter3.section5;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,6 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 生产者、消费者
@@ -28,11 +28,7 @@ public class ProductAndConsumer {
 
         new Thread(() -> {
             while (true) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Threads.sleep(1000);
                 Message message = queue.take();
             }
         }, "消费者").start();

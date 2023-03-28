@@ -2,11 +2,10 @@ package com.nova.book.juc.chapter2.section5;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import com.nova.common.utils.thread.Threads;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 应用案例
@@ -30,7 +29,7 @@ class Example {
     @Test
     public void sleep() throws InterruptedException {
         while (true) {
-            TimeUnit.MILLISECONDS.sleep(50);
+            Threads.sleep(50);
         }
     }
 
@@ -45,7 +44,7 @@ class Example {
             @SneakyThrows
             @Override
             public void run() {
-                TimeUnit.SECONDS.sleep(1);
+                Threads.sleep(1);
                 r = 10;
             }
         };
@@ -54,7 +53,7 @@ class Example {
             @SneakyThrows
             @Override
             public void run() {
-                TimeUnit.SECONDS.sleep(2);
+                Threads.sleep(2);
                 r1 = 20;
             }
         };
@@ -73,10 +72,10 @@ class Example {
      * 两阶段终止模式
      */
     @Test
-    public void twoPhaseTermination() throws InterruptedException {
+    public void twoPhaseTermination() {
         TwoPhaseTermination monitor = new TwoPhaseTermination();
         monitor.start();
-        TimeUnit.SECONDS.sleep(3);
+        Threads.sleep(3000);
         monitor.stop();
     }
 
@@ -92,9 +91,9 @@ class Example {
             @Override
             public void run() {
                 log.debug("洗水壶");
-                TimeUnit.SECONDS.sleep(1);
+                Threads.sleep(1);
                 log.debug("烧开水");
-                TimeUnit.SECONDS.sleep(5);
+                Threads.sleep(5);
             }
         };
 
@@ -103,11 +102,11 @@ class Example {
             @Override
             public void run() {
                 log.debug("洗茶壶");
-                TimeUnit.SECONDS.sleep(1);
+                Threads.sleep(1);
                 log.debug("洗茶杯");
-                TimeUnit.SECONDS.sleep(1);
+                Threads.sleep(1);
                 log.debug("拿茶叶");
-                TimeUnit.SECONDS.sleep(1);
+                Threads.sleep(1);
                 t1.join();
                 log.debug("泡茶");
             }
@@ -136,8 +135,8 @@ class TwoPhaseTermination {
                 }
                 try {
                     log.debug("执行监控记录");
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
+                    Threads.sleep(1);
+                } catch (Exception e) {
                     e.printStackTrace();
                     //重新设置打断标记，因为catch后变为false
                     log.debug("重置前的isInterrupted：{}", current.isInterrupted());

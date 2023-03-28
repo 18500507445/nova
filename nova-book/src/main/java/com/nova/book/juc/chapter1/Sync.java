@@ -1,5 +1,6 @@
 package com.nova.book.juc.chapter1;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -12,12 +13,8 @@ class Sync {
 
     public static void main(String[] args) {
         new Thread(() -> {
-            try {
-                System.out.println("异步");
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            System.out.println("异步");
+            Threads.sleep(2000);
         }).start();
         log.debug("do other things...");
     }

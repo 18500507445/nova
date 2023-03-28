@@ -1,9 +1,8 @@
 package com.nova.book.juc.chapter3.section2;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 线程8锁
@@ -153,7 +152,7 @@ class NumberOne {
 class NumberTwo {
     @SneakyThrows
     public synchronized void a() {
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         log.debug("1");
     }
 
@@ -167,7 +166,7 @@ class NumberThree {
 
     @SneakyThrows
     public synchronized void a() {
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         log.debug("1");
     }
 
@@ -185,7 +184,7 @@ class NumberFive {
 
     @SneakyThrows
     public static synchronized void a() {
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         log.debug("1");
     }
 
@@ -200,7 +199,7 @@ class NumberSix {
 
     @SneakyThrows
     public static synchronized void a() {
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         log.debug("1");
     }
 

@@ -1,9 +1,8 @@
 package com.nova.book.juc.chapter3.section5;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: wait notify的正确姿势
@@ -27,21 +26,15 @@ class CorrectPostureStep {
      * 加了synchronized (room) 后，就好比小男在里面反锁了门睡觉，烟根本没法送进门，main没加
      * synchronized就好像main线程是翻窗户进来的
      * 解决方法，使用wait - notify
-     *
-     * @throws InterruptedException
      */
     @Test
-    public void one() throws InterruptedException {
+    public void one() {
         new Thread(() -> {
             synchronized (room) {
                 log.debug("有烟没？[{}]", hasCigarette);
                 if (!hasCigarette) {
                     log.debug("没烟，先歇会！");
-                    try {
-                        TimeUnit.SECONDS.sleep(2);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Threads.sleep(2000);
                 }
                 log.debug("有烟没？[{}]", hasCigarette);
                 if (hasCigarette) {
@@ -58,7 +51,7 @@ class CorrectPostureStep {
             }, "打工人").start();
         }
 
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         new Thread(() -> {
             // 这里能不能加 synchronized (room)？答：不能
             hasCigarette = true;
@@ -99,7 +92,7 @@ class CorrectPostureStep {
             }, "打工人").start();
         }
 
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         new Thread(() -> {
             synchronized (room) {
                 hasCigarette = true;
@@ -156,7 +149,7 @@ class CorrectPostureStep {
             }
         }, "小女").start();
 
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         new Thread(() -> {
             synchronized (room) {
                 hasTakeout = true;
@@ -215,7 +208,7 @@ class CorrectPostureStep {
             }
         }, "小女").start();
 
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         new Thread(() -> {
             synchronized (room) {
                 hasTakeout = true;

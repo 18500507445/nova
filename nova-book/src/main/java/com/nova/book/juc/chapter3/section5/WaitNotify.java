@@ -1,10 +1,7 @@
 package com.nova.book.juc.chapter3.section5;
 
-import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 等待、唤醒demo
@@ -43,7 +40,7 @@ class WaitNotify {
         }, "t2").start();
 
         // 主线程两秒后执行
-        TimeUnit.MILLISECONDS.sleep(500);
+        Threads.sleep(500);
 
         log.debug("唤醒 obj 上其它线程");
 

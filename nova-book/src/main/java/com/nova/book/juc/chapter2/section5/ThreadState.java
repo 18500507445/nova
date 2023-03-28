@@ -1,9 +1,9 @@
 package com.nova.book.juc.chapter2.section5;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 线程六种状态
@@ -45,11 +45,7 @@ class ThreadState {
             @Override
             public void run() {
                 synchronized (obj) {
-                    try {
-                        TimeUnit.SECONDS.sleep(1000000);// timed_waiting
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Threads.sleep(1000000);// timed_waiting
                 }
             }
         };
@@ -71,21 +67,14 @@ class ThreadState {
             @Override
             public void run() {
                 synchronized (obj) { // blocked
-                    try {
-                        TimeUnit.SECONDS.sleep(1000000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Threads.sleep(1000000);
                 }
             }
         };
         t6.start();
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Threads.sleep(500);
+
         log.debug("t1 state {}", t1.getState());
         log.debug("t2 state {}", t2.getState());
         log.debug("t3 state {}", t3.getState());

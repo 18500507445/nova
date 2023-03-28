@@ -1,5 +1,6 @@
 package com.nova.book.juc.chapter1;
 
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,9 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class Async {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
         System.out.println("同步");
-        Thread.sleep(2000);
+        Threads.sleep(2000);
         log.debug("do other things...");
     }
 }

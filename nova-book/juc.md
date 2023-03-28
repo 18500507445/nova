@@ -177,7 +177,7 @@ public static void m2(){
 
 - 自旋锁就是线程重试加锁（多核cpu下才有意义，jvm自动调整自旋次数）
 
-#### 3.5 wait / notify（WaitNotify、SleepAndWait）
+#### 3.5 wait / notify
 - obj.wait()让进入object监视器的线程到waitSet等待
 - obj.notify()在object上正在waitSet等待的线程中挑一个唤醒
 - obj.notifyAll()让object上正在waitSet等待的线程全部唤醒
@@ -207,3 +207,56 @@ synchronized(lock) {
 
 异步模式之生产者、消费者
 
+
+#### 3.5 重新理解线程状态转换
+![线程状态转换](https://img-blog.csdnimg.cn/471319664de74681bf06c147ca967941.png#pic_center)
+- 情况1 NEW-->RUNNABLE
+> 当调用t.start()方法时，由NEW-->RUNNABLE
+
+- 情况2 RUNNABLE<-->WAITING
+> t线程用 synchronized(obj) 获取了对象锁后  
+调用obj.wait()方法时，t线程从RUNNABLE-->WAITING  
+调用obj.notify()，obj.notifyAll()，t.interrupt()时  
+竞争锁成功，t线程从WAITING-->RUNNABLE  
+竞争锁失败，t线程从WAITING-->BLOCKED
+
+- 情况3 RUNNABLE <--> WAITING
+> 当前线程调用 t.join() 方法时，当前线程从 RUNNABLE --> WAITING  
+注意是当前线程在t线程对象的监视器上等待  
+t线程运行结束，或调用了当前线程的interrupt()时，当前线程从WAITING-->RUNNABLE  
+
+- 情况4 RUNNABLE<-->WAITING
+> 当前线程调用LockSupport.park()方法会让当前线程从RUNNABLE-->WAITING  
+调用LockSupport.unpark(目标线程)或调用了线程的interrupt()，会让目标线程从WAITING-->RUNNABLE  
+
+- 情况5 RUNNABLE<-->TIMED_WAITING
+> t线程用synchronized(obj)获取了对象锁后  
+调用obj.wait(longn)方法时，t线程从RUNNABLE-->TIMED_WAITING  
+t线程等待时间超过了n毫秒，或调用obj.notify()，obj.notifyAll()，t.interrupt()时  
+竞争锁成功，t线程从TIMED_WAITING-->RUNNABLE  
+竞争锁失败，t线程从TIMED_WAITING-->BLOCKED  
+
+- 情况6 RUNNABLE<-->TIMED_WAITING
+> 当前线程调用t.join(longn)方法时，当前线程从RUNNABLE-->TIMED_WAITING  
+注意是当前线程在t线程对象的监视器上等待  
+当前线程等待时间超过了n毫秒，或t线程运行结束，或调用了当前线程的interrupt()时，当前线程从TIMED_WAITING-->RUNNABLE  
+
+- 情况7 RUNNABLE<-->TIMED_WAITING
+> 当前线程调用Thread.sleep(longn)，当前线程从RUNNABLE-->TIMED_WAITING    
+当前线程等待时间超过了n毫秒，当前线程从TIMED_WAITING-->RUNNABLE  
+
+- 情况8 RUNNABLE<-->TIMED_WAITING
+> 当前线程调用LockSupport.parkNanos(longnanos)或LockSupport.parkUntil(longmillis)时，当前线程从RUNNABLE-->TIMED_WAITING  
+调用LockSupport.unpark(目标线程)或调用了线程的interrupt()，或是等待超时，会让目标线程从TIMED_WAITING-->RUNNABLE  
+
+- 情况9 RUNNABLE<-->BLOCKED
+> t线程用synchronized(obj)获取了对象锁时如果竞争失败，从RUNNABLE-->BLOCKED  
+持obj锁线程的同步代码块执行完毕，会唤醒该对象上所有BLOCKED的线程重新竞争，如果其中t线程竞争成功，从BLOCKED-->RUNNABLE，其它失败的线程仍然BLOCKED  
+
+- 情况10 RUNNABLE<-->TERMINATED
+> 当前线程所有代码运行完毕，进入TERMINATED  
+
+#### 3.6 多把锁
+- 将锁的粒度细分
+> 好处，是可以增强并发度  
+坏处，如果一个线程需要同时获得多把锁，就容易发生死锁

@@ -5,10 +5,8 @@ import java.math.BigDecimal;
 
 /**
  * @date: 2019/5/27 19:50
- * @return:
- * @description:根据两点坐标计算两点之间的距离
+ * @description: 根据两点坐标计算两点之间的距离
  */
-
 public class LocationUtils {
 
     /**

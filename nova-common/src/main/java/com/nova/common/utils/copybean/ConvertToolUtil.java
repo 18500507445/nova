@@ -32,8 +32,8 @@ public class ConvertToolUtil {
         List<String> excludesList = null;
 
         if (excludsArray != null && excludsArray.length > 0) {
-
-            excludesList = Arrays.asList(excludsArray); // 构造列表对象
+            //构造列表对象
+            excludesList = Arrays.asList(excludsArray);
         }
 
         Method[] fromMethods = from.getClass().getDeclaredMethods();

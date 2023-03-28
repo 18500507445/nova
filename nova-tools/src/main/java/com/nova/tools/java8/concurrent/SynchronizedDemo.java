@@ -1,5 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
@@ -40,10 +41,9 @@ public class SynchronizedDemo {
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(SynchronizedDemo::incrementSync));
+        IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::incrementSync));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.println("   Sync: " + count);
     }
@@ -57,10 +57,9 @@ public class SynchronizedDemo {
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(SynchronizedDemo::increment));
+        IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::increment));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.println("NonSync: " + count);
     }
@@ -74,10 +73,9 @@ public class SynchronizedDemo {
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(SynchronizedDemo::incrementSyncClass));
+        IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::incrementSyncClass));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.println(count);
     }

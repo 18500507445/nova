@@ -1,5 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
@@ -26,7 +27,7 @@ public class LongAdderExample {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(() -> adder.add(2)));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.format("Add: %d\n", adder.sumThenReset());
     }
@@ -41,7 +42,7 @@ public class LongAdderExample {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(adder::increment));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, adder.sumThenReset());
     }
@@ -59,7 +60,7 @@ public class LongAdderExample {
         IntStream.range(0, 10)
                 .forEach(i -> executor.submit(() -> accumulator.accumulate(i)));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.format("Add: %d\n", accumulator.getThenReset());
     }

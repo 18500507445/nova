@@ -231,7 +231,7 @@ t线程运行结束，或调用了当前线程的interrupt()时，当前线程�
 
 - 情况5 RUNNABLE<-->TIMED_WAITING
 > t线程用synchronized(obj)获取了对象锁后  
-调用obj.wait(longn)方法时，t线程从RUNNABLE-->TIMED_WAITING  
+调用obj.wait(long n)方法时，t线程从RUNNABLE-->TIMED_WAITING  
 t线程等待时间超过了n毫秒，或调用obj.notify()，obj.notifyAll()，t.interrupt()时  
 竞争锁成功，t线程从TIMED_WAITING-->RUNNABLE  
 竞争锁失败，t线程从TIMED_WAITING-->BLOCKED  
@@ -242,11 +242,11 @@ t线程等待时间超过了n毫秒，或调用obj.notify()，obj.notifyAll()，
 当前线程等待时间超过了n毫秒，或t线程运行结束，或调用了当前线程的interrupt()时，当前线程从TIMED_WAITING-->RUNNABLE  
 
 - 情况7 RUNNABLE<-->TIMED_WAITING
-> 当前线程调用Thread.sleep(longn)，当前线程从RUNNABLE-->TIMED_WAITING    
+> 当前线程调用Thread.sleep(long n)，当前线程从RUNNABLE-->TIMED_WAITING    
 当前线程等待时间超过了n毫秒，当前线程从TIMED_WAITING-->RUNNABLE  
 
 - 情况8 RUNNABLE<-->TIMED_WAITING
-> 当前线程调用LockSupport.parkNanos(longnanos)或LockSupport.parkUntil(longmillis)时，当前线程从RUNNABLE-->TIMED_WAITING  
+> 当前线程调用LockSupport.parkNanos(long nanos)或LockSupport.parkUntil(long millis)时，当前线程从RUNNABLE-->TIMED_WAITING  
 调用LockSupport.unpark(目标线程)或调用了线程的interrupt()，或是等待超时，会让目标线程从TIMED_WAITING-->RUNNABLE  
 
 - 情况9 RUNNABLE<-->BLOCKED
@@ -260,3 +260,21 @@ t线程等待时间超过了n毫秒，或调用obj.notify()，obj.notifyAll()，
 - 将锁的粒度细分
 > 好处，是可以增强并发度  
 坏处，如果一个线程需要同时获得多把锁，就容易发生死锁
+
+#### 3.7 可重入锁ReentrantLock
+相对于synchronized都支持可重入，还具备以下特点
+- 可中断
+- 可以设置超时时间
+- 可以设置为公平锁
+- 支持多个条件变量
+
+~~~java
+// 获取锁
+reentrantLock.lock();
+try {
+    // 临界区
+} finally {
+    // 释放锁
+    reentrantLock.unlock();
+}
+~~~

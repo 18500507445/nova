@@ -1,5 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
@@ -41,7 +42,7 @@ public class SemaphoreDemo {
             permit = semaphore.tryAcquire(1, TimeUnit.SECONDS);
             if (permit) {
                 System.out.println("Semaphore acquired");
-                ConcurrentUtils.sleep(5);
+                Threads.sleep(5000);
             } else {
                 System.out.println("Could not acquire semaphore");
             }
@@ -64,7 +65,7 @@ public class SemaphoreDemo {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(SemaphoreDemo::increment));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.println("Increment: " + count);
     }
@@ -76,7 +77,7 @@ public class SemaphoreDemo {
         IntStream.range(0, 10)
                 .forEach(i -> executor.submit(SemaphoreDemo::doWork));
 
-        ConcurrentUtils.stop(executor);
+         Threads.stop(executor);
     }
 
 }

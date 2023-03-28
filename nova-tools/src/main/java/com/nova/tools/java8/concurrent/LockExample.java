@@ -1,5 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -40,10 +41,9 @@ public class LockExample {
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(LockExample::increment));
+        IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(LockExample::increment));
 
-        ConcurrentUtils.stop(executor);
+         Threads.stop(executor);
 
         System.out.println(count);
     }
@@ -57,7 +57,7 @@ public class LockExample {
         executor.submit(() -> {
             lock.lock();
             try {
-                ConcurrentUtils.sleep(1);
+                Threads.sleep(1000);
             } finally {
                 lock.unlock();
             }
@@ -70,7 +70,7 @@ public class LockExample {
             System.out.println("Lock acquired: " + locked);
         });
 
-        ConcurrentUtils.stop(executor);
+         Threads.stop(executor);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class LockExample {
         executor.submit(() -> {
             lock.writeLock().lock();
             try {
-                ConcurrentUtils.sleep(1);
+                Threads.sleep(1000);
                 map.put("foo", "bar");
             } finally {
                 lock.writeLock().unlock();
@@ -95,7 +95,7 @@ public class LockExample {
             lock.readLock().lock();
             try {
                 System.out.println(map.get("foo"));
-                ConcurrentUtils.sleep(1);
+                Threads.sleep(1000);
             } finally {
                 lock.readLock().unlock();
             }
@@ -103,7 +103,7 @@ public class LockExample {
         executor.submit(readTask);
         executor.submit(readTask);
 
-        ConcurrentUtils.stop(executor);
+         Threads.stop(executor);
     }
 
 
@@ -118,7 +118,7 @@ public class LockExample {
         executor.submit(() -> {
             long stamp = lock.writeLock();
             try {
-                ConcurrentUtils.sleep(1);
+                Threads.sleep(1000);
                 map.put("foo", "bar");
             } finally {
                 lock.unlockWrite(stamp);
@@ -129,7 +129,7 @@ public class LockExample {
             long stamp = lock.readLock();
             try {
                 System.out.println(map.get("foo"));
-                ConcurrentUtils.sleep(1);
+                Threads.sleep(1000);
             } finally {
                 lock.unlockRead(stamp);
             }
@@ -137,7 +137,7 @@ public class LockExample {
         executor.submit(readTask);
         executor.submit(readTask);
 
-        ConcurrentUtils.stop(executor);
+         Threads.stop(executor);
     }
 
     @Test
@@ -150,9 +150,9 @@ public class LockExample {
             long stamp = lock.tryOptimisticRead();
             try {
                 System.out.println("Optimistic Lock Valid: " + lock.validate(stamp));
-                ConcurrentUtils.sleep(1);
+                Threads.sleep(1000);
                 System.out.println("Optimistic Lock Valid: " + lock.validate(stamp));
-                ConcurrentUtils.sleep(2);
+                Threads.sleep(2000);
                 System.out.println("Optimistic Lock Valid: " + lock.validate(stamp));
             } finally {
                 lock.unlock(stamp);
@@ -163,14 +163,14 @@ public class LockExample {
             long stamp = lock.writeLock();
             try {
                 System.out.println("Write Lock acquired");
-                ConcurrentUtils.sleep(2);
+                Threads.sleep(2000);
             } finally {
                 lock.unlock(stamp);
                 System.out.println("Write done");
             }
         });
 
-        ConcurrentUtils.stop(executor);
+         Threads.stop(executor);
     }
 
     @Test
@@ -196,6 +196,6 @@ public class LockExample {
             }
         });
 
-        ConcurrentUtils.stop(executor);
+         Threads.stop(executor);
     }
 }

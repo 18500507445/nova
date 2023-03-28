@@ -1,5 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
@@ -30,7 +31,7 @@ public class AtomicExample {
                     executor.submit(task);
                 });
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.format("Update: %d\n", ATOMIC_INT.get());
     }
@@ -48,7 +49,7 @@ public class AtomicExample {
                     executor.submit(task);
                 });
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.format("Accumulate: %d\n", ATOMIC_INT.get());
     }
@@ -62,7 +63,7 @@ public class AtomicExample {
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(ATOMIC_INT::incrementAndGet));
 
-        ConcurrentUtils.stop(executor);
+        Threads.stop(executor);
 
         System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, ATOMIC_INT.get());
     }

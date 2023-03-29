@@ -13,7 +13,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
- * @description: 享元模式-自定义连接池
+ * @description: 享元模式-自定义数据库连接池
  * @author: wzh
  * @date: 2023/3/29 15:33
  */

@@ -1,6 +1,6 @@
 package com.nova.book.jvm.chapter4.section2;
 
-import java.util.concurrent.TimeUnit;
+import com.nova.common.utils.thread.Threads;
 
 /**
  * @description: volatile只能保证可见性，不能保证原子性
@@ -20,7 +20,7 @@ class Visibility {
         });
         t.start();
 
-        TimeUnit.SECONDS.sleep(1);
+        Threads.sleep(1000);
         // 如果不加volatile关键字，线程t不会如预想的停下来
         run = false;
         System.out.println("线程停止");

@@ -2,6 +2,7 @@ package com.nova.book.effectivejava.chapter9.section2;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -20,11 +21,7 @@ class SectionTest2 {
         Pool pool = new Pool(new LinkedList<Integer>() {
             @Override
             public boolean add(Integer s) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Threads.sleep(1000);
                 return super.add(s);
             }
         });

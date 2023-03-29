@@ -12,14 +12,12 @@ import java.net.UnknownHostException;
 import java.util.concurrent.*;
 
 /**
- * @description: 为什么使用线程池
- * 答：创建和销毁线程耗费大量的时间,效率很低 为了提高线程的利用率使用线程池
+ * @description: 手动job
  * @author: wzh
  * @date: 2021/3/31 11:13
- * web:https://www.freesion.com/article/32671046670/
  */
-@Slf4j(topic = "ManualCreate")
-public class ManualCreate {
+@Slf4j(topic = "ManualJob")
+public class ManualJob {
 
     /**
      * 获取机器核数，作为线程池数量
@@ -49,6 +47,7 @@ public class ManualCreate {
     }
 
     /**
+     * @see <a href="https://blog.csdn.net/dodod2012/article/details/107464723</a>
      * corePoolSize => 线程池核心线程数量
      * maximumPoolSize => 线程池最大数量,必须大于等于1
      * keepAliveTime => 空闲线程存活时间,当空闲时间到达此值,多余线程会被销毁到核心线程数量
@@ -68,9 +67,9 @@ public class ManualCreate {
     private static final BlockingQueue<Integer> QUEUE = new LinkedBlockingQueue<>();
 
     public static void main(String[] args) {
-        final ManualCreate manualCreate = new ManualCreate();
-        manualCreate.start();
-        manualCreate.process();
+        final ManualJob manualJob = new ManualJob();
+        manualJob.start();
+        manualJob.process();
     }
 
     public void start() {

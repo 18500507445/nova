@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.LinkedList;
 
 /**
- * @description: 面试题：生产者，消费者（队列实现）
+ * @description: 面试题：生产者，消费者（LinkedList当做队列实现）
  * @author: wzh
  * @date: 2023/3/27 10:08
  */

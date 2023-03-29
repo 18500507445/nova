@@ -10,6 +10,7 @@ import java.util.concurrent.*;
 
 /**
  * @description: 线程池demo
+ * 为什么使用线程池:创建和销毁线程耗费大量的时间,效率很低 为了提高线程的利用率使用线程池
  * @author: wzh
  * @date: 2022/3/31 10:38
  */
@@ -48,7 +49,7 @@ public class ThreadPoolDemo {
     @Test
     public void demoB() throws InterruptedException {
         TimeInterval timer = DateUtil.timer();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 1000; i++) {
             queue.put(i);
         }
         for (int j = 0; j < 50; j++) {
@@ -58,7 +59,7 @@ public class ThreadPoolDemo {
 
         // 优雅关闭线程池
         service.shutdown();
-        service.awaitTermination(1000L, TimeUnit.SECONDS);
+        service.awaitTermination(3, TimeUnit.SECONDS);
     }
 
     /**

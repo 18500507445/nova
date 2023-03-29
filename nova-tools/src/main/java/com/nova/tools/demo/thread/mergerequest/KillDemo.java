@@ -216,48 +216,49 @@ public class KillDemo {
                 userRequest.getCount(), operateType)).collect(Collectors.toList());
         operateChangeLogList.addAll(collect);
     }
-}
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class OperateChangeLog {
-    private Long orderId;
-    private Integer count;
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class OperateChangeLog {
+        private Long orderId;
+        private Integer count;
 
-    /**
-     * 1-扣减，2-回滚
-     */
-    private Integer operateType;
-}
+        /**
+         * 1-扣减，2-回滚
+         */
+        private Integer operateType;
+    }
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class RequestPromise {
-    private UserRequest userRequest;
-    private Result result;
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class RequestPromise {
+        private UserRequest userRequest;
+        private Result result;
 
-    public RequestPromise(UserRequest userRequest) {
-        this.userRequest = userRequest;
+        public RequestPromise(UserRequest userRequest) {
+            this.userRequest = userRequest;
+        }
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class Result {
+        private Boolean success;
+        private String msg;
+    }
+
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class UserRequest {
+        private Long orderId;
+        private Long userId;
+        private Integer count;
+
     }
 }
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class Result {
-    private Boolean success;
-    private String msg;
-}
-
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class UserRequest {
-    private Long orderId;
-    private Long userId;
-    private Integer count;
-
-}

@@ -11,7 +11,6 @@ public class InnerClass {
      * 私有构造方法
      */
     private InnerClass() {
-
     }
 
     /**

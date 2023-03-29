@@ -6,6 +6,7 @@ package com.nova.book.design.structure.flyweight;
  * @date: 2022/12/31 10:38
  */
 public class Circle implements Shape {
+
     private final String color;
 
     public Circle(String color) {

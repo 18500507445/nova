@@ -64,8 +64,7 @@ public class CompletableFutureDemo {
         };
         Stream<Integer> stream = taskList.stream();
         Stream<Object> objectStream = stream.map(function1);
-        CompletableFuture[] completableFutures = objectStream.toArray(intFunction);
-        CompletableFuture[] cfs = completableFutures;
+        CompletableFuture[] cfs = objectStream.toArray(intFunction);
         // 封装后无返回值，必须自己whenComplete()获取
         CompletableFuture.allOf(cfs).join();
 

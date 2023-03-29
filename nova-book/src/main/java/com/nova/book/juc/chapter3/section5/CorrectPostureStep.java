@@ -2,7 +2,9 @@ package com.nova.book.juc.chapter3.section5;
 
 import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @description: wait notify的正确姿势
@@ -20,6 +22,18 @@ class CorrectPostureStep {
 
     static boolean hasTakeout = false;
 
+    public static void main(String[] args) {
+        //versionOne();
+
+        //versionTwo();
+
+        //versionThree();
+
+        //versionFour();
+
+        versionFive();
+    }
+
     /**
      * 其它干活的线程，都要一直阻塞，效率太低
      * 小男线程必须睡足2后才能醒来，就算烟提前送到，也无法立刻醒来
@@ -27,8 +41,7 @@ class CorrectPostureStep {
      * synchronized就好像main线程是翻窗户进来的
      * 解决方法，使用wait - notify
      */
-    @Test
-    public void one() {
+    public static void versionOne() {
         new Thread(() -> {
             synchronized (room) {
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -61,11 +74,8 @@ class CorrectPostureStep {
 
     /**
      * 解决了其它干活的线程阻塞的问题，但如果有其它线程也在等待条件呢？
-     *
-     * @throws InterruptedException
      */
-    @Test
-    public void two() throws InterruptedException {
+    public static void versionTwo() {
         new Thread(() -> {
             synchronized (room) {
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -104,11 +114,8 @@ class CorrectPostureStep {
 
     /**
      * 用notifyAll仅解决某个线程的唤醒问题，但使用if + wait判断仅有一次机会，一旦条件不成立，就没有重新判断的机会了
-     *
-     * @throws InterruptedException
      */
-    @Test
-    public void three() throws InterruptedException {
+    public static void versionThree() {
         new Thread(() -> {
             synchronized (room) {
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -163,11 +170,8 @@ class CorrectPostureStep {
     /**
      * 完美方案
      * 用while + wait，当条件不成立，再次wait
-     *
-     * @param args
-     * @throws InterruptedException
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void versionFour() {
         new Thread(() -> {
             synchronized (room) {
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -218,4 +222,82 @@ class CorrectPostureStep {
             }
         }, "外卖员").start();
     }
+
+    static ReentrantLock ROOM = new ReentrantLock();
+
+    /**
+     * 等待烟的休息室
+     */
+    static Condition waitCigaretteSet = ROOM.newCondition();
+
+    /**
+     * 等外卖的休息室
+     */
+    static Condition waitTakeoutSet = ROOM.newCondition();
+
+    /**
+     * 进阶版：ReentrantLock + Condition
+     */
+    public static void versionFive() {
+        new Thread(() -> {
+            ROOM.lock();
+            try {
+                log.debug("有烟没？[{}]", hasCigarette);
+                while (!hasCigarette) {
+                    log.debug("没烟，先歇会！");
+                    try {
+                        waitCigaretteSet.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                log.debug("有烟没？[{}]", hasCigarette);
+                log.debug("可以开始干活了");
+            } finally {
+                ROOM.unlock();
+            }
+        }, "小男").start();
+
+        new Thread(() -> {
+            ROOM.lock();
+            try {
+                log.debug("外卖送到没？[{}]", hasTakeout);
+                while (!hasTakeout) {
+                    log.debug("没外卖，先歇会！");
+                    try {
+                        waitTakeoutSet.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                log.debug("外卖送到没？[{}]", hasTakeout);
+                log.debug("可以开始干活了");
+            } finally {
+                ROOM.unlock();
+            }
+        }, "小女").start();
+
+        Threads.sleep(1000);
+        new Thread(() -> {
+            ROOM.lock();
+            try {
+                hasTakeout = true;
+                waitTakeoutSet.signal();
+            } finally {
+                ROOM.unlock();
+            }
+        }, "外卖员").start();
+
+        Threads.sleep(1000);
+        new Thread(() -> {
+            ROOM.lock();
+            try {
+                hasCigarette = true;
+                waitCigaretteSet.signal();
+            } finally {
+                ROOM.unlock();
+            }
+        }, "送烟员").start();
+    }
+
 }

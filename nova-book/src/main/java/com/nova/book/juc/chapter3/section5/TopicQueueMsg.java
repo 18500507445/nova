@@ -10,11 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.LinkedList;
 
 /**
- * @description: 例子：生产者、消费者
+ * @description: 面试题：生产者，消费者（队列实现）
  * @author: wzh
  * @date: 2023/3/27 10:08
  */
-public class ProductAndConsumer {
+class TopicQueueMsg {
 
     public static void main(String[] args) {
         MessageQueue queue = new MessageQueue(2);

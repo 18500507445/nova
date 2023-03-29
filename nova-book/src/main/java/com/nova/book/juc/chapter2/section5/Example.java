@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 @Slf4j
 class Example {
 
-
     static int r = 0;
 
     static int r1 = 0;
@@ -123,6 +122,11 @@ class TwoPhaseTermination {
     private Thread monitor;
 
     /**
+     * 升级版，标识
+     */
+    private volatile boolean stop = false;
+
+    /**
      * 开启
      */
     public void start() {
@@ -155,5 +159,23 @@ class TwoPhaseTermination {
         monitor.interrupt();
     }
 
+    public void startPro() {
+        monitor = new Thread(() -> {
+            while (true) {
+                if (stop) {
+                    log.debug("料理后事stop");
+                    break;
+                }
+                log.debug("执行监控记录");
+                Threads.sleep(1);
+            }
+        });
+        monitor.start();
+    }
+
+    public void stopPro() {
+        stop = true;
+        monitor.interrupt();
+    }
 
 }

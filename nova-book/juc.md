@@ -237,7 +237,7 @@ t线程等待时间超过了n毫秒，或调用obj.notify()，obj.notifyAll()，
 竞争锁失败，t线程从TIMED_WAITING-->BLOCKED  
 
 - 情况6 RUNNABLE<-->TIMED_WAITING
-> 当前线程调用t.join(longn)方法时，当前线程从RUNNABLE-->TIMED_WAITING  
+> 当前线程调用t.join(long n)方法时，当前线程从RUNNABLE-->TIMED_WAITING  
 注意是当前线程在t线程对象的监视器上等待  
 当前线程等待时间超过了n毫秒，或t线程运行结束，或调用了当前线程的interrupt()时，当前线程从TIMED_WAITING-->RUNNABLE  
 
@@ -266,8 +266,8 @@ t线程等待时间超过了n毫秒，或调用obj.notify()，obj.notifyAll()，
 
 相对于synchronized都支持可重入，还具备以下特点
 - 可中断
-- 可以设置超时时间
-- 可以设置为公平锁
+- 可设置超时时间
+- 可设置为公平锁
 - 支持多个条件变量
 
 ~~~java
@@ -280,3 +280,34 @@ try {
     reentrantLock.unlock();
 }
 ~~~
+
+
+### 4. 共享模型之内存
+#### 4.1 Java内存模型
+JMM即JavaMemoryModel，它定义了主存、工作内存抽象概念，底层对应着CPU寄存器、缓存、硬件内存、CPU指令优化等
+> JMM体现在以下几个方面  
+原子性 - 保证指令不会受到线程上下文切换的影响  
+可见性 - 保证指令不会受cpu缓存的影响  
+有序性 - 保证指令不会受cpu指令并行优化的影响
+
+指令重排：参照Jvm.ConcurrencyTest
+
+单例模式学习：参照Design.singleton
+
+### 5. 共享模型之无锁
+#### 5.1 CAS与volatile
+CAS的特点
+
+结合CAS和volatile可以实现无锁并发，适用于线程数少、多核CPU的场景下。  
+>（1）CAS是基于乐观锁的思想：最乐观的估计，不怕别的线程来修改共享变量，就算改了也没关系，我吃亏点再重试呗。  
+（2）synchronized是基于悲观锁的思想：最悲观的估计，得防着其它线程来修改共享变量，我上了锁你们都别想改，我改完了解开锁，你们才有机会。  
+（3）CAS体现的是无锁并发、无阻塞并发，请仔细体会这两句话的意思
+> - 因为没有使用synchronized，所以线程不会陷入阻塞，这是效率提升的因素之一
+> - 但如果竞争激烈，可以想到重试必然频繁发生，反而效率会受影响
+
+### 6. 共享模型之不可变
+#### 6.1 日期转换问题
+例子-DateSafe
+
+#### 6.2 不可变设计
+基本数据类型包装类、String串池、BigDecimal、例子（数据库连接池）

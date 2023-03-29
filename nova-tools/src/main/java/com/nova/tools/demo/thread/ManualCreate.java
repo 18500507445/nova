@@ -3,10 +3,10 @@ package com.nova.tools.demo.thread;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.PostConstruct;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.concurrent.*;
@@ -18,7 +18,7 @@ import java.util.concurrent.*;
  * @date: 2021/3/31 11:13
  * web:https://www.freesion.com/article/32671046670/
  */
-@Slf4j
+@Slf4j(topic = "ManualCreate")
 public class ManualCreate {
 
     /**
@@ -67,25 +67,21 @@ public class ManualCreate {
 
     private static final BlockingQueue<Integer> QUEUE = new LinkedBlockingQueue<>();
 
-    @PostConstruct
-    public void init() {
-        start();
-        process();
+    public static void main(String[] args) {
+        final ManualCreate manualCreate = new ManualCreate();
+        manualCreate.start();
+        manualCreate.process();
     }
 
     public void start() {
-        try {
-            if (StringUtils.isBlank(IP)) {
-                log.error("未获取到主机ip地址");
-                return;
-            }
-            //todo 可做解锁ip处理 情景举例：一个任务执行失败了，扔到重试表里，重试表有个locker字段，定时任务一直扫表，哪台机器哪个线程抢到任务locker放ip，然后当任务被线程处理，locker清除ip
-            System.out.println("模拟:清除该ip锁定的任务后,睡眠2s");
-            Thread.sleep(1000 * 2);
-        } catch (InterruptedException e) {
-            log.error(e.getMessage());
+        if (StringUtils.isBlank(IP)) {
+            log.debug("未获取到主机ip地址");
             return;
         }
+        //todo 可做解锁ip处理 情景举例：一个任务执行失败了，扔到重试表里，重试表有个locker字段，定时任务一直扫表，哪台机器哪个线程抢到任务locker放ip，然后当任务被线程处理，locker清除ip
+        System.out.println("模拟:清除该ip锁定的任务后,睡眠2s");
+        Threads.sleep(2000);
+
         System.out.println("------------准备处理业务------------");
         SERVICE.submit(new RetryTask());
     }
@@ -106,13 +102,13 @@ public class ManualCreate {
                     System.out.println("------------允许TASK个数：" + taskNum);
 
                     if (taskNum == 0) {
-                        TimeUnit.SECONDS.sleep(1);
-                        continue;
+                        Threads.sleep(1000);
+                        break;
                     }
 
                     if (taskNum > 0) {
                         //todo 比如根据taskNum 锁定重试任务表 where locker = ip limit taskNum
-                        System.out.println("获取业务，处理业务的机器为：" + IP + "时间:" + DateUtil.now());
+                        System.out.println("获取业务，处理业务的机器为：" + IP + "，时间:" + DateUtil.now());
                     }
 
                     //QUEUE.put() 处理实体类

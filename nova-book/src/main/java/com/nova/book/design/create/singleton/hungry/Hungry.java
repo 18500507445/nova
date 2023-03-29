@@ -26,4 +26,11 @@ public class Hungry {
         return instance;
     }
 
+    /**
+     * 类方法
+     */
+    public void process() {
+
+    }
+
 }

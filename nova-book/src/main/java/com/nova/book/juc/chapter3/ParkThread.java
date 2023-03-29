@@ -8,7 +8,7 @@ import java.util.concurrent.locks.LockSupport;
 /**
  * @description: LockSupport.park对比
  * 与Object的wait&notify相比
- * (1)wait，notify 和 notifyAll 必须配合 Object Monitor一起使用，而park，unPark不必
+ * (1)wait，notify 和 notifyAll 必须配合 Object Monitor一起使用，而park/unPark不必
  * (2)park&unPark是以线程为单位来【阻塞】和【唤醒】线程，而notify只能随机唤醒一个等待线程，notifyAll是唤醒所有等待线程，就不那么【精确】
  * (3)park&unPark可以先unPark，而wait&notify不能先notify
  * @author: wzh

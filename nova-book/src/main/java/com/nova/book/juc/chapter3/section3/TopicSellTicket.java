@@ -8,12 +8,12 @@ import java.util.Random;
 import java.util.Vector;
 
 /**
- * @description: 售票练习
+ * @description: 面试题：售票
  * @author: wzh
  * @date: 2023/3/26 10:02
  */
-@Slf4j(topic = "ExerciseSell")
-public class ExerciseSell {
+@Slf4j(topic = "TopicSellTicket")
+public class TopicSellTicket {
 
     public static void main(String[] args) throws InterruptedException {
         // 模拟多人买票

@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Random;
 
 /**
- * @description: 转账练习
+ * @description: 面试题：转账
  * @author: wzh
  * @date: 2023/3/26 10:14
  */
-@Slf4j(topic = "ExerciseTransfer")
-public class ExerciseTransfer {
+@Slf4j(topic = "TopicTransfer")
+public class TopicTransfer {
 
     /**
      * Random是线程安全

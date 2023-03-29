@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Slf4j
+@Slf4j(topic = "BatchRequest")
 public class BatchRequest {
 
     /**

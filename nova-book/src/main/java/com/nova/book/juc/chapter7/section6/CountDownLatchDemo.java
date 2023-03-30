@@ -1,5 +1,7 @@
 package com.nova.book.juc.chapter7.section6;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
 import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,9 +24,9 @@ class CountDownLatchDemo {
 
         //simple();
 
-        //threadPool();
+        threadPool();
 
-        game();
+        //game();
     }
 
     /**
@@ -69,6 +71,7 @@ class CountDownLatchDemo {
      * 应用场景：(1)数据库查询不同表进行组装数据   (2)http调用不同接口进行组装数据
      */
     private static void threadPool() {
+        final TimeInterval timer = DateUtil.timer();
         ExecutorService service = Executors.newFixedThreadPool(4);
         CountDownLatch latch = new CountDownLatch(3);
         service.submit(() -> {
@@ -93,11 +96,13 @@ class CountDownLatchDemo {
             try {
                 log.debug("waiting...");
                 latch.await();
-                log.debug("wait end...");
+                log.debug("wait end...  共耗时:{}ms", timer.interval());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
+
+        service.shutdown();
     }
 
     /**
@@ -136,7 +141,4 @@ class CountDownLatchDemo {
         service.shutdown();
     }
 
-    /**
-     *
-     */
 }

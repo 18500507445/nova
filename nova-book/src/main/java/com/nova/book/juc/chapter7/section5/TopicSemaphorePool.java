@@ -1,4 +1,4 @@
-package com.nova.book.juc.chapter6.section2;
+package com.nova.book.juc.chapter7.section5;
 
 import com.nova.common.utils.thread.Threads;
 import lombok.AllArgsConstructor;
@@ -10,32 +10,28 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
- * @description: 享元模式-自定义数据库连接池
+ * @description:
  * @author: wzh
- * @date: 2023/3/29 15:33
+ * @date: 2023/3/30 22:22
  */
-public class TopicCustomPool {
+class TopicSemaphorePool {
 
     public static void main(String[] args) {
-        Pool pool = new Pool(3);
-        for (int i = 0; i < 6; i++) {
+        Pool pool = new Pool(2);
+        for (int i = 0; i < 4; i++) {
             new Thread(() -> {
                 Connection conn = pool.borrow();
-
                 Threads.sleep(new Random().nextInt(1000));
-
                 pool.free(conn);
             }).start();
         }
     }
 }
 
-/**
- * 学习完第7章第五节，可以用Semaphore优化
- */
 @Slf4j(topic = "Pool")
 class Pool {
 
@@ -54,15 +50,21 @@ class Pool {
      */
     private final AtomicIntegerArray states;
 
+    private final Semaphore semaphore;
+
     /**
      * 4. 构造方法初始化
+     *
+     * @param poolSize
      */
     public Pool(int poolSize) {
         this.poolSize = poolSize;
+        // 让许可数与资源数一致
+        this.semaphore = new Semaphore(poolSize);
         this.connections = new Connection[poolSize];
         this.states = new AtomicIntegerArray(new int[poolSize]);
         for (int i = 0; i < poolSize; i++) {
-            connections[i] = new MockConnection("连接：" + (i + 1));
+            connections[i] = new MockConnection("连接" + (i + 1));
         }
     }
 
@@ -71,27 +73,24 @@ class Pool {
      *
      * @return
      */
-    public Connection borrow() {
-        while (true) {
-            for (int i = 0; i < poolSize; i++) {
-                // 获取空闲连接
-                if (states.get(i) == 0) {
-                    if (states.compareAndSet(i, 0, 1)) {
-                        log.debug("borrow {}", connections[i]);
-                        return connections[i];
-                    }
-                }
-            }
-            // 如果没有空闲连接，当前线程进入等待
-            synchronized (this) {
-                try {
-                    log.debug("wait...");
-                    this.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+    public Connection borrow() {// t1, t2, t3
+        // 获取许可
+        try {
+            semaphore.acquire(); // 没有许可的线程，在此等待
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < poolSize; i++) {
+            // 获取空闲连接
+            if (states.get(i) == 0) {
+                if (states.compareAndSet(i, 0, 1)) {
+                    log.debug("borrow {}", connections[i]);
+                    return connections[i];
                 }
             }
         }
+        // 不会执行到这里
+        return null;
     }
 
     /**
@@ -103,10 +102,8 @@ class Pool {
         for (int i = 0; i < poolSize; i++) {
             if (connections[i] == conn) {
                 states.set(i, 0);
-                synchronized (this) {
-                    log.debug("free {}", conn);
-                    this.notifyAll();
-                }
+                log.debug("free {}", conn);
+                semaphore.release();
                 break;
             }
         }
@@ -117,7 +114,7 @@ class Pool {
 @AllArgsConstructor
 class MockConnection implements Connection {
 
-    private String name;
+    private final String name;
 
     @Override
     public Statement createStatement() throws SQLException {

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 线程池工厂
@@ -51,9 +53,22 @@ class SectionTest3 {
     /**
      * 周期性执行任务的线程池
      */
-    @Test
-    public void demoD() {
-        ExecutorService executorService = Executors.newScheduledThreadPool(8);
+    public static void main(String[] args) {
+        ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
+        log.debug("开始");
+        //延时执行
+        pool.schedule(() -> {
+            log.debug("task1");
+        }, 1, TimeUnit.SECONDS);
+
+        pool.schedule(() -> {
+            log.debug("task2");
+        }, 1, TimeUnit.SECONDS);
+
+        //定时执行
+        pool.scheduleAtFixedRate(() -> {
+            log.debug("task3");
+        }, 1, 1, TimeUnit.SECONDS);
     }
 
 }

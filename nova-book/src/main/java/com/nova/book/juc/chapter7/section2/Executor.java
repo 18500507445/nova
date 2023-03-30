@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @description: 线程池demo
@@ -28,10 +27,11 @@ class Executor {
 
         //submit();
 
-        invokeAll();
+        //invokeAll();
 
         //invokeAny();
 
+        shutDown();
 
     }
 
@@ -135,5 +135,36 @@ class Executor {
             e.printStackTrace();
         }
         log.debug("先执行完的结果：{}", result);
+    }
+
+    public static void shutDown() {
+        Future<Integer> result1 = pool.submit(() -> {
+            log.debug("task 1 running...");
+            Threads.sleep(1000);
+            log.debug("task 1 finish...");
+            return 1;
+        });
+
+        Future<Integer> result2 = pool.submit(() -> {
+            log.debug("task 2 running...");
+            Threads.sleep(1000);
+            log.debug("task 2 finish...");
+            return 2;
+        });
+
+        Future<Integer> result3 = pool.submit(() -> {
+            log.debug("task 3 running...");
+            Threads.sleep(1000);
+            log.debug("task 3 finish...");
+            return 3;
+        });
+
+        log.debug("shutdown");
+
+        pool.shutdown();
+
+        //pool.awaitTermination(3, TimeUnit.SECONDS);
+
+        //log.debug("other.... {}", pool.shutdownNow());
     }
 }

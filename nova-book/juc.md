@@ -354,3 +354,21 @@ void shutdown();
  */
 List<Runnable> shutdownNow();
 ~~~
+
+线程池创建多少线程合适
+> CPU密集型运算：数据分析  
+I/O密集型运算：I/O操作、远程PRC调用、数据库操作。公式--> 线程数 = 核数 * 期望cpu利用率 * 总时间（CPU计算时间+等待时间）/ CPU计算时间  
+例如：4核CPU计算时间是10%，其它等待时间是90%，期望cpu被100%利用，套用公式
+4* 100% * 100% / 10% = 40
+
+#### 7.3 AQS原理、ReentrantLock原理
+全称是AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架
+> 用state属性来表示资源的状态（分独占模式和共享模式），子类需要定义如何维护这个状态，控制如何获取锁和释放锁
+
+#### 7.4 读写锁
+ReentrantReadWriteLock
+
+Jdk8进一步优化，加入StampedLock
+
+#### 7.5 Semaphore-信号量
+像一个停车场，permits就好像停车位数量，当线程获得了permits 就像是获得了停车位，然后停车场显示空余车位减一

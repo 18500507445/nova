@@ -14,7 +14,7 @@ import java.util.concurrent.*;
  * @author: wzh
  * @date: 2022/3/31 10:38
  */
-public class ThreadPoolDemo {
+class ThreadPoolDemo {
 
     /**
      * 线程数

@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
  * @author: wzh
  * @date: 2022/11/18 15:11
  */
-public class LockExample {
+class LockExample {
 
     private static final int NUM_INCREMENTS = 10000;
 

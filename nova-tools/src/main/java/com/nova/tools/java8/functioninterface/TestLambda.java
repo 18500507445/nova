@@ -8,7 +8,7 @@ package com.nova.tools.java8.functioninterface;
  * @date: 2021/4/20 20:58
  */
 
-public class TestLambda {
+class TestLambda {
 
     //3.静态内部类
     static class Like2 implements ILike {

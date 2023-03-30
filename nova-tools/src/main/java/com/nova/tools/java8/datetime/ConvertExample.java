@@ -11,7 +11,7 @@ import java.util.Date;
  * @author wzh
  * @date 2018/3/3
  */
-public class ConvertExample {
+class ConvertExample {
 
     /**
      * LocalDate -> Date
@@ -20,7 +20,7 @@ public class ConvertExample {
      * @return
      */
     @Test
-    public void toDate(LocalDate localDate) {
+    void toDate(LocalDate localDate) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDate.atStartOfDay().atZone(zone).toInstant();
         Date from = Date.from(instant);
@@ -34,7 +34,7 @@ public class ConvertExample {
      * @return
      */
     @Test
-    public void toDate(LocalDateTime localDateTime) {
+    void toDate(LocalDateTime localDateTime) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
         Date from = Date.from(instant);
@@ -48,7 +48,7 @@ public class ConvertExample {
      * @return
      */
     @Test
-    public void toDate(LocalTime localTime) {
+    void toDate(LocalTime localTime) {
         LocalDate localDate = LocalDate.now();
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
         ZoneId zone = ZoneId.systemDefault();
@@ -64,7 +64,7 @@ public class ConvertExample {
      * @return
      */
     @Test
-    public void toLocalDate(Date date) {
+    void toLocalDate(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
@@ -79,7 +79,7 @@ public class ConvertExample {
      * @return
      */
     @Test
-    public void toLocalDateTime(Date date) {
+    void toLocalDateTime(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
@@ -93,7 +93,7 @@ public class ConvertExample {
      * @return
      */
     @Test
-    public void toLocalTime(Date date) {
+    void toLocalTime(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);

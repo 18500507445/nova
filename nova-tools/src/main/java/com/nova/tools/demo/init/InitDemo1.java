@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
  * @author: wzh
  * @date: 2022/10/11 10:35
  */
-public class InitDemo1 {
+class InitDemo1 {
 
     /**
      * 如何在程序启动时 初始化数据或执行其它业务
@@ -16,7 +16,7 @@ public class InitDemo1 {
      * 例如：加载数据库中的数据字典缓存到redis中
      */
     @PostConstruct
-    public void init() {
+    void init() {
         System.out.println("[注解@PostConstruct] 初始化");
     }
 }

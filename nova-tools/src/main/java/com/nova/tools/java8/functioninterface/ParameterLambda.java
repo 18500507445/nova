@@ -6,7 +6,7 @@ package com.nova.tools.java8.functioninterface;
  * @date: 2021/4/20 21:14
  */
 
-public class ParameterLambda {
+class ParameterLambda {
 
     public static void main(String[] args) {
         ILove love;

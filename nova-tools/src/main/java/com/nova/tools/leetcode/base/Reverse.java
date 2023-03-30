@@ -8,20 +8,20 @@ import org.junit.jupiter.api.Test;
  * @date: 2021/2/23 17:13
  */
 
-public class Reverse {
+class Reverse {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         int x = 1001;
         System.out.println(calculation(x));
     }
 
     @Test
-    public void demoC() {
+    void demoC() {
         boolean palindrome = isPalindrome(5665);
         System.out.println("palindrome = " + palindrome);
     }
 
-    public boolean isPalindrome(int x) {
+    boolean isPalindrome(int x) {
         if (x < 0) {
             return false;
         }
@@ -34,7 +34,7 @@ public class Reverse {
         return sum == a;
     }
 
-    public static int calculation(int x) {
+    static int calculation(int x) {
         int result;
         try {
             StringBuilder sb = new StringBuilder();

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/2/13 18:06
  */
-public class LombokTest {
+class LombokTest {
 
     @Data
     static class DemoA {

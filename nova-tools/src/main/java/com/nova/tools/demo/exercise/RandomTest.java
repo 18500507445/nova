@@ -13,7 +13,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/1/21 20:43
  */
-public class RandomTest {
+class RandomTest {
 
     public static int sum1, sum2, sum3 = 0;
 

@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  * @author: wzh
  * @date: 2022/11/18 15:15
  */
-public class SynchronizedDemo {
+class SynchronizedDemo {
 
     private static final int NUM_INCREMENTS = 10000;
 

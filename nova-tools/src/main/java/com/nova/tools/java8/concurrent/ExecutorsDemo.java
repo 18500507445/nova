@@ -11,7 +11,7 @@ import java.util.concurrent.*;
  * @author: wzh
  * @date: 2022/11/18 15:05
  */
-public class ExecutorsDemo {
+class ExecutorsDemo {
 
     ExecutorService EXECUTOR_ONE = Executors.newFixedThreadPool(1);
 

@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
  * @date: 2021/3/31 14:33
  */
 
-public class SemaphoreTest {
+class SemaphoreTest {
 
     public static void main(String[] args) throws InterruptedException {
         //饭店里只用两个洗手池，所以初始化许可证的总数为2。

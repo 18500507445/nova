@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * @author wangzehui 字符串练习
  * @date 2018/9/10 17:34
  */
-public class StringExercise {
+class StringExercise {
 
     private static String seatCode = Myself.SEAT_CODE;
 

@@ -6,8 +6,8 @@ package com.nova.tools.leetcode;
  * @date: 2021/2/25 11:14
  */
 
-public class StringTest {
-    public static void main(String[] args) {
+class StringTest {
+    static void main(String[] args) {
         System.out.println(ip4Invalid());
     }
 
@@ -20,7 +20,7 @@ public class StringTest {
      * 不同点：replaceAll支持正则表达式，因此会对参数进行解析（两个参数均是），如replaceAll("\d", “")，而replace则不会，replace("\d","”)就是替换"\d"的字符串，而不会解析为正则
      * @return
      */
-    public static String ip4Invalid() {
+    static String ip4Invalid() {
         String address = "1.1.1.1";
         return address.replace("\\.", "[.]");
     }

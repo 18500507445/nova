@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
  * @author wzh
  * @date 2018/3/3
  */
-public class DurationExample {
+class DurationExample {
 
     @Test
-    public void demoA() throws InterruptedException {
+    void demoA() throws InterruptedException {
         // 创建Duration实例
         Instant first = Instant.now();
         Thread.sleep(3000);

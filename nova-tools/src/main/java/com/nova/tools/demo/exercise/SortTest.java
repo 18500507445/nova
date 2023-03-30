@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author: wzh
  * @date: 2019/4/18 17:04
  */
-public class SortTest {
+class SortTest {
 
     /**
      * 合并数组

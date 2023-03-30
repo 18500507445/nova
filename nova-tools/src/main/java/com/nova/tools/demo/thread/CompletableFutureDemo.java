@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  * @description: CompletableFutureDemo
  * @author: wzh
  */
-public class CompletableFutureDemo {
+class CompletableFutureDemo {
 
     public static void main(String[] args) {
         TimeInterval timer = DateUtil.timer();

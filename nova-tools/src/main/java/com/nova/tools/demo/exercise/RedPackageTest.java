@@ -11,7 +11,7 @@ import java.util.Random;
  * @author: wzh
  * @date: 2023/1/21 20:44
  */
-public class RedPackageTest {
+class RedPackageTest {
 
     /**
      * 剩余金额随机法

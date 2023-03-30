@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @date 2018/10/19 13:47
  */
 
-public class ObjTest {
+class ObjTest {
 
     @Test
     public void testObj() {

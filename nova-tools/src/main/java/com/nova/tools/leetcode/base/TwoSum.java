@@ -9,12 +9,12 @@ import java.util.Map;
  * @date: 2020/6/16 13:38
  */
 
-public class TwoSum {
+class TwoSum {
     private static int[] nums = {2, 6, 7, 4, 10, 8};
 
     private static int target = 8;
 
-    public static int[] twoSum(int[] nums, int target) {
+    static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>(16);
         for (int i = 0; i < nums.length; i++) {
             int complement = target - nums[i];
@@ -26,7 +26,7 @@ public class TwoSum {
         throw new IllegalArgumentException("No two sum solution");
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         int[] ints = twoSum(nums, target);
         for (int anInt : ints) {
             System.out.println(anInt);

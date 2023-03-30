@@ -10,7 +10,7 @@ import java.util.Scanner;
  * 2014年度（2014年7月1日至2015年6月30日）住房公积金缴存比例为12%。
  * 五险一金缴纳比例是按年度计算的，通常一个年度横跨两个年份，因此，以上2014年北京五险一金缴纳比例相关介绍，仅仅适合2014年7月1日以后的缴费计算，至于2014年7月1日之前的缴纳比例
  */
-public class RealWages {
+class RealWages {
 
     static final double BASE = 5000;
 

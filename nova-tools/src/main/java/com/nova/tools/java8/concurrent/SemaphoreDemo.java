@@ -14,11 +14,11 @@ import java.util.stream.IntStream;
  * @author: wzh
  * @date: 2022/11/18 15:15
  */
-public class SemaphoreDemo {
+class SemaphoreDemo {
 
     private static final int NUM_INCREMENTS = 10000;
 
-    private static Semaphore semaphore = new Semaphore(1);
+    private static final Semaphore semaphore = new Semaphore(1);
 
     private static int count = 0;
 

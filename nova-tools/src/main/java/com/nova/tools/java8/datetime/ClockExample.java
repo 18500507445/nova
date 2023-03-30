@@ -11,13 +11,13 @@ import java.util.Date;
  * @author: wzh
  * @date: 2022/11/18 13:53
  */
-public class ClockExample {
+class ClockExample {
 
     /**
      * Clock 示例
      */
     @Test
-    public void demoA() {
+    void demoA() {
         Clock clock = Clock.systemDefaultZone();
         long millis = clock.millis();
         Instant instant = clock.instant();

@@ -3,13 +3,13 @@ package com.nova.tools.java8.completablefuture;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.NumberUtil;
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
 
 /**
- * @description:
- * 一.什么是CompletableFuture?
+ * @description: 一.什么是CompletableFuture?
  * 通俗的理解，CompletableFuture其实是一个线程任务编排工具类，
  * 他里面提供不同的静态方法让开发人员比较方便的去提交任务和组织任务的执行关系以及聚合任务执行结果等等，
  * 他是在JDK1.8之后才有的(包含JDK1.8)。所以在这里你先记着他是一个工具类。
@@ -30,7 +30,7 @@ public class CompletableFutureExample {
     public void demoA() throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         Future<Integer> submit = executorService.submit(() -> {
-            TimeUnit.SECONDS.sleep(3);
+            Threads.sleep(2000);
             return 100;
         });
         try {
@@ -39,12 +39,10 @@ public class CompletableFutureExample {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+
+        //任务完成返回ture
         while (!submit.isDone()) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Threads.sleep(100);
         }
         Integer result = submit.get();
         System.out.println(result);

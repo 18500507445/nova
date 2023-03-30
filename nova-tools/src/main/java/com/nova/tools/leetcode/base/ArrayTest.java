@@ -12,9 +12,9 @@ import java.util.List;
  * @date: 2021/2/25 10:42
  */
 
-public class ArrayTest {
+class ArrayTest {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         List<Boolean> booleans = kidsWithCandies();
         System.out.println(JSONObject.toJSONString(booleans));
     }
@@ -27,7 +27,7 @@ public class ArrayTest {
      *
      * @return
      */
-    public static int numIdenticalPairs() {
+    static int numIdenticalPairs() {
         int[] nums = {1, 2, 3, 1, 1, 3};
         int a = 0;
         for (int i = 0; i < nums.length - 1; i++) {
@@ -48,7 +48,7 @@ public class ArrayTest {
      *
      * @return
      */
-    public static int maximumWealth() {
+    static int maximumWealth() {
         int[][] nums = {{4, 5, 6, 8}, {2, 3}, {1, 6, 9}};
         int max = 0;
         for (int[] num : nums) {
@@ -74,7 +74,7 @@ public class ArrayTest {
      * 给你一个数组candies和一个整数extraCandies，其中candies[i]代表第 i 个孩子拥有的糖果数目。
      * 对每一个孩子，检查是否存在一种方案，将额外的extraCandies个糖果分配给孩子们之后，此孩子有 最多的糖果。注意，允许有多个孩子同时拥有 最多的糖果数目。
      */
-    public static List<Boolean> kidsWithCandies() {
+    static List<Boolean> kidsWithCandies() {
         int[] candies = {2, 3, 5, 1, 3};
         int extraCandies = 3;
         int max = 0;

@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
  * @author: wzh
  * @date: 2022/11/17 20:15
  */
-public class NumberTest {
+class NumberTest {
 
     /**
      * 测试float

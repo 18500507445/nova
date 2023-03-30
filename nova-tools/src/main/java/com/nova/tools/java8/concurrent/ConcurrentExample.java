@@ -11,7 +11,7 @@ import java.util.concurrent.ForkJoinPool;
  * @author: wzh
  * @date: 2022/11/18 14:54
  */
-public class ConcurrentExample {
+class ConcurrentExample {
 
     @Test
     public void testReduce() {

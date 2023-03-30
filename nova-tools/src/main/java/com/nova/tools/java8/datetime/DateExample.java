@@ -11,13 +11,13 @@ import java.util.Locale;
  * @author: wzh
  * @date: 2022/11/18 14:06
  */
-public class DateExample {
+class DateExample {
 
     /**
      * DateTimeFormatter 示例
      */
     @Test
-    public void dateTimeFormatExample() {
+    void dateTimeFormatExample() {
         DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
         String formattedDate = formatter.format(LocalDate.now());
         String formattedZonedDate = formatter.format(ZonedDateTime.now());
@@ -57,7 +57,7 @@ public class DateExample {
     /**
      * LocalDate 示例
      */
-    public void localDateExample() {
+    void localDateExample() {
         // 创建一个LocalDate实例
         LocalDate localDate = LocalDate.now();
 
@@ -87,7 +87,7 @@ public class DateExample {
     /**
      * LocalDateTime 示例
      */
-    public void localDateTimeExample() {
+    void localDateTimeExample() {
         // 创建一个LocalDateTime实例
         LocalDateTime localDateTime = LocalDateTime.now();
 
@@ -108,7 +108,7 @@ public class DateExample {
     /**
      * LocalTime 示例
      */
-    public void localTimeExample() {
+    void localTimeExample() {
 
         // 创建一个LocalTime实例
         LocalTime localTime = LocalTime.now();

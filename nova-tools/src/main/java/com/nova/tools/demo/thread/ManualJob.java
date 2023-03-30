@@ -17,7 +17,7 @@ import java.util.concurrent.*;
  * @date: 2021/3/31 11:13
  */
 @Slf4j(topic = "ManualJob")
-public class ManualJob {
+class ManualJob {
 
     /**
      * 获取机器核数，作为线程池数量

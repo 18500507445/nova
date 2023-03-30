@@ -372,3 +372,5 @@ Jdk8进一步优化，加入StampedLock
 
 #### 7.5 Semaphore-信号量
 像一个停车场，permits就好像停车位数量，当线程获得了permits 就像是获得了停车位，然后停车场显示空余车位减一
+
+#### 7.6 CountDownLatch-倒计时锁

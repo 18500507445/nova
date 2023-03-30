@@ -10,10 +10,10 @@ import java.time.Instant;
  * @author wzh
  * @date 2018/3/2
  */
-public class InstantExample {
+class InstantExample {
 
     @Test
-    public void testA() {
+    void testA() {
         // 创建一个Instant实例
         Instant now = Instant.now();
 

@@ -7,7 +7,7 @@ import java.util.Properties;
  * @author wzh
  * @date 2018/2/11
  */
-public class OptionalDemo {
+class OptionalDemo {
 
     /**
      * 1. 创建 Optional

@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.*;
  * @author: wzh
  * @date: 2019/6/14 14:07
  */
-public class Java8ListDemo {
+class Java8ListDemo {
 
     public static final List<People> PEOPLE_LIST = Myself.EXERCISE_LIST;
 

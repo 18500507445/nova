@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  * @date: 2018/12/20 18:29
  */
 
-public class TimeTest {
+class TimeTest {
 
     @Test
     public void demoA() {

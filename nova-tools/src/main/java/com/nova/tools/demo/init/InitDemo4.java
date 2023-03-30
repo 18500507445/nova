@@ -8,9 +8,9 @@ import org.springframework.boot.SpringApplication;
  * @date: 2022/10/11 10:40
  */
 //@SpringBootApplication
-public class InitDemo4 {
+class InitDemo4 {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(InitDemo4.class, args);
         System.out.println("[main] 初始化");
     }

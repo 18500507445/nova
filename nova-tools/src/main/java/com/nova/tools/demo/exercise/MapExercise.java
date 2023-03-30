@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @author: wzh
  * @date: 2019/4/22 11:32
  */
-public class MapExercise {
+class MapExercise {
 
     /**
      * 初始化容量的影响

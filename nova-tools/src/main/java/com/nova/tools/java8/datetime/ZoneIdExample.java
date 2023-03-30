@@ -12,13 +12,13 @@ import java.util.TimeZone;
  * @author: wzh
  * @date: 2022/11/18 14:06
  */
-public class ZoneIdExample {
+class ZoneIdExample {
 
     /**
      * ZoneId 示例
      */
     @Test
-    public void zoneIdExample() {
+    void zoneIdExample() {
         // 获取系统默认时区
         ZoneId defaultZoneId = ZoneId.systemDefault();
         ZoneId shanghaiZoneId = ZoneId.of("Asia/Shanghai");
@@ -37,7 +37,7 @@ public class ZoneIdExample {
      * ZonedDateTime 示例
      */
     @Test
-    public void zonedDateTimeExample(){
+    void zonedDateTimeExample(){
         // 创建一个ZonedDateTime实例
         ZonedDateTime dateTime = ZonedDateTime.now();
 

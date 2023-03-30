@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/2/12 14:07
  */
-public class ResultTest {
+class ResultTest {
 
     public static final String RESULT = "测试";
 

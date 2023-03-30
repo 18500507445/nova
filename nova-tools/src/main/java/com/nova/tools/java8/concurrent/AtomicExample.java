@@ -13,11 +13,11 @@ import java.util.stream.IntStream;
  * @author: wzh
  * @date: 2022/11/18 14:49
  */
-public class AtomicExample {
+class AtomicExample {
 
     private static final int NUM_INCREMENTS = 1000;
 
-    private static AtomicInteger ATOMIC_INT = new AtomicInteger(0);
+    private static final AtomicInteger ATOMIC_INT = new AtomicInteger(0);
 
     @Test
     public void testUpdate() {

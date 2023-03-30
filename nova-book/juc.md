@@ -315,3 +315,42 @@ CAS的特点
 ### 7. 并发工具
 #### 7.1 自定义线程池
 ![自定义线程池](https://img-blog.csdnimg.cn/d91246cd84994c49b50096c66a327dce.png#pic_center)
+
+#### 7.2 ThreadPoolExecutor
+构造方法例子：ManualJob
+
+线程池工厂方法：chapter9.SectionTest3
+
+提交任务
+~~~java
+// 执行任务
+void execute(Runnable command);
+
+// 提交任务 task，用返回值 Future 获得任务执行结果
+<T> Future<T> submit(Callable<T> task);
+
+// 提交 tasks 中所有任务
+<T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks) throws InterruptedException;
+
+// 提交 tasks 中所有任务，带超时时间
+<T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks,long timeout, TimeUnit unit) throws InterruptedException;
+
+// 提交 tasks 中所有任务，哪个任务先成功执行完毕，返回此任务执行结果，其它任务取消
+<T> T invokeAny(Collection<? extends Callable<T>> tasks) throws InterruptedException, ExecutionException;
+
+// 提交 tasks 中所有任务，哪个任务先成功执行完毕，返回此任务执行结果，其它任务取消，带超时时间
+<T> T invokeAny(Collection<? extends Callable<T>> tasks,long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
+~~~
+
+关闭线程池
+~~~java
+/*
+ * 线程池状态变为 SHUTDOWN，不会接收新任务，但已提交任务会执行完，此方法不会阻塞调用线程的执行
+ */
+void shutdown();
+
+/*
+ * 线程池状态变为 STOP，不会接收新任务，会将队列中的任务返回，并用interrupt的方式中断正在执行的任务
+ */
+List<Runnable> shutdownNow();
+~~~

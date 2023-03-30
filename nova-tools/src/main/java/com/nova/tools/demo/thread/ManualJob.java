@@ -48,17 +48,17 @@ public class ManualJob {
 
     /**
      * @see <a href="https://blog.csdn.net/dodod2012/article/details/107464723</a>
-     * corePoolSize => 线程池核心线程数量
-     * maximumPoolSize => 线程池最大数量,必须大于等于1
-     * keepAliveTime => 空闲线程存活时间,当空闲时间到达此值,多余线程会被销毁到核心线程数量
-     * unit => 时间单位
-     * workQueue => 线程池所使用的缓冲队列,里面放了被提交但尚未被执行的任务
-     * threadFactory => 线程池创建线程使用的工厂
+     * corePoolSize => 线程池核心线程数（最多保留的线程数）
+     * maximumPoolSize => 最大线程数，（corePoolSize+救急线程数） = 最大线程数，必须大于等于1
+     * keepAliveTime => 救急线程-存活时间。当空闲时间到达此值，多余线程会被销毁到核心线程数量
+     * unit => 救急线程-时间单位
+     * workQueue => 线程池所使用的缓冲队列，里面放了被提交但尚未被执行的任务
+     * threadFactory => 线程池创建线程使用的工厂，可以创建名字
      * handler => 拒绝策略，当线程池最大数和队列都满了，对任务的拒绝方式
-     * (1)AbortPolicy:默认策略 抛出异常
-     * (2)DiscardPolicy:丢弃任务
-     * (3)DiscardOldestPolicy:丢弃队列最前面任务,执行该任务
-     * (4)CallerRunsPolicy:是不会丢弃任务，直接运行任务的run方法，即使用主线程执行任务
+     * (1)AbortPolicy：默认策略 抛出异常
+     * (2)DiscardPolicy：丢弃任务
+     * (3)DiscardOldestPolicy：丢弃队列最前面任务,执行该任务
+     * (4)CallerRunsPolicy：是不会丢弃任务，直接运行任务的run方法，即使用主线程执行任务
      */
     private static final ExecutorService SERVICE = new ThreadPoolExecutor(THREAD_COUNT, 10,
             0L, TimeUnit.MILLISECONDS,
@@ -78,16 +78,16 @@ public class ManualJob {
             return;
         }
         //todo 可做解锁ip处理 情景举例：一个任务执行失败了，扔到重试表里，重试表有个locker字段，定时任务一直扫表，哪台机器哪个线程抢到任务locker放ip，然后当任务被线程处理，locker清除ip
-        System.out.println("模拟:清除该ip锁定的任务后,睡眠2s");
+        System.out.println("模拟：清除该ip锁定的任务后,睡眠2s");
         Threads.sleep(2000);
 
         System.out.println("------------准备处理业务------------");
-        SERVICE.submit(new RetryTask());
+        SERVICE.execute(new RetryTask());
     }
 
     public void process() {
         for (int i = 0; i < THREAD_COUNT; i++) {
-            SERVICE.submit(new Task());
+            SERVICE.execute(new Task());
         }
     }
 
@@ -107,7 +107,7 @@ public class ManualJob {
 
                     if (taskNum > 0) {
                         //todo 比如根据taskNum 锁定重试任务表 where locker = ip limit taskNum
-                        System.out.println("获取业务，处理业务的机器为：" + IP + "，时间:" + DateUtil.now());
+                        System.out.println("获取业务，处理业务的机器为：" + IP + "，时间：" + DateUtil.now());
                     }
 
                     //QUEUE.put() 处理实体类
@@ -118,7 +118,7 @@ public class ManualJob {
                 } catch (Exception e) {
                     log.error(e.getMessage());
                 } finally {
-                    log.debug("休眠时间:" + DateUtil.now());
+                    log.debug("休眠时间：" + DateUtil.now());
                 }
             }
         }

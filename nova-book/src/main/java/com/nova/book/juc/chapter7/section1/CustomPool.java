@@ -1,4 +1,4 @@
-package com.nova.book.juc.chapter7;
+package com.nova.book.juc.chapter7.section1;
 
 import com.nova.common.utils.thread.Threads;
 import lombok.Data;

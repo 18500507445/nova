@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @description:
+ * @description: 倒计时锁（类比join）
  * @author: wzh
  * @date: 2023/3/30 22:35
  */

@@ -139,12 +139,8 @@ public class CompletableFutureExample {
     @Test
     public void demoG() throws ExecutionException, InterruptedException {
         CompletableFuture.supplyAsync(() -> {
-            try {
-                System.out.println("开始执行了");
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            System.out.println("开始执行了");
+            Threads.sleep(2000);
             return 9999;
         }).thenRun(() -> {
             System.out.println("执行结束了");
@@ -166,8 +162,7 @@ public class CompletableFutureExample {
                         System.out.println("a =" + a);
                         System.out.println("b =" + b);
                         return a + b;
-                    })
-                    .get();
+                    }).get();
             System.out.println(s);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -175,8 +170,9 @@ public class CompletableFutureExample {
     }
 
     /**
-     * @throws ExecutionException
-     * @throws InterruptedException
+     * 将已经完成任务的执行结果作为方法入参，但是无返回值
+     * <p>
+     * 区别：applyToEither会将已经完成任务的执行结果作为所提供函数的参数，且该方法有返回值；acceptEither同样将已经完成任务的执行结果作为方法入参，但是无返回值；runAfterEither没有入参，也没有返回值。
      */
     @Test
     public void demoI() throws ExecutionException, InterruptedException {
@@ -189,79 +185,58 @@ public class CompletableFutureExample {
     /**
      * anyOf:m1和m2任务只要有一个异步线程完成就触发
      * allOf：都完成再触发
-     *
-     * @throws ExecutionException
-     * @throws InterruptedException
      */
     @Test
     public void demoJ() throws ExecutionException, InterruptedException {
         TimeInterval timer = DateUtil.timer();
         CompletableFuture.anyOf(m1(), m2())
                 .thenRun(() -> {
-                    System.out.println("anyOf：" + timer.interval());
+                    System.out.println("anyOf：" + timer.interval() + " ms");
                 }).get();
 
         timer.restart();
         CompletableFuture.allOf(m1(), m2())
                 .thenRun(() -> {
-                    System.out.println("allOf：" + timer.interval());
+                    System.out.println("allOf：" + timer.interval() + " ms");
                 }).get();
     }
 
     /***
      * 多个线程 数据合并取结果
-     * @throws ExecutionException
-     * @throws InterruptedException
      */
     @Test
     public void demoK() throws ExecutionException, InterruptedException {
         TimeInterval timer = DateUtil.timer();
-        CompletableFuture<Integer> a = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture<Integer> task1 = CompletableFuture.supplyAsync(() -> {
             int sum = 0;
             for (int i = 0; i < 10000; i++) {
                 sum = sum + i;
             }
             return sum;
         });
-        CompletableFuture<Integer> b = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture<Integer> task2 = CompletableFuture.supplyAsync(() -> {
             int sum = 0;
             for (int i = 10000; i < 20000; i++) {
                 sum = sum + i;
             }
             return sum;
         });
-        CompletableFuture.allOf(a, b).join();
-        int one = a.get();
-        int two = b.get();
+        CompletableFuture.allOf(task1, task2).join();
+        int one = task1.get();
+        int two = task2.get();
         System.out.println("结果：" + NumberUtil.add(one + two) + "，耗时：" + timer.interval() + "ms");
-
-        timer.restart();
-        int sum = 0;
-        for (int i = 0; i < 20000; i++) {
-            sum = sum + i;
-        }
-        System.out.println("结果：" + sum + "，耗时：" + timer.interval() + "ms");
-
     }
 
     private static CompletableFuture<Integer> m1() {
         return CompletableFuture.supplyAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Threads.sleep(1000);
             return 2333;
         });
     }
 
     private static CompletableFuture<Integer> m2() {
         return CompletableFuture.supplyAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Threads.sleep(2000);
             return 8877;
         });
     }

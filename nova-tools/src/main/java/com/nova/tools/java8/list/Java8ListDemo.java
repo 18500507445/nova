@@ -271,7 +271,6 @@ class Java8ListDemo {
         //并行的情况，那就不能确保是第一个，串行时数据较少findAny()是为了更高效
         People any = PEOPLE_LIST.stream().findAny().get();
         System.out.println("findAny:" + JSONUtil.toJsonStr(any));
-
     }
 
 

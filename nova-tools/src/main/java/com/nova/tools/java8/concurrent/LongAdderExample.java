@@ -14,6 +14,9 @@ public class LongAdderExample {
 
     private static final int NUM_INCREMENTS = 10000;
 
+    /**
+     * 累加器
+     */
     private static final LongAdder adder = new LongAdder();
 
 

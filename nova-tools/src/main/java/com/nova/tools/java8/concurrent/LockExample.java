@@ -35,11 +35,11 @@ class LockExample {
         }
     }
 
+    private static final ExecutorService executor = Executors.newFixedThreadPool(2);
+
     @Test
     public void demoA() {
         count = 0;
-
-        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(LockExample::increment));
 
@@ -50,8 +50,6 @@ class LockExample {
 
     @Test
     public void demoB() {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
         executor.submit(() -> {
             lock.lock();
             try {
@@ -73,9 +71,7 @@ class LockExample {
 
     @Test
     public void demoC() {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(16);
 
         ReadWriteLock lock = new ReentrantReadWriteLock();
 
@@ -107,9 +103,7 @@ class LockExample {
 
     @Test
     public void demoD() {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(16);
 
         StampedLock lock = new StampedLock();
 
@@ -140,8 +134,6 @@ class LockExample {
 
     @Test
     public void demoE() {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
         StampedLock lock = new StampedLock();
 
         executor.submit(() -> {
@@ -173,8 +165,6 @@ class LockExample {
 
     @Test
     public void demoF() {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
         StampedLock lock = new StampedLock();
 
         executor.submit(() -> {

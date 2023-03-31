@@ -1,5 +1,6 @@
 package com.nova.tools.java8.datetime;
 
+import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -15,10 +16,10 @@ import java.time.LocalDateTime;
 class DurationExample {
 
     @Test
-    void demoA() throws InterruptedException {
+    void demoA() {
         // 创建Duration实例
         Instant first = Instant.now();
-        Thread.sleep(3000);
+        Threads.sleep(3000);
         Instant second = Instant.now();
         Duration duration = Duration.between(first, second);
 

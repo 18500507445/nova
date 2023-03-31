@@ -13,11 +13,12 @@ import java.util.concurrent.ForkJoinPool;
  */
 class ConcurrentExample {
 
+    private static final ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(16);
+
     @Test
     public void testReduce() {
         System.out.println("Parallelism: " + ForkJoinPool.getCommonPoolParallelism());
 
-        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(16);
         map.putIfAbsent("foo", "bar");
         map.putIfAbsent("han", "solo");
         map.putIfAbsent("r2", "d2");
@@ -31,7 +32,6 @@ class ConcurrentExample {
 
     @Test
     public void testSearch() {
-        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(16);
         map.putIfAbsent("foo", "bar");
         map.putIfAbsent("han", "solo");
         map.putIfAbsent("r2", "d2");
@@ -64,7 +64,6 @@ class ConcurrentExample {
 
     @Test
     public void testForEach() {
-        ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
         map.putIfAbsent("foo", "bar");
         map.putIfAbsent("han", "solo");
         map.putIfAbsent("r2", "d2");

@@ -42,7 +42,7 @@ class SemaphoreDemo {
             permit = semaphore.tryAcquire(1, TimeUnit.SECONDS);
             if (permit) {
                 System.out.println("Semaphore acquired");
-                Threads.sleep(5000);
+                Threads.sleep(3000);
             } else {
                 System.out.println("Could not acquire semaphore");
             }
@@ -62,8 +62,7 @@ class SemaphoreDemo {
     public void demoA() {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(SemaphoreDemo::increment));
+        IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SemaphoreDemo::increment));
 
         Threads.stop(executor);
 
@@ -74,10 +73,9 @@ class SemaphoreDemo {
     public void demoB() {
         ExecutorService executor = Executors.newFixedThreadPool(10);
 
-        IntStream.range(0, 10)
-                .forEach(i -> executor.submit(SemaphoreDemo::doWork));
+        IntStream.range(0, 10).forEach(i -> executor.submit(SemaphoreDemo::doWork));
 
-         Threads.stop(executor);
+        Threads.stop(executor);
     }
 
 }

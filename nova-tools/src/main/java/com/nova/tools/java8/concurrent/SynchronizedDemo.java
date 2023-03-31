@@ -32,6 +32,9 @@ class SynchronizedDemo {
         count = count + 1;
     }
 
+    private static final ExecutorService executor = Executors.newFixedThreadPool(2);
+
+
     /**
      * testSyncIncrement
      */
@@ -39,13 +42,11 @@ class SynchronizedDemo {
     public void demoA() {
         count = 0;
 
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::incrementSync));
 
         Threads.stop(executor);
 
-        System.out.println("   Sync: " + count);
+        System.out.println("Sync: " + count);
     }
 
     /**
@@ -54,8 +55,6 @@ class SynchronizedDemo {
     @Test
     public void demoB() {
         count = 0;
-
-        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::increment));
 
@@ -70,8 +69,6 @@ class SynchronizedDemo {
     @Test
     public void demoC() {
         count = 0;
-
-        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::incrementSyncClass));
 

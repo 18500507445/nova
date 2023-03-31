@@ -19,29 +19,22 @@ class AtomicExample {
 
     private static final AtomicInteger ATOMIC_INT = new AtomicInteger(0);
 
+    private static final ExecutorService executor = Executors.newFixedThreadPool(2);
+
     @Test
     public void testUpdate() {
-        ATOMIC_INT.set(0);
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> {
-                    Runnable task = () ->
-                            ATOMIC_INT.updateAndGet(n -> n + 2);
+                    Runnable task = () -> ATOMIC_INT.updateAndGet(n -> n + 2);
                     executor.submit(task);
                 });
 
         Threads.stop(executor);
-
         System.out.format("Update: %d\n", ATOMIC_INT.get());
     }
 
     @Test
     public void testAccumulate() {
-        ATOMIC_INT.set(0);
-
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> {
                     Runnable task = () ->
@@ -56,10 +49,6 @@ class AtomicExample {
 
     @Test
     public void testIncrement() {
-        ATOMIC_INT.set(0);
-
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(ATOMIC_INT::incrementAndGet));
 

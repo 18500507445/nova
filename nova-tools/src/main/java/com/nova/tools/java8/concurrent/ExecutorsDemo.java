@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * @description:
+ * @description: 线程池demo
  * @author: wzh
  * @date: 2022/11/18 15:05
  */

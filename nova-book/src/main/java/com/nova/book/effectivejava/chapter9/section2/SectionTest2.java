@@ -41,15 +41,11 @@ class SectionTest2 {
         for (int i = 0; i < 16; i++) {
             final int x = i;
             new Thread(() -> {
-                try {
-                    pool.add(x);
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                pool.add(x);
+                Threads.sleep(2000);
             }).start();
         }
-        Thread.sleep(1500);
+        Threads.sleep(1500);
         System.out.println("pool.size() = " + pool.size());
         System.out.println("耗时 = " + timer.interval());
     }
@@ -61,15 +57,11 @@ class SectionTest2 {
         for (int i = 0; i < 16; i++) {
             final int x = i;
             new Thread(() -> {
-                try {
-                    pool.add(x);
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                pool.add(x);
+                Threads.sleep(2000);
             }).start();
         }
-        Thread.sleep(1500);
+        Threads.sleep(1500);
         System.out.println("pool.size() = " + pool.size());
         System.out.println("耗时 = " + timer.interval());
     }

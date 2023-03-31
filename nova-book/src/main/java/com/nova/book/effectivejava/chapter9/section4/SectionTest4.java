@@ -93,7 +93,7 @@ class SectionTest4 {
                 try {
                     sp.acquire();
                     System.out.println(Thread.currentThread().getName() + "，开始执行");
-                    Thread.sleep(r.nextInt(2000));
+                    Threads.sleep(r.nextInt(2000));
                     System.out.println(Thread.currentThread().getName() + "，结束执行");
                 } catch (InterruptedException e) {
                     e.printStackTrace();

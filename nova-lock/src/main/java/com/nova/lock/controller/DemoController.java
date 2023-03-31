@@ -1,8 +1,9 @@
 package com.nova.lock.controller;
 
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.core.model.business.ValidatorReqDTO;
+import com.nova.common.core.model.result.AjaxResult;
+import com.nova.lock.annotation.Lock;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ public class DemoController extends BaseController {
     /**
      * redisson
      */
+    @Lock(value = "redisson", expireSeconds = 60)
     @PostMapping("redisson")
     public AjaxResult redisson(ValidatorReqDTO reqDto) {
         return AjaxResult.success(reqDto);

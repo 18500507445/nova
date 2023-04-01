@@ -132,7 +132,7 @@ public class RabbitConfig {
     }
 
     /**
-     * 将email队列绑定到广播交换机
+     * 将email队列-绑定到广播交换机
      *
      * @return
      */
@@ -142,7 +142,7 @@ public class RabbitConfig {
     }
 
     /**
-     * 将sms队列绑定到广播交换机
+     * 将sms队列-绑定到广播交换机
      *
      * @return
      */
@@ -160,7 +160,7 @@ public class RabbitConfig {
     }
 
     /**
-     * 绑定直连交换机1
+     * 直连队列1-绑定直连交换机
      */
     @Bean
     public Binding bindingDirectOne() {
@@ -176,7 +176,7 @@ public class RabbitConfig {
     }
 
     /**
-     * 绑定直连死信交换机
+     * 死信队列-绑定死信交换机
      */
     @Bean
     public Binding bindingDirectDl() {
@@ -184,7 +184,7 @@ public class RabbitConfig {
     }
 
     /**
-     * 直连队列2-指定死信队列和交换机
+     * 直连队列2-指定死信队列、死信交换机、策略
      */
     @Bean
     public Queue queueDirectTwo() {
@@ -200,7 +200,7 @@ public class RabbitConfig {
     }
 
     /**
-     * 绑定直连交换机2
+     * 直连队列2-绑定直连交换机
      */
     @Bean
     public Binding bindingDirectTwo() {

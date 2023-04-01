@@ -43,7 +43,7 @@ class Merge3 {
     private static final ExecutorService pool = Executors.newCachedThreadPool();
 
     /**
-     * 模拟数据库操作日志表 order_id_operate_type uk
+     * 模拟数据库操作日志表 order_id和operate_type当做一个unionKey
      */
     private final List<OperateChangeLog> operateChangeLogList = new ArrayList<>();
 
@@ -157,8 +157,8 @@ class Merge3 {
                     }
                 }
 
-                // 用户ID=5的批次和之后的批次，请求都会超时
-                if (list.stream().anyMatch(e -> e.getUserRequest().getUserId().equals(5L))) {
+                // 用户ID=6的批次和之后的批次，请求都会超时
+                if (list.stream().anyMatch(e -> e.getUserRequest().getUserId().equals(6L))) {
                     Threads.sleep(200);
                 }
 

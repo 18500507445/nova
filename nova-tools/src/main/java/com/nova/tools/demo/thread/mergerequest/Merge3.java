@@ -212,7 +212,7 @@ class Merge3 {
             if (hasRollback) {
                 return;
             }
-            log.debug(" 最终回滚");
+            log.debug("最终回滚");
             stock += userRequest.getCount();
             saveChangeLog(Lists.newArrayList(userRequest), 2);
         }

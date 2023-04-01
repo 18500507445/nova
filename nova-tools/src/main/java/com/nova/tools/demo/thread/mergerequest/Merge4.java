@@ -22,24 +22,27 @@ class Merge4 {
     /**
      * 缓存队列
      */
-    private static final ArrayBlockingQueue<RequestPromise> BLOCKING_QUEUE = new ArrayBlockingQueue<>(200);
+    private static final ArrayBlockingQueue<RequestPromise> BLOCKING_QUEUE = new ArrayBlockingQueue<>(10);
 
     /**
      * 每批合并处理数量
      */
-    private static final int BATCH_NUMBER = 20;
+    private static final int BATCH_NUMBER = 3;
 
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(12);
+    /**
+     * 计划模拟的请求数
+     */
+    public static final int REQUEST_COUNT = 10;
+
+    private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
     /**
      * 库存量
      */
-    private static final AtomicInteger totalStock = new AtomicInteger(60);
+    private static final AtomicInteger totalStock = new AtomicInteger(6);
 
     public static void main(String[] args) throws InterruptedException {
-        // 计划模拟的请求数
-        int requestCount = 122;
-        CountDownLatch requestCountDown = new CountDownLatch(requestCount);
+        CountDownLatch requestCountDown = new CountDownLatch(REQUEST_COUNT);
         executorService.execute(() -> {
             List<RequestPromise> promiseList = new ArrayList<>();
             while (true) {
@@ -122,7 +125,7 @@ class Merge4 {
 
         List<RequestPromise> requestList = new ArrayList<>();
         //模拟requestCount个请求
-        for (int i = 1; i <= requestCount; i++) {
+        for (int i = 1; i <= REQUEST_COUNT; i++) {
             UserRequest userRequest = new UserRequest(1, String.valueOf(i), "order" + i);
             RequestPromise requestPromise = new RequestPromise(userRequest, null);
             requestList.add(requestPromise);
@@ -137,9 +140,9 @@ class Merge4 {
         requestList.forEach(r -> {
             try {
                 final RequestPromise callResult = r.getFuture().get(200, TimeUnit.MILLISECONDS);
-                log.info("{}抢到了吗:{}", r.getRequest(), callResult.getResult());
+                log.info("{} 抢到了吗：{}", r.getRequest(), callResult.getResult());
             } catch (Exception e) {
-                log.error("发生了异常:{},e:{}", r, e);
+                log.error("发生了异常：{},e:{}", r, e);
             }
         });
 

@@ -23,7 +23,17 @@ class Merge3 {
     /**
      * 库存
      */
-    private Integer stock = 6;
+    private static Integer STOCK = 6;
+
+    /**
+     * 每批合并处理数量
+     */
+    private static final int BATCH_NUMBER = 3;
+
+    /**
+     * 计划模拟的请求数
+     */
+    public static final int REQUEST_COUNT = 10;
 
     /**
      * 阻塞队列
@@ -46,10 +56,10 @@ class Merge3 {
         CountDownLatch countDownLatch = new CountDownLatch(10);
 
         log.debug("-------- 库存 --------");
-        log.debug("库存初始数量：{}", killDemo.stock);
+        log.debug("库存初始数量：{}", STOCK);
 
         Map<UserRequest, Future<Result>> requestFutureMap = new HashMap<>(16);
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= REQUEST_COUNT; i++) {
             final Long orderId = i + 100L;
             final Long userId = (long) i;
             UserRequest userRequest = new UserRequest(orderId, userId, 1);
@@ -97,7 +107,7 @@ class Merge3 {
         });
 
         log.debug("------- 库存 -------");
-        log.debug("库存最终数量 :{}", killDemo.stock);
+        log.debug("库存最终数量 :{}", STOCK);
 
         Threads.stop(pool);
     }
@@ -139,9 +149,7 @@ class Merge3 {
                     continue;
                 }
 
-                //控制3条一合并
-                int batchSize = 3;
-                for (int i = 0; i < batchSize; i++) {
+                for (int i = 0; i < BATCH_NUMBER; i++) {
                     try {
                         list.add(queue.take());
                     } catch (InterruptedException e) {
@@ -158,9 +166,9 @@ class Merge3 {
 
                 int sum = list.stream().mapToInt(e -> e.getUserRequest().getCount()).sum();
                 // 两种情况
-                if (sum <= stock) {
+                if (sum <= STOCK) {
                     // 开始事务
-                    stock -= sum;
+                    STOCK -= sum;
                     saveChangeLog(list.stream().map(RequestPromise::getUserRequest).collect(Collectors.toList()), 1);
                     // 关闭事务
                     // notify user
@@ -175,9 +183,9 @@ class Merge3 {
                 }
                 for (RequestPromise requestPromise : list) {
                     int count = requestPromise.getUserRequest().getCount();
-                    if (count <= stock) {
+                    if (count <= STOCK) {
                         // 开启事务
-                        stock -= count;
+                        STOCK -= count;
                         saveChangeLog(Lists.newArrayList(requestPromise.getUserRequest()), 1);
                         // 关闭事务
                         requestPromise.setResult(new Result(true, "ok"));
@@ -213,7 +221,7 @@ class Merge3 {
                 return;
             }
             log.debug("最终回滚");
-            stock += userRequest.getCount();
+            STOCK += userRequest.getCount();
             saveChangeLog(Lists.newArrayList(userRequest), 2);
         }
         // 忽略

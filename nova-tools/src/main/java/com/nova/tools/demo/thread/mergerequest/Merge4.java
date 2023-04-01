@@ -41,15 +41,20 @@ class Merge4 {
      */
     private static final AtomicInteger totalStock = new AtomicInteger(6);
 
+    /**
+     * 3人合并一个请求强一起扣，剩余3个库存被其它3个人单独强，最终有4个人没抢到
+     *
+     * @param args
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
         CountDownLatch requestCountDown = new CountDownLatch(REQUEST_COUNT);
         pool.execute(() -> {
             List<RequestPromise> promiseList = new ArrayList<>();
             while (true) {
                 //退化为队列单个消费
-                final int queueSize = BLOCKING_QUEUE.size();
-                log.info("队列中的任务数:{}",queueSize);
-                if (queueSize <= BATCH_NUMBER) {
+                //log.info("队列中的任务数:{}",BLOCKING_QUEUE.size());
+                if (BLOCKING_QUEUE.size() <= BATCH_NUMBER) {
                     //控制边界再判断当前队列中是否有残留
                     if (!promiseList.isEmpty()) {
                         promiseList.forEach(p -> eachTaskHandler(p, totalStock, pool, requestCountDown));
@@ -86,7 +91,7 @@ class Merge4 {
                     if (totalStock.get() >= sum) {
                         totalStock.addAndGet(-sum);
                         promiseList.forEach(p -> {
-                            Result result = new Result(true, "一块儿抢单成功(批量处理)");
+                            Result result = new Result(true, "批量处理，抢单成功");
                             p.setResult(result);
                             final Future<RequestPromise> future = pool.submit(p);
                             p.setFuture(future);
@@ -98,7 +103,7 @@ class Merge4 {
                     //无库存
                     if (totalStock.get() <= 0) {
                         promiseList.forEach(p -> {
-                            Result result = new Result(false, "抱歉，库存已被抢完(批量处理)");
+                            Result result = new Result(false, "批量处理，没有库存");
                             p.setResult(result);
                             final Future<RequestPromise> future = pool.submit(p);
                             p.setFuture(future);
@@ -138,7 +143,7 @@ class Merge4 {
         requestList.forEach(r -> {
             try {
                 final RequestPromise callResult = r.getFuture().get(200, TimeUnit.MILLISECONDS);
-                log.info("{} 抢到了吗：{}", r.getRequest(), callResult.getResult());
+                log.info("用户id：{} 抢到了吗：{}", r.getRequest().getUserId(), callResult.getResult());
             } catch (Exception e) {
                 log.error("发生了异常：{},e:{}", r, e);
             }
@@ -150,17 +155,17 @@ class Merge4 {
     /**
      * 每个请求任务单独处理
      *
-     * @param p               任务
-     * @param totalStock      库存数量
+     * @param p          任务
+     * @param totalStock 库存数量
      * @param pool
      */
     private static void eachTaskHandler(RequestPromise p, AtomicInteger totalStock, ExecutorService pool, CountDownLatch requestCountDown) {
         if (totalStock.get() >= p.getRequest().getWantCount()) {
             totalStock.addAndGet(-p.getRequest().getWantCount());
-            Result result = new Result(true, "单个抢单成功");
+            Result result = new Result(true, "单独处理，抢单成功");
             p.setResult(result);
         } else {
-            Result result = new Result(false, "单个抢单失败");
+            Result result = new Result(false, "单独处理，库存不足");
             p.setResult(result);
         }
         final Future<RequestPromise> future = pool.submit(p);

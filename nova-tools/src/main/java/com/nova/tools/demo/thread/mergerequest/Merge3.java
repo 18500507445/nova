@@ -1,200 +1,220 @@
 package com.nova.tools.demo.thread.mergerequest;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import cn.hutool.json.JSONUtil;
+import com.google.common.collect.Lists;
+import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
- * @description: 网友改版Future+Queue版本
- * https://github.com/ArminZheng/order/blob/hotfix/src/main/java/com/arminzheng/KillDemo.java
+ * @description: 极海升级版
  * @author: wzh
- * @date: 2023/4/1 16:30
+ * @date: 2023/4/1 13:03
  */
 @Slf4j(topic = "Merge3")
 class Merge3 {
 
     /**
-     * 缓存队列
+     * 库存
      */
-    private static final ArrayBlockingQueue<RequestPromise> BLOCKING_QUEUE = new ArrayBlockingQueue<>(200);
+    private Integer stock = 6;
 
     /**
-     * 每批合并处理数量
+     * 阻塞队列
      */
-    private static final int BATCH_NUMBER = 20;
+    private final BlockingQueue<RequestPromise> queue = new LinkedBlockingQueue<>(10);
 
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(12);
+    private static final ExecutorService pool = Executors.newCachedThreadPool();
 
     /**
-     * 库存量
+     * 模拟数据库操作日志表 order_id_operate_type uk
      */
-    private static final AtomicInteger totalStock = new AtomicInteger(60);
+    private final List<OperateChangeLog> operateChangeLogList = new ArrayList<>();
 
     public static void main(String[] args) throws InterruptedException {
-        // 计划模拟的请求数
-        int requestCount = 122;
-        CountDownLatch requestCountDown = new CountDownLatch(requestCount);
-        executorService.execute(() -> {
-            List<RequestPromise> promiseList = new ArrayList<>();
-            while (true) {
-                //退化为队列单个消费
-                final int queueSize = BLOCKING_QUEUE.size();
-                //log.info("队列中的任务数:{}",queueSize);
-                if (queueSize >= 0 && queueSize <= BATCH_NUMBER) {
-                    //控制边界再判断当前队列中是否有残留
-                    if (!promiseList.isEmpty()) {
-                        promiseList.forEach(p -> {
-                            eachTaskHandler(p, totalStock, executorService, requestCountDown);
-                        });
-                        promiseList.clear();
-                        continue;
-                    }
+        Merge3 killDemo = new Merge3();
+        killDemo.mergeJob();
+        Thread.sleep(2000);
 
-                    RequestPromise p = null;
+        CountDownLatch countDownLatch = new CountDownLatch(10);
+
+        log.debug("-------- 库存 --------");
+        log.debug("库存初始数量：{}", killDemo.stock);
+
+        Map<UserRequest, Future<Result>> requestFutureMap = new HashMap<>(16);
+        for (int i = 1; i <= 10; i++) {
+            final Long orderId = i + 100L;
+            final Long userId = (long) i;
+            UserRequest userRequest = new UserRequest(orderId, userId, 1);
+            Future<Result> future = pool.submit(() -> {
+                countDownLatch.countDown();
+                countDownLatch.await(1, TimeUnit.SECONDS);
+                return killDemo.operate(userRequest);
+            });
+            requestFutureMap.put(userRequest, future);
+        }
+
+        log.debug("------- 客户端响应 -------");
+
+        Thread.sleep(1000);
+        requestFutureMap.entrySet().forEach(entry -> {
+            try {
+                Result result = entry.getValue().get(300, TimeUnit.MILLISECONDS);
+
+                log.debug(":客户端请求响应:{}", JSONUtil.toJsonStr(result));
+
+                if (!result.getSuccess() && "等待超时".equals(result.getMsg())) {
+                    // 超时，发送请求回滚
+
+                    log.debug("{} 发起回滚操作", entry.getKey());
+                    killDemo.rollback(entry.getKey());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        log.debug("------- 库存操作日志 -------");
+        log.debug("扣减成功条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(1)).count());
+        killDemo.operateChangeLogList.forEach(e -> {
+            if (e.getOperateType().equals(1)) {
+                System.out.println(e);
+            }
+        });
+
+        log.debug("扣减回滚条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(2)).count());
+        killDemo.operateChangeLogList.forEach(e -> {
+            if (e.getOperateType().equals(2)) {
+                System.out.println(e);
+            }
+        });
+
+        log.debug("------- 库存 -------");
+        log.debug("库存初始数量 :{}", killDemo.stock);
+
+        Threads.stop(pool);
+    }
+
+    /**
+     * 用户库存扣减
+     *
+     * @param userRequest
+     * @return
+     */
+    public Result operate(UserRequest userRequest) throws InterruptedException {
+        //todo 阈值判断
+
+        //todo 队列的创建
+        RequestPromise requestPromise = new RequestPromise(userRequest);
+        synchronized (requestPromise) {
+            boolean enqueueSuccess = queue.offer(requestPromise, 100, TimeUnit.MILLISECONDS);
+            if (!enqueueSuccess) {
+                return new Result(false, "系统繁忙");
+            }
+            try {
+                requestPromise.wait(200);
+                if (requestPromise.getResult() == null) {
+                    return new Result(false, "等待超时");
+                }
+            } catch (InterruptedException e) {
+                return new Result(false, "被中断");
+            }
+        }
+        return requestPromise.getResult();
+    }
+
+    public void mergeJob() {
+        new Thread(() -> {
+            List<RequestPromise> list = new ArrayList<>();
+            while (true) {
+                if (queue.isEmpty()) {
+                    Threads.sleep(10);
+                    continue;
+                }
+
+                int batchSize = queue.size();
+                for (int i = 0; i < batchSize; i++) {
                     try {
-                        p = BLOCKING_QUEUE.take();
+                        list.add(queue.take());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    eachTaskHandler(p, totalStock, executorService, requestCountDown);
+                }
+
+                // 用户ID=5的批次和之后的批次，请求都会超时
+                if (list.stream().anyMatch(e -> e.getUserRequest().getUserId().equals(5L))) {
+                    Threads.sleep(200);
+                }
+
+                log.debug("合并扣减库存数：{}", list.size());
+
+                int sum = list.stream().mapToInt(e -> e.getUserRequest().getCount()).sum();
+                // 两种情况
+                if (sum <= stock) {
+                    // 开始事务
+                    stock -= sum;
+                    saveChangeLog(list.stream().map(RequestPromise::getUserRequest).collect(Collectors.toList()), 1);
+                    // 关闭事务
+                    // notify user
+                    list.forEach(requestPromise -> {
+                        requestPromise.setResult(new Result(true, "ok"));
+                        synchronized (requestPromise) {
+                            requestPromise.notify();
+                        }
+                    });
+                    list.clear();
                     continue;
                 }
-                //加入批量列表
-                try {
-                    promiseList.add(BLOCKING_QUEUE.take());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                for (RequestPromise requestPromise : list) {
+                    int count = requestPromise.getUserRequest().getCount();
+                    if (count <= stock) {
+                        // 开启事务
+                        stock -= count;
+                        saveChangeLog(Lists.newArrayList(requestPromise.getUserRequest()), 1);
+                        // 关闭事务
+                        requestPromise.setResult(new Result(true, "ok"));
+                    } else {
+                        requestPromise.setResult(new Result(false, "库存不足"));
+                    }
+                    synchronized (requestPromise) {
+                        requestPromise.notify();
+                    }
                 }
-
-                /**
-                 * 批量消费 并控制每批的数量为BATCH_NUMBER
-                 * 库存分三种情况
-                 * 1.库存大于订单商品量
-                 * 2.有库存但小于订单商品量
-                 * 3.无库存
-                 */
-                if (promiseList.size() >= BATCH_NUMBER) {
-                    int sum = promiseList.stream().mapToInt(p -> p.request.getWantCount()).sum();
-                    //库存充足
-                    if (totalStock.get() >= sum) {
-                        totalStock.addAndGet(-sum);
-                        promiseList.forEach(p -> {
-                            Result result = new Result(true, "一块儿抢单成功(批量处理)");
-                            p.setResult(result);
-                            final Future<RequestPromise> future = executorService.submit(p);
-                            p.setFuture(future);
-                            requestCountDown.countDown();
-                        });
-                        promiseList.clear();
-                        continue;
-                    }
-                    //无库存
-                    if (totalStock.get() <= 0) {
-                        promiseList.forEach(p -> {
-                            Result result = new Result(false, "抱歉，库存已被抢完(批量处理)");
-                            p.setResult(result);
-                            final Future<RequestPromise> future = executorService.submit(p);
-                            p.setFuture(future);
-                            requestCountDown.countDown();
-                        });
-                        promiseList.clear();
-                        continue;
-                    }
-
-                    //库存紧张，退化为单个消费
-                    if (totalStock.get() < sum && totalStock.get() > 0) {
-                        promiseList.forEach(p -> {
-                            eachTaskHandler(p, totalStock, executorService, requestCountDown);
-                        });
-                        promiseList.clear();
-                        continue;
-                    }
-
-                }
+                list.clear();
             }
-        });
-
-        List<RequestPromise> requestList = new ArrayList<>();
-        //模拟requestCount个请求
-        for (int i = 1; i <= requestCount; i++) {
-            UserRequest userRequest = new UserRequest(1, String.valueOf(i), String.valueOf("order" + i));
-            RequestPromise requestPromise = new RequestPromise(userRequest, null);
-            requestList.add(requestPromise);
-            executorService.submit(() -> {
-                BLOCKING_QUEUE.offer(requestPromise);
-            });
-        }
-
-        //等待合并请求处理完成
-        requestCountDown.await();
-
-        requestList.forEach(r -> {
-            try {
-                final RequestPromise callResult = r.getFuture().get(200, TimeUnit.MILLISECONDS);
-                log.info("{}抢到了吗:{}", r.getRequest(), callResult.getResult());
-            } catch (Exception e) {
-                log.error("发生了异常:{},e:{}", r, e);
-            }
-        });
-
-
+        }, "mergeThread").start();
     }
 
     /**
-     * 每个请求任务单独处理
+     * 写库存流水
      *
-     * @param p               任务
-     * @param totalStock      库存数量
-     * @param executorService
+     * @param list
+     * @param operateType
      */
-    private static void eachTaskHandler(RequestPromise p, AtomicInteger totalStock, ExecutorService executorService, CountDownLatch requestCountDown) {
-        if (totalStock.get() >= p.getRequest().getWantCount()) {
-            totalStock.addAndGet(-p.getRequest().getWantCount());
-            Result result = new Result(true, "单个抢单成功");
-            p.setResult(result);
-        } else {
-            Result result = new Result(false, "单个抢单失败");
-            p.setResult(result);
-        }
-        final Future<RequestPromise> future = executorService.submit(p);
-        p.setFuture(future);
-        requestCountDown.countDown();
+    private void saveChangeLog(List<UserRequest> list, int operateType) {
+        List<OperateChangeLog> collect = list.stream().map(userRequest -> new OperateChangeLog(userRequest.getOrderId(),
+                userRequest.getCount(), operateType)).collect(Collectors.toList());
+        operateChangeLogList.addAll(collect);
     }
 
-
-    @Data
-    @ToString
-    static class RequestPromise implements Callable<RequestPromise> {
-
-        private UserRequest request;
-        private Result result;
-
-        private Future<RequestPromise> future;
-
-        public RequestPromise(UserRequest request, Result result) {
-            this.request = request;
-            this.result = result;
+    private void rollback(UserRequest userRequest) {
+        if (operateChangeLogList.stream().anyMatch(operateChangeLog -> operateChangeLog.getOrderId().equals(userRequest.getOrderId()))) {
+            // 回滚
+            boolean hasRollback = operateChangeLogList.stream().anyMatch(operateChangeLog -> operateChangeLog.getOrderId().equals(userRequest.getOrderId()) && operateChangeLog.getOperateType().equals(2));
+            if (hasRollback) {
+                return;
+            }
+            log.debug(" 最终回滚");
+            stock += userRequest.getCount();
+            saveChangeLog(Lists.newArrayList(userRequest), 2);
         }
-
-        @Override
-        public RequestPromise call() {
-            return this;
-        }
+        // 忽略
     }
 
-
-    @Data
-    @ToString
-    @AllArgsConstructor
-    static class UserRequest {
-        private int wantCount;
-        private String userId;
-        private String orderId;
-    }
 }

@@ -1,174 +1,200 @@
 package com.nova.tools.demo.thread.mergerequest;
 
-import com.nova.common.utils.thread.Threads;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @description: 修复版（https://github.com/ArminZheng/order）
- * 1 countDown等待
- * 2 await被中断后才会抛异常(无法区分notify和timeout)
- * 3 synchronized 指向堆对象
- * 4 库存不够未通知(wait到底)
- * 5 消费速度<生产速度->OOM(while->for固定批次or获取队列长度)
- * 6 【merge轮训】before【提交消费】i.e.notify先于wait(入队列在获取锁之后)
- * 7 feature可以换成completedFuture 做到先返回先打印
+ * @description: 网友改版Future+Queue版本
+ * https://github.com/ArminZheng/order/blob/hotfix/src/main/java/com/arminzheng/KillDemo.java
  * @author: wzh
- * @date: 2023/4/1 16:43
+ * @date: 2023/4/1 16:30
  */
+@Slf4j(topic = "Merge4")
 class Merge4 {
 
     /**
-     * 模拟数据库行
+     * 缓存队列
      */
-    private volatile Integer stock = 6;
+    private static final ArrayBlockingQueue<RequestPromise> BLOCKING_QUEUE = new ArrayBlockingQueue<>(200);
 
     /**
-     * 合并队列
+     * 每批合并处理数量
      */
-    private final BlockingDeque<RequestPromise> queue = new LinkedBlockingDeque<>(10);
+    private static final int BATCH_NUMBER = 20;
+
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(12);
 
     /**
-     * 启动10个线程
-     * 库存6个
-     * 生成一个合并队列
-     * 每个用户都能拿到自己的请求响应
-     *
-     * @param args
+     * 库存量
      */
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        Merge4 killDemo = new Merge4();
-        killDemo.mergeJob();
-        Threads.sleep(2000);
+    private static final AtomicInteger totalStock = new AtomicInteger(60);
 
-        List<Future<Result>> futureList = new ArrayList<>();
-        CountDownLatch countDownLatch = new CountDownLatch(10);
-        for (int i = 0; i < 10; i++) {
-            Long orderId = i + 100L;
-            Long userId = (long) i;
-            Future<Result> future =
-                    executorService.submit(
-                            () -> {
-                                countDownLatch.countDown();
-                                // 没有做等待
-                                countDownLatch.await(1, TimeUnit.SECONDS);
-                                return killDemo.operate(new UserRequest(orderId, userId, 1));
-                            });
-
-            futureList.add(future);
-        }
-
-        futureList.forEach(
-                future -> {
-                    try {
-                        // 每个用户最多等待 300ms
-                        Result result = future.get(300, TimeUnit.MILLISECONDS);
-                        System.out.println(Thread.currentThread().getName() + " 客户端请求响应 " + result);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        throw new RuntimeException(e);
-                    }
-                });
-    }
-
-
-    /**
-     * 用户库存扣减
-     *
-     * <pre>
-     * TODO 阈值判断
-     * TODO 队列创建</pre>
-     * <p>
-     * synchronized 指向堆对象
-     *
-     * <p>当对象为局部变量（非原始类型）时，只有引用是局部的，而不是实际的对象本身。实际上在堆上其可以被许多其他线程访问。
-     *
-     * <p>因此，需要对对象进行同步，以便单个线程一次只能访问该对象。
-     *
-     * @see <a
-     * href="https://stackoverflow.com/questions/43134998/is-it-reasonable-to-synchronize-on-a-local-variable">Is
-     * it reasonable to synchronize on a local variable?</a>
-     */
-    public Result operate(UserRequest userRequest) throws InterruptedException {
-        RequestPromise requestPromise = new RequestPromise(userRequest);
-        synchronized (requestPromise) {
-            boolean enqueueSuccess = queue.offer(requestPromise, 100, TimeUnit.MILLISECONDS);
-            if (!enqueueSuccess) {
-                return new Result(false, "系统繁忙");
-            }
-            try {
-                // 进队列成功后阻塞 200ms
-                requestPromise.wait(200);
-                // 等待超时不会抛出异常。结束时间之后，直接往下执行，返回null
-                if (requestPromise.getResult() == null) {
-                    return new Result(false, "等待超时");
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return requestPromise.getResult();
-    }
-
-    public void mergeJob() {
-        new Thread(() -> {
-            ArrayList<RequestPromise> list = new ArrayList<>();
+    public static void main(String[] args) throws InterruptedException {
+        // 计划模拟的请求数
+        int requestCount = 122;
+        CountDownLatch requestCountDown = new CountDownLatch(requestCount);
+        executorService.execute(() -> {
+            List<RequestPromise> promiseList = new ArrayList<>();
             while (true) {
-                if (queue.isEmpty()) {
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(10);
+                //退化为队列单个消费
+                final int queueSize = BLOCKING_QUEUE.size();
+                //log.info("队列中的任务数:{}",queueSize);
+                if (queueSize >= 0 && queueSize <= BATCH_NUMBER) {
+                    //控制边界再判断当前队列中是否有残留
+                    if (!promiseList.isEmpty()) {
+                        promiseList.forEach(p -> {
+                            eachTaskHandler(p, totalStock, executorService, requestCountDown);
+                        });
+                        promiseList.clear();
                         continue;
+                    }
+
+                    RequestPromise p = null;
+                    try {
+                        p = BLOCKING_QUEUE.take();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }
-
-                        /*while (queue.peek() != null) { // 如果生产端比消费端快，就会造成死循环
-                            list.add(queue.poll());
-                        }*/
-                int batchSize = queue.size();
-                for (int i = 0; i < batchSize; i++) {
-                    list.add(queue.poll()); // poll 自动移除
-                }
-
-                System.out.println(Thread.currentThread().getName() + " 合并扣减库存: " + list);
-
-                int sum = list.stream().mapToInt(e -> e.getUserRequest().getCount()).sum();
-                // 两种情况 ：1/2 库存足够
-                if (sum <= stock) {
-                    stock -= sum;
-                    // notify user
-                    list.forEach(
-                            requestPromise -> {
-                                requestPromise.setResult(new Result(true, "ok"));
-                                synchronized (requestPromise) {
-                                    requestPromise.notify();
-                                }
-                            });
+                    eachTaskHandler(p, totalStock, executorService, requestCountDown);
                     continue;
                 }
-                // 2/2 库存不足
-                for (RequestPromise requestPromise : list) {
-                    int count = requestPromise.getUserRequest().getCount();
-                    // 库存: 1, 下单: {user1: 2, user2: 1}
-                    if (count <= stock) {
-                        stock -= count;
-                        requestPromise.setResult(new Result(true, "ok"));
-                    } else {
-                        requestPromise.setResult(new Result(false, "库存不足"));
+                //加入批量列表
+                try {
+                    promiseList.add(BLOCKING_QUEUE.take());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                /**
+                 * 批量消费 并控制每批的数量为BATCH_NUMBER
+                 * 库存分三种情况
+                 * 1.库存大于订单商品量
+                 * 2.有库存但小于订单商品量
+                 * 3.无库存
+                 */
+                if (promiseList.size() >= BATCH_NUMBER) {
+                    int sum = promiseList.stream().mapToInt(p -> p.request.getWantCount()).sum();
+                    //库存充足
+                    if (totalStock.get() >= sum) {
+                        totalStock.addAndGet(-sum);
+                        promiseList.forEach(p -> {
+                            Result result = new Result(true, "一块儿抢单成功(批量处理)");
+                            p.setResult(result);
+                            final Future<RequestPromise> future = executorService.submit(p);
+                            p.setFuture(future);
+                            requestCountDown.countDown();
+                        });
+                        promiseList.clear();
+                        continue;
+                    }
+                    //无库存
+                    if (totalStock.get() <= 0) {
+                        promiseList.forEach(p -> {
+                            Result result = new Result(false, "抱歉，库存已被抢完(批量处理)");
+                            p.setResult(result);
+                            final Future<RequestPromise> future = executorService.submit(p);
+                            p.setFuture(future);
+                            requestCountDown.countDown();
+                        });
+                        promiseList.clear();
+                        continue;
                     }
 
-                    // 库存不足没有进行通知
-                    synchronized (requestPromise) {
-                        requestPromise.notify();
+                    //库存紧张，退化为单个消费
+                    if (totalStock.get() < sum && totalStock.get() > 0) {
+                        promiseList.forEach(p -> {
+                            eachTaskHandler(p, totalStock, executorService, requestCountDown);
+                        });
+                        promiseList.clear();
+                        continue;
                     }
+
                 }
-                list.clear();
             }
-        }, "mergeJob").start();
+        });
+
+        List<RequestPromise> requestList = new ArrayList<>();
+        //模拟requestCount个请求
+        for (int i = 1; i <= requestCount; i++) {
+            UserRequest userRequest = new UserRequest(1, String.valueOf(i), "order" + i);
+            RequestPromise requestPromise = new RequestPromise(userRequest, null);
+            requestList.add(requestPromise);
+            executorService.submit(() -> {
+                BLOCKING_QUEUE.offer(requestPromise);
+            });
+        }
+
+        //等待合并请求处理完成
+        requestCountDown.await();
+
+        requestList.forEach(r -> {
+            try {
+                final RequestPromise callResult = r.getFuture().get(200, TimeUnit.MILLISECONDS);
+                log.info("{}抢到了吗:{}", r.getRequest(), callResult.getResult());
+            } catch (Exception e) {
+                log.error("发生了异常:{},e:{}", r, e);
+            }
+        });
+
+
     }
 
+    /**
+     * 每个请求任务单独处理
+     *
+     * @param p               任务
+     * @param totalStock      库存数量
+     * @param executorService
+     */
+    private static void eachTaskHandler(RequestPromise p, AtomicInteger totalStock, ExecutorService executorService, CountDownLatch requestCountDown) {
+        if (totalStock.get() >= p.getRequest().getWantCount()) {
+            totalStock.addAndGet(-p.getRequest().getWantCount());
+            Result result = new Result(true, "单个抢单成功");
+            p.setResult(result);
+        } else {
+            Result result = new Result(false, "单个抢单失败");
+            p.setResult(result);
+        }
+        final Future<RequestPromise> future = executorService.submit(p);
+        p.setFuture(future);
+        requestCountDown.countDown();
+    }
+
+
+    @Data
+    @ToString
+    static class RequestPromise implements Callable<RequestPromise> {
+
+        private UserRequest request;
+        private Result result;
+
+        private Future<RequestPromise> future;
+
+        public RequestPromise(UserRequest request, Result result) {
+            this.request = request;
+            this.result = result;
+        }
+
+        @Override
+        public RequestPromise call() {
+            return this;
+        }
+    }
+
+
+    @Data
+    @ToString
+    @AllArgsConstructor
+    static class UserRequest {
+        private int wantCount;
+        private String userId;
+        private String orderId;
+    }
 }

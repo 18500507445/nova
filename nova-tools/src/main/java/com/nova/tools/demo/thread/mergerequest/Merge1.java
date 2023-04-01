@@ -18,7 +18,7 @@ class Merge1 {
     /**
      * 库存
      */
-    private Integer stock = 10;
+    private Integer stock = 6;
 
     /**
      * 阻塞队列
@@ -31,7 +31,7 @@ class Merge1 {
         Merge1 killDemo = new Merge1();
         killDemo.mergeJob();
         log.debug("等待mergeJob启动");
-        Threads.sleep(2000);
+        Threads.sleep(1500);
 
         List<Future<Result>> list = new ArrayList<>();
         final CountDownLatch latch = new CountDownLatch(10);
@@ -45,7 +45,6 @@ class Merge1 {
             list.add(future);
         }
 
-        latch.await();
         //遍历每一个响应结果
         list.forEach(resultFuture -> {
             try {

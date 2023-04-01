@@ -40,7 +40,8 @@ class Merge3 {
     public static void main(String[] args) throws InterruptedException {
         Merge3 killDemo = new Merge3();
         killDemo.mergeJob();
-        Thread.sleep(2000);
+        log.debug("等待mergeJob启动");
+        Thread.sleep(1500);
 
         CountDownLatch countDownLatch = new CountDownLatch(10);
 
@@ -63,17 +64,17 @@ class Merge3 {
         log.debug("------- 客户端响应 -------");
 
         Thread.sleep(1000);
-        requestFutureMap.entrySet().forEach(entry -> {
+        requestFutureMap.forEach((key, value) -> {
             try {
-                Result result = entry.getValue().get(300, TimeUnit.MILLISECONDS);
+                Result result = value.get(300, TimeUnit.MILLISECONDS);
 
-                log.debug(":客户端请求响应:{}", JSONUtil.toJsonStr(result));
+                log.debug("客户端请求响应：{}", JSONUtil.toJsonStr(result));
 
                 if (!result.getSuccess() && "等待超时".equals(result.getMsg())) {
                     // 超时，发送请求回滚
 
-                    log.debug("{} 发起回滚操作", entry.getKey());
-                    killDemo.rollback(entry.getKey());
+                    log.debug("{}，发起回滚操作", key);
+                    killDemo.rollback(key);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -96,7 +97,7 @@ class Merge3 {
         });
 
         log.debug("------- 库存 -------");
-        log.debug("库存初始数量 :{}", killDemo.stock);
+        log.debug("库存最终数量 :{}", killDemo.stock);
 
         Threads.stop(pool);
     }
@@ -138,7 +139,8 @@ class Merge3 {
                     continue;
                 }
 
-                int batchSize = queue.size();
+                //控制3条一合并
+                int batchSize = 3;
                 for (int i = 0; i < batchSize; i++) {
                     try {
                         list.add(queue.take());
@@ -152,7 +154,7 @@ class Merge3 {
                     Threads.sleep(200);
                 }
 
-                log.debug("合并扣减库存数：{}", list.size());
+                log.debug("合并扣减库存：{}", JSONUtil.toJsonStr(list));
 
                 int sum = list.stream().mapToInt(e -> e.getUserRequest().getCount()).sum();
                 // 两种情况

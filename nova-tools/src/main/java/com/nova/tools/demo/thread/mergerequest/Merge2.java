@@ -50,32 +50,28 @@ class Merge2 {
 
         List<Future<Result>> futureList = new ArrayList<>();
         CountDownLatch countDownLatch = new CountDownLatch(10);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i <= 10; i++) {
             Long orderId = i + 100L;
             Long userId = (long) i;
-            Future<Result> future =
-                    pool.submit(
-                            () -> {
-                                countDownLatch.countDown();
-                                // 没有做等待
-                                countDownLatch.await(1, TimeUnit.SECONDS);
-                                return killDemo.operate(new UserRequest(orderId, userId, 1));
-                            });
-
+            Future<Result> future = pool.submit(() -> {
+                countDownLatch.countDown();
+                // 没有做等待
+                countDownLatch.await(1, TimeUnit.SECONDS);
+                return killDemo.operate(new UserRequest(orderId, userId, 1));
+            });
             futureList.add(future);
         }
 
-        futureList.forEach(
-                future -> {
-                    try {
-                        // 每个用户最多等待 300ms
-                        Result result = future.get(300, TimeUnit.MILLISECONDS);
-                        log.debug("客户端请求响应:{}", result);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        throw new RuntimeException(e);
-                    }
-                });
+        futureList.forEach(future -> {
+            try {
+                // 每个用户最多等待 300ms
+                Result result = future.get(300, TimeUnit.MILLISECONDS);
+                log.debug("客户端请求响应:{}", result);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        });
 
         Threads.stop(pool);
     }

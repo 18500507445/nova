@@ -14,6 +14,10 @@ import java.util.stream.Collectors;
 
 /**
  * @description: 极海升级版
+ * <p>
+ * 分析：如果105在第二个批次，6个库存那么会扣减3，回滚3个
+ * 105在第一个批次，全部回滚
+ * 105在最后一个批次，没有回滚
  * @author: wzh
  * @date: 2023/4/1 13:03
  */
@@ -220,7 +224,7 @@ class Merge3 {
             if (hasRollback) {
                 return;
             }
-            log.debug("最终回滚");
+            log.debug("用户id：{}，最终回滚", userRequest.getUserId());
             STOCK += userRequest.getCount();
             saveChangeLog(Lists.newArrayList(userRequest), 2);
         }

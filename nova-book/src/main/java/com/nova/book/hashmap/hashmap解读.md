@@ -566,11 +566,12 @@ public HashMap(int initialCapacity, float loadFactor) {
      	//将指定的加载因子赋值给HashMap成员变量的负载因子loadFactor
         this.loadFactor = loadFactor;
     	/*
-    		tableSizeFor(initialCapacity) 判断指定的初始化容量是否是2的n次幂，如果不是那么会变为比指			定初始化容量大的最小的2的n次幂。这点上述已经讲解过。
-    		但是注意，在tableSizeFor方法体内部将计算后的数据返回给调用这里了，并且直接赋值给threshold边			界值了。有些人会觉得这里是一个bug,应该这样书写：
+    		tableSizeFor(initialCapacity) 判断指定的初始化容量是否是2的n次幂，如果不是那么会变为比指定初始化容量大的最小的2的n次幂。这点上述已经讲解过。
+    		但是注意，在tableSizeFor方法体内部将计算后的数据返回给调用这里了，并且直接赋值给threshold边界值了。有些人会觉得这里是一个bug,应该这样书写：
     		this.threshold = tableSizeFor(initialCapacity) * this.loadFactor;
     		这样才符合threshold的意思（当HashMap的size到达threshold这个阈值时会扩容）。
-			但是，请注意，在jdk8以后的构造方法中，并没有对table这个成员变量进行初始化，table的初始化被推			 迟到了put方法中，在put方法中会对threshold重新计算，put方法的具体实现我们下面会进行讲解
+			但是，请注意，在jdk8以后的构造方法中，并没有对table这个成员变量进行初始化，table的初始化被推迟到了put方法中，
+			在put方法中会对threshold重新计算，put方法的具体实现我们下面会进行讲解
     	*/
         this.threshold = tableSizeFor(initialCapacity);
     }
@@ -595,11 +596,11 @@ public HashMap(int initialCapacity, float loadFactor) {
 对于 this.threshold = tableSizeFor(initialCapacity); 疑问解答：
 
 ~~~java
-tableSizeFor(initialCapacity) 判断指定的初始化容量是否是2的n次幂，如果不是那么会变为比指			定初始化容量大的最小的2的n次幂。这点上述已经讲解过。
-但是注意，在tableSizeFor方法体内部将计算后的数据返回给调用这里了，并且直接赋值给threshold边			界值了。有些人会觉得这里是一个bug,应该这样书写：
+tableSizeFor(initialCapacity) 判断指定的初始化容量是否是2的n次幂，如果不是那么会变为比指定初始化容量大的最小的2的n次幂。这点上述已经讲解过。
+但是注意，在tableSizeFor方法体内部将计算后的数据返回给调用这里了，并且直接赋值给threshold边界值了。有些人会觉得这里是一个bug,应该这样书写：
 this.threshold = tableSizeFor(initialCapacity) * this.loadFactor;
 这样才符合threshold的意思（当HashMap的size到达threshold这个阈值时会扩容）。
-但是，请注意，在jdk8以后的构造方法中，并没有对table这个成员变量进行初始化，table的初始化被推			 迟到了put方法中，在put方法中会对threshold重新计算，put方法的具体实现我们下面会进行讲解
+但是，请注意，在jdk8以后的构造方法中，并没有对table这个成员变量进行初始化，table的初始化被推迟到了put方法中，在put方法中会对threshold重新计算，put方法的具体实现我们下面会进行讲解
 ~~~
 
 4、包含另一个“Map”的构造函数
@@ -703,7 +704,9 @@ public V put(K key, V value) {
 
 从上面可以得知HashMap是支持Key为空的，而HashTable是直接用Key来获取HashCode所以key为空会抛异常。
 
-{其实上面就已经解释了为什么HashMap的长度**为什么要是2的幂**因为HashMap 使用的方法很巧妙，它通过 hash & (table.length -1)来得到该对象的保存位，前面说过 HashMap 底层数组的长度总是2的n次方，这是HashMap在速度上的优化。当 length 总是2的n次方时，hash & (length-1)运算等价于对 length 取模，也就是hash%length，但是&比%具有更高的效率。比如 n % 32 = n & (32 -1)。}
+{其实上面就已经解释了为什么HashMap的长度**为什么要是2的幂**因为HashMap 使用的方法很巧妙，它通过 hash & (table.length -1)来得到该对象的保存位，
+
+前面说过 HashMap 底层数组的长度总是2的n次方，这是HashMap在速度上的优化。当 length 总是2的n次方时，hash & (length-1)运算等价于对 length 取模，也就是hash%length，但是&比%具有更高的效率。比如 n % 32 = n & (32 -1)。}
 
 
 
@@ -814,7 +817,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
     /*
     	1）i = (n - 1) & hash 表示计算数组的索引赋值给i，即确定元素存放在哪个桶中
     	2）p = tab[i = (n - 1) & hash]表示获取计算出的位置的数据赋值给节点p
-    	3) (p = tab[i = (n - 1) & hash]) == null 判断节点位置是否等于null，如果为null，则执行代			码：tab[i] = newNode(hash, key, value, null);根据键值对创建新的节点放入该位置的桶中
+    	3) (p = tab[i = (n - 1) & hash]) == null 判断节点位置是否等于null，如果为null，则执行代码：tab[i] = newNode(hash, key, value, null);根据键值对创建新的节点放入该位置的桶中
         小结：如果当前桶没有哈希碰撞冲突，则直接把键值对插入空间位置
     */ 
     if ((p = tab[i = (n - 1) & hash]) == null)
@@ -825,15 +828,15 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
         Node<K,V> e; K k;
         /*
         	比较桶中第一个元素(数组中的结点)的hash值和key是否相等
-        	1）p.hash == hash ：p.hash表示原来存在数据的hash值  hash表示后添加数据的hash值 比较两个				 hash值是否相等
+        	1）p.hash == hash ：p.hash表示原来存在数据的hash值  hash表示后添加数据的hash值 比较两个hash值是否相等
                  说明：p表示tab[i]，即 newNode(hash, key, value, null)方法返回的Node对象。
                     Node<K,V> newNode(int hash, K key, V value, Node<K,V> next) 
                     {
                         return new Node<>(hash, key, value, next);
                     }
                     而在Node类中具有成员变量hash用来记录着之前数据的hash值的
-             2）(k = p.key) == key ：p.key获取原来数据的key赋值给k  key 表示后添加数据的key 比较两					个key的地址值是否相等
-             3）key != null && key.equals(k)：能够执行到这里说明两个key的地址值不相等，那么先判断后				添加的key是否等于null，如果不等于null再调用equals方法判断两个key的内容是否相等
+             2）(k = p.key) == key ：p.key获取原来数据的key赋值给k  key 表示后添加数据的key 比较两个key的地址值是否相等
+             3）key != null && key.equals(k)：能够执行到这里说明两个key的地址值不相等，那么先判断后添加的key是否等于null，如果不等于null再调用equals方法判断两个key的内容是否相等
         */
         if (p.hash == hash &&
             ((k = p.key) == key || (key != null && key.equals(k))))
@@ -855,7 +858,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
             for (int binCount = 0; ; ++binCount) {
                 /*
                 	1)e = p.next 获取p的下一个元素赋值给e
-                	2)(e = p.next) == null 判断p.next是否等于null，等于null，说明p没有下一个元					素，那么此时到达了链表的尾部，还没有找到重复的key,则说明HashMap没有包含该键
+                	2)(e = p.next) == null 判断p.next是否等于null，等于null，说明p没有下一个元素，那么此时到达了链表的尾部，还没有找到重复的key,则说明HashMap没有包含该键
                 	将该键值对插入链表中
                 */
                 if ((e = p.next) == null) {
@@ -866,14 +869,14 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                     	 {
                                 return new Node<>(hash, key, value, next);
                          }
-                         注意第四个参数next是null，因为当前元素插入到链表末尾了，那么下一个节点肯定是								null
+                         注意第四个参数next是null，因为当前元素插入到链表末尾了，那么下一个节点肯定是null
                          2）这种添加方式也满足链表数据结构的特点，每次向后添加新的元素
                     */
                     p.next = newNode(hash, key, value, null);
                     /*
                     	1)节点添加完成之后判断此时节点个数是否大于TREEIFY_THRESHOLD临界值8，如果大于
                     	则将链表转换为红黑树
-                    	2）int binCount = 0 ：表示for循环的初始化值。从0开始计数。记录着遍历节点的个						数。值是0表示第一个节点，1表示第二个节点。。。。7表示第八个节点，加上数组中的的一						个元素，元素个数是9
+                    	2）int binCount = 0 ：表示for循环的初始化值。从0开始计数。记录着遍历节点的个数。值是0表示第一个节点，1表示第二个节点。。。。7表示第八个节点，加上数组中的的一						个元素，元素个数是9
                     	TREEIFY_THRESHOLD - 1 --》8 - 1 ---》7
                     	如果binCount的值是7(加上数组中的的一个元素，元素个数是9)
                     	TREEIFY_THRESHOLD - 1也是7，此时转换红黑树
@@ -886,7 +889,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                 }
                  
                 /*
-                	执行到这里说明e = p.next 不是null，不是最后一个元素。继续判断链表中结点的key值与插					  入的元素的key值是否相等
+                	执行到这里说明e = p.next 不是null，不是最后一个元素。继续判断链表中结点的key值与插入的元素的key值是否相等
                 */
                 if (e.hash == hash &&
                     ((k = e.key) == key || (key != null && key.equals(k))))
@@ -967,7 +970,7 @@ treeifyBin方法如下所示：
         else if ((e = tab[index = (n - 1) & hash]) != null) {
             /*
             	1）执行到这里说明哈希表中的数组长度大于阈值64，开始进行树形化
-            	2）e = tab[index = (n - 1) & hash]表示将数组中的元素取出赋值给e,e是哈希表中指定位					置桶里的链表节点，从第一个开始
+            	2）e = tab[index = (n - 1) & hash]表示将数组中的元素取出赋值给e,e是哈希表中指定位置桶里的链表节点，从第一个开始
             */
             //hd：红黑树的头结点   tl :红黑树的尾结点
             TreeNode<K,V> hd = null, tl = null;

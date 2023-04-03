@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * @description: 响应拦截器 (@ResponseBody的返回生效)
+ * @description: 响应拦截器 (@ResponseBody的返回生效)，作用返回加密数据
  * @author: wzh
  * @date: 2022/8/30 15:30
  */

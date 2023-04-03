@@ -1,6 +1,7 @@
 package com.nova.tools.leetcode.base;
 
-import com.alibaba.fastjson2.JSONObject;
+import cn.hutool.json.JSONUtil;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,20 +15,13 @@ import java.util.List;
 
 class ArrayTest {
 
-    static void main(String[] args) {
-        List<Boolean> booleans = kidsWithCandies();
-        System.out.println(JSONObject.toJSONString(booleans));
-    }
-
-
     /**
      * 给你一个整数数组 nums 。
      * 如果一组数字 (i,j) 满足 nums[i] == nums[j] 且 i < j ，就可以认为这是一组 好数对 。
      * 返回好数对的数目。
-     *
-     * @return
      */
-    static int numIdenticalPairs() {
+    @Test
+    public void numIdenticalPairs() {
         int[] nums = {1, 2, 3, 1, 1, 3};
         int a = 0;
         for (int i = 0; i < nums.length - 1; i++) {
@@ -37,7 +31,7 @@ class ArrayTest {
                 }
             }
         }
-        return a;
+        System.out.println(a);
     }
 
     /**
@@ -45,10 +39,9 @@ class ArrayTest {
      * 客户的 资产总量 就是他们在各家银行托管的资产数量之和。最富有客户就是 资产总量 最大的客户。
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/richest-customer-wealth
-     *
-     * @return
      */
-    static int maximumWealth() {
+    @Test
+    public void maximumWealth() {
         int[][] nums = {{4, 5, 6, 8}, {2, 3}, {1, 6, 9}};
         int max = 0;
         for (int[] num : nums) {
@@ -67,14 +60,15 @@ class ArrayTest {
         Integer integer = Arrays.stream(nums).map(ints -> Arrays.stream(ints).sum()).max(Integer::compareTo).get();
         System.out.println(integer);
 
-        return max;
+        System.out.println("max = " + max);
     }
 
     /**
      * 给你一个数组candies和一个整数extraCandies，其中candies[i]代表第 i 个孩子拥有的糖果数目。
      * 对每一个孩子，检查是否存在一种方案，将额外的extraCandies个糖果分配给孩子们之后，此孩子有 最多的糖果。注意，允许有多个孩子同时拥有 最多的糖果数目。
      */
-    static List<Boolean> kidsWithCandies() {
+    @Test
+    public void kidsWithCandies() {
         int[] candies = {2, 3, 5, 1, 3};
         int extraCandies = 3;
         int max = 0;
@@ -87,6 +81,6 @@ class ArrayTest {
         for (int candy : candies) {
             booleans.add(candy + extraCandies >= max);
         }
-        return booleans;
+        System.out.println(JSONUtil.toJsonStr(booleans));
     }
 }

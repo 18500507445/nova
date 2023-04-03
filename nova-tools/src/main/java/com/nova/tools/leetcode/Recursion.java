@@ -6,7 +6,8 @@ package com.nova.tools.leetcode;
  * @date: 2021/2/22 14:27
  */
 class Recursion {
-    static void main(String[] args) {
+
+    public static void main(String[] args) {
         add(1);
         System.out.println(add(1));
     }

@@ -10,13 +10,15 @@ import org.junit.jupiter.api.Test;
 
 class Reverse {
 
-    static void main(String[] args) {
+
+    @Test
+    void demoA() {
         int x = 1001;
         System.out.println(calculation(x));
     }
 
     @Test
-    void demoC() {
+    void demoB() {
         boolean palindrome = isPalindrome(5665);
         System.out.println("palindrome = " + palindrome);
     }

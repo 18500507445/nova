@@ -4,6 +4,8 @@
 * (2) springXml方式和注解方式
 * (3) 此项目为旧活新整，从新学习一下，巩固一下基础
 * (4) 还有一些spring mvc的基础知识
+* (5) springboot
+* (6) springcloud
 
 ### 收集的知识
 * [《百度》](https://www.baidu.com)

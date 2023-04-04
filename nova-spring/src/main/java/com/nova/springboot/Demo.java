@@ -5,6 +5,6 @@ package com.nova.springboot;
  * @author: wangzehui
  * @date: 2022/12/31 17:43
  */
-public class DemoTest {
+class Demo {
 
 }

@@ -36,8 +36,6 @@
         <module>nova-pay</module>
         <module>nova-rpc</module>
         <module>nova-spring</module>
-        <module>nova-spring-boot</module>
-        <module>nova-spring-cloud</module>
         <module>nova-spring-mybatis</module>
         <module>nova-sql</module>
         <module>nova-tools</module>

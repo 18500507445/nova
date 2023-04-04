@@ -55,23 +55,19 @@
 
 17.nova-spring
 * [spring学习](nova-spring/springNote.md)
+* [spring-boot学习](nova-spring/springBootNote.md)
+* [spring-cloud学习](nova-spring/springCloudNote.md)
 
-18.nova-spring-boot(待开始)
-* [spring-boot学习](nova-spring-boot/springBootNote.md)
-
-19.nova-spring-cloud(待开始)
-* [spring-cloud学习](nova-spring-cloud/springCloudNote.md)
-
-20.nova-spring-mybatis
+18.nova-spring-mybatis
 * [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)
 
-21.nova-tools
+19.nova-tools
 * [练习demo,java8,hutool、guava测试类，微信公众号](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲](summary.md)
 
-22.nova-websocket
+20.nova-websocket
 * websocket学习
 
-23.nova-xxl
+21.nova-xxl
 * xxl-job执行器，mysql2.3.1sql文件，oracle2.1.0
 

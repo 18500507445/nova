@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author wzh
  * @date 2018/2/8
  */
-public class ParallelArrays {
+class ParallelArrays {
 
     public static void main(String[] args) {
         long[] arrayOfLong = new long[20000];

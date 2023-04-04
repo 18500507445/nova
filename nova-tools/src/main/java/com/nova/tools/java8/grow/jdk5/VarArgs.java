@@ -9,7 +9,7 @@ import java.util.List;
  * @author wzh
  * @date 2018/2/8
  */
-public class VarArgs {
+class VarArgs {
 
     public static List<String> asList(String[] names) {
         return Arrays.asList(names);

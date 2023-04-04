@@ -10,7 +10,7 @@ import javax.script.ScriptException;
  * @author wzh
  * @date 2018/2/8
  */
-public class NashornDemo {
+class NashornDemo {
 
     public static void main(String[] args) throws ScriptException {
         ScriptEngineManager manager = new ScriptEngineManager();

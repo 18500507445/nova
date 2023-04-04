@@ -1,4 +1,4 @@
-package com.nova.tools.demo.exercise;
+package com.nova.tools.java8.datetime;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  * @date: 2018/12/20 18:29
  */
 
-class TimeTest {
+class TimeExample {
 
     @Test
     public void demoA() {

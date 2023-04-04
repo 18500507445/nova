@@ -9,7 +9,7 @@ import java.util.Map;
  * @author wzh
  * @date 2018/2/8
  */
-public class Generic<T> {
+class Generic<T> {
 
     public T getById(Integer id) {
         return null;

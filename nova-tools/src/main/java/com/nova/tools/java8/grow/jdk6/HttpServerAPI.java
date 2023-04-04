@@ -15,7 +15,7 @@ import java.net.InetSocketAddress;
  * @author wzh
  * @date 2018/2/8
  */
-public class HttpServerAPI {
+class HttpServerAPI {
 
     private static int count = 0;
 

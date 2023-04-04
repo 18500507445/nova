@@ -11,7 +11,7 @@ import java.util.Base64;
  * @author wzh
  * @date 2018/2/8
  */
-public class Base64Demo {
+class Base64Demo {
 
     @Test
     public void demoA() {

@@ -8,7 +8,7 @@ import java.util.Optional;
  * @author wzh
  * @date 2018/2/8
  */
-public class OptionalDemo {
+class OptionalDemo {
 
     public static void main(String[] args) {
         Optional<String> fullName = Optional.ofNullable(null);

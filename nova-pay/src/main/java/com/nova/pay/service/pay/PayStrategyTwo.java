@@ -13,6 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @description: 实现方式二
+ *
+ * 还有一种实现方式：支付抽象类
+ * 多种支付方式继承抽象类，然后进行注入，Controller初始化map
+ * 可以参考LockSeatServiceImpl，代码没有接口这种简洁
+ *
  * @author: wzh
  * @date: 2023/1/16 22:47
  */

@@ -3,7 +3,7 @@ package com.nova.tools.java8.grow.jdk8;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class Streams {
+class Streams {
 
     private enum Status {
         OPEN, CLOSED

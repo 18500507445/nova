@@ -1,4 +1,4 @@
-package com.nova.tools.java8.list;
+package com.nova.tools.java8.collection;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.tools.demo.entity.Myself;
@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.*;
  * @author: wzh
  * @date: 2019/6/14 14:07
  */
-class Java8ListDemo {
+class ListDemo {
 
     public static final List<People> PEOPLE_LIST = Myself.EXERCISE_LIST;
 

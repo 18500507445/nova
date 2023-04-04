@@ -6,7 +6,7 @@ package com.nova.tools.java8.grow.jdk6;
  * @author wzh
  * @date 2018/2/8
  */
-public class Console {
+class Console {
 
     public static void main(String[] args) {
 

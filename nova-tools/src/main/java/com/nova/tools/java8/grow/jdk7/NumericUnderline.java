@@ -6,7 +6,7 @@ package com.nova.tools.java8.grow.jdk7;
  * @author wzh
  * @date 2018/2/8
  */
-public class NumericUnderline {
+class NumericUnderline {
 
     public static void main(String[] args) {
         int num = 1234_5678_9;

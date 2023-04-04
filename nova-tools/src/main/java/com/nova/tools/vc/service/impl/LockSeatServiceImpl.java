@@ -1,22 +1,21 @@
 package com.nova.tools.vc.service.impl;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.nova.tools.vc.dataresult.DataResult;
-import com.nova.tools.vc.enumerate.TicketSystemEnum;
 import com.nova.tools.vc.base.AbstractLockSeatBase;
+import com.nova.tools.vc.dataresult.DataResult;
 import com.nova.tools.vc.entity.LockSeatBean;
 import com.nova.tools.vc.entity.LockSeatParamBean;
+import com.nova.tools.vc.enumerate.TicketSystemEnum;
 import com.nova.tools.vc.lockseat.CMTSLockSeatProcess;
 import com.nova.tools.vc.lockseat.ChenXingLockSeatProcess;
 import com.nova.tools.vc.lockseat.DingXinLockSeatProcess;
 import com.nova.tools.vc.service.LockSeatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description:
@@ -42,7 +41,7 @@ public class LockSeatServiceImpl implements LockSeatService {
         LockSeatBean data = new LockSeatBean();
         try {
             TicketSystemEnum ticketCode = TicketSystemEnum.getTicketSystemEnum(lockSeatParam.getCType());
-            HashMap<TicketSystemEnum, AbstractLockSeatBase> map = new HashMap<>(16);
+            Map<TicketSystemEnum, AbstractLockSeatBase> map = new HashMap<>(16);
             //todo
             map.put(TicketSystemEnum.CHENXING, chenXingLockSeatProcess);
             map.put(TicketSystemEnum.CMTS, cmtsLockSeatProcess);

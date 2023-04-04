@@ -17,7 +17,7 @@ import java.util.List;
  * @author wzh
  * @date 2018/2/8
  */
-public class CompilerAPI {
+class CompilerAPI {
 
     public static void main(String[] args) throws Exception {
         String program = "" +

@@ -8,7 +8,7 @@ import java.time.*;
  * @author wzh
  * @date 2018/2/8
  */
-public class DateTimeAPI {
+class DateTimeAPI {
 
     public static void main(String[] args) {
         // Get the system clock as UTC offset

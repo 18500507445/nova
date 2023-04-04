@@ -6,7 +6,7 @@ package com.nova.tools.java8.grow.jdk5;
  * @author wzh
  * @date 2018/2/8
  */
-public class AutoBoxing {
+class AutoBoxing {
 
     public static void main(String[] args) {
         int a = new Integer(66);

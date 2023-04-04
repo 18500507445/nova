@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author wzh
  * @date 2018/2/8
  */
-public class Concurrent {
+class Concurrent {
 
     public void lock() {
         Lock lock = new ReentrantLock();
@@ -54,7 +54,7 @@ public class Concurrent {
     }
 
     public void concurrentHashMap() {
-        Map<String, Integer> concurrentHashMap = new ConcurrentHashMap<>();
+        Map<String, Integer> concurrentHashMap = new ConcurrentHashMap<>(16);
         concurrentHashMap.put("Hello", 1);
         concurrentHashMap.put("World", 2);
 

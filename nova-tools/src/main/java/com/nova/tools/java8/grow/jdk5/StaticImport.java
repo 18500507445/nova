@@ -8,7 +8,7 @@ import static java.lang.System.out;
  * @author wzh
  * @date 2018/2/8
  */
-public class StaticImport {
+class StaticImport {
 
     public static void main(String[] args) {
         out.println("Hi let learn java 8.");

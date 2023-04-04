@@ -13,7 +13,7 @@ import java.io.IOException;
  * @author wzh
  * @date 2018/2/8
  */
-public class TryWithResource {
+class TryWithResource {
 
     public static void main(String[] args) {
         String path = ScriptEngineDemo.class.getResource("/test.js").getPath();

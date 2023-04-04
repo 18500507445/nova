@@ -42,7 +42,7 @@
 * mongo
 
 13.nova-mq
-* active，kafka，rabbit(完结)
+* active，kafka，rabbit
 
 14.nova-pay
 * [支付组件](nova-pay/payNote.md)
@@ -51,12 +51,12 @@
 * [sql练习](nova-sql/sqlNote.md)
 
 16.nova-rpc
-* [手写rpc框架、dubbo调用(待补充)](nova-rpc/rpcNote.md)
+* [手写rpc框架、dubbo调用(待开始)](nova-rpc/rpcNote.md)
 
 17.nova-spring
 * [spring学习](nova-spring/springNote.md)
-* [spring-boot学习](nova-spring/springBootNote.md)
-* [spring-cloud学习](nova-spring/springCloudNote.md)
+* [spring-boot学习(待开始)](nova-spring/springBootNote.md)
+* [spring-cloud学习(待开始)](nova-spring/springCloudNote.md)
 
 18.nova-spring-mybatis
 * [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)

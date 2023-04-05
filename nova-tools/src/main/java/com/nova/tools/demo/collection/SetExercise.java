@@ -25,7 +25,6 @@ class SetExercise {
 
     /**
      * 使用二叉树的原理对新 add()的对象按照指定的顺序排序（升序、降序）
-     * <p>
      * Integer和String对象都可以进行默认的 TreeSet 排序
      */
     @Test
@@ -36,6 +35,7 @@ class SetExercise {
     /**
      * 继承HashSet，实现LinkedHashMap
      * 特点：有序的，遍历该集合时候将会以元素的添加顺序访问集合的元素
+     * 线程不安全
      */
     @Test
     public void linkHashSet() {
@@ -46,7 +46,7 @@ class SetExercise {
      * 线程安全的hashSet
      */
     @Test
-    public void a() {
+    public void safeHashSet() {
         Set<String> hashSet = ConcurrentHashMap.newKeySet();
     }
 

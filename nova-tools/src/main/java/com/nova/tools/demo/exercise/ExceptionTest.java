@@ -1,4 +1,4 @@
-package com.nova.tools.demo.exception;
+package com.nova.tools.demo.exercise;
 
 
 import com.nova.tools.demo.entity.Myself;
@@ -12,7 +12,7 @@ import java.io.StringWriter;
  * @date: 2018/12/16 18:50
  */
 
-public class Abnormal {
+public class ExceptionTest {
 
     public static void main(String[] args) {
         try {

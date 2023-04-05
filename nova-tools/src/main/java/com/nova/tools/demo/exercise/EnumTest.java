@@ -1,9 +1,27 @@
-package com.nova.tools.demo.enumTest;
+package com.nova.tools.demo.exercise;
+
 
 /**
- * Created by dongliu on 2017/7/6.
+ * @author wangzehui
+ * @date 2018/10/24 14:06
  */
-public enum RequestTypeEnum {
+
+public class EnumTest {
+
+    public static void main(String[] args) {
+
+        System.out.println(RequestTypeEnum.BUYTICKET);
+
+        System.out.println(RequestTypeEnum.valuesOf(3));
+
+        System.out.println(RequestTypeEnum.BUYTICKET.getCode());
+
+        System.out.println(RequestTypeEnum.BUYTICKET.getName());
+
+    }
+}
+
+enum RequestTypeEnum {
 
     LOCKSEAT(1, "锁座"),
 

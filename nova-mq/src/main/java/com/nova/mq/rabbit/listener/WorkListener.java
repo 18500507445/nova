@@ -113,8 +113,7 @@ public class WorkListener {
             /**
              * 拒绝消息
              * 如果 requeue 参数设置为 true，则 RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
-             * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，
-             * 而不会把它发送给新的消费者。
+             * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，而不会把它发送给新的消费者。
              */
             //channel.basicReject(tag, true);
             System.out.println("工作公平模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));

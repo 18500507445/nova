@@ -6,7 +6,6 @@ import com.nova.mq.rabbit.listener.SimpleListener;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -215,7 +214,6 @@ public class RabbitMqTest {
 
     /**
      * 直连模式1
-     * 过期进入死信队列
      */
     @Test
     public void directTestOne() {
@@ -232,10 +230,19 @@ public class RabbitMqTest {
     }
 
     /**
+     * 直连模式3
+     * 过期进入死信队列
+     */
+    @Test
+    public void directTestThree() {
+        rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "directThree", MSG);
+    }
+
+    /**
      * 主体模式
      */
     @Test
-    public void topicTest(){
+    public void topicTest() {
         rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_TOPIC, "three.two.one", MSG);
     }
 

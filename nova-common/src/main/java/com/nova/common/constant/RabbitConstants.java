@@ -55,6 +55,7 @@ public class RabbitConstants {
      */
     public static final String QUEUE_DIRECT_ONE = "queue-direct-one";
     public static final String QUEUE_DIRECT_TWO = "queue-direct-two";
+    public static final String QUEUE_DIRECT_THREE = "queue-direct-three";
     public static final String QUEUE_DIRECT_DLX = "queue-direct-dlx";
 
     /**

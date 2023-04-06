@@ -194,8 +194,6 @@ public class RabbitConfig {
                 .deadLetterExchange(RabbitConstants.EXCHANGE_DIRECT_DLX)
                 //指定死信RoutingKey
                 .deadLetterRoutingKey("directDl")
-                //如果5秒没处理，就自动删除
-                .ttl(1000 * 5)
                 .build();
     }
 
@@ -205,6 +203,28 @@ public class RabbitConfig {
     @Bean
     public Binding bindingDirectTwo() {
         return BindingBuilder.bind(queueDirectTwo()).to(directExchange()).with("directTwo").noargs();
+    }
+
+    /**
+     * 直连队列3-指定死信队列、死信交换机、过期策略
+     */
+    @Bean
+    public Queue queueDirectThree() {
+        return QueueBuilder
+                .nonDurable(RabbitConstants.QUEUE_DIRECT_THREE)
+                .deadLetterExchange(RabbitConstants.EXCHANGE_DIRECT_DLX)
+                .deadLetterRoutingKey("directDl")
+                //如果5秒没处理，就自动删除
+                .ttl(1000 * 5)
+                .build();
+    }
+
+    /**
+     * 直连队列3-绑定直连交换机
+     */
+    @Bean
+    public Binding bindingDirectThree() {
+        return BindingBuilder.bind(queueDirectThree()).to(directExchange()).with("directThree").noargs();
     }
 
     /**

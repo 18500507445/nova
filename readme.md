@@ -4,9 +4,10 @@
 ### 结构介绍
 1.nova-book
 * [书籍和学习笔记](nova-book/bookNote.md)
-* [数据结构与算法](nova-book/algorithm.md)
-* [设计模式](nova-book/design.md)
-* [并发编程](nova-book/juc.md)
+* [数据结构与算法](nova-book/src/main/java/com/nova/book/algorithm/algorithm.md)
+* [设计模式](nova-book/src/main/java/com/nova/book/design/design.md)
+* [Java并发编程](nova-book/src/main/java/com/nova/book/juc/juc.md)
+* [HashMap解读](nova-book/src/main/java/com/nova/book/hashmap/hashmap解读.md)
 
 2.nova-cache
 * Memcache、caffeine、redis

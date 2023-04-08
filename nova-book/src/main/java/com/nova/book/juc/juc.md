@@ -62,7 +62,7 @@ linux
 - top -H -p <PID> 查看某个进程（PID）的所有线程
 
 #### 2.4线程运行原理
-![线程运行原理](https://img-blog.csdnimg.cn/784158a11c924f4c9e376e12a37ebe6b.png#pic_center)
+![线程运行原理](./img/线程池5种状态.png)
 栈与栈帧
 > Java Virtual Machine Stacks （Java虚拟机栈）
 我们都知道JVM中由堆、栈、方法区所组成，其中栈内存是给谁用的呢？其实就是线程，每个线程启动后，虚拟 机就会为其分配一块栈内存
@@ -104,7 +104,7 @@ linux
 护线程运行结束了，即使守护线程的代码没有执行完，也会强制结束。
 
 #### 2.6五种状态
-![6五种状态](https://img-blog.csdnimg.cn/10e02179a4bb4030972df3a4e4b2576d.png#pic_center)
+![6五种状态](./img/6种状态.png)
 - 【初始状态】仅是在语言层面创建了线程对象，还未与操作系统线程关联
 - 【可运行状态】（就绪状态）指该线程已经被创建（与操作系统线程关联），可以由CPU调度执行
 - 【运行状态】指获取了CPU时间片运行中的状态 （当CPU时间片用完，会从【运行状态】转换至【可运行状态】，会导致线程的上下文切换）
@@ -209,7 +209,7 @@ synchronized(lock) {
 
 
 #### 3.5 重新理解线程状态转换
-![线程状态转换](https://img-blog.csdnimg.cn/471319664de74681bf06c147ca967941.png#pic_center)
+![线程状态转换](./img/线程状态转换.png)
 - 情况1 NEW-->RUNNABLE
 > 当调用t.start()方法时，由NEW-->RUNNABLE
 
@@ -314,7 +314,7 @@ CAS的特点
 
 ### 7. 并发工具
 #### 7.1 自定义线程池
-![自定义线程池](https://img-blog.csdnimg.cn/d91246cd84994c49b50096c66a327dce.png#pic_center)
+![自定义线程池](./img/自定义线程池.png)
 
 #### 7.2 ThreadPoolExecutor
 构造方法例子：ManualJob

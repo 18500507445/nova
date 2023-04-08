@@ -1,6 +1,6 @@
 ## Java虚拟机
 
-![学习路线](https://img-blog.csdnimg.cn/7cddc167f09e48319575188803688b57.png#pic_center)
+![学习路线](./img/学习路线.png)
  
 ### 1.JVM内存结构
 #### 1.1 程序计数器  
@@ -36,7 +36,7 @@ java调用本地方法，由C或者C++语言编写的本地方法去操作系统
 jvm启动创建方法区
 
 #### 1.6直接内存
-![直接内存](https://img-blog.csdnimg.cn/6ba8e4fc774a4a55aa4b9f1982c5235d.png#pic_center)
+![直接内存](./img/直接内存.png)
 
 
 ### 2.垃圾回收
@@ -51,17 +51,17 @@ jvm启动创建方法区
 虚引用：弱引用+引用队列  
 
 #### 2.2 垃圾回收算法
-![标记清除](https://img-blog.csdnimg.cn/43527a2f3065445a88a8eaaa3dc698b9.png#pic_center)
+![标记清除](./img/标记清除.png)
 - 标记清除（没有GC root引用的标记清除，优点：速度快，缺点：空间有碎片，不连续）
-![标记整理](https://img-blog.csdnimg.cn/d6e26f59c6834867b64adbe0745b48df.png#pic_center)
+![标记整理](./img/标记整理.png)
 - 标记整理（优点：整理空间碎片，内存紧凑，空间连续，缺点：移动碎片，地址重排，效率低）
-![复制](https://img-blog.csdnimg.cn/1bf7a870c7bc4c3fa8beea2a23e2894e.png#pic_center)
+![复制](./img/复制.png)
 - 复制（创建一个新的空间，把标记的拷贝过来，空间换时间，占用内存双倍空间）
 
 #### 2.3 分代垃圾回收
-![分代垃圾回收](https://img-blog.csdnimg.cn/76b2569661ff4f0ab0660f67dda60dce.png#pic_center)
+![分代垃圾回收](./img/分代垃圾回收.png)
 
-![相关VM参数](https://img-blog.csdnimg.cn/26133884fe48458186725bc7bb843692.png#pic_center)
+![相关VM参数](./img/相关VM参数.png)
 
 #### 2.4 垃圾回收器
 1. 串行 
@@ -80,9 +80,9 @@ jvm启动创建方法区
 - 超大堆内存，会将堆划分为多个大小相等的Region
 - 整体上是标记+整理算法，两个区域之间是复制算法
 
-![串行](https://img-blog.csdnimg.cn/65b5ce87a6dd4c62bb65b527d7eb4b6a.png#pic_center)
-![并行-吞吐量优先-parallel](https://img-blog.csdnimg.cn/8378f656251a4c14a94980bf839007c0.png#pic_center)
-![并发-响应时间优先-cms](https://img-blog.csdnimg.cn/c9c81b98ad944306a3384c03ea672b86.png#pic_center)
+![串行](./img/串行.png)
+![并行-吞吐量优先-parallel](./img/并行-吞吐量优先.png)
+![并发-响应时间优先-cms](./img/并发-响应时间优先.png)
 > 初始标记：仅仅标记GC ROOTS的直接关联对象，发生stop the world  
 > 并发标记：使用GC ROOTS TRACING算法，进行跟踪标记，产生变动的对象放入一个队列中供重新标记过程时遍历，不暂停  
 > 重新标记：因为之前的并发标记，其它用户线程不暂停，可能产生新的垃圾，所以stop the world
@@ -145,9 +145,9 @@ Oracle提供了javap工具来反编译class文件，javap -v HelloWorld.class
 
 扩展类加载器
 #### 3.5 类加载器
-![类加载器](https://img-blog.csdnimg.cn/8965fec2fcfd47d1b434fcac73896f0e.png#pic_center)
+![类加载器](./img/类加载器.png)
 
-![双亲委派](https://img-blog.csdnimg.cn/abddcfb5addb42f5a88e7a7e8a533ae4.png#pic_center)
+![双亲委派](./img/双亲委派.png)
 
 #### 3.6 运行期优化
 
@@ -158,11 +158,11 @@ Oracle提供了javap工具来反编译class文件，javap -v HelloWorld.class
 - 简单的说，JMM 定义了一套在多线程读写共享数据时（成员变量、数组）时，对数据的可见性、有序性、和原子性的规则和保障
 
 #### 4.2 可见性
-![可见性](https://img-blog.csdnimg.cn/3d61bcff0aa84128affd210fe8a301c0.png#pic_center)
+![可见性](./img/可见性.png)
 #### 4.3 有序性
-![指令重排](https://img-blog.csdnimg.cn/879be774e78d4e468379260dcdf2710f.png#pic_center)
+![指令重排](./img/指令重排.png)
 #### 4.4 CAS与原子类
-![CAS](https://img-blog.csdnimg.cn/bd3a0bcbcf5f4d11bd57fc1afc0b838b.png#pic_center)
+![CAS](./img/CAS.png)
 - CAS是基于乐观锁的思想：最乐观估计，不怕别的线程来修改共享变量，就算改了也没关系，我吃亏点再重试呗。
 - synchronized是基于悲观锁的思想：最悲观估计，得防着其它线程来修改共享变量，我上了锁你们都别想改，我改完了解开锁，你们才有机会。
 - juc（java.util.concurrent）中提供了原子操作类，可以提供线程安全的操作，例如：AtomicInteger、 AtomicBoolean等，它们底层就是采用CAS技术+volatile来实现。

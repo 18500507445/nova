@@ -16,7 +16,7 @@ public class GcDemo {
     private static final int _8MB = 8 * 1024 * 1024;
 
     /**
-     * idea添加 vm options 如下
+     * idea运行找edit Configuration 找到modify options 点开 vm options 添加参数如下
      * -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -verbose:gc -XX:-ScavengeBeforeFullGC
      * 伊甸园：幸存form：幸存to比例为，8：1：1，所以执行程序，total空间为9m，幸存to区需要空出来
      * <p>
@@ -31,7 +31,7 @@ public class GcDemo {
         //gc();
         //tenured();
         //direct();
-        //outOfMemory();
+        outOfMemory();
     }
 
 

@@ -108,7 +108,7 @@ jvm启动创建方法区
 - 所有的new操作的内存分配非常廉价
 - 死亡对象的回收代价是0
 - 大部分对象用过既死亡
-- Minor GC的时间远远大于Full GC
+- Minor GC的时间远远低于Full GC
 - 新生代也不是越大越好，空间资源越大GC时间越长，一般建议总空间的25%-50%
 - 理想情况是（并发量*请求）响应的数据
 - 幸存区也需要考虑，空间资源大到能保留两类对象，一类生命周期较短还在用暂时还没回收（当前活跃对象），另外一类年龄不够还没被晋升（需要晋升对象）。
@@ -128,7 +128,7 @@ jvm启动创建方法区
 - 案例1 FullGC和MinorGC频繁
 > GC特别频繁尤其MinorGC，说明空间紧张，新生代塞满了，后果幸存区空间紧张，晋升阈值降低，老年代也空间紧张，导致FullGC也频繁  
 > 尝试调整新生代内存空间，晋升阈值提高，尽可能留在新生代，MinorGC频率也降低，FullGC频率也降低
-- 案例2（CMS垃圾回收期）请求高峰期发生FullGC，单次暂停时间特别长 
+- 案例2（CMS垃圾回收器）请求高峰期发生FullGC，单次暂停时间特别长 
 > 查看CMS日志，哪个阶段耗时（大概率重新标记），调整参数： -XX:+CMSScavengeBeforeRemark
 - 案例3 [实战调优Parallel收集器](https://www.wangtianyi.top/blog/2018/07/27/jvmdiao-you-ru-men-er-shi-zhan-diao-you-parallelshou-ji-qi/)
 

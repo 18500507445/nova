@@ -71,4 +71,6 @@
 
 21.nova-xxl
 * xxl-job执行器，mysql2.3.1sql文件，oracle2.1.0
+* [xxl-job源码阅读笔记](https://www.processon.com/preview/6433f533b433fa00159576a8)
+
 

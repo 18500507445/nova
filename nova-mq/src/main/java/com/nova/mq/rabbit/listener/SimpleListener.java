@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * @description: 简单队列模式监听器，绑定到默认的交换机上(amqp-default)
- * https://img-blog.csdnimg.cn/15dc5ce2c06548cd8f61154496134b5a.png#pic_center
+ * @link <a href="https://img-blog.csdnimg.cn/15dc5ce2c06548cd8f61154496134b5a.png#pic_center">默认交换机</a>
  * 默认交换机绑定到每个队列，路由key等于队列名称。无法显式绑定到默认交换或从默认交换解除绑定。它也不能被删除。
  * @author: wzh
  * @date: 2023/1/6 15:42

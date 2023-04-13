@@ -23,7 +23,7 @@ class Executor {
     static ExecutorService pool = Executors.newFixedThreadPool(2);
 
     public static void main(String[] args) {
-        //single();
+        //execute();
 
         //submit();
 
@@ -38,7 +38,7 @@ class Executor {
     /**
      * 自己创建一个单线程串行执行任务，如果任务执行失败而终止那么没有任何补救措施，而线程池还会新建一个线程，保证池的正常工作
      */
-    public static void single() {
+    public static void execute() {
         single.execute(() -> {
             log.debug("1");
             int i = 1 / 0;

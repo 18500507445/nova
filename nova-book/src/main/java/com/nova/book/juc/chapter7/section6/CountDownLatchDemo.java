@@ -34,7 +34,7 @@ class CountDownLatchDemo {
      */
     private static void simple() {
         CountDownLatch latch = new CountDownLatch(3);
-
+        final TimeInterval timer = DateUtil.timer();
         new Thread(() -> {
             log.debug("begin...");
             Threads.sleep(1000);
@@ -62,7 +62,7 @@ class CountDownLatchDemo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        log.debug("wait end...");
+        log.debug("wait end...  共耗时:{}ms", timer.interval());
     }
 
     /**

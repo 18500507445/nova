@@ -2,7 +2,7 @@ package com.nova.book.design.create.singleton.inner;
 
 /**
  * @description: 静态内部类
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 14:32
  */
 public class InnerClass {

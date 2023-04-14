@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 
 /**
  * @description: 引入spring-test依赖 使用@ExtendWith、@ContextConfiguration获取上下文
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 20:34
  */
 @ExtendWith(SpringExtension.class)

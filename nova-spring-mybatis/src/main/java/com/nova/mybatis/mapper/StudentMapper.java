@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 20:35
  */
 @Mapper

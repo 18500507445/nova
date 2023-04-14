@@ -5,7 +5,7 @@ import com.nova.tools.demo.entity.Myself;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author wangzehui 字符串练习
+ * @author wzh 字符串练习
  * @date 2018/9/10 17:34
  */
 class StringExercise {

@@ -2,7 +2,7 @@ package com.nova.book.design.create.singleton.lazy;
 
 /**
  * @description: 双重检索模式
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 14:30
  */
 public class DoubleRetrieval {

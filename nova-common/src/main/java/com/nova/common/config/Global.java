@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @author wangzehui
+ * @author wzh
  * @Title: Global
  * @ProjectName crazy
  * @description: 全局配置类

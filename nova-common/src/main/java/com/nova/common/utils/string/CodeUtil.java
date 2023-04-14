@@ -6,7 +6,7 @@ import java.util.Random;
  * @Classname: CodeUtil
  * @description: 唯一ID生成唯一邀请码
  * @date: 2022/5/16 17:48
- * @Created: by wangzehui
+ * @Created: by wzh
  */
 public class CodeUtil {
 

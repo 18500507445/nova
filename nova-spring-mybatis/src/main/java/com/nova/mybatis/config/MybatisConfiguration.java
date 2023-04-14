@@ -21,7 +21,7 @@ import java.io.IOException;
  * ComponentScan 扫描service
  * EnableTransactionManagement 开启事务
  * EnableAspectJAutoProxy 开启aop
- * @author: wangzehui
+ * @author: wzh
  * @date: 2022/12/31 20:34
  */
 @Configuration

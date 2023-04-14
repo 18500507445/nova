@@ -11,7 +11,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * @author wangzehui
+ * @author wzh
  * @description: 线程池配置
  * @date 2022/7/18 16:24
  */

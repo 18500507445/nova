@@ -2,7 +2,7 @@ package com.nova.mybatis.service;
 
 /**
  * @description:
- * @author: wangzehui
+ * @author: wzh
  * @date: 2023/1/1 21:54
  */
 public interface TransactionService {

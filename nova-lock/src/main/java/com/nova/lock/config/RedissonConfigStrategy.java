@@ -6,7 +6,7 @@ import org.redisson.config.Config;
  * RedissonConfigStrategy
  * Redisson配置构建接口
  *
- * @author wangzehui
+ * @author wzh
  * @date 2022/12/26 23:10
  */
 public interface RedissonConfigStrategy {

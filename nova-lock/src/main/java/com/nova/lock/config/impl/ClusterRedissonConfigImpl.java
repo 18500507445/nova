@@ -10,7 +10,7 @@ import org.redisson.config.Config;
 /**
  * 集群方式Redisson配置
  *
- * @author wangzehui
+ * @author wzh
  * @date 2022/12/26 23:10
  */
 @Slf4j

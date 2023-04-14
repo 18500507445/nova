@@ -17,7 +17,7 @@ public enum TraceHttpHeaderEnum {
      */
     HEADER_TRACE_ID("header_trace_id", "http请求发送traceId");
 
-    String code;
+    final String code;
 
-    String message;
+    final String message;
 }

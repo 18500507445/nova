@@ -17,7 +17,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <fastjson.version>2.0.20</fastjson.version>
-        <hutool.version>5.8.9</hutool.version>
+        <hutool.version>5.8.17</hutool.version>
         <email.version>1.5</email.version>
         <guava.version>31.1-jre</guava.version>
         <thumbnailator.version>0.4.17</thumbnailator.version>

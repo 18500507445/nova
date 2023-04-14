@@ -3,7 +3,7 @@ package com.nova.common.core.model.result;
 /**
  * 通用返回码对象(主要放各个模块的通用错误码)
  *
- * @author tojson
+ * @author wzh
  * @date 2021/6/21 21:25
  */
 public enum RespResultCode implements IRespResultCode {

@@ -1,4 +1,4 @@
-package com.nova.cache.memcache;
+package com.nova.cache.memcached;
 
 import com.whalin.MemCached.MemCachedClient;
 import com.whalin.MemCached.SockIOPool;
@@ -13,7 +13,7 @@ import java.util.Date;
  * @date: 2022/12/20 15:40
  */
 @Component
-public class MemcacheUtil implements Serializable {
+public class MemcachedUtil implements Serializable {
 
     /**
      * 默认存储14 天
@@ -24,7 +24,7 @@ public class MemcacheUtil implements Serializable {
 
     private static final String SERVERS_URL = "ip1:port,ip2:port";
 
-    private MemcacheUtil() {
+    private MemcachedUtil() {
         String[] cacheServers = SERVERS_URL.split(",");
         String[] serverList = new String[cacheServers.length];
         System.arraycopy(cacheServers, 0, serverList, 0, cacheServers.length);

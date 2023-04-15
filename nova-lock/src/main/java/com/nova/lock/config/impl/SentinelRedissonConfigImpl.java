@@ -27,8 +27,7 @@ public class SentinelRedissonConfigImpl implements RedissonConfigStrategy {
             String[] addrTokens = address.split(",");
             String sentinelAliasName = addrTokens[0];
             // 设置redis配置文件sentinel.conf配置的sentinel别名
-            config.useSentinelServers()
-                    .setMasterName(sentinelAliasName);
+            config.useSentinelServers().setMasterName(sentinelAliasName);
             config.useSentinelServers().setDatabase(database);
             if (StringUtils.isNotBlank(password)) {
                 config.useSentinelServers().setPassword(password);

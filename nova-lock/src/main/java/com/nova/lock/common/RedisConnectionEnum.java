@@ -12,7 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum RedisConnectionType {
+public enum RedisConnectionEnum {
 
     /**
      * 单节点部署方式

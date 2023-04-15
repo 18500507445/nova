@@ -38,9 +38,9 @@ public class RedissonLock {
         try {
             getLock = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
             if (getLock) {
-                log.info("获取Redisson分布式锁[成功],lockName={}", lockName);
+                log.info("获取Redisson分布式锁[成功]，lockName={}", lockName);
             } else {
-                log.info("获取Redisson分布式锁[失败],lockName={}", lockName);
+                log.info("获取Redisson分布式锁[失败]，lockName={}", lockName);
             }
         } catch (InterruptedException e) {
             log.error("获取Redisson分布式锁[异常]，lockName=" + lockName, e);

@@ -1,4 +1,4 @@
-package com.nova.database.aspect;
+package com.nova.database.aop;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.database.annotation.DataSource;
@@ -16,7 +16,9 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * 多数据源处理
+ * @description: 多数据源处理
+ * @author: wzh
+ * @date: 2022/10/13 20:26
  */
 @Aspect
 @Order(1)

@@ -1,4 +1,4 @@
-package com.nova.framework.aspect;
+package com.nova.framework.aop;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.nova.common.annotation.ExtRateLimiter;

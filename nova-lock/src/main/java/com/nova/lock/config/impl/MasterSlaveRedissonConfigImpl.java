@@ -1,6 +1,6 @@
 package com.nova.lock.config.impl;
 
-import com.nova.lock.common.RedissonEnum;
+import com.nova.lock.enums.RedissonEnum;
 import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;

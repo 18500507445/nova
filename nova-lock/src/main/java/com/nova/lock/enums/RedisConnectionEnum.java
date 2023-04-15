@@ -1,4 +1,4 @@
-package com.nova.lock.common;
+package com.nova.lock.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

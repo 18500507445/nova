@@ -27,7 +27,7 @@ public class RedissonConfiguration {
     @Order(value = 1)
     public RedissonManager redissonManager(RedissonProperties redissonProperties) {
         RedissonManager redissonManager = new RedissonManager(redissonProperties);
-        log.info("[RedissonManager]组装完毕,当前连接方式:" + redissonProperties.getType() + ",连接地址:" + redissonProperties.getAddress());
+        log.info("[RedissonManager] 组装完毕，当前连接方式:{}，连接地址:{}", redissonProperties.getType(), redissonProperties.getAddress());
         return redissonManager;
     }
 
@@ -37,7 +37,7 @@ public class RedissonConfiguration {
     public RedissonLock redissonLock(RedissonManager redissonManager) {
         RedissonLock redissonLock = new RedissonLock();
         redissonLock.setRedissonManager(redissonManager);
-        log.info("[RedissonLock]组装完毕");
+        log.info("[RedissonLock] 组装完毕");
         return redissonLock;
     }
 }

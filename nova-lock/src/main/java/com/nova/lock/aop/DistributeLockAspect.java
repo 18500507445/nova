@@ -37,7 +37,7 @@ public class DistributeLockAspect {
 
     @Around("pointcut() && @annotation(lock)")
     public Object around(ProceedingJoinPoint point, Lock lock) {
-        log.info("[开始]执行RedisLock环绕通知,获取Redis分布式锁开始");
+        log.info("[开始]执行RedisLock环绕通知，获取Redis分布式锁开始");
         //获取锁名称
         String lockName = lock.value();
         //获取超时时间

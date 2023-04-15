@@ -1,8 +1,7 @@
 package com.nova.common.trace;
 
 import cn.hutool.core.util.StrUtil;
-import com.google.common.collect.Maps;
-import com.google.gson.Gson;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.context.BodyReaderRequestWrapper;
 import com.nova.common.context.ReqGetBody;
 import com.nova.common.context.RequestParamsUtil;
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * @description: web端链路过滤器处理(设置traceId, spanId)
@@ -34,8 +34,7 @@ public class TraceWebFilter extends GenericFilterBean {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
         long start = System.currentTimeMillis();
         HttpServletRequest request = (HttpServletRequest) req;
-        String traceId = String.valueOf(request.getHeader(
-                TraceHttpHeaderEnum.HEADER_TRACE_ID.getCode()));
+        String traceId = String.valueOf(request.getHeader(TraceHttpHeaderEnum.HEADER_TRACE_ID.getCode()));
         if (StrUtil.isNotEmpty(traceId) && !"null".equals(traceId)) {
             TraceHelper.setCurrentTrace(traceId);
         } else {
@@ -57,21 +56,21 @@ public class TraceWebFilter extends GenericFilterBean {
     private BodyReaderRequestWrapper printAccessLog(HttpServletRequest request) throws IOException {
         BodyReaderRequestWrapper requestWrapper;
         String requestUrl = request.getRequestURI();
-        SortedMap<String, Object> paramResult = Maps.newTreeMap();
-        paramResult.putAll(RequestParamsUtil.getUrlParams(request));
-        if (!StrUtil.equals(HttpMethod.GET.name(), request.getMethod())) {
-            String contentType = request.getContentType();
-            if (StrUtil.containsIgnoreCase(contentType, "json")) {
-                requestWrapper = new BodyReaderRequestWrapper(request);
-                paramResult.putAll(new Gson().fromJson(ReqGetBody.getBody(requestWrapper), Map.class));
-                log.info("开始当前请求-{},方法-{}，body参数：{}", requestUrl, request.getMethod(),
-                        new Gson().toJson(paramResult));
-                return requestWrapper;
-            } else if (StrUtil.containsIgnoreCase(contentType, "form")) {
-                paramResult.putAll(RequestParamsUtil.getFormParams(request));
+        SortedMap<String, Object> paramResult = new TreeMap<>(RequestParamsUtil.getUrlParams(request));
+        try {
+            if (!StrUtil.equals(HttpMethod.GET.name(), request.getMethod())) {
+                String contentType = request.getContentType();
+                if (StrUtil.containsIgnoreCase(contentType, "json")) {
+                    requestWrapper = new BodyReaderRequestWrapper(request);
+                    paramResult.putAll(JSONObject.parseObject(ReqGetBody.getBody(requestWrapper), Map.class));
+                    return requestWrapper;
+                } else if (StrUtil.containsIgnoreCase(contentType, "form")) {
+                    paramResult.putAll(RequestParamsUtil.getFormParams(request));
+                }
             }
+        } finally {
+            log.info("请求apiName：{}，方式：{}，body：{}", requestUrl, request.getMethod(), JSONObject.toJSONString(paramResult));
         }
-        log.info("开始当前请求-{},方法-{}，body参数：{}", requestUrl, request.getMethod(), new Gson().toJson(paramResult));
         return null;
     }
 }

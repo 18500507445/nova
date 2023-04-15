@@ -55,14 +55,12 @@ public class TraceHelper {
             trace.setTraceId(genTraceId());
             trace.setSpanId(genSpanId());
             MDC.put(Trace.TRACE, trace.getTraceId());
-            MDC.put(Trace.PARENT_SPAN, trace.getSpanId());
-            CURRENT_SPAN.set(trace);
         } else {
             // spanId每次不一样，重新生成
             trace.setSpanId(genSpanId());
-            MDC.put(Trace.PARENT_SPAN, trace.getSpanId());
-            CURRENT_SPAN.set(trace);
         }
+        MDC.put(Trace.PARENT_SPAN, trace.getSpanId());
+        CURRENT_SPAN.set(trace);
         return trace;
     }
 

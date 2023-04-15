@@ -1,8 +1,12 @@
 package com.nova.lock.config;
 
-import com.google.common.base.Preconditions;
-import com.nova.lock.common.RedisConnectionEnum;
-import com.nova.lock.config.impl.*;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
+import com.nova.lock.config.impl.ClusterRedissonConfigImpl;
+import com.nova.lock.config.impl.MasterSlaveRedissonConfigImpl;
+import com.nova.lock.config.impl.SentinelRedissonConfigImpl;
+import com.nova.lock.config.impl.StandaloneRedissonConfigImpl;
+import com.nova.lock.enums.RedisConnectionEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
@@ -67,10 +71,15 @@ public class RedissonManager {
          * @return Config
          */
         Config createConfig(RedissonProperties redissonProperties) {
-            Preconditions.checkNotNull(redissonProperties);
-            Preconditions.checkNotNull(redissonProperties.getAddress(), "redisson.lock.server.address cannot be NULL!");
-            Preconditions.checkNotNull(redissonProperties.getType(), "redisson.lock.server.password cannot be NULL");
-            Preconditions.checkNotNull(redissonProperties.getDatabase(), "redisson.lock.server.database cannot be NULL");
+            if (ObjectUtil.isNull(redissonProperties)) {
+                return null;
+            }
+            if (StrUtil.isBlank(redissonProperties.getAddress())) {
+                log.info("redisson.lock.server.address cannot be NULL!");
+            }
+            if (StrUtil.isBlank(redissonProperties.getType())) {
+                log.info("redisson.lock.server.password cannot be NULL");
+            }
             String connectionType = redissonProperties.getType();
             // 声明配置上下文
             RedissonConfigContext redissonConfigContext;

@@ -15,6 +15,7 @@ import org.springframework.data.redis.serializer.SerializationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +32,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisService {
 
-    @Autowired
-    @SuppressWarnings("all")
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     /**

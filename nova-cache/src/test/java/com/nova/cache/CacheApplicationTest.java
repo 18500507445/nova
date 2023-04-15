@@ -20,7 +20,7 @@ import java.util.Map;
 @SpringBootTest
 class CacheApplicationTest {
 
-    @Autowired
+    @Resource
     private RedisService redisService;
 
     @Resource

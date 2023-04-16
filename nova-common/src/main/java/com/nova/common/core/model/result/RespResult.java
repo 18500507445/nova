@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @description: 通用返回结果对象
  * @author: wzh
- * @date: 2022/12/20 11:16
+ * @date: 2023/03/20 11:16
  */
 @Data
 public class RespResult<T> implements Serializable {
@@ -183,6 +183,10 @@ public class RespResult<T> implements Serializable {
         RespResult<T> ar = new RespResult<T>(RespResultCode.OK);
         ar.setData(data);
         return ar;
+    }
+
+    public static <T> RespResult<T> success(IRespResultCode apiResultCode) {
+        return new RespResult<T>(apiResultCode);
     }
 
     public RespResult<T> setRespMessage(IRespResultCode respResultCode) {

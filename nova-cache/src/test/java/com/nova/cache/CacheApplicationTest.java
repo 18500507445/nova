@@ -8,7 +8,6 @@ import com.nova.cache.memcached.MemcachedUtil;
 import com.nova.cache.redis.RedisService;
 import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;

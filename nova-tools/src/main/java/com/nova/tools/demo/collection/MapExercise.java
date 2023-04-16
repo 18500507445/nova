@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @description:
+ * @description: map
  * @author: wzh
  * @date: 2019/4/22 11:32
  */
@@ -18,7 +18,7 @@ class MapExercise {
      * 初始化容量的影响
      */
     @Test
-    public void testHashMap() {
+    public void capacity() {
         TimeInterval timer = DateUtil.timer();
         //定义数据量
         int aHundredMillion = 1_000_000;
@@ -38,9 +38,10 @@ class MapExercise {
     }
 
     /**
-     * 数组方式存储key/value，线程不安全，允许null作为key和value，key不可以重复，value允许重复
-     * 无序，key的hash值是先计算key的hashcode值，然后再进行计算，
-     * 每次容量扩容会重新计算所以key的hash值，会消耗资源，要求key必须重写equals和hashcode方法.
+     * 无序，线程不安全
+     * 数组方式存储key/value，都可以为null，key不可以重复，value可重复
+     * key的hash值是先计算key的hashcode值，然后再进行计算，
+     * 每次容量扩容会重新计算所以key的hash值，会消耗资源，要求key必须重写equals和hashcode方法
      * 默认初始容量16，负载因子0.75，扩容为旧容量乘2，查找元素快，如果key一样则比较value，如果value不一样，则按照链表结构存储value，就是一个key后面有多个value；
      */
     @Test
@@ -100,6 +101,7 @@ class MapExercise {
     }
 
     /**
+     *
      * 关联数组、哈希表、有序（可以记录元素存储的顺序）
      * 线程不安全
      */

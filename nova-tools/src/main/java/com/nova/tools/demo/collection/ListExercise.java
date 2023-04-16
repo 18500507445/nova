@@ -15,9 +15,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 class ListExercise {
 
     /**
-     * 内部是数组实现的，所以适合随机查找和遍历，不适合插入、删除
-     * <p>
-     * 排列有序、可以重复，线程不安全
+     * 数组实现的，随机查找和遍历效率高，插入、删除效率低
+     * 有序、可重复、线程不安全
      */
     @Test
     public void arrayList() {
@@ -25,7 +24,8 @@ class ListExercise {
     }
 
     /**
-     * 与ArrayList一样，线程安全，但是性能略低
+     * 与arrayList相似
+     * 线程安全、性能略低
      */
     @Test
     public void vector() {
@@ -33,9 +33,9 @@ class ListExercise {
     }
 
     /**
-     * 内部是双向循环链表结构，很适合数据的动态插入和删除
-     * 可以当做堆栈、队列（单项、双向）使用
-     * 线程不安全
+     *
+     * 双向循环链表实现，插入、删除效率高、查找和便利效率低
+     * 可以当做堆栈、队列（单项、双向）使用，线程不安全
      */
     @Test
     public void linkList() {

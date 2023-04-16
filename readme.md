@@ -61,7 +61,7 @@
 
 18.nova-tools
 * [练习demo,java8,hutool、guava测试类，微信公众号](nova-tools/toolsNote.md)
-* [互联网Java工程师进阶知识完全扫盲](summary.md)
+* [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 
 19.nova-websocket
 * websocket学习

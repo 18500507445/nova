@@ -3,13 +3,13 @@ package com.nova.cache.redis;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.TimeoutUtils;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationUtils;
 import org.springframework.stereotype.Component;
@@ -17,10 +17,7 @@ import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -698,6 +695,43 @@ public class RedisService {
      */
     public void unionZSetList(String key, List<String> keys, String target) {
         redisTemplate.opsForZSet().unionAndStore(key, keys, target);
+    }
+
+    /**
+     * 使用redis保证原子操作（判断是否存在，添加key，设置过期时间）
+     * 也可以使用 lua 脚本 "return redis.call('set',KEYS[1], ARGV[1],'NX','PX',ARGV[2])"
+     *
+     * @param key
+     * @param value
+     * @param expireTime
+     * @return
+     */
+    public boolean lock(String key, String value, int expireTime) {
+        while (true) {
+            if (Boolean.TRUE.equals(redisTemplate.boundValueOps(value).
+                    setIfAbsent(key, expireTime, TimeUnit.SECONDS))) {
+                return true;
+            }
+        }
+    }
+
+    /**
+     * 将锁释放掉
+     * <p>
+     * 为何解锁需要校验 requestId 因为不是自己的锁不能释放
+     * 客户端A加锁，一段时间之后客户端A解锁，在执行 lock 之前，锁突然过期了。
+     * 此时客户端B尝试加锁成功，然后客户端A再执行 unlock 方法，则将客户端B的锁给解除了。
+     *
+     * @return true false
+     */
+    public boolean unlock(String key, String value) {
+        // 这里使用Lua脚本保证原子性操作
+        String script = "if  redis.call('get', KEYS[1]) == ARGV[1] then " +
+                "return redis.call('del', KEYS[1]) " +
+                "else return 0 end";
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
+        Long res = redisTemplate.execute(redisScript, Collections.singletonList(value), key);
+        return new Long(1).equals(res);
     }
 
     /**

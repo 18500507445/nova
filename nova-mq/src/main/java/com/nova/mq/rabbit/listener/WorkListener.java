@@ -13,7 +13,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @description: 工作队列模式，分为轮询和公平分发(能者多劳)
+ * @description: 分发机制，分为轮询（每个人一样多）和公平分发（干完手动应答后再取一个，也就是能者多劳）
  * @author: wzh
  * @date: 2023/1/6 17:54
  */

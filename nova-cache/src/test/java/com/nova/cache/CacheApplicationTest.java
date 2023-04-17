@@ -60,12 +60,14 @@ class CacheApplicationTest {
      */
     @Test
     public void incr() {
+        Threads.sleep(2000);
         String key = "total";
-        redisService.incr(key, 1L);
+        redisService.incr(key, 5L);
+        Threads.sleep(5000);
         redisService.decr(key, 1L);
         redisService.expire(key, 60L);
 
-        Threads.sleep(3000);
+        Threads.sleep(5000);
         redisService.expire(key, 60L);
     }
 

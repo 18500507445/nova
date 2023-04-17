@@ -10,7 +10,7 @@
 * [HashMap解读](nova-book/src/main/java/com/nova/book/hashmap/hashmap解读.md)
 
 2.nova-cache
-* Memcache、caffeine、redis
+* Memcached、caffeine、redis
 
 3.nova-common
 * 通用工具包（包括常量类，工具类，枚举类，异常类）
@@ -60,7 +60,7 @@
 * [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)
 
 18.nova-tools
-* [练习demo,java8,hutool、guava测试类，微信公众号](nova-tools/toolsNote.md)
+* [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 
 19.nova-websocket

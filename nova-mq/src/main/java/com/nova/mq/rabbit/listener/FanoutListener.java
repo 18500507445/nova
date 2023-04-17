@@ -11,7 +11,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @description: 广播队列模式，1条消息多个监听
+ * @description: 广播模式，1条消息多个监听
  * @author: wzh
  * @date: 2023/1/6 21:36
  */

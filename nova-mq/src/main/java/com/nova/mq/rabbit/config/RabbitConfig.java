@@ -42,11 +42,6 @@ public class RabbitConfig {
         return connectionFactory;
     }
 
-    @Bean
-    public RabbitTemplate rabbitTemplate() {
-        return new RabbitTemplate(rabbitConnectionFactory());
-    }
-
     @Bean(name = "listenerContainer")
     public SimpleRabbitListenerContainerFactory listenerContainer() {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();

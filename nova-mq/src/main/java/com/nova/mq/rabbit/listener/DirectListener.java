@@ -11,7 +11,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @description: 直连交换机
+ * @description: 直连模式
  * @author: wzh
  * @date: 2023/1/5 11:00
  */

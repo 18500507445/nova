@@ -22,12 +22,12 @@ spring:
   kafka:
     bootstrap-servers: 127.0.0.1:9092
     producer: # producer 生产者
-      retries: 0 # 重试次数
+      retries: 3 # 重试次数
       acks: 1 # 应答级别:多少个分区副本备份完成时向生产者发送ack确认(可选0、1、all/-1)
       batch-size: 16384 # 批量大小
       buffer-memory: 33554432 # 生产端缓冲区大小
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
       # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
       auto-commit-interval: 1S
@@ -37,9 +37,9 @@ spring:
       auto-offset-reset: earliest
       # 是否自动提交偏移量，默认值是true,为了避免出现重复数据和数据丢失，可以把它设置为false,然后手动提交偏移量
       enable-auto-commit: false
-      # 键的反序列化方式
+      # 键/值的反序列化方式
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      # 值的反序列化方式
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
     listener: # Kafka Consumer Listener 监听器配置
       missing-topics-fatal: false # 消费监听接口监听的主题不存在时，默认会报错。所以通过设置为 false ，解决报错
+      ack-mode: MANUAL # 开启手动 ack

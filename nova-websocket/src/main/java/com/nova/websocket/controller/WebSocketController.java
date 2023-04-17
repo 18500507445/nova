@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/socket")
 public class WebSocketController {
+
     /**
      * 测试发送消息
      *

@@ -7,7 +7,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @description: 限流注解
+ * @description: redis计数器限流注解
  * @author: wzh
  * @date: 2022/11/19 16:29
  */

@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 
 /**
- * @description: 配置
+ * @description: 限流配置
  * @author: wzh
  * @date: 2022/11/19 17:18
  */

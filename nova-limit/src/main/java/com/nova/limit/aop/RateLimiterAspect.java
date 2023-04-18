@@ -1,4 +1,4 @@
-package com.nova.framework.aop;
+package com.nova.limit.aop;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.nova.common.annotation.ExtRateLimiter;
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @description:
+ * @description: 单机令牌桶限流aop（guava版）
  * @author: wzh
  * @date: 2022/10/13 20:30
  */
@@ -81,7 +81,7 @@ public class RateLimiterAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         String requestURI = request.getRequestURI();
-        RateLimiter rateLimiter = null;
+        RateLimiter rateLimiter;
         if (!RATE_LIMITER_MAP.containsKey(requestURI)) {
             // 开启令牌通限流 独立线程
             rateLimiter = RateLimiter.create(value);

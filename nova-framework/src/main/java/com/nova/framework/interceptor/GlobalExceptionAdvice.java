@@ -1,4 +1,4 @@
-package com.nova.limit.interceptor;
+package com.nova.framework.interceptor;
 
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.exception.base.ParamException;

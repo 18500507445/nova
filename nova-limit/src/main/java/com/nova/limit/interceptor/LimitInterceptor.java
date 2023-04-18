@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @description: 限流
+ * @description: 限流拦截器
  * @author: wzh
  * @date: 2022/11/19 16:34
  */
@@ -38,7 +38,6 @@ public class LimitInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         //判断请求是否属于方法的请求
         if (handler instanceof HandlerMethod) {
             HandlerMethod hm = (HandlerMethod) handler;

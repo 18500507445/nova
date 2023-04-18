@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @description:
+ * @description: 单机令牌桶限流注解
  * @author: wzh
  * @date: 2022/10/13 20:26
  */

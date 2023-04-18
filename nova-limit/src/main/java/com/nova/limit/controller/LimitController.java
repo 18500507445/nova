@@ -2,8 +2,7 @@ package com.nova.limit.controller;
 
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.limit.annotation.AccessLimit;
-import com.nova.limit.bucket.Bucket;
-import com.nova.limit.bucket.RedisTokenBucket;
+import com.nova.limit.annotation.BucketLimit;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/")
 public class LimitController {
 
-    private final RedisTokenBucket redisTokenBucket;
-
     /**
      * redis计数器限流
      */
@@ -32,6 +29,7 @@ public class LimitController {
         return AjaxResult.success();
     }
 
+
     /**
      * 令牌桶
      * 可根据自己的场景自定义 拦截
@@ -40,12 +38,9 @@ public class LimitController {
      * bucket对象，然后调用bucket，bucket实例的key理应是接口uri
      */
     @PostMapping("bucket")
+    @BucketLimit(seconds = 1, maxCount = 5)
     public AjaxResult bucket() {
-        Bucket bucket = new Bucket();
-        bucket.setBucketMaxCapacity(2);
-        bucket.setKey("/bucket");
-        bucket.setPutSpeed(1);
-        redisTokenBucket.createTokenBucket(bucket);
+        log.info("成功进入");
         return AjaxResult.success();
     }
 

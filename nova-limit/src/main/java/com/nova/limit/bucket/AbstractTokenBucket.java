@@ -37,7 +37,7 @@ public abstract class AbstractTokenBucket implements TokenBucket {
         // 这段时间桶子流入的速度
         int putCapacity = (int) ((now - bucket.getStartTime()) / 1000) * bucket.getPutSpeed();
         // 获取当前容量
-        int nowCapacity = Math.min(bucket.getCapacity() + putCapacity, bucket.getBucketMaxCapacity());
+        int nowCapacity = Math.min(bucket.getCapacity() + putCapacity, bucket.getMaxCapacity());
         // 如果容量不够直接返回
         if (nowCapacity < 1) {
             return null;

@@ -50,9 +50,9 @@ public class RedisTokenBucket extends AbstractTokenBucket {
         }
         // 变更配置
         Bucket redisBucket = JSONObject.parseObject(tokenBucketStr, Bucket.class);
-        if (redisBucket.getBucketMaxCapacity() != bucket.getBucketMaxCapacity()
+        if (redisBucket.getMaxCapacity() != bucket.getMaxCapacity()
                 || redisBucket.getPutSpeed() != bucket.getPutSpeed()) {
-            redisBucket.setBucketMaxCapacity(bucket.getBucketMaxCapacity());
+            redisBucket.setMaxCapacity(bucket.getMaxCapacity());
             redisBucket.setPutSpeed(bucket.getPutSpeed());
             boolean lock = lock(hashKey + bucket.getKey());
             try {
@@ -98,7 +98,7 @@ public class RedisTokenBucket extends AbstractTokenBucket {
                     //超时
                     return false;
                 }
-                Threads.sleep(100);
+                Threads.sleep(50);
             }
         } catch (Exception e) {
             e.printStackTrace();

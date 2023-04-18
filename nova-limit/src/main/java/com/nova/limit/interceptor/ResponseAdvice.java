@@ -1,6 +1,7 @@
 package com.nova.limit.interceptor;
 
 import com.nova.common.constant.Constants;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -14,17 +15,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @date: 2022/8/30 15:30
  */
 @ControllerAdvice
+@Slf4j
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        System.out.println("ResponseAdvice-supports:" + Constants.IS_OPEN);
+        log.info("ResponseAdvice-supports:" + Constants.IS_OPEN);
         return Constants.IS_OPEN;
     }
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        System.out.println("beforeBodyWrite");
+        log.info("beforeBodyWrite");
         return body;
     }
 }

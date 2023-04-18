@@ -1,6 +1,9 @@
 package com.nova.limit.bucket;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @description: 桶子实体类
@@ -8,6 +11,7 @@ import lombok.Data;
  * @date: 2023/4/18 20:43
  */
 @Data
+@Accessors(chain = true)
 public class Bucket {
 
     /**
@@ -18,10 +22,10 @@ public class Bucket {
     /**
      * 桶子最大容量
      */
-    private int bucketMaxCapacity;
+    private int maxCapacity;
 
     /**
-     * 桶子水流流入速度，单位秒
+     * 桶子水流，流入速度，单位秒
      */
     private int putSpeed;
 
@@ -39,6 +43,6 @@ public class Bucket {
      * 创建桶子时容量拉满
      */
     public Bucket() {
-        this.setCapacity(this.bucketMaxCapacity);
+        this.setCapacity(this.maxCapacity);
     }
 }

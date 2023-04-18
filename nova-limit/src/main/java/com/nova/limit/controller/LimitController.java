@@ -25,7 +25,7 @@ public class LimitController {
      */
     @PostMapping("redisLimit")
     @AccessLimit(seconds = 5, maxCount = 5)
-    public AjaxResult redisLimit(@RequestBody Object body) {
-        return AjaxResult.success(body);
+    public AjaxResult redisLimit() {
+        return AjaxResult.success();
     }
 }

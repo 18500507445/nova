@@ -10,7 +10,7 @@
 * [HashMap解读](nova-book/src/main/java/com/nova/book/hashmap/hashmap解读.md)
 
 2.nova-cache
-* Memcached、caffeine、redis
+* Memcached、caffeine、redis（lettuce客户端）
 
 3.nova-common
 * 通用工具包（包括常量类，工具类，枚举类，异常类）
@@ -25,6 +25,7 @@
 * 框架核心组件
 
 7.nova-limit
+* 这里用的jedis客户端
 * [接口限流、请求响应拦截器、validation](nova-limit/limitNote.md)
 
 8.nova-lock

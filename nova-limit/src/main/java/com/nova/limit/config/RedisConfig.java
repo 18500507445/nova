@@ -77,6 +77,8 @@ public class RedisConfig {
         return new JedisPool(jedisPoolConfig, host, port, timeout, password);
     }
 
+
+
     /**
      * 高可用主从模式
      * 注掉上面的bean，然后JedisUtil注入JedisSentinelPool

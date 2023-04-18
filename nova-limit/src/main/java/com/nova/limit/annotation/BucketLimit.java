@@ -7,18 +7,18 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @description: 令牌桶限流
+ * @description:
  * @author: wzh
- * @date: 2023/4/18 22:05
+ * @date: 2023/4/18 23:56
  */
 @Retention(RUNTIME)
 @Target(METHOD)
 public @interface BucketLimit {
 
     /**
-     * 流速 每秒几个令牌
+     * 每秒产生的令牌数
      */
-    int seconds();
+    int rate();
 
     /**
      * 最大容量
@@ -26,7 +26,13 @@ public @interface BucketLimit {
     int maxCount();
 
     /**
+     * 请求的令牌数
+     */
+    int requestNum();
+
+    /**
      * 提示消息
      */
     String message() default "超出访问次数，已被限流";
+
 }

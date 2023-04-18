@@ -29,18 +29,13 @@ public class LimitController {
         return AjaxResult.success();
     }
 
-
     /**
      * 令牌桶
-     * 可根据自己的场景自定义 拦截
-     * 1. 拦截器拦截所有接口并且限流
-     * 2. 拦截器根据url可配置化限流，针对接口的限流方式。拦截器获取到uri后再读取配置中接口的参数创建
-     * bucket对象，然后调用bucket，bucket实例的key理应是接口uri
+     * 每秒产生的令牌数，最大容量，请求的令牌数
      */
     @PostMapping("bucket")
-    @BucketLimit(seconds = 1, maxCount = 5)
-    public AjaxResult bucket() {
-        log.info("成功进入");
+    @BucketLimit(rate = 1, maxCount = 5, requestNum = 1)
+    public AjaxResult bucketLua() {
         return AjaxResult.success();
     }
 

@@ -4,6 +4,7 @@ import cn.hutool.core.util.SerializeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.*;
 
@@ -944,5 +945,23 @@ public class JedisUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String scriptLoad(byte[] buffer) {
+        try (Jedis jedis = this.jedisPool.getResource()) {
+            return jedis.scriptLoad(new String(buffer));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public long evalsha(String scriptLua, List<String> keys, List<String> args) {
+        try (Jedis jedis = this.jedisPool.getResource()) {
+            return (long) ((List<Object>) jedis.evalsha(scriptLua, keys, args)).get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

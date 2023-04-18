@@ -20,7 +20,6 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        log.info("ResponseAdvice-supports:" + Constants.IS_OPEN);
         return Constants.IS_OPEN;
     }
 

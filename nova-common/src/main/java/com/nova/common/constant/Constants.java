@@ -38,7 +38,7 @@ public class Constants {
 
     public static final int KS_CODE = 1;
 
-    public static final boolean IS_OPEN = true;
+    public static final boolean IS_OPEN = false;
 
     public static final String GOOGLE_VERIFY_URL = "http://xxx.xxx.xx/api/google/verify";
 

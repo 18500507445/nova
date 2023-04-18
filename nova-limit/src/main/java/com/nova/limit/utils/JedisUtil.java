@@ -232,7 +232,7 @@ public class JedisUtil {
      * @param value
      * @return
      */
-    public boolean lpush(String key, String... value) {
+    public boolean headPush(String key, String... value) {
         if ((key == null) || (value == null)) {
             return false;
         }
@@ -245,8 +245,8 @@ public class JedisUtil {
         return false;
     }
 
-    public boolean lpush(String key, long seconds, String... value) {
-        boolean result = lpush(key, value);
+    public boolean headPush(String key, long seconds, String... value) {
+        boolean result = headPush(key, value);
         if (result) {
             long i = expire(key, seconds);
             return i == 1L;
@@ -254,12 +254,12 @@ public class JedisUtil {
         return false;
     }
 
-    public boolean lpush(String key, List<String> list) {
+    public boolean headPush(String key, List<String> list) {
         if (StringUtils.isBlank(key) || (list == null) || (list.size() == 0)) {
             return false;
         }
         for (String value : list) {
-            lpush(key, value);
+            headPush(key, value);
         }
         return true;
     }
@@ -271,7 +271,7 @@ public class JedisUtil {
      * @param value
      * @return
      */
-    public boolean rpush(String key, String... value) {
+    public boolean tailPush(String key, String... value) {
         if (StringUtils.isBlank(key) || (value == null)) {
             return false;
         }
@@ -284,8 +284,8 @@ public class JedisUtil {
         return false;
     }
 
-    public boolean rpush(String key, long seconds, String... value) {
-        boolean result = rpush(key, value);
+    public boolean tailPush(String key, long seconds, String... value) {
+        boolean result = tailPush(key, value);
         if (result) {
             long i = expire(key, seconds);
             return i == 1L;
@@ -293,12 +293,12 @@ public class JedisUtil {
         return false;
     }
 
-    public boolean rpush(String key, List<String> list) {
+    public boolean tailPush(String key, List<String> list) {
         if (StringUtils.isBlank(key) || (list == null) || (list.size() == 0)) {
             return false;
         }
         for (String value : list) {
-            rpush(key, value);
+            tailPush(key, value);
         }
         return true;
     }
@@ -309,11 +309,11 @@ public class JedisUtil {
      * @param key
      * @return String
      */
-    public String rpop(String key) {
+    public String removeAndGet(String key) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return jedis.rpop(key);
         } catch (Exception ex) {
-            log.error("rpop error.", ex);
+            log.error("removeAndGet error.", ex);
         }
         return null;
     }
@@ -453,7 +453,7 @@ public class JedisUtil {
      * @param value
      * @return boolean true/false
      */
-    public boolean hset(String key, String field, String value) {
+    public boolean hashSet(String key, String field, String value) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             jedis.hset(key, field, value);
             return true;
@@ -470,7 +470,7 @@ public class JedisUtil {
      * @param field
      * @return String 返回给定字段的值
      */
-    public String hget(String key, String field) {
+    public String hashGet(String key, String field) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return jedis.hget(key, field);
         } catch (Exception ex) {
@@ -485,7 +485,7 @@ public class JedisUtil {
      * @param key
      * @return Map<String, String>
      */
-    public Map<String, String> hgetAll(String key) {
+    public Map<String, String> hashGetAll(String key) {
         Map<String, String> map = null;
         try (Jedis jedis = this.jedisPool.getResource()) {
             map = jedis.hgetAll(key);
@@ -502,7 +502,7 @@ public class JedisUtil {
      * @param hash
      * @return boolean
      */
-    public boolean hmset(String key, Map<String, String> hash) {
+    public boolean hashSet(String key, Map<String, String> hash) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             //String key = name + ":" + objectId;
             jedis.hmset(key, hash);
@@ -520,7 +520,7 @@ public class JedisUtil {
      * @param fields
      * @return List<String> 一个包含多个给定字段关联值的表，表值的排列顺序和指定字段的请求顺序一样
      */
-    public List<String> hmget(String key, String... fields) {
+    public List<String> hashGet(String key, String... fields) {
         List<String> list = null;
         try (Jedis jedis = this.jedisPool.getResource()) {
             list = jedis.hmget(key, fields);
@@ -537,7 +537,7 @@ public class JedisUtil {
      * @param fields
      * @return long 被成功删除字段的数量，不包括被忽略的字段
      */
-    public long hdel(String key, String... fields) {
+    public long hashDel(String key, String... fields) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return jedis.hdel(key, fields);
         } catch (Exception ex) {
@@ -552,7 +552,7 @@ public class JedisUtil {
      * @param key
      * @return long 哈希表中字段的数量, 当 key 不存在时，返回 0
      */
-    public long hlen(String key) {
+    public long hashLength(String key) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return jedis.hlen(key);
         } catch (Exception ex) {
@@ -568,7 +568,7 @@ public class JedisUtil {
      * @param field
      * @return boolean
      */
-    public boolean hexists(String key, String field) {
+    public boolean hashExists(String key, String field) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return jedis.hexists(key, field);
         } catch (Exception ex) {
@@ -583,12 +583,12 @@ public class JedisUtil {
      * @param key
      * @return List<String> 一个包含哈希表中所有值的表, 当 key 不存在时, 返回一个空表
      */
-    public List<String> hvals(String key) {
+    public List<String> getHashValueList(String key) {
         List<String> list = null;
         try (Jedis jedis = this.jedisPool.getResource()) {
             list = jedis.hvals(key);
         } catch (Exception ex) {
-            log.error("hvals error.", ex);
+            log.error("getHashValueList error.", ex);
         }
         return list;
     }
@@ -599,12 +599,12 @@ public class JedisUtil {
      * @param key
      * @return Set<String> 包含哈希表中所有字段的列表, 当 key 不存在时, 返回一个空列表
      */
-    public Set<String> hkeys(String key) {
+    public Set<String> getHashKeySet(String key) {
         Set<String> set = null;
         try (Jedis jedis = this.jedisPool.getResource()) {
             set = jedis.hkeys(key);
         } catch (Exception ex) {
-            log.error("hkeys error.", ex);
+            log.error("getHashKeySet error.", ex);
         }
         return set;
     }
@@ -635,7 +635,7 @@ public class JedisUtil {
      * @param member
      * @return boolean true/false
      */
-    public boolean sadd(String key, String member) {
+    public boolean setSet(String key, String member) {
         if (StringUtils.isBlank(key)) {
             return false;
         }
@@ -648,8 +648,8 @@ public class JedisUtil {
         return false;
     }
 
-    public boolean sadd(String key, long seconds, String member) {
-        boolean result = sadd(key, member);
+    public boolean setSet(String key, long seconds, String member) {
+        boolean result = setSet(key, member);
         if (result) {
             long i = expire(key, seconds);
             return i == 1L;
@@ -657,7 +657,7 @@ public class JedisUtil {
         return false;
     }
 
-    public boolean sadd(String key, List<String> members) {
+    public boolean setSet(String key, List<String> members) {
         if (StringUtils.isBlank(key)) {
             return false;
         }
@@ -677,11 +677,11 @@ public class JedisUtil {
      * @param key
      * @return Set<String>
      */
-    public Set<String> smembers(String key) {
+    public Set<String> getSetList(String key) {
         try (Jedis jedis = jedisPool.getResource()) {
             return jedis.smembers(key);
         } catch (Exception e) {
-            log.error("smembers error", e);
+            log.error("getSetList error", e);
         }
         return null;
     }

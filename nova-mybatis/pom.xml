@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>nova-spring-mybatis</artifactId>
+    <artifactId>nova-mybatis</artifactId>
     <description>mybatis整合spring</description>
 
     <properties>

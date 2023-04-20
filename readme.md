@@ -52,17 +52,20 @@
 15.nova-rpc
 * [手写rpc框架、dubbo调用(待开始)](nova-rpc/rpcNote.md)
 
-16.nova-mybatis
+16.nova-sms
+* 多短信通道，阿里云、腾讯云、七牛云、云片
+
+17.nova-mybatis
 * [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)
 
-17.nova-tools
+18.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 
-18.nova-websocket
+19.nova-websocket
 * websocket学习
 
-29.nova-xxl
+20.nova-xxl
 * xxl-job执行器，mysql2.3.1sql文件，oracle2.1.0
 * [xxl-job源码阅读笔记](https://www.processon.com/preview/6433f533b433fa00159576a8)
 

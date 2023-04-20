@@ -13,7 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import javax.annotation.Resource;
 
 /**
- * @description:
+ * @description: 邮件配置类，加载send和配置类
  * @author: wzh
  * @date: 2022/9/3 19:43
  */

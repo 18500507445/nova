@@ -1,0 +1,18 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+sms:
+  name:
+    tencent:
+      secretId: 123
+      secretKey: 123
+      appId: 123
+      signName: 123
+      templateId: 123
+    qiniu:
+    aliyun:
+    yunpian:
+

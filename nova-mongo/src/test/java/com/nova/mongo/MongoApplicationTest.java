@@ -22,10 +22,6 @@ public class MongoApplicationTest {
     @Autowired
     private MongoUtils mongoUtils;
 
-    public static void main(String[] args) {
-
-    }
-
     /**
      * 保存demo
      */

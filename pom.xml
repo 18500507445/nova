@@ -33,9 +33,9 @@
         <module>nova-mail</module>
         <module>nova-mongo</module>
         <module>nova-mq</module>
+        <module>nova-mybatis</module>
         <module>nova-rpc</module>
-        <module>nova-mybatis</module>
-        <module>nova-mybatis</module>
+        <module>nova-sms</module>
         <module>nova-sql</module>
         <module>nova-tools</module>
         <module>nova-websocket</module>

@@ -6,6 +6,12 @@
         <groupId>com.nova</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>nova-mq-active</module>
+        <module>nova-mq-rabbit</module>
+        <module>nova-mq-kafka</module>
+    </modules>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nova-mq</artifactId>
@@ -13,32 +19,15 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-framework</artifactId>
         </dependency>
 
-        <!-- activeMQ -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-activemq</artifactId>
-        </dependency>
-
-        <!-- rabbitMQ -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-
-        <!-- kafka -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-
     </dependencies>
+
 </project>

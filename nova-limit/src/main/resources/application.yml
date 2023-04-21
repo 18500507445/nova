@@ -21,3 +21,4 @@ spring:
     sentinel: #高可用，主从模式
       master: master
       nodes: 127.0.0.1:26379
+

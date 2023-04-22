@@ -40,6 +40,7 @@
         <module>nova-tools</module>
         <module>nova-websocket</module>
         <module>nova-xxl</module>
+        <module>nova-starter-redis</module>
 
     </modules>
 

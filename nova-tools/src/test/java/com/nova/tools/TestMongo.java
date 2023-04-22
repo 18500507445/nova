@@ -2,7 +2,6 @@ package com.nova.tools;
 
 import com.nova.tools.demo.entity.Topic;
 import com.starter.mongo.MongoService;
-import com.starter.redis.RedisService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,21 +11,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description: mongo-starter测试类
+ * @author: wzh
+ * @date: 2023/4/22 21:09
+ */
 @SpringBootTest
-class ToolsApplicationTests {
-
-    @Resource
-    private RedisService redisService;
+public class TestMongo {
 
     @Resource
     private MongoService mongoService;
-
-    @Test
-    public void testRedis(){
-        final Object o = redisService.get("234");
-        System.out.println("o = " + o);
-    }
-
 
     /**
      * 保存demo

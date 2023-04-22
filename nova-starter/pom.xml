@@ -16,6 +16,7 @@
     <modules>
         <module>nova-starter-redis</module>
         <module>nova-starter-mongo</module>
+        <module>nova-starter-xxl</module>
     </modules>
 
     <properties>
@@ -24,4 +25,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- 自动配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- 配置处理，增加配置提示 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure-processor</artifactId>
+        </dependency>
+    </dependencies>
 </project>

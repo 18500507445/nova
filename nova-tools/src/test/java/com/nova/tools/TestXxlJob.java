@@ -1,9 +1,9 @@
-package com.nova.xxl.job;
+package com.nova.tools;
 
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedInputStream;
@@ -27,9 +27,9 @@ import java.util.concurrent.TimeUnit;
  * @author xuxueli 2019-12-11 21:52:51
  */
 @Component
-public class SampleXxlJob {
-
-    private static final Logger logger = LoggerFactory.getLogger(SampleXxlJob.class);
+@SpringBootApplication
+@Slf4j
+public class TestXxlJob {
 
     /**
      * 1、简单任务示例（Bean模式）
@@ -240,12 +240,10 @@ public class SampleXxlJob {
     }
 
     public void init() {
-        logger.info("init");
+        log.info("init");
     }
 
     public void destroy() {
-        logger.info("destroy");
+        log.info("destroy");
     }
-
-
 }

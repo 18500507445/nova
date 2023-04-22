@@ -1,4 +1,4 @@
-package com.nova.mongo.entity;
+package com.nova.tools.demo.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

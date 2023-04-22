@@ -1,14 +1,12 @@
-package com.nova.mongo.utils;
+package com.starter.mongo;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -18,7 +16,7 @@ import java.util.List;
  * @date: 2022/9/8 21:37
  */
 @Component
-public class MongoUtils {
+public class MongoService {
 
     @Resource
     private MongoTemplate mongoTemplate;
@@ -176,7 +174,7 @@ public class MongoUtils {
             }
         }
         Query query = Query.query(criteria);
-        query.with(Sort.by(Direction.DESC, sort));
+        query.with(Sort.by(Sort.Direction.DESC, sort));
         return mongoTemplate.find(query, obj.getClass(), collectionName);
     }
 

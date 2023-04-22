@@ -31,7 +31,6 @@
         <module>nova-log</module>
         <module>nova-login</module>
         <module>nova-mail</module>
-        <module>nova-mongo</module>
         <module>nova-mq</module>
         <module>nova-mybatis</module>
         <module>nova-rpc</module>
@@ -40,7 +39,7 @@
         <module>nova-tools</module>
         <module>nova-websocket</module>
         <module>nova-xxl</module>
-        <module>nova-starter-redis</module>
+        <module>nova-starter</module>
 
     </modules>
 

@@ -40,23 +40,23 @@
 11.nova-mail
 * 邮件
 
-12.nova-mongo
-* mongo
-
-13.nova-mq
+12.nova-mq
 * active，kafka，rabbit
 
-14.nova-sql
-* [sql练习](nova-sql/sqlNote.md)
+13.nova-mybatis
+* [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)
 
-15.nova-rpc
+14.nova-rpc
 * [手写rpc框架、dubbo调用(待开始)](nova-rpc/rpcNote.md)
 
-16.nova-sms
+15.nova-sms
 * 多短信通道，阿里云、腾讯云、七牛云、云片
 
-17.nova-mybatis
-* [spring-mybatis学习](nova-spring-mybatis/mybatisNote.md)
+16.nova-sql
+* [sql练习](nova-sql/sqlNote.md)
+
+17.nova-starter（后续xxl-job、mq）
+* 目前已经整合redis、mongo
 
 18.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)

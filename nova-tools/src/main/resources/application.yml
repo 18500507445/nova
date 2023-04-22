@@ -26,3 +26,12 @@ spring:
         min-idle: 0
         #连接超时时间
     timeout: 10000
+
+  data:
+    mongodb:
+      host: 47.100.174.176
+      port: 27017
+      username: root
+      password: '@wangzehui123'
+      authentication-database: admin  #认证的库
+      database: myself    #操作的库

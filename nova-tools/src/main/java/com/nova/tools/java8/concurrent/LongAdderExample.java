@@ -27,8 +27,7 @@ public class LongAdderExample {
     public void demoA() {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(() -> adder.add(2)));
+        IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(() -> adder.add(2)));
 
         Threads.stop(executor);
 
@@ -42,8 +41,7 @@ public class LongAdderExample {
     public void demoB() {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, NUM_INCREMENTS)
-                .forEach(i -> executor.submit(adder::increment));
+        IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(adder::increment));
 
         Threads.stop(executor);
 
@@ -60,8 +58,7 @@ public class LongAdderExample {
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        IntStream.range(0, 10)
-                .forEach(i -> executor.submit(() -> accumulator.accumulate(i)));
+        IntStream.range(0, 10).forEach(i -> executor.submit(() -> accumulator.accumulate(i)));
 
         Threads.stop(executor);
 

@@ -61,7 +61,7 @@ class TestLambda {
 //1.定义一个函数式接口
 interface ILike {
 
-    public abstract void lambda();
+    void lambda();
 
 }
 

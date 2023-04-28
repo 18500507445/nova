@@ -47,7 +47,6 @@ class ManualJob {
     }
 
     /**
-     * @see <a href="https://blog.csdn.net/dodod2012/article/details/107464723</a>
      * corePoolSize => 线程池核心线程数（最多保留的线程数）
      * maximumPoolSize => 最大线程数，（corePoolSize+救急线程数） = 最大线程数，必须大于等于1
      * keepAliveTime => 救急线程-存活时间。当空闲时间到达此值，多余线程会被销毁到核心线程数量
@@ -59,6 +58,8 @@ class ManualJob {
      * (2)DiscardPolicy：丢弃任务
      * (3)DiscardOldestPolicy：丢弃队列最前面任务,执行该任务
      * (4)CallerRunsPolicy：不丢弃任务，直接运行任务的run方法，即使用主线程执行任务
+     * @see <a href="https://blog.csdn.net/dodod2012/article/details/107464723</a>
+     *
      */
     private static final ExecutorService SERVICE = new ThreadPoolExecutor(THREAD_COUNT, 10,
             0L, TimeUnit.MILLISECONDS,

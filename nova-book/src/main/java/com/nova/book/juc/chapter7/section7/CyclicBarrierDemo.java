@@ -1,6 +1,7 @@
 package com.nova.book.juc.chapter7.section7;
 
 import com.nova.common.utils.thread.Threads;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.*;
@@ -22,6 +23,7 @@ class CyclicBarrierDemo {
     /**
      * 简单版实现 3次循环打印
      */
+    @SneakyThrows
     private static void simple() {
         ExecutorService service = Executors.newFixedThreadPool(6);
         for (int i = 0; i < 3; i++) {
@@ -36,11 +38,8 @@ class CyclicBarrierDemo {
                 Threads.sleep(2000);
                 latch.countDown();
             });
-            try {
-                latch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
+            latch.await();
             log.debug("task1 task2 finish...");
         }
         service.shutdown();

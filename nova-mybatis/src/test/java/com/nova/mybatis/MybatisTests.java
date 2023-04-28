@@ -37,7 +37,6 @@ public class MybatisTests {
         System.out.println(studentMapper.getStudent());
     }
 
-
     /**
      * 测试事务
      */

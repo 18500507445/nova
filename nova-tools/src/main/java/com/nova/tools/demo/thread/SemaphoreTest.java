@@ -57,9 +57,9 @@ class Customer implements Runnable {
      * 网址:https://blog.csdn.net/huyaowei789/article/details/106690603/?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242
      */
 
-    private Semaphore washbasin;
+    private final Semaphore washbasin;
 
-    private String name;
+    private final String name;
 
     public Customer(Semaphore washbasin, String name) {
         this.washbasin = washbasin;

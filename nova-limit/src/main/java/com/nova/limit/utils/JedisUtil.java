@@ -957,6 +957,13 @@ public class JedisUtil {
         return "";
     }
 
+    /**
+     * 执行lua脚本
+     * @param scriptLua
+     * @param keys
+     * @param args
+     * @return
+     */
     public long evalsha(String scriptLua, List<String> keys, List<String> args) {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return (long) ((List<Object>) jedis.evalsha(scriptLua, keys, args)).get(0);

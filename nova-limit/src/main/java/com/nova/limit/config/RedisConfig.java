@@ -7,6 +7,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisSentinelPool;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,11 +54,11 @@ public class RedisConfig {
         jedisPoolConfig.setMaxTotal(maxTotal);
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMinIdle(minIdle);
-        jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
+        jedisPoolConfig.setMaxWait(Duration.ofMillis(maxWaitMillis));
         jedisPoolConfig.setNumTestsPerEvictionRun(50);
-        jedisPoolConfig.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
-        jedisPoolConfig.setMinEvictableIdleTimeMillis(1800000);
-        jedisPoolConfig.setSoftMinEvictableIdleTimeMillis(10000);
+        jedisPoolConfig.setTimeBetweenEvictionRuns(Duration.ofMillis(timeBetweenEvictionRunsMillis));
+        jedisPoolConfig.setMinEvictableIdleTime(Duration.ofMillis(1800000));
+        jedisPoolConfig.setSoftMinEvictableIdleTime(Duration.ofMillis(10000));
         jedisPoolConfig.setTestOnBorrow(true);
         jedisPoolConfig.setTestWhileIdle(true);
         jedisPoolConfig.setTestOnReturn(true);
@@ -69,7 +70,7 @@ public class RedisConfig {
     public JedisPool jedisPoolFactory() {
         JedisPoolConfig jedisPoolConfig = jedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
-        jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
+        jedisPoolConfig.setMaxWait(Duration.ofMillis(maxWaitMillis));
         // 连接耗尽时是否阻塞, false报异常,true阻塞直到超时, 默认true
         jedisPoolConfig.setBlockWhenExhausted(true);
         // 是否启用pool的jmx管理功能, 默认true

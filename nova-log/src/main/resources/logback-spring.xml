@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="log.path" value="/Users/wangzehui/Documents/opt/logbak/nova/nova-log"/>
-<!--    <property name="log.path" value="/opt/logbak/nova/nova-log"/>-->
+    <property name="log.path" value="/Users/wangzehui/Documents/Logs/nova/nova-log"/>
+<!--    <property name="log.path" value="/opt/Logs/nova/nova-log"/>-->
     <property name="log.maxHistory" value="15"/>
     <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 

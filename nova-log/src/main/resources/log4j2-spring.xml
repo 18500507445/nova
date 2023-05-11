@@ -11,7 +11,7 @@
         <Property name="LOG_WARN_LEVEL" value="warn"/>
         <Property name="LOG_ERROR_LEVEL" value="error"/>
         <!-- 在当前目录下创建名为log目录做日志存放的目录 -->
-        <Property name="FILE_PATH" value="/Users/wangzehui/Documents/opt/logbak/nova/nova-log"/>
+        <Property name="FILE_PATH" value="/Users/wangzehui/Documents/Logs/nova/nova-log"/>
         <!-- 日志文件大小，超过这个大小将被压缩 -->
         <Property name="LOG_MAX_SIZE" value="1024MB"/>
         <!-- 保留多少天以内的日志 -->

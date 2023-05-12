@@ -56,13 +56,14 @@
 * [sql练习](nova-sql/sqlNote.md)
 
 17.nova-starter（后续mq....）
-* 目前已经整合redis、mongo、xxlJob
+* 自定义starter，目前已经整合redis、mongo、xxlJob
 * <optional>true</optional>：防止依赖传递，导致引入后和项目的包冲突
 * [xxl-job源码阅读笔记](https://www.processon.com/preview/6433f533b433fa00159576a8)
 
 18.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
+* 引入了starter详情见测试类
 
 19.nova-websocket
 * websocket学习

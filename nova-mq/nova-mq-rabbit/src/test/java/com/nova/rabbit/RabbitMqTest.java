@@ -239,7 +239,7 @@ public class RabbitMqTest {
     }
 
     /**
-     * 主体模式
+     * 主题模式
      */
     @Test
     public void topicTest() {

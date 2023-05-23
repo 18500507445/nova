@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.net.URLEncodeUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -43,16 +44,16 @@ public class TestSpider {
     /**
      * 太阳代理
      */
-    public static final String PROXY_URL = "http://http.tiqu.alibabaapi.com/getip?num=3&type=2&pack=119426&port=1&lb=1&pb=45&regions=";
+    private static final String PROXY_URL = "http://http.tiqu.alibabaapi.com/getip?num=3&type=2&pack=119426&port=1&lb=1&pb=45&regions=";
 
-    public static final String SEARCH_URL = "{\"area\":\"1_72_55657_0\",\"pin\":\"\",\"fields\":\"11100000\",\"skuIds\":\"%s\",\"source\":\"pc-item\"}";
+    private static final String SEARCH_URL = "{\"area\":\"1_72_55657_0\",\"pin\":\"\",\"fields\":\"11100000\",\"skuIds\":\"%s\",\"source\":\"pc-item\"}";
 
-    public static final String BASE_SEARCH_URL = "https://api.m.jd.com/?appid=item-v3&functionId=pctradesoa_getprice&client=pc&clientVersion=1.0.0&t=%s&body=";
+    private static final String BASE_SEARCH_URL = "https://api.m.jd.com/?appid=item-v3&functionId=pctradesoa_getprice&client=pc&clientVersion=1.0.0&t=%s&body=";
 
     /**
      * 计时器
      */
-    public static final TimeInterval timer = DateUtil.timer();
+    private static final TimeInterval timer = DateUtil.timer();
 
     /**
      * 获取机器核数，作为线程池数量
@@ -67,7 +68,7 @@ public class TestSpider {
     /**
      * CompletableFuture使用的线程池
      */
-    public static final ExecutorService FUTURE_POOL = Executors.newFixedThreadPool(2);
+    private static final ExecutorService FUTURE_POOL = Executors.newFixedThreadPool(2);
 
     /**
      * 手动创建线程池
@@ -84,7 +85,7 @@ public class TestSpider {
     /**
      * 模拟任务数量
      */
-    public static final int COUNT = 400;
+    private static final int COUNT = 400;
 
     /**
      * Excel实体类
@@ -92,7 +93,7 @@ public class TestSpider {
     @Data
     static class Product {
         @ExcelProperty(value = "sku_id", index = 0)
-        public String skuId;
+        private String skuId;
     }
 
     @Test
@@ -176,7 +177,7 @@ public class TestSpider {
                 EXECUTOR_POOL.submit(new TaskA(randomList, url, longAdder));
             }
         }
-        Threads.sleep(5 * 60 * 3600);
+        ThreadUtil.sleep(5 * 60 * 3600);
         Threads.stop(EXECUTOR_POOL);
     }
 
@@ -201,10 +202,10 @@ public class TestSpider {
                 List<Object> randomList = RandomUtil.randomEleList(array, 1);
                 Thread t = new Thread(new TaskB(randomList, url, longAdder));
                 t.start();
-                Threads.sleep(600);
+                ThreadUtil.sleep(600);
             }
         }
-//        Threads.sleep(5 * 60 * 3600);
+//        ThreadUtil.sleep(5 * 60 * 3600);
     }
 
     /**
@@ -343,7 +344,7 @@ public class TestSpider {
     }
 
     static public void insert(String price) {
-        Threads.sleep(50);
+        ThreadUtil.sleep(50);
     }
 
     public static int PARK_TIME = 0;

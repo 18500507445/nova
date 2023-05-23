@@ -21,9 +21,7 @@ class SemaphoreDemo {
         // 1. 创建 semaphore 对象
         Semaphore semaphore = new Semaphore(3);
 
-        /**
-         * 2. 6个线程同时运行
-         */
+        // 2. 6个线程同时运行
         for (int i = 0; i < 6; i++) {
             new Thread(() -> {
                 try {

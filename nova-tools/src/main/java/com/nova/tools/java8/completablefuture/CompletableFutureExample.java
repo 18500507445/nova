@@ -6,6 +6,8 @@ import cn.hutool.core.util.NumberUtil;
 import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -227,17 +229,55 @@ public class CompletableFutureExample {
         System.out.println("结果：" + NumberUtil.add(one + two) + "，耗时：" + timer.interval() + "ms");
     }
 
+    /**
+     * 区分 allOf和anyOf
+     */
+    @Test
+    public void demoL() {
+        for (int i = 0; i < 5; i++) {
+            List<CompletableFuture<Integer>> completableFutures = new ArrayList<>();
+            completableFutures.add(m1());
+            completableFutures.add(m2());
+            completableFutures.add(m3());
+            CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).join();
+            for (CompletableFuture<Integer> result : completableFutures) {
+                try {
+                    System.out.println("price：" + result.get());
+                    System.out.println("time：" + DateUtil.now());
+                } catch (Exception ignored) {
+
+                }
+            }
+        }
+    }
+
     private static CompletableFuture<Integer> m1() {
+        int i = 3333;
         return CompletableFuture.supplyAsync(() -> {
-            Threads.sleep(1000);
-            return 2333;
+            Threads.sleep(i);
+            return i;
         });
     }
 
     private static CompletableFuture<Integer> m2() {
+        int i = 4444;
         return CompletableFuture.supplyAsync(() -> {
-            Threads.sleep(2000);
-            return 8877;
+            try {
+//                return 8877;
+                Threads.sleep(i);
+                throw new RuntimeException();
+            } catch (Exception ignored) {
+
+            }
+            return 0;
+        });
+    }
+
+    private static CompletableFuture<Integer> m3() {
+        int i = 5555;
+        return CompletableFuture.supplyAsync(() -> {
+            Threads.sleep(i);
+            return i;
         });
     }
 

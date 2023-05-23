@@ -65,7 +65,7 @@ class ManualJob {
             0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(1024), NAME_THREAD_FACTORY, new ThreadPoolExecutor.CallerRunsPolicy());
 
-    private static final BlockingQueue<Integer> QUEUE = new LinkedBlockingQueue<>();
+    private static final BlockingQueue<Integer> QUEUE = new LinkedBlockingQueue<>(1024);
 
     public static void main(String[] args) {
         final ManualJob manualJob = new ManualJob();

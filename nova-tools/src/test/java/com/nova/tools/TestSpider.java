@@ -68,19 +68,18 @@ public class TestSpider {
     /**
      * CompletableFuture使用的线程池
      */
-    private static final ExecutorService FUTURE_POOL = Executors.newFixedThreadPool(2);
+    private static final ExecutorService FUTURE_POOL = Executors.newFixedThreadPool(THREAD_COUNT / 5);
 
     /**
      * 手动创建线程池
      */
-    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(2, 2,
-            30L, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<>(1024), THREAD_FACTORY, new ThreadPoolExecutor.DiscardPolicy());
+    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(THREAD_COUNT / 5, THREAD_COUNT / 5,
+            30L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(1024), THREAD_FACTORY, new ThreadPoolExecutor.DiscardPolicy());
 
     /**
      * 信号量，控制获取ip的并发数，暂时不用了
      */
-    private final Semaphore SEMAPHORE = new Semaphore(1);
+    private final Semaphore SEMAPHORE = new Semaphore(THREAD_COUNT / 5);
 
     /**
      * 模拟任务数量

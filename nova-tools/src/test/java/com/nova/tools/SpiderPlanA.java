@@ -12,19 +12,20 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.read.listener.ReadListener;
-import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.utils.thread.Threads;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.ConnectionPool;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ import java.util.stream.Collectors;
  * @date: 2023/05/22 17:59
  */
 @Slf4j(topic = "TestSpider")
-public class TestSpider {
+public class SpiderPlanA {
 
     /**
      * 太阳代理
@@ -86,77 +87,37 @@ public class TestSpider {
      */
     private static final int COUNT = 400;
 
-    /**
-     * Excel实体类
-     */
-    @Data
-    static class Product {
-        @ExcelProperty(value = "sku_id", index = 0)
-        private String skuId;
-    }
-
-    @Test
-    public void randomTest() {
-        int j = RandomUtil.randomInt(1000);
-        System.out.println(j * 10);
-    }
-
-    @Test
-    public void excelTest() {
-        String fileName = "/Users/wangzehui/Documents/IdeaProjects/nova/nova-tools/src/main/resources/sku_id.xlsx";
-        EasyExcel.read(fileName, Product.class, new ReadListener<Product>() {
-            /**
-             * 单次缓存的数据量
-             */
-            public static final int BATCH_COUNT = 500000;
-
-            /**
-             * 临时存储
-             */
-            private List<Product> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
-
-            @Override
-            public void invoke(Product data, AnalysisContext context) {
-                cachedDataList.add(data);
-                if (cachedDataList.size() >= BATCH_COUNT) {
-                    saveData();
-                    // 存储完成清理 list
-                    cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
-                }
-            }
-
-            @Override
-            public void doAfterAllAnalysed(AnalysisContext context) {
-                saveData();
-            }
-
-            /**
-             * 加上存储数据库
-             */
-            private void saveData() {
-                log.info("{}条数据，开始存储数据库！", cachedDataList.size());
-                log.info("存储数据库成功！");
-            }
-        }).sheet().doRead();
-
-    }
-
     @Test
     public void urlTest() {
+        String price = "-1";
         try {
-            String github = HttpUtil.createGet("https://github.com/").timeout(1200).execute().body();
+            String ipJson = HttpUtil.createGet("http://http.tiqu.alibabaapi.com/getip?num=1&type=2&pack=119426&port=1&lb=1&pb=45&regions=").timeout(1500).execute().body();
+            JSONObject jsonObject = JSON.parseObject(ipJson);
+            JSONArray array = jsonObject.getJSONArray("data");
+
+            String skuId = "100038004347";
+            String url = String.format(SEARCH_URL, skuId);
+            url = String.format(BASE_SEARCH_URL, System.currentTimeMillis()) + URLEncodeUtil.encode(url, Charset.defaultCharset());
+
+            List<Object> randomList = RandomUtil.randomEleList(array, 2);
+
+            JSONObject ipObject = JSON.parseObject(Convert.toStr(randomList.get(0)));
+            price = okHttp(url, ipObject.getString("ip"), ipObject.getIntValue("port"));
         } catch (Exception ignored) {
 
         }
-        System.out.println(timer.interval() + " ms");
+        System.out.println("耗时：" + timer.interval() + " ms，price：" + price);
     }
 
     /**
+     * 线程池版本+并行http版
      * 2core，2max，2-future-core，120s，成功率98%
      * 3core，3max，2-future-core，150s，成功率95%
      * 10core，20max，max-future-core，15s，成功率77%
      * 20core，50max，max-future-core，15s，成功率72%
      * 50core，100max，max-future-core，15s，成功率72%
+     * </p>
+     * 测算，单服务，60s，200条，64台1min也就是12800，7200000w数据/12800/60 = 9.3h
      */
     @Test
     public void demoA() {
@@ -181,9 +142,11 @@ public class TestSpider {
     }
 
     /**
-     * 不用线程池，用sleep控制并发数，spider方式
+     * spider目前版本，不用线程池，用sleep控制并发数
      * sleep 600，time：240s，成功率：93%，并发2
      * sleep 10，time：5s，成功率：50-55%，并发100
+     * </p>
+     * 测算，单服务60s，100条，64台1min也就是6400，7200000w数据/6400/60 = 18.6h
      */
     @Test
     public void demoB() {
@@ -266,11 +229,7 @@ public class TestSpider {
             List<CompletableFuture<String>> completableFutures = randomList.stream().map(s -> CompletableFuture.supplyAsync(() -> {
                 JSONObject ipObject = JSON.parseObject(Convert.toStr(s));
                 try {
-                    HttpResponse execute = HttpUtil.createGet(finalUrl).setHttpProxy(ipObject.getString("ip"), ipObject.getIntValue("port")).timeout(1500).execute();
-                    if (ObjectUtil.isNotNull(execute) && 200 == execute.getStatus()) {
-                        JSONArray jsonArray = JSON.parseArray(Convert.toStr(execute.body()));
-                        return jsonArray.getJSONObject(0).getString("p");
-                    }
+                    return okHttp(finalUrl, ipObject.getString("ip"), ipObject.getIntValue("port"));
                 } catch (Exception ignored) {
 
                 }
@@ -282,7 +241,7 @@ public class TestSpider {
             //获得执行结果
             for (CompletableFuture<String> result : completableFutures) {
                 try {
-                    if (ObjectUtil.isNotNull(result.get())) {
+                    if (StrUtil.isNotBlank(result.get())) {
                         price = result.get();
                         longAdder.increment();
                         System.out.println("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：" + price + "，次数：" + longAdder.longValue());
@@ -320,14 +279,9 @@ public class TestSpider {
 
         @Override
         public void run() {
-            String price = "";
             JSONObject ipObject = JSON.parseObject(Convert.toStr(randomList.get(0)));
             try {
-                HttpResponse execute = HttpUtil.createGet(finalUrl).setHttpProxy(ipObject.getString("ip"), ipObject.getIntValue("port")).timeout(1500).execute();
-                if (ObjectUtil.isNotNull(execute) && 200 == execute.getStatus()) {
-                    JSONArray jsonArray = JSON.parseArray(Convert.toStr(execute.body()));
-                    price = jsonArray.getJSONObject(0).getString("p");
-                }
+                String price = okHttp(finalUrl, ipObject.getString("ip"), ipObject.getIntValue("port"));
                 if (StrUtil.isNotBlank(price)) {
                     longAdder.increment();
                     System.out.println("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：" + price + "，次数：" + longAdder.longValue());
@@ -361,6 +315,42 @@ public class TestSpider {
                 }
             }
             result += i;
+        }
+        return result;
+    }
+
+    private static String okHttp(String url, String ip, int port) throws IOException {
+        String result = "";
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        //代理服务器的IP和端口号
+        builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port)));
+        OkHttpClient httpClient = builder
+                //设置读取超时时间
+                .readTimeout(1500, TimeUnit.MILLISECONDS)
+                .retryOnConnectionFailure(false)
+                .connectionPool(new ConnectionPool(5, 10, TimeUnit.SECONDS))
+                //设置写的超时时间
+                .writeTimeout(1500, TimeUnit.MILLISECONDS)
+                .connectTimeout(1500, TimeUnit.MILLISECONDS).build();
+
+        Request request = new Request.Builder().url(url).build();
+        Response httpResponse = httpClient.newCall(request).execute();
+        //得到服务响应状态码
+        if (httpResponse.code() == 200) {
+            if (ObjectUtil.isNotNull(httpResponse.body())) {
+                JSONArray jsonArray = JSON.parseArray(httpResponse.body().string());
+                result = jsonArray.getJSONObject(0).getString("p");
+            }
+        }
+        return result;
+    }
+
+    private static String toolHttp(String url, String ip, int port) {
+        String result = "";
+        HttpResponse execute = HttpUtil.createGet(url).setHttpProxy(ip, port).timeout(1500).execute();
+        if (ObjectUtil.isNotNull(execute) && 200 == execute.getStatus()) {
+            JSONArray jsonArray = JSON.parseArray(Convert.toStr(execute.body()));
+            result = jsonArray.getJSONObject(0).getString("p");
         }
         return result;
     }

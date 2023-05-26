@@ -102,7 +102,7 @@ public class SpiderPlanA {
             List<Object> randomList = RandomUtil.randomEleList(array, 2);
 
             JSONObject ipObject = JSON.parseObject(Convert.toStr(randomList.get(0)));
-            price = okHttp(url, ipObject.getString("ip"), ipObject.getIntValue("port"));
+            price = toolHttp(url, ipObject.getString("ip"), ipObject.getIntValue("port"));
         } catch (Exception ignored) {
 
         }
@@ -111,13 +111,13 @@ public class SpiderPlanA {
 
     /**
      * 线程池版本+并行http版
-     * 2core，2max，2-future-core，120s，成功率98%
-     * 3core，3max，2-future-core，150s，成功率95%
-     * 10core，20max，max-future-core，15s，成功率77%
-     * 20core，50max，max-future-core，15s，成功率72%
-     * 50core，100max，max-future-core，15s，成功率72%
+     * planA：2core，2max，2-future-core，120s，成功率98%
+     * planB：3core，3max，2-future-core，150s，成功率95%
+     * planC：10core，20max，max-future-core，15s，成功率77%
+     * planD：20core，50max，max-future-core，15s，成功率72%
+     * planE：50core，100max，max-future-core，15s，成功率72%
      * </p>
-     * 测算，单服务，60s，200条，64台1min也就是12800，7200000w数据/12800/60 = 9.3h
+     * 最优方案A，进性测算，单服务，60s，200条，64台1min也就是12800，7200000w数据/12800/60 = 9.3h
      */
     @Test
     public void demoA() {
@@ -146,7 +146,7 @@ public class SpiderPlanA {
      * sleep 600，time：240s，成功率：93%，并发2
      * sleep 10，time：5s，成功率：50-55%，并发100
      * </p>
-     * 测算，单服务60s，100条，64台1min也就是6400，7200000w数据/6400/60 = 18.6h
+     * 测算，单服务60s，100条，64台1min也就是6400，7200000w数据/6400/60 = 18.6h，再加上代理ip队列阻塞重试时间
      */
     @Test
     public void demoB() {
@@ -229,7 +229,7 @@ public class SpiderPlanA {
             List<CompletableFuture<String>> completableFutures = randomList.stream().map(s -> CompletableFuture.supplyAsync(() -> {
                 JSONObject ipObject = JSON.parseObject(Convert.toStr(s));
                 try {
-                    return okHttp(finalUrl, ipObject.getString("ip"), ipObject.getIntValue("port"));
+                    return toolHttp(finalUrl, ipObject.getString("ip"), ipObject.getIntValue("port"));
                 } catch (Exception ignored) {
 
                 }

@@ -1,9 +1,11 @@
 package com.nova.lock.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.lock.annotation.Lock;
+import com.nova.lock.core.RedissonLock;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/")
 public class DemoController extends BaseController {
 
+    private RedissonLock redissonLock;
+
     /**
      * redisson
      */
@@ -30,4 +34,19 @@ public class DemoController extends BaseController {
         return AjaxResult.success(reqDto);
     }
 
+    @PostMapping("offer")
+    public AjaxResult offer(ValidatorReqDTO reqDto) {
+        return AjaxResult.success(redissonLock.rQueueOffer(reqDto.getName(), JSONUtil.toJsonStr(reqDto)));
+    }
+
+    @PostMapping("poll")
+    public AjaxResult poll(ValidatorReqDTO reqDto) {
+        String json = redissonLock.rQueuePoll(reqDto.getName(), String.class);
+        return AjaxResult.success("success", json);
+    }
+
+    @PostMapping("size")
+    public AjaxResult size(ValidatorReqDTO reqDto) {
+        return AjaxResult.success(redissonLock.rQueueSize(reqDto.getName()));
+    }
 }

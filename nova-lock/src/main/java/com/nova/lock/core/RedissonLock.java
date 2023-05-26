@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RLock;
+import org.redisson.api.RQueue;
 
 import java.util.concurrent.TimeUnit;
 
@@ -80,4 +82,39 @@ public class RedissonLock {
         RLock rLock = redissonManager.getRedisson().getLock(lockName);
         return rLock.isLocked();
     }
+
+    /**
+     * 分布式队列，RQueue，FIFO
+     *
+     * @param name
+     * @return
+     */
+    public boolean rQueueOffer(String name, Object value) {
+        RQueue<Object> queue = redissonManager.getRedisson().getQueue(name);
+        return queue.offer(value);
+    }
+
+    public <t> t rQueuePoll(String name, Class<t> tClass) {
+        RQueue<t> queue = redissonManager.getRedisson().getQueue(name);
+        return queue.poll();
+    }
+
+    public int rQueueSize(String name) {
+        return redissonManager.getRedisson().getQueue(name).size();
+    }
+
+    /**
+     * 分布式队列，BQueue，阻塞
+     */
+    public boolean bQueueOffer(String name, Object value, long time, TimeUnit unit) throws InterruptedException {
+        RBlockingQueue<Object> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
+        return blockingQueue.offer(value, time, unit);
+    }
+
+    public <t> t bQueuePoll(String name, long time, TimeUnit unit, Class<t> tClass) throws InterruptedException {
+        RBlockingQueue<t> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
+        return blockingQueue.poll(time, unit);
+    }
+
+
 }

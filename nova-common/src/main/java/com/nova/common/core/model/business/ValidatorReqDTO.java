@@ -32,4 +32,6 @@ public class ValidatorReqDTO extends BaseReqDTO {
     @Email(message = "邮件格式不正确")
     private String email;
 
+    private String name;
+
 }

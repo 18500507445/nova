@@ -178,7 +178,7 @@ public class SpiderPlanA {
      */
     @Test
     public void demoC() throws ExecutionException, InterruptedException {
-        doJob(10);
+        doJob(8);
     }
 
     public static void doJob(int threadNum) throws ExecutionException, InterruptedException {
@@ -314,6 +314,17 @@ public class SpiderPlanA {
                 } catch (Exception ignore) {
                 }
             }
+            result += i;
+        }
+        return result;
+    }
+
+    public static Long taskD() {
+        long result = 0L;
+        PARK_TIME = 0;
+        for (int i = 0; i < 100; i++) {
+            ++PARK_TIME;
+            ThreadUtil.sleep(500);
             result += i;
         }
         return result;

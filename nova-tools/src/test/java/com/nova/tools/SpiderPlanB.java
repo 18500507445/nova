@@ -42,13 +42,13 @@ public class SpiderPlanB {
     /**
      * 模拟任务数量
      */
-    private static final int COUNT = 7_000_00;
+    private static final int COUNT = 7_200_000;
 
     private static final int PAGE_SIZE = 10_000;
 
     /**
      * 不存在计算，单纯的IO型，所以想想线程数可否设置大一些
-     * 理论700w数据，分片700，每片1w对应开启一个线程。单片，1w数据，平均每次请求0.5s，请求超时设置尽量短些到时间断开，失败重试策略（暂不考虑，可用mq做补偿，不要影响主task）
+     * 理论720w数据，分片720，每片1w对应开启一个线程。单片，1w数据，平均每次请求0.5s，请求超时设置尽量短些到时间断开，失败重试策略（暂不考虑，可用mq做补偿，不要影响主task）
      * <p>
      * 本地测试
      * coreNum = 8，耗时：1min，次数：1000

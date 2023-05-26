@@ -536,7 +536,7 @@ public class RedisService {
     }
 
     /**
-     * 将list放入缓存
+     * 将list放入缓存，右管道进入
      *
      * @param key   键
      * @param value 值
@@ -549,6 +549,18 @@ public class RedisService {
         } catch (Exception e) {
             log.error("Exception: {}", e.getMessage());
             return false;
+        }
+    }
+
+    /**
+     * 从管道左边取出并移除
+     */
+    public Object listPop(String key) {
+        try {
+            return redisTemplate.opsForList().leftPop(key);
+        } catch (Exception e) {
+            log.error("Exception: {}", e.getMessage());
+            return null;
         }
     }
 

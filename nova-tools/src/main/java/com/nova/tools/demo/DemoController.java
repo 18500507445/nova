@@ -4,7 +4,6 @@ import cn.hutool.core.date.DateTime;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.tools.demo.entity.People;
 import com.starter.redis.RedisService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2023/05/26 12:09
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
 public class DemoController {
 
     private final RedisService redisService;
 
-    @PostMapping ("setList")
+    @PostMapping("setList")
     public AjaxResult setList(@RequestParam String name) {
         for (int i = 1; i < 3; i++) {
             People build = People.builder().id(i).age(1).createTime(new DateTime()).build();
@@ -36,6 +35,7 @@ public class DemoController {
 
     @PostMapping("getList")
     public AjaxResult getList(@RequestParam String name) {
-        return AjaxResult.success(redisService.listPop(name));
+        People people = (People) redisService.listPop(name);
+        return AjaxResult.success(people);
     }
 }

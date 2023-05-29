@@ -106,14 +106,26 @@ public class RedissonLock {
     /**
      * 分布式队列，BQueue，阻塞
      */
-    public boolean bQueueOffer(String name, Object value, long time, TimeUnit unit) throws InterruptedException {
-        RBlockingQueue<Object> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
-        return blockingQueue.offer(value, time, unit);
+    public boolean bQueueOffer(String name, Object value, long time, TimeUnit unit) {
+        try {
+            RBlockingQueue<Object> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
+            return blockingQueue.offer(value, time, unit);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public <t> t bQueuePoll(String name, long time, TimeUnit unit, Class<t> tClass) throws InterruptedException {
-        RBlockingQueue<t> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
-        return blockingQueue.poll(time, unit);
+    public <t> t bQueuePoll(String name, long time, TimeUnit unit, Class<t> tClass) {
+        try {
+            RBlockingQueue<t> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
+            return blockingQueue.poll(time, unit);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int bQueueSize(String name) {
+        return redissonManager.getRedisson().getBlockingQueue(name).size();
     }
 
 

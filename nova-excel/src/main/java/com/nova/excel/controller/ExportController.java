@@ -12,6 +12,7 @@ import com.nova.common.core.controller.BaseController;
 import com.nova.common.utils.list.PageUtils;
 import com.nova.excel.entity.ExportDO;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ import java.util.concurrent.*;
  * @date: 2023/1/12 13:30
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
 public class ExportController extends BaseController {

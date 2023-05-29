@@ -25,7 +25,7 @@
 * 框架核心组件
 
 7.nova-limit
-* 这里用的jedis客户端
+* 这里用的jedis客户端（不推荐，1.线程不安全需要连接池 2.相比性能较差）
 * [接口限流、请求响应拦截器、validation](nova-limit/limitNote.md)
 
 8.nova-lock

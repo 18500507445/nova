@@ -5,7 +5,7 @@ import cn.hutool.core.date.TimeInterval;
 import com.google.common.hash.Funnels;
 import com.nova.limit.config.BloomFilterHelper;
 import com.nova.limit.utils.JedisUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;
@@ -22,7 +22,7 @@ import java.util.List;
  * @date: 2023/4/21 17:23
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
 public class BloomController {

@@ -6,11 +6,13 @@ import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.lock.annotation.Lock;
 import com.nova.lock.core.RedissonLock;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -18,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2022/11/19 17:19
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
 public class DemoController extends BaseController {
 
-    private RedissonLock redissonLock;
+    private final RedissonLock redissonLock;
 
     /**
      * redisson
@@ -36,17 +38,17 @@ public class DemoController extends BaseController {
 
     @PostMapping("offer")
     public AjaxResult offer(ValidatorReqDTO reqDto) {
-        return AjaxResult.success(redissonLock.rQueueOffer(reqDto.getName(), JSONUtil.toJsonStr(reqDto)));
+        return AjaxResult.success(redissonLock.bQueueOffer(reqDto.getName(), JSONUtil.toJsonStr(reqDto), 500, TimeUnit.MILLISECONDS));
     }
 
     @PostMapping("poll")
     public AjaxResult poll(ValidatorReqDTO reqDto) {
-        String json = redissonLock.rQueuePoll(reqDto.getName(), String.class);
+        String json = redissonLock.bQueuePoll(reqDto.getName(), 500, TimeUnit.MILLISECONDS, String.class);
         return AjaxResult.success("success", json);
     }
 
     @PostMapping("size")
     public AjaxResult size(ValidatorReqDTO reqDto) {
-        return AjaxResult.success(redissonLock.rQueueSize(reqDto.getName()));
+        return AjaxResult.success(redissonLock.bQueueSize(reqDto.getName()));
     }
 }

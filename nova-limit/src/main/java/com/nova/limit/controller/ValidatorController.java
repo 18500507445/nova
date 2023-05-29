@@ -3,7 +3,7 @@ package com.nova.limit.controller;
 import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.utils.common.ValidatorUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2023/4/18 19:33
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
 public class ValidatorController {

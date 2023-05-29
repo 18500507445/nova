@@ -3,7 +3,7 @@ package com.nova.login.controller;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.core.controller.BaseController;
 import com.xkcoding.justauth.AuthRequestFactory;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * @date: 2023/1/2 21:07
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/oauth")
 public class OauthController extends BaseController {

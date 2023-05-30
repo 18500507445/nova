@@ -8,8 +8,8 @@ spring:
   # ========================== ↓↓↓↓↓↓ 邮件配置样例 ↓↓↓↓↓↓ ==========================
   mail:
     host: smtp.qq.com
-    username: xxx@qq.com # TODO 账号
-    password: xxxxxxxxxx # TODO 注：这里填写 在邮箱 设置 -> 账号 里面生成的`授权码` !!!
+    username: 1251850055@qq.com # TODO 账号
+    password: uzalblzbzsmticah # TODO 注：这里填写 在邮箱 设置 -> 账号 里面生成的`授权码` !!!
     default-encoding: UTF-8
     properties:
       mail:
@@ -18,3 +18,10 @@ spring:
           starttls:
             enable: true
             required: true
+
+jasypt:
+  encryptor:
+    # 加密算法
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    # 加密使用的盐
+    password: jaspyt_password

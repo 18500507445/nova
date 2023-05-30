@@ -31,12 +31,12 @@ public class ThreadPoolConfig {
     /**
      * 队列最大长度
      */
-    private static final int QUEUE_CAPACITY = 1000;
+    private static final int QUEUE_CAPACITY = 1024;
 
     /**
      * 线程池维护线程所允许的空闲时间
      */
-    private static final int KEEP_ALIVE_SECONDS = 300;
+    private static final int KEEP_ALIVE_SECONDS = 60;
 
     @Bean(name = "threadPoolTaskExecutor")
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {

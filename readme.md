@@ -38,7 +38,7 @@
 * [三方登录JustAuth](nova-login/loginNote.md)
 
 11.nova-mail
-* 邮件
+* 邮件、配置文件加解密
 
 12.nova-mq
 * active，kafka，rabbit

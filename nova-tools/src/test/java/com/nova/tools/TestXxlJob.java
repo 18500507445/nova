@@ -3,8 +3,7 @@ package com.nova.tools;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -26,8 +25,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author xuxueli 2019-12-11 21:52:51
  */
-@Component
-@SpringBootApplication
+@SpringBootTest
 @Slf4j
 public class TestXxlJob {
 

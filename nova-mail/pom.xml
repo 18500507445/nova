@@ -13,7 +13,6 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <jasypt.version>3.0.5</jasypt.version>
 
     </properties>
 
@@ -29,11 +28,5 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
-        <!--jasypt配置文件加解密-->
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>${jasypt.version}</version>
-        </dependency>
     </dependencies>
 </project>

@@ -8,8 +8,10 @@ spring:
   # ========================== ↓↓↓↓↓↓ 邮件配置样例 ↓↓↓↓↓↓ ==========================
   mail:
     host: smtp.qq.com
-    username: 1251850055@qq.com # TODO 账号
-    password: uzalblzbzsmticah # TODO 注：这里填写 在邮箱 设置 -> 账号 里面生成的`授权码` !!!
+    # 账号
+    username: ENC(HalkP5NTDZy7+55R6gYk0nkuLxlhfpJjDNNC3Ly9fKizNKG5B/EhNsJHzFHamcdJdhgikxHHLpV+nSxX1X1Nyw==)
+    # 注：这里填写 在邮箱 设置 -> 账号 里面生成的`授权码`
+    password: ENC(1NGyC3jyVYR+sVblUcp94NAinxdPvIWRgsnt08DgTufVBlZfPU8k5Ew2O8Znfz3djhTpaTD525N4ihRF/kuPQg==)
     default-encoding: UTF-8
     properties:
       mail:

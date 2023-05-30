@@ -13,7 +13,7 @@ spring:
     # redis服务器连接端口
     port: 63799
     # redis服务器连接密码（尽量设置密码，防止远程注入服务器挖矿）
-    password: '@wangzehui123'
+    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
     jedis:
       pool:
         # 连接池最大连接数（使用负值表示没有限制）
@@ -32,7 +32,7 @@ spring:
       host: 47.100.174.176
       port: 27017
       username: root
-      password: '@wangzehui123'
+      password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
       authentication-database: admin  #认证的库
       database: myself    #操作的库
 
@@ -56,3 +56,10 @@ xxl:
       logretentiondays: 15
       # 执行器IP [选填]：默认为空表示自动获取IP，多网卡时可手动设置指定IP，该IP不会绑定Host仅作为通讯实用；地址信息用于 "执行器注册" 和 "调度中心请求并触发任务"；
       port: -1
+
+jasypt:
+  encryptor:
+    # 加密算法
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    # 加密使用的盐
+    password: jaspyt_password

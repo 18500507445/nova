@@ -36,7 +36,7 @@ public class SpiderPlanA {
     /**
      * 手动创建线程池
      */
-    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(10 * THREAD_COUNT, 100 * THREAD_COUNT,
+    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(320, 320,
             30L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(1024), THREAD_FACTORY, new ThreadPoolExecutor.DiscardPolicy());
 
     /**
@@ -56,13 +56,18 @@ public class SpiderPlanA {
      * coreNum = 50，耗时：10s，次数：1000
      * coreNum = 80，耗时：7.8s，次数：1000
      * coreNum = 100，耗时：7.7s，次数：1000
-     * coreNum = 100，耗时：7.7s，次数：1000
      * coreNum = 700，耗时：7.7s，次数：1000
      * <p>
-     * 临界值coreNum = 80
+     *
+     * 满足上述公式所以可以根据网络IO时间测算coreNum
+     *
+     * 网络IO 500ms，临界值coreNum = 80
      * 耗时：13min，次数：100000
      * 耗时：130min，次数：1000000
      * 耗时：862min，次数：7200000 理论15.6h
+     *
+     * 网络IO 1000ms，临界值coreNum = 160
+     * 耗时：7.3s，次数：1000
      *
      * @param args
      */
@@ -78,7 +83,6 @@ public class SpiderPlanA {
         for (List<String> skuIds : partition) {
             EXECUTOR_POOL.submit(new Task(skuIds, longAdder));
         }
-
     }
 
     static class Task implements Runnable {
@@ -100,10 +104,12 @@ public class SpiderPlanA {
         @Override
         public void run() {
             for (String skuId : skuIds) {
-                ThreadUtil.sleep(500);
+                ThreadUtil.sleep(2000);
                 longAdder.increment();
-                System.out.println("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：0，次数：" + longAdder.longValue());
+                if (longAdder.longValue() >= 1000) {
+                    System.out.println("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：0，次数：" + longAdder.longValue());
 
+                }
                 //查询到价格后发送mq，利用消息队列解耦，提高吞吐
                 sendMq(skuId, "0");
             }

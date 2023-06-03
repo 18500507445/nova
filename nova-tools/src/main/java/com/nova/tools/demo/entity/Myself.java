@@ -39,18 +39,6 @@ public class Myself {
     public static final Boolean BOOLEAN_FALSE = Boolean.FALSE;
 
     /**
-     *
-     */
-    public static final List<People> PEOPLE_LIST = Arrays.asList(
-            People.builder().id(1).age(12).name("张三").description("傻").build(),
-            People.builder().id(2).age(16).name("赵四").description("白").build(),
-            People.builder().id(3).age(18).name("王五").description("甜").build(),
-            People.builder().id(4).age(21).name("田六").description("胖").build(),
-            People.builder().id(5).age(25).name("孙七").description("高").build()
-    );
-
-
-    /**
      * exercise-list
      */
     public static final List<People> EXERCISE_LIST = Arrays.asList(

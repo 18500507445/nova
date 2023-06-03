@@ -131,16 +131,14 @@ class ListDemo {
         }
         //方式1
         String nameStr1 = String.join(",", nameList);
+        System.out.println(JSONUtil.toJsonStr(nameStr1));
 
         //方式2
         String nameStr2 = StringUtils.join(nameList, ",");
+        System.out.println(JSONUtil.toJsonStr(nameStr2));
 
         //方式3
         String collect = PEOPLE_LIST.stream().map(People::getName).collect(joining(","));
-
-
-        System.out.println(JSONUtil.toJsonStr(nameStr1));
-        System.out.println(JSONUtil.toJsonStr(nameStr2));
         System.out.println(JSONUtil.toJsonStr(collect));
     }
 

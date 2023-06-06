@@ -16,9 +16,10 @@
 3. 方法内的局部变量是否线程安全？  答：如果线程私有就是安全的
 4. cpu占用过多
 - top（查看哪个进程id占用cpu高）
-- ps H -eo pid,tid,%cpu |grep pid（定位是哪个线程引起的）
+- ps H -eo pid,tid,%cpu |grep pid（定位是哪个线程tid引起的）
 - pid转16进制获得nid
 - jstack pid（找到nid对应的行号，进一步定位源代码）
+
 
 #### 1.3 本地方法栈
 java调用本地方法，由C或者C++语言编写的本地方法去操作系统，例如Object类clone方法（带有native关键字）

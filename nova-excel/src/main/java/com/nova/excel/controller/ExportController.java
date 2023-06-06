@@ -50,7 +50,6 @@ public class ExportController extends BaseController {
 
     static {
         path = Objects.requireNonNull(ExportController.class.getResource("/")).getPath();
-
         for (int i = 1; i <= TOTAL; i++) {
             ExportDO data = new ExportDO();
             data.setId(Convert.toLong(i));

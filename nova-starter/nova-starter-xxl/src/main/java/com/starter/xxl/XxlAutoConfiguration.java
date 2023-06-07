@@ -21,16 +21,18 @@ public class XxlAutoConfiguration {
     public XxlJobExecutor xxlJobExecutor(XxlProperties properties) {
         XxlProperties.AdminProperties admin = properties.getAdmin();
         XxlProperties.ExecutorProperties executor = properties.getExecutor();
-
-        // 初始化执行器
-        XxlJobExecutor xxlJobExecutor = new XxlJobSpringExecutor();
-        xxlJobExecutor.setIp(executor.getIp());
-        xxlJobExecutor.setPort(executor.getPort());
-        xxlJobExecutor.setAppname(executor.getAppName());
-        xxlJobExecutor.setLogPath(executor.getLogPath());
-        xxlJobExecutor.setLogRetentionDays(executor.getLogRetentionDays());
-        xxlJobExecutor.setAdminAddresses(admin.getAddresses());
-        xxlJobExecutor.setAccessToken(properties.getAccessToken());
-        return xxlJobExecutor;
+        if (null != admin && null != executor) {
+            // 初始化执行器
+            XxlJobExecutor xxlJobExecutor = new XxlJobSpringExecutor();
+            xxlJobExecutor.setIp(executor.getIp());
+            xxlJobExecutor.setPort(executor.getPort());
+            xxlJobExecutor.setAppname(executor.getAppName());
+            xxlJobExecutor.setLogPath(executor.getLogPath());
+            xxlJobExecutor.setLogRetentionDays(executor.getLogRetentionDays());
+            xxlJobExecutor.setAdminAddresses(admin.getAddresses());
+            xxlJobExecutor.setAccessToken(properties.getAccessToken());
+            return xxlJobExecutor;
+        }
+        return null;
     }
 }

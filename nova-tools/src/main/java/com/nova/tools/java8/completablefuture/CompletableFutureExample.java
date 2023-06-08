@@ -209,25 +209,26 @@ public class CompletableFutureExample {
     @Test
     public void demoK() throws ExecutionException, InterruptedException {
         TimeInterval timer = DateUtil.timer();
-        CompletableFuture<Integer> task1 = CompletableFuture.supplyAsync(() -> {
-            int sum = 0;
-            for (int i = 0; i < 10000; i++) {
+        CompletableFuture<Long> task1 = CompletableFuture.supplyAsync(() -> {
+            long sum = 0;
+            for (long i = 0; i < 5000000000L; i++) {
                 sum = sum + i;
             }
             return sum;
         });
-        CompletableFuture<Integer> task2 = CompletableFuture.supplyAsync(() -> {
-            int sum = 0;
-            for (int i = 10000; i < 20000; i++) {
+        CompletableFuture<Long> task2 = CompletableFuture.supplyAsync(() -> {
+            long sum = 0;
+            for (long i = 5000000000L; i < 10000000000L; i++) {
                 sum = sum + i;
             }
             return sum;
         });
         CompletableFuture.allOf(task1, task2).join();
-        int one = task1.get();
-        int two = task2.get();
+        Long one = task1.get();
+        Long two = task2.get();
         System.out.println("结果：" + NumberUtil.add(one + two) + "，耗时：" + timer.interval() + "ms");
     }
+
 
     /**
      * 区分 allOf和anyOf

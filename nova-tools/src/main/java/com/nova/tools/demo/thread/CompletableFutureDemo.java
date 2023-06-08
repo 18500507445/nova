@@ -7,7 +7,7 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.utils.thread.Threads;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;

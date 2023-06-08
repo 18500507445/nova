@@ -6,7 +6,7 @@ import com.nova.common.enums.ResultCode;
 import java.util.Map;
 
 /**
- * @description:
+ * @description: 第三种通用返回
  * @author: wzh
  * @date: 2022/9/21 17:24
  */

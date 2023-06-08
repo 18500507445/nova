@@ -75,6 +75,19 @@ class ThreadPoolDemo {
         pool.shutdown();
     }
 
+    /**
+     * 创建ForkJoinPool线程池
+     */
+    @Test
+    public void demoD() {
+        TimeInterval timer = DateUtil.timer();
+        ForkJoinPool pool = new ForkJoinPool();
+        Task task = new Task(0L, 10000000000L);
+        Long invoke = pool.invoke(task);
+        System.err.println(invoke);
+        System.out.println("花费时间:" + timer.interval() + "ms");
+    }
+
     private static class DemoA implements Runnable {
         @Override
         public void run() {
@@ -94,6 +107,36 @@ class ThreadPoolDemo {
 
             }
 
+        }
+    }
+
+    public static class Task extends RecursiveTask<Long> {
+        private final long start;
+        private final long end;
+        private static final long THURS_HOLD = 10000000L;
+
+        public Task(long start, long end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        @Override
+        protected Long compute() {
+            long length = end - start;
+            if (length <= THURS_HOLD) {//小于临界值
+                long sum = 0L;
+                for (long i = start; i <= end; i++) {
+                    sum += i;
+                }
+                return sum;
+
+            } else {
+                long mid = (start + end) / 2;
+                Task task1 = new Task(start, mid);
+                Task task2 = new Task(mid + 1, end);
+                invokeAll(task1, task2);
+                return task1.join() + task2.join();
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ public class DeleteMaven {
     /**
      * 注意：MAVEN_REPO_PATH 的值需要替换成你自己的maven本地仓库地址
      */
-    private static final String MAVEN_REPO_PATH = "/Library/Apache/repository";
+    private static final String MAVEN_REPO_PATH = "/Users/wangzehui/Documents/Apache/repository-nova";
 
     private static final String[] SUFFIX = {".lastUpdated", "jar-in-progress"};
 

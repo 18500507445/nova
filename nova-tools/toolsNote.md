@@ -43,6 +43,7 @@ nova-tools
 
 ### SQL
 * [《52条SQL语句，性能优化》](https://mp.weixin.qq.com/s/R3i6BgHP6yvRLXAxFYsdmA)
+* [《批量插入优化》](https://blog.csdn.net/lh155136/article/details/122437056?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168681407416800182712837%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168681407416800182712837&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-122437056-null-null.142%5Ev88%5Econtrol_2,239%5Ev2%5Einsert_chatgpt&utm_term=rewriteBatchedStatements%3Dtrue&spm=1018.2226.3001.4187)
 * [《SQL优化最强总结 (建议收藏~)》](https://mp.weixin.qq.com/s/SGYJoTYiAilNnNODgGkk3g)
 * [《SQL优化万能公式：5大步骤+10个案例》](https://mp.weixin.qq.com/s/_zi661XsJXql68YL8N93Lw)
 * [《为什么说MySQL单表行数不要超过2000w? 》](https://mp.weixin.qq.com/s/YEFIe5U-J8Stnh5MvokdLg)
@@ -95,3 +96,39 @@ nova-tools
 * [《面试必备：30个Java集合面试问题及答案》](https://mp.weixin.qq.com/s/psgJNTZ3B7ZNtiFb67rgDg)
 * [《面试官Spring63问，抗住了马上高薪》](https://mp.weixin.qq.com/s/TDCQYAWulmCCCcUn7ok0pQ)
 * [《最全的spring面试题和答案》](https://mp.weixin.qq.com/s/N8OkVaRtNlB3xq8KTvo2_g)
+
+
+### 三种for循环插入耗时对比（10000条），事例在my-mall项目测试类
+~~~Java
+    /**
+     * 普通批量插入，耗时：900823 ms
+     */
+    @Test
+    public void normalInsert() {
+        List<MyOrder> list = getList();
+        list.forEach(myOrder -> myOrderDao.insert(myOrder));
+        System.out.println("插入" + list.size() + "条数据，耗时 ： " + TIMER.interval() + " ms");
+    }
+
+
+    /**
+     * foreach批量插入，耗时：8479 ms
+     */
+    @Test
+    public void testBatch() {
+        int i = myOrderDao.insertBatch(getList());
+        System.out.println("插入" + i + "条数据，耗时 ： " + TIMER.interval() + " ms");
+    }
+
+    /**
+     * 开启SqlSession批量插入，耗时：7776 ms
+     */
+    @Test
+    public void testInsert() {
+        SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
+        MyOrderDao mapper = sqlSession.getMapper(MyOrderDao.class);
+        List<MyOrder> list = getList();
+        list.forEach(mapper::insert);
+        System.out.println("插入" + list.size() + "条数据，耗时 ： " + TIMER.interval() + " ms");
+    }
+~~~

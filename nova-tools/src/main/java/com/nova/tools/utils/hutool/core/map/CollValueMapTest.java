@@ -11,45 +11,45 @@ import java.util.HashSet;
 
 public class CollValueMapTest {
 
-	@Test
-	public void testListValueMapRemove() {
-		final ListValueMap<String, String> entries = new ListValueMap<>();
-		entries.putValue("one","11");
-		entries.putValue("one","22");
-		entries.putValue("one","33");
-		entries.putValue("one","22");
+    @Test
+    public void testListValueMapRemove() {
+        final ListValueMap<String, String> entries = new ListValueMap<>();
+        entries.putValue("one", "11");
+        entries.putValue("one", "22");
+        entries.putValue("one", "33");
+        entries.putValue("one", "22");
 
-		entries.putValue("two","44");
-		entries.putValue("two","55");
+        entries.putValue("two", "44");
+        entries.putValue("two", "55");
 
-		entries.putValue("three","11");
+        entries.putValue("three", "11");
 
-		entries.removeValue("one","22");
+        entries.removeValue("one", "22");
 
-		Assert.equals(ListUtil.of("11","33","22"), entries.get("one"));
+        Assert.equals(ListUtil.of("11", "33", "22"), entries.get("one"));
 
-		entries.removeValues("two",ListUtil.of("44","55"));
-		Assert.equals(ListUtil.empty(),entries.get("two"));
-	}
+        entries.removeValues("two", ListUtil.of("44", "55"));
+        Assert.equals(ListUtil.empty(), entries.get("two"));
+    }
 
-	@Test
-	public void testSetValueMapRemove() {
-		final SetValueMap<String, String> entries = new SetValueMap<>();
-		entries.putValue("one","11");
-		entries.putValue("one","22");
-		entries.putValue("one","33");
-		entries.putValue("one","22");
+    @Test
+    public void testSetValueMapRemove() {
+        final SetValueMap<String, String> entries = new SetValueMap<>();
+        entries.putValue("one", "11");
+        entries.putValue("one", "22");
+        entries.putValue("one", "33");
+        entries.putValue("one", "22");
 
-		entries.putValue("two","44");
-		entries.putValue("two","55");
+        entries.putValue("two", "44");
+        entries.putValue("two", "55");
 
-		entries.putValue("three","11");
+        entries.putValue("three", "11");
 
-		entries.removeValue("one","22");
-		Assert.equals(CollUtil.newHashSet("11","33"), entries.get("one"));
+        entries.removeValue("one", "22");
+        Assert.equals(CollUtil.newHashSet("11", "33"), entries.get("one"));
 
-		entries.removeValues("two",ListUtil.of("44","55"));
-		Assert.equals(CollUtil.empty(HashSet.class),entries.get("two"));
-	}
+        entries.removeValues("two", ListUtil.of("44", "55"));
+        Assert.equals(CollUtil.empty(HashSet.class), entries.get("two"));
+    }
 
 }

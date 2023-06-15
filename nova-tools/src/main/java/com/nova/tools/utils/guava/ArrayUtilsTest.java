@@ -15,7 +15,7 @@ class ArrayUtilsTest {
      * 给已有数组添加元素
      */
     @Test
-    public void test2(){
+    public void test2() {
         int[] ints = new int[1];
         ints[0] = 3;
         // toString打印数组内容
@@ -31,7 +31,7 @@ class ArrayUtilsTest {
      * 判断一个数组是不是空的(null/长度为0)
      */
     @Test
-    public void test1(){
+    public void test1() {
         Integer[] ints = new Integer[0];
         ints = null;
         System.out.println(ArrayUtils.isEmpty(ints));

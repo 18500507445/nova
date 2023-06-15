@@ -74,7 +74,7 @@ class ObjTest {
     }
 
     @Test
-    public void testBooleanTwo(){
+    public void testBooleanTwo() {
         Boolean aBoolean = ObjTest.valueOf(false);
         System.out.println(aBoolean);
     }

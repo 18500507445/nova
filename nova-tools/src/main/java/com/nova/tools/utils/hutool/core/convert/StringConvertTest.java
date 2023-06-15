@@ -8,9 +8,9 @@ import java.util.TimeZone;
 
 public class StringConvertTest {
 
-	@Test
-	public void timezoneToStrTest(){
-		final String s = Convert.toStr(TimeZone.getTimeZone("Asia/Shanghai"));
-		Assert.equals("Asia/Shanghai", s);
-	}
+    @Test
+    public void timezoneToStrTest() {
+        final String s = Convert.toStr(TimeZone.getTimeZone("Asia/Shanghai"));
+        Assert.equals("Asia/Shanghai", s);
+    }
 }

@@ -8,9 +8,9 @@ import java.time.ZoneId;
 import java.util.TimeZone;
 
 public class ZoneUtilTest {
-	@Test
-	public void toTest() {
-		Assert.equals(ZoneId.systemDefault(), ZoneUtil.toZoneId(null));
-		Assert.equals(TimeZone.getDefault(), ZoneUtil.toTimeZone(null));
-	}
+    @Test
+    public void toTest() {
+        Assert.equals(ZoneId.systemDefault(), ZoneUtil.toZoneId(null));
+        Assert.equals(TimeZone.getDefault(), ZoneUtil.toTimeZone(null));
+    }
 }

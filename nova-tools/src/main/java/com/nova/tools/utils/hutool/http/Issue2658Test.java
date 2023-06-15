@@ -11,13 +11,13 @@ import java.util.List;
 
 public class Issue2658Test {
 
-	@SuppressWarnings("resource")
-	@Test
-	@Ignore
-	public void getWithCookieTest(){
-		HttpRequest.get("https://www.baidu.com/").execute();
-		final List<HttpCookie> cookies = GlobalCookieManager.getCookieManager().getCookieStore().getCookies();
-		Console.log("###" + cookies);
-		HttpRequest.get("https://www.baidu.com/").execute();
-	}
+    @SuppressWarnings("resource")
+    @Test
+    @Ignore
+    public void getWithCookieTest() {
+        HttpRequest.get("https://www.baidu.com/").execute();
+        final List<HttpCookie> cookies = GlobalCookieManager.getCookieManager().getCookieStore().getCookies();
+        Console.log("###" + cookies);
+        HttpRequest.get("https://www.baidu.com/").execute();
+    }
 }

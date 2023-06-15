@@ -14,24 +14,24 @@ import java.time.LocalDateTime;
  */
 public class Issue644Test {
 
-	@Test
-	public void toBeanTest(){
-		final BeanWithDate beanWithDate = new BeanWithDate();
-		beanWithDate.setDate(LocalDateTime.now());
+    @Test
+    public void toBeanTest() {
+        final BeanWithDate beanWithDate = new BeanWithDate();
+        beanWithDate.setDate(LocalDateTime.now());
 
-		final JSONObject jsonObject = JSONUtil.parseObj(beanWithDate);
+        final JSONObject jsonObject = JSONUtil.parseObj(beanWithDate);
 
-		BeanWithDate beanWithDate2 = JSONUtil.toBean(jsonObject, BeanWithDate.class);
-		Assert.equals(LocalDateTimeUtil.formatNormal(beanWithDate.getDate()),
-				LocalDateTimeUtil.formatNormal(beanWithDate2.getDate()));
+        BeanWithDate beanWithDate2 = JSONUtil.toBean(jsonObject, BeanWithDate.class);
+        Assert.equals(LocalDateTimeUtil.formatNormal(beanWithDate.getDate()),
+                LocalDateTimeUtil.formatNormal(beanWithDate2.getDate()));
 
-		beanWithDate2 = JSONUtil.toBean(jsonObject.toString(), BeanWithDate.class);
-		Assert.equals(LocalDateTimeUtil.formatNormal(beanWithDate.getDate()),
-				LocalDateTimeUtil.formatNormal(beanWithDate2.getDate()));
-	}
+        beanWithDate2 = JSONUtil.toBean(jsonObject.toString(), BeanWithDate.class);
+        Assert.equals(LocalDateTimeUtil.formatNormal(beanWithDate.getDate()),
+                LocalDateTimeUtil.formatNormal(beanWithDate2.getDate()));
+    }
 
-	@Data
-	static class BeanWithDate{
-		private LocalDateTime date;
-	}
+    @Data
+    static class BeanWithDate {
+        private LocalDateTime date;
+    }
 }

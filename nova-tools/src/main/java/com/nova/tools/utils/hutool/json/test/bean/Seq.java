@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class Seq {
-	private String seq;
+    private String seq;
 
-	public Seq() {
-	}
+    public Seq() {
+    }
 
-	public Seq(String seq) {
-		this.seq = seq;
-	}
+    public Seq(String seq) {
+        this.seq = seq;
+    }
 }

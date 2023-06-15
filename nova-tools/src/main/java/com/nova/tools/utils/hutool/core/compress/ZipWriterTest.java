@@ -12,17 +12,17 @@ import java.io.File;
 
 public class ZipWriterTest {
 
-	@Test
-	@Ignore
-	public void zipDirTest() {
-		ZipUtil.zip(new File("d:/test"));
-	}
+    @Test
+    @Ignore
+    public void zipDirTest() {
+        ZipUtil.zip(new File("d:/test"));
+    }
 
-	@Test
-	@Ignore
-	public void addTest(){
-		final ZipWriter writer = ZipWriter.of(FileUtil.file("d:/test/test.zip"), CharsetUtil.CHARSET_UTF_8);
-		writer.add(new FileResource("d:/test/qr_c.png"));
-		writer.close();
-	}
+    @Test
+    @Ignore
+    public void addTest() {
+        final ZipWriter writer = ZipWriter.of(FileUtil.file("d:/test/test.zip"), CharsetUtil.CHARSET_UTF_8);
+        writer.add(new FileResource("d:/test/qr_c.png"));
+        writer.close();
+    }
 }

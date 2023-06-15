@@ -13,35 +13,35 @@ import java.util.stream.Stream;
 
 public class DefaultCloneTest {
 
-	@Test
-	public void clone0() {
-		Car oldCar = new Car();
-		oldCar.setId(1);
-		oldCar.setWheelList(Stream.of(new Wheel("h")).collect(Collectors.toList()));
+    @Test
+    public void clone0() {
+        Car oldCar = new Car();
+        oldCar.setId(1);
+        oldCar.setWheelList(Stream.of(new Wheel("h")).collect(Collectors.toList()));
 
-		Car newCar = oldCar.clone0();
-		Assert.equals(oldCar.getId(), newCar.getId());
-		Assert.equals(oldCar.getWheelList(), newCar.getWheelList());
+        Car newCar = oldCar.clone0();
+        Assert.equals(oldCar.getId(), newCar.getId());
+        Assert.equals(oldCar.getWheelList(), newCar.getWheelList());
 
-		newCar.setId(2);
-		Assert.notEquals(oldCar.getId(), newCar.getId());
-		newCar.getWheelList().add(new Wheel("s"));
+        newCar.setId(2);
+        Assert.notEquals(oldCar.getId(), newCar.getId());
+        newCar.getWheelList().add(new Wheel("s"));
 
-		Assert.equals(oldCar, newCar);
+        Assert.equals(oldCar, newCar);
 
-	}
+    }
 
-	@Data
-	static class Car implements DefaultCloneable<Car> {
-		private Integer id;
-		private List<Wheel> wheelList;
-	}
+    @Data
+    static class Car implements DefaultCloneable<Car> {
+        private Integer id;
+        private List<Wheel> wheelList;
+    }
 
-	@Data
-	@AllArgsConstructor
-	static class Wheel {
-		private String direction;
-	}
+    @Data
+    @AllArgsConstructor
+    static class Wheel {
+        private String direction;
+    }
 
 }
 

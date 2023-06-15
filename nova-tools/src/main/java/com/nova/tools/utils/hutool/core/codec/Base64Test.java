@@ -11,91 +11,90 @@ import org.junit.jupiter.api.Test;
  * Base64单元测试
  *
  * @author looly
- *
  */
 public class Base64Test {
 
-	@Test
-	public void isBase64Test(){
-		Assert.isTrue(Base64.isBase64(Base64.encode(RandomUtil.randomString(1000))));
-	}
+    @Test
+    public void isBase64Test() {
+        Assert.isTrue(Base64.isBase64(Base64.encode(RandomUtil.randomString(1000))));
+    }
 
-	@Test
-	public void isBase64Test2(){
-		String base64 = "dW1kb3MzejR3bmljM2J6djAyZzcwbWk5M213Nnk3cWQ3eDJwOHFuNXJsYmMwaXhxbmg0dmxrcmN0anRkbmd3\n" +
-				"ZzcyZWFwanI2NWNneTg2dnp6cmJoMHQ4MHpxY2R6c3pjazZtaQ==";
-		Assert.isTrue(Base64.isBase64(base64));
+    @Test
+    public void isBase64Test2() {
+        String base64 = "dW1kb3MzejR3bmljM2J6djAyZzcwbWk5M213Nnk3cWQ3eDJwOHFuNXJsYmMwaXhxbmg0dmxrcmN0anRkbmd3\n" +
+                "ZzcyZWFwanI2NWNneTg2dnp6cmJoMHQ4MHpxY2R6c3pjazZtaQ==";
+        Assert.isTrue(Base64.isBase64(base64));
 
-		// '=' 不位于末尾
-		base64 = "dW1kb3MzejR3bmljM2J6=djAyZzcwbWk5M213Nnk3cWQ3eDJwOHFuNXJsYmMwaXhxbmg0dmxrcmN0anRkbmd3\n" +
-				"ZzcyZWFwanI2NWNneTg2dnp6cmJoMHQ4MHpxY2R6c3pjazZtaQ=";
-		Assert.isFalse(Base64.isBase64(base64));
-	}
+        // '=' 不位于末尾
+        base64 = "dW1kb3MzejR3bmljM2J6=djAyZzcwbWk5M213Nnk3cWQ3eDJwOHFuNXJsYmMwaXhxbmg0dmxrcmN0anRkbmd3\n" +
+                "ZzcyZWFwanI2NWNneTg2dnp6cmJoMHQ4MHpxY2R6c3pjazZtaQ=";
+        Assert.isFalse(Base64.isBase64(base64));
+    }
 
-	@Test
-	public void encodeAndDecodeTest() {
-		String a = "伦家是一个非常长的字符串66";
-		String encode = Base64.encode(a);
-		Assert.equals("5Lym5a625piv5LiA5Liq6Z2e5bi46ZW/55qE5a2X56ym5LiyNjY=", encode);
+    @Test
+    public void encodeAndDecodeTest() {
+        String a = "伦家是一个非常长的字符串66";
+        String encode = Base64.encode(a);
+        Assert.equals("5Lym5a625piv5LiA5Liq6Z2e5bi46ZW/55qE5a2X56ym5LiyNjY=", encode);
 
-		String decodeStr = Base64.decodeStr(encode);
-		Assert.equals(a, decodeStr);
-	}
+        String decodeStr = Base64.decodeStr(encode);
+        Assert.equals(a, decodeStr);
+    }
 
-	@Test
-	public void encodeAndDecodeWithoutPaddingTest() {
-		String a = "伦家是一个非常长的字符串66";
-		String encode = Base64.encodeWithoutPadding(StrUtil.utf8Bytes(a));
-		Assert.equals("5Lym5a625piv5LiA5Liq6Z2e5bi46ZW/55qE5a2X56ym5LiyNjY", encode);
+    @Test
+    public void encodeAndDecodeWithoutPaddingTest() {
+        String a = "伦家是一个非常长的字符串66";
+        String encode = Base64.encodeWithoutPadding(StrUtil.utf8Bytes(a));
+        Assert.equals("5Lym5a625piv5LiA5Liq6Z2e5bi46ZW/55qE5a2X56ym5LiyNjY", encode);
 
-		String decodeStr = Base64.decodeStr(encode);
-		Assert.equals(a, decodeStr);
-	}
+        String decodeStr = Base64.decodeStr(encode);
+        Assert.equals(a, decodeStr);
+    }
 
-	@Test
-	public void encodeAndDecodeTest2() {
-		String a = "a61a5db5a67c01445ca2-HZ20181120172058/pdf/中国电信影像云单体网关Docker版-V1.2.pdf";
-		String encode = Base64.encode(a, CharsetUtil.UTF_8);
-		Assert.equals("YTYxYTVkYjVhNjdjMDE0NDVjYTItSFoyMDE4MTEyMDE3MjA1OC9wZGYv5Lit5Zu955S15L+h5b2x5YOP5LqR5Y2V5L2T572R5YWzRG9ja2Vy54mILVYxLjIucGRm", encode);
+    @Test
+    public void encodeAndDecodeTest2() {
+        String a = "a61a5db5a67c01445ca2-HZ20181120172058/pdf/中国电信影像云单体网关Docker版-V1.2.pdf";
+        String encode = Base64.encode(a, CharsetUtil.UTF_8);
+        Assert.equals("YTYxYTVkYjVhNjdjMDE0NDVjYTItSFoyMDE4MTEyMDE3MjA1OC9wZGYv5Lit5Zu955S15L+h5b2x5YOP5LqR5Y2V5L2T572R5YWzRG9ja2Vy54mILVYxLjIucGRm", encode);
 
-		String decodeStr = Base64.decodeStr(encode, CharsetUtil.UTF_8);
-		Assert.equals(a, decodeStr);
-	}
+        String decodeStr = Base64.decodeStr(encode, CharsetUtil.UTF_8);
+        Assert.equals(a, decodeStr);
+    }
 
-	@Test
-	public void encodeAndDecodeTest3() {
-		String a = ":";
-		String encode = Base64.encode(a);
-		Assert.equals("Og==", encode);
+    @Test
+    public void encodeAndDecodeTest3() {
+        String a = ":";
+        String encode = Base64.encode(a);
+        Assert.equals("Og==", encode);
 
-		String decodeStr = Base64.decodeStr(encode);
-		Assert.equals(a, decodeStr);
-	}
+        String decodeStr = Base64.decodeStr(encode);
+        Assert.equals(a, decodeStr);
+    }
 
-	@Test
-	public void encodeAndDecodeGbkTest(){
-		String orderDescription = "订购成功立即生效，30天内可观看专区中除单独计费影片外的所有内容，到期自动取消。";
-		String result = Base64.encode(orderDescription, "gbk");
+    @Test
+    public void encodeAndDecodeGbkTest() {
+        String orderDescription = "订购成功立即生效，30天内可观看专区中除单独计费影片外的所有内容，到期自动取消。";
+        String result = Base64.encode(orderDescription, "gbk");
 
-		final String s = Base64.decodeStr(result, "gbk");
-		Assert.equals(orderDescription, s);
-	}
+        final String s = Base64.decodeStr(result, "gbk");
+        Assert.equals(orderDescription, s);
+    }
 
-	@Test
-	public void decodeEmojiTest(){
-		String str = "😄";
-		final String encode = Base64.encode(str);
+    @Test
+    public void decodeEmojiTest() {
+        String str = "😄";
+        final String encode = Base64.encode(str);
 //		Console.log(encode);
 
-		final String decodeStr = Base64.decodeStr(encode);
-		Assert.equals(str, decodeStr);
-	}
+        final String decodeStr = Base64.decodeStr(encode);
+        Assert.equals(str, decodeStr);
+    }
 
-	@Test
-	public void issuesI5QR4WTest(){
-		String a = java.util.Base64.getEncoder().encodeToString("111".getBytes()); //java.util.Base64
-		String b = Base64.encode("111"); //cn.hutool.core.codec.Base64
+    @Test
+    public void issuesI5QR4WTest() {
+        String a = java.util.Base64.getEncoder().encodeToString("111".getBytes()); //java.util.Base64
+        String b = Base64.encode("111"); //cn.hutool.core.codec.Base64
 
-		Assert.equals(a, b);
-	}
+        Assert.equals(a, b);
+    }
 }

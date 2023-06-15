@@ -15,54 +15,54 @@ import java.io.Serializable;
  */
 public class Issue1687Test {
 
-	@Test
-	public void toBeanTest(){
-		final SysUserFb sysUserFb = new SysUserFb();
-		sysUserFb.setDepId("123");
-		sysUserFb.setCustomerId("456");
+    @Test
+    public void toBeanTest() {
+        final SysUserFb sysUserFb = new SysUserFb();
+        sysUserFb.setDepId("123");
+        sysUserFb.setCustomerId("456");
 
-		final SysUser sysUser = BeanUtil.toBean(sysUserFb, SysUser.class);
-		// 别名错位导致找不到字段
-		Assert.isNull(sysUser.getDepart());
-		Assert.equals(new Long(456L), sysUser.getOrgId());
-	}
+        final SysUser sysUser = BeanUtil.toBean(sysUserFb, SysUser.class);
+        // 别名错位导致找不到字段
+        Assert.isNull(sysUser.getDepart());
+        Assert.equals(new Long(456L), sysUser.getOrgId());
+    }
 
-	@Test
-	public void toBeanTest2(){
-		final SysUserFb sysUserFb = new SysUserFb();
-		sysUserFb.setDepId("123");
-		sysUserFb.setCustomerId("456");
+    @Test
+    public void toBeanTest2() {
+        final SysUserFb sysUserFb = new SysUserFb();
+        sysUserFb.setDepId("123");
+        sysUserFb.setCustomerId("456");
 
-		// 补救别名错位
-		final CopyOptions copyOptions = CopyOptions.create().setFieldMapping(
-				MapUtil.builder("depart", "depId").build()
-		);
-		final SysUser sysUser = BeanUtil.toBean(sysUserFb, SysUser.class, copyOptions);
+        // 补救别名错位
+        final CopyOptions copyOptions = CopyOptions.create().setFieldMapping(
+                MapUtil.builder("depart", "depId").build()
+        );
+        final SysUser sysUser = BeanUtil.toBean(sysUserFb, SysUser.class, copyOptions);
 
-		Assert.equals(new Long(123L), sysUser.getDepart());
-		Assert.equals(new Long(456L), sysUser.getOrgId());
-	}
+        Assert.equals(new Long(123L), sysUser.getDepart());
+        Assert.equals(new Long(456L), sysUser.getOrgId());
+    }
 
-	@Data
-	static class SysUserFb implements Serializable {
+    @Data
+    static class SysUserFb implements Serializable {
 
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		@Alias("depart")
-		private String depId;
+        @Alias("depart")
+        private String depId;
 
-		@Alias("orgId")
-		private String customerId;
-	}
+        @Alias("orgId")
+        private String customerId;
+    }
 
-	@Data
-	static class SysUser implements Serializable {
+    @Data
+    static class SysUser implements Serializable {
 
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		@Alias("depId")
-		private Long depart;
+        @Alias("depId")
+        private Long depart;
 
-		private Long orgId;
-	}
+        private Long orgId;
+    }
 }

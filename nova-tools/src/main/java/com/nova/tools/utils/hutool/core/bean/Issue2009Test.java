@@ -9,69 +9,69 @@ import org.junit.jupiter.api.Test;
  */
 public class Issue2009Test {
 
-	@SuppressWarnings("InnerClassMayBeStatic")
-	public class BaseA {
-		private String paPss;
+    @SuppressWarnings("InnerClassMayBeStatic")
+    public class BaseA {
+        private String paPss;
 
-		public String getPaPss() {
-			return paPss;
-		}
+        public String getPaPss() {
+            return paPss;
+        }
 
-		public void setPaPss(String paPss) {
-			this.paPss = paPss;
-		}
-	}
-
-
-	public class A extends BaseA {
-		private String papss;
-
-		public String getPapss() {
-			return papss;
-		}
-
-		public void setPapss(String papss) {
-			this.papss = papss;
-		}
-
-		@Override
-		public String toString() {
-			return "A{" +
-					"papss='" + papss + '\'' +
-					'}';
-		}
-	}
+        public void setPaPss(String paPss) {
+            this.paPss = paPss;
+        }
+    }
 
 
-	public class B extends BaseA {
-		private String papss;
+    public class A extends BaseA {
+        private String papss;
 
-		public B(String papss) {
-			this.papss = papss;
-		}
+        public String getPapss() {
+            return papss;
+        }
 
-		public String getPapss() {
-			return papss;
-		}
+        public void setPapss(String papss) {
+            this.papss = papss;
+        }
 
-		public void setPapss(String papss) {
-			this.papss = papss;
-		}
+        @Override
+        public String toString() {
+            return "A{" +
+                    "papss='" + papss + '\'' +
+                    '}';
+        }
+    }
 
-		@Override
-		public String toString() {
-			return "B{" +
-					"papss='" + papss + '\'' +
-					'}';
-		}
-	}
 
-	@Test
-	public void test() {
-		B b = new B("a string text");
-		A a = new A();
-		BeanUtil.copyProperties(b, a);
+    public class B extends BaseA {
+        private String papss;
 
-		Assert.equals(b.getPapss(), a.getPapss());
-	}
+        public B(String papss) {
+            this.papss = papss;
+        }
+
+        public String getPapss() {
+            return papss;
+        }
+
+        public void setPapss(String papss) {
+            this.papss = papss;
+        }
+
+        @Override
+        public String toString() {
+            return "B{" +
+                    "papss='" + papss + '\'' +
+                    '}';
+        }
+    }
+
+    @Test
+    public void test() {
+        B b = new B("a string text");
+        A a = new A();
+        BeanUtil.copyProperties(b, a);
+
+        Assert.equals(b.getPapss(), a.getPapss());
+    }
 }

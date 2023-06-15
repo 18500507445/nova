@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class TreeBuilderTest {
 
-	@Test
-	public void checkIsBuiltTest(){
-		final TreeBuilder<Integer> of = TreeBuilder.of(0);
-		of.build();
-		of.append(new ArrayList<>());
-	}
+    @Test
+    public void checkIsBuiltTest() {
+        final TreeBuilder<Integer> of = TreeBuilder.of(0);
+        of.build();
+        of.append(new ArrayList<>());
+    }
 }

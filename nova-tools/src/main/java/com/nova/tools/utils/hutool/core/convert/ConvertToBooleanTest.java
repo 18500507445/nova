@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 
 public class ConvertToBooleanTest {
 
-	@Test
-	public void intToBooleanTest(){
-		int a = 100;
-		final Boolean aBoolean = Convert.toBool(a);
-		Assert.isTrue(aBoolean);
+    @Test
+    public void intToBooleanTest() {
+        int a = 100;
+        final Boolean aBoolean = Convert.toBool(a);
+        Assert.isTrue(aBoolean);
 
-		int b = 0;
-		final Boolean bBoolean = Convert.toBool(b);
-		Assert.isFalse(bBoolean);
-	}
+        int b = 0;
+        final Boolean bBoolean = Convert.toBool(b);
+        Assert.isFalse(bBoolean);
+    }
 }

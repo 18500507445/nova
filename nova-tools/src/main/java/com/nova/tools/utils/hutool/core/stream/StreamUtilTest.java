@@ -15,42 +15,42 @@ import java.util.stream.Stream;
 
 public class StreamUtilTest {
 
-	@Test
-	public void ofTest(){
-		final Stream<Integer> stream = StreamUtil.of(2, x -> x * 2, 4);
-		final String result = stream.collect(CollectorUtil.joining(","));
-		Assert.equals("2,4,8,16", result);
-	}
+    @Test
+    public void ofTest() {
+        final Stream<Integer> stream = StreamUtil.of(2, x -> x * 2, 4);
+        final String result = stream.collect(CollectorUtil.joining(","));
+        Assert.equals("2,4,8,16", result);
+    }
 
-	// === iterator ===
-	@Test
-	public void streamTestNullIterator() {
-		//Assert.assertThrows(IllegalArgumentException.class, () -> StreamUtil.of((Iterator<Object>) null));
-	}
+    // === iterator ===
+    @Test
+    public void streamTestNullIterator() {
+        //Assert.assertThrows(IllegalArgumentException.class, () -> StreamUtil.of((Iterator<Object>) null));
+    }
 
-	@SuppressWarnings({"RedundantOperationOnEmptyContainer", "RedundantCollectionOperation"})
-	@Test
-	public void streamTestEmptyListToIterator() {
-		assertStreamIsEmpty(StreamUtil.of(new ArrayList<>().iterator()));
-	}
+    @SuppressWarnings({"RedundantOperationOnEmptyContainer", "RedundantCollectionOperation"})
+    @Test
+    public void streamTestEmptyListToIterator() {
+        assertStreamIsEmpty(StreamUtil.of(new ArrayList<>().iterator()));
+    }
 
-	@Test
-	public void streamTestEmptyIterator() {
-		assertStreamIsEmpty(StreamUtil.of(Collections.emptyIterator()));
-	}
+    @Test
+    public void streamTestEmptyIterator() {
+        assertStreamIsEmpty(StreamUtil.of(Collections.emptyIterator()));
+    }
 
-	@Test
-	public void streamTestOrdinaryIterator() {
-		final ArrayList<Integer> arrayList = CollUtil.newArrayList(1, 2, 3);
-		Assert.equals(new Integer[]{1, 2, 3}, StreamUtil.of(arrayList.iterator()).toArray());
+    @Test
+    public void streamTestOrdinaryIterator() {
+        final ArrayList<Integer> arrayList = CollUtil.newArrayList(1, 2, 3);
+        Assert.equals(new Integer[]{1, 2, 3}, StreamUtil.of(arrayList.iterator()).toArray());
 
-		final HashSet<Integer> hashSet = CollUtil.newHashSet(1, 2, 3);
-		Assert.equals(hashSet, StreamUtil.of(hashSet.iterator()).collect(Collectors.toSet()));
-	}
+        final HashSet<Integer> hashSet = CollUtil.newHashSet(1, 2, 3);
+        Assert.equals(hashSet, StreamUtil.of(hashSet.iterator()).collect(Collectors.toSet()));
+    }
 
-	void assertStreamIsEmpty(final Stream<?> stream) {
-		Assert.notNull(stream);
-		Assert.equals(0, stream.toArray().length);
-	}
-	// ================ stream test end ================
+    void assertStreamIsEmpty(final Stream<?> stream) {
+        Assert.notNull(stream);
+        Assert.equals(0, stream.toArray().length);
+    }
+    // ================ stream test end ================
 }

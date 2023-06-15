@@ -15,36 +15,36 @@ import org.junit.jupiter.api.Test;
  */
 public class IssuesI44E4HTest {
 
-	@Test
-	public void deserializerTest(){
-		GlobalSerializeMapping.put(TestDto.class, (JSONDeserializer<TestDto>) json -> {
-			final TestDto testDto = new TestDto();
-			testDto.setMd(new AcBizModuleMd("name1", ((JSONObject)json).getStr("md")));
-			return testDto;
-		});
+    @Test
+    public void deserializerTest() {
+        GlobalSerializeMapping.put(TestDto.class, (JSONDeserializer<TestDto>) json -> {
+            final TestDto testDto = new TestDto();
+            testDto.setMd(new AcBizModuleMd("name1", ((JSONObject) json).getStr("md")));
+            return testDto;
+        });
 
-		String jsonStr = "{\"md\":\"value1\"}";
-		final TestDto testDto = JSONUtil.toBean(jsonStr, TestDto.class);
-		Assert.equals("value1", testDto.getMd().getValue());
-	}
+        String jsonStr = "{\"md\":\"value1\"}";
+        final TestDto testDto = JSONUtil.toBean(jsonStr, TestDto.class);
+        Assert.equals("value1", testDto.getMd().getValue());
+    }
 
-	@Getter
-	@Setter
-	@AllArgsConstructor
-	public static class AcBizModuleMd {
-		private String name;
-		private String value;
-		// 值列表
-		public static final AcBizModuleMd Value1 = new AcBizModuleMd("value1", "name1");
-		public static final AcBizModuleMd Value2 = new AcBizModuleMd("value2", "name2");
-		public static final AcBizModuleMd Value3 = new AcBizModuleMd("value3", "name3");
-	}
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class AcBizModuleMd {
+        private String name;
+        private String value;
+        // 值列表
+        public static final AcBizModuleMd Value1 = new AcBizModuleMd("value1", "name1");
+        public static final AcBizModuleMd Value2 = new AcBizModuleMd("value2", "name2");
+        public static final AcBizModuleMd Value3 = new AcBizModuleMd("value3", "name3");
+    }
 
-	@Getter
-	@Setter
-	public static class TestDto {
-		private AcBizModuleMd md;
-	}
+    @Getter
+    @Setter
+    public static class TestDto {
+        private AcBizModuleMd md;
+    }
 }
 
 

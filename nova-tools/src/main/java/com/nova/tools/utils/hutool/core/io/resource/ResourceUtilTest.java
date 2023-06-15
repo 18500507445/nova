@@ -9,29 +9,29 @@ import org.junit.jupiter.api.Test;
 
 public class ResourceUtilTest {
 
-	@Test
-	public void readXmlTest(){
-		final String str = ResourceUtil.readUtf8Str("test.xml");
-		Assert.notNull(str);
+    @Test
+    public void readXmlTest() {
+        final String str = ResourceUtil.readUtf8Str("test.xml");
+        Assert.notNull(str);
 
-		Resource resource = new ClassPathResource("test.xml");
-		final String xmlStr = resource.readUtf8Str();
+        Resource resource = new ClassPathResource("test.xml");
+        final String xmlStr = resource.readUtf8Str();
 
-		Assert.equals(str, xmlStr);
-	}
+        Assert.equals(str, xmlStr);
+    }
 
-	@Test
-	public void stringResourceTest(){
-		final StringResource stringResource = new StringResource("testData", "test");
-		Assert.equals("test", stringResource.getName());
-		Assert.equals("testData".getBytes(), stringResource.readBytes());
-		Assert.equals("testData".getBytes(), IoUtil.readBytes(stringResource.getStream()));
-	}
+    @Test
+    public void stringResourceTest() {
+        final StringResource stringResource = new StringResource("testData", "test");
+        Assert.equals("test", stringResource.getName());
+        Assert.equals("testData".getBytes(), stringResource.readBytes());
+        Assert.equals("testData".getBytes(), IoUtil.readBytes(stringResource.getStream()));
+    }
 
-	@Test
-	public void fileResourceTest(){
-		final FileResource resource = new FileResource(FileUtil.file("test.xml"));
-		Assert.equals("test.xml", resource.getName());
-		Assert.isTrue(StrUtil.isNotEmpty(resource.readUtf8Str()));
-	}
+    @Test
+    public void fileResourceTest() {
+        final FileResource resource = new FileResource(FileUtil.file("test.xml"));
+        Assert.equals("test.xml", resource.getName());
+        Assert.isTrue(StrUtil.isNotEmpty(resource.readUtf8Str()));
+    }
 }

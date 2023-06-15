@@ -57,7 +57,7 @@ class StringUtilsTest {
      * 字符串的处理
      */
     @Test
-    public void charMatcherTest(){
+    public void charMatcherTest() {
         String str = "aj\tld1\b23aAbCs  kF45JAb  c56sl";
         //移除str中的a
         CharMatcher.is('a').removeFrom(str);
@@ -69,7 +69,7 @@ class StringUtilsTest {
         //保留str中的a,b,c字符
         CharMatcher.noneOf("abc").removeFrom(str);
         //匹配str中的a-j的字母，全部替换成数字6
-        CharMatcher.inRange('a','j').replaceFrom(str,"6");
+        CharMatcher.inRange('a', 'j').replaceFrom(str, "6");
         //去str中的空格
         CharMatcher.breakingWhitespace().removeFrom(str);
         //去掉str中的数字

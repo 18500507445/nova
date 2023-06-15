@@ -17,7 +17,7 @@ class NumberTest {
      * 测试float
      */
     @Test
-    public void floatDemo(){
+    public void floatDemo() {
         System.out.println(0.9f - 0.8f);
         System.out.println(1f - 0.7f);
         System.out.println("1" + "2");

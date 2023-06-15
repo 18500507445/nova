@@ -16,18 +16,18 @@ import java.lang.annotation.Target;
 // Retention注解决定MyAnnotation注解的生命周期
 @Retention(RetentionPolicy.RUNTIME)
 // Target注解决定MyAnnotation注解可以加在哪些成分上，如加在类身上，或者属性身上，或者方法身上等成分
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ElementType.METHOD, ElementType.TYPE})
 public @interface AnnotationForTest {
 
-	/**
-	 * 注解的默认属性值
-	 *
-	 * @return 属性值
-	 */
-	String value() default "";
+    /**
+     * 注解的默认属性值
+     *
+     * @return 属性值
+     */
+    String value() default "";
 
-	@Alias("value")
-	String retry() default "";
+    @Alias("value")
+    String retry() default "";
 
-	String[] names() default "";
+    String[] names() default "";
 }

@@ -12,31 +12,31 @@ import java.util.Map;
 
 public class Issue2202Test {
 
-	/**
-	 * https://github.com/dromara/hutool/issues/2202
-	 */
-	@Test
-	public void mapToBeanWithFieldNameEditorTest(){
-		Map<String, String> headerMap = new HashMap<>(5);
-		headerMap.put("wechatpay-serial", "serial");
-		headerMap.put("wechatpay-nonce", "nonce");
-		headerMap.put("wechatpay-timestamp", "timestamp");
-		headerMap.put("wechatpay-signature", "signature");
-		ResponseSignVerifyParams case1 = BeanUtil.toBean(headerMap, ResponseSignVerifyParams.class,
-				CopyOptions.create().setFieldNameEditor(field -> NamingCase.toCamelCase(field, '-')));
+    /**
+     * https://github.com/dromara/hutool/issues/2202
+     */
+    @Test
+    public void mapToBeanWithFieldNameEditorTest() {
+        Map<String, String> headerMap = new HashMap<>(5);
+        headerMap.put("wechatpay-serial", "serial");
+        headerMap.put("wechatpay-nonce", "nonce");
+        headerMap.put("wechatpay-timestamp", "timestamp");
+        headerMap.put("wechatpay-signature", "signature");
+        ResponseSignVerifyParams case1 = BeanUtil.toBean(headerMap, ResponseSignVerifyParams.class,
+                CopyOptions.create().setFieldNameEditor(field -> NamingCase.toCamelCase(field, '-')));
 
-		Assert.equals("serial", case1.getWechatpaySerial());
-		Assert.equals("nonce", case1.getWechatpayNonce());
-		Assert.equals("timestamp", case1.getWechatpayTimestamp());
-		Assert.equals("signature", case1.getWechatpaySignature());
-	}
+        Assert.equals("serial", case1.getWechatpaySerial());
+        Assert.equals("nonce", case1.getWechatpayNonce());
+        Assert.equals("timestamp", case1.getWechatpayTimestamp());
+        Assert.equals("signature", case1.getWechatpaySignature());
+    }
 
-	@Data
-	static class ResponseSignVerifyParams {
-		private String wechatpaySerial;
-		private String wechatpaySignature;
-		private String wechatpayTimestamp;
-		private String wechatpayNonce;
-		private String body;
-	}
+    @Data
+    static class ResponseSignVerifyParams {
+        private String wechatpaySerial;
+        private String wechatpaySignature;
+        private String wechatpayTimestamp;
+        private String wechatpayNonce;
+        private String body;
+    }
 }

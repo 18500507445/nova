@@ -37,7 +37,7 @@ class ZoneIdExample {
      * ZonedDateTime 示例
      */
     @Test
-    void zonedDateTimeExample(){
+    void zonedDateTimeExample() {
         // 创建一个ZonedDateTime实例
         ZonedDateTime dateTime = ZonedDateTime.now();
 

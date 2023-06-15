@@ -15,36 +15,36 @@ import java.io.IOException;
  */
 public class ExceptionUtilTest {
 
-	@Test
-	public void wrapTest() {
-		IORuntimeException e = ExceptionUtil.wrap(new IOException(), IORuntimeException.class);
-		Assert.notNull(e);
-	}
+    @Test
+    public void wrapTest() {
+        IORuntimeException e = ExceptionUtil.wrap(new IOException(), IORuntimeException.class);
+        Assert.notNull(e);
+    }
 
-	@Test
-	public void getRootTest() {
-		// 查找入口方法
-		StackTraceElement ele = ExceptionUtil.getRootStackElement();
-		Assert.equals("main", ele.getMethodName());
-	}
+    @Test
+    public void getRootTest() {
+        // 查找入口方法
+        StackTraceElement ele = ExceptionUtil.getRootStackElement();
+        Assert.equals("main", ele.getMethodName());
+    }
 
-	@Test
-	public void convertTest() {
-		// RuntimeException e = new RuntimeException();
-		IOException ioException = new IOException();
-		IllegalArgumentException argumentException = new IllegalArgumentException(ioException);
-		IOException ioException1 = ExceptionUtil.convertFromOrSuppressedThrowable(argumentException, IOException.class, true);
-		Assert.notNull(ioException1);
-	}
+    @Test
+    public void convertTest() {
+        // RuntimeException e = new RuntimeException();
+        IOException ioException = new IOException();
+        IllegalArgumentException argumentException = new IllegalArgumentException(ioException);
+        IOException ioException1 = ExceptionUtil.convertFromOrSuppressedThrowable(argumentException, IOException.class, true);
+        Assert.notNull(ioException1);
+    }
 
-	@Test
-	public void bytesIntConvertTest(){
-		final String s = Convert.toStr(12);
-		final int integer = Convert.toInt(s);
-		Assert.equals(12, integer);
+    @Test
+    public void bytesIntConvertTest() {
+        final String s = Convert.toStr(12);
+        final int integer = Convert.toInt(s);
+        Assert.equals(12, integer);
 
-		final byte[] bytes = Convert.intToBytes(12);
-		final int i = Convert.bytesToInt(bytes);
-		Assert.equals(12, i);
-	}
+        final byte[] bytes = Convert.intToBytes(12);
+        final int i = Convert.bytesToInt(bytes);
+        Assert.equals(12, i);
+    }
 }

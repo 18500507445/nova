@@ -9,65 +9,65 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 其它转换
- * @author Looly
  *
+ * @author Looly
  */
 public class ConvertOtherTest {
-	@Test
-	public void hexTest() {
-		String a = "我是一个小小的可爱的字符串";
-		String hex = Convert.toHex(a, CharsetUtil.CHARSET_UTF_8);
-		Assert.equals("e68891e698afe4b880e4b8aae5b08fe5b08fe79a84e58fafe788b1e79a84e5ad97e7aca6e4b8b2", hex);
+    @Test
+    public void hexTest() {
+        String a = "我是一个小小的可爱的字符串";
+        String hex = Convert.toHex(a, CharsetUtil.CHARSET_UTF_8);
+        Assert.equals("e68891e698afe4b880e4b8aae5b08fe5b08fe79a84e58fafe788b1e79a84e5ad97e7aca6e4b8b2", hex);
 
-		String raw = Convert.hexToStr(hex, CharsetUtil.CHARSET_UTF_8);
-		Assert.equals(a, raw);
-	}
+        String raw = Convert.hexToStr(hex, CharsetUtil.CHARSET_UTF_8);
+        Assert.equals(a, raw);
+    }
 
-	@Test
-	public void unicodeTest() {
-		String a = "我是一个小小的可爱的字符串";
+    @Test
+    public void unicodeTest() {
+        String a = "我是一个小小的可爱的字符串";
 
-		String unicode = Convert.strToUnicode(a);
-		Assert.equals("\\u6211\\u662f\\u4e00\\u4e2a\\u5c0f\\u5c0f\\u7684\\u53ef\\u7231\\u7684\\u5b57\\u7b26\\u4e32", unicode);
+        String unicode = Convert.strToUnicode(a);
+        Assert.equals("\\u6211\\u662f\\u4e00\\u4e2a\\u5c0f\\u5c0f\\u7684\\u53ef\\u7231\\u7684\\u5b57\\u7b26\\u4e32", unicode);
 
-		String raw = Convert.unicodeToStr(unicode);
-		Assert.equals(raw, a);
+        String raw = Convert.unicodeToStr(unicode);
+        Assert.equals(raw, a);
 
-		// 针对有特殊空白符的Unicode
-		String str = "你 好";
-		String unicode2 = Convert.strToUnicode(str);
-		Assert.equals("\\u4f60\\u00a0\\u597d", unicode2);
+        // 针对有特殊空白符的Unicode
+        String str = "你 好";
+        String unicode2 = Convert.strToUnicode(str);
+        Assert.equals("\\u4f60\\u00a0\\u597d", unicode2);
 
-		String str2 = Convert.unicodeToStr(unicode2);
-		Assert.equals(str, str2);
-	}
+        String str2 = Convert.unicodeToStr(unicode2);
+        Assert.equals(str, str2);
+    }
 
-	@Test
-	public void convertCharsetTest() {
-		String a = "我不是乱码";
-		// 转换后result为乱码
-		String result = Convert.convertCharset(a, CharsetUtil.UTF_8, CharsetUtil.ISO_8859_1);
-		String raw = Convert.convertCharset(result, CharsetUtil.ISO_8859_1, "UTF-8");
-		Assert.equals(raw, a);
-	}
+    @Test
+    public void convertCharsetTest() {
+        String a = "我不是乱码";
+        // 转换后result为乱码
+        String result = Convert.convertCharset(a, CharsetUtil.UTF_8, CharsetUtil.ISO_8859_1);
+        String raw = Convert.convertCharset(result, CharsetUtil.ISO_8859_1, "UTF-8");
+        Assert.equals(raw, a);
+    }
 
-	@Test
-	public void convertTimeTest() {
-		long a = 4535345;
-		long minutes = Convert.convertTime(a, TimeUnit.MILLISECONDS, TimeUnit.MINUTES);
-		Assert.equals(75, minutes);
-	}
+    @Test
+    public void convertTimeTest() {
+        long a = 4535345;
+        long minutes = Convert.convertTime(a, TimeUnit.MILLISECONDS, TimeUnit.MINUTES);
+        Assert.equals(75, minutes);
+    }
 
-	@Test
-	public void wrapUnwrapTest() {
-		// 去包装
-		Class<?> wrapClass = Integer.class;
-		Class<?> unWraped = Convert.unWrap(wrapClass);
-		Assert.equals(int.class, unWraped);
+    @Test
+    public void wrapUnwrapTest() {
+        // 去包装
+        Class<?> wrapClass = Integer.class;
+        Class<?> unWraped = Convert.unWrap(wrapClass);
+        Assert.equals(int.class, unWraped);
 
-		// 包装
-		Class<?> primitiveClass = long.class;
-		Class<?> wraped = Convert.wrap(primitiveClass);
-		Assert.equals(Long.class, wraped);
-	}
+        // 包装
+        Class<?> primitiveClass = long.class;
+        Class<?> wraped = Convert.wrap(primitiveClass);
+        Assert.equals(Long.class, wraped);
+    }
 }

@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 public class FormUrlencodedTest {
 
-	@Test
-	public void encodeParamTest(){
-		String encode = FormUrlencoded.ALL.encode("a+b", CharsetUtil.CHARSET_UTF_8);
-		Assert.equals("a%2Bb", encode);
+    @Test
+    public void encodeParamTest() {
+        String encode = FormUrlencoded.ALL.encode("a+b", CharsetUtil.CHARSET_UTF_8);
+        Assert.equals("a%2Bb", encode);
 
-		encode = FormUrlencoded.ALL.encode("a b", CharsetUtil.CHARSET_UTF_8);
-		Assert.equals("a+b", encode);
-	}
+        encode = FormUrlencoded.ALL.encode("a b", CharsetUtil.CHARSET_UTF_8);
+        Assert.equals("a+b", encode);
+    }
 }

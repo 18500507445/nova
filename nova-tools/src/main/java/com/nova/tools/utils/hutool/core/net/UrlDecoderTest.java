@@ -6,8 +6,8 @@ import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class UrlDecoderTest {
-	@Test
-	public void decodeForPathTest(){
-		Assert.equals("+", URLDecoder.decodeForPath("+", CharsetUtil.CHARSET_UTF_8));
-	}
+    @Test
+    public void decodeForPathTest() {
+        Assert.equals("+", URLDecoder.decodeForPath("+", CharsetUtil.CHARSET_UTF_8));
+    }
 }

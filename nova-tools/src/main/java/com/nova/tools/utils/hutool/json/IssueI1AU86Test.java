@@ -19,32 +19,32 @@ import java.util.List;
  */
 public class IssueI1AU86Test {
 
-	@Test
-	public void toListTest() {
-		List<String> redisList = CollUtil.newArrayList(
-				"{\"updateDate\":1583376342000,\"code\":\"move\",\"id\":1,\"sort\":1,\"name\":\"电影大全\"}",
-				"{\"updateDate\":1583378882000,\"code\":\"zy\",\"id\":3,\"sort\":5,\"name\":\"综艺会\"}"
-		);
+    @Test
+    public void toListTest() {
+        List<String> redisList = CollUtil.newArrayList(
+                "{\"updateDate\":1583376342000,\"code\":\"move\",\"id\":1,\"sort\":1,\"name\":\"电影大全\"}",
+                "{\"updateDate\":1583378882000,\"code\":\"zy\",\"id\":3,\"sort\":5,\"name\":\"综艺会\"}"
+        );
 
-		// 手动parse
-		final JSONArray jsonArray = new JSONArray();
-		for (String str : redisList) {
-			jsonArray.add(JSONUtil.parse(str));
-		}
+        // 手动parse
+        final JSONArray jsonArray = new JSONArray();
+        for (String str : redisList) {
+            jsonArray.add(JSONUtil.parse(str));
+        }
 
-		final List<Vcc> vccs = jsonArray.toList(Vcc.class);
-		for (Vcc vcc : vccs) {
-			Assert.notNull(vcc);
-		}
-	}
+        final List<Vcc> vccs = jsonArray.toList(Vcc.class);
+        for (Vcc vcc : vccs) {
+            Assert.notNull(vcc);
+        }
+    }
 
-	@Data
-	public static class Vcc implements Serializable {
-		private static final long serialVersionUID = 1L;
-		private Long id;
-		private Date updateDate;
-		private String code;
-		private String name;
-		private Integer sort;
-	}
+    @Data
+    public static class Vcc implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private Long id;
+        private Date updateDate;
+        private String code;
+        private String name;
+        private Integer sort;
+    }
 }

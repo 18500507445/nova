@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class UserB {
-	private String name;
-	private String b;
-	private Date date;
+    private String name;
+    private String b;
+    private Date date;
 }

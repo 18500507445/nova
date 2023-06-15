@@ -14,28 +14,28 @@ import java.util.List;
  */
 public class IssueI1H2VN {
 
-	@Test
-	public void toBeanTest() {
-		String jsonStr = "{'conditionsVo':[{'column':'StockNo','value':'abc','type':'='},{'column':'CheckIncoming','value':'1','type':'='}]," +
-				"'queryVo':{'conditionsVo':[{'column':'StockNo','value':'abc','type':'='},{'column':'CheckIncoming','value':'1','type':'='}],'queryVo':null}}";
-		QueryVo vo = JSONUtil.toBean(jsonStr, QueryVo.class);
-		Assert.equals(2, vo.getConditionsVo().size());
-		final QueryVo subVo = vo.getQueryVo();
-		Assert.notNull(subVo);
-		Assert.equals(2, subVo.getConditionsVo().size());
-		Assert.isNull(subVo.getQueryVo());
-	}
+    @Test
+    public void toBeanTest() {
+        String jsonStr = "{'conditionsVo':[{'column':'StockNo','value':'abc','type':'='},{'column':'CheckIncoming','value':'1','type':'='}]," +
+                "'queryVo':{'conditionsVo':[{'column':'StockNo','value':'abc','type':'='},{'column':'CheckIncoming','value':'1','type':'='}],'queryVo':null}}";
+        QueryVo vo = JSONUtil.toBean(jsonStr, QueryVo.class);
+        Assert.equals(2, vo.getConditionsVo().size());
+        final QueryVo subVo = vo.getQueryVo();
+        Assert.notNull(subVo);
+        Assert.equals(2, subVo.getConditionsVo().size());
+        Assert.isNull(subVo.getQueryVo());
+    }
 
-	@Data
-	public static class ConditionVo {
-		private String column;
-		private String value;
-		private String type;
-	}
+    @Data
+    public static class ConditionVo {
+        private String column;
+        private String value;
+        private String type;
+    }
 
-	@Data
-	public static class QueryVo {
-		private List<ConditionVo> conditionsVo;
-		private QueryVo queryVo;
-	}
+    @Data
+    public static class QueryVo {
+        private List<ConditionVo> conditionsVo;
+        private QueryVo queryVo;
+    }
 }

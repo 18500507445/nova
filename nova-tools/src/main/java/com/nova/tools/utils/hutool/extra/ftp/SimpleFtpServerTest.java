@@ -4,10 +4,10 @@ import cn.hutool.extra.ftp.SimpleFtpServer;
 
 public class SimpleFtpServerTest {
 
-	public static void main(String[] args) {
-		SimpleFtpServer
-				.create()
-				.addAnonymous("d:/test/ftp/")
-				.start();
-	}
+    public static void main(String[] args) {
+        SimpleFtpServer
+                .create()
+                .addAnonymous("d:/test/ftp/")
+                .start();
+    }
 }

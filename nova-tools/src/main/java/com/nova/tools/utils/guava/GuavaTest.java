@@ -27,8 +27,9 @@ class GuavaTest {
 //        }
 //        Preconditions.checkNotNull(param,"参数不能为空");
         // 第一个expression:布尔值的表达式，true:校验通过，不抛异常;false:抛异常
-        Preconditions.checkArgument(param != null,"参数不能为空");
+        Preconditions.checkArgument(param != null, "参数不能为空");
     }
+
     /**
      * 不可变集合
      */
@@ -48,15 +49,16 @@ class GuavaTest {
         list.add("ccc");
         System.out.println(jdkUnmodifiableList);
     }
+
     /**
      * HashMultimap用来替代jdk原生的Map<String,Collection<String>> map;
      */
     @Test
     public void test6() {
-        Multimap<String,String> multimap = HashMultimap.create();
-        multimap.put("a","1");
-        multimap.put("a","2");
-        multimap.put("a","3");
+        Multimap<String, String> multimap = HashMultimap.create();
+        multimap.put("a", "1");
+        multimap.put("a", "2");
+        multimap.put("a", "3");
         Collection<String> aValues = multimap.get("a");
         System.out.println(aValues);
 
@@ -66,6 +68,7 @@ class GuavaTest {
         Map<String, Collection<String>> jdkMap = multimap.asMap();
         System.out.println(jdkMap);
     }
+
     /**
      * Multiset
      * list:元素可重复的有序集合
@@ -73,7 +76,7 @@ class GuavaTest {
      */
     @Test
     public void test5() {
-        Multiset<String> multiset =  HashMultiset.create();
+        Multiset<String> multiset = HashMultiset.create();
         multiset.add("a");
         multiset.add("b");
         multiset.add("c");
@@ -82,15 +85,16 @@ class GuavaTest {
         Set<Multiset.Entry<String>> entries = multiset.entrySet();
         System.out.println(entries);// [a x 2, b, c]
         for (Multiset.Entry<String> entry : entries) {
-            System.out.println("元素:"+entry.getElement()+",个数:"+entry.getCount());
+            System.out.println("元素:" + entry.getElement() + ",个数:" + entry.getCount());
         }
 
         Set<String> elementSet = multiset.elementSet();
         System.out.println(elementSet);// [a, b, c]
         for (String ele : elementSet) {
-            System.out.println("集合里面的元素:"+ele);
+            System.out.println("集合里面的元素:" + ele);
         }
     }
+
     /**
      * Ints
      * Longs
@@ -102,6 +106,7 @@ class GuavaTest {
         List<Integer> integers = Ints.asList(1, 2, 3);
         System.out.println(integers);
     }
+
     /**
      * Lists的用法,另有Sets、Maps
      */
@@ -174,8 +179,7 @@ class GuavaTest {
                 // 过滤掉空白的字符串(不包括"")
                 .omitEmptyStrings()
                 // 去除每个元素的前后空格
-                .trimResults()
-                ;
+                .trimResults();
         Iterable<String> iterable = splitter.split(str);
         System.out.println(iterable);
         List<String> splitToList = splitter.splitToList(str);

@@ -19,46 +19,46 @@ import java.util.stream.Stream;
  */
 public class Issue2131Test {
 
-	@Test
-	public void strToBean() {
-		GoodsResponse goodsResponse = new GoodsResponse();
-		GoodsItem apple = new GoodsItem().setGoodsId(1L).setGoodsName("apple").setChannel("wechat");
-		GoodsItem pear = new GoodsItem().setGoodsId(2L).setGoodsName("pear").setChannel("jd");
-		final List<GoodsItem> collections = goodsResponse.getCollections();
-		Stream.of(apple, pear).forEach(collections::add);
+    @Test
+    public void strToBean() {
+        GoodsResponse goodsResponse = new GoodsResponse();
+        GoodsItem apple = new GoodsItem().setGoodsId(1L).setGoodsName("apple").setChannel("wechat");
+        GoodsItem pear = new GoodsItem().setGoodsId(2L).setGoodsName("pear").setChannel("jd");
+        final List<GoodsItem> collections = goodsResponse.getCollections();
+        Stream.of(apple, pear).forEach(collections::add);
 
-		String jsonStr = JSONUtil.toJsonStr(goodsResponse);
-		final JSONObject jsonObject = JSONUtil.parseObj(jsonStr);
+        String jsonStr = JSONUtil.toJsonStr(goodsResponse);
+        final JSONObject jsonObject = JSONUtil.parseObj(jsonStr);
 
-		GoodsResponse result = jsonObject.toBean(GoodsResponse.class);
-		Assert.equals(0, result.getCollections().size());
-	}
+        GoodsResponse result = jsonObject.toBean(GoodsResponse.class);
+        Assert.equals(0, result.getCollections().size());
+    }
 
-	@Data
-	static class BaseResponse {
+    @Data
+    static class BaseResponse {
 
-		@SuppressWarnings("unused")
-		@Transient
-		public final boolean successful() {
-			return code == 200 || code == 201;
-		}
+        @SuppressWarnings("unused")
+        @Transient
+        public final boolean successful() {
+            return code == 200 || code == 201;
+        }
 
-		private int code = 200;
-		private String message;
-	}
+        private int code = 200;
+        private String message;
+    }
 
-	@EqualsAndHashCode(callSuper = true)
-	@Data
-	static class GoodsResponse extends BaseResponse {
-		// 由于定义成了final形式，setXXX无效，导致无法注入。
-		private final List<GoodsItem> collections = ListUtil.list(false);
-	}
+    @EqualsAndHashCode(callSuper = true)
+    @Data
+    static class GoodsResponse extends BaseResponse {
+        // 由于定义成了final形式，setXXX无效，导致无法注入。
+        private final List<GoodsItem> collections = ListUtil.list(false);
+    }
 
-	@Data
-	@Accessors(chain = true)
-	static class GoodsItem{
-		private long goodsId;
-		private String goodsName;
-		private String channel;
-	}
+    @Data
+    @Accessors(chain = true)
+    static class GoodsItem {
+        private long goodsId;
+        private String goodsName;
+        private String channel;
+    }
 }

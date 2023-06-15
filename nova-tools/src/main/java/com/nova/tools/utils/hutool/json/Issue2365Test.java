@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 
 public class Issue2365Test {
 
-	@Test
-	public void toBeanTest(){
-		String jsonStr = "{\"fileName\":\"aaa\",\"fileBytes\":\"AQ==\"}";
-		final FileInfo fileInfo = JSONUtil.toBean(jsonStr, FileInfo.class);
-		Assert.equals("aaa", fileInfo.getFileName());
-		Assert.equals(new byte[]{1}, fileInfo.getFileBytes());
-	}
+    @Test
+    public void toBeanTest() {
+        String jsonStr = "{\"fileName\":\"aaa\",\"fileBytes\":\"AQ==\"}";
+        final FileInfo fileInfo = JSONUtil.toBean(jsonStr, FileInfo.class);
+        Assert.equals("aaa", fileInfo.getFileName());
+        Assert.equals(new byte[]{1}, fileInfo.getFileBytes());
+    }
 
-	@Data
-	public static class FileInfo {
-		private String fileName;
-		private byte[] fileBytes;
-	}
+    @Data
+    public static class FileInfo {
+        private String fileName;
+        private byte[] fileBytes;
+    }
 }

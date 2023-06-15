@@ -14,19 +14,19 @@ import java.util.List;
  */
 public class Issue1729Test {
 
-	@Test
-	public void readTest() {
-		final ExcelReader reader = ExcelUtil.getReader("UserProjectDO.xlsx");
-		final List<UserProjectDO> read = reader.read(0, 1, UserProjectDO.class);
-		Assert.equals("aa", read.get(0).getProjectName());
-		Assert.isNull(read.get(0).getEndTrainTime());
-		Assert.equals("2020-02-02", read.get(0).getEndTestTime().toString());
-	}
+    @Test
+    public void readTest() {
+        final ExcelReader reader = ExcelUtil.getReader("UserProjectDO.xlsx");
+        final List<UserProjectDO> read = reader.read(0, 1, UserProjectDO.class);
+        Assert.equals("aa", read.get(0).getProjectName());
+        Assert.isNull(read.get(0).getEndTrainTime());
+        Assert.equals("2020-02-02", read.get(0).getEndTestTime().toString());
+    }
 
-	@Data
-	public static class UserProjectDO {
-		private String projectName;
-		private java.sql.Date endTrainTime;
-		private java.sql.Date endTestTime;
-	}
+    @Data
+    public static class UserProjectDO {
+        private String projectName;
+        private java.sql.Date endTrainTime;
+        private java.sql.Date endTestTime;
+    }
 }

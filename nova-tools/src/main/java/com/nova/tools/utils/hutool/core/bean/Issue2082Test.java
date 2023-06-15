@@ -11,24 +11,24 @@ import org.junit.jupiter.api.Test;
  */
 public class Issue2082Test {
 
-	@Test
-	public void toBeanTest() {
-		TestBean2 testBean2 = new TestBean2();
-		TestBean test = BeanUtil.toBean(testBean2, TestBean.class);
-		Assert.isNull(test.getId());
-	}
+    @Test
+    public void toBeanTest() {
+        TestBean2 testBean2 = new TestBean2();
+        TestBean test = BeanUtil.toBean(testBean2, TestBean.class);
+        Assert.isNull(test.getId());
+    }
 
-	@Data
-	static class TestBean {
-		private Long id;
+    @Data
+    static class TestBean {
+        private Long id;
 
-		public void setId(String id) {
-			this.id = Long.valueOf(id);
-		}
-	}
+        public void setId(String id) {
+            this.id = Long.valueOf(id);
+        }
+    }
 
-	@Data
-	static class TestBean2 {
-		private String id;
-	}
+    @Data
+    static class TestBean2 {
+        private String id;
+    }
 }

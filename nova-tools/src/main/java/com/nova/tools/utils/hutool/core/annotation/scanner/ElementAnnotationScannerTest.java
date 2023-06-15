@@ -15,47 +15,47 @@ import java.util.Map;
 
 public class ElementAnnotationScannerTest {
 
-	@Test
-	public void supportTest() {
-		final ElementAnnotationScanner scanner = new ElementAnnotationScanner();
-		Assert.isTrue(scanner.support(ReflectUtil.getField(FieldAnnotationScannerTest.Example.class, "id")));
-		Assert.isTrue(scanner.support(ReflectUtil.getMethod(FieldAnnotationScannerTest.Example.class, "getId")));
-		Assert.isFalse(scanner.support(null));
-		Assert.isTrue(scanner.support(FieldAnnotationScannerTest.Example.class));
-	}
+    @Test
+    public void supportTest() {
+        final ElementAnnotationScanner scanner = new ElementAnnotationScanner();
+        Assert.isTrue(scanner.support(ReflectUtil.getField(FieldAnnotationScannerTest.Example.class, "id")));
+        Assert.isTrue(scanner.support(ReflectUtil.getMethod(FieldAnnotationScannerTest.Example.class, "getId")));
+        Assert.isFalse(scanner.support(null));
+        Assert.isTrue(scanner.support(FieldAnnotationScannerTest.Example.class));
+    }
 
-	@Test
-	public void getAnnotationsTest() {
-		final ElementAnnotationScanner scanner = new ElementAnnotationScanner();
-		final Field field = ReflectUtil.getField(FieldAnnotationScannerTest.Example.class, "id");
-		Assert.notNull(field);
-		Assert.isTrue(scanner.support(field));
-		List<Annotation> annotations = scanner.getAnnotations(field);
-		Assert.equals(1, annotations.size());
-		Assert.equals(AnnotationForScannerTest.class, CollUtil.getFirst(annotations).annotationType());
-	}
+    @Test
+    public void getAnnotationsTest() {
+        final ElementAnnotationScanner scanner = new ElementAnnotationScanner();
+        final Field field = ReflectUtil.getField(FieldAnnotationScannerTest.Example.class, "id");
+        Assert.notNull(field);
+        Assert.isTrue(scanner.support(field));
+        List<Annotation> annotations = scanner.getAnnotations(field);
+        Assert.equals(1, annotations.size());
+        Assert.equals(AnnotationForScannerTest.class, CollUtil.getFirst(annotations).annotationType());
+    }
 
-	@Test
-	public void scanTest() {
-		final ElementAnnotationScanner scanner = new ElementAnnotationScanner();
-		final Field field = ReflectUtil.getField(FieldAnnotationScannerTest.Example.class, "id");
-		final Map<Integer, List<Annotation>> map = new HashMap<>();
-		scanner.scan(
-			(index, annotation) -> map.computeIfAbsent(index, i -> new ArrayList<>()).add(annotation),
-			field, null
-		);
-		Assert.equals(1, map.size());
-		Assert.equals(1, map.get(0).size());
-		Assert.equals(AnnotationForScannerTest.class, map.get(0).get(0).annotationType());
-	}
+    @Test
+    public void scanTest() {
+        final ElementAnnotationScanner scanner = new ElementAnnotationScanner();
+        final Field field = ReflectUtil.getField(FieldAnnotationScannerTest.Example.class, "id");
+        final Map<Integer, List<Annotation>> map = new HashMap<>();
+        scanner.scan(
+                (index, annotation) -> map.computeIfAbsent(index, i -> new ArrayList<>()).add(annotation),
+                field, null
+        );
+        Assert.equals(1, map.size());
+        Assert.equals(1, map.get(0).size());
+        Assert.equals(AnnotationForScannerTest.class, map.get(0).get(0).annotationType());
+    }
 
-	public static class Example {
-		@AnnotationForScannerTest
-		private Integer id;
+    public static class Example {
+        @AnnotationForScannerTest
+        private Integer id;
 
-		public Integer getId() {
-			return id;
-		}
-	}
+        public Integer getId() {
+            return id;
+        }
+    }
 
 }

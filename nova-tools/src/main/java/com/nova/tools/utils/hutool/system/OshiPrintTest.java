@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 @Ignore
 public class OshiPrintTest {
 
-	@Test
-	@Ignore
-	public void printCpuInfo(){
-		Console.log(OshiUtil.getCpuInfo());
-	}
+    @Test
+    @Ignore
+    public void printCpuInfo() {
+        Console.log(OshiUtil.getCpuInfo());
+    }
 }

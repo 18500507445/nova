@@ -15,22 +15,22 @@ import java.util.Map;
  */
 public class IssueI53OSTTest {
 
-	@Test
-	@Ignore
-	public void readTest(){
-		Map<String, Object> result = new HashMap<>();
-		List<Object> header = new ArrayList<>();
+    @Test
+    @Ignore
+    public void readTest() {
+        Map<String, Object> result = new HashMap<>();
+        List<Object> header = new ArrayList<>();
 
-		ExcelUtil.readBySax("d:/test/sax_merge.xlsx", -1, (sheetIndex, rowIndex, rowCells) -> {
-			if(rowIndex == 0){
-				header.addAll(rowCells);
-				return;
-			}
-			for (int i = 0; i < rowCells.size(); i++) {
-				result.put((String) header.get(i), rowCells.get(i));
-			}
-			Console.log(result);
-			result.clear();
-		});
-	}
+        ExcelUtil.readBySax("d:/test/sax_merge.xlsx", -1, (sheetIndex, rowIndex, rowCells) -> {
+            if (rowIndex == 0) {
+                header.addAll(rowCells);
+                return;
+            }
+            for (int i = 0; i < rowCells.size(); i++) {
+                result.put((String) header.get(i), rowCells.get(i));
+            }
+            Console.log(result);
+            result.clear();
+        });
+    }
 }

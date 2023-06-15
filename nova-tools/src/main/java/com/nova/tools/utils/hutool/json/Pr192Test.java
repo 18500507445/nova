@@ -9,68 +9,69 @@ import java.util.List;
 
 public class Pr192Test {
 
-	@Test
-	public void toBeanTest3() {
-		//		测试数字类型精度丢失的情况
-		String number = "1234.123456789123456";
-		String jsonString = "{\"create\":{\"details\":[{\"price\":" + number + "}]}}";
-		WebCreate create = JSONUtil.toBean(jsonString, WebCreate.class);
-		Assert.equals(number,create.getCreate().getDetails().get(0).getPrice().toString());
-	}
+    @Test
+    public void toBeanTest3() {
+        //		测试数字类型精度丢失的情况
+        String number = "1234.123456789123456";
+        String jsonString = "{\"create\":{\"details\":[{\"price\":" + number + "}]}}";
+        WebCreate create = JSONUtil.toBean(jsonString, WebCreate.class);
+        Assert.equals(number, create.getCreate().getDetails().get(0).getPrice().toString());
+    }
 
-	static class WebCreate {
-		private Create create;
-		@Override
-		public String toString() {
-			return "WebCreate{" +
-					"create=" + create +
-					'}';
-		}
+    static class WebCreate {
+        private Create create;
 
-		public void setCreate(Create create) {
-			this.create = create;
-		}
+        @Override
+        public String toString() {
+            return "WebCreate{" +
+                    "create=" + create +
+                    '}';
+        }
 
-		public Create getCreate() {
-			return create;
-		}
-	}
+        public void setCreate(Create create) {
+            this.create = create;
+        }
 
-	static class Create {
-		@Override
-		public String toString() {
-			return "Create{" +
-					"details=" + details +
-					'}';
-		}
+        public Create getCreate() {
+            return create;
+        }
+    }
 
-		private List<Detail> details;
+    static class Create {
+        @Override
+        public String toString() {
+            return "Create{" +
+                    "details=" + details +
+                    '}';
+        }
 
-		public void setDetails(List<Detail> details) {
-			this.details = details;
-		}
+        private List<Detail> details;
 
-		public List<Detail> getDetails() {
-			return details;
-		}
-	}
+        public void setDetails(List<Detail> details) {
+            this.details = details;
+        }
 
-	static class Detail {
-		private BigDecimal price;
+        public List<Detail> getDetails() {
+            return details;
+        }
+    }
 
-		public void setPrice(BigDecimal price) {
-			this.price = price;
-		}
+    static class Detail {
+        private BigDecimal price;
 
-		@Override
-		public String toString() {
-			return "Detail{" +
-					"price=" + price +
-					'}';
-		}
+        public void setPrice(BigDecimal price) {
+            this.price = price;
+        }
 
-		public BigDecimal getPrice() {
-			return price;
-		}
-	}
+        @Override
+        public String toString() {
+            return "Detail{" +
+                    "price=" + price +
+                    '}';
+        }
+
+        public BigDecimal getPrice() {
+            return price;
+        }
+    }
 }

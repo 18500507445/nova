@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * @author huangchengxing
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.ANNOTATION_TYPE, ElementType.TYPE, ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.ANNOTATION_TYPE, ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @interface AnnotationForScannerTest {
-	String value() default "";
+    String value() default "";
 }

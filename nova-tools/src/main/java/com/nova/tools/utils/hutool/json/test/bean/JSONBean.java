@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class JSONBean {
-	private int code;
-	private JSONObject data;
+    private int code;
+    private JSONObject data;
 }

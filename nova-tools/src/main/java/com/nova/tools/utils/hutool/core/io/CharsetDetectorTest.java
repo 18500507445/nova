@@ -12,19 +12,19 @@ import java.nio.charset.Charset;
 
 public class CharsetDetectorTest {
 
-	@Test
-	public void detectTest(){
-		// 测试多个Charset对同一个流的处理是否有问题
-		final Charset detect = CharsetDetector.detect(ResourceUtil.getStream("test.xml"),
-				CharsetUtil.CHARSET_GBK, CharsetUtil.CHARSET_UTF_8);
-		Assert.equals(CharsetUtil.CHARSET_UTF_8, detect);
-	}
+    @Test
+    public void detectTest() {
+        // 测试多个Charset对同一个流的处理是否有问题
+        final Charset detect = CharsetDetector.detect(ResourceUtil.getStream("test.xml"),
+                CharsetUtil.CHARSET_GBK, CharsetUtil.CHARSET_UTF_8);
+        Assert.equals(CharsetUtil.CHARSET_UTF_8, detect);
+    }
 
-	@Test
-	@Ignore
-	public void issue2547() {
-		final Charset detect = CharsetDetector.detect(IoUtil.DEFAULT_LARGE_BUFFER_SIZE,
-				ResourceUtil.getStream("d:/test/default.txt"));
-		Assert.equals(CharsetUtil.CHARSET_UTF_8, detect);
-	}
+    @Test
+    @Ignore
+    public void issue2547() {
+        final Charset detect = CharsetDetector.detect(IoUtil.DEFAULT_LARGE_BUFFER_SIZE,
+                ResourceUtil.getStream("d:/test/default.txt"));
+        Assert.equals(CharsetUtil.CHARSET_UTF_8, detect);
+    }
 }

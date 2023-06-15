@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class ADT {
-	private List<String> BookingCode;
+    private List<String> BookingCode;
 }

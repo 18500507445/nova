@@ -17,24 +17,24 @@ import java.util.concurrent.TimeUnit;
  */
 public class AsyncUtilTest {
 
-	@Test
-	@Ignore
-	public void waitAndGetTest() {
-		CompletableFuture<String> hutool = CompletableFuture.supplyAsync(() -> {
-			ThreadUtil.sleep(1, TimeUnit.SECONDS);
-			return "hutool";
-		});
-		CompletableFuture<String> sweater = CompletableFuture.supplyAsync(() -> {
-			ThreadUtil.sleep(2, TimeUnit.SECONDS);
-			return "卫衣";
-		});
-		CompletableFuture<String> warm = CompletableFuture.supplyAsync(() -> {
-			ThreadUtil.sleep(3, TimeUnit.SECONDS);
-			return "真暖和";
-		});
-		// 等待完成
-		AsyncUtil.waitAll(hutool, sweater, warm);
-		// 获取结果
-		Assert.equals("hutool卫衣真暖和", AsyncUtil.get(hutool) + AsyncUtil.get(sweater) + AsyncUtil.get(warm));
-	}
+    @Test
+    @Ignore
+    public void waitAndGetTest() {
+        CompletableFuture<String> hutool = CompletableFuture.supplyAsync(() -> {
+            ThreadUtil.sleep(1, TimeUnit.SECONDS);
+            return "hutool";
+        });
+        CompletableFuture<String> sweater = CompletableFuture.supplyAsync(() -> {
+            ThreadUtil.sleep(2, TimeUnit.SECONDS);
+            return "卫衣";
+        });
+        CompletableFuture<String> warm = CompletableFuture.supplyAsync(() -> {
+            ThreadUtil.sleep(3, TimeUnit.SECONDS);
+            return "真暖和";
+        });
+        // 等待完成
+        AsyncUtil.waitAll(hutool, sweater, warm);
+        // 获取结果
+        Assert.equals("hutool卫衣真暖和", AsyncUtil.get(hutool) + AsyncUtil.get(sweater) + AsyncUtil.get(warm));
+    }
 }

@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 
 public class Issue2611Test {
 
-	@Test
-	public void chineseMoneyToNumberTest(){
-		final BigDecimal value = Convert.chineseMoneyToNumber("陆万柒仟伍佰伍拾柒元");
+    @Test
+    public void chineseMoneyToNumberTest() {
+        final BigDecimal value = Convert.chineseMoneyToNumber("陆万柒仟伍佰伍拾柒元");
 
-		Assert.equals("67,557.00", NumberUtil.decimalFormatMoney(value.doubleValue()));
-	}
+        Assert.equals("67,557.00", NumberUtil.decimalFormatMoney(value.doubleValue()));
+    }
 }

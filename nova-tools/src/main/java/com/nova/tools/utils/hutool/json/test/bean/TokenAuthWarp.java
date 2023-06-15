@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TokenAuthWarp extends UUMap<TokenAuthResponse> {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String targetUrl;
-	private String success;
+    private String targetUrl;
+    private String success;
 }

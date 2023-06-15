@@ -15,19 +15,19 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class FileSystemUtilTest {
 
-	@Test
-	@Ignore
-	public void listTest(){
-		final FileSystem fileSystem = FileSystemUtil.createZip("d:/test/test.zip",
-				CharsetUtil.CHARSET_GBK);
-		final Path root = FileSystemUtil.getRoot(fileSystem);
-		PathUtil.walkFiles(root, new SimpleFileVisitor<Path>() {
+    @Test
+    @Ignore
+    public void listTest() {
+        final FileSystem fileSystem = FileSystemUtil.createZip("d:/test/test.zip",
+                CharsetUtil.CHARSET_GBK);
+        final Path root = FileSystemUtil.getRoot(fileSystem);
+        PathUtil.walkFiles(root, new SimpleFileVisitor<Path>() {
 
-			@Override
-			public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
-				Console.log(path);
-				return FileVisitResult.CONTINUE;
-			}
-		});
-	}
+            @Override
+            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+                Console.log(path);
+                return FileVisitResult.CONTINUE;
+            }
+        });
+    }
 }

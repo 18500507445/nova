@@ -21,147 +21,147 @@ import java.util.regex.Pattern;
  */
 public class NanoIdTest {
 
-	@Test
-	public void nanoIdVerify100KRandomNanoIdsAreUniqueVerifiedTest() {
+    @Test
+    public void nanoIdVerify100KRandomNanoIdsAreUniqueVerifiedTest() {
 
-		//It's not much, but it's a good sanity check I guess.
-		final int idCount = 100000;
-		final Set<String> ids = new HashSet<>(idCount);
+        //It's not much, but it's a good sanity check I guess.
+        final int idCount = 100000;
+        final Set<String> ids = new HashSet<>(idCount);
 
-		for (int i = 0; i < idCount; i++) {
-			final String id = NanoId.randomNanoId();
-			if (ids.contains(id) == false) {
-				ids.add(id);
-			} else {
-				System.out.println("Non-unique ID generated: " + id);
-			}
-		}
+        for (int i = 0; i < idCount; i++) {
+            final String id = NanoId.randomNanoId();
+            if (ids.contains(id) == false) {
+                ids.add(id);
+            } else {
+                System.out.println("Non-unique ID generated: " + id);
+            }
+        }
 
-	}
+    }
 
-	@Test
-	public void nanoIdSeededRandomSuccessTest() {
+    @Test
+    public void nanoIdSeededRandomSuccessTest() {
 
-		//With a seed provided, we can know which IDs to expect, and subsequently verify that the
-		// provided random number generator is being used as expected.
-		final Random random = new Random(12345);
+        //With a seed provided, we can know which IDs to expect, and subsequently verify that the
+        // provided random number generator is being used as expected.
+        final Random random = new Random(12345);
 
-		final char[] alphabet =
-				("_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").toCharArray();
+        final char[] alphabet =
+                ("_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").toCharArray();
 
-		final int size = 21;
+        final int size = 21;
 
-		final String[] expectedIds = new String[]{"kutqLNv1wDmIS56EcT3j7", "U497UttnWzKWWRPMHpLD7",
-				"7nj2dWW1gjKLtgfzeI8eC", "I6BXYvyjszq6xV7L9k2A9", "uIolcQEyyQIcn3iM6Odoa"};
+        final String[] expectedIds = new String[]{"kutqLNv1wDmIS56EcT3j7", "U497UttnWzKWWRPMHpLD7",
+                "7nj2dWW1gjKLtgfzeI8eC", "I6BXYvyjszq6xV7L9k2A9", "uIolcQEyyQIcn3iM6Odoa"};
 
-		for (final String expectedId : expectedIds) {
-			final String generatedId = NanoId.randomNanoId(random, alphabet, size);
-			Assert.equals(expectedId, generatedId);
-		}
+        for (final String expectedId : expectedIds) {
+            final String generatedId = NanoId.randomNanoId(random, alphabet, size);
+            Assert.equals(expectedId, generatedId);
+        }
 
-	}
+    }
 
-	@Test
-	public void nanoIdVariousAlphabetsSuccessTest() {
+    @Test
+    public void nanoIdVariousAlphabetsSuccessTest() {
 
-		//Test ID generation with various alphabets consisting of 1 to 255 unique symbols.
-		for (int symbols = 1; symbols <= 255; symbols++) {
+        //Test ID generation with various alphabets consisting of 1 to 255 unique symbols.
+        for (int symbols = 1; symbols <= 255; symbols++) {
 
-			final char[] alphabet = new char[symbols];
-			for (int i = 0; i < symbols; i++) {
-				alphabet[i] = (char) i;
-			}
+            final char[] alphabet = new char[symbols];
+            for (int i = 0; i < symbols; i++) {
+                alphabet[i] = (char) i;
+            }
 
-			final String id = NanoId
-					.randomNanoId(null, alphabet, NanoId.DEFAULT_SIZE);
+            final String id = NanoId
+                    .randomNanoId(null, alphabet, NanoId.DEFAULT_SIZE);
 
-			//Create a regex pattern that only matches to the characters in the alphabet
-			final StringBuilder patternBuilder = new StringBuilder();
-			patternBuilder.append("^[");
-			for (final char character : alphabet) {
-				patternBuilder.append(Pattern.quote(String.valueOf(character)));
-			}
-			patternBuilder.append("]+$");
+            //Create a regex pattern that only matches to the characters in the alphabet
+            final StringBuilder patternBuilder = new StringBuilder();
+            patternBuilder.append("^[");
+            for (final char character : alphabet) {
+                patternBuilder.append(Pattern.quote(String.valueOf(character)));
+            }
+            patternBuilder.append("]+$");
 
-			Assert.isTrue(id.matches(patternBuilder.toString()));
-		}
+            Assert.isTrue(id.matches(patternBuilder.toString()));
+        }
 
-	}
+    }
 
-	@Test
-	public void nanoIdVariousSizesSuccessTest() {
+    @Test
+    public void nanoIdVariousSizesSuccessTest() {
 
-		//Test ID generation with all sizes between 1 and 1,000.
-		for (int size = 1; size <= 1000; size++) {
+        //Test ID generation with all sizes between 1 and 1,000.
+        for (int size = 1; size <= 1000; size++) {
 
-			final String id = NanoId.randomNanoId(size);
+            final String id = NanoId.randomNanoId(size);
 
-			Assert.equals(size, id.length());
-		}
+            Assert.equals(size, id.length());
+        }
 
-	}
+    }
 
-	@Test
-	public void nanoIdWellDistributedSuccess() {
+    @Test
+    public void nanoIdWellDistributedSuccess() {
 
-		//Test if symbols in the generated IDs are well distributed.
+        //Test if symbols in the generated IDs are well distributed.
 
-		final int idCount = 100000;
-		final int idSize = 20;
-		final char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        final int idCount = 100000;
+        final int idSize = 20;
+        final char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
-		final Map<String, Long> charCounts = new HashMap<>();
+        final Map<String, Long> charCounts = new HashMap<>();
 
-		for (int i = 0; i < idCount; i++) {
+        for (int i = 0; i < idCount; i++) {
 
-			final String id = NanoId
-					.randomNanoId(null, alphabet, idSize);
+            final String id = NanoId
+                    .randomNanoId(null, alphabet, idSize);
 
-			for (int j = 0; j < id.length(); j++) {
-				final String value = String.valueOf(id.charAt(j));
+            for (int j = 0; j < id.length(); j++) {
+                final String value = String.valueOf(id.charAt(j));
 
-				final Long charCount = charCounts.get(value);
-				if (charCount == null) {
-					charCounts.put(value, 1L);
-				} else {
-					charCounts.put(value, charCount + 1);
-				}
-			}
-		}
+                final Long charCount = charCounts.get(value);
+                if (charCount == null) {
+                    charCounts.put(value, 1L);
+                } else {
+                    charCounts.put(value, charCount + 1);
+                }
+            }
+        }
 
-		//Verify the distribution of characters is pretty even
-		for (final Long charCount : charCounts.values()) {
-			final double distribution = (charCount * alphabet.length / (double) (idCount * idSize));
-			Assert.isTrue(distribution >= 0.95 && distribution <= 1.05);
-		}
+        //Verify the distribution of characters is pretty even
+        for (final Long charCount : charCounts.values()) {
+            final double distribution = (charCount * alphabet.length / (double) (idCount * idSize));
+            Assert.isTrue(distribution >= 0.95 && distribution <= 1.05);
+        }
 
-	}
+    }
 
-	@Test
-	public void randomNanoIdEmptyAlphabetExceptionThrownTest() {
-		NanoId.randomNanoId(new SecureRandom(), new char[]{}, 10);
-	}
+    @Test
+    public void randomNanoIdEmptyAlphabetExceptionThrownTest() {
+        NanoId.randomNanoId(new SecureRandom(), new char[]{}, 10);
+    }
 
-	@Test
-	public void randomNanoId256AlphabetExceptionThrownTest() {
+    @Test
+    public void randomNanoId256AlphabetExceptionThrownTest() {
 
-		//The alphabet is composed of 256 unique characters
-		final char[] largeAlphabet = new char[256];
-		for (int i = 0; i < 256; i++) {
-			largeAlphabet[i] = (char) i;
-		}
+        //The alphabet is composed of 256 unique characters
+        final char[] largeAlphabet = new char[256];
+        for (int i = 0; i < 256; i++) {
+            largeAlphabet[i] = (char) i;
+        }
 
-		NanoId.randomNanoId(new SecureRandom(), largeAlphabet, 20);
+        NanoId.randomNanoId(new SecureRandom(), largeAlphabet, 20);
 
-	}
+    }
 
-	@Test
-	public void randomNanoIdNegativeSizeExceptionThrown() {
-		NanoId.randomNanoId(new SecureRandom(), new char[]{'a', 'b', 'c'}, -10);
-	}
+    @Test
+    public void randomNanoIdNegativeSizeExceptionThrown() {
+        NanoId.randomNanoId(new SecureRandom(), new char[]{'a', 'b', 'c'}, -10);
+    }
 
-	@Test
-	public void randomNanoIdZeroSizeExceptionThrown() {
-		NanoId.randomNanoId(new SecureRandom(), new char[]{'a', 'b', 'c'}, 0);
-	}
+    @Test
+    public void randomNanoIdZeroSizeExceptionThrown() {
+        NanoId.randomNanoId(new SecureRandom(), new char[]{'a', 'b', 'c'}, 0);
+    }
 }

@@ -39,6 +39,7 @@
         <module>nova-starter</module>
         <module>nova-tools</module>
         <module>nova-websocket</module>
+        <module>nova-mybatis-plus</module>
 
     </modules>
 

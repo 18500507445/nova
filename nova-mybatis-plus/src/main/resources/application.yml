@@ -17,12 +17,16 @@ spring:
     banner-mode: off
 
 mybatis-plus:
-  #关闭mybatis-plus启动图
   global-config:
+    #关闭mybatis-plus启动图
     banner: false
+
   #打印log
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #数据库 下划线命名映射小驼峰命名 user_name --> userName
+    map-underscore-to-camel-case: true
+
 
 jasypt:
   encryptor:

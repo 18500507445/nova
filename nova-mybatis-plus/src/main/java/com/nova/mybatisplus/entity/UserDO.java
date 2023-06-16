@@ -1,5 +1,6 @@
 package com.nova.mybatisplus.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,4 +41,21 @@ public class UserDO {
      */
     private String email;
 
+    @TableField("user_name")
+    private String userName;
+
+    @TableField("`desc`")
+    private String desc;
+
+    @TableField(select = false)
+    private String hide;
+
+    @TableField(exist = false)
+    private Boolean online;
+
+    /**
+     * 变量名成：private String name
+     *
+     * 属性：getName -> Name -> name
+     */
 }

@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
-public class UserController {
+public class OneUserController {
 
-    private final UserService userService;
+    private final OneUserService oneUserService;
 
     private static final TimeInterval TIMER = DateUtil.timer();
 
     @PostMapping("selectList")
     public AjaxResult selectList() {
         try {
-            return AjaxResult.success(userService.selectList());
+            return AjaxResult.success(oneUserService.selectList());
         } finally {
             log.info("接口：selectList，耗时：{} ms", TIMER.interval());
         }

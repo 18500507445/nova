@@ -12,13 +12,13 @@ import java.util.List;
  * @date: 2023/06/15 19:54
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class OneUserServiceImpl implements OneUserService {
 
     @Resource
-    private UserMapper userMapper;
+    private OneUserMapper oneUserMapper;
 
     @Override
     public List<UserDO> selectList() {
-        return userMapper.selectList(null);
+        return oneUserMapper.selectList(null);
     }
 }

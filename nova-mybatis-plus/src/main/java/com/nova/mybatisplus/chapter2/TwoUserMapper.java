@@ -1,4 +1,4 @@
-package com.nova.mybatisplus.chapter1;
+package com.nova.mybatisplus.chapter2;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.nova.mybatisplus.entity.UserDO;
@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date: 2023/06/15 19:50
  */
 @Mapper
-public interface UserMapper extends BaseMapper<UserDO> {
+public interface TwoUserMapper extends BaseMapper<UserDO> {
 
 }

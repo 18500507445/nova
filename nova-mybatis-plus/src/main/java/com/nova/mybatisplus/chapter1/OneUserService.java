@@ -9,7 +9,7 @@ import java.util.List;
  * @description userService
  * @date: 2023/06/15 19:52
  */
-public interface UserService {
+public interface OneUserService {
 
     List<UserDO> selectList();
 }

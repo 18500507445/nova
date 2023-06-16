@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: wzh
@@ -126,6 +125,59 @@ public class Chapter3Test {
 
         //不是空的数据
         queryWrapper.isNotNull(UserDO::getName);
+    }
+
+    /**
+     * in查询
+     */
+    @Test
+    public void inQuery() {
+        LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
+        List<Integer> ageList = new ArrayList<>();
+        Collections.addAll(ageList, 18, 19, 20);
+
+        //in查询
+        queryWrapper.in(UserDO::getAge, ageList);
+
+        //not in查询
+        queryWrapper.notIn(UserDO::getAge, ageList);
+
+        //in sql
+        queryWrapper.inSql(UserDO::getAge, "18,19,20");
+
+        //not inSql
+        queryWrapper.notInSql(UserDO::getAge, "18,19,20");
+
+        //子查询
+        queryWrapper.inSql(UserDO::getAge, "select age from user");
+    }
+
+    /**
+     * 分组、聚合查询
+     */
+    @Test
+    public void groupQuery() {
+        QueryWrapper<UserDO> queryWrapper = new QueryWrapper<>();
+
+        //分组字段
+        queryWrapper.groupBy("age");
+
+        //查询字段
+        queryWrapper.select("age,count(1) as num");
+
+        //聚合删选条件
+        queryWrapper.having("num >= 1");
+
+        //排序，备注：多个字段排序多写一个orderBy既可
+        queryWrapper.orderBy(true, true, "age");
+
+        //排序写法二
+        LambdaQueryWrapper<UserDO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.orderByAsc(UserDO::getAge);
+
+        //因为查询出来的字段和实体不匹配，所以用Map接收
+        List<Map<String, Object>> maps = threeUserMapper.selectMaps(queryWrapper);
+        System.out.println("maps = " + maps);
     }
 
 

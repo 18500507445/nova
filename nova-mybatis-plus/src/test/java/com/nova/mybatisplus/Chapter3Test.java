@@ -153,7 +153,7 @@ public class Chapter3Test {
     }
 
     /**
-     * 分组、聚合查询
+     * 分组、聚合、排序查询
      */
     @Test
     public void groupQuery() {
@@ -180,5 +180,65 @@ public class Chapter3Test {
         System.out.println("maps = " + maps);
     }
 
+    /**
+     * 条件拼接
+     */
+    @Test
+    public void func() {
+        LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
+
+        //根据不同的情况来选择不同的查询条件
+        queryWrapper.func(userDOLambdaQueryWrapper -> {
+            if (true) {
+                userDOLambdaQueryWrapper.eq(UserDO::getAge, 18);
+            } else {
+                userDOLambdaQueryWrapper.ne(UserDO::getAge, 18);
+            }
+        });
+    }
+
+    /**
+     * 逻辑and、or查询
+     */
+    @Test
+    public void logicalQuery() {
+        LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
+
+        //直接拼接 age > 18 and age < 60
+        queryWrapper.gt(UserDO::getAge, 18).lt(UserDO::getAge, 60);
+
+        //直接or拼接，age > 26 or age < 22
+        queryWrapper.gt(UserDO::getAge, 26).or().lt(UserDO::getAge, 22);
+
+        //and和or嵌套拼接，name = 'Tom' and (age > 26 or age < 22)
+        queryWrapper.eq(UserDO::getName, "Tom")
+                .and(i -> i.gt(UserDO::getAge, 26).or().lt(UserDO::getAge, 22));
+
+        //直接嵌套 name = 'Tom' and age != 22
+        queryWrapper.nested(i -> i.eq(UserDO::getName, "Tom").ne(UserDO::getAge, 22));
+
+    }
+
+    /**
+     * 自定义sql
+     */
+    @Test
+    public void applyQuery() {
+        LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
+        //直接拼接sql
+        queryWrapper.apply("id = 1");
+
+        //分页查询
+        queryWrapper.last("limit 0,2");
+
+        //exists查询
+        queryWrapper.exists("select id from user where age = 18");
+
+        //not exists查询
+        queryWrapper.notExists("select id from user where age = 18");
+
+        //返回字段 id,name
+        queryWrapper.select(UserDO::getId, UserDO::getName);
+    }
 
 }

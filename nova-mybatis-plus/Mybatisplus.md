@@ -77,5 +77,7 @@ public class TwoUserServiceImpl extends ServiceImpl<TwoUserMapper, UserDO> imple
   (7)字段失效，@TableField(select = false)，默认是展示
   (8)视图属性，实体类字段，但是表中没有对应的字段，@TableField(exist = false)
 
-* 条件构造器QueryWrapper
+* 条件构造器QueryWrapper，例子Chapter3Test
+
+### 第四章：高级篇
   

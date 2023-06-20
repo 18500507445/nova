@@ -80,4 +80,28 @@ public class TwoUserServiceImpl extends ServiceImpl<TwoUserMapper, UserDO> imple
 * 条件构造器QueryWrapper，例子Chapter3Test
 
 ### 第四章：高级篇
+* 主键策略
+  ~~~java
+  import com.baomidou.mybatisplus.annotation.IdType;
   
+  @TableId(value = "id", type = IdType.AUTO)
+  private Long id;
+  ~~~
+  (1)AUTO策略，Mysql数据库设置Id自增  
+  (2)INPUT策略，手动setId   
+  (3)ASSIGN_ID，雪花算法 
+  (4)ASSIGN_UUID，UUID 
+  (5)NONE或者不添加注解，走全局配置，全局默认走雪花算法  
+  ~~~yml
+  mybatis-plus:
+  global-config:
+    #全局默认雪花算法
+    db-config:
+      id-type: assign_id
+  ~~~
+* 分页（分页插件、自定义分页插件）  
+  (1)添加配置类
+  
+
+
+### 第五章：高级篇

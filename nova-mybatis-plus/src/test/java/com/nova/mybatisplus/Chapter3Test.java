@@ -4,7 +4,6 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.nova.mybatisplus.chapter3.ThreeUserMapper;
-import com.nova.mybatisplus.chapter3.ThreeUserService;
 import com.nova.mybatisplus.entity.UserDO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,9 +18,6 @@ import java.util.*;
  */
 @SpringBootTest
 public class Chapter3Test {
-
-    @Resource
-    private ThreeUserService thirdUserService;
 
     @Resource
     private ThreeUserMapper threeUserMapper;

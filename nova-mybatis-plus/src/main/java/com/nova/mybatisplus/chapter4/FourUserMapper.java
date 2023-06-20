@@ -1,8 +1,10 @@
 package com.nova.mybatisplus.chapter4;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.nova.mybatisplus.entity.UserDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author: wzh
@@ -11,5 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface FourUserMapper extends BaseMapper<UserDO> {
+
+    IPage<UserDO> selectByName(@Param("page") IPage<UserDO> page, @Param("name") String name);
 
 }

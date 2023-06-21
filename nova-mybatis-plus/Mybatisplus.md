@@ -100,8 +100,53 @@ public class TwoUserServiceImpl extends ServiceImpl<TwoUserMapper, UserDO> imple
       id-type: assign_id
   ~~~
 * 分页（分页插件、自定义分页插件）  
-  (1)添加配置类
-  
+  (1)添加配置类-MybatisPlusConfig  
 
+* ActiveRecord-领域模型（测试方法-activeRecordInsert）  
+  (1)DO extends Model<T>  
+  (2)对应的mapper也需要有  
+
+* SimpleQuery工具类（测试方法-simpleQueryList）  
+  (1)可以对selectList查询后结用Stream进行封装，返回一些指定结果，简洁api调用  
 
 ### 第五章：高级篇
+* 逻辑删除（更新status字段）  
+  ~~~java
+  /**
+   * 删除表示 默认0
+   */
+  @TableLogic(value = "0", delval = "1")
+  private Integer status;
+  ~~~
+  
+* 通用枚举  
+  ~~~java
+  @EnumValue
+  private final Integer gender;
+  ~~~
+  
+* 字段类型处理器（map转Json存入表， 需要fastJson依赖） 
+  ~~~java
+  @TableName(autoResultMap = true)
+  
+  /**
+   * 联系方式，字段处理成Json
+   */
+  @TableField(typeHandler = FastjsonTypeHandler.class)
+  private Map<String, String> contact;
+  ~~~
+  
+* 自动填充（时间自动更新，了解就行了，我自己习惯设计数据库的时候字段设置好自动更新）  
+  设置处理器，MyMetaHandler  
+  ~~~java
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
+  private LocalDateTime createTime;
+
+  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+  private LocalDateTime updateTime;
+  ~~~
+  
+* 防止全表更新插件，配置一个拦截器（MybatisPlusConfig） 
+  ~~~java
+  interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
+  ~~~

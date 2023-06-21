@@ -53,7 +53,6 @@ public class Chapter2Test {
     }
 
 
-
     /***
      * 简化Service后，使用Service进行增删改查
      */
@@ -93,6 +92,6 @@ public class Chapter2Test {
         UserDO userDO = twoUserMapper.selectByName("Tom");
         System.out.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
     }
-    
+
 
 }

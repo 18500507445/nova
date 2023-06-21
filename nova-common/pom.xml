@@ -23,7 +23,7 @@
         <thumbnailator.version>0.4.17</thumbnailator.version>
         <commons.io.version>2.11.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
-        <poi.version>5.2.3</poi.version>
+        <poi.version>4.1.2</poi.version>
         <jwt.version>4.0.0</jwt.version>
         <vavr.version>1.0.0-alpha-4</vavr.version>
         <bouncycastle.version>1.70</bouncycastle.version>

@@ -27,6 +27,7 @@ public class MybatisPlusConfig {
 
         //配置防止全表更新拦截器
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
+
         return interceptor;
     }
 

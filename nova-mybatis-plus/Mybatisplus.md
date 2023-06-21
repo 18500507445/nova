@@ -4,9 +4,7 @@
 * [学习视频](https://www.bilibili.com/video/BV1Bc411W7Wj?p=18&vd_source=bf69afcaca624e3b61a8f265c720a96b)
 * [参考笔记](https://blog.csdn.net/ewertyucf/article/details/130106739)
 
-
-
-### 第一章：入门篇
+### 第一章：入门篇（sql文件在resources路径下）
 * 引入依赖
 ~~~xml
 <!-- mybatis-plus依赖 里面包含了mybatis-spring-->
@@ -149,4 +147,36 @@ public class TwoUserServiceImpl extends ServiceImpl<TwoUserMapper, UserDO> imple
 * 防止全表更新插件，配置一个拦截器（MybatisPlusConfig） 
   ~~~java
   interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
+  ~~~
+
+* 支持乐观锁注解，配置文件添加插件  
+  ~~~java
+  @Version
+  private Integer version;
+  ~~~
+  
+  ~~~java
+  interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+  ~~~
+  
+* 代码生成器（Chapter5Test.main方法）
+  ~~~xml
+  <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-generator</artifactId>
+  </dependency>
+  
+  <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+  </dependency>
+  ~~~
+
+* 多数据源配置（修改yml文件，@DS("tableName")可以作用于ServiceImpl、Mapper）
+  ~~~xml
+  <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+      <version>${dynamic.version}</version>
+  </dependency>
   ~~~

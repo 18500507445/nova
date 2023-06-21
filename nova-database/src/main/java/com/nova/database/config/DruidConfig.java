@@ -83,7 +83,7 @@ public class DruidConfig {
         // 创建filter进行过滤
         Filter filter = new Filter() {
             @Override
-            public void init(FilterConfig filterConfig) throws ServletException {
+            public void init(FilterConfig filterConfig) {
             }
 
             @Override
@@ -114,7 +114,7 @@ public class DruidConfig {
      * 配置事务管理器
      */
     @Bean
-    public DataSourceTransactionManager transactionManager(DynamicDataSource dataSource) throws Exception {
+    public DataSourceTransactionManager transactionManager(DynamicDataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 }

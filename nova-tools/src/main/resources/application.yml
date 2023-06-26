@@ -14,7 +14,7 @@ spring:
     port: 63799
     # redis服务器连接密码（尽量设置密码，防止远程注入服务器挖矿）
     password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
-    jedis:
+    lettuce:
       pool:
         # 连接池最大连接数（使用负值表示没有限制）
         max-active: 8
@@ -24,7 +24,7 @@ spring:
         max-idle: 8
         # 连接池中的最小空闲连接
         min-idle: 0
-        #连接超时时间
+    #连接超时时间
     timeout: 10000
 
   data:

@@ -20,7 +20,7 @@ import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -101,7 +101,7 @@ public class SpiderPlanB {
             List<Object> randomList = RandomUtil.randomEles(array, 2);
 
             JSONObject ipObject = JSON.parseObject(Convert.toStr(randomList.get(0)));
-            price = toolHttp(url, ipObject.getString("ip"), ipObject.getIntValue("port"));
+            price = okHttp(url, ipObject.getString("ip"), ipObject.getIntValue("port"));
         } catch (Exception ignored) {
 
         }
@@ -333,12 +333,12 @@ public class SpiderPlanB {
         builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port)));
         OkHttpClient httpClient = builder
                 //设置读取超时时间
-                .readTimeout(1500, TimeUnit.MILLISECONDS)
+                .readTimeout(500, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(false)
                 .connectionPool(new ConnectionPool(5, 10, TimeUnit.SECONDS))
                 //设置写的超时时间
-                .writeTimeout(1500, TimeUnit.MILLISECONDS)
-                .connectTimeout(1500, TimeUnit.MILLISECONDS).build();
+                .writeTimeout(200, TimeUnit.MILLISECONDS)
+                .connectTimeout(200, TimeUnit.MILLISECONDS).build();
 
         Request request = new Request.Builder().url(url).build();
         Response httpResponse = httpClient.newCall(request).execute();
@@ -354,7 +354,7 @@ public class SpiderPlanB {
 
     private static String toolHttp(String url, String ip, int port) {
         String result = "";
-        HttpResponse execute = HttpUtil.createGet(url).setHttpProxy(ip, port).timeout(1500).execute();
+        HttpResponse execute = HttpUtil.createGet(url).setHttpProxy(ip, port).timeout(500).execute();
         if (ObjectUtil.isNotNull(execute) && 200 == execute.getStatus()) {
             JSONArray jsonArray = JSON.parseArray(Convert.toStr(execute.body()));
             result = jsonArray.getJSONObject(0).getString("p");

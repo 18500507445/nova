@@ -2,6 +2,8 @@ package com.nova.tools.demo;
 
 import cn.hutool.core.date.DateTime;
 import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.utils.common.ServletUtils;
+import com.nova.common.utils.ip.IpUtils;
 import com.nova.tools.demo.entity.People;
 import com.starter.redis.RedisService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: wzh
@@ -26,10 +31,12 @@ public class DemoController {
 
     @PostMapping("setList")
     public AjaxResult setList(@RequestParam String name) {
+        List<Object> list = new ArrayList<>();
         for (int i = 1; i < 3; i++) {
             People build = People.builder().id(i).age(1).createTime(new DateTime()).build();
-            redisService.setList(name, build);
+            list.add(build);
         }
+        redisService.setList(name, list);
         return AjaxResult.success("success");
     }
 
@@ -38,4 +45,10 @@ public class DemoController {
         People people = (People) redisService.listPop(name);
         return AjaxResult.success(people);
     }
+
+    @PostMapping("host")
+    public String host() {
+        return IpUtils.getIpAddr(ServletUtils.getRequest());
+    }
+
 }

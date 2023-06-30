@@ -26,4 +26,11 @@ public class JasyptTest {
         // 解密
         System.out.println(stringEncryptor.decrypt("4+fSPJL3wq+pZm9IVnD9ssbuH0qW1vky4Kdq0EO5vOe1LdTl1+DpnjrXImMb5ef5"));
     }
+
+    public static void main(String[] args) {
+        for (long i = 0; i < 100; i++) {
+            long count = i%2;
+            System.out.println("count = " + count);
+        }
+    }
 }

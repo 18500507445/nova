@@ -32,12 +32,12 @@ public class DemoController {
     @PostMapping("setList")
     public AjaxResult setList(@RequestParam String name) {
         List<Object> list = new ArrayList<>();
-        for (int i = 1; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             People build = People.builder().id(i).age(1).createTime(new DateTime()).build();
             list.add(build);
         }
-        redisService.setList(name, list);
-        return AjaxResult.success("success");
+        redisService.setList(name, list.subList(1, list.size()));
+        return AjaxResult.success(list.get(0));
     }
 
     @PostMapping("getList")
@@ -47,8 +47,18 @@ public class DemoController {
     }
 
     @PostMapping("host")
-    public String host() {
-        return IpUtils.getIpAddr(ServletUtils.getRequest());
+    public AjaxResult host() {
+        String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
+        boolean lock = redisService.lock(ip, ip, 50);
+        try {
+            if (lock) {
+                return AjaxResult.success();
+            } else {
+                return AjaxResult.error();
+            }
+        } finally {
+            redisService.unlock(ip, ip);
+        }
     }
 
 }

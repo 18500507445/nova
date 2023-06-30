@@ -93,14 +93,12 @@ public class SpiderPlanB {
             String ipJson = HttpUtil.createGet("http://http.tiqu.alibabaapi.com/getip?num=1&type=2&pack=119455&port=1&lb=1&pb=45&regions=").timeout(1500).execute().body();
             JSONObject jsonObject = JSON.parseObject(ipJson);
             JSONArray array = jsonObject.getJSONArray("data");
+            List<Object> randomList = RandomUtil.randomEles(array, 2);
+            JSONObject ipObject = JSON.parseObject(Convert.toStr(randomList.get(0)));
 
             String skuId = "100038004347";
             String url = String.format(SEARCH_URL, skuId);
             url = String.format(BASE_SEARCH_URL, System.currentTimeMillis()) + URLEncodeUtil.encode(url, Charset.defaultCharset());
-
-            List<Object> randomList = RandomUtil.randomEles(array, 2);
-
-            JSONObject ipObject = JSON.parseObject(Convert.toStr(randomList.get(0)));
             price = okHttp(url, ipObject.getString("ip"), ipObject.getIntValue("port"));
         } catch (Exception ignored) {
 

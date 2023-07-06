@@ -44,7 +44,7 @@ public class SpiderPlanA {
     /**
      * 模拟任务数量
      */
-    private static final int COUNT = 200_000;
+    private static final int COUNT = 7_200_000;
 
     private static final int PAGE_SIZE = 10_000;
 
@@ -79,7 +79,7 @@ public class SpiderPlanA {
         for (int i = 0; i < COUNT; i++) {
             queryList.add(skuId);
         }
-        List<List<String>> partition = ListUtil.partition(queryList, 12);
+        List<List<String>> partition = ListUtil.partition(queryList, PAGE_SIZE);
         LongAdder longAdder = new LongAdder();
 
         for (List<String> skuIds : partition) {

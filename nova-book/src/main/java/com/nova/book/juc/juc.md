@@ -342,6 +342,13 @@ void execute(Runnable command);
 <T> T invokeAny(Collection<? extends Callable<T>> tasks,long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 ~~~
 
+submit与execute的区别
+- execute提交的是Runnable类型的任务，而submit提交的是Callable或者Runnable类型的任务
+- execute的提交没有返回值，而submit的提交会返回一个Future类型的对象
+- execute提交的时候，如果有异常，就会直接抛出异常，而submit在遇到异常的时候，通常不会立马抛出异常，而是会将异常暂时存储起来，等待你调用Future.get()方法的时候，才会抛出异常
+- execute 提交的任务抛出异常，老线程会退出，线程池会立即创建一个新的线程。
+- submit 提交的任务抛出异常，老线程不会退出，线程池设置的 UncaughtExceptionHandler 对 execute 提交的任务生效，对 submit 提交的任务不生效。
+
 关闭线程池
 ~~~java
 /*

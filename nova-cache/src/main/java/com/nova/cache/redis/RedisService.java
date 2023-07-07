@@ -715,7 +715,11 @@ public class RedisService {
      * 使用redis保证原子操作（判断是否存在，添加key，设置过期时间）
      * 也可以使用 lua 脚本 "return redis.call('set',KEYS[1], ARGV[1],'NX','PX',ARGV[2])"
      * 问题：如果key过期的时间早于程序执行时间，会导致删除key失败，多应用间释放锁，导致锁一直失效；
+     *
      * 解决办法：String requestId = UUID.randomUUID().toString().replace("-", "");
+     *
+     * 固定的key，正常情况加锁、解锁需要自己线程完成才能保证并发情况下的问题的发生（例如库存的超卖），
+     * 如果有特殊情况不需要线程与线程间的锁那么共享一把，当前服务其它的线程或者其它服务的线程把锁释放了也没有关系，本质上就是降低请求次数
      *
      * @param requestId
      * @param expireTime

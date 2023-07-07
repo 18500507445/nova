@@ -29,6 +29,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisService {
 
+    private static final String LOCK_PREFIX = "redisLock";
+
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
@@ -712,16 +714,17 @@ public class RedisService {
     /**
      * 使用redis保证原子操作（判断是否存在，添加key，设置过期时间）
      * 也可以使用 lua 脚本 "return redis.call('set',KEYS[1], ARGV[1],'NX','PX',ARGV[2])"
+     * 问题：如果key过期的时间早于程序执行时间，会导致删除key失败，多应用间释放锁，导致锁一直失效；
+     * 解决办法：String requestId = UUID.randomUUID().toString().replace("-", "");
      *
-     * @param key
-     * @param value
+     * @param requestId
      * @param expireTime
      * @return
      */
-    public boolean lock(String key, String value, int expireTime) {
+    public boolean lock(String requestId, int expireTime) {
         while (true) {
-            if (Boolean.TRUE.equals(redisTemplate.boundValueOps(value).
-                    setIfAbsent(key, expireTime, TimeUnit.SECONDS))) {
+            if (Boolean.TRUE.equals(redisTemplate.boundValueOps(LOCK_PREFIX).
+                    setIfAbsent(requestId, expireTime, TimeUnit.SECONDS))) {
                 return true;
             }
         }
@@ -736,13 +739,13 @@ public class RedisService {
      *
      * @return true false
      */
-    public boolean unlock(String key, String value) {
+    public boolean unlock(String requestId) {
         // 这里使用Lua脚本保证原子性操作
         String script = "if  redis.call('get', KEYS[1]) == ARGV[1] then " +
                 "return redis.call('del', KEYS[1]) " +
                 "else return 0 end";
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
-        Long res = redisTemplate.execute(redisScript, Collections.singletonList(value), key);
+        Long res = redisTemplate.execute(redisScript, Collections.singletonList(LOCK_PREFIX), requestId);
         return new Long(1).equals(res);
     }
 

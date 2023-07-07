@@ -46,14 +46,14 @@ nova-tools
 * [《批量插入优化》](https://blog.csdn.net/lh155136/article/details/122437056?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168681407416800182712837%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168681407416800182712837&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-122437056-null-null.142%5Ev88%5Econtrol_2,239%5Ev2%5Einsert_chatgpt&utm_term=rewriteBatchedStatements%3Dtrue&spm=1018.2226.3001.4187)
 * [《SQL优化最强总结 (建议收藏~)》](https://mp.weixin.qq.com/s/SGYJoTYiAilNnNODgGkk3g)
 * [《SQL优化万能公式：5大步骤+10个案例》](https://mp.weixin.qq.com/s/_zi661XsJXql68YL8N93Lw)
-* [《为什么说MySQL单表行数不要超过2000w? 》](https://mp.weixin.qq.com/s/YEFIe5U-J8Stnh5MvokdLg)
+* [《为什么说Mysql单表行数不要超过2000w? 》](https://mp.weixin.qq.com/s/YEFIe5U-J8Stnh5MvokdLg)
 * [《char和varchar有哪些区别？varchar最大长度是多少？》](https://mp.weixin.qq.com/s/Alqk60lcXWrEMFcxj8abAA)
 * [《一次SQL查询优化原理分析（900W+ 数据，从17s到300ms》](https://mp.weixin.qq.com/s/vFTxYZmGfML-4PTg4eaQ7g)
 * [《8种常被忽视的SQL错误用法 》](https://mp.weixin.qq.com/s/FyzXRZCEUqhWnjP3IJZy9Q)
 * [《一次非常有意思的SQL优化经历：从30248.271s到0.001s 》](https://mp.weixin.qq.com/s/tcEoMlz2rdWLsO5q5lO0gw)
-* [《MySQL的on duplicate key update语法有死锁隐患》](https://www.bilibili.com/video/BV16v4y127eG/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
-* [《MySQL update 锁住整张表》](https://www.bilibili.com/video/BV1XW4y1u7x2/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
-* [《MySQL update 死锁演示》](https://www.bilibili.com/video/BV1SM411B7bC/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [《Mysql的on duplicate key update和replace into语法有死锁隐患》](https://www.bilibili.com/video/BV16v4y127eG/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [《Mysql update 锁住整张表》](https://www.bilibili.com/video/BV1XW4y1u7x2/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [《Mysql update 死锁演示》](https://www.bilibili.com/video/BV1SM411B7bC/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
 * [《select...for update是锁表还是锁行？》](https://www.bilibili.com/video/BV15f4y137sf/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
 
 ### 线程

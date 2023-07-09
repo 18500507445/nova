@@ -28,7 +28,7 @@ public class SpiderPlanA {
     /**
      * 获取机器核数，作为线程池数量
      */
-    private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int THREAD_COUNT = 16 * Runtime.getRuntime().availableProcessors();
 
     /**
      * 线程工厂
@@ -38,7 +38,7 @@ public class SpiderPlanA {
     /**
      * 手动创建线程池
      */
-    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(12, 12,
+    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(THREAD_COUNT, THREAD_COUNT,
             30L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(1024), THREAD_FACTORY, new ThreadPoolExecutor.DiscardPolicy());
 
     /**

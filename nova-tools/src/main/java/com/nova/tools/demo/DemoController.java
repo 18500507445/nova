@@ -1,6 +1,14 @@
 package com.nova.tools.demo;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.thread.ThreadFactoryBuilder;
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.utils.common.ServletUtils;
 import com.nova.common.utils.ip.IpUtils;
@@ -13,15 +21,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @author: wzh
  * @description 测试Controller
  * @date: 2023/05/26 12:09
  */
-@Slf4j
+@Slf4j(topic = "DemoController")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
@@ -60,5 +72,125 @@ public class DemoController {
             redisService.unlock(ip, ip);
         }
     }
+
+    public static final String PRODUCT_POLL = "productPoll";
+
+    public static final String SPECIAL_POLL = "specialPoll";
+
+    /**
+     * 计时器
+     */
+    private static final TimeInterval TIMER = DateUtil.timer();
+
+    private static final TimeInterval TOTAL_TIMER = DateUtil.timer();
+
+    /**
+     * 获取机器核数，作为线程池数量
+     */
+    private static final int THREAD_COUNT = 8 * Runtime.getRuntime().availableProcessors();
+
+    /**
+     * 线程工厂
+     */
+    private static final ThreadFactory THREAD_FACTORY = new ThreadFactoryBuilder().setNamePrefix("pricePlan").build();
+
+    /**
+     * 手动创建线程池
+     */
+    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(THREAD_COUNT, THREAD_COUNT,
+            30L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(1024), THREAD_FACTORY, new ThreadPoolExecutor.DiscardPolicy());
+
+    @PostMapping("pricePlan")
+    public AjaxResult pricePlan() {
+        LongAdder longAdder = new LongAdder();
+        for (int i = 0; i < THREAD_COUNT; i++) {
+            EXECUTOR_POOL.submit(new Task(longAdder));
+        }
+        return AjaxResult.success();
+    }
+
+    @PostMapping("pricePlanA")
+    public AjaxResult pricePlanA() {
+        new Thread(() -> updatePrice(new LongAdder())).start();
+        return AjaxResult.success();
+    }
+
+    class Task implements Runnable {
+
+        /**
+         * 计数器
+         */
+        private final LongAdder longAdder;
+
+        public Task(LongAdder longAdder) {
+            this.longAdder = longAdder;
+        }
+
+        @Override
+        public void run() {
+            updatePrice(longAdder);
+        }
+    }
+
+    private void updatePrice(LongAdder longAdder) {
+        while (true) {
+            Object o = redisService.listPop(PRODUCT_POLL);
+            if (ObjectUtil.isNull(o)) {
+                break;
+            }
+            List<String> split = StrUtil.split(o.toString(), "-");
+            if (CollUtil.isNotEmpty(split) && split.size() > 5) {
+                Boolean special = redisService.containsSet(SPECIAL_POLL, split.get(1));
+                if (!special) {
+                    //执行算价，新价格保留2为小数
+                    String skuId = split.get(0);
+                    String cateId = split.get(1);
+                    String rate = split.get(2);
+                    String flag = split.get(3);
+                    String costPrice = split.get(4);
+                    String elePrice = split.get(5);
+
+
+                    BigDecimal percent = NumberUtil.add(NumberUtil.div(rate, "100"), BigDecimal.ONE);
+                    //单位分
+                    BigDecimal newPrice = NumberUtil.mul(percent, new BigDecimal(costPrice)).setScale(2, RoundingMode.HALF_UP);
+
+                    //允许超过电商价
+                    if (StrUtil.equals("1", flag)) {
+                        newPrice = newPrice.compareTo(new BigDecimal(elePrice)) > 0 ? new BigDecimal(elePrice) : newPrice;
+                    }
+
+                    //先去查询 有就修改，没有就插入
+                    getData(cateId, skuId);
+
+                    //插入表 newPrice、操作人 、skuId、cateId，创建、修改时间自动生成，status（0已更新，1更新中），这个最好也默认值
+                    saveOrUpdate(cateId, skuId, newPrice);
+
+                    //发送队列
+                    sendMq(skuId, newPrice.toString());
+                    longAdder.increment();
+                    log.info("time：{}，耗时：{} ms，总耗时：{} ms，价格：{}，次数{}", DateUtil.now(), TIMER.interval(), TOTAL_TIMER.interval(), newPrice, longAdder.longValue());
+                    TIMER.restart();
+                }
+            }
+        }
+    }
+
+
+    //模拟数据库IO耗时50ms
+    public void getData(String cateId, String skuId) {
+        ThreadUtil.sleep(50);
+    }
+
+    //模拟数据库IO耗时50ms
+    public void saveOrUpdate(String cateId, String skuId, BigDecimal price) {
+        ThreadUtil.sleep(50);
+    }
+
+    //模拟网络IO耗时20ms
+    public void sendMq(String skuId, String price) {
+        ThreadUtil.sleep(50);
+    }
+
 
 }

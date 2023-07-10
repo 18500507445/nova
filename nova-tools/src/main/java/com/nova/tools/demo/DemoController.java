@@ -78,16 +78,9 @@ public class DemoController {
     public static final String SPECIAL_POLL = "specialPoll";
 
     /**
-     * 计时器
-     */
-    private static final TimeInterval TIMER = DateUtil.timer();
-
-    private static final TimeInterval TOTAL_TIMER = DateUtil.timer();
-
-    /**
      * 获取机器核数，作为线程池数量
      */
-    private static final int THREAD_COUNT = 8 * Runtime.getRuntime().availableProcessors();
+    private static final int THREAD_COUNT =  Runtime.getRuntime().availableProcessors()/2;
 
     /**
      * 线程工厂
@@ -100,18 +93,34 @@ public class DemoController {
     private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(THREAD_COUNT, THREAD_COUNT,
             30L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(1024), THREAD_FACTORY, new ThreadPoolExecutor.DiscardPolicy());
 
+    /**
+     * 40线程，60秒 --> 1.2w
+     * 20线程，60秒 --> 6000
+     */
     @PostMapping("pricePlan")
     public AjaxResult pricePlan() {
         LongAdder longAdder = new LongAdder();
+        TimeInterval timer = DateUtil.timer();
+        TimeInterval totalTimer = DateUtil.timer();
         for (int i = 0; i < THREAD_COUNT; i++) {
-            EXECUTOR_POOL.submit(new Task(longAdder));
+            EXECUTOR_POOL.submit(new Task(longAdder, timer, totalTimer));
         }
         return AjaxResult.success();
     }
 
+    /**
+     * 5,60,1500
+     * @return
+     */
     @PostMapping("pricePlanA")
     public AjaxResult pricePlanA() {
-        new Thread(() -> updatePrice(new LongAdder())).start();
+        LongAdder longAdder = new LongAdder();
+        TimeInterval timer = DateUtil.timer();
+        TimeInterval totalTimer = DateUtil.timer();
+
+        for (int i = 0; i < 5; i++) {
+            new Thread(() -> updatePrice(longAdder, timer, totalTimer)).start();
+        }
         return AjaxResult.success();
     }
 
@@ -122,17 +131,29 @@ public class DemoController {
          */
         private final LongAdder longAdder;
 
-        public Task(LongAdder longAdder) {
+        /**
+         * 记录单线程耗时
+         */
+        private final TimeInterval timer;
+
+        /**
+         * 总耗时
+         */
+        private final TimeInterval totalTimer;
+
+        public Task(LongAdder longAdder, TimeInterval timer, TimeInterval totalTimer) {
             this.longAdder = longAdder;
+            this.timer = timer;
+            this.totalTimer = totalTimer;
         }
 
         @Override
         public void run() {
-            updatePrice(longAdder);
+            updatePrice(longAdder, timer, totalTimer);
         }
     }
 
-    private void updatePrice(LongAdder longAdder) {
+    private void updatePrice(LongAdder longAdder, TimeInterval timer, TimeInterval totalTimer) {
         while (true) {
             Object o = redisService.listPop(PRODUCT_POLL);
             if (ObjectUtil.isNull(o)) {
@@ -169,8 +190,8 @@ public class DemoController {
                     //发送队列
                     sendMq(skuId, newPrice.toString());
                     longAdder.increment();
-                    log.info("time：{}，耗时：{} ms，总耗时：{} ms，价格：{}，次数{}", DateUtil.now(), TIMER.interval(), TOTAL_TIMER.interval(), newPrice, longAdder.longValue());
-                    TIMER.restart();
+                    log.info("time：{}，耗时：{} ms，总耗时：{} ms，价格：{}，次数{}", DateUtil.now(), timer.interval(), totalTimer.interval(), newPrice, longAdder.longValue());
+                    timer.restart();
                 }
             }
         }

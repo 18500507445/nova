@@ -7,15 +7,26 @@ import lombok.NoArgsConstructor;
 import java.util.Optional;
 
 /**
- * 住址对象
- *
- * @author wzh
- * @date 2018/2/11
+ * @author: wzh
+ * @description 用户对象
+ * @date: 2023/07/12 09:16
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class Address {
+public class User {
+    private String username;
+    private String password;
+    private Integer age;
+    private Address address;
+
+    private Optional<Address> optAddress;
+}
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class Address{
 
     /**
      * 街道
@@ -26,16 +37,4 @@ class Address {
      * 门牌
      */
     private String door;
-
-}
-
-@Data
-class User {
-    private String username;
-    private String password;
-    private Integer age;
-    private Address address;
-
-    private Optional<Address> optAddress;
-
 }

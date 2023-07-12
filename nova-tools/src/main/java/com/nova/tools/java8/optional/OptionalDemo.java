@@ -10,6 +10,19 @@ import java.util.Properties;
 class OptionalDemo {
 
     /**
+     * Java8之前，过多的退出语句
+     */
+    public void saveUser(User user) {
+        if (null == user) {
+            return;
+        }
+        if (null == user.getAddress()) {
+            return;
+        }
+        // 保存 user
+    }
+
+    /**
      * 1. 创建 Optional
      */
     public void createOptional() {
@@ -83,7 +96,7 @@ class OptionalDemo {
 
     public static Optional<Integer> parseInt(String value) {
         try {
-            return Optional.ofNullable(Integer.parseInt(value));
+            return Optional.of(Integer.parseInt(value));
         } catch (Exception e) {
             return Optional.empty();
         }

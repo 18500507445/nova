@@ -33,6 +33,7 @@
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <oss.version>3.16.0</oss.version>
         <jasypt.version>3.0.5</jasypt.version>
+        <jol.version>0.17</jol.version>
 
     </properties>
 
@@ -222,10 +223,11 @@
             <version>${jasypt.version}</version>
         </dependency>
 
+        <!-- 打印对象信息 -->
         <dependency>
             <groupId>org.openjdk.jol</groupId>
             <artifactId>jol-core</artifactId>
-            <version>0.17</version>
+            <version>${jol.version}</version>
         </dependency>
 
     </dependencies>

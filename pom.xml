@@ -40,6 +40,7 @@
         <module>nova-tools</module>
         <module>nova-websocket</module>
         <module>nova-mybatis-plus</module>
+        <module>nova-search</module>
 
     </modules>
 

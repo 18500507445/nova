@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>nova</artifactId>
         <groupId>com.nova</groupId>
+        <artifactId>nova</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <packaging>pom</packaging>
+
     <modules>
-        <module>nova-mq-active</module>
-        <module>nova-mq-rabbit</module>
-        <module>nova-mq-kafka</module>
-        <module>nova-mq-rocket</module>
+        <module>nova-search-solr</module>
+        <module>nova-search-elasticsearch</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>nova-mq</artifactId>
+    <artifactId>nova-search</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

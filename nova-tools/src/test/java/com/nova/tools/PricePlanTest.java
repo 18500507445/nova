@@ -3,22 +3,18 @@ package com.nova.tools;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.starter.redis.RedisService;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.openjdk.jol.info.ClassLayout;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 /**
  * @author: wzh
@@ -69,69 +65,17 @@ public class PricePlanTest {
         }
     }
 
-    @Test
-    public void demoA() {
-        TimeInterval timer = DateUtil.timer();
-        List<skuDTO> list1 = new ArrayList<>();
-        List<skuDTO> list2 = new ArrayList<>();
-        for (int i = 0; i < 4000000; i++) {
-            skuDTO skuDTO = new skuDTO();
-            skuDTO.setSkuId(String.valueOf(i));
-            skuDTO.setCateId(String.valueOf(i));
-            if (i < 500000) {
-                list1.add(skuDTO);
-            } else {
-                list2.add(skuDTO);
-            }
-        }
-        System.out.println("拼装耗时：" + timer.interval() + " ms");
-        timer.restart();
-
-        LinkedHashSet<skuDTO> linkedHashSet = new LinkedHashSet<>();
-        linkedHashSet.addAll(list1);
-        linkedHashSet.addAll(list2);
-
-        System.out.println("list.size：" + linkedHashSet.size());
-        System.out.println("处理：" + timer.interval() + " ms");
-    }
-
     @Data
     @EqualsAndHashCode
     static class skuDTO {
         String skuId = "";
         String cateId = "";
-    }
 
-
-    @Test
-    public void demoK() throws ExecutionException, InterruptedException {
-        TimeInterval timer = DateUtil.timer();
-        System.out.println("计时开始");
-        CompletableFuture<Long> task1 = CompletableFuture.supplyAsync(() -> {
-            ThreadUtil.sleep(1300L);
-            return 1L;
-        });
-        CompletableFuture<Long> task2 = CompletableFuture.supplyAsync(() -> {
-            ThreadUtil.sleep(400L);
-            return 2L;
-        });
-        CompletableFuture<Long> task3 = CompletableFuture.supplyAsync(() -> {
-            ThreadUtil.sleep(3000L);
-            return 3L;
-        });
-        CompletableFuture.allOf(task1, task2, task3).join();
-        Long one = task1.get();
-        Long two = task2.get();
-        Long three = task3.get();
-        System.out.println("one = " + one);
-        System.out.println("two = " + two);
-        System.out.println("three = " + three);
-        System.out.println("耗时 = " + timer.interval());
+//        String age = "";
+//        String sex = "";
     }
 
     public static void main(String[] args) {
-        ArrayList<skuDTO> skuDTOS = new ArrayList<>();
-        List<Object> collect = skuDTOS.stream().map(skuDTO::getSkuId).collect(Collectors.toList());
-        System.out.println("collect = " + collect);
+        System.out.print(ClassLayout.parseClass(skuDTO.class).toPrintable());
     }
 }

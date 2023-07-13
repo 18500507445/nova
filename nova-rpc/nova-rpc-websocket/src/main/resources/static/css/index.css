@@ -1,0 +1,51 @@
+@font-face {
+    font-family: "pix";
+    src: url("DottedSongtiSquareRegular.otf");
+}
+
+html, body, pre, code, kbd, samp {
+    font-family: "pix", serif;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.all-div {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin: 20px auto;
+    overflow-scrolling: auto;
+}
+
+/*.message {*/
+/*    overflow: auto;*/
+/*    width: 800px;*/
+/*    height: 400px;*/
+/*    margin-top: 20px;*/
+/*}*/
+
+.send-btns {
+    display: flex;
+}
+
+/*自己发送聊天的样式*/
+.message-me {
+    color: red;
+    text-align: right
+}
+
+.message-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-left {
+    display: flex;
+    margin-top: 2rem;
+    align-self: flex-start;
+}
+.message-right {
+    display: flex;
+    margin-top: 2rem;
+    align-self: flex-end;
+}

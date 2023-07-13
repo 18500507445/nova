@@ -30,18 +30,14 @@
         <module>nova-lock</module>
         <module>nova-log</module>
         <module>nova-login</module>
-        <module>nova-mail</module>
         <module>nova-mq</module>
-        <module>nova-mybatis</module>
+        <module>nova-msg</module>
+        <module>nova-orm</module>
         <module>nova-rpc</module>
-        <module>nova-sms</module>
+        <module>nova-search</module>
         <module>nova-sql</module>
         <module>nova-starter</module>
         <module>nova-tools</module>
-        <module>nova-websocket</module>
-        <module>nova-mybatis-plus</module>
-        <module>nova-search</module>
-
     </modules>
 
     <properties>

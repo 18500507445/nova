@@ -38,32 +38,30 @@
 10.nova-login
 * [三方登录JustAuth](nova-login/loginNote.md)
 
-11.nova-mail
+11.nova-mq
+* active，kafka，rabbit，rocket（待定）
+
+12.nova-msg
 * 发送邮件
+* 发送短信，多短信通道：阿里云、腾讯云、七牛云、云片
 
-12.nova-mq
-* active，kafka，rabbit
+13.nova-orm
+* [jpa学习-待补充]
+* [mybatis学习](nova-orm/nova-orm-mybatis/mybatisNote.md)
+* [mybatisplus学习](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
 
-13.nova-mybatis
-* [spring-mybatis学习](nova-mybatis/mybatisNote.md)
+14.nova-rpc
+* [手写rpc框架](nova-rpc/nova-rpc-socket/rpcNote.md)
+* [websocket学习]
 
-14.nova-mybatis-plus
-* [Mybatisplus学习](nova-mybatis-plus/Mybatisplus.md)
-
-15.nova-rpc
-* [手写rpc框架、dubbo调用(待开始)](nova-rpc/rpcNote.md)
-
-16.nova-sms
-* 多短信通道：阿里云、腾讯云、七牛云、云片
-
-17.nova-sql
+15.nova-sql
 * [sql练习](nova-sql/sqlNote.md)
 
-18.nova-starter（后续mq....）
+16.nova-starter（后续mq....）
 * 自定义starter：redis、mongo、xxlJob
 * <optional>true</optional>：防止依赖传递，导致引入后和项目的包冲突
 
-19.nova-tools
+17.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 * 引入了starter详情见测试类
@@ -76,6 +74,3 @@ jasypt:
     # 加密使用的盐
     password: jaspyt_password
 ~~~
-
-20.nova-websocket
-* websocket学习

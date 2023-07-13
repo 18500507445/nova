@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.nova</groupId>
+        <artifactId>nova-msg</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>nova-msg-sms</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <aliyun-sms.version>4.6.0</aliyun-sms.version>
+        <tencentcloud.version>3.1.740</tencentcloud.version>
+        <yunpiansms.version>1.2.7</yunpiansms.version>
+        <qiniusms.version>7.13.0</qiniusms.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- 阿里云短信服务 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>${aliyun-sms.version}</version>
+        </dependency>
+        <!-- 腾讯云短信服务 -->
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+            <version>3.1.742</version>
+        </dependency>
+        <!-- 云片短信服务 -->
+        <dependency>
+            <groupId>com.yunpian.sdk</groupId>
+            <artifactId>yunpian-java-sdk</artifactId>
+            <version>${yunpiansms.version}</version>
+        </dependency>
+        <!-- 七牛云短信服务 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>${qiniusms.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

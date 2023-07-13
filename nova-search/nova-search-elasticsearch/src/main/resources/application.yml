@@ -4,6 +4,10 @@ server:
   servlet:
     context-path: /
 
+spring:
+  elasticsearch:
+    uris: ip:port
+
 jasypt:
   encryptor:
     # 加密算法

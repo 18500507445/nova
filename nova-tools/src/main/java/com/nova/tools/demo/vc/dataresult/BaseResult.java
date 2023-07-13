@@ -1,4 +1,4 @@
-package com.nova.tools.vc.dataresult;
+package com.nova.tools.demo.vc.dataresult;
 
 
 import java.io.Serializable;

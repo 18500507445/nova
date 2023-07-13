@@ -1,4 +1,4 @@
-package com.nova.tools.vc.dataresult;
+package com.nova.tools.demo.vc.dataresult;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

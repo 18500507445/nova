@@ -1,9 +1,9 @@
-package com.nova.tools.vc.service;
+package com.nova.tools.demo.vc.service;
 
 
-import com.nova.tools.vc.dataresult.DataResult;
-import com.nova.tools.vc.entity.LockSeatBean;
-import com.nova.tools.vc.entity.LockSeatParamBean;
+import com.nova.tools.demo.vc.dataresult.DataResult;
+import com.nova.tools.demo.vc.entity.LockSeatBean;
+import com.nova.tools.demo.vc.entity.LockSeatParamBean;
 
 /**
  * @description:

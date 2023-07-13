@@ -4,6 +4,7 @@ server:
   servlet:
     context-path: /
 
+spring:
   data:
     solr:
       host: http://username:password@ip:port/xxx

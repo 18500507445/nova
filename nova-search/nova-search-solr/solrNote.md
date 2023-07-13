@@ -12,5 +12,23 @@
 * 自定义业务域，相当于在数据库中建立表结构，定义字段名和字段类型
 
 ### 第二章
-* SolrJ和Spring Data Solr
+* SolrJ引入依赖，基础的增删改查
+~~~xml
+<dependency>
+    <groupId>org.apache.solr</groupId>
+    <artifactId>solr-solrj</artifactId>
+</dependency>
+~~~
 
+### 第三章
+* Solr导入Mysql，注意导入jar包(mysql驱动、导入功能包(2个)、分词包)
+~~~
+mysql-connector-java-8.0.30.jar
+
+solr-dataimporthandler-8.6.0.jar
+solr-dataimporthandler-extras-8.6.0.jar
+
+lucene-analyzers-smartcn-8.6.0.jar
+~~~
+
+* 如何修改配置文件，以及配置业务域，网上找吧，懒得写教程了。

@@ -1,15 +1,15 @@
-package com.nova.tools.vc.service.impl;
+package com.nova.tools.demo.vc.service.impl;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.nova.tools.vc.base.AbstractLockSeatBase;
-import com.nova.tools.vc.dataresult.DataResult;
-import com.nova.tools.vc.entity.LockSeatBean;
-import com.nova.tools.vc.entity.LockSeatParamBean;
-import com.nova.tools.vc.enumerate.TicketSystemEnum;
-import com.nova.tools.vc.lockseat.CMTSLockSeatProcess;
-import com.nova.tools.vc.lockseat.ChenXingLockSeatProcess;
-import com.nova.tools.vc.lockseat.DingXinLockSeatProcess;
-import com.nova.tools.vc.service.LockSeatService;
+import com.nova.tools.demo.vc.base.AbstractLockSeatBase;
+import com.nova.tools.demo.vc.dataresult.DataResult;
+import com.nova.tools.demo.vc.entity.LockSeatBean;
+import com.nova.tools.demo.vc.entity.LockSeatParamBean;
+import com.nova.tools.demo.vc.enumerate.TicketSystemEnum;
+import com.nova.tools.demo.vc.lockseat.CMTSLockSeatProcess;
+import com.nova.tools.demo.vc.lockseat.ChenXingLockSeatProcess;
+import com.nova.tools.demo.vc.lockseat.DingXinLockSeatProcess;
+import com.nova.tools.demo.vc.service.LockSeatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

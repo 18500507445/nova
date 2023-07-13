@@ -1,4 +1,4 @@
-package com.nova.tools.vc.entity;
+package com.nova.tools.demo.vc.entity;
 
 import lombok.Data;
 

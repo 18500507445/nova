@@ -1,11 +1,11 @@
-package com.nova.tools.vc.lockseat;
+package com.nova.tools.demo.vc.lockseat;
 
 
-import com.nova.tools.vc.dataresult.DataResult;
-import com.nova.tools.vc.enumerate.TicketSystemEnum;
-import com.nova.tools.vc.base.AbstractLockSeatBase;
-import com.nova.tools.vc.entity.LockSeatBean;
-import com.nova.tools.vc.entity.LockSeatParamBean;
+import com.nova.tools.demo.vc.dataresult.DataResult;
+import com.nova.tools.demo.vc.enumerate.TicketSystemEnum;
+import com.nova.tools.demo.vc.base.AbstractLockSeatBase;
+import com.nova.tools.demo.vc.entity.LockSeatBean;
+import com.nova.tools.demo.vc.entity.LockSeatParamBean;
 import org.springframework.stereotype.Service;
 
 /**

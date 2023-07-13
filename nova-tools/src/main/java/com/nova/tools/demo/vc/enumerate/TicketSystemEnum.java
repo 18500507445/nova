@@ -1,4 +1,4 @@
-package com.nova.tools.vc.enumerate;
+package com.nova.tools.demo.vc.enumerate;
 
 import java.io.Serializable;
 

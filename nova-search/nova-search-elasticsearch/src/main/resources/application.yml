@@ -4,14 +4,9 @@ server:
   servlet:
     context-path: /
 
-  data:
-    solr:
-      host: http://username:password@ip:port/xxx
-
 jasypt:
   encryptor:
     # 加密算法
     algorithm: PBEWITHHMACSHA512ANDAES_256
     # 加密使用的盐
     password: jaspyt_password
-

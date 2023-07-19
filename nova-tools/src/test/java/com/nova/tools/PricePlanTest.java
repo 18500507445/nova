@@ -5,11 +5,11 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.RandomUtil;
 import com.starter.redis.RedisService;
+import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.openjdk.jol.info.ClassLayout;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -40,7 +40,7 @@ public class PricePlanTest {
         TimeInterval timer = DateUtil.timer();
         //字符串拼接skuId-cateId-加价率-是否允许超过电商价-costPrice(成本价)-elePrice(JD电商价)
         List<Object> as = new ArrayList<>();
-        for (int i = 0; i < 7200000; i++) {
+        for (int i = 0; i < 5000000; i++) {
             as.add(RandomUtil.randomNumbers(12) + "-" + RandomUtil.randomNumbers(8) + "-10.1" + "-1" + "-" + RandomUtil.randomNumbers(4) + "-" + RandomUtil.randomNumbers(4));
         }
         List<List<Object>> partition = ListUtil.partition(as, 80000);
@@ -70,12 +70,20 @@ public class PricePlanTest {
     static class skuDTO {
         String skuId = "";
         String cateId = "";
-
-//        String age = "";
-//        String sex = "";
+        Integer poolType;
     }
 
-    public static void main(String[] args) {
-        System.out.print(ClassLayout.parseClass(skuDTO.class).toPrintable());
+    @Test
+    public void testObjectByteSize() {
+        List<Object> as = new ArrayList<>();
+        for (int i = 0; i < 5000000; i++) {
+            skuDTO skuDTO = new skuDTO();
+            skuDTO.setSkuId(RandomUtil.randomNumbers(12));
+            skuDTO.setCateId(RandomUtil.randomNumbers(8));
+            skuDTO.setPoolType(1);
+            as.add(skuDTO);
+        }
+        System.out.println("占用：" + ObjectSizeCalculator.getObjectSize(as) / 1024 / 1024 + "mb");
     }
+
 }

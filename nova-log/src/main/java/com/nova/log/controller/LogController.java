@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogController extends BaseController {
 
     /**
-     * log
+     * 异步log测试，性能差一倍
      */
     @PostMapping("log")
     public AjaxResult limit() {
         TimeInterval timer = DateUtil.timer();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 500000; i++) {
             log.info("这是{}条日志！", i);
         }
         log.info("当前耗时：{}ms", timer.interval());

@@ -96,39 +96,3 @@ nova-tools
 * [《面试必备：30个Java集合面试问题及答案》](https://mp.weixin.qq.com/s/psgJNTZ3B7ZNtiFb67rgDg)
 * [《面试官Spring63问，抗住了马上高薪》](https://mp.weixin.qq.com/s/TDCQYAWulmCCCcUn7ok0pQ)
 * [《最全的spring面试题和答案》](https://mp.weixin.qq.com/s/N8OkVaRtNlB3xq8KTvo2_g)
-
-
-### 三种for循环插入耗时对比（10000条），事例在my-mall项目测试类
-~~~Java
-    /**
-     * 普通批量插入，耗时：900823 ms
-     */
-    @Test
-    public void normalInsert() {
-        List<MyOrder> list = getList();
-        list.forEach(myOrder -> myOrderDao.insert(myOrder));
-        System.out.println("插入" + list.size() + "条数据，耗时 ： " + TIMER.interval() + " ms");
-    }
-
-
-    /**
-     * foreach批量插入，耗时：8479 ms
-     */
-    @Test
-    public void testBatch() {
-        int i = myOrderDao.insertBatch(getList());
-        System.out.println("插入" + i + "条数据，耗时 ： " + TIMER.interval() + " ms");
-    }
-
-    /**
-     * 开启SqlSession批量插入，耗时：7776 ms
-     */
-    @Test
-    public void testInsert() {
-        SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
-        MyOrderDao mapper = sqlSession.getMapper(MyOrderDao.class);
-        List<MyOrder> list = getList();
-        list.forEach(mapper::insert);
-        System.out.println("插入" + list.size() + "条数据，耗时 ： " + TIMER.interval() + " ms");
-    }
-~~~

@@ -57,6 +57,7 @@ class DateExample {
     /**
      * LocalDate 示例
      */
+    @Test
     void localDateExample() {
         // 创建一个LocalDate实例
         LocalDate localDate = LocalDate.now();
@@ -87,6 +88,7 @@ class DateExample {
     /**
      * LocalDateTime 示例
      */
+    @Test
     void localDateTimeExample() {
         // 创建一个LocalDateTime实例
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -108,6 +110,7 @@ class DateExample {
     /**
      * LocalTime 示例
      */
+    @Test
     void localTimeExample() {
 
         // 创建一个LocalTime实例
@@ -126,4 +129,5 @@ class DateExample {
         System.out.println("localTimeLater  : " + localTimeLater);
         System.out.println("localTimeEarlier: " + localTimeEarlier);
     }
+
 }

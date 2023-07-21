@@ -73,6 +73,9 @@ public class PricePlanTest {
         Integer poolType;
     }
 
+    /**
+     * 计算对象占用内存大小
+     */
     @Test
     public void testObjectByteSize() {
         List<Object> as = new ArrayList<>();

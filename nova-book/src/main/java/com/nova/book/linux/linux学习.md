@@ -6,11 +6,11 @@
 （2）top -c：查看cpu信息，核数  
 （3）ls：list的简写，显示目标列表  
 （4）cd：进入
+（5）ps auxw|head -1;ps auxw|sort -rn -k3|head -10（cpu占用前十的进程）
 
 #### 1.2 文件
 （1）open -e .zshrc：打开文件
 （2）vim ~/.zshrc：窗口打开文件
-
 
 #### 1.3 启、停服务
 （1）ps -ef|grep java：查找java进程  

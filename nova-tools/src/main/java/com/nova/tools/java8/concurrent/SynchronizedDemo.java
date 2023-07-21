@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
 /**
- * @description:
+ * @description: 锁
  * @author: wzh
  * @date: 2022/11/18 15:15
  */

@@ -6,6 +6,7 @@ import com.nova.tools.java8.grow.jdk6.ScriptEngineDemo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * try-with-resource
@@ -16,7 +17,7 @@ import java.io.IOException;
 class TryWithResource {
 
     public static void main(String[] args) {
-        String path = ScriptEngineDemo.class.getResource("/test.js").getPath();
+        String path = Objects.requireNonNull(ScriptEngineDemo.class.getResource("/test.js")).getPath();
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String str = br.readLine();

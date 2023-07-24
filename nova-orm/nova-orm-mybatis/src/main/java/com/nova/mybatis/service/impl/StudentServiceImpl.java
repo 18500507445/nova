@@ -1,7 +1,7 @@
-package com.nova.myabtis.service.impl;
+package com.nova.mybatis.service.impl;
 
-import com.nova.myabtis.service.StudentService;
-import com.nova.myabtis.mapper.StudentMapper;
+import com.nova.mybatis.service.StudentService;
+import com.nova.mybatis.mapper.StudentMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

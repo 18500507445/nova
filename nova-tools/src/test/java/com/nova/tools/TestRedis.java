@@ -25,6 +25,25 @@ public class TestRedis {
     @Resource
     private RedissonClient redissonClient;
 
+    @Test
+    public void testRedis() {
+        final Object o = redisService.get("234");
+        System.out.println("o = " + o);
+    }
+
+    /**
+     * 测试redisson加锁、解锁
+     */
+    @Test
+    public void testRedisson() {
+        String key = "redissonLock";
+
+        boolean lock = lock(key, 100L);
+        System.out.println("lock = " + lock);
+
+        release(key);
+    }
+
     public boolean lock(String key, long expireSeconds) {
         RLock rLock = redissonClient.getLock(key);
         boolean getLock;
@@ -44,26 +63,6 @@ public class TestRedis {
 
     public void release(String key) {
         redissonClient.getLock(key).unlock();
-    }
-
-
-    @Test
-    public void testRedis() {
-        final Object o = redisService.get("234");
-        System.out.println("o = " + o);
-    }
-
-    /**
-     * 测试加锁、解锁
-     */
-    @Test
-    public void testRedisson() {
-        String key = "redissonLock";
-
-        boolean lock = lock(key, 100L);
-        System.out.println("lock = " + lock);
-
-        release(key);
     }
 
 

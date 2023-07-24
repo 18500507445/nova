@@ -1,4 +1,4 @@
-package com.nova.myabtis.service;
+package com.nova.mybatis.service;
 
 /**
  * @description:

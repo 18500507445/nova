@@ -46,7 +46,6 @@
 * 发送短信，多短信通道：阿里云、腾讯云、七牛云、云片
 
 13.nova-orm
-* [jpa学习-待补充]
 * [mybatis学习](nova-orm/nova-orm-mybatis/mybatisNote.md)
 * [mybatisplus学习](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
 

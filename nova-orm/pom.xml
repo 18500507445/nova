@@ -11,7 +11,6 @@
     <artifactId>nova-orm</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>nova-orm-jpa</module>
         <module>nova-orm-mybatis</module>
         <module>nova-orm-mybatisplus</module>
     </modules>

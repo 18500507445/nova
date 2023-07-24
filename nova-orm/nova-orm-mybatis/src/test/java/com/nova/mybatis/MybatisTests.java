@@ -1,10 +1,10 @@
 package com.nova.mybatis;
 
 
-import com.nova.myabtis.config.MybatisConfiguration;
-import com.nova.myabtis.mapper.StudentMapper;
-import com.nova.myabtis.service.StudentService;
-import com.nova.myabtis.service.TransactionService;
+import com.nova.mybatis.config.MybatisConfiguration;
+import com.nova.mybatis.mapper.StudentMapper;
+import com.nova.mybatis.service.StudentService;
+import com.nova.mybatis.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;

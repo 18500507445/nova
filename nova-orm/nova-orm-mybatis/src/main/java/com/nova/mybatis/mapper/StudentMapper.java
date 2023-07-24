@@ -1,6 +1,6 @@
-package com.nova.myabtis.mapper;
+package com.nova.mybatis.mapper;
 
-import com.nova.myabtis.entity.Student;
+import com.nova.mybatis.entity.Student;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

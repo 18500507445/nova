@@ -1,4 +1,4 @@
-package com.nova.myabtis.config;
+package com.nova.mybatis.config;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;

@@ -1,4 +1,4 @@
-package com.nova.myabtis.entity;
+package com.nova.mybatis.entity;
 
 import lombok.Data;
 

@@ -14,8 +14,9 @@
 
 #### 1.3 启、停服务
 （1）ps -ef|grep java：查找java进程  
-（2）kill -9 pid：根据id停止进程  
-（3）nohup java -Xms1g -Xmx1g -Xmn256m -Xss512k -XX:PermSize=512m -XX:MaxPermSize=512m -jar /xxx/xxx.jar >/dev/null 2>&1 &
+（2）kill -9 pid：根据id立刻停止进程  
+（3）kill -15 pid：请求完毕后，停止进程（死锁的时候还是kill -9吧，哈哈）
+（5）nohup java -Xms1g -Xmx1g -Xmn256m -Xss512k -XX:PermSize=512m -XX:MaxPermSize=512m -jar /xxx/xxx.jar >/dev/null 2>&1 &
 - 根据JVM参数启动服务
 
 #### 1.4 日志

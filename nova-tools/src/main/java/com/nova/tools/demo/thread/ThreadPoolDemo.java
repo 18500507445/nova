@@ -39,7 +39,7 @@ class ThreadPoolDemo {
                 namedThreadFactory,
                 new ThreadPoolExecutor.AbortPolicy());
 
-        executor.execute(new DemoA());
+        executor.execute(() -> System.out.println("--" + Thread.currentThread().getId()));
         // 优雅关闭线程池
         executor.shutdown();
         // 任务执行完毕后打印"Done"
@@ -53,7 +53,16 @@ class ThreadPoolDemo {
             queue.put(i);
         }
         for (int j = 0; j < 50; j++) {
-            service.submit(new DemoB());
+            service.submit((Runnable) () -> {
+                while (true) {
+                    try {
+                        System.out.println(queue.take() + "--" + Thread.currentThread().getId());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
         }
         System.out.println("耗时:" + timer.interval());
 
@@ -70,73 +79,9 @@ class ThreadPoolDemo {
         ExecutorService pool = Executors.newSingleThreadExecutor();
         for (int i = 1; i <= 1000; ++i) {
             final int number = i;
-            pool.execute(() -> System.out.println("I am " + number));
+            pool.execute(() -> System.out.println("I am " + Thread.currentThread().getId() + "-" + number));
         }
         pool.shutdown();
     }
 
-    /**
-     * 创建ForkJoinPool线程池
-     */
-    @Test
-    public void demoD() {
-        TimeInterval timer = DateUtil.timer();
-        ForkJoinPool pool = new ForkJoinPool();
-        Task task = new Task(0L, 10000000000L);
-        Long invoke = pool.invoke(task);
-        System.err.println(invoke);
-        System.out.println("花费时间:" + timer.interval() + "ms");
-    }
-
-    private static class DemoA implements Runnable {
-        @Override
-        public void run() {
-            System.out.println("--" + Thread.currentThread().getId());
-        }
-    }
-
-    private static class DemoB implements Runnable {
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    System.out.println(queue.take() + "--" + Thread.currentThread().getId());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-        }
-    }
-
-    public static class Task extends RecursiveTask<Long> {
-        private final long start;
-        private final long end;
-        private static final long THURS_HOLD = 10000000L;
-
-        public Task(long start, long end) {
-            this.start = start;
-            this.end = end;
-        }
-
-        @Override
-        protected Long compute() {
-            long length = end - start;
-            if (length <= THURS_HOLD) {//小于临界值
-                long sum = 0L;
-                for (long i = start; i <= end; i++) {
-                    sum += i;
-                }
-                return sum;
-
-            } else {
-                long mid = (start + end) / 2;
-                Task task1 = new Task(start, mid);
-                Task task2 = new Task(mid + 1, end);
-                invokeAll(task1, task2);
-                return task1.join() + task2.join();
-            }
-        }
-    }
 }

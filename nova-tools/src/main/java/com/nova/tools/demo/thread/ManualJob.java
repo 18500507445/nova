@@ -13,6 +13,7 @@ import java.util.concurrent.*;
 
 /**
  * @description: 手动job
+ * 模拟场景一个线程队列放数据，一个队列取，用信号量控制好速度
  * @author: wzh
  * @date: 2021/3/31 11:13
  */

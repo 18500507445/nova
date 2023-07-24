@@ -1,7 +1,7 @@
 package com.nova.socket.codec;
 
-import com.nova.rpc.manual.entity.RPCRequest;
-import com.nova.rpc.manual.entity.RPCResponse;
+import com.nova.socket.entity.RPCRequest;
+import com.nova.socket.entity.RPCResponse;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;

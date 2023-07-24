@@ -1,12 +1,12 @@
 package com.nova.socket.version_4.server;
 
 
-import com.nova.rpc.manual.service.BlogService;
-import com.nova.rpc.manual.service.UserService;
-import com.nova.rpc.manual.service.impl.BlogServiceImpl;
-import com.nova.rpc.manual.service.impl.UserServiceImpl;
-import com.nova.rpc.manual.version_3.server.RPCServer;
-import com.nova.rpc.manual.version_3.server.ServiceProvider;
+import com.nova.socket.service.BlogService;
+import com.nova.socket.service.UserService;
+import com.nova.socket.service.impl.BlogServiceImpl;
+import com.nova.socket.service.impl.UserServiceImpl;
+import com.nova.socket.version_3.server.RPCServer;
+import com.nova.socket.version_3.server.ServiceProvider;
 
 public class TestServer {
 

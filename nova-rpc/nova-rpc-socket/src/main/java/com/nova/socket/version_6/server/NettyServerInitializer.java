@@ -1,8 +1,8 @@
 package com.nova.socket.version_6.server;
 
-import com.nova.rpc.manual.codec.JsonSerializer;
-import com.nova.rpc.manual.codec.MyDecode;
-import com.nova.rpc.manual.codec.MyEncode;
+import com.nova.socket.codec.JsonSerializer;
+import com.nova.socket.codec.MyDecode;
+import com.nova.socket.codec.MyEncode;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;

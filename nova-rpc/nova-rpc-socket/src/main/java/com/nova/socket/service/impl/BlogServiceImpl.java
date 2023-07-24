@@ -1,8 +1,8 @@
 package com.nova.socket.service.impl;
 
 
-import com.nova.rpc.manual.entity.BlogBO;
-import com.nova.rpc.manual.service.BlogService;
+import com.nova.socket.entity.BlogBO;
+import com.nova.socket.service.BlogService;
 
 public class BlogServiceImpl implements BlogService {
 

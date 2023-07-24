@@ -1,8 +1,8 @@
 package com.nova.socket.version_2.client;
 
 
-import com.nova.rpc.manual.entity.UserBO;
-import com.nova.rpc.manual.service.UserService;
+import com.nova.socket.entity.UserBO;
+import com.nova.socket.service.UserService;
 
 public class RPCClient {
 

@@ -1,10 +1,10 @@
 package com.nova.socket.version_6.client;
 
-import com.nova.rpc.manual.entity.RPCRequest;
-import com.nova.rpc.manual.entity.RPCResponse;
-import com.nova.rpc.manual.version_4.client.RPCClient;
-import com.nova.rpc.manual.version_6.register.ServiceRegister;
-import com.nova.rpc.manual.version_6.register.ZkServiceRegister;
+import com.nova.socket.entity.RPCRequest;
+import com.nova.socket.entity.RPCResponse;
+import com.nova.socket.version_4.client.RPCClient;
+import com.nova.socket.version_6.register.ServiceRegister;
+import com.nova.socket.version_6.register.ZkServiceRegister;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;

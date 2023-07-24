@@ -1,7 +1,7 @@
 package com.nova.socket.version_5.server;
 
-import com.nova.rpc.manual.entity.RPCRequest;
-import com.nova.rpc.manual.entity.RPCResponse;
+import com.nova.socket.entity.RPCRequest;
+import com.nova.socket.entity.RPCResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.AllArgsConstructor;

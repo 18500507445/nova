@@ -1,10 +1,10 @@
 package com.nova.socket.version_4.client;
 
 
-import com.nova.rpc.manual.entity.BlogBO;
-import com.nova.rpc.manual.entity.UserBO;
-import com.nova.rpc.manual.service.BlogService;
-import com.nova.rpc.manual.service.UserService;
+import com.nova.socket.entity.BlogBO;
+import com.nova.socket.entity.UserBO;
+import com.nova.socket.service.BlogService;
+import com.nova.socket.service.UserService;
 
 public class TestClient {
 

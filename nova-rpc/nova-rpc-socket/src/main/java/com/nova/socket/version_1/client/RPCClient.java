@@ -1,7 +1,7 @@
 package com.nova.socket.version_1.client;
 
 
-import com.nova.rpc.manual.entity.UserBO;
+import com.nova.socket.entity.UserBO;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

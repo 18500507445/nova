@@ -1,12 +1,12 @@
 package com.nova.socket.version_5.client;
 
 
-import com.nova.rpc.manual.entity.BlogBO;
-import com.nova.rpc.manual.entity.UserBO;
-import com.nova.rpc.manual.service.BlogService;
-import com.nova.rpc.manual.service.UserService;
-import com.nova.rpc.manual.version_4.client.RPCClient;
-import com.nova.rpc.manual.version_4.client.RPCClientProxy;
+import com.nova.socket.entity.BlogBO;
+import com.nova.socket.entity.UserBO;
+import com.nova.socket.service.BlogService;
+import com.nova.socket.service.UserService;
+import com.nova.socket.version_4.client.RPCClient;
+import com.nova.socket.version_4.client.RPCClientProxy;
 
 public class TestClient {
 

@@ -1,7 +1,7 @@
 package com.nova.socket.service;
 
 
-import com.nova.rpc.manual.entity.BlogBO;
+import com.nova.socket.entity.BlogBO;
 
 public interface BlogService {
 

@@ -1,8 +1,8 @@
 package com.nova.socket.version_3.server;
 
 
-import com.nova.rpc.manual.entity.RPCRequest;
-import com.nova.rpc.manual.entity.RPCResponse;
+import com.nova.socket.entity.RPCRequest;
+import com.nova.socket.entity.RPCResponse;
 import lombok.AllArgsConstructor;
 
 import java.io.IOException;

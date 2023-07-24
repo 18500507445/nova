@@ -1,6 +1,6 @@
 package com.nova.socket.version_5.client;
 
-import com.nova.rpc.manual.entity.RPCResponse;
+import com.nova.socket.entity.RPCResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.AttributeKey;

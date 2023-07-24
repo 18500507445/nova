@@ -1,8 +1,8 @@
 package com.nova.socket.version_6.server;
 
 
-import com.nova.rpc.manual.version_6.register.ServiceRegister;
-import com.nova.rpc.manual.version_6.register.ZkServiceRegister;
+import com.nova.socket.version_6.register.ServiceRegister;
+import com.nova.socket.version_6.register.ZkServiceRegister;
 
 import java.net.InetSocketAddress;
 import java.util.HashMap;

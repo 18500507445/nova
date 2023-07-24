@@ -1,9 +1,9 @@
 package com.nova.socket.version_2.server;
 
 
-import com.nova.rpc.manual.entity.RPCRequest;
-import com.nova.rpc.manual.entity.RPCResponse;
-import com.nova.rpc.manual.service.impl.UserServiceImpl;
+import com.nova.socket.entity.RPCRequest;
+import com.nova.socket.entity.RPCResponse;
+import com.nova.socket.service.impl.UserServiceImpl;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -3,8 +3,8 @@ package com.nova.socket.codec;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.nova.rpc.manual.entity.RPCRequest;
-import com.nova.rpc.manual.entity.RPCResponse;
+import com.nova.socket.entity.RPCRequest;
+import com.nova.socket.entity.RPCResponse;
 
 
 /**

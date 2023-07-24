@@ -1,7 +1,7 @@
 package com.nova.socket.version_5.server;
 
 
-import com.nova.rpc.manual.version_3.server.RPCServer;
+import com.nova.socket.version_3.server.RPCServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.nio.NioEventLoopGroup;

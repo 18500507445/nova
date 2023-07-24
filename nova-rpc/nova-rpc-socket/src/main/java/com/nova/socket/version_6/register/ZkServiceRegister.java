@@ -1,8 +1,8 @@
 package com.nova.socket.version_6.register;
 
 
-import com.nova.rpc.manual.version_6.loadbalance.LoadBalance;
-import com.nova.rpc.manual.version_6.loadbalance.RandomLoadBalance;
+import com.nova.socket.version_6.loadbalance.LoadBalance;
+import com.nova.socket.version_6.loadbalance.RandomLoadBalance;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

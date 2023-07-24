@@ -1,7 +1,7 @@
 package com.nova.socket.service;
 
 
-import com.nova.rpc.manual.entity.UserBO;
+import com.nova.socket.entity.UserBO;
 
 /**
  * @description:

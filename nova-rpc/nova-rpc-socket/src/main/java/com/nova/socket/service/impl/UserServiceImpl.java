@@ -1,8 +1,8 @@
 package com.nova.socket.service.impl;
 
 
-import com.nova.rpc.manual.entity.UserBO;
-import com.nova.rpc.manual.service.UserService;
+import com.nova.socket.entity.UserBO;
+import com.nova.socket.service.UserService;
 
 import java.util.Random;
 import java.util.UUID;

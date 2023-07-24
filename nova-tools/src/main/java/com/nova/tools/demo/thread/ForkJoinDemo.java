@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 
 /**
  * @author: wzh
- * @description
+ * @description (1)ForkJoinPool 默认线程池大小=CPU核心数 并非设置越大越好，IO密集型任务 受限于磁盘IO
+ * (2)fork-join和ThreadPool，各自有各自的应用场景，二者是并存互补的关系
+ * (3)递归任务，很适合用fork-join。如分治任务：分而治之，父任务，依赖于子任务的完成
  * @date: 2023/07/24 16:49
  */
 public class ForkJoinDemo {
@@ -82,7 +84,7 @@ public class ForkJoinDemo {
                 future.get();
             }
             Thread.sleep(execTime * 1000);
-            System.out.println("time: " + DateUtil.now() + ", taskName:" + name + ", thread:" + Thread.currentThread());
+            System.out.println("time: " + DateUtil.now() + ", taskName:" + name + ", threadName:" + Thread.currentThread().getName());
             return "time" + DateUtil.now() + ", taskName:" + name;
         }
 
@@ -96,7 +98,7 @@ public class ForkJoinDemo {
                 dependentTask.join();
             }
             Thread.sleep(execTime * 1000);
-            System.out.println("time: " + DateUtil.now() + ", taskName:" + name + ", thread:" + Thread.currentThread());
+            System.out.println("time: " + DateUtil.now() + ", taskName:" + name + ", threadName:" + Thread.currentThread().getName());
             return "xxx";
         }
     }
@@ -136,10 +138,11 @@ public class ForkJoinDemo {
 
             } else {
                 long mid = (start + end) / 2;
-                TaskA task1 = new TaskA(start, mid);
-                TaskA task2 = new TaskA(mid + 1, end);
-                invokeAll(task1, task2);
-                return task1.join() + task2.join();
+                TaskA left = new TaskA(start, mid);
+                TaskA right = new TaskA(mid + 1, end);
+                invokeAll(left, right);
+                // 把两个小任务累加的结果合并起来
+                return left.join() + right.join();
             }
         }
     }

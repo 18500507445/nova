@@ -50,7 +50,7 @@ class ListDemo {
         random.ints().limit(10).sorted().forEach(System.out::println);
 
         // 并行处理
-        count = STRINGS.parallelStream().filter(string -> string.isEmpty()).count();
+        count = STRINGS.parallelStream().filter(String::isEmpty).count();
         System.out.println("空字符串的数量为: " + count);
     }
 
@@ -270,6 +270,24 @@ class ListDemo {
         People any = PEOPLE_LIST.stream().findAny().get();
         System.out.println("findAny:" + JSONUtil.toJsonStr(any));
     }
+
+    /**
+     * 并行流
+     */
+    @Test
+    public void parallelStream() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4);
+        // 串行流
+        int sum1 = list.stream().reduce(5, Integer::sum);
+        // 并行流
+        int sum2 = list.parallelStream().reduce(5, Integer::sum);
+        System.out.println("串行流执行结果：" + sum1);
+        System.out.println("并行流执行结果：" + sum2);
+
+        int sum3 = list.parallelStream().reduce(0, Integer::sum) + 5;
+        System.out.println("并行流之外加5执行结果：" + sum3);
+    }
+
 
 
 }

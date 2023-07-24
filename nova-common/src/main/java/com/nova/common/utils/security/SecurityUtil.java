@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Base64Utils;
 
-
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -47,21 +46,21 @@ public class SecurityUtil {
         KEY_MAP.put("h5", "NrRtQPDQDxv1h6NZ");
     }
 
-    public synchronized static String DecryptAllPara(String Paravalue, String clientType) {
+    public synchronized static String decryptAllPara(String params, String clientType) {
         String decryptvalue = "";
         try {
             if (StringUtils.isNotBlank(clientType)) {
                 if (StringUtils.equals("h5", clientType)) {
-                    decryptvalue = Decrypt(Paravalue.getBytes(StandardCharsets.UTF_8), H5_SECRET_KEY);
+                    decryptvalue = Decrypt(params.getBytes(StandardCharsets.UTF_8), H5_SECRET_KEY);
                 } else if (ArrayUtils.contains(new String[]{"android", "ios"}, clientType)) {
-                    decryptvalue = Decrypt(URLDecoder.decode(Paravalue, "utf-8").getBytes(StandardCharsets.UTF_8), SECRET_KEY);
+                    decryptvalue = Decrypt(URLDecoder.decode(params, "utf-8").getBytes(StandardCharsets.UTF_8), SECRET_KEY);
                 }
             } else {
-                decryptvalue = URLDecoder.decode(Decrypt(Paravalue.getBytes(StandardCharsets.UTF_8)), "utf-8");
+                decryptvalue = URLDecoder.decode(decrypt(params.getBytes(StandardCharsets.UTF_8)), "utf-8");
             }
             decryptvalue = URLDecoder.decode(decryptvalue, "utf-8");
         } catch (Exception e) {
-            log.error("DecryptAllPara====>解密全部参数失败:{}", e);
+            log.error("decryptAllPara====>解密全部参数失败:", e);
             e.printStackTrace();
         }
         return decryptvalue;
@@ -74,7 +73,7 @@ public class SecurityUtil {
      * @return
      * @throws Exception
      */
-    public static String Decrypt(byte[] src) throws Exception {
+    public static String decrypt(byte[] src) throws Exception {
         SecretKey sKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
         Cipher ci = Cipher.getInstance("AES");
         ci.init(Cipher.DECRYPT_MODE, sKey);

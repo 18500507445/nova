@@ -117,7 +117,6 @@ public class Arith {
      * @return 1 d1 > d2  0 d1 = d2 -1 d1 < d2
      */
     public static int compare(double d1, double d2) {
-        int retval = new Double(d1).compareTo(d2);
-        return retval;
+        return new Double(d1).compareTo(d2);
     }
 }

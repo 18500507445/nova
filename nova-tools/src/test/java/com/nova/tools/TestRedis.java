@@ -53,7 +53,6 @@ public class TestRedis {
         System.out.println("o = " + o);
     }
 
-
     /**
      * 测试加锁、解锁
      */

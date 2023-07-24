@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * Map通用处理方法
+ * request请求参数转换Map通用处理方法
  */
 public class MapDataUtil {
 

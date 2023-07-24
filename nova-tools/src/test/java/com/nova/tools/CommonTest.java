@@ -14,15 +14,14 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description 配置文件加解密测试
- * @date: 2023/05/30 15:36
+ * @description 通用测试类
+ * @date: 2023/07/24 14:43
  */
 @SpringBootTest
-public class JasyptTest {
+public class CommonTest {
 
     @Autowired
     private StringEncryptor stringEncryptor;
-
     /**
      * 加密解密测试
      */
@@ -57,4 +56,5 @@ public class JasyptTest {
         }
         System.out.println("占用：" + ObjectSizeCalculator.getObjectSize(as) / 1024 / 1024 + "mb");
     }
+
 }

@@ -46,7 +46,7 @@ public class DispatcherController extends BaseController {
             String function = "";
             if (StrUtil.isNotBlank(apiUrl)) {
                 log.info("dispatcher====>before:" + apiUrl);
-                apiUrl = SecurityUtil.DecryptAllPara(apiUrl, clientType);
+                apiUrl = SecurityUtil.decryptAllPara(apiUrl, clientType);
                 log.info("dispatcher====>after:" + apiUrl);
                 String[] arrUrl = apiUrl.split("&");
                 Map<String, String> urlParam = new HashMap<>(16);

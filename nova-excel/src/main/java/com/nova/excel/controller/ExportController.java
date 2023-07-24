@@ -11,7 +11,6 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.utils.list.PageUtils;
 import com.nova.excel.entity.ExportDO;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +26,7 @@ import java.util.Objects;
 import java.util.concurrent.*;
 
 /**
- * @description: 导出Controller
+ * @description: 线程合并结果后导出
  * @author: wzh
  * @date: 2023/1/12 13:30
  */
@@ -64,11 +63,8 @@ public class ExportController extends BaseController {
     @SneakyThrows
     @GetMapping("exportEasyExcel")
     public void exportEasyExcel() {
-        System.out.println("-----------任务执行开始-----------");
         TimeInterval timer = DateUtil.timer();
-
         String fileName = path + UUID.fastUUID() + ".xlsx";
-
         HttpServletResponse response = getResponse();
         // 设置响应内容
         response.setContentType("application/vnd.ms-excel");
@@ -79,9 +75,13 @@ public class ExportController extends BaseController {
                 "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
         //模拟数据库数据
         List<ExportDO> exportList = selectAll(TOTAL, 50000);
-        //可以浏览器下载，也可以直接EasyExcel.write(fileName, ExportDO.class)下载到本地或者服务器
-        EasyExcel.write(fileName, ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板")
-                .doWrite(exportList);
+
+        //可以浏览器下载
+        EasyExcel.write(response.getOutputStream(), ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
+
+        //可以直接EasyExcel.write(fileName, ExportDO.class)下载到本地或者服务器
+//        EasyExcel.write(fileName, ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
+
         log.info("当前耗时：{}ms", timer.interval());
     }
 
@@ -105,7 +105,7 @@ public class ExportController extends BaseController {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        System.out.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " ,查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
+        System.out.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " , 查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
         return resultList;
     }
 
@@ -125,9 +125,9 @@ public class ExportController extends BaseController {
             TimeInterval timer = DateUtil.timer();
             System.out.println("线程：" + Thread.currentThread().getName() + " , 开始读取数据------");
             List<ExportDO> pageList = PageUtils.startPage(list, pageNum, pageSize);
-            System.out.println("线程：" + Thread.currentThread().getName() + " , 读取数据  " + list.size() + ",页数:" + pageNum + "耗时 ：" + timer.interval() + "ms");
+            System.out.println("线程：" + Thread.currentThread().getName() + " , 读取数据  " + list.size() + ", 页数:" + pageNum + ", 耗时 ：" + timer.interval() + "ms");
             cd.countDown();
-            System.out.println("剩余任务数  ===========================> " + cd.getCount());
+            System.out.println("剩余任务数  ================> " + cd.getCount());
             return pageList;
         }
     }

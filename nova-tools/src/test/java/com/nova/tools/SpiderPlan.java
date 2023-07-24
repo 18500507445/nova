@@ -1,12 +1,12 @@
 package com.nova.tools;
 
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.net.URLEncodeUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
@@ -30,25 +30,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
-import java.util.concurrent.locks.LockSupport;
 import java.util.stream.Collectors;
 
 /**
  * @author: wzh
- * @description 方案B
- * @date: 2023/05/22 17:59
+ * @description 方案A
+ * @date: 2023/05/25 10:52
  */
-@Slf4j(topic = "SpiderPlanB")
-public class SpiderPlanB {
-
-    /**
-     * 太阳代理
-     */
-    private static final String PROXY_URL = "http://http.tiqu.alibabaapi.com/getip?num=3&type=2&pack=119455&port=1&lb=1&pb=45&regions=";
-
-    private static final String SEARCH_URL = "{\"area\":\"1_72_55657_0\",\"pin\":\"\",\"fields\":\"11100000\",\"skuIds\":\"%s\",\"source\":\"pc-item\"}";
-
-    private static final String BASE_SEARCH_URL = "https://api.m.jd.com/?appid=item-v3&functionId=pctradesoa_getprice&client=pc&clientVersion=1.0.0&t=%s&body=";
+@Slf4j(topic = "SpiderPlanA")
+public class SpiderPlan {
 
     /**
      * 计时器
@@ -58,7 +48,7 @@ public class SpiderPlanB {
     /**
      * 获取机器核数，作为线程池数量
      */
-    private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int THREAD_COUNT = 16 * Runtime.getRuntime().availableProcessors();
 
     /**
      * 线程工厂
@@ -73,18 +63,60 @@ public class SpiderPlanB {
     /**
      * 手动创建线程池
      */
-    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(THREAD_COUNT / 5, THREAD_COUNT / 5,
+    private static final ExecutorService EXECUTOR_POOL = new ThreadPoolExecutor(THREAD_COUNT, THREAD_COUNT,
             30L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(1024), THREAD_FACTORY, new ThreadPoolExecutor.DiscardPolicy());
-
-    /**
-     * 信号量，控制获取ip的并发数，暂时不用了
-     */
-    private final Semaphore SEMAPHORE = new Semaphore(THREAD_COUNT / 5);
 
     /**
      * 模拟任务数量
      */
-    private static final int COUNT = 400;
+    private static final int COUNT = 7_200_000;
+
+    private static final int PAGE_SIZE = 10_000;
+
+    private static final String PROXY_URL = "http://http.tiqu.alibabaapi.com/getip?num=3&type=2&pack=119455&port=1&lb=1&pb=45&regions=";
+
+    private static final String SEARCH_URL = "{\"area\":\"1_72_55657_0\",\"pin\":\"\",\"fields\":\"11100000\",\"skuIds\":\"%s\",\"source\":\"pc-item\"}";
+
+    private static final String BASE_SEARCH_URL = "https://api.m.jd.com/?appid=item-v3&functionId=pctradesoa_getprice&client=pc&clientVersion=1.0.0&t=%s&body=";
+
+    /**
+     * 单纯的IO型，最佳线程数目 = （（线程等待时间+线程CPU时间）/线程CPU时间 ）* CPU数目
+     * 线程等待（网络IO、磁盘IO），线程cpu计算
+     * 理论720w数据，分片720，每片1w对应开启一个线程。单片，1w数据，平均每次请求0.5s，请求超时设置尽量短些到时间断开，失败重试策略（暂不考虑，可用mq做补偿，不要影响主task）
+     * <p>
+     * 本地测试
+     * coreNum = 8，耗时：1min，次数：1000
+     * coreNum = 50，耗时：10s，次数：1000
+     * coreNum = 80，耗时：7.8s，次数：1000
+     * coreNum = 100，耗时：7.7s，次数：1000
+     * coreNum = 700，耗时：7.7s，次数：1000
+     * <p>
+     * <p>
+     * 满足上述公式所以可以根据网络IO时间测算coreNum
+     * <p>
+     * 网络IO 500ms，临界值coreNum = 80
+     * 耗时：13min，次数：100000
+     * 耗时：130min，次数：1000000
+     * 耗时：862min，次数：7200000 理论15.6h
+     * <p>
+     * 网络IO 1000ms，临界值coreNum = 160
+     * 耗时：7.3s，次数：1000
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        String skuId = "100038004347";
+        List<String> queryList = new ArrayList<>();
+        for (int i = 0; i < COUNT; i++) {
+            queryList.add(skuId);
+        }
+        List<List<String>> partition = ListUtil.partition(queryList, PAGE_SIZE);
+        LongAdder longAdder = new LongAdder();
+
+        for (List<String> skuIds : partition) {
+            EXECUTOR_POOL.submit(new Task(skuIds, longAdder));
+        }
+    }
 
     @Test
     public void urlTest() {
@@ -106,93 +138,46 @@ public class SpiderPlanB {
         System.out.println("耗时：" + timer.interval() + " ms，price：" + price);
     }
 
-    /**
-     * 线程池版本+并行http版
-     * planA：2core，2max，2-future-core，120s，成功率98%
-     * planB：3core，3max，2-future-core，150s，成功率95%
-     * planC：10core，20max，max-future-core，15s，成功率77%
-     * planD：20core，50max，max-future-core，15s，成功率72%
-     * planE：50core，100max，max-future-core，15s，成功率72%
-     * </p>
-     * 最优方案A，进性测算，单服务，60s，200条，64台1min也就是12800，7200000w数据/12800/60 = 9.3h
-     */
-    @Test
-    public void demoA() {
-        String ipJson = HttpUtil.createGet(PROXY_URL).timeout(1500).execute().body();
-        JSONObject jsonObject = JSON.parseObject(ipJson);
-        JSONArray array = jsonObject.getJSONArray("data");
+    static class Task implements Runnable {
+        /**
+         * 每次1w条
+         */
+        private final List<String> skuIds;
 
-        String skuId = "100038004347";
-        String url = String.format(SEARCH_URL, skuId);
-        url = String.format(BASE_SEARCH_URL, System.currentTimeMillis()) + URLEncodeUtil.encode(url, Charset.defaultCharset());
+        /**
+         * 计数器
+         */
+        private final LongAdder longAdder;
 
-        LongAdder longAdder = new LongAdder();
-        if (ObjectUtil.isNotNull(array)) {
-            //模拟多线程处理task
-            for (int i = 0; i < COUNT; i++) {
-                //方案1 每次从list取不同的2个ip+port去并行请求，方案2 每次拿相同的ip+port去并行请求（randomEles）
-                List<Object> randomList = RandomUtil.randomEleList(array, 2);
-                EXECUTOR_POOL.submit(new TaskA(randomList, url, longAdder));
-            }
+        public Task(List<String> skuIds, LongAdder longAdder) {
+            this.skuIds = skuIds;
+            this.longAdder = longAdder;
         }
-        ThreadUtil.sleep(5 * 60 * 3600);
-    }
 
-    /**
-     * spider目前版本，不用线程池，用sleep控制并发数
-     * sleep 600，time：240s，成功率：93%，并发2
-     * sleep 10，time：5s，成功率：50-55%，并发100
-     * </p>
-     * 测算，单服务60s，100条，64台1min也就是6400，7200000w数据/6400/60 = 18.6h，再加上代理ip队列阻塞重试时间
-     */
-    @Test
-    public void demoB() {
-        String ipJson = HttpUtil.createGet(PROXY_URL).timeout(1500).execute().body();
-        JSONObject jsonObject = JSON.parseObject(ipJson);
-        JSONArray array = jsonObject.getJSONArray("data");
-
-        String skuId = "100038004347";
-        String url = String.format(SEARCH_URL, skuId);
-        url = String.format(BASE_SEARCH_URL, System.currentTimeMillis()) + URLEncodeUtil.encode(url, Charset.defaultCharset());
-
-        LongAdder longAdder = new LongAdder();
-        if (ObjectUtil.isNotNull(array)) {
-            for (int i = 0; i < COUNT; i++) {
-                List<Object> randomList = RandomUtil.randomEleList(array, 1);
-                Thread t = new Thread(new TaskB(randomList, url, longAdder));
-                t.start();
+        @Override
+        public void run() {
+            for (String skuId : skuIds) {
                 ThreadUtil.sleep(600);
+                longAdder.increment();
+                log.info("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：0，次数：" + longAdder.longValue());
+                //查询到价格后发送mq，利用消息队列解耦，提高吞吐
+                sendMq(skuId, "0");
             }
         }
+
+        /**
+         * 模拟发送mq
+         *
+         * @param skuId
+         * @param price
+         */
+        public void sendMq(String skuId, String price) {
+            ThreadUtil.sleep(5);
+        }
     }
 
     /**
-     * 测试线程，cpu空闲占比
-     *
-     */
-    @Test
-    public void demoC() throws ExecutionException, InterruptedException {
-        doJob(8);
-    }
-
-    public static void doJob(int threadNum) throws ExecutionException, InterruptedException {
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(threadNum, threadNum, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<>(100));
-        List<Future<?>> taskList = new ArrayList<>();
-        for (int i = 0; i < threadNum; i++) {
-            taskList.add(threadPoolExecutor.submit(() -> {
-                taskC();
-            }));
-        }
-        for (Future<?> future : taskList) {
-            future.get();
-        }
-        System.out.println(threadNum + "个线程，耗时：" + timer.interval() / 1000 + "秒，停顿占比：" + NumberUtil.roundStr(Convert.toDouble(PARK_TIME * 100.0 / timer.interval()), 2) + "%");
-        threadPoolExecutor.shutdown();
-    }
-
-
-    /**
-     * 任务a
+     * 爬虫任务
      */
     static class TaskA implements Runnable {
 
@@ -252,77 +237,12 @@ public class SpiderPlanB {
                 insert(price);
             }
         }
-    }
 
-    /**
-     * 任务b
-     */
-    static class TaskB implements Runnable {
-
-        private final List<Object> randomList;
-
-        private final String finalUrl;
-
-        private final LongAdder longAdder;
-
-        public TaskB(List<Object> randomList, String finalUrl, LongAdder longAdder) {
-            this.randomList = randomList;
-            this.finalUrl = finalUrl;
-            this.longAdder = longAdder;
-        }
-
-        @Override
-        public void run() {
-            JSONObject ipObject = JSON.parseObject(Convert.toStr(randomList.get(0)));
-            try {
-                String price = okHttp(finalUrl, ipObject.getString("ip"), ipObject.getIntValue("port"));
-                if (StrUtil.isNotBlank(price)) {
-                    longAdder.increment();
-                    System.out.println("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：" + price + "，次数：" + longAdder.longValue());
-                    timer.restart();
-
-                    //模拟改库
-                    insert(price);
-                }
-            } catch (Exception ignored) {
-
-            }
+        static public void insert(String price) {
+            ThreadUtil.sleep(50);
         }
     }
 
-    static public void insert(String price) {
-        ThreadUtil.sleep(50);
-    }
-
-    public static int PARK_TIME = 0;
-
-    public static Long taskC() {
-        long result = 0L;
-        PARK_TIME = 0;
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            if (i % 10_000_000 == 0) {
-                try {
-                    ++PARK_TIME;
-                    // 模拟IO
-                    LockSupport.parkNanos(100_000_000);
-                } catch (Exception ignore) {
-                }
-            }
-            result += i;
-        }
-        return result;
-    }
-
-    public static Long taskD() {
-        long result = 0L;
-        PARK_TIME = 0;
-        for (int i = 0; i < 100; i++) {
-            ++PARK_TIME;
-            ThreadUtil.sleep(500);
-            result += i;
-        }
-        return result;
-    }
 
     private static String okHttp(String url, String ip, int port) throws IOException {
         String result = "";
@@ -359,5 +279,6 @@ public class SpiderPlanB {
         }
         return result;
     }
+
 
 }

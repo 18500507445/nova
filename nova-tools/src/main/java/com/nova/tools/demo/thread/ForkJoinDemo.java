@@ -102,7 +102,7 @@ public class ForkJoinDemo {
     }
 
     /**
-     * 任务分而治之
+     * 任务分而治之，递归拆分10组进行求和
      */
     @Test
     public void demoD() {

@@ -14,7 +14,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
- * @description:
+ * @description: 类似数据库连接池
  * @author: wzh
  * @date: 2023/3/30 22:22
  */

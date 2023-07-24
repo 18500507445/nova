@@ -3,6 +3,7 @@ package com.nova.book.juc.chapter7.section7;
 import com.nova.common.utils.thread.Threads;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
 
@@ -14,18 +15,13 @@ import java.util.concurrent.*;
 @Slf4j(topic = "CyclicBarrier")
 class CyclicBarrierDemo {
 
-    public static void main(String[] args) {
-        //simple();
-
-        pro();
-    }
-
     /**
      * 简单版实现 3次循环打印
      */
     @SneakyThrows
-    private static void simple() {
-        ExecutorService service = Executors.newFixedThreadPool(6);
+    @Test
+    public void simple() {
+        ExecutorService service = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 3; i++) {
             CountDownLatch latch = new CountDownLatch(2);
             service.submit(() -> {
@@ -49,7 +45,7 @@ class CyclicBarrierDemo {
      * CyclicBarrier实现
      * 怎么读：塞克立刻拜瑞耳
      */
-    private static void pro() {
+    public static void main(String[] args) {
         //线程数和任务数要相等，否则：task1  task2  task1
         int taskNum = 2, coreSize = 2;
         ExecutorService service = Executors.newFixedThreadPool(coreSize);
@@ -78,4 +74,5 @@ class CyclicBarrierDemo {
         }
         service.shutdown();
     }
+
 }

@@ -42,13 +42,13 @@ class DataContainerStamped {
         this.data = data;
     }
 
-    public int read(long readTime) {
+    public void read(long readTime) {
         long stamp = lock.tryOptimisticRead();
         log.debug("optimistic read locking...{}", stamp);
         Threads.sleep(readTime);
         if (lock.validate(stamp)) {
             log.debug("read finish...{}, data:{}", stamp, data);
-            return data;
+            return;
         }
         // 锁升级 - 读锁
         log.debug("updating to read lock... {}", stamp);
@@ -57,7 +57,6 @@ class DataContainerStamped {
             log.debug("read lock {}", stamp);
             Threads.sleep(readTime);
             log.debug("read finish...{}, data:{}", stamp, data);
-            return data;
         } finally {
             log.debug("read unlock {}", stamp);
             lock.unlockRead(stamp);

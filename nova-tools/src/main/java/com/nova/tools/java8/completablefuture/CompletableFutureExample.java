@@ -291,6 +291,7 @@ public class CompletableFutureExample {
 
     /**
      * demo
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -363,6 +364,42 @@ public class CompletableFutureExample {
             e.printStackTrace();
         }
         return i;
+    }
+
+
+    /**
+     * 循环打印A，B，C
+     */
+    @Test
+    public void circularPrintln() {
+        List<CompletableFuture<String>> completableFutures = new ArrayList<>();
+        CompletableFuture<String> printA = CompletableFuture.supplyAsync(() -> {
+            Threads.sleep(500);
+            return "A";
+        });
+        CompletableFuture<String> printB = CompletableFuture.supplyAsync(() -> {
+            Threads.sleep(1500);
+            return "B";
+        });
+        CompletableFuture<String> printC = CompletableFuture.supplyAsync(() -> {
+            Threads.sleep(2500);
+            return "C";
+        });
+
+        completableFutures.add(printA);
+        completableFutures.add(printB);
+        completableFutures.add(printC);
+
+        CompletableFuture.anyOf(completableFutures.toArray(new CompletableFuture[0])).join();
+        for (CompletableFuture<String> result : completableFutures) {
+            try {
+                String s = result.get();
+                System.out.println("打印 = " + s);
+            } catch (Exception ignored) {
+
+            }
+        }
+
     }
 
 

@@ -21,6 +21,13 @@ public class ReadResourcesTest {
     @Value("${server.servlet.context-path}")
     private String path;
 
+    public static String STATIC_PATH;
+
+    @Value("${server.servlet.context-path}")
+    public void setStaticPath(String staticPath) {
+        STATIC_PATH = staticPath;
+    }
+
     /**
      * 读取properties文件属性
      */
@@ -39,8 +46,20 @@ public class ReadResourcesTest {
         System.out.println("port = " + port);
     }
 
+    /**
+     * 注入方式读取属性值
+     */
     @Test
     public void readValue() {
         System.out.println("path = " + path);
     }
+
+    /**
+     * 属性值赋值静态变量
+     */
+    @Test
+    public void readStaticValue() {
+        System.out.println("staticPath = " + ReadResourcesTest.STATIC_PATH);
+    }
+
 }

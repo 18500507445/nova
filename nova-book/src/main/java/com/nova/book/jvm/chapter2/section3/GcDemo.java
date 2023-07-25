@@ -1,6 +1,9 @@
 package com.nova.book.jvm.chapter2.section3;
 
+import cn.hutool.core.thread.ThreadUtil;
+
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 演示gc
@@ -28,10 +31,10 @@ public class GcDemo {
      * 答：当一个线程抛出oom异常后，它所占据的内存资源会全部被释放掉，从而不会影响其它的线程运行
      */
     public static void main(String[] args) {
-        //gc();
-        //tenured();
-        //direct();
-        outOfMemory();
+        gc();
+//        tenured();
+//        direct();
+//        outOfMemory();
     }
 
 

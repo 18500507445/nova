@@ -1,4 +1,4 @@
-# MyRPCFromZero
+# Version_1
 
 从零开始，手写一个RPC，跟随着这篇文档以及数个迭代版本的代码，由简陋到逐渐完备，让所有人都能看懂并且写出一个RPC框架。
 
@@ -202,7 +202,7 @@ public class RPCServer {
 
 ------
 
-### 2.MyRPC版本2
+### 2.Version_2
 
 #### 背景知识
 
@@ -433,7 +433,7 @@ public class RPCClient {
 
 ------
 
-### 3.MyRPC 版本3
+### 3.Version_3
 
 #### 背景知识
 
@@ -730,7 +730,7 @@ System.out.println("从服务端得到的blog为：" + blogById);
 
 ------
 
-### 4.MyRPC版本4
+### 4.Version_4
 
 #### 背景知识
 
@@ -1025,9 +1025,8 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RPCResponse>
 1. java自带序列化方式（Java序列化写入不仅是完整的类名，也包含整个类的定义，包含所有被引用的类），不够通用，不够高效
 
 
-
 ------
-### 4.1MyRPC版本4.1
+### 4.1 Version_4.1
 
 #### 背景知识
 - 各种序列化方式以及比较，（Java原生序列化， json，protobuf，kryo..）[参考博客](https://www.jianshu.com/p/937883b6b2e5)
@@ -1293,7 +1292,7 @@ public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
 
 ------
 
-### 5.MyRPC版本5
+### 5.Version_5
 #### 背景知识
 - zookeeper安装， 基本概念
 - 了解curator开源zookeeper客户端中的使用
@@ -1522,8 +1521,7 @@ public class ServiceProvider {
 ------
 
 
-
-### 6.MyRPC版本6
+### 6.Version_6
 
 我们的RPC总体框架已经有了，接下来就是一些修修补补已经扩展功能的模块了
 

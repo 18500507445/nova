@@ -1,5 +1,6 @@
 package com.nova.tools;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
 import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.Data;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: wzh
@@ -22,6 +24,7 @@ public class CommonTest {
 
     @Autowired
     private StringEncryptor stringEncryptor;
+
     /**
      * 加密解密测试
      */
@@ -57,4 +60,17 @@ public class CommonTest {
         System.out.println("占用：" + ObjectSizeCalculator.getObjectSize(as) / 1024 / 1024 + "mb");
     }
 
+    /**
+     * 分配空间 -Xmx120m -Xms120m -XX:SurvivorRatio=8 -XX:NewRatio=2
+     * 本地打开VisualVM工具查看分配情况
+     */
+    public static void main(String[] args) {
+        List<byte[]> list = new ArrayList<>();
+        for (int i = 0; i < 500; i++) {
+            final int _100kb = 1024 * 1024;
+            byte[] arr = new byte[_100kb];
+            list.add(arr);
+            ThreadUtil.sleep(30, TimeUnit.MINUTES);
+        }
+    }
 }

@@ -2,8 +2,10 @@
 
 
 ### 参考文档
-> 参考文档 <https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html>
-> es 和 spring-boot-starter-data-elasticsearch 版本对应关系参考 <https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#new-features>
+> 参考文档 <https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html>  
+> es 和 spring-boot-starter-data-elasticsearch 版本对应关系参考 <https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#new-features>  
+> 版本对应关系参考 <https://github.com/spring-projects/spring-data-elasticsearch/blob/main/src/main/asciidoc/preface.adoc>  
+
 
 
 ### 名词解释

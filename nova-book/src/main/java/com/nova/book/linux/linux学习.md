@@ -26,3 +26,8 @@
 （4）cat xxx.log |grep -A 16 'xxx'：查找文件包含xxx16行以内的内容  
 
 
+#### 1.5安装环境需要用到的命令
+（1）cat /etc/passwd |cut -f 1 -d :（查询所有用户列表）
+（2）useradd（添加用户）
+（3）passwd（设置密码）
+（4）chmod -R elastic /usr/local/* （给文件夹读写权限）

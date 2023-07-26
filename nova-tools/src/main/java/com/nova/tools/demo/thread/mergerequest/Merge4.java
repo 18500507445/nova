@@ -119,7 +119,6 @@ class Merge4 {
                             eachTaskHandler(p, totalStock, pool, requestCountDown);
                         });
                         promiseList.clear();
-                        continue;
                     }
 
                 }
@@ -145,7 +144,7 @@ class Merge4 {
                 final RequestPromise callResult = r.getFuture().get(200, TimeUnit.MILLISECONDS);
                 log.info("用户id：{} 抢到了吗：{}", r.getRequest().getUserId(), callResult.getResult());
             } catch (Exception e) {
-                log.error("发生了异常：{},e:{}", r, e);
+                log.error("发生了异常：{},e:", r, e);
             }
         });
 

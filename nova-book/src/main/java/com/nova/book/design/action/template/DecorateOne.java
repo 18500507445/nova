@@ -7,8 +7,6 @@ package com.nova.book.design.action.template;
  */
 public class DecorateOne extends AbstractClass {
 
-//    void operation() { }
-
     @Override
     protected void decorate() {
         System.out.println("自定义...");

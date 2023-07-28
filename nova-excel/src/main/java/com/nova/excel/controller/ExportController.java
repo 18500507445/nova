@@ -103,7 +103,7 @@ public class ExportController extends BaseController {
                 resultList.addAll(future.get());
             }
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            log.error("selectAll异常", e);
         }
         System.out.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " , 查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
         return resultList;

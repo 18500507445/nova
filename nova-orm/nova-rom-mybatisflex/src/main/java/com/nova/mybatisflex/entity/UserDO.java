@@ -1,7 +1,9 @@
-package com.nova.mybatisplus.entity;
+package com.nova.mybatisflex.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,14 +20,13 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName(value = "user", autoResultMap = true)
+@Table(value = "user")
 public class UserDO {
-
-    //变量名成：private String name，属性：getName -> Name -> name
 
     /**
      * 主键ID
      */
+    @Id(keyType = KeyType.Auto)
     private Long id;
 
     /**
@@ -43,16 +44,11 @@ public class UserDO {
      */
     private String email;
 
-    @TableField("user_name")
+    @Column("user_name")
     private String userName;
 
-    @TableField("`desc`")
     private String desc;
 
-    @TableField(select = false)
     private String hide;
-
-    @TableField(exist = false)
-    private Boolean online;
 
 }

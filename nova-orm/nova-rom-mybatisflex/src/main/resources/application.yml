@@ -6,6 +6,9 @@ server:
 
 #多数据源
 mybatis-flex:
+  global-config:
+    #关闭logo
+    print-banner: false
   datasource:
     master:
       type: druid

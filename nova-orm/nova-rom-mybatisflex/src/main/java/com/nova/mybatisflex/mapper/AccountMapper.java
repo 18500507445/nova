@@ -2,7 +2,7 @@ package com.nova.mybatisflex.mapper;
 
 import com.mybatisflex.annotation.UseDataSource;
 import com.mybatisflex.core.BaseMapper;
-import com.nova.mybatisflex.entity.UserDO;
+import com.nova.mybatisflex.entity.Account;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,5 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 @UseDataSource("master")
-public interface UserMapper extends BaseMapper<UserDO> {
+public interface AccountMapper extends BaseMapper<Account> {
+
 }

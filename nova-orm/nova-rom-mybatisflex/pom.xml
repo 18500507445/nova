@@ -25,6 +25,12 @@
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-framework</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>pagehelper-spring-boot-starter</artifactId>
+                    <groupId>com.github.pagehelper</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Mysql驱动包 -->

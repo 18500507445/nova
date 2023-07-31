@@ -7,7 +7,9 @@ import cn.hutool.core.lang.UUID;
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.RejectPolicy;
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.utils.list.PageUtils;
 import com.nova.excel.entity.ExportDO;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +61,7 @@ public class ExportController extends BaseController {
     }
 
     /**
-     * 阿里easyExcel测试
+     * 阿里easyExcel测试，多线程查询后合并100w然后导出
      */
     @SneakyThrows
     @GetMapping("exportEasyExcel")
@@ -71,8 +74,7 @@ public class ExportController extends BaseController {
         // 防止下载的文件名字乱码
         response.setCharacterEncoding("UTF-8");
         // 文件以附件形式下载
-        response.setHeader("Content-disposition",
-                "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
+        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
         //模拟数据库数据
         List<ExportDO> exportList = selectAll(TOTAL, 50000);
 
@@ -83,9 +85,56 @@ public class ExportController extends BaseController {
 //        EasyExcel.write(fileName, ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
 
         log.info("当前耗时：{}ms", timer.interval());
+        System.gc();
     }
 
-    public List<ExportDO> selectAll(Integer total, Integer limit) {
+    /**
+     * 多线程查询，10w一个分区，然后写入不同sheet
+     */
+    @SneakyThrows
+    @GetMapping("threadExportExcel")
+    public void threadExportExcel() {
+        TimeInterval timer = DateUtil.timer();
+        HttpServletResponse response = getResponse();
+        // 设置响应内容
+        response.setContentType("application/vnd.ms-excel");
+        // 防止下载的文件名字乱码
+        response.setCharacterEncoding("UTF-8");
+        // 文件以附件形式下载
+        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
+
+        //异步写入
+        asyncWrite(TOTAL, 100000, response);
+        log.info("当前耗时：{}ms", timer.interval());
+        System.gc();
+    }
+
+    public void asyncWrite(Integer total, Integer limit, HttpServletResponse response) throws InterruptedException, ExecutionException, IOException {
+        TimeInterval timer = DateUtil.timer();
+        int sum = 0;
+        int count = total / limit + (total % limit > 0 ? 1 : 0);
+        CountDownLatch cd = new CountDownLatch(count);
+        List<MyCallableTask> taskList = new ArrayList<>();
+        for (int i = 1; i <= count; i++) {
+            taskList.add(new MyCallableTask(i, limit, cd));
+        }
+        ThreadPoolExecutor threadPoolExecutor = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
+        List<Future<List<ExportDO>>> futures = threadPoolExecutor.invokeAll(taskList);
+        try (ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), ExportDO.class).build()) {
+            for (int i = 0; i < futures.size(); i++) {
+                List<ExportDO> pageList = futures.get(i).get();
+                // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样
+                WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + (i + 1)).build();
+                // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
+                excelWriter.write(pageList, writeSheet);
+                sum += pageList.size();
+            }
+        }
+        cd.await();
+        System.err.println("数据写入表格成功 , 共：" + sum + " 条, 耗时 ：" + timer.interval() + "ms");
+    }
+
+    public List<ExportDO> selectAll(Integer total, Integer limit) throws InterruptedException {
         TimeInterval timer = DateUtil.timer();
         List<MyCallableTask> taskList = new ArrayList<>();
         // 计算出多少页，即循环次数
@@ -105,6 +154,7 @@ public class ExportController extends BaseController {
         } catch (InterruptedException | ExecutionException e) {
             log.error("selectAll异常", e);
         }
+        cd.await();
         System.err.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " , 查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
         return resultList;
     }

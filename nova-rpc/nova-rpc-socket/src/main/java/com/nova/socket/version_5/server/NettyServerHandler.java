@@ -44,7 +44,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RPCRequest> 
             return RPCResponse.success(invoke);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-            System.out.println("方法执行错误");
+            System.err.println("方法执行错误");
             return RPCResponse.fail();
         }
     }

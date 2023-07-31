@@ -89,7 +89,7 @@ public class UserNameSecretUtil {
     public static void main(String[] args) {
         String str = "CPezPzDzJbPMeeIzzJ@dongeqiu_SECRETMSGENDING";
         //String str = "otdolwPL6lOYcwUh7hmEp8IrB6S0@weiXin";
-        System.out.println(userNameDecrypt(str));
+        System.err.println(userNameDecrypt(str));
     }
 
     /**

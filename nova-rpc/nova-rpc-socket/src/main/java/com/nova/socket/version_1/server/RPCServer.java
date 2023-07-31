@@ -21,7 +21,7 @@ public class RPCServer {
         UserServiceImpl userService = new UserServiceImpl();
         try {
             ServerSocket serverSocket = new ServerSocket(8899);
-            System.out.println("服务端启动了");
+            System.err.println("服务端启动了");
             // BIO的方式监听Socket
             while (true) {
                 Socket socket = serverSocket.accept();
@@ -38,14 +38,14 @@ public class RPCServer {
                         oos.flush();
                     } catch (IOException e) {
                         e.printStackTrace();
-                        System.out.println("从IO中读取数据错误");
+                        System.err.println("从IO中读取数据错误");
                     }
                 }).start();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("服务器启动失败");
+            System.err.println("服务器启动失败");
         }
     }
 }

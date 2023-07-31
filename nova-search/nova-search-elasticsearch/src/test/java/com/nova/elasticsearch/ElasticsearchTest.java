@@ -32,7 +32,7 @@ public class ElasticsearchTest {
     public void getAllTest() {
         Iterable<User> iterable = userService.getAll();
         for (User user : iterable) {
-            System.out.println("jsonUser = " + JSONUtil.toJsonStr(user));
+            System.err.println("jsonUser = " + JSONUtil.toJsonStr(user));
         }
     }
 

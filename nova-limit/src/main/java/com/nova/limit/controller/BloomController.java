@@ -49,7 +49,7 @@ public class BloomController {
         for (int i = 0; i < 100; i++) {
             jedisUtil.add(bloomFilterHelper, redisKey, i);
         }
-        System.out.println("布隆过滤器添加100个值，耗时：" + timer.interval() + "ms");
+        System.err.println("布隆过滤器添加100个值，耗时：" + timer.interval() + "ms");
         timer.restart();
         for (int i = 0; i < 101; i++) {
             boolean result = jedisUtil.contains(bloomFilterHelper, redisKey, i);
@@ -57,7 +57,7 @@ public class BloomController {
                 j++;
             }
         }
-        System.out.println("漏掉了" + j + "个,验证结果耗时：" + timer.interval() + "ms");
+        System.err.println("漏掉了" + j + "个,验证结果耗时：" + timer.interval() + "ms");
     }
 
     @PostMapping("redisson")
@@ -70,7 +70,7 @@ public class BloomController {
         list.forEach(bloomFilter::add);
 
         //判断下面号码是否在布隆过滤器中
-        System.out.println(bloomFilter.contains("1"));
-        System.out.println(bloomFilter.contains("4"));
+        System.err.println(bloomFilter.contains("1"));
+        System.err.println(bloomFilter.contains("4"));
     }
 }

@@ -22,7 +22,7 @@ public class ActiveMqListener {
         MapMessage obj = (MapMessage) msg;
         try {
             String userId = obj.getString("userId");
-            System.out.println(userId);
+            System.err.println(userId);
         } catch (Exception e) {
             log.error("testActiveMqListener异常:{}" + e.getMessage());
         }

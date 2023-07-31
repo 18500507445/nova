@@ -32,7 +32,7 @@ public class SimpleListener {
     @RabbitHandler
     @RabbitListener(queues = RabbitConstants.QUEUE_SIMPLE_ONE)
     public void one(Message message) {
-        System.out.println("简单模式one消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("简单模式one消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -44,7 +44,7 @@ public class SimpleListener {
     @RabbitHandler
     @RabbitListener(queues = RabbitConstants.QUEUE_SIMPLE_TWO)
     public String two(Message message) {
-        System.out.println("简单模式two消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("简单模式two消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
         return "收到";
     }
 
@@ -58,7 +58,7 @@ public class SimpleListener {
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_THREE))
     public void three(Message message) {
-        System.out.println("简单模式three消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("简单模式three消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -70,7 +70,7 @@ public class SimpleListener {
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_FOUR))
     public void four(MessageBO message) {
-        System.out.println("简单模式four消息：" + JSONUtil.toJsonStr(message));
+        System.err.println("简单模式four消息：" + JSONUtil.toJsonStr(message));
     }
 
     /**
@@ -82,7 +82,7 @@ public class SimpleListener {
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_FIVE))
     public void five(Map<String, Object> msg) {
-        System.out.println("简单模式five消息：" + JSONUtil.toJsonStr(msg));
+        System.err.println("简单模式five消息：" + JSONUtil.toJsonStr(msg));
     }
 
 

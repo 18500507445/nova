@@ -23,15 +23,15 @@ public class RPCClient {
         UserService userService = clientProxy.getProxy(UserService.class);
 
         UserBO userByUserId = userService.getUserByUserId(10);
-        System.out.println("从服务端得到的user为：" + userByUserId);
+        System.err.println("从服务端得到的user为：" + userByUserId);
 
         UserBO user = UserBO.builder().userName("张三").id(100).sex(true).build();
         Integer integer = userService.insertUserId(user);
-        System.out.println("向服务端插入数据：" + integer);
+        System.err.println("向服务端插入数据：" + integer);
 
         BlogService blogService = clientProxy.getProxy(BlogService.class);
         BlogBO blogById = blogService.getBlogById(10000);
-        System.out.println("从服务端得到的blog为：" + blogById);
+        System.err.println("从服务端得到的blog为：" + blogById);
     }
 
 }

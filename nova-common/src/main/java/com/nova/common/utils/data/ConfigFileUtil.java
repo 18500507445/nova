@@ -17,7 +17,7 @@ public class ConfigFileUtil {
             is = ConfigFileUtil.class.getClassLoader().getResourceAsStream(resourcePropertyFileName);
             properties.load(is);
         } catch (Exception e) {
-            System.out.println("不能读取配置文件 ：" + resourcePropertyFileName);
+            System.err.println("不能读取配置文件 ：" + resourcePropertyFileName);
         }
         return new LinkedHashMap<String, String>((Map) properties);
     }
@@ -27,7 +27,7 @@ public class ConfigFileUtil {
         try {
             properties.load(propertyFileInputStream);
         } catch (Exception e) {
-            System.out.println("不能读取配置文件");
+            System.err.println("不能读取配置文件");
         }
         return new LinkedHashMap<String, String>((Map) properties);
     }

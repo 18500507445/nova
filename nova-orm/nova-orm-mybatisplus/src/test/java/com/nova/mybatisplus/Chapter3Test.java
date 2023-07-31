@@ -35,7 +35,7 @@ public class Chapter3Test {
 
         //3.进行条件查询
         UserDO userDO = threeUserMapper.selectOne(queryWrapper);
-        System.out.println("userDO = " + JSONUtil.toJsonStr(userDO));
+        System.err.println("userDO = " + JSONUtil.toJsonStr(userDO));
     }
 
     /**
@@ -51,7 +51,7 @@ public class Chapter3Test {
         //null2IsNull设置为false，age为null，sql不作为拼接条件
         queryWrapper.allEq(hashMap, false);
         UserDO userDO = threeUserMapper.selectOne(queryWrapper);
-        System.out.println("userDO = " + JSONUtil.toJsonStr(userDO));
+        System.err.println("userDO = " + JSONUtil.toJsonStr(userDO));
     }
 
     /**
@@ -63,7 +63,7 @@ public class Chapter3Test {
         queryWrapper.eq(UserDO::getName, "Tom");
         queryWrapper.eq(UserDO::getAge, 28);
         UserDO userDO = threeUserMapper.selectOne(queryWrapper);
-        System.out.println("userDO = " + JSONUtil.toJsonStr(userDO));
+        System.err.println("userDO = " + JSONUtil.toJsonStr(userDO));
     }
 
     /**
@@ -173,7 +173,7 @@ public class Chapter3Test {
 
         //因为查询出来的字段和实体不匹配，所以用Map接收
         List<Map<String, Object>> maps = threeUserMapper.selectMaps(queryWrapper);
-        System.out.println("maps = " + maps);
+        System.err.println("maps = " + maps);
     }
 
     /**

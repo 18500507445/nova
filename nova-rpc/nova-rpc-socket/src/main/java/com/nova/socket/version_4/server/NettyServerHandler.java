@@ -21,7 +21,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RPCRequest> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RPCRequest msg) throws Exception {
-        //System.out.println(msg);
+        //System.err.println(msg);
         RPCResponse response = getResponse(msg);
         ctx.writeAndFlush(response);
         ctx.close();
@@ -46,7 +46,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RPCRequest> 
             return RPCResponse.success(invoke);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-            System.out.println("方法执行错误");
+            System.err.println("方法执行错误");
             return RPCResponse.fail();
         }
     }

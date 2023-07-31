@@ -559,11 +559,11 @@ public class CollStreamUtil {
                 BigDecimal.valueOf(2),
                 BigDecimal.valueOf(5),
                 BigDecimal.valueOf(1));
-        System.out.println(bigDecimals);
-        System.out.println(distinct(bigDecimals, bigDecimal -> bigDecimal));
-        System.out.println(distinctOrderly(bigDecimals, bigDecimal -> bigDecimal));
+        System.err.println(bigDecimals);
+        System.err.println(distinct(bigDecimals, bigDecimal -> bigDecimal));
+        System.err.println(distinctOrderly(bigDecimals, bigDecimal -> bigDecimal));
 
-        System.out.println(avgDecimal(bigDecimals, o -> o, RoundingMode.HALF_UP)); // 2.5 -> 3
+        System.err.println(avgDecimal(bigDecimals, o -> o, RoundingMode.HALF_UP)); // 2.5 -> 3
 
     }
 }

@@ -178,19 +178,19 @@ public class SecurityUtil {
                     "RldmVsb3BlciBSZWxhdGlvbnMgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkCCA7rV4fnngmNMAkGBSsOAwIaBQAwDQYJKoZIhvcNAQEBBQAEggEAP/" +
                     "Bj88vGlZXjhvePurpdZfGuQCVjB0QhKNL6TXpQQ9X2QzO81kswUiMDQVggVWspUuDQhiZPoYxU2QzUFN58wLmKL1d+31thHJpWhAvIDsQ+Zyg5gqCHjSV7E3KRoxFJyHbD2yh6EpkB2hpd2dc9q8c5HGCEnVo0nCjvm4gxip9xNZnz585snlOp+qRFQ0fwy" +
                     "br0OfzM9iUhohPBeUanPsI+hFvcJgWMTBVSFSukYAK7tY06OLaCcjaXIlY1wu2w/6+T3GP5zaaMJc4gOxq/YF6rDISHX/8eKvglHscRF0NI1lqao0mPMUbCExSjSs5nxLpNFC+7pOv20frbNamTzg==&userId=1520320807190917120";
-            System.out.println("请求加密param:" + param);
+            System.err.println("请求加密param:" + param);
             String secret = URLEncoder.encode(param, "utf-8");
-            System.out.println("URLenCode:" + secret);
+            System.err.println("URLenCode:" + secret);
             String str = SecurityUtil.Encrypt(secret.getBytes(StandardCharsets.UTF_8), "SfNJN1O69Zs1ekjB");
-            System.out.println("ios加密后str:" + str);
+            System.err.println("ios加密后str:" + str);
             String encode = URLEncoder.encode(str, "utf-8");
-            System.out.println("(这个要传给服务器了)---加密后再Url.enCode:" + encode);
+            System.err.println("(这个要传给服务器了)---加密后再Url.enCode:" + encode);
 
-            System.out.println("------------------------------------------------------");
+            System.err.println("------------------------------------------------------");
             String accessSecretData = URLDecoder.decode(encode, "utf-8");
             String result = SecurityUtil.Decrypt(accessSecretData.getBytes(StandardCharsets.UTF_8), "SfNJN1O69Zs1ekjB");
             result = URLDecoder.decode(result, "utf-8");
-            System.out.println("服务器解密后str:" + result);
+            System.err.println("服务器解密后str:" + result);
         } catch (Exception e) {
             e.printStackTrace();
         }

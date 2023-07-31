@@ -25,7 +25,7 @@ public class FanoutListener {
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_FANOUT_EMAIL))
     public void email(Message message) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("广播-email,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("广播-email,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -37,6 +37,6 @@ public class FanoutListener {
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_FANOUT_SMS))
     public void sms(Message message) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("广播-sms,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("广播-sms,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 }

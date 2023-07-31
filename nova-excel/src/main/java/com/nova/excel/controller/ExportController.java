@@ -90,7 +90,7 @@ public class ExportController extends BaseController {
         List<MyCallableTask> taskList = new ArrayList<>();
         // 计算出多少页，即循环次数
         int count = total / limit + (total % limit > 0 ? 1 : 0);
-        System.out.println("本次任务量: " + count);
+        System.err.println("本次任务量: " + count);
         CountDownLatch cd = new CountDownLatch(count);
         for (int i = 1; i <= count; i++) {
             taskList.add(new MyCallableTask(i, limit, cd));
@@ -105,7 +105,7 @@ public class ExportController extends BaseController {
         } catch (InterruptedException | ExecutionException e) {
             log.error("selectAll异常", e);
         }
-        System.out.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " , 查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
+        System.err.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " , 查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
         return resultList;
     }
 
@@ -123,11 +123,11 @@ public class ExportController extends BaseController {
         @Override
         public List<ExportDO> call() {
             TimeInterval timer = DateUtil.timer();
-            System.out.println("线程：" + Thread.currentThread().getName() + " , 开始读取数据------");
+            System.err.println("线程：" + Thread.currentThread().getName() + " , 开始读取数据------");
             List<ExportDO> pageList = PageUtils.startPage(list, pageNum, pageSize);
-            System.out.println("线程：" + Thread.currentThread().getName() + " , 读取数据  " + list.size() + ", 页数:" + pageNum + ", 耗时 ：" + timer.interval() + "ms");
+            System.err.println("线程：" + Thread.currentThread().getName() + " , 读取数据  " + list.size() + ", 页数:" + pageNum + ", 耗时 ：" + timer.interval() + "ms");
             cd.countDown();
-            System.out.println("剩余任务数  ================> " + cd.getCount());
+            System.err.println("剩余任务数  ================> " + cd.getCount());
             return pageList;
         }
     }

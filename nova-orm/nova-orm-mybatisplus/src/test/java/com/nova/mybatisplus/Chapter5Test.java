@@ -65,7 +65,7 @@ public class Chapter5Test {
     @Test
     public void contactQuery() {
         UserFiveDO result = fiveUserMapper.selectById(1671354213734621185L);
-        System.out.println("result = " + JSONUtil.toJsonStr(result));
+        System.err.println("result = " + JSONUtil.toJsonStr(result));
     }
 
     @Test
@@ -126,8 +126,8 @@ public class Chapter5Test {
 
         UserFiveDO result = fiveUserMapper.selectById(1671354213734621185L);
 
-        System.out.println("myOrder = " + JSONUtil.toJsonStr(myOrder));
-        System.out.println("result = " + JSONUtil.toJsonStr(result));
+        System.err.println("myOrder = " + JSONUtil.toJsonStr(myOrder));
+        System.err.println("result = " + JSONUtil.toJsonStr(result));
     }
 
 

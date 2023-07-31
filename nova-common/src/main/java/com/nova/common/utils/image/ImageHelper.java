@@ -41,7 +41,7 @@ public class ImageHelper {
             fops.write(img);
             fops.flush();
             fops.close();
-            System.out.println("图片已经写入" + zipImageUrl);
+            System.err.println("图片已经写入" + zipImageUrl);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,7 +149,7 @@ public class ImageHelper {
             byte[] bytes = ImageHelper.compressPicForScale(imgByteArr, 1024L);
             ImageHelper.writeImageToDisk(bytes, localFileName);
             File localTempFile = new File(localFileName);
-            System.out.println(localTempFile);
+            System.err.println(localTempFile);
             //删除临时文件
             localTempFile.delete();
         } catch (Exception e) {

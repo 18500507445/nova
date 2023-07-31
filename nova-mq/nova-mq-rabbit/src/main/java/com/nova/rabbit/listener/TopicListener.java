@@ -22,7 +22,7 @@ public class TopicListener {
     @RabbitListener(queues = RabbitConstants.QUEUE_TOPIC_ONE)
     public void one(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("主题模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("主题模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     @SneakyThrows
@@ -30,7 +30,7 @@ public class TopicListener {
     @RabbitListener(queues = RabbitConstants.QUEUE_TOPIC_TWO)
     public void two(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("主题模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("主题模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     @SneakyThrows
@@ -38,6 +38,6 @@ public class TopicListener {
     @RabbitListener(queues = RabbitConstants.QUEUE_TOPIC_THREE)
     public void three(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("主题模式3,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("主题模式3,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 }

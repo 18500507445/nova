@@ -24,7 +24,7 @@ public class Chapter1Test {
     public void selectList() {
         List<UserDO> userDOList = oneUserMapper.selectList(null);
         String jsonStr = JSONUtil.toJsonStr(userDOList);
-        System.out.println("jsonStr = " + jsonStr);
+        System.err.println("jsonStr = " + jsonStr);
     }
 
 }

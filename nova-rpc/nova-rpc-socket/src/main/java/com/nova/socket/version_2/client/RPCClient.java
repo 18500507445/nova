@@ -26,11 +26,11 @@ public class RPCClient {
 
         // 服务的方法1
         UserBO userByUserId = proxy.getUserByUserId(10);
-        System.out.println("从服务端得到的user为：" + userByUserId);
+        System.err.println("从服务端得到的user为：" + userByUserId);
         // 服务的方法2
         UserBO user = UserBO.builder().userName("张三").id(100).sex(true).build();
         Integer integer = proxy.insertUserId(user);
-        System.out.println("向服务端插入数据：" + integer);
+        System.err.println("向服务端插入数据：" + integer);
     }
 
 }

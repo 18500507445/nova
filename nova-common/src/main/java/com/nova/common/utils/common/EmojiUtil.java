@@ -81,7 +81,7 @@ public class EmojiUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(EmojiUtil.utfemojiRecovery("哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈<emoji>%F0%9F%91%8C</emoji>"));
+        System.err.println(EmojiUtil.utfemojiRecovery("哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈<emoji>%F0%9F%91%8C</emoji>"));
     }
 
 }

@@ -35,7 +35,7 @@ public class ZkServiceRegister implements ServiceRegister {
         this.client = CuratorFrameworkFactory.builder().connectString("47.100.174.176:2181")
                 .sessionTimeoutMs(40000).retryPolicy(policy).namespace(ROOT_PATH).build();
         this.client.start();
-        System.out.println("zookeeper 连接成功");
+        System.err.println("zookeeper 连接成功");
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ZkServiceRegister implements ServiceRegister {
             // 临时节点，服务器下线就删除节点
             client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(path);
         } catch (Exception e) {
-            System.out.println("此服务已存在");
+            System.err.println("此服务已存在");
         }
     }
 

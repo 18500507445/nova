@@ -16,7 +16,7 @@ public class AddIndexStringUtil {
 
     public static void main(String[] args) {
         String srr = "abcdefghijklmnopqrstuvwsyz";
-        System.out.println(insertStr(srr));
+        System.err.println(insertStr(srr));
     }
 
     public static String insertStr(String str) {

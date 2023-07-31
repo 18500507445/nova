@@ -69,7 +69,7 @@ public class TransactionServiceImpl implements TransactionService {
         try {
             studentService.insertFive();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ public class TransactionServiceImpl implements TransactionService {
         try {
             studentService.insertSeven();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }

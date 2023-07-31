@@ -33,11 +33,11 @@ public class RPCClient {
             objectOutputStream.flush();
             // 服务器查询数据，返回对应的对象
             UserBO user = (UserBO) objectInputStream.readObject();
-            System.out.println("服务端返回的User:" + user);
+            System.err.println("服务端返回的User:" + user);
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("客户端启动失败");
+            System.err.println("客户端启动失败");
         }
     }
 }

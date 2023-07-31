@@ -53,7 +53,7 @@ public class Md5Utils {
         List<String> list = new ArrayList<>();
         String[] params = param.split("&");
 
-        System.out.println("*********2" + params.toString());
+        System.err.println("*********2" + params.toString());
 
         // 参数按key进行ASCII码升序排列
         for (String s : params) {
@@ -64,7 +64,7 @@ public class Md5Utils {
 
         String paramSignStr = StringUtils.join(list, "");
 
-        System.out.println("参数签名内容:[{" + paramSignStr + "}]");
+        System.err.println("参数签名内容:[{" + paramSignStr + "}]");
 
         return null;
     }

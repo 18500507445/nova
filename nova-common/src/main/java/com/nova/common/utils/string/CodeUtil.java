@@ -42,12 +42,12 @@ public class CodeUtil {
 
         while ((id / binLen) > 0) {
             int ind = (int) (id % binLen);
-            // System.out.println(num + "-->" + ind);
+            // System.err.println(num + "-->" + ind);
             buf[--charPos] = r[ind];
             id /= binLen;
         }
         buf[--charPos] = r[(int) (id % binLen)];
-        // System.out.println(num + "-->" + num % binLen);
+        // System.err.println(num + "-->" + num % binLen);
         String str = new String(buf, charPos, (32 - charPos));
         // 不够长度的自动随机补全
         if (str.length() < s) {
@@ -81,12 +81,12 @@ public class CodeUtil {
             } else {
                 res = ind;
             }
-            // System.out.println(ind + "-->" + res);
+            // System.err.println(ind + "-->" + res);
         }
         return res;
     }
 
     public static void main(String[] args) {
-        System.out.println(toSerialCode(15811072705L));
+        System.err.println(toSerialCode(15811072705L));
     }
 }

@@ -35,7 +35,7 @@ public class MybatisTests {
      */
     @Test
     public void testConfig() {
-        System.out.println(studentMapper.getStudent());
+        System.err.println(studentMapper.getStudent());
     }
 
     /**

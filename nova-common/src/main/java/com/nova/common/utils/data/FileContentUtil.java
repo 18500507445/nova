@@ -30,7 +30,7 @@ public class FileContentUtil {
         }
         String line;
         while ((line = br.readLine()) != null) {
-            System.out.println(line);
+            System.err.println(line);
         }
         br.close();
     }
@@ -43,9 +43,9 @@ public class FileContentUtil {
     public void demoA(String fileName) throws IOException {
         //注意getResource("")里面是空字符串
         String path = this.getClass().getClassLoader().getResource("").getPath();
-        System.out.println(path);
+        System.err.println(path);
         String filePath = path + fileName;
-        System.out.println(filePath);
+        System.err.println(filePath);
         getFileContent(filePath);
     }
 
@@ -58,10 +58,10 @@ public class FileContentUtil {
     public void demoB(String fileName) throws IOException {
         //注意getResource("")里面是空字符串
         String path = this.getClass().getClassLoader().getResource(fileName).getPath();
-        System.out.println(path);
+        System.err.println(path);
         //如果路径中带有中文会被URLEncoder,因此这里需要解码
         String filePath = URLDecoder.decode(path, "UTF-8");
-        System.out.println(filePath);
+        System.err.println(filePath);
         getFileContent(filePath);
     }
 
@@ -77,10 +77,10 @@ public class FileContentUtil {
     public void demoC(String fileName) throws IOException {
         //注意getResource("")里面是空字符串
         String path = this.getClass().getClassLoader().getResource(fileName).getFile();
-        System.out.println(path);
+        System.err.println(path);
         //如果路径中带有中文会被URLEncoder,因此这里需要解码
         String filePath = URLDecoder.decode(path, "UTF-8");
-        System.out.println(filePath);
+        System.err.println(filePath);
         getFileContent(filePath);
     }
 
@@ -147,8 +147,8 @@ public class FileContentUtil {
         String rootCanonicalPath = directory.getCanonicalPath();
         //绝对路径：getAbsolutePath() 方法返回文件的绝对路径，如果构造的时候是全路径就直接返回全路径，如果构造时是相对路径，就返回当前目录的路径 + 构造 File 对象时的路径
         String rootAbsolutePath = directory.getAbsolutePath();
-        System.out.println(rootCanonicalPath);
-        System.out.println(rootAbsolutePath);
+        System.err.println(rootCanonicalPath);
+        System.err.println(rootAbsolutePath);
         String filePath = rootCanonicalPath + "\\chapter-2-springmvc-quickstart\\src\\main\\resources\\" + fileName;
         getFileContent(filePath);
     }
@@ -169,7 +169,7 @@ public class FileContentUtil {
         System.setProperty("TEST_ROOT", "E:\\WorkSpace\\Git\\spring-framework-learning-example");
         //参数为空
         String rootPath = System.getProperty("TEST_ROOT");
-        System.out.println(rootPath);
+        System.err.println(rootPath);
         String filePath = rootPath + "\\chapter-2-springmvc-quickstart\\src\\main\\resources\\" + fileName;
         getFileContent(filePath);
     }

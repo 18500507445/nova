@@ -80,7 +80,7 @@ public class RabbitMqTest {
             channel.basicPublish("", QUEUE_NAME, null, "Hello World!".getBytes());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("发送消息出现异常...");
+            System.err.println("发送消息出现异常...");
         }
     }
 
@@ -101,7 +101,7 @@ public class RabbitMqTest {
         Channel channel = connection.createChannel();
         //创建一个基本的消费者
         channel.basicConsume(QUEUE_NAME, false, (s, delivery) -> {
-            System.out.println("msg = " + new String(delivery.getBody()));
+            System.err.println("msg = " + new String(delivery.getBody()));
             /**
              *  basicAck是确认应答，第一个参数是当前的消息标签，后面的参数是
              *  是否批量处理消息队列中所有的消息，如果为false表示只处理当前消息
@@ -139,7 +139,7 @@ public class RabbitMqTest {
     @Test
     public void simpleTwo() {
         Object receive = rabbitTemplate.convertSendAndReceive(RabbitConstants.QUEUE_SIMPLE_TWO, MSG);
-        System.out.println("receive = " + receive);
+        System.err.println("receive = " + receive);
     }
 
     /**

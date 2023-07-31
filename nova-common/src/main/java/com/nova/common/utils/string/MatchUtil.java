@@ -16,7 +16,7 @@ public class MatchUtil {
         String str2 = "今天是星期";
         Integer num = matchValue(str1, str2);
         long end = System.currentTimeMillis();
-        System.out.println("相似度:" + num + "，耗时：" + (end - start) + "ms");
+        System.err.println("相似度:" + num + "，耗时：" + (end - start) + "ms");
     }
 
     public static Integer matchValue(String str1, String str2) {
@@ -46,12 +46,12 @@ public class MatchUtil {
                         dif[i - 1][j] + 1);
             }
         }
-//        System.out.println("字符串\"" + str1 + "\"与\"" + str2 + "\"的比较");
+//        System.err.println("字符串\"" + str1 + "\"与\"" + str2 + "\"的比较");
         //取数组右下角的值，同样不同位置代表不同字符串的比较
-//        System.out.println("差异步骤：" + dif[len1][len2]);
+//        System.err.println("差异步骤：" + dif[len1][len2]);
         //计算相似度
         double similarity = 1 - (double) dif[len1][len2] / Math.max(str1.length(), str2.length());
-//        System.out.println("相似度：" + format);
+//        System.err.println("相似度：" + format);
         double v = similarity * 100;
         return (int) v;
     }

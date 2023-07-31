@@ -19,7 +19,7 @@ public class MyDecode extends ByteToMessageDecoder {
         short messageType = in.readShort();
         // 现在还只支持request与response请求
         if (messageType != MessageType.REQUEST.getCode() && messageType != MessageType.RESPONSE.getCode()) {
-            System.out.println("暂不支持此种数据");
+            System.err.println("暂不支持此种数据");
             return;
         }
         // 2. 读取序列化的类型

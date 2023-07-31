@@ -31,7 +31,7 @@ public class Chapter2Test {
         UserDO userDO = new UserDO();
         userDO.setId(6L).setName("Wzh").setAge(28).setEmail("188508540@qq.com");
         int insert = twoUserMapper.insert(userDO);
-        System.out.println("insert = " + insert);
+        System.err.println("insert = " + insert);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class Chapter2Test {
     @Test
     public void query() {
         UserDO userDO = twoUserMapper.selectById(6L);
-        System.out.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
+        System.err.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
     }
 
 
@@ -61,13 +61,13 @@ public class Chapter2Test {
         UserDO userDO = new UserDO();
         userDO.setId(7L).setName("Cf").setAge(26).setEmail("188508540@qq.com");
         boolean save = twoUserService.save(userDO);
-        System.out.println("save = " + save);
+        System.err.println("save = " + save);
     }
 
     @Test
     public void testDelete() {
         boolean delete = twoUserService.removeById(7L);
-        System.out.println("delete = " + delete);
+        System.err.println("delete = " + delete);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class Chapter2Test {
     @Test
     public void testQuery() {
         UserDO userDO = twoUserService.getById(7L);
-        System.out.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
+        System.err.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
     }
 
 
@@ -90,7 +90,7 @@ public class Chapter2Test {
     @Test
     public void queryByName() {
         UserDO userDO = twoUserMapper.selectByName("Tom");
-        System.out.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
+        System.err.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
     }
 
 

@@ -28,11 +28,11 @@ public class ReplaceString {
         String a = "剩余10次";
         String replace = Pattern.compile("[^0-9]").matcher(a).replaceAll("").trim();
         String s = a.replaceAll(replace, "#" + replace + "#");
-        System.out.println(s);
+        System.err.println(s);
 
         //替换()
         String matchContent = "测试替换()内容了";
         matchContent = matchContent.replaceAll(REGEX_ALL_BRACKETS, "(" + 123 + ")");
-        System.out.println(matchContent);
+        System.err.println(matchContent);
     }
 }

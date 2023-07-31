@@ -64,13 +64,13 @@ public class ClientProxy implements InvocationHandler {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-            System.out.println(request);
+            System.err.println(request);
             objectOutputStream.writeObject(request);
             objectOutputStream.flush();
 
             return (RPCResponse) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println();
+            System.err.println();
             return null;
         }
     }

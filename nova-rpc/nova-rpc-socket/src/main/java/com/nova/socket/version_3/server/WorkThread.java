@@ -38,7 +38,7 @@ public class WorkThread implements Runnable {
             oos.flush();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("从IO中读取数据错误");
+            System.err.println("从IO中读取数据错误");
         }
     }
 
@@ -55,7 +55,7 @@ public class WorkThread implements Runnable {
             return RPCResponse.success(invoke);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-            System.out.println("方法执行错误");
+            System.err.println("方法执行错误");
             return RPCResponse.fail();
         }
     }

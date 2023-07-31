@@ -41,7 +41,7 @@ public class WorkListener {
         channel.basicQos(1);
         ThreadUtil.sleep(500);
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("工作轮询模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("工作轮询模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -57,7 +57,7 @@ public class WorkListener {
         channel.basicQos(1);
         ThreadUtil.sleep(1000);
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("工作轮询模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("工作轮询模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -75,7 +75,7 @@ public class WorkListener {
     public void pollingThread(Message message) {
         long tag = message.getMessageProperties().getDeliveryTag();
         ThreadUtil.sleep(100);
-        System.out.println("工作模式开启多线程,消息id：" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("工作模式开启多线程,消息id：" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -116,7 +116,7 @@ public class WorkListener {
              * 如果 requeue 参数设置为 false，则 RabbitMQ 立即会还把消息从队列中移除，而不会把它发送给新的消费者。
              */
             //channel.basicReject(tag, true);
-            System.out.println("工作公平模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+            System.err.println("工作公平模式1,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
         }
     }
 
@@ -135,7 +135,7 @@ public class WorkListener {
             ThreadUtil.sleep(1000);
         } finally {
             channel.basicAck(tag, false);
-            System.out.println("工作公平模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+            System.err.println("工作公平模式2,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
         }
     }
 

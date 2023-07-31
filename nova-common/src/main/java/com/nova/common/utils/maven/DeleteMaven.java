@@ -26,7 +26,7 @@ public class DeleteMaven {
     public static void main(String[] args) {
         File mavenRep = new File(MAVEN_REPO_PATH);
         if (!mavenRep.exists()) {
-            System.out.println("Maven repos is not exist.");
+            System.err.println("Maven repos is not exist.");
             return;
         }
         File[] files = mavenRep.listFiles();
@@ -34,7 +34,7 @@ public class DeleteMaven {
             checkAndDeleteFiles(files);
             /*第一次不会删除 删除（lastUpdated，progress）之后变成空的文件夹*/
             checkAndDeleteFiles(files);
-            System.out.println("Clean lastUpdated files and in-progess jar finished.");
+            System.err.println("Clean lastUpdated files and in-progess jar finished.");
         }
     }
 
@@ -43,7 +43,7 @@ public class DeleteMaven {
             if (file.isDirectory()) {
                 if (Objects.requireNonNull(file.listFiles()).length == 0) {
                     // 删除空文件夹
-                    System.out.println("删除文件夹：" + file.getAbsolutePath());
+                    System.err.println("删除文件夹：" + file.getAbsolutePath());
                     file.delete();
                 } else {
                     checkAndDeleteFiles(Objects.requireNonNull(file.listFiles()));
@@ -51,7 +51,7 @@ public class DeleteMaven {
             } else {
                 for (String suffix : SUFFIX) {
                     if (file.getName().contains(suffix)) {
-                        System.out.println("删除文件：" + file.getAbsolutePath());
+                        System.err.println("删除文件：" + file.getAbsolutePath());
                         file.delete();
                     }
                 }

@@ -35,11 +35,11 @@ public class LocationUtils {
         // 公式中“cosβ1cosβ2cos（α1-α2）+sinβ1sinβ2”的部分，得到∠AOB的cos值
         double cos = Math.cos(radiansAY) * Math.cos(radiansBY) * Math.cos(radiansAX - radiansBX)
                 + Math.sin(radiansAY) * Math.sin(radiansBY);
-//        System.out.println("cos = " + cos); // 值域[-1,1]
+//        System.err.println("cos = " + cos); // 值域[-1,1]
         // 反余弦值
         double acos = Math.acos(cos);
-//        System.out.println("acos = " + acos); // 值域[0,π]
-//        System.out.println("∠AOB = " + Math.toDegrees(acos)); // 球心角 值域[0,180]
+//        System.err.println("acos = " + acos); // 值域[0,π]
+//        System.err.println("∠AOB = " + Math.toDegrees(acos)); // 球心角 值域[0,180]
 
         BigDecimal bd = new BigDecimal(EARTH_RADIUS * acos);
         return bd.divide(new BigDecimal(1000)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
@@ -48,6 +48,6 @@ public class LocationUtils {
     public static void main(String[] args) {
         Point2D point2D = new Point2D.Double(116.50655600000000, 39.78813600000000);
         Point2D point2D1 = new Point2D.Double(116.5072996577004, 39.78825559300053);
-        System.out.println(getDistance(point2D, point2D1));
+        System.err.println(getDistance(point2D, point2D1));
     }
 }

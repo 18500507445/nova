@@ -54,7 +54,7 @@ public class JsonSerializer implements Serializer {
                 obj = response;
                 break;
             default:
-                System.out.println("暂时不支持此种消息");
+                System.err.println("暂时不支持此种消息");
                 throw new RuntimeException();
         }
         return obj;

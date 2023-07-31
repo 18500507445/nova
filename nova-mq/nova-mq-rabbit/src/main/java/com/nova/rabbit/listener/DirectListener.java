@@ -27,7 +27,7 @@ public class DirectListener {
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_DIRECT_ONE))
     public void one(Message message) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("直连模式one,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("直连模式one,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -43,7 +43,7 @@ public class DirectListener {
         long tag = message.getMessageProperties().getDeliveryTag();
         //false消息从队列中移除
         channel.basicReject(tag, false);
-        System.out.println("直连模式two,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("直连模式two,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**
@@ -56,6 +56,6 @@ public class DirectListener {
     @RabbitListener(queues = RabbitConstants.QUEUE_DIRECT_DLX)
     public void delay(Message message) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("死信监听,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("死信监听,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 }

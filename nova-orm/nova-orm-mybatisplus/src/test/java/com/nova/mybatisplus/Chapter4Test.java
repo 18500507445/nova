@@ -31,7 +31,7 @@ public class Chapter4Test {
         UserDO userDO = new UserDO();
         userDO.setName("Wai").setAge(99).setEmail("123456789@qq.com");
         int insert = fourUserMapper.insert(userDO);
-        System.out.println("insert = " + insert);
+        System.err.println("insert = " + insert);
     }
 
     /**
@@ -47,11 +47,11 @@ public class Chapter4Test {
         fourUserMapper.selectPage(page, queryWrapper);
 
         //获取分页查询的信息
-        System.out.println("currentPage = " + page.getCurrent());
-        System.out.println("pageSize = " + page.getSize());
-        System.out.println("totalPages = " + page.getPages());
-        System.out.println("totalSizes = " + page.getTotal());
-        System.out.println("result = " + JSONUtil.toJsonStr(page.getRecords()));
+        System.err.println("currentPage = " + page.getCurrent());
+        System.err.println("pageSize = " + page.getSize());
+        System.err.println("totalPages = " + page.getPages());
+        System.err.println("totalSizes = " + page.getTotal());
+        System.err.println("result = " + JSONUtil.toJsonStr(page.getRecords()));
     }
 
     /**
@@ -61,7 +61,7 @@ public class Chapter4Test {
     public void customQuery() {
         IPage<UserDO> page = new Page<>(1, 2);
         fourUserMapper.selectByName(page, "tom");
-        System.out.println("result = " + JSONUtil.toJsonStr(page.getRecords()));
+        System.err.println("result = " + JSONUtil.toJsonStr(page.getRecords()));
     }
 
 
@@ -90,7 +90,7 @@ public class Chapter4Test {
     public void activeRecordQuery() {
         UserActiveRecordDO user = new UserActiveRecordDO();
         user = user.setId(1671335418429210626L).selectById();
-        System.out.println("result = " + JSONUtil.toJsonStr(user));
+        System.err.println("result = " + JSONUtil.toJsonStr(user));
     }
 
 
@@ -103,7 +103,7 @@ public class Chapter4Test {
         queryWrapper.eq(UserDO::getName, "Tom");
         //查询为Tom的idList
         List<Long> list = SimpleQuery.list(queryWrapper, UserDO::getId);
-        System.out.println("list = " + JSONUtil.toJsonStr(list));
+        System.err.println("list = " + JSONUtil.toJsonStr(list));
     }
 
     @Test
@@ -115,7 +115,7 @@ public class Chapter4Test {
             //效果相同 Optional.of(userDO.getName()).map(String::toLowerCase).ifPresent(userDO::setName);
             userDO.setName(userDO.getName().toLowerCase());
         });
-        System.out.println("list = " + JSONUtil.toJsonStr(list));
+        System.err.println("list = " + JSONUtil.toJsonStr(list));
     }
 
     @Test
@@ -124,7 +124,7 @@ public class Chapter4Test {
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserDO::getName, "Tom");
         Map<Long, UserDO> userMap = SimpleQuery.keyMap(queryWrapper, UserDO::getId);
-        System.out.println("userMap = " + JSONUtil.toJsonStr(userMap));
+        System.err.println("userMap = " + JSONUtil.toJsonStr(userMap));
     }
 
     @Test
@@ -133,14 +133,14 @@ public class Chapter4Test {
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(UserDO::getName, "Tom");
         Map<Long, String> userMap = SimpleQuery.map(queryWrapper, UserDO::getId, UserDO::getName);
-        System.out.println("userMap = " + JSONUtil.toJsonStr(userMap));
+        System.err.println("userMap = " + JSONUtil.toJsonStr(userMap));
     }
 
     @Test
     public void simpleQueryGroup() {
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
         Map<String, List<UserDO>> userGroup = SimpleQuery.group(queryWrapper, UserDO::getName);
-        System.out.println("userGroup = " + JSONUtil.toJsonStr(userGroup));
+        System.err.println("userGroup = " + JSONUtil.toJsonStr(userGroup));
     }
 
 

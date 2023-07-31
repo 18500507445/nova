@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserBO getUserByUserId(Integer id) {
-        System.out.println("客户端查询了" + id + "的用户");
+        System.err.println("客户端查询了" + id + "的用户");
         // 模拟从数据库中取用户的行为
         Random random = new Random();
         return UserBO.builder().userName(UUID.randomUUID().toString())
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer insertUserId(UserBO user) {
-        System.out.println("插入数据成功：" + user);
+        System.err.println("插入数据成功：" + user);
         return 1;
     }
 

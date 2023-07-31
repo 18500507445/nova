@@ -322,7 +322,7 @@ public class ListUtils {
         //方法一：使用流遍历操作
         Stream.iterate(0, n -> n + 1).limit(limit).forEach(i -> {
             List<Integer> collect = list.stream().skip(i * MAX_NUMBER).limit(MAX_NUMBER).collect(Collectors.toList());
-            System.out.println(collect);
+            System.err.println(collect);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -379,6 +379,6 @@ public class ListUtils {
         cutList(list, limit);
 
         List<List<Integer>> partition = Lists.partition(list, 5);
-        System.out.println(JSONUtil.toJsonStr(partition));
+        System.err.println(JSONUtil.toJsonStr(partition));
     }
 }

@@ -195,6 +195,6 @@ public class AddressUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(getRealAddressByIP("223.221.240.148"));
+        System.err.println(getRealAddressByIP("223.221.240.148"));
     }
 }

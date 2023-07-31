@@ -73,9 +73,9 @@ public class JwtUtils {
         String randomStr = "123";
 
         String token = sign(userName, randomStr);
-        System.out.println("token：" + token);
+        System.err.println("token：" + token);
 
         boolean verify = verify(token, userName, randomStr);
-        System.out.println("verify：" + verify);
+        System.err.println("verify：" + verify);
     }
 }

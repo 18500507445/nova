@@ -23,7 +23,7 @@ public class TestOne {
     @Test
     public void queryAll() {
         List<UserDO> list = userMapper.selectAll();
-        System.out.println("jsonStr = " + JSONUtil.toJsonStr(list));
+        System.err.println("jsonStr = " + JSONUtil.toJsonStr(list));
     }
     
 }

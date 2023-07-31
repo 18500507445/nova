@@ -67,7 +67,7 @@ public class BucketLimitAspect extends BaseController implements InitializingBea
             HttpServletResponse response = attributes.getResponse();
             String requestUrl = request.getRequestURI();
             final long evalsha = jedisUtil.evalsha(scriptLua, getKeys(requestUrl), Arrays.asList(String.valueOf(rate), String.valueOf(maxCount), String.valueOf(requestNum)));
-            System.out.println(DateUtil.now() + "，evalsha = " + evalsha);
+            System.err.println(DateUtil.now() + "，evalsha = " + evalsha);
             if (evalsha < 1) {
                 //超出访问次数，返回
                 render(response, message);

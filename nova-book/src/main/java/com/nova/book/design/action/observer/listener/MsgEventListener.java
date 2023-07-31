@@ -9,6 +9,6 @@ public class MsgEventListener implements EventListener {
 
     @Override
     public void doEvent(Object obj) {
-        System.out.println("短信：" + obj);
+        System.err.println("短信：" + obj);
     }
 }

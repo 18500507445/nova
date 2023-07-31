@@ -16,7 +16,7 @@ public class AliPay extends Payment {
 
     @Override
     public void transfer() {
-        System.out.println("*** 支付宝");
+        System.err.println("*** 支付宝");
         this.payMode.security();
     }
 

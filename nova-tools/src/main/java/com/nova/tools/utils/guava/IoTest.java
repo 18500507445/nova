@@ -23,7 +23,7 @@ class IoTest {
     public void test1() throws IOException {
         String path = "E:\\ideaProjects2\\utils-demo\\src\\test\\resources\\1.txt";
         String string = FileUtils.readFileToString(new File(path), StandardCharsets.UTF_8);
-        System.out.println(string);
+        System.err.println(string);
     }
 
     /**
@@ -33,7 +33,7 @@ class IoTest {
     public void test2() throws IOException {
         String path = "E:\\ideaProjects2\\utils-demo\\src\\test\\resources\\1.txt";
         List<String> list = FileUtils.readLines(new File(path), StandardCharsets.UTF_8);
-        System.out.println(list.size());
+        System.err.println(list.size());
     }
 
     /**
@@ -44,9 +44,9 @@ class IoTest {
     public void test3() throws IOException {
         String path = "E:\\ideaProjects2\\utils-demo\\src\\test\\resources\\1.txt";
         // 获取baseName
-        System.out.println(FilenameUtils.getBaseName(path));
+        System.err.println(FilenameUtils.getBaseName(path));
         // 获取后缀
-        System.out.println(FilenameUtils.getExtension(path));
+        System.err.println(FilenameUtils.getExtension(path));
     }
 
 }

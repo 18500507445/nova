@@ -18,9 +18,9 @@ class NumberTest {
      */
     @Test
     public void floatDemo() {
-        System.out.println(0.9f - 0.8f);
-        System.out.println(1f - 0.7f);
-        System.out.println("1" + "2");
+        System.err.println(0.9f - 0.8f);
+        System.err.println(1f - 0.7f);
+        System.err.println("1" + "2");
     }
 
     /**
@@ -34,7 +34,7 @@ class NumberTest {
         Double pow = Math.pow(m, n);
         //Double转long类型
         long l = pow.longValue();
-        System.out.println(l);
+        System.err.println(l);
     }
 
     /**
@@ -44,7 +44,7 @@ class NumberTest {
     public void modularOperation() {
         BigDecimal ten = new BigDecimal(10);
         BigDecimal[] bigDecimals = ten.divideAndRemainder(new BigDecimal(3));
-        System.out.println("商:" + bigDecimals[0] + ",余数:" + bigDecimals[1]);
+        System.err.println("商:" + bigDecimals[0] + ",余数:" + bigDecimals[1]);
     }
 
     /**
@@ -59,7 +59,7 @@ class NumberTest {
 
         //舍0
         String s1 = bigDecimal.stripTrailingZeros().toPlainString();
-        System.out.println("舍0:" + s1);
+        System.err.println("舍0:" + s1);
 
         String s = df.format(bigDecimal);
 
@@ -68,8 +68,8 @@ class NumberTest {
         double v = Double.parseDouble(s);
 
         //取绝对值
-        System.out.println("取绝对值:" + Math.abs(i));
-        System.out.println("取绝对值:" + Math.abs(v));
+        System.err.println("取绝对值:" + Math.abs(i));
+        System.err.println("取绝对值:" + Math.abs(v));
     }
 
     /**
@@ -83,8 +83,8 @@ class NumberTest {
         }
         String s = price.stripTrailingZeros().toPlainString();
 
-        System.out.println(price);
-        System.out.println(s);
+        System.err.println(price);
+        System.err.println(s);
     }
 
 

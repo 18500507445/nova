@@ -14,10 +14,10 @@ class CompositionDemo {
         Function1<Integer, Integer> func1 = a -> a + 1;
         Function1<Integer, Integer> func2 = a -> a * 2;
         Function1<Integer, Integer> func3 = func1.andThen(func2);
-        System.out.println(func3.apply(2));
+        System.err.println(func3.apply(2));
 
         Function1<Integer, Integer> func4 = func2.compose(func1);
-        System.out.println(func4.apply(2));
+        System.err.println(func4.apply(2));
 
     }
 }

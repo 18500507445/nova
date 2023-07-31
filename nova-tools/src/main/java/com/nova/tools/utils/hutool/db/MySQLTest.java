@@ -84,7 +84,7 @@ public class MySQLTest {
         db.insert(Entity.create("testuser").set("id", 1).set("account", "ice").set("pass", "123456"));
         db.upsert(Entity.create("testuser").set("id", 1).set("account", "icefairy").set("pass", "a123456"));
         Entity user = db.get(Entity.create("testuser").set("id", 1));
-        System.out.println("user=======" + user.getStr("account") + "___" + user.getStr("pass"));
+        System.err.println("user=======" + user.getStr("account") + "___" + user.getStr("pass"));
         Assert.equals(user.getStr("account"), new String("icefairy"));
     }
 }

@@ -32,10 +32,10 @@ class SectionTest3 {
 
     @Test
     public void demoA() {
-        System.out.println(1 | 2);
-        System.out.println(1 | 4);
-        System.out.println(2 | 4);
-        System.out.println(1 | 2 | 4);
+        System.err.println(1 | 2);
+        System.err.println(1 | 4);
+        System.err.println(2 | 4);
+        System.err.println(1 | 2 | 4);
     }
 
     @Test
@@ -44,9 +44,9 @@ class SectionTest3 {
 
         EnumSet<Style> styles = EnumSet.of(Style.BOLD, Style.UNDERLINE);
 
-        System.out.println(styles.contains(Style.UNDERLINE));
-        System.out.println(styles.contains(Style.STRIKETHROUGH));
-        System.out.println(styles);
+        System.err.println(styles.contains(Style.UNDERLINE));
+        System.err.println(styles.contains(Style.STRIKETHROUGH));
+        System.err.println(styles);
     }
 
 }

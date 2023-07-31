@@ -12,7 +12,7 @@ class InitDemo4 {
 
     static void main(String[] args) {
         SpringApplication.run(InitDemo4.class, args);
-        System.out.println("[main] 初始化");
+        System.err.println("[main] 初始化");
     }
 
 }

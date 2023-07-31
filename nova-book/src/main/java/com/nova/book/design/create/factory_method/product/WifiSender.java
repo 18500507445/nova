@@ -10,6 +10,6 @@ public class WifiSender implements Sender {
 
     @Override
     public void sendData(String data) {
-        System.out.println("Send data by wifi,data=" + data);
+        System.err.println("Send data by wifi,data=" + data);
     }
 }

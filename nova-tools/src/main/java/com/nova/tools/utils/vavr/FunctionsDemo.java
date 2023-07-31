@@ -31,7 +31,7 @@ class FunctionsDemo {
 
         //创建方式四
         Function2<Integer, Integer, Integer> sumFour = Integer::sum;
-        System.out.println(sumFour.apply(100, 100));
+        System.err.println(sumFour.apply(100, 100));
     }
 
 

@@ -10,7 +10,7 @@ import java.util.Collection;
 class AList<T> {
 
     public void add(T t) {
-        System.out.println("add");
+        System.err.println("add");
     }
 
     public void addAll(Collection<T> coll) {
@@ -20,7 +20,7 @@ class AList<T> {
         for (T t : coll) {
             add(t);
         }
-        System.out.println("addAll");
+        System.err.println("addAll");
     }
 }
 

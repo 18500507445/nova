@@ -47,7 +47,7 @@ class GuavaTest {
         // 如果执行add操作会报错:UnsupportedOperationException
 //        jdkUnmodifiableList.add("ccc");
         list.add("ccc");
-        System.out.println(jdkUnmodifiableList);
+        System.err.println(jdkUnmodifiableList);
     }
 
     /**
@@ -60,13 +60,13 @@ class GuavaTest {
         multimap.put("a", "2");
         multimap.put("a", "3");
         Collection<String> aValues = multimap.get("a");
-        System.out.println(aValues);
+        System.err.println(aValues);
 
         // 是否包含key=a,value=1的entry
-        System.out.println(multimap.containsEntry("a", "4"));
+        System.err.println(multimap.containsEntry("a", "4"));
         // 转化成jdk原生api实现的数据结构
         Map<String, Collection<String>> jdkMap = multimap.asMap();
-        System.out.println(jdkMap);
+        System.err.println(jdkMap);
     }
 
     /**
@@ -81,17 +81,17 @@ class GuavaTest {
         multiset.add("b");
         multiset.add("c");
         multiset.add("a");
-        System.out.println(multiset);
+        System.err.println(multiset);
         Set<Multiset.Entry<String>> entries = multiset.entrySet();
-        System.out.println(entries);// [a x 2, b, c]
+        System.err.println(entries);// [a x 2, b, c]
         for (Multiset.Entry<String> entry : entries) {
-            System.out.println("元素:" + entry.getElement() + ",个数:" + entry.getCount());
+            System.err.println("元素:" + entry.getElement() + ",个数:" + entry.getCount());
         }
 
         Set<String> elementSet = multiset.elementSet();
-        System.out.println(elementSet);// [a, b, c]
+        System.err.println(elementSet);// [a, b, c]
         for (String ele : elementSet) {
-            System.out.println("集合里面的元素:" + ele);
+            System.err.println("集合里面的元素:" + ele);
         }
     }
 
@@ -104,7 +104,7 @@ class GuavaTest {
     @Test
     public void test4() {
         List<Integer> integers = Ints.asList(1, 2, 3);
-        System.out.println(integers);
+        System.err.println(integers);
     }
 
     /**
@@ -124,7 +124,7 @@ class GuavaTest {
         // 把list2分成小的集合，小的集合大小是size
 //        list2.subList() // 太麻烦
         List<List<String>> partition = Lists.partition(list2, 2);
-        System.out.println(partition);
+        System.err.println(partition);
         for (List<String> ids : partition) {
 //            api(ids);
         }
@@ -140,14 +140,14 @@ class GuavaTest {
         String str = "student_name";
         // 下划线转驼峰 CAMEL:骆驼
         // studentName
-        System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, str));
+        System.err.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, str));
         // StudentName
-        System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, str));
+        System.err.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, str));
 
         // 驼峰转下划线
         str = "studentName";
         // 结果: student_name
-        System.out.println(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, str));
+        System.err.println(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, str));
     }
 
     /**
@@ -168,9 +168,9 @@ class GuavaTest {
                 .useForNull("这是null的替代物");
 
         // a,b,c
-        System.out.println(joiner.join(list));
+        System.err.println(joiner.join(list));
         // jdk8中实现这类需求也比较方便
-        System.out.println(list.stream().filter(StringUtils::isNotBlank)
+        System.err.println(list.stream().filter(StringUtils::isNotBlank)
                 .collect(Collectors.joining(",")));
 
         String str = "a,b,\"\",,  c  ,";
@@ -181,9 +181,9 @@ class GuavaTest {
                 // 去除每个元素的前后空格
                 .trimResults();
         Iterable<String> iterable = splitter.split(str);
-        System.out.println(iterable);
+        System.err.println(iterable);
         List<String> splitToList = splitter.splitToList(str);
-        System.out.println(splitToList);
+        System.err.println(splitToList);
 
     }
 }

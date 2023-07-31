@@ -79,9 +79,9 @@ class SinglyLinkedList implements Iterable<Integer> {
         if (null == curr) {
             return;
         }
-        System.out.println("before:" + curr.value);
+        System.err.println("before:" + curr.value);
         recursion(curr.next);
-        System.out.println("after:" + curr.value);
+        System.err.println("after:" + curr.value);
     }
 
     @Override
@@ -234,7 +234,7 @@ class SinglyLinkedListTest {
         for (int i = 1; i <= 4; i++) {
             list.addFirst(i);
         }
-        list.forEach1(System.out::println);
+        list.forEach1(System.err::println);
     }
 
     /**
@@ -246,7 +246,7 @@ class SinglyLinkedListTest {
         for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
-        list.forEach1(System.out::println);
+        list.forEach1(System.err::println);
     }
 
     /**
@@ -259,7 +259,7 @@ class SinglyLinkedListTest {
             list.addLast(i);
         }
         int i = list.get(0);
-        System.out.println("i = " + i);
+        System.err.println("i = " + i);
     }
 
     /**
@@ -272,7 +272,7 @@ class SinglyLinkedListTest {
             list.addLast(i);
         }
         list.insert(4, 4);
-        list.forEach1(System.out::println);
+        list.forEach1(System.err::println);
     }
 
     /**

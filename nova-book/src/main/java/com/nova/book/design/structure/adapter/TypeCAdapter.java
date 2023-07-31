@@ -8,6 +8,6 @@ package com.nova.book.design.structure.adapter;
 public class TypeCAdapter {
 
     public void typeC() {
-        System.out.println("Type-C 充电...");
+        System.err.println("Type-C 充电...");
     }
 }

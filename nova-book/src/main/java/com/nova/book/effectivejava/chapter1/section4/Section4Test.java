@@ -12,7 +12,7 @@ class Section4Test {
     @Test
     public void demoA() {
         boolean isCat = CatUtil.isCat("tom");
-        System.out.println("isCat = " + isCat);
+        System.err.println("isCat = " + isCat);
     }
 
 }

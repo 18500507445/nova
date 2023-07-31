@@ -32,7 +32,7 @@ public class SignTest {
         sign = SecureUtil.sign(SignAlgorithm.SHA1withRSA, null, publicKey);
         // 验证签名
         boolean verify = sign.verify(content.getBytes(), signed);
-        System.out.println(verify);
+        System.err.println(verify);
     }
 
     @Test

@@ -78,7 +78,7 @@ class DynamicArray implements Iterable<Integer> {
 
     public void forEach() {
         for (int i = 0; i < size; i++) {
-            System.out.println(array[i]);
+            System.err.println(array[i]);
         }
     }
 
@@ -136,7 +136,7 @@ class DynamicArray implements Iterable<Integer> {
                 sum += a[i][j];
             }
         }
-        System.out.println(sum);
+        System.err.println(sum);
     }
 
     public static void ji(int[][] a, int rows, int columns) {
@@ -146,7 +146,7 @@ class DynamicArray implements Iterable<Integer> {
                 sum += a[i][j];
             }
         }
-        System.out.println(sum);
+        System.err.println(sum);
     }
 
 }
@@ -179,7 +179,7 @@ class DynamicArrayTest {
         list.add(3, 4);
 
         for (int i = 0; i < 4; i++) {
-            System.out.println(list.get(i));
+            System.err.println(list.get(i));
         }
     }
 
@@ -193,16 +193,16 @@ class DynamicArrayTest {
         list.addLast(2);
         list.addLast(3);
 
-        System.out.println("手动foreach开始");
-        list.forEachPro(integer -> System.out.println(integer));
+        System.err.println("手动foreach开始");
+        list.forEachPro(integer -> System.err.println(integer));
 
-        System.out.println("迭代器遍历开始");
+        System.err.println("迭代器遍历开始");
         for (Integer element : list) {
-            System.out.println(element);
+            System.err.println(element);
         }
 
-        System.out.println("java8 steam遍历");
-        list.stream().forEach(System.out::println);
+        System.err.println("java8 steam遍历");
+        list.stream().forEach(System.err::println);
     }
 
     /**
@@ -216,8 +216,8 @@ class DynamicArrayTest {
         list.addLast(3);
 
         int remove = list.remove(2);
-        System.out.println("remove = " + remove);
-        list.stream().forEach(System.out::println);
+        System.err.println("remove = " + remove);
+        list.stream().forEach(System.err::println);
     }
 
     /**
@@ -229,7 +229,7 @@ class DynamicArrayTest {
         for (int i = 0; i < 9; i++) {
             list.addLast(i);
         }
-        list.stream().forEach(System.out::println);
+        list.stream().forEach(System.err::println);
     }
 
     /**
@@ -266,7 +266,7 @@ class DynamicArrayTest {
         sw.start("ji");
         DynamicArray.ji(a, rows, columns);
         sw.stop();
-        System.out.println(sw.prettyPrint());
+        System.err.println(sw.prettyPrint());
     }
 
 

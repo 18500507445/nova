@@ -40,9 +40,9 @@ class RedPackageTest {
                 remain = BigDecimal.ZERO;
             }
             sum = sum.add(min.add(redPack));
-            System.out.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redPack).setScale(2, RoundingMode.HALF_UP));
+            System.err.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redPack).setScale(2, RoundingMode.HALF_UP));
         }
-        System.out.println("红包总额：" + sum.setScale(2, RoundingMode.HALF_UP));
+        System.err.println("红包总额：" + sum.setScale(2, RoundingMode.HALF_UP));
     }
 
     /**
@@ -79,10 +79,10 @@ class RedPackageTest {
                 remain = BigDecimal.ZERO;
             }
             sum1 = sum1.add(min.add(redpeck)).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck).setScale(2, RoundingMode.HALF_UP));
+            System.err.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck).setScale(2, RoundingMode.HALF_UP));
         }
 
-        System.out.println("红包总额：" + sum1);
+        System.err.println("红包总额：" + sum1);
     }
 
     /**
@@ -119,10 +119,10 @@ class RedPackageTest {
                 remain = BigDecimal.ZERO;
             }
             sum1 = sum1.add(min.add(redpeck).setScale(2, RoundingMode.HALF_UP));
-            System.out.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck));
+            System.err.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck));
         }
 
-        System.out.println("红包总额：" + sum1);
+        System.err.println("红包总额：" + sum1);
     }
 
     /**
@@ -148,9 +148,9 @@ class RedPackageTest {
                 remain = BigDecimal.ZERO;
             }
             sum = sum.add(min.add(redpeck)).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck));
+            System.err.println("第" + (i + 1) + "个人抢到红包金额为：" + min.add(redpeck));
         }
-        System.out.println("红包总额：" + sum);
+        System.err.println("红包总额：" + sum);
     }
 
     @Test

@@ -9,7 +9,7 @@ public class DecorateOne extends AbstractClass {
 
     @Override
     protected void decorate() {
-        System.out.println("自定义...");
-        System.out.println("布灵布灵的装修风格...");
+        System.err.println("自定义...");
+        System.err.println("布灵布灵的装修风格...");
     }
 }

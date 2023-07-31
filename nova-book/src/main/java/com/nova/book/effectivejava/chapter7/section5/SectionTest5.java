@@ -17,7 +17,7 @@ class SectionTest5 {
     @Test
     public void demoA() {
         Integer integer = null;
-        System.out.println(integer == 13);
+        System.err.println(integer == 13);
     }
 
 
@@ -34,8 +34,8 @@ class SectionTest5 {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             sum += i;
         }
-        System.out.println(sum);
-        System.out.println("耗时:" + timer.interval());
+        System.err.println(sum);
+        System.err.println("耗时:" + timer.interval());
     }
 
 }

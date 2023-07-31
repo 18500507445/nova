@@ -13,21 +13,21 @@ class ParameterLambda {
 
         //1.lambda标识简化
         love = (int a) -> {
-            System.out.println("I Love You-->" + a);
+            System.err.println("I Love You-->" + a);
         };
 
         //2.简化1 参数类型
         love = (a) -> {
-            System.out.println("I Love You-->" + a);
+            System.err.println("I Love You-->" + a);
         };
 
         //3.简化2 简化括号
         love = a -> {
-            System.out.println("I Love You-->" + a);
+            System.err.println("I Love You-->" + a);
         };
 
         //4.简化3 去掉花括号
-        love = a -> System.out.println("I Love You-->" + a);
+        love = a -> System.err.println("I Love You-->" + a);
 
         love.love(521);
 

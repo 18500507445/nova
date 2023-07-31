@@ -80,10 +80,10 @@ class ManualJob {
             return;
         }
         //todo 可做解锁ip处理 情景举例：一个任务执行失败了，扔到重试表里，重试表有个locker字段，定时任务一直扫表，哪台机器哪个线程抢到任务locker放ip，然后当任务被线程处理，locker清除ip
-        System.out.println("模拟：清除该ip锁定的任务后,睡眠2s");
+        System.err.println("模拟：清除该ip锁定的任务后,睡眠2s");
         Threads.sleep(2000);
 
-        System.out.println("------------准备处理业务------------");
+        System.err.println("------------准备处理业务------------");
         SERVICE.execute(new RetryTask());
     }
 
@@ -100,7 +100,7 @@ class ManualJob {
                 try {
                     //返回此信号灯中可用的许可证数量
                     int taskNum = SEMAPHORE.availablePermits();
-                    System.out.println("------------允许TASK个数：" + taskNum);
+                    System.err.println("------------允许TASK个数：" + taskNum);
 
                     if (taskNum == 0) {
                         Threads.sleep(1000);
@@ -109,7 +109,7 @@ class ManualJob {
 
                     if (taskNum > 0) {
                         //todo 比如根据taskNum 锁定重试任务表 where locker = ip limit taskNum
-                        System.out.println("获取业务，处理业务的机器为：" + IP + "，时间：" + DateUtil.now());
+                        System.err.println("获取业务，处理业务的机器为：" + IP + "，时间：" + DateUtil.now());
                     }
 
                     //QUEUE.put() 处理实体类
@@ -151,7 +151,7 @@ class ManualJob {
      */
     private void consume(Integer i) {
         try {
-            System.out.println("处理次数" + i);
+            System.err.println("处理次数" + i);
         } catch (Exception exp) {
             log.error("重试异常" + exp);
         } finally {

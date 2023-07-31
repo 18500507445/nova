@@ -115,7 +115,7 @@ class LinkedListStackTest {
         stack.push(3);
         stack.push(4);
 
-        System.out.println(JSONUtil.toJsonStr(stack));
+        System.err.println(JSONUtil.toJsonStr(stack));
     }
 
     /**
@@ -128,7 +128,7 @@ class LinkedListStackTest {
         stack.push(2);
         stack.push(3);
         stack.pop();
-        System.out.println(JSONUtil.toJsonStr(stack));
+        System.err.println(JSONUtil.toJsonStr(stack));
     }
 
 

@@ -19,7 +19,7 @@ class SectionTest7 {
 
         //内部会优化成
         String s = new StringBuilder().append(s1).append(s2).append(s3).toString();
-        System.out.println(s);
+        System.err.println(s);
 
     }
 
@@ -29,7 +29,7 @@ class SectionTest7 {
         for (int i = 0; i < 100; i++) {
             sum += "," + i;
         }
-        System.out.println("sum = " + sum);
+        System.err.println("sum = " + sum);
     }
 
     @Test
@@ -38,7 +38,7 @@ class SectionTest7 {
         for (int i = 0; i < 100; i++) {
             sb.append(",").append(i);
         }
-        System.out.println("sb" + sb);
+        System.err.println("sb" + sb);
     }
 
 

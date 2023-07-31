@@ -18,7 +18,7 @@ public class ShapeFactory {
         if (circle == null) {
             circle = new Circle(color);
             circleMap.put(color, circle);
-            System.out.println("创建圆: " + color);
+            System.err.println("创建圆: " + color);
         }
         return circle;
     }

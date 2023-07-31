@@ -8,6 +8,6 @@ package com.nova.book.design.action.mediator;
 public class ChatRoom {
 
     public static void showMessage(User user, String message) {
-        System.out.printf("[%s]: %s%n", user.getName(), message);
+        System.err.printf("[%s]: %s%n", user.getName(), message);
     }
 }

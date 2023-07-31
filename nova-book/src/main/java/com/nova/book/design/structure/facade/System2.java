@@ -9,6 +9,6 @@ package com.nova.book.design.structure.facade;
  */
 public class System2 {
     public void handle() {
-        System.out.println("子系统2 ...");
+        System.err.println("子系统2 ...");
     }
 }

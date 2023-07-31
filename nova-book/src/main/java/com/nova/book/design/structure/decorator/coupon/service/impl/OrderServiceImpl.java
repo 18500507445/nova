@@ -17,7 +17,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(OrderDTO order) {
-        System.out.println("订单参数：" + JSONUtil.toJsonStr(order));
+        System.err.println("订单参数：" + JSONUtil.toJsonStr(order));
         List<Product> productList = order.getProductList();
         List<Discount> discountList = order.getDiscountList();
 

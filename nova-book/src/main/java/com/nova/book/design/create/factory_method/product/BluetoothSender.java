@@ -10,6 +10,6 @@ public class BluetoothSender implements Sender {
 
     @Override
     public void sendData(String data) {
-        System.out.println("Send data by bluetooth,data=" + data);
+        System.err.println("Send data by bluetooth,data=" + data);
     }
 }

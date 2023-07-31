@@ -150,7 +150,7 @@ class MaxHeap {
     public static void main(String[] args) {
         int[] array = {1, 2, 3, 4, 5, 6, 7};
         MaxHeap maxHeap = new MaxHeap(array);
-        System.out.println(Arrays.toString(maxHeap.array));
+        System.err.println(Arrays.toString(maxHeap.array));
     }
 
 

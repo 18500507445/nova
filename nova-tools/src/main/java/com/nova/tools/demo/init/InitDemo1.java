@@ -17,6 +17,6 @@ class InitDemo1 {
      */
     @PostConstruct
     void init() {
-        System.out.println("[注解@PostConstruct] 初始化");
+        System.err.println("[注解@PostConstruct] 初始化");
     }
 }

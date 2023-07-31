@@ -26,7 +26,7 @@ class You implements Marry {
 
     @Override
     public void happyMarry() {
-        System.out.println("wzh结婚了！！！！！！！！");
+        System.err.println("wzh结婚了！！！！！！！！");
     }
 }
 
@@ -49,10 +49,10 @@ class WeddingCompany implements Marry {
     }
 
     private void after() {
-        System.out.println("洞房花烛夜");
+        System.err.println("洞房花烛夜");
     }
 
     private void before() {
-        System.out.println("收钱办事");
+        System.err.println("收钱办事");
     }
 }

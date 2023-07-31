@@ -12,12 +12,12 @@ class LazyDemo {
     public static void main(String[] args) {
         Lazy<String> name = Lazy.of(() -> "Deepak");
         //false
-        System.out.println(name.isEvaluated());
+        System.err.println(name.isEvaluated());
         //Deepak
-        System.out.println(name.get());
+        System.err.println(name.get());
         //True
-        System.out.println(name.isEvaluated());
+        System.err.println(name.isEvaluated());
         //Deepak, from cache
-        System.out.println(name.get());
+        System.err.println(name.get());
     }
 }

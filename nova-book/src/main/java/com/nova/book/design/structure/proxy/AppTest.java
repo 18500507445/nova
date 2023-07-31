@@ -17,7 +17,7 @@ public class AppTest {
     public void demoA() {
         JdbcService jdbc = new JdbcProxy();
         jdbc.selectOne();
-        System.out.println("-------------");
+        System.err.println("-------------");
         jdbc.selectOne();
     }
 
@@ -33,11 +33,11 @@ public class AppTest {
 
     @Test
     public void demoC(){
-        System.out.println("--------自己来--------");
+        System.err.println("--------自己来--------");
         You you = new You();
         you.happyMarry();
 
-        System.out.println("--------找婚庆--------");
+        System.err.println("--------找婚庆--------");
         new WeddingCompany(new You()).happyMarry();
     }
 

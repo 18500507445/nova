@@ -17,19 +17,19 @@ class Cat implements Cloneable{
     private String colour;
 
     public Cat() {
-        System.out.println("Cat 无参构造器");
+        System.err.println("Cat 无参构造器");
     }
 
     public Cat(Integer id, String name, String colour) {
         this.id = id;
         this.name = name;
         this.colour = colour;
-        System.out.println("Cat 有参构造器");
+        System.err.println("Cat 有参构造器");
     }
 
     @Override
     protected Cat clone() throws CloneNotSupportedException {
-        System.out.println("clone Cat");
+        System.err.println("clone Cat");
         return (Cat) super.clone();
     }
 }

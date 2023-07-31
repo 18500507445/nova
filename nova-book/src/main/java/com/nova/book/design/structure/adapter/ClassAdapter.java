@@ -15,6 +15,6 @@ public class ClassAdapter extends TypeCAdapter implements UsbTarget {
         super.typeC();
         // ...
 
-        System.out.println("typeC -> usb");
+        System.err.println("typeC -> usb");
     }
 }

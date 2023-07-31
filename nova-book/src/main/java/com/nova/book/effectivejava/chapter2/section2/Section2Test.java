@@ -13,13 +13,13 @@ class Section2Test {
     public void demoA() {
         Cat.BlackCat blackCat1 = new Cat.BlackCat();
         Cat.BlackCat blackCat2 = new Cat.BlackCat();
-        System.out.println("hashCode1 = " + blackCat1.hashCode());
-        System.out.println("hashCode2 = " + blackCat2.hashCode());
+        System.err.println("hashCode1 = " + blackCat1.hashCode());
+        System.err.println("hashCode2 = " + blackCat2.hashCode());
     }
 
     @Test
     public void demoB() {
         Cat.BlueCat blueCat = new Cat.BlueCat();
-        System.out.println("hashCode = " + blueCat.hashCode());
+        System.err.println("hashCode = " + blueCat.hashCode());
     }
 }

@@ -18,7 +18,7 @@ public class JdbcProxy implements JdbcService {
     @Override
     public void selectOne() {
         if (this.jdbcServiceImpl == null) {
-            System.out.println("加载...");
+            System.err.println("加载...");
             this.jdbcServiceImpl = new JdbcServiceImpl();
         }
         this.jdbcServiceImpl.selectOne();

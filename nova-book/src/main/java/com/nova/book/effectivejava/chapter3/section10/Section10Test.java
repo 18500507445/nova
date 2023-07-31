@@ -28,7 +28,7 @@ class Section10Test {
 
     @Test
     public void demoB() {
-        System.out.println(str1);
+        System.err.println(str1);
     }
 
     /**
@@ -39,7 +39,7 @@ class Section10Test {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                System.out.println("running");
+                System.err.println("running");
             }
         };
         new Thread(runnable).start();

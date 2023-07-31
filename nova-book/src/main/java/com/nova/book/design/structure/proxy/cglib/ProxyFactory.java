@@ -40,12 +40,12 @@ public class ProxyFactory implements MethodInterceptor {
 
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        System.out.println("Cglib代理：开始事务...");
+        System.err.println("Cglib代理：开始事务...");
 
         //执行目标对象的方法
         Object returnValue = method.invoke(target, objects);
 
-        System.out.println("Cglib代理：提交事务...");
+        System.err.println("Cglib代理：提交事务...");
 
         return returnValue;
     }

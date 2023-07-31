@@ -19,7 +19,7 @@ class StringExercise {
     public void splitStr() {
         String[] split = seatCode.split("_");
         for (String s : split) {
-            System.out.println(s);
+            System.err.println(s);
         }
     }
 
@@ -30,6 +30,6 @@ class StringExercise {
     @Test
     public void replaceStr() {
         seatCode = seatCode.replaceAll("_", "#");
-        System.out.println(seatCode);
+        System.err.println(seatCode);
     }
 }

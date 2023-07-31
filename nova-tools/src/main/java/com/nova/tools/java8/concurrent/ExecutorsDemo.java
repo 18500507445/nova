@@ -24,7 +24,7 @@ class ExecutorsDemo {
             try {
                 TimeUnit.SECONDS.sleep(3);
                 String name = Thread.currentThread().getName();
-                System.out.println("task finished: " + name);
+                System.err.println("task finished: " + name);
             } catch (InterruptedException e) {
                 System.err.println("task interrupted");
             }
@@ -34,7 +34,7 @@ class ExecutorsDemo {
 
     static void stop(ExecutorService executor) {
         try {
-            System.out.println("attempt to shutdown executor");
+            System.err.println("attempt to shutdown executor");
             executor.shutdown();
             executor.awaitTermination(5, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
@@ -44,7 +44,7 @@ class ExecutorsDemo {
                 System.err.println("killing non-finished tasks");
             }
             executor.shutdownNow();
-            System.out.println("shutdown finished");
+            System.err.println("shutdown finished");
         }
     }
 
@@ -86,10 +86,10 @@ class ExecutorsDemo {
             }
         });
 
-        System.out.println("future done: " + future.isDone());
+        System.err.println("future done: " + future.isDone());
         Integer result = future.get();
-        System.out.println("future done: " + future.isDone());
-        System.out.print("result: " + result);
+        System.err.println("future done: " + future.isDone());
+        System.err.print("result: " + result);
         EXECUTOR_ONE.shutdownNow();
     }
 
@@ -102,7 +102,7 @@ class ExecutorsDemo {
                 callable("task3", 3));
 
         String result = executor.invokeAny(callables);
-        System.out.println(result);
+        System.err.println(result);
 
         executor.shutdown();
     }
@@ -131,7 +131,7 @@ class ExecutorsDemo {
                         throw new IllegalStateException(e);
                     }
                 })
-                .forEach(System.out::println);
+                .forEach(System.err::println);
 
         executor.shutdown();
     }
@@ -140,7 +140,7 @@ class ExecutorsDemo {
         Runnable task = () -> {
             try {
                 TimeUnit.SECONDS.sleep(2);
-                System.out.println("Scheduling: " + System.nanoTime());
+                System.err.println("Scheduling: " + System.nanoTime());
             } catch (InterruptedException e) {
                 System.err.println("task interrupted");
             }
@@ -150,21 +150,21 @@ class ExecutorsDemo {
     }
 
     public void demoH() {
-        Runnable task = () -> System.out.println("Scheduling: " + System.nanoTime());
+        Runnable task = () -> System.err.println("Scheduling: " + System.nanoTime());
         int initialDelay = 0;
         int period = 1;
         executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
     }
 
     public void demoI() throws InterruptedException {
-        Runnable task = () -> System.out.println("Scheduling: " + System.nanoTime());
+        Runnable task = () -> System.err.println("Scheduling: " + System.nanoTime());
         int delay = 3;
         ScheduledFuture<?> future = executor.schedule(task, delay, TimeUnit.SECONDS);
 
         TimeUnit.MILLISECONDS.sleep(1337);
 
         long remainingDelay = future.getDelay(TimeUnit.MILLISECONDS);
-        System.out.printf("Remaining Delay: %sms\n", remainingDelay);
+        System.err.printf("Remaining Delay: %sms\n", remainingDelay);
     }
 
 }

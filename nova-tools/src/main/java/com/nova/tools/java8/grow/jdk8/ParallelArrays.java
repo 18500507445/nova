@@ -17,12 +17,12 @@ class ParallelArrays {
         Arrays.parallelSetAll(arrayOfLong,
                 index -> ThreadLocalRandom.current().nextInt(1000000));
         Arrays.stream(arrayOfLong).limit(10).forEach(
-                i -> System.out.print(i + " "));
-        System.out.println();
+                i -> System.err.print(i + " "));
+        System.err.println();
 
         Arrays.parallelSort(arrayOfLong);
         Arrays.stream(arrayOfLong).limit(10).forEach(
-                i -> System.out.print(i + " "));
-        System.out.println();
+                i -> System.err.print(i + " "));
+        System.err.println();
     }
 }

@@ -99,14 +99,14 @@ class Merge3 {
         log.debug("扣减成功条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(1)).count());
         killDemo.operateChangeLogList.forEach(e -> {
             if (e.getOperateType().equals(1)) {
-                System.out.println(e);
+                System.err.println(e);
             }
         });
 
         log.debug("扣减回滚条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(2)).count());
         killDemo.operateChangeLogList.forEach(e -> {
             if (e.getOperateType().equals(2)) {
-                System.out.println(e);
+                System.err.println(e);
             }
         });
 

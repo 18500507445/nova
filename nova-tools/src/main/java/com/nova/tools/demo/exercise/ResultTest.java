@@ -19,19 +19,19 @@ class ResultTest {
     @Test
     public void demoA() {
         RespResult<String> success = RespResult.success(RESULT);
-        System.out.println(JSONUtil.toJsonStr(success));
+        System.err.println(JSONUtil.toJsonStr(success));
     }
 
     @Test
     public void demoB() {
         AjaxResult success = AjaxResult.success(RESULT);
-        System.out.println(JSONUtil.toJsonStr(success));
+        System.err.println(JSONUtil.toJsonStr(success));
     }
 
     @Test
     public void demoC() {
         String success = ResultUtil.makeResult(ResultCode.SUCCESS, RESULT);
-        System.out.println(success);
+        System.err.println(success);
     }
 
 }

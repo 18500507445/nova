@@ -25,13 +25,13 @@ public abstract class AbstractClass {
     }
 
     private void start() {
-        System.out.println("start ...");
+        System.err.println("start ...");
     }
 
     protected abstract void decorate();
 
 
     private void end() {
-        System.out.println("end ...");
+        System.err.println("end ...");
     }
 }

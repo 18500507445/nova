@@ -31,7 +31,7 @@ public class LongAdderExample {
 
         Threads.stop(executor);
 
-        System.out.format("Add: %d\n", adder.sumThenReset());
+        System.err.format("Add: %d\n", adder.sumThenReset());
     }
 
     /**
@@ -45,7 +45,7 @@ public class LongAdderExample {
 
         Threads.stop(executor);
 
-        System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, adder.sumThenReset());
+        System.err.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, adder.sumThenReset());
     }
 
     /**
@@ -62,6 +62,6 @@ public class LongAdderExample {
 
         Threads.stop(executor);
 
-        System.out.format("Add: %d\n", accumulator.getThenReset());
+        System.err.format("Add: %d\n", accumulator.getThenReset());
     }
 }

@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 class SectionTest5 {
 
     public void testArgs(String... args) {
-        System.out.println("args.getClass() = " + args.getClass());
+        System.err.println("args.getClass() = " + args.getClass());
         for (String arg : args) {
-            System.out.println(arg);
+            System.err.println(arg);
         }
     }
 

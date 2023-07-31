@@ -41,10 +41,10 @@ class SemaphoreDemo {
         try {
             permit = semaphore.tryAcquire(1, TimeUnit.SECONDS);
             if (permit) {
-                System.out.println("Semaphore acquired");
+                System.err.println("Semaphore acquired");
                 Threads.sleep(3000);
             } else {
-                System.out.println("Could not acquire semaphore");
+                System.err.println("Could not acquire semaphore");
             }
         } catch (InterruptedException e) {
             throw new IllegalStateException(e);
@@ -66,7 +66,7 @@ class SemaphoreDemo {
 
         Threads.stop(executor);
 
-        System.out.println("Increment: " + count);
+        System.err.println("Increment: " + count);
     }
 
     @Test

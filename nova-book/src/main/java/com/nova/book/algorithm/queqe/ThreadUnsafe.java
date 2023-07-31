@@ -35,7 +35,7 @@ class ThreadUnsafe {
         ThreadUnsafe queue = new ThreadUnsafe();
         new Thread(() -> queue.offer("e1"), "t1").start();
         new Thread(() -> queue.offer("e2"), "t2").start();
-        System.out.println(queue);
+        System.err.println(queue);
     }
 
 }

@@ -67,7 +67,7 @@ interface Account {
                 e.printStackTrace();
             }
         });
-        System.out.println("余额: " + account.getBalance() + "， 耗时: " + timer.interval() + " ms");
+        System.err.println("余额: " + account.getBalance() + "， 耗时: " + timer.interval() + " ms");
     }
 
 }

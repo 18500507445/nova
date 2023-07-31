@@ -55,12 +55,12 @@ class OptionalDemo {
         //orElse不管street是否为null都进入方法，orElseGet就不会进去，需要做好区分，这是一个坑
         String s1 = optionalUser.map(User::getAddress).map(Address::getStreet).orElse(printf());
         String s2 = optionalUser.map(User::getAddress).map(Address::getStreet).orElseGet(this::printf);
-        System.out.println("s1 = " + s1);
-        System.out.println("s2 = " + s2);
+        System.err.println("s1 = " + s1);
+        System.err.println("s2 = " + s2);
     }
 
     private String printf() {
-        System.out.println("操作数据库");
+        System.err.println("操作数据库");
         return "打印";
     }
 
@@ -70,9 +70,9 @@ class OptionalDemo {
         try {
             User user = new User();
             Assert.notNull(user, "用户不能为空");
-            System.out.println("继续做");
+            System.err.println("继续做");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 

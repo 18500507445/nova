@@ -45,7 +45,7 @@ class LockExample {
 
         Threads.stop(executor);
 
-        System.out.println(count);
+        System.err.println(count);
     }
 
     @Test
@@ -60,10 +60,10 @@ class LockExample {
         });
 
         executor.submit(() -> {
-            System.out.println("Locked: " + lock.isLocked());
-            System.out.println("Held by me: " + lock.isHeldByCurrentThread());
+            System.err.println("Locked: " + lock.isLocked());
+            System.err.println("Held by me: " + lock.isHeldByCurrentThread());
             boolean locked = lock.tryLock();
-            System.out.println("Lock acquired: " + locked);
+            System.err.println("Lock acquired: " + locked);
         });
 
         Threads.stop(executor);
@@ -88,7 +88,7 @@ class LockExample {
         Runnable readTask = () -> {
             lock.readLock().lock();
             try {
-                System.out.println(map.get("foo"));
+                System.err.println(map.get("foo"));
                 Threads.sleep(1000);
             } finally {
                 lock.readLock().unlock();
@@ -120,7 +120,7 @@ class LockExample {
         Runnable readTask = () -> {
             long stamp = lock.readLock();
             try {
-                System.out.println(map.get("foo"));
+                System.err.println(map.get("foo"));
                 Threads.sleep(1000);
             } finally {
                 lock.unlockRead(stamp);
@@ -139,11 +139,11 @@ class LockExample {
         executor.submit(() -> {
             long stamp = lock.tryOptimisticRead();
             try {
-                System.out.println("Optimistic Lock Valid: " + lock.validate(stamp));
+                System.err.println("Optimistic Lock Valid: " + lock.validate(stamp));
                 Threads.sleep(1000);
-                System.out.println("Optimistic Lock Valid: " + lock.validate(stamp));
+                System.err.println("Optimistic Lock Valid: " + lock.validate(stamp));
                 Threads.sleep(2000);
-                System.out.println("Optimistic Lock Valid: " + lock.validate(stamp));
+                System.err.println("Optimistic Lock Valid: " + lock.validate(stamp));
             } finally {
                 lock.unlock(stamp);
             }
@@ -152,11 +152,11 @@ class LockExample {
         executor.submit(() -> {
             long stamp = lock.writeLock();
             try {
-                System.out.println("Write Lock acquired");
+                System.err.println("Write Lock acquired");
                 Threads.sleep(2000);
             } finally {
                 lock.unlock(stamp);
-                System.out.println("Write done");
+                System.err.println("Write done");
             }
         });
 
@@ -173,12 +173,12 @@ class LockExample {
                 if (count == 0) {
                     stamp = lock.tryConvertToWriteLock(stamp);
                     if (stamp == 0L) {
-                        System.out.println("Could not convert to write lock");
+                        System.err.println("Could not convert to write lock");
                         stamp = lock.writeLock();
                     }
                     count = 23;
                 }
-                System.out.println(count);
+                System.err.println(count);
             } finally {
                 lock.unlock(stamp);
             }

@@ -19,6 +19,6 @@ public class ObjAdapter implements UsbTarget {
         this.typeCAdapter.typeC();
         // ...
 
-        System.out.println("typeC -> usb");
+        System.err.println("typeC -> usb");
     }
 }

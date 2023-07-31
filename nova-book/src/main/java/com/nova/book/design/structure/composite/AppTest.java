@@ -21,7 +21,7 @@ public class AppTest {
         ceo.add(technology);
 
         // 打印该组织的所有员工
-        ceo.getSubordinates().forEach(System.out::println);
+        ceo.getSubordinates().forEach(System.err::println);
     }
 
 }

@@ -31,13 +31,13 @@ class StopThread {
      * @throws InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
-        System.out.println(DateUtil.now());
+        System.err.println(DateUtil.now());
         Thread t = new Thread(() -> {
             int i = 0;
             while (!stop) {
                 i++;
             }
-            System.out.println(DateUtil.now());
+            System.err.println(DateUtil.now());
         });
         t.start();
         Threads.sleep(1000);
@@ -61,13 +61,13 @@ class StopThread {
      */
     @Test
     public void demoB() throws InterruptedException {
-        System.out.println(DateUtil.now());
+        System.err.println(DateUtil.now());
         Thread t = new Thread(() -> {
             int i = 0;
             while (getStop()) {
                 i++;
             }
-            System.out.println(DateUtil.now());
+            System.err.println(DateUtil.now());
         });
         t.start();
         Threads.sleep(1000);

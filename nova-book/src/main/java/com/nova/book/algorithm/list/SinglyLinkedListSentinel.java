@@ -155,7 +155,7 @@ class SinglyLinkedListSentinelTest {
         for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
     /**
@@ -168,7 +168,7 @@ class SinglyLinkedListSentinelTest {
             list.addLast(i);
         }
         int i = list.get(2);
-        System.out.println("i = " + i);
+        System.err.println("i = " + i);
     }
 
     /**
@@ -181,7 +181,7 @@ class SinglyLinkedListSentinelTest {
             list.addLast(i);
         }
         list.insert(0, 5);
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
     /**
@@ -193,7 +193,7 @@ class SinglyLinkedListSentinelTest {
         for (int i = 1; i <= 4; i++) {
             list.addFirst(i);
         }
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
 

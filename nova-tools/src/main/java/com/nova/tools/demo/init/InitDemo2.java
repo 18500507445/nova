@@ -11,6 +11,6 @@ class InitDemo2 implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        System.out.println("[实现InitializingBean] 初始化");
+        System.err.println("[实现InitializingBean] 初始化");
     }
 }

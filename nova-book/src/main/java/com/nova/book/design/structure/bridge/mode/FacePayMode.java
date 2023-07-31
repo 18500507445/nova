@@ -8,6 +8,6 @@ public class FacePayMode implements IPayMode {
 
     @Override
     public void security() {
-        System.out.println("人脸支付");
+        System.err.println("人脸支付");
     }
 }

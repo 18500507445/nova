@@ -43,7 +43,7 @@ public class CompletableFutureExample {
         });
         try {
             Integer result = submit.get();
-            System.out.println(result);
+            System.err.println(result);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -53,7 +53,7 @@ public class CompletableFutureExample {
             Threads.sleep(100);
         }
         Integer result = submit.get();
-        System.out.println(result);
+        System.err.println(result);
     }
 
     /**
@@ -66,7 +66,7 @@ public class CompletableFutureExample {
      */
     @Test
     public void demoB() {
-        CompletableFuture<Void> helloFuture = CompletableFuture.runAsync(() -> System.out.println("hello future"));
+        CompletableFuture<Void> helloFuture = CompletableFuture.runAsync(() -> System.err.println("hello future"));
 
         CompletableFuture<Integer> integerCompletableFuture = CompletableFuture.supplyAsync(() -> 2333);
     }
@@ -77,26 +77,26 @@ public class CompletableFutureExample {
     @Test
     public void demoC() {
         CompletableFuture<Integer> uCompletableFuture = CompletableFuture.supplyAsync(() -> {
-            System.out.println("开始执行运算");
+            System.err.println("开始执行运算");
             try {
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             int a = 1 / 0;
-            System.out.println("执行结束");
+            System.err.println("执行结束");
             return 2333;
         });
 
         try {
             Integer result = uCompletableFuture.whenComplete((a, b) -> {
-                System.out.println("Result: " + a);
-                System.out.println("Exception: " + b);
+                System.err.println("Result: " + a);
+                System.err.println("Exception: " + b);
             }).exceptionally(e -> {
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
                 return 666;
             }).get();
-            System.out.println(result);
+            System.err.println(result);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -118,7 +118,7 @@ public class CompletableFutureExample {
     public void demoD() {
         try {
             String result = CompletableFuture.supplyAsync(() -> 2333).thenApply(String::valueOf).get();
-            System.out.println(result);
+            System.err.println(result);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -129,7 +129,7 @@ public class CompletableFutureExample {
      */
     @Test
     public void demoE() throws ExecutionException, InterruptedException {
-        CompletableFuture.supplyAsync(() -> 9999).thenAccept(System.out::println).get();
+        CompletableFuture.supplyAsync(() -> 9999).thenAccept(System.err::println).get();
     }
 
     /**
@@ -139,19 +139,19 @@ public class CompletableFutureExample {
     public void demoF() throws ExecutionException, InterruptedException {
         CompletableFuture.supplyAsync(() -> 9999)
                 .thenAcceptBoth(CompletableFuture.supplyAsync(() -> "7878"), (a, b) -> {
-                    System.out.println("a = " + a);
-                    System.out.println("b = " + b);
+                    System.err.println("a = " + a);
+                    System.err.println("b = " + b);
                 }).get();
     }
 
     @Test
     public void demoG() throws ExecutionException, InterruptedException {
         CompletableFuture.supplyAsync(() -> {
-            System.out.println("开始执行了");
+            System.err.println("开始执行了");
             Threads.sleep(2000);
             return 9999;
         }).thenRun(() -> {
-            System.out.println("执行结束了");
+            System.err.println("执行结束了");
         }).get();
     }
 
@@ -167,11 +167,11 @@ public class CompletableFutureExample {
         try {
             String s = CompletableFuture.supplyAsync(() -> 23333)
                     .thenCombine(CompletableFuture.supplyAsync(() -> "8898"), (a, b) -> {
-                        System.out.println("a =" + a);
-                        System.out.println("b =" + b);
+                        System.err.println("a =" + a);
+                        System.err.println("b =" + b);
                         return a + b;
                     }).get();
-            System.out.println(s);
+            System.err.println(s);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -185,7 +185,7 @@ public class CompletableFutureExample {
     @Test
     public void demoI() throws ExecutionException, InterruptedException {
         m1().acceptEither(m2(), t -> {
-            System.out.println("t = " + t);
+            System.err.println("t = " + t);
         }).get();
     }
 
@@ -199,13 +199,13 @@ public class CompletableFutureExample {
         TimeInterval timer = DateUtil.timer();
         CompletableFuture.anyOf(m1(), m2())
                 .thenRun(() -> {
-                    System.out.println("anyOf：" + timer.interval() + " ms");
+                    System.err.println("anyOf：" + timer.interval() + " ms");
                 }).get();
 
         timer.restart();
         CompletableFuture.allOf(m1(), m2())
                 .thenRun(() -> {
-                    System.out.println("allOf：" + timer.interval() + " ms");
+                    System.err.println("allOf：" + timer.interval() + " ms");
                 }).get();
     }
 
@@ -232,7 +232,7 @@ public class CompletableFutureExample {
         CompletableFuture.allOf(task1, task2).join();
         Long one = task1.get();
         Long two = task2.get();
-        System.out.println("结果：" + NumberUtil.add(one + two) + "，耗时：" + timer.interval() + "ms");
+        System.err.println("结果：" + NumberUtil.add(one + two) + "，耗时：" + timer.interval() + "ms");
     }
 
 
@@ -249,8 +249,8 @@ public class CompletableFutureExample {
             CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).join();
             for (CompletableFuture<Integer> result : completableFutures) {
                 try {
-                    System.out.println("price：" + result.get());
-                    System.out.println("time：" + DateUtil.now());
+                    System.err.println("price：" + result.get());
+                    System.err.println("time：" + DateUtil.now());
                 } catch (Exception ignored) {
 
                 }
@@ -307,7 +307,7 @@ public class CompletableFutureExample {
         BiConsumer<String, Throwable> biConsumer = new BiConsumer<String, Throwable>() {
             @Override
             public void accept(String s, Throwable e) {
-                System.out.println("任务" + s + "完成!result=" + s + "，异常e =" + e + "," + DateUtil.now());
+                System.err.println("任务" + s + "完成!result=" + s + "，异常e =" + e + "," + DateUtil.now());
                 list.add(s);
             }
         };
@@ -343,7 +343,7 @@ public class CompletableFutureExample {
         for (Integer i : taskList) {
             list.add(calc(i).toString());
         }
-        System.out.println("list=" + list + ",耗时=" + timer.interval() + "ms");
+        System.err.println("list=" + list + ",耗时=" + timer.interval() + "ms");
         System.exit(0);
     }
 
@@ -359,7 +359,7 @@ public class CompletableFutureExample {
                 //其它任务耗时1秒
                 TimeUnit.SECONDS.sleep(1);
             }
-            System.out.println("task线程：" + Thread.currentThread().getName() + "，任务i= " + i + "，完成时间点：" + DateUtil.now());
+            System.err.println("task线程：" + Thread.currentThread().getName() + "，任务i= " + i + "，完成时间点：" + DateUtil.now());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -394,7 +394,7 @@ public class CompletableFutureExample {
         for (CompletableFuture<String> result : completableFutures) {
             try {
                 String s = result.get();
-                System.out.println("打印 = " + s);
+                System.err.println("打印 = " + s);
             } catch (Exception ignored) {
 
             }

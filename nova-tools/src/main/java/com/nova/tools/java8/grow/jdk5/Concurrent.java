@@ -20,7 +20,7 @@ class Concurrent {
         Lock lock = new ReentrantLock();
         lock.lock();
         try {
-            System.out.println("hello world");
+            System.err.println("hello world");
         } finally {
             lock.unlock();
         }
@@ -31,7 +31,7 @@ class Concurrent {
         Condition condition = lock.newCondition();
         // do something
         condition.await(10, TimeUnit.SECONDS);
-        System.out.println("Get result.");
+        System.err.println("Get result.");
     }
 
     public void executorService() {
@@ -39,7 +39,7 @@ class Concurrent {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Task is running.");
+                System.err.println("Task is running.");
             }
         });
     }
@@ -58,7 +58,7 @@ class Concurrent {
         concurrentHashMap.put("Hello", 1);
         concurrentHashMap.put("World", 2);
 
-        System.out.println(concurrentHashMap.get("Hello"));
+        System.err.println(concurrentHashMap.get("Hello"));
     }
 
     public void copyOnWriteList() {
@@ -67,17 +67,17 @@ class Concurrent {
         copyOnWriteList.add("b");
         copyOnWriteList.add("c");
 
-        System.out.println(copyOnWriteList.size());
+        System.err.println(copyOnWriteList.size());
     }
 
     public void semaphore() {
         Semaphore semaphore = new Semaphore(3);
         try {
             semaphore.acquire();
-            System.out.println(Thread.currentThread().getName() + " is working");
+            System.err.println(Thread.currentThread().getName() + " is working");
             TimeUnit.SECONDS.sleep(1);
             semaphore.release();
-            System.out.println(Thread.currentThread().getName() + " is over");
+            System.err.println(Thread.currentThread().getName() + " is over");
         } catch (InterruptedException e) {
         }
     }

@@ -28,7 +28,7 @@ class OutOfMemory {
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            System.out.println("i = " + i);
+            System.err.println("i = " + i);
         }
     }
 }

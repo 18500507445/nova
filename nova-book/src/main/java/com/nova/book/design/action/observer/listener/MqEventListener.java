@@ -9,6 +9,6 @@ public class MqEventListener implements EventListener{
 
     @Override
     public void doEvent(Object obj) {
-        System.out.println("Mq：" + obj);
+        System.err.println("Mq：" + obj);
     }
 }

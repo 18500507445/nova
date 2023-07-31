@@ -12,7 +12,7 @@ class SectionTest5 {
     @Test
     public void demoA() {
         double add = OperationEnum.calculation(OperationEnum.ADD, 22, 3);
-        System.out.println("add = " + add);
+        System.err.println("add = " + add);
     }
 
 }

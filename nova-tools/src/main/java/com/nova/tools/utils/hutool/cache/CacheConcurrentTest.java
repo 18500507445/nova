@@ -47,7 +47,7 @@ class CacheConcurrentTest {
             ThreadUtil.execute(() -> show(cache));
         }
 
-        System.out.println("==============================");
+        System.err.println("==============================");
         ThreadUtil.sleep(10000);
     }
 

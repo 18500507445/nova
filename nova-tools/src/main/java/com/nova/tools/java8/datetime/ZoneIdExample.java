@@ -26,11 +26,11 @@ class ZoneIdExample {
         // TimeZone 转换为 ZoneId
         ZoneId oldToNewZoneId = TimeZone.getDefault().toZoneId();
 
-        System.out.println(defaultZoneId);
-        System.out.println(shanghaiZoneId);
-        System.out.println(oldToNewZoneId);
+        System.err.println(defaultZoneId);
+        System.err.println(shanghaiZoneId);
+        System.err.println(oldToNewZoneId);
 
-        System.out.println(ZoneId.getAvailableZoneIds());
+        System.err.println(ZoneId.getAvailableZoneIds());
     }
 
     /**
@@ -51,9 +51,9 @@ class ZoneIdExample {
         ZoneId zoneId2 = ZoneId.of("Europe/Copenhagen");
         ZoneId zoneId3 = ZoneId.of("Europe/Paris");
 
-        System.out.println("dateTime     : " + dateTime);
-        System.out.println("zoneDateTime : " + zoneDateTime);
-        System.out.println("zoneId2      : " + zoneId2);
-        System.out.println("zoneId3      : " + zoneId3);
+        System.err.println("dateTime     : " + dateTime);
+        System.err.println("zoneDateTime : " + zoneDateTime);
+        System.err.println("zoneId2      : " + zoneId2);
+        System.err.println("zoneId3      : " + zoneId3);
     }
 }

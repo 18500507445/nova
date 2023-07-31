@@ -22,13 +22,13 @@ class ListDemo {
 
         Option<Double> min = of.min();
 
-        System.out.println(sum.doubleValue());
+        System.err.println(sum.doubleValue());
 
-        System.out.println(average.get().doubleValue());
+        System.err.println(average.get().doubleValue());
 
-        System.out.println(max.get().doubleValue());
+        System.err.println(max.get().doubleValue());
 
-        System.out.println(min.get().doubleValue());
+        System.err.println(min.get().doubleValue());
 
     }
 }

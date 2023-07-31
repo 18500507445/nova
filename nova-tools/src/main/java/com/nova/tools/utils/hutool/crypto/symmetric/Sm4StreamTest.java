@@ -29,7 +29,7 @@ public class Sm4StreamTest {
         try (InputStream input = new FileInputStream(source);
              OutputStream out = new FileOutputStream(target)) {
             sm4.encrypt(input, out, IS_CLOSE);
-            System.out.println("============encrypt end");
+            System.err.println("============encrypt end");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class Sm4StreamTest {
         try (InputStream input = new FileInputStream(source);
              OutputStream out = new FileOutputStream(target)) {
             sm4.decrypt(input, out, IS_CLOSE);
-            System.out.println("============decrypt end");
+            System.err.println("============decrypt end");
         } catch (IOException e) {
             e.printStackTrace();
         }

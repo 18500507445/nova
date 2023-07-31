@@ -18,7 +18,7 @@ class Console {
             console.printf(" User name is:%s ", new Object[]{user});
             console.printf(" Password is:%s ", new Object[]{pwd});
         } else {
-            System.out.println(" No Console! ");
+            System.err.println(" No Console! ");
         }
 
     }

@@ -38,11 +38,11 @@ class RandomTest {
             if (StrUtil.equals("C", random)) {
                 sum3++;
             }
-            //System.out.println(random);
+            //System.err.println(random);
         }
-        System.out.println("sum1:" + sum1);
-        System.out.println("sum2:" + sum2);
-        System.out.println("sum3:" + sum3);
+        System.err.println("sum1:" + sum1);
+        System.err.println("sum2:" + sum2);
+        System.err.println("sum3:" + sum3);
     }
 
     /**
@@ -67,9 +67,9 @@ class RandomTest {
                 sum3++;
             }
         }
-        System.out.println("sum1:" + sum1);
-        System.out.println("sum2:" + sum2);
-        System.out.println("sum3:" + sum3);
+        System.err.println("sum1:" + sum1);
+        System.err.println("sum2:" + sum2);
+        System.err.println("sum3:" + sum3);
 
     }
 

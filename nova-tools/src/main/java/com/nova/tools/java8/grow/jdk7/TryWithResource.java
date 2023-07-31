@@ -22,7 +22,7 @@ class TryWithResource {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String str = br.readLine();
             while (null != str) {
-                System.out.println(str);
+                System.err.println(str);
                 str = br.readLine();
             }
         } catch (IOException e) {

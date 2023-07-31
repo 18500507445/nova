@@ -39,11 +39,11 @@ class ThreadPoolDemo {
                 namedThreadFactory,
                 new ThreadPoolExecutor.AbortPolicy());
 
-        executor.execute(() -> System.out.println("--" + Thread.currentThread().getId()));
+        executor.execute(() -> System.err.println("--" + Thread.currentThread().getId()));
         // 优雅关闭线程池
         executor.shutdown();
         // 任务执行完毕后打印"Done"
-        System.out.println("Done");
+        System.err.println("Done");
     }
 
     @Test
@@ -56,7 +56,7 @@ class ThreadPoolDemo {
             service.submit((Runnable) () -> {
                 while (true) {
                     try {
-                        System.out.println(queue.take() + "--" + Thread.currentThread().getId());
+                        System.err.println(queue.take() + "--" + Thread.currentThread().getId());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -64,7 +64,7 @@ class ThreadPoolDemo {
                 }
             });
         }
-        System.out.println("耗时:" + timer.interval());
+        System.err.println("耗时:" + timer.interval());
 
         // 优雅关闭线程池
         service.shutdown();
@@ -79,7 +79,7 @@ class ThreadPoolDemo {
         ExecutorService pool = Executors.newSingleThreadExecutor();
         for (int i = 1; i <= 1000; ++i) {
             final int number = i;
-            pool.execute(() -> System.out.println("I am " + Thread.currentThread().getId() + "-" + number));
+            pool.execute(() -> System.err.println("I am " + Thread.currentThread().getId() + "-" + number));
         }
         pool.shutdown();
     }

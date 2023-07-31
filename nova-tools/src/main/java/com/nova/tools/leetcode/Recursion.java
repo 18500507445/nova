@@ -9,7 +9,7 @@ class Recursion {
 
     public static void main(String[] args) {
         add(1);
-        System.out.println(add(1));
+        System.err.println(add(1));
     }
 
     static int add(int i) {

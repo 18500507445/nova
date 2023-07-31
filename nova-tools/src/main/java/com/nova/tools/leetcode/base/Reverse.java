@@ -14,13 +14,13 @@ class Reverse {
     @Test
     void demoA() {
         int x = 1001;
-        System.out.println(calculation(x));
+        System.err.println(calculation(x));
     }
 
     @Test
     void demoB() {
         boolean palindrome = isPalindrome(5665);
-        System.out.println("palindrome = " + palindrome);
+        System.err.println("palindrome = " + palindrome);
     }
 
     boolean isPalindrome(int x) {

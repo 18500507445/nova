@@ -54,7 +54,7 @@ public class ForkJoinDemo {
         task3.dependentTasks.add(task8);
         task4.dependentTasks.add(task9);
 
-        System.out.println("start time: " + DateUtil.now());
+        System.err.println("start time: " + DateUtil.now());
 //        pool1.submit(task1);
         pool2.invoke(task1);
 
@@ -84,7 +84,7 @@ public class ForkJoinDemo {
                 future.get();
             }
             Thread.sleep(execTime * 1000);
-            System.out.println("time: " + DateUtil.now() + ", taskName:" + name + ", threadName:" + Thread.currentThread().getName());
+            System.err.println("time: " + DateUtil.now() + ", taskName:" + name + ", threadName:" + Thread.currentThread().getName());
             return "time" + DateUtil.now() + ", taskName:" + name;
         }
 
@@ -98,7 +98,7 @@ public class ForkJoinDemo {
                 dependentTask.join();
             }
             Thread.sleep(execTime * 1000);
-            System.out.println("time: " + DateUtil.now() + ", taskName:" + name + ", threadName:" + Thread.currentThread().getName());
+            System.err.println("time: " + DateUtil.now() + ", taskName:" + name + ", threadName:" + Thread.currentThread().getName());
             return "xxx";
         }
     }
@@ -113,7 +113,7 @@ public class ForkJoinDemo {
         TaskA task = new TaskA(0L, 10000000000L);
         Long invoke = pool.invoke(task);
         System.err.println(invoke);
-        System.out.println("花费时间:" + timer.interval() + "ms");
+        System.err.println("花费时间:" + timer.interval() + "ms");
     }
 
     public static class TaskA extends RecursiveTask<Long> {

@@ -33,7 +33,7 @@ class SectionTest4 {
         EnumMap<Type, Object> typeMap = new EnumMap<>(Type.class);
 
         for (Type type : typeMap.keySet()) {
-            System.out.println(type);
+            System.err.println(type);
         }
 
     }

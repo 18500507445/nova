@@ -11,6 +11,6 @@ import java.util.Arrays;
 class Lambda {
 
     public static void main(String[] args) {
-        Arrays.asList("a", "b", "d").forEach(System.out::println);
+        Arrays.asList("a", "b", "d").forEach(System.err::println);
     }
 }

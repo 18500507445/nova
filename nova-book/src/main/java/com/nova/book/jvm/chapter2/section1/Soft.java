@@ -32,14 +32,14 @@ class Soft {
         List<SoftReference<byte[]>> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             SoftReference<byte[]> ref = new SoftReference<>(new byte[_4MB]);
-            System.out.println(Arrays.toString(ref.get()));
+            System.err.println(Arrays.toString(ref.get()));
             list.add(ref);
-            System.out.println(list.size());
+            System.err.println(list.size());
 
         }
-        System.out.println("循环结束：" + list.size());
+        System.err.println("循环结束：" + list.size());
         for (SoftReference<byte[]> ref : list) {
-            System.out.println(ref.get());
+            System.err.println(ref.get());
         }
     }
 

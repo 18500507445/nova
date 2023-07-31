@@ -31,7 +31,7 @@ class ArrayTest {
                 }
             }
         }
-        System.out.println(a);
+        System.err.println(a);
     }
 
     /**
@@ -58,9 +58,9 @@ class ArrayTest {
          * 方法二
          */
         Integer integer = Arrays.stream(nums).map(ints -> Arrays.stream(ints).sum()).max(Integer::compareTo).get();
-        System.out.println(integer);
+        System.err.println(integer);
 
-        System.out.println("max = " + max);
+        System.err.println("max = " + max);
     }
 
     /**
@@ -81,6 +81,6 @@ class ArrayTest {
         for (int candy : candies) {
             booleans.add(candy + extraCandies >= max);
         }
-        System.out.println(JSONUtil.toJsonStr(booleans));
+        System.err.println(JSONUtil.toJsonStr(booleans));
     }
 }

@@ -25,7 +25,7 @@ class SortTest {
         int[] ints = ArrayUtils.addAll(arr1, arr2);
         Arrays.sort(ints);
         for (int i : ints) {
-            System.out.println(i);
+            System.err.println(i);
         }
     }
 
@@ -47,7 +47,7 @@ class SortTest {
                     }
                 }
             }
-            System.out.println(a);
+            System.err.println(a);
         }
     }
 
@@ -66,7 +66,7 @@ class SortTest {
                 }
             }
         }
-        System.out.println(JSONUtil.toJsonStr(arr));
+        System.err.println(JSONUtil.toJsonStr(arr));
     }
 
     /**
@@ -89,7 +89,7 @@ class SortTest {
                 }
             }
         }
-        System.out.println(JSONUtil.toJsonStr(arr));
+        System.err.println(JSONUtil.toJsonStr(arr));
     }
 
 }

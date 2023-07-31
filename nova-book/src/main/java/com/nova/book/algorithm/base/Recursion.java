@@ -25,7 +25,7 @@ class Recursion {
     @Test
     public void factorial() {
         int sum = factorial(5);
-        System.out.println("sum = " + sum);
+        System.err.println("sum = " + sum);
     }
 
     /**
@@ -36,7 +36,7 @@ class Recursion {
             return;
         }
         reversePrintString(str, n + 1);
-        System.out.println(str.charAt(n));
+        System.err.println(str.charAt(n));
     }
 
     @Test
@@ -71,7 +71,7 @@ class Recursion {
     public void binarySearch() {
         int[] arr = {1, 3, 5, 7, 9};
         int index = binarySearch(arr, 3, 0, arr.length - 1);
-        System.out.println("index = " + index);
+        System.err.println("index = " + index);
     }
 
     /**
@@ -100,7 +100,7 @@ class Recursion {
     public void bubble() {
         int[] arr = {7, 5, 3, 1, 9};
         bubble(arr, arr.length - 1);
-        System.out.println("arr:" + Arrays.toString(arr));
+        System.err.println("arr:" + Arrays.toString(arr));
     }
 
 

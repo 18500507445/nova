@@ -22,8 +22,8 @@ class DateExample {
         String formattedDate = formatter.format(LocalDate.now());
         String formattedZonedDate = formatter.format(ZonedDateTime.now());
 
-        System.out.println("LocalDate          : " + formattedDate);
-        System.out.println("formattedZonedDate : " + formattedZonedDate);
+        System.err.println("LocalDate          : " + formattedDate);
+        System.err.println("formattedZonedDate : " + formattedZonedDate);
 
         LocalDateTime dateTime = LocalDateTime.now();
         // 20180303
@@ -37,11 +37,11 @@ class DateExample {
         // 今天是：2018年 三月 03日 星期六
         String strDate5 = dateTime.format(DateTimeFormatter.ofPattern("今天是：YYYY年 MMMM dd日 E", Locale.CHINESE));
 
-        System.out.println(strDate1);
-        System.out.println(strDate2);
-        System.out.println(strDate3);
-        System.out.println(strDate4);
-        System.out.println(strDate5);
+        System.err.println(strDate1);
+        System.err.println(strDate2);
+        System.err.println(strDate3);
+        System.err.println(strDate4);
+        System.err.println(strDate5);
 
         // 将一个字符串解析成一个日期对象
         String strDate6 = "2018-03-03";
@@ -50,8 +50,8 @@ class DateExample {
         LocalDate date = LocalDate.parse(strDate6, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalDateTime dateTime1 = LocalDateTime.parse(strDate7, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        System.out.println(date);
-        System.out.println(dateTime1);
+        System.err.println(date);
+        System.err.println(dateTime1);
     }
 
     /**
@@ -71,18 +71,18 @@ class DateExample {
         int dayOfYear = localDate.getDayOfYear();
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
-        System.out.println("year       : " + year);
-        System.out.println("month      : " + month.getValue());
-        System.out.println("dayOfMonth : " + dayOfMonth);
-        System.out.println("dayOfYear  : " + dayOfYear);
-        System.out.println("dayOfWeek  : " + dayOfWeek.getValue());
+        System.err.println("year       : " + year);
+        System.err.println("month      : " + month.getValue());
+        System.err.println("dayOfMonth : " + dayOfMonth);
+        System.err.println("dayOfYear  : " + dayOfYear);
+        System.err.println("dayOfWeek  : " + dayOfWeek.getValue());
 
         // 3年后
         LocalDate d1 = localDate2.plusYears(3);
         // 3年前
         LocalDate d2 = localDate2.minusYears(3);
-        System.out.println("plusYears  : " + d1);
-        System.out.println("minusYears : " + d2);
+        System.err.println("plusYears  : " + d1);
+        System.err.println("minusYears : " + d2);
     }
 
     /**
@@ -101,10 +101,10 @@ class DateExample {
         // 3年前的现在
         LocalDateTime dt2 = localDateTime.minusYears(3);
 
-        System.out.println("localDateTime  : " + localDateTime);
-        System.out.println("localDateTime2 : " + localDateTime2);
-        System.out.println("dt1            : " + dt1);
-        System.out.println("dt2            : " + dt2);
+        System.err.println("localDateTime  : " + localDateTime);
+        System.err.println("localDateTime2 : " + localDateTime2);
+        System.err.println("dt1            : " + dt1);
+        System.err.println("dt2            : " + dt2);
     }
 
     /**
@@ -124,10 +124,10 @@ class DateExample {
         // 3小时前
         LocalTime localTimeEarlier = localTime.minusHours(3);
 
-        System.out.println("localTime       : " + localTime);
-        System.out.println("localTime2      : " + localTime2);
-        System.out.println("localTimeLater  : " + localTimeLater);
-        System.out.println("localTimeEarlier: " + localTimeEarlier);
+        System.err.println("localTime       : " + localTime);
+        System.err.println("localTime2      : " + localTime2);
+        System.err.println("localTimeLater  : " + localTimeLater);
+        System.err.println("localTimeEarlier: " + localTimeEarlier);
     }
 
 }

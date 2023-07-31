@@ -16,35 +16,35 @@ class ObjTest {
     @Test
     public void testObj() {
         String[] str1 = Myself.STRING_ARR;
-        System.out.println("str1地址" + Arrays.toString(str1));
+        System.err.println("str1地址" + Arrays.toString(str1));
 
         String[] str2 = str1.clone();
-        System.out.println("str2地址" + Arrays.toString(str2));
+        System.err.println("str2地址" + Arrays.toString(str2));
 
         for (String s : str1) {
-            System.out.println(s);
+            System.err.println(s);
         }
 
         for (String s : str2) {
-            System.out.println(s);
+            System.err.println(s);
         }
 
-        System.out.println(str1.hashCode());
+        System.err.println(str1.hashCode());
 
-        System.out.println(str2.hashCode());
+        System.err.println(str2.hashCode());
 
-        System.out.println("str1和str2值是否相等" + str1.equals(str2));
+        System.err.println("str1和str2值是否相等" + str1.equals(str2));
 
-        System.out.println(str1 == str2);
+        System.err.println(str1 == str2);
 
 
-        System.out.println("----------------------------------------------------------");
+        System.err.println("----------------------------------------------------------");
         String a = "1";
         String b = "1";
-        System.out.println(a.equals(b));
-        System.out.println(a == b);
-        System.out.println("a" + a.hashCode());
-        System.out.println("b" + b.hashCode());
+        System.err.println(a.equals(b));
+        System.err.println(a == b);
+        System.err.println("a" + a.hashCode());
+        System.err.println("b" + b.hashCode());
     }
 
     @Test
@@ -56,7 +56,7 @@ class ObjTest {
         boolean a = true;
         boolean b = true;
         boolean c = (a = (1 == 2)) && (b = (1 == 2));
-        System.out.println("短路和判断" + c);
+        System.err.println("短路和判断" + c);
 
         /**
          * 条件之一为true，结果为true
@@ -66,7 +66,7 @@ class ObjTest {
         boolean f = false;
 
         boolean g = (e = (1 == 1)) || (f = (1 == 1));
-        System.out.println("短路或判断" + g);
+        System.err.println("短路或判断" + g);
     }
 
     private static Boolean valueOf(boolean b) {
@@ -76,7 +76,7 @@ class ObjTest {
     @Test
     public void testBooleanTwo() {
         Boolean aBoolean = ObjTest.valueOf(false);
-        System.out.println(aBoolean);
+        System.err.println(aBoolean);
     }
 
 }

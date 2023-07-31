@@ -23,6 +23,6 @@ class Visibility {
         Threads.sleep(1000);
         // 如果不加volatile关键字，线程t不会如预想的停下来
         run = false;
-        System.out.println("线程停止");
+        System.err.println("线程停止");
     }
 }

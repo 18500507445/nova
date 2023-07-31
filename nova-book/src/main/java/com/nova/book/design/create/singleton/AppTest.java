@@ -25,7 +25,7 @@ public class AppTest {
     public void hungryTest() throws Exception {
         Hungry instance1 = Hungry.getInstance();
         Hungry instance2 = Hungry.getInstance();
-        System.out.println(instance2 == instance1);
+        System.err.println(instance2 == instance1);
 
         //反射 破坏了单例
         Constructor<LazySafe> declaredConstructor = LazySafe.class.getDeclaredConstructor();
@@ -33,7 +33,7 @@ public class AppTest {
         LazySafe instance3 = declaredConstructor.newInstance();
         LazySafe instance4 = declaredConstructor.newInstance();
 
-        System.out.println(instance4 == instance3);
+        System.err.println(instance4 == instance3);
     }
 
     /**
@@ -43,7 +43,7 @@ public class AppTest {
     public void lazyNoSafeTest() {
         LazyNoSafe instance1 = LazyNoSafe.getInstance();
         LazyNoSafe instance2 = LazyNoSafe.getInstance();
-        System.out.println(instance2 == instance1);
+        System.err.println(instance2 == instance1);
     }
 
     /**
@@ -53,7 +53,7 @@ public class AppTest {
     public void lazySafeTest() {
         LazySafe instance1 = LazySafe.getInstance();
         LazySafe instance2 = LazySafe.getInstance();
-        System.out.println(instance2 == instance1);
+        System.err.println(instance2 == instance1);
     }
 
     /**
@@ -63,7 +63,7 @@ public class AppTest {
     public void doubleRetrievalTest() {
         DoubleRetrieval instance1 = DoubleRetrieval.getInstance();
         DoubleRetrieval instance2 = DoubleRetrieval.getInstance();
-        System.out.println(instance2 == instance1);
+        System.err.println(instance2 == instance1);
     }
 
     /**
@@ -73,7 +73,7 @@ public class AppTest {
     public void innerClassTest() {
         InnerClass instance1 = InnerClass.getInstance();
         InnerClass instance2 = InnerClass.getInstance();
-        System.out.println(instance2 == instance1);
+        System.err.println(instance2 == instance1);
     }
 
     /**
@@ -83,7 +83,7 @@ public class AppTest {
     public void enumTest() {
         EnumClass instance1 = EnumClass.INSTANCE;
         EnumClass instance2 = EnumClass.INSTANCE;
-        System.out.println(instance2 == instance1);
+        System.err.println(instance2 == instance1);
     }
 
 }

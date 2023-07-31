@@ -59,7 +59,7 @@ public class TestMongo {
     @Test
     public void testFind() {
         List<Topic> all = mongoService.findAll(Topic.class);
-        all.forEach(System.out::println);
+        all.forEach(System.err::println);
     }
 
     /**
@@ -89,7 +89,7 @@ public class TestMongo {
     @Test
     public void testQuery() {
         User user = userService.getById(1L);
-        System.out.println("user = " + JSONUtil.toJsonStr(user));
+        System.err.println("user = " + JSONUtil.toJsonStr(user));
     }
 
     /**
@@ -106,7 +106,7 @@ public class TestMongo {
                 .eq(Objects.nonNull(req.getAge()), User::getAge, req.getAge())
                 .between((Objects.nonNull(req.getStartTime()) && Objects.nonNull(req.getEndTime())), User::getCreateTime, req.getStartTime(), req.getEndTime());
         Page<User> page = userService.page(query, req.getPageNo(), req.getPageSize());
-        System.out.println("page = " + JSONUtil.toJsonStr(page));
+        System.err.println("page = " + JSONUtil.toJsonStr(page));
     }
 
 }

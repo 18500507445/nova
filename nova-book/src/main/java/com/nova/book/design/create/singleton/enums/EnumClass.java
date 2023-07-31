@@ -10,6 +10,6 @@ public enum EnumClass {
     INSTANCE;
 
     public void test() {
-        System.out.println("hello");
+        System.err.println("hello");
     }
 }

@@ -44,7 +44,7 @@ class TopicAlternatePrint {
         Threads.sleep(1000);
         awaitSignal.lock();
         try {
-            System.out.println("开始...");
+            System.err.println("开始...");
             a.signal();
         } finally {
             awaitSignal.unlock();
@@ -89,7 +89,7 @@ class AwaitSignal extends ReentrantLock {
             lock();
             try {
                 current.await();
-                System.out.print(str);
+                System.err.print(str);
                 next.signal();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -111,7 +111,7 @@ class ParkUnPark {
     public void print(String str, Thread next) {
         for (int i = 0; i < loopNumber; i++) {
             LockSupport.park();
-            System.out.print(str);
+            System.err.print(str);
             LockSupport.unpark(next);
         }
     }

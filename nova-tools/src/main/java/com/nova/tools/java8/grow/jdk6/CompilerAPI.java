@@ -23,7 +23,7 @@ class CompilerAPI {
         String program = "" +
                 "public class LearnJava6 {\n" +
                 "  public static void main(String[] args) {\n" +
-                "    System.out.println(\"欢迎你学习跟上 Java 8 之 CompilerAPI!\");\n" +
+                "    System.err.println(\"欢迎你学习跟上 Java 8 之 CompilerAPI!\");\n" +
                 "  }\n" +
                 "}\n";
 

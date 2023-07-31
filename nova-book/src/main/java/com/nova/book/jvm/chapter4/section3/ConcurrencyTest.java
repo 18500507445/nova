@@ -43,7 +43,7 @@ public class ConcurrencyTest {
             });
             t2.start();
 
-            System.out.println("第" + i + "次调用，result：" + result);
+            System.err.println("第" + i + "次调用，result：" + result);
         }
     }
 

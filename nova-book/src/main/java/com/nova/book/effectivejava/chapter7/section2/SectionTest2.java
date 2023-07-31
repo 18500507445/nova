@@ -12,7 +12,7 @@ class SectionTest2 {
     @Test
     public void demoA(){
         for (int i = 0; i < 5; i++) {
-            System.out.println(i);
+            System.err.println(i);
         }
     }
 

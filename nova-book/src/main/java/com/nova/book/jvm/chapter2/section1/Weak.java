@@ -20,11 +20,11 @@ class Weak {
             WeakReference<byte[]> ref = new WeakReference<>(new byte[_4MB]);
             list.add(ref);
             for (WeakReference<byte[]> w : list) {
-                System.out.print(w.get() + " ");
+                System.err.print(w.get() + " ");
             }
-            System.out.println();
+            System.err.println();
 
         }
-        System.out.println("循环结束：" + list.size());
+        System.err.println("循环结束：" + list.size());
     }
 }

@@ -14,7 +14,7 @@ class SectionTest2 {
         Cache.add("1",new Object());
 
         Object o = Cache.get("1");
-        System.out.println(o);
+        System.err.println(o);
     }
 
 }

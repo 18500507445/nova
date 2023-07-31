@@ -8,6 +8,6 @@ package com.nova.book.design.action.command.cook;
 public class Cook {
 
     public void doing() {
-        System.out.println("制作中...");
+        System.err.println("制作中...");
     }
 }

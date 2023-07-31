@@ -103,7 +103,7 @@ class MyAspect {
     @After("execution(* *(..))")
     public void after() {
         long end = System.nanoTime();
-        System.out.println("cost time:" + (end - start));
+        System.err.println("cost time:" + (end - start));
     }
 }
 

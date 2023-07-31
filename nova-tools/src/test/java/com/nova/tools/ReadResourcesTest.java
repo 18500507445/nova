@@ -34,7 +34,7 @@ public class ReadResourcesTest {
     @Test
     public void readProperties() {
         String test = PropertiesUtils.getInstance().getPropertyValue("test", "name");
-        System.out.println("test = " + test);
+        System.err.println("test = " + test);
     }
 
     /**
@@ -43,7 +43,7 @@ public class ReadResourcesTest {
     @Test
     public void readYmlFile() {
         String port = env.getProperty("server.port");
-        System.out.println("port = " + port);
+        System.err.println("port = " + port);
     }
 
     /**
@@ -51,7 +51,7 @@ public class ReadResourcesTest {
      */
     @Test
     public void readValue() {
-        System.out.println("path = " + path);
+        System.err.println("path = " + path);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ReadResourcesTest {
      */
     @Test
     public void readStaticValue() {
-        System.out.println("staticPath = " + ReadResourcesTest.STATIC_PATH);
+        System.err.println("staticPath = " + ReadResourcesTest.STATIC_PATH);
     }
 
 }

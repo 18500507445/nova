@@ -30,7 +30,7 @@ class AtomicExample {
                 });
 
         Threads.stop(executor);
-        System.out.format("Update: %d\n", ATOMIC_INT.get());
+        System.err.format("Update: %d\n", ATOMIC_INT.get());
     }
 
     @Test
@@ -44,7 +44,7 @@ class AtomicExample {
 
         Threads.stop(executor);
 
-        System.out.format("Accumulate: %d\n", ATOMIC_INT.get());
+        System.err.format("Accumulate: %d\n", ATOMIC_INT.get());
     }
 
     @Test
@@ -54,6 +54,6 @@ class AtomicExample {
 
         Threads.stop(executor);
 
-        System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, ATOMIC_INT.get());
+        System.err.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, ATOMIC_INT.get());
     }
 }

@@ -14,7 +14,7 @@ class TestLambda {
     static class Like2 implements ILike {
         @Override
         public void lambda() {
-            System.out.println("I Like Lambda2");
+            System.err.println("I Like Lambda2");
         }
     }
 
@@ -30,7 +30,7 @@ class TestLambda {
         class Like3 implements ILike {
             @Override
             public void lambda() {
-                System.out.println("I Like Lambda3");
+                System.err.println("I Like Lambda3");
             }
         }
 
@@ -41,7 +41,7 @@ class TestLambda {
         like = new ILike() {
             @Override
             public void lambda() {
-                System.out.println("I Like Lambda5");
+                System.err.println("I Like Lambda5");
             }
         };
 
@@ -49,7 +49,7 @@ class TestLambda {
 
         //6.用Lambda简化
         like = () -> {
-            System.out.println("I Like Lambda6");
+            System.err.println("I Like Lambda6");
         };
 
         like.lambda();
@@ -70,7 +70,7 @@ class Like implements ILike {
 
     @Override
     public void lambda() {
-        System.out.println("I Like Lambda1");
+        System.err.println("I Like Lambda1");
     }
 
 }

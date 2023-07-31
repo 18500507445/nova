@@ -10,13 +10,13 @@ public class EnumTest {
 
     public static void main(String[] args) {
 
-        System.out.println(RequestTypeEnum.BUYTICKET);
+        System.err.println(RequestTypeEnum.BUYTICKET);
 
-        System.out.println(RequestTypeEnum.valuesOf(3));
+        System.err.println(RequestTypeEnum.valuesOf(3));
 
-        System.out.println(RequestTypeEnum.BUYTICKET.getCode());
+        System.err.println(RequestTypeEnum.BUYTICKET.getCode());
 
-        System.out.println(RequestTypeEnum.BUYTICKET.getName());
+        System.err.println(RequestTypeEnum.BUYTICKET.getName());
 
     }
 }

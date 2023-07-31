@@ -12,12 +12,12 @@ public class MultipleEventListener {
 
     @Subscribe
     public void listenerEventA(EventA eventA) {
-        System.out.println("subscribe EventA:" + eventA.getMessage());
+        System.err.println("subscribe EventA:" + eventA.getMessage());
     }
 
     @Subscribe
     public void listenerEventB(EventB eventB) {
-        System.out.println("subscribe EventB:" + eventB.getMessage());
+        System.err.println("subscribe EventB:" + eventB.getMessage());
     }
 
     /**
@@ -27,6 +27,6 @@ public class MultipleEventListener {
      */
     @Subscribe
     public void listenerDeadEvent(DeadEvent deadEvent) {
-        System.out.println("deadEvent:" + deadEvent.getEvent());
+        System.err.println("deadEvent:" + deadEvent.getEvent());
     }
 }

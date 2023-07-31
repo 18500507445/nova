@@ -21,11 +21,11 @@ class StringTable {
         //new StringBuilder.append("a").append("b").toString 这个是在堆内存中
         String s4 = s1 + s2;
 
-        System.out.println(s3 == s4);
+        System.err.println(s3 == s4);
 
         //这里就是直接找常量池中已经存在的"ab"固相等
         String s5 = "a" + "b";
-        System.out.println(s3 == s5);
+        System.err.println(s3 == s5);
 
     }
 }

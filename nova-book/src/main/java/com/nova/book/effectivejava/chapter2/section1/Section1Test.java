@@ -18,7 +18,7 @@ class Section1Test {
     public void demoA() {
         Cat a = new Cat(1, "wzh", "red");
         Cat b = new Cat(1, "wzh", "red");
-        System.out.println(a.equals(b));
+        System.err.println(a.equals(b));
     }
 
     @Test
@@ -28,7 +28,7 @@ class Section1Test {
         b.setId(1);
         b.setName("wzh");
 
-        System.out.println(a.equals(b));
+        System.err.println(a.equals(b));
     }
 
 

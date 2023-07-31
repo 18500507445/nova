@@ -16,7 +16,7 @@ public class WxPay extends Payment {
 
     @Override
     public void transfer() {
-        System.out.println("*** 微信");
+        System.err.println("*** 微信");
         this.payMode.security();
     }
 

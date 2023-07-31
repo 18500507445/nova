@@ -29,7 +29,7 @@ class TwoSum {
     static void main(String[] args) {
         int[] ints = twoSum(nums, target);
         for (int anInt : ints) {
-            System.out.println(anInt);
+            System.err.println(anInt);
         }
 
 //        List<Integer> integers = new ArrayList<>();
@@ -39,7 +39,7 @@ class TwoSum {
 //                integers.add(i + 1);
 //            }
 //        }
-//        System.out.println(JSONObject.toJSONString(integers));
+//        System.err.println(JSONObject.toJSONString(integers));
 
     }
 

@@ -12,6 +12,6 @@ public class JdbcServiceImpl implements JdbcService {
 
     @Override
     public void selectOne() {
-        System.out.println("hello...");
+        System.err.println("hello...");
     }
 }

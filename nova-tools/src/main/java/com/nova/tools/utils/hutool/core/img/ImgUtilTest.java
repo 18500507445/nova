@@ -145,7 +145,7 @@ public class ImgUtilTest {
     public void getMainColor() throws MalformedURLException {
         BufferedImage read = ImgUtil.read(new URL("https://pic2.zhimg.com/v2-94f5552f2b142ff575306850c5bab65d_b.png"));
         String mainColor = ImgUtil.getMainColor(read, new int[]{64, 84, 116});
-        System.out.println(mainColor);
+        System.err.println(mainColor);
     }
 
     @Test

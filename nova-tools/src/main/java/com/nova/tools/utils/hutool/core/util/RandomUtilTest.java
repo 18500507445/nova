@@ -75,7 +75,7 @@ public class RandomUtilTest {
     public void randomStringWithoutStrTest() {
         for (int i = 0; i < 100; i++) {
             final String s = RandomUtil.randomStringWithoutStr(8, "0IPOL");
-            System.out.println(s);
+            System.err.println(s);
             for (char c : "0IPOL".toCharArray()) {
                 Assert.isFalse(s.contains((String.valueOf(c).toLowerCase(Locale.ROOT))));
             }

@@ -20,17 +20,17 @@ class InstantExample {
         // 访问Instant的时间
         long seconds = now.getEpochSecond();
         int nanos = now.getNano();
-        System.out.println("seconds : " + seconds);
-        System.out.println("nanos   : " + nanos);
+        System.err.println("seconds : " + seconds);
+        System.err.println("nanos   : " + nanos);
 
         // 3秒后
         Instant later = now.plusSeconds(3);
         // 3秒前
         Instant earlier = now.minusSeconds(3);
 
-        System.out.println("current : " + now.toString());
-        System.out.println("later   : " + later);
-        System.out.println("earlier : " + earlier);
+        System.err.println("current : " + now.toString());
+        System.err.println("later   : " + later);
+        System.err.println("earlier : " + earlier);
     }
 
 }

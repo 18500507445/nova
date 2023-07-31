@@ -26,7 +26,7 @@ public class ScriptEngineDemo {
 
             Object ret = invokableEngine.invokeFunction("test", (Object) null);
 
-            System.out.println("The result is : " + ret);
+            System.err.println("The result is : " + ret);
         } catch (Exception e) {
             e.printStackTrace();
         }

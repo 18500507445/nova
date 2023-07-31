@@ -22,7 +22,7 @@ public class AppTest {
         // 通知
         eventManager.notify("来了...");
 
-        System.out.println("----------------");
+        System.err.println("----------------");
 
         // 取消短信订阅
         eventManager.unsubscribe(msgEventListener);
@@ -35,9 +35,9 @@ public class AppTest {
         MyObservable observable = new MyObservable();
 
         //注册观察者
-        observable.addObserver((o, arg) -> System.out.println("张三：邮件订阅：" + arg));
-        observable.addObserver((o, arg) -> System.out.println("李四：邮件订阅：" + arg));
-        observable.addObserver((o, arg) -> System.out.println("王五：邮件订阅：" + arg));
+        observable.addObserver((o, arg) -> System.err.println("张三：邮件订阅：" + arg));
+        observable.addObserver((o, arg) -> System.err.println("李四：邮件订阅：" + arg));
+        observable.addObserver((o, arg) -> System.err.println("王五：邮件订阅：" + arg));
         //调整变化
         observable.setChanged();
         //通知

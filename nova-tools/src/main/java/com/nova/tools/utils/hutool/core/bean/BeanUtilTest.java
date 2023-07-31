@@ -353,7 +353,7 @@ public class BeanUtilTest {
                     return s2;
                 }).collect(Collectors.toList());
 
-                System.out.println(listReps);
+                System.err.println(listReps);
             }).start();
         }
 

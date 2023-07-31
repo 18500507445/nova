@@ -38,7 +38,7 @@ class CacheApplicationTest {
         redisService.set(key, "1", 60L);
         Object o = redisService.get(key);
         if (ObjectUtil.isNotNull(o)) {
-            System.out.println(o);
+            System.err.println(o);
         }
     }
 
@@ -97,7 +97,7 @@ class CacheApplicationTest {
 
         List<Object> objects = redisService.getList(key, 0L, -1L);
 
-        System.out.println("objects = " + objects);
+        System.err.println("objects = " + objects);
     }
 
     /**
@@ -121,7 +121,7 @@ class CacheApplicationTest {
         redisService.setZSet(key, "C", 55);
 
         final JSONArray zSet = redisService.getZSet(key, 0L, -1L);
-        System.out.println(zSet);
+        System.err.println(zSet);
     }
 
     /**
@@ -149,7 +149,7 @@ class CacheApplicationTest {
         caffeineCacheUtil.putCache(cacheName, key, "1");
 
         Object cache = caffeineCacheUtil.getCache(cacheName, key);
-        System.out.println("cache = " + cache);
+        System.err.println("cache = " + cache);
     }
 
     /**
@@ -162,7 +162,7 @@ class CacheApplicationTest {
 
         Object cache = memcachedUtil.getData(key);
 
-        System.out.println("cache = " + cache);
+        System.err.println("cache = " + cache);
     }
 
 

@@ -12,13 +12,13 @@ class Section3Test {
     @Test
     public void demoA() {
         Cat.BlackCat blackCat = new Cat.BlackCat();
-        System.out.println("blackCat = " + blackCat);
+        System.err.println("blackCat = " + blackCat);
     }
 
     @Test
     public void demoB() {
         Cat.BlueCat blueCat = new Cat.BlueCat();
-        System.out.println("blueCat = " + blueCat);
+        System.err.println("blueCat = " + blueCat);
     }
 
 

@@ -20,11 +20,11 @@ class EitherDemo {
 
         // -10000
         Either<Integer, Integer> either = func.apply(0);
-        System.out.println(either.mapLeft(l -> l * 100).getLeft());
+        System.err.println(either.mapLeft(l -> l * 100).getLeft());
 
         // 10000
         Either<Integer, Integer> either1 = func.apply(100);
-        System.out.println(either1.map(r -> r * 100).get());
+        System.err.println(either1.map(r -> r * 100).get());
 
     }
 }

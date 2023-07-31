@@ -12,7 +12,7 @@ class AppTest {
         String[] arr = new String[]{"a", "b", "c"};
         ArrayCollection<String> collection = ArrayCollection.of(arr);
         for (Object o : collection) {
-            System.out.println("o = " + o);
+            System.err.println("o = " + o);
         }
 
     }

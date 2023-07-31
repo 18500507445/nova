@@ -62,7 +62,7 @@ class ListExercise {
         copyOnWriteList.add("b");
         copyOnWriteList.add("c");
 
-        System.out.println(JSONUtil.toJsonStr(copyOnWriteList));
+        System.err.println(JSONUtil.toJsonStr(copyOnWriteList));
     }
 
 }

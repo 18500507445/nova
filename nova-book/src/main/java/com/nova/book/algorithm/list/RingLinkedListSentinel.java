@@ -128,7 +128,7 @@ class RingLinkedListSentinelTest {
         for (int i = 1; i <= 4; i++) {
             list.addFirst(i);
         }
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
     /**
@@ -140,7 +140,7 @@ class RingLinkedListSentinelTest {
         for (int i = 1; i <= 4; i++) {
             list.addLast(i);
         }
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
     /**
@@ -156,7 +156,7 @@ class RingLinkedListSentinelTest {
         list.removeFirst();
         list.removeFirst();
         list.removeFirst();
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
     /**
@@ -172,7 +172,7 @@ class RingLinkedListSentinelTest {
         list.removeLast();
         list.removeLast();
         list.removeLast();
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
     /**
@@ -185,7 +185,7 @@ class RingLinkedListSentinelTest {
             list.addLast(i);
         }
         list.removeByValue(4);
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
 }

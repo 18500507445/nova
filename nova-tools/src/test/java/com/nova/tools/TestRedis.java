@@ -28,7 +28,7 @@ public class TestRedis {
     @Test
     public void testRedis() {
         final Object o = redisService.get("234");
-        System.out.println("o = " + o);
+        System.err.println("o = " + o);
     }
 
     /**
@@ -39,7 +39,7 @@ public class TestRedis {
         String key = "redissonLock";
 
         boolean lock = lock(key, 100L);
-        System.out.println("lock = " + lock);
+        System.err.println("lock = " + lock);
 
         release(key);
     }

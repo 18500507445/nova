@@ -12,7 +12,7 @@ class Section2Test {
     @Test
     public void demoA(){
         Cat tom = Cat.builder().id(1).name("tom").build();
-        System.out.println("tom = " + tom);
+        System.err.println("tom = " + tom);
     }
 
 }

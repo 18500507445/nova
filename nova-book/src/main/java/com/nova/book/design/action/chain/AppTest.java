@@ -16,6 +16,6 @@ public class AppTest {
     public void test() throws Exception {
         AbstractHandler abstractHandler = new LevelBHandler().appendNext(new LevelAHandler());
         boolean result = abstractHandler.approve("通过");
-        System.out.println(result);
+        System.err.println(result);
     }
 }

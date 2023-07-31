@@ -59,8 +59,8 @@ class TopicWorldCount {
             });
         }
         pool.shutdown();
-        System.out.println("耗时：" + timer.interval() + " ms");
-        System.out.println(JSONUtil.toJsonStr(hashMap));
+        System.err.println("耗时：" + timer.interval() + " ms");
+        System.err.println(JSONUtil.toJsonStr(hashMap));
     }
 
 }

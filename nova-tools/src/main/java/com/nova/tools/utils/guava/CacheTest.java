@@ -31,7 +31,7 @@ class CacheTest {
                 .build();
         cache.put("a", "a1");
         String value = cache.getIfPresent("a");
-        System.out.println(value);
+        System.err.println(value);
     }
 
     @Test
@@ -44,12 +44,12 @@ class CacheTest {
                     @Override
                     public String load(String key) throws Exception {
                         TimeUnit.SECONDS.sleep(1);
-                        System.out.println(key + " load data");
+                        System.err.println(key + " load data");
                         return key + " add value";
                     }
                 });
-        System.out.println(loadingCache.get("a"));
-        System.out.println(loadingCache.get("b"));
+        System.err.println(loadingCache.get("a"));
+        System.err.println(loadingCache.get("b"));
     }
 
     @Test
@@ -71,9 +71,9 @@ class CacheTest {
         cache.put("b", "2");
         cache.put("c", "3");
 
-        System.out.println(cache.getIfPresent("a"));
-        System.out.println(cache.getIfPresent("b"));
-        System.out.println(cache.getIfPresent("c"));
+        System.err.println(cache.getIfPresent("a"));
+        System.err.println(cache.getIfPresent("b"));
+        System.err.println(cache.getIfPresent("c"));
 
         Cache<String, String> cache1 = CacheBuilder.newBuilder()
                 //最大容量为1M
@@ -90,9 +90,9 @@ class CacheTest {
         cache1.put("y", "2");
         cache1.put("z", "3");
 
-        System.out.println(cache1.getIfPresent("x"));
-        System.out.println(cache1.getIfPresent("y"));
-        System.out.println(cache1.getIfPresent("z"));
+        System.err.println(cache1.getIfPresent("x"));
+        System.err.println(cache1.getIfPresent("y"));
+        System.err.println(cache1.getIfPresent("z"));
 
     }
 
@@ -107,7 +107,7 @@ class CacheTest {
         cache.put("a", "1");
         int i = 1;
         while (true) {
-            System.out.println("第" + i + "秒获取到的数据为：" + cache.getIfPresent("a"));
+            System.err.println("第" + i + "秒获取到的数据为：" + cache.getIfPresent("a"));
             i++;
             TimeUnit.SECONDS.sleep(1);
         }

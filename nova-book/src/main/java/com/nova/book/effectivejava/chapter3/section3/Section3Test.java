@@ -16,7 +16,7 @@ class Section3Test {
     @Test
     public void demoA() {
         Cat cat = new Cat(1);
-        System.out.println("cat = " + cat);
+        System.err.println("cat = " + cat);
     }
 
     @Test
@@ -25,11 +25,11 @@ class Section3Test {
         Cat cat = new Cat(1, map);
 
         Map<String, Object> classMap = cat.getMap();
-        System.out.println("classMap = " + classMap);
+        System.err.println("classMap = " + classMap);
 
         map.put("a", "b");
 
-        System.out.println("classMap = " + classMap);
+        System.err.println("classMap = " + classMap);
 
     }
 
@@ -39,7 +39,7 @@ class Section3Test {
         Map<Integer, Object> initMap = cat.getInitMap();
         initMap.put(1, "a");
 
-        System.out.println("initMap = " + initMap);
+        System.err.println("initMap = " + initMap);
     }
 
     /**
@@ -52,7 +52,7 @@ class Section3Test {
 
         copy[1] = 'm';
 
-        System.out.println("arr = " + Arrays.toString(arr));
+        System.err.println("arr = " + Arrays.toString(arr));
     }
 
 

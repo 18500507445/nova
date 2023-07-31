@@ -157,7 +157,7 @@ class DoublyLinkedListSentinelTest {
         for (int i = 1; i <= 4; i++) {
             list.addFirst(i);
         }
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
     /**
@@ -170,7 +170,7 @@ class DoublyLinkedListSentinelTest {
             list.addLast(i);
         }
         list.insert(4, 4);
-        list.forEach(System.out::println);
+        list.forEach(System.err::println);
     }
 
 }

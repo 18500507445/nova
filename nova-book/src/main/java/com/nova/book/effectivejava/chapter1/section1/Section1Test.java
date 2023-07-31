@@ -15,8 +15,8 @@ class Section1Test {
     public void demoA() {
         for (int i = 1; i <= NUM; i++) {
             Cat singleton = Cat.getSingleton();
-            System.out.println("singleton = " + singleton);
-            System.out.println("hashCode:" + singleton.hashCode());
+            System.err.println("singleton = " + singleton);
+            System.err.println("hashCode:" + singleton.hashCode());
         }
     }
 
@@ -26,8 +26,8 @@ class Section1Test {
             Cat singleton = Cat.getSingleton();
             singleton.setId(i);
             singleton.setName(i + "");
-            System.out.println("singleton = " + singleton);
-            System.out.println("hashCode:" + singleton.hashCode());
+            System.err.println("singleton = " + singleton);
+            System.err.println("hashCode:" + singleton.hashCode());
         }
     }
 
@@ -35,12 +35,12 @@ class Section1Test {
     public void demoC() {
         for (int i = 1; i <= NUM; i++) {
             Cat singleton = Cat.getNotRepeat(i + "");
-            System.out.println("singleton = " + singleton);
-            System.out.println("hashCode:" + singleton.hashCode());
+            System.err.println("singleton = " + singleton);
+            System.err.println("hashCode:" + singleton.hashCode());
         }
 
         Cat singleton = Cat.getNotRepeat("1");
-        System.out.println(singleton);
-        System.out.println("hashCode:" + singleton.hashCode());
+        System.err.println(singleton);
+        System.err.println("hashCode:" + singleton.hashCode());
     }
 }

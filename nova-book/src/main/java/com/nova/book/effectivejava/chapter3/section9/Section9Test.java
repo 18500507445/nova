@@ -28,9 +28,9 @@ class Section9Test {
             }
         };
         CATS.sort(idComparator);
-        CATS.forEach(System.out::println);
+        CATS.forEach(System.err::println);
 
-        System.out.println("-----------------------------");
+        System.err.println("-----------------------------");
 
         Comparator<Cat> ageComparator = new Comparator<Cat>() {
             @Override
@@ -39,7 +39,7 @@ class Section9Test {
             }
         };
         CATS.sort(ageComparator);
-        CATS.forEach(System.out::println);
+        CATS.forEach(System.err::println);
     }
 
     /**
@@ -48,11 +48,11 @@ class Section9Test {
     @Test
     public void demoB() {
         CATS.sort(CatComparator.idComparator());
-        CATS.forEach(System.out::println);
+        CATS.forEach(System.err::println);
 
-        System.out.println("-----------------------------");
+        System.err.println("-----------------------------");
         CATS.sort(CatComparator.ageComparator());
-        CATS.forEach(System.out::println);
+        CATS.forEach(System.err::println);
     }
 
     /**
@@ -61,12 +61,12 @@ class Section9Test {
     @Test
     public void demoC() {
         CATS.sort(Comparator.comparing(Cat::getId));
-        CATS.forEach(System.out::println);
+        CATS.forEach(System.err::println);
 
-        System.out.println("-----------------------------");
+        System.err.println("-----------------------------");
 
         CATS.sort(Comparator.comparing(Cat::getAge));
-        CATS.forEach(System.out::println);
+        CATS.forEach(System.err::println);
     }
 
 

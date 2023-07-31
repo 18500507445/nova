@@ -25,7 +25,7 @@ public class AppTest {
         //放在常量池中
         String newValue = s.intern();
 
-        System.out.println(newValue);
+        System.err.println(newValue);
     }
 
 }

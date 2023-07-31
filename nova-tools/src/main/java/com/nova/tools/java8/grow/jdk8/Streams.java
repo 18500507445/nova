@@ -46,6 +46,6 @@ class Streams {
                 .mapToInt(Task::getPoints)
                 .sum();
 
-        System.out.println("Total points: " + totalPointsOfOpenTasks);
+        System.err.println("Total points: " + totalPointsOfOpenTasks);
     }
 }

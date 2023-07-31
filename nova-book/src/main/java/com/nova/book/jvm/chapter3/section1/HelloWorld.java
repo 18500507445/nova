@@ -8,6 +8,6 @@ package com.nova.book.jvm.chapter3.section1;
 class HelloWorld {
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        System.err.println("Hello World");
     }
 }

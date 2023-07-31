@@ -31,9 +31,9 @@ public class CommonTest {
     @Test
     public void jasyptTest() {
         // 加密
-        System.out.println(stringEncryptor.encrypt("root"));
+        System.err.println(stringEncryptor.encrypt("root"));
         // 解密
-        System.out.println(stringEncryptor.decrypt("4+fSPJL3wq+pZm9IVnD9ssbuH0qW1vky4Kdq0EO5vOe1LdTl1+DpnjrXImMb5ef5"));
+        System.err.println(stringEncryptor.decrypt("4+fSPJL3wq+pZm9IVnD9ssbuH0qW1vky4Kdq0EO5vOe1LdTl1+DpnjrXImMb5ef5"));
     }
 
     @Data
@@ -57,7 +57,7 @@ public class CommonTest {
             skuDTO.setPoolType(1);
             as.add(skuDTO);
         }
-        System.out.println("占用：" + ObjectSizeCalculator.getObjectSize(as) / 1024 / 1024 + "mb");
+        System.err.println("占用：" + ObjectSizeCalculator.getObjectSize(as) / 1024 / 1024 + "mb");
     }
 
     /**

@@ -102,7 +102,7 @@ public class RangeTest {
         Assert.equals(range.next(), DateUtil.parse("2017-01-03"));
         try {
             range.next();
-            System.out.println("已超过边界，下一个元素不应该存在！");
+            System.err.println("已超过边界，下一个元素不应该存在！");
         } catch (NoSuchElementException ignored) {
         }
 
@@ -124,7 +124,7 @@ public class RangeTest {
         Assert.equals(DateUtil.parse("2017-01-04"), range.next());
         try {
             range.next();
-            System.out.println("不包含结束时间情况下，下一个元素不应该存在！");
+            System.err.println("不包含结束时间情况下，下一个元素不应该存在！");
         } catch (NoSuchElementException ignored) {
         }
     }

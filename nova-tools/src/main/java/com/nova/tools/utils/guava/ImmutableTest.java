@@ -16,6 +16,6 @@ class ImmutableTest {
     @Test
     public void createMap() {
         Map<String, Object> silver = ImmutableMap.of("id", 1, "name", "name");
-        System.out.println(JSONUtil.toJsonStr(silver));
+        System.err.println(JSONUtil.toJsonStr(silver));
     }
 }

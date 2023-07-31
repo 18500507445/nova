@@ -58,6 +58,6 @@ class ThreadSafe {
                 e.printStackTrace();
             }
         }, "t2").start();
-        System.out.println(queue);
+        System.err.println(queue);
     }
 }

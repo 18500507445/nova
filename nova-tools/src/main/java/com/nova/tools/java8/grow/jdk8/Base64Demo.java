@@ -20,12 +20,12 @@ class Base64Demo {
         final String encoded = Base64
                 .getEncoder()
                 .encodeToString(text.getBytes(StandardCharsets.UTF_8));
-        System.out.println(encoded);
+        System.err.println(encoded);
 
         final String decoded = new String(
                 Base64.getDecoder().decode(encoded),
                 StandardCharsets.UTF_8);
-        System.out.println(decoded);
+        System.err.println(decoded);
     }
 
 }

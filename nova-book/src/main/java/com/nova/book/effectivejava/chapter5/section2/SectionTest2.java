@@ -11,12 +11,12 @@ class SectionTest2 {
 
     @Test
     public void demoA(){
-        System.out.println(WeekEnum.ONE.ordinal());
+        System.err.println(WeekEnum.ONE.ordinal());
     }
 
     @Test
     public void demoB(){
-        System.out.println(WeekEnum.valuesOf(1));
+        System.err.println(WeekEnum.valuesOf(1));
     }
 
 

@@ -25,10 +25,10 @@ class StringUtilsTest {
         String left = StringUtils.left(str, 3);
         // 8911
         String right = StringUtils.right(str, 4);
-        System.out.println(left + "****" + right);
+        System.err.println(left + "****" + right);
         // rightPad：如果left长度<7,那么就在右边用*填充到7个长度
         String padResult = StringUtils.rightPad(left, 7, '*');
-        System.out.println(padResult + right);
+        System.err.println(padResult + right);
     }
 
     /**
@@ -37,9 +37,9 @@ class StringUtilsTest {
     @Test
     public void test2() {
         String str = "   ";
-        System.out.println(StringUtils.isEmpty(str));
+        System.err.println(StringUtils.isEmpty(str));
         // 反过来
-        System.out.println(StringUtils.isNotEmpty(str));
+        System.err.println(StringUtils.isNotEmpty(str));
     }
 
     /**
@@ -48,9 +48,9 @@ class StringUtilsTest {
     @Test
     public void test1() {
         String str = "   ";
-        System.out.println(StringUtils.isBlank(str));
+        System.err.println(StringUtils.isBlank(str));
         // 反过来
-        System.out.println(StringUtils.isNotBlank(str));
+        System.err.println(StringUtils.isNotBlank(str));
     }
 
     /**
@@ -82,7 +82,7 @@ class StringUtilsTest {
         CharMatcher.javaUpperCase().retainFrom(str);
 
         //组合条件：获取str中的大写字母和数字
-        System.out.println(CharMatcher.javaUpperCase().or(CharMatcher.digit()).retainFrom(str));
+        System.err.println(CharMatcher.javaUpperCase().or(CharMatcher.digit()).retainFrom(str));
 
     }
 }

@@ -31,7 +31,7 @@ class SectionTest2 {
             new Thread(() -> pool.add(x)).start();
         }
         TimeUnit.SECONDS.sleep(4);
-        System.out.println("pool.size() = " + pool.size());
+        System.err.println("pool.size() = " + pool.size());
     }
 
     @Test
@@ -46,8 +46,8 @@ class SectionTest2 {
             }).start();
         }
         Threads.sleep(1500);
-        System.out.println("pool.size() = " + pool.size());
-        System.out.println("耗时 = " + timer.interval());
+        System.err.println("pool.size() = " + pool.size());
+        System.err.println("耗时 = " + timer.interval());
     }
 
     @Test
@@ -62,8 +62,8 @@ class SectionTest2 {
             }).start();
         }
         Threads.sleep(1500);
-        System.out.println("pool.size() = " + pool.size());
-        System.out.println("耗时 = " + timer.interval());
+        System.err.println("pool.size() = " + pool.size());
+        System.err.println("耗时 = " + timer.interval());
     }
 
 

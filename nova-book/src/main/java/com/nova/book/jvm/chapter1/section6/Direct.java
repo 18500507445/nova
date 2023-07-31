@@ -42,7 +42,7 @@ class Direct {
             e.printStackTrace();
         }
         long end = System.nanoTime();
-        System.out.println("directBuffer 用时：" + (end - start) / 1000_000.0);
+        System.err.println("directBuffer 用时：" + (end - start) / 1000_000.0);
     }
 
     private static void io() {
@@ -63,6 +63,6 @@ class Direct {
             e.printStackTrace();
         }
         long end = System.nanoTime();
-        System.out.println("io 用时：" + (end - start) / 1000_000.0);
+        System.err.println("io 用时：" + (end - start) / 1000_000.0);
     }
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.System.out;
+import static java.lang.System.err;
 
 /**
  * @author: wzh
@@ -28,12 +28,12 @@ public class Jdk5Test {
         int[] arr = {1, 4, 5, 7};
 
         for (int i : arr) {
-            System.out.println(i);
+            System.err.println(i);
         }
 
         List<String> names = Arrays.asList("王爵nice", "Gay冰", "A*熊");
         for (String name : names) {
-            System.out.println(name);
+            System.err.println(name);
         }
     }
 

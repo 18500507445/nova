@@ -9,7 +9,7 @@ public class LevelBHandler extends AbstractHandler {
 
     @Override
     public boolean approve(Object param) {
-        System.out.println("二级审核：" + param);
+        System.err.println("二级审核：" + param);
         // 默认都是通过，走下一级审核
         return super.next(param);
     }

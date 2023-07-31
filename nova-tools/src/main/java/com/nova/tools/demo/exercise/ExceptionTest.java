@@ -20,14 +20,14 @@ public class ExceptionTest {
             if (a) {
                 throw new RuntimeException("手动抛异常创建失败");
             } else {
-                System.out.println("程序执行");
+                System.err.println("程序执行");
             }
         } catch (Exception e) {
             StringWriter stringWriter = new StringWriter();
             e.printStackTrace(new PrintWriter(stringWriter));
-            System.out.println(stringWriter);
+            System.err.println(stringWriter);
 
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }

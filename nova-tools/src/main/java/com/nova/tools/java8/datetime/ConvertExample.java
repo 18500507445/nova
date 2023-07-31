@@ -24,7 +24,7 @@ class ConvertExample {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDate.atStartOfDay().atZone(zone).toInstant();
         Date from = Date.from(instant);
-        System.out.println(from);
+        System.err.println(from);
     }
 
     /**
@@ -38,7 +38,7 @@ class ConvertExample {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
         Date from = Date.from(instant);
-        System.out.println(from);
+        System.err.println(from);
     }
 
     /**
@@ -54,7 +54,7 @@ class ConvertExample {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
         Date from = Date.from(instant);
-        System.out.println(from);
+        System.err.println(from);
     }
 
     /**
@@ -69,7 +69,7 @@ class ConvertExample {
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
         LocalDate localDate = localDateTime.toLocalDate();
-        System.out.println(localDate);
+        System.err.println(localDate);
     }
 
     /**
@@ -83,7 +83,7 @@ class ConvertExample {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
-        System.out.println(localDateTime);
+        System.err.println(localDateTime);
     }
 
     /**
@@ -98,7 +98,7 @@ class ConvertExample {
         ZoneId zone = ZoneId.systemDefault();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
         LocalTime localTime = localDateTime.toLocalTime();
-        System.out.println(localTime);
+        System.err.println(localTime);
     }
 
 

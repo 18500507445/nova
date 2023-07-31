@@ -33,7 +33,7 @@ public class NanoIdTest {
             if (ids.contains(id) == false) {
                 ids.add(id);
             } else {
-                System.out.println("Non-unique ID generated: " + id);
+                System.err.println("Non-unique ID generated: " + id);
             }
         }
 

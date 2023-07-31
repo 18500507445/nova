@@ -122,7 +122,7 @@ class CountDownLatchDemo {
                 for (int i = 0; i <= 100; i++) {
                     Threads.sleep(r.nextInt(100));
                     all[x] = Thread.currentThread().getName() + "(" + (i + "%") + ")";
-                    System.out.print("\r" + Arrays.toString(all));
+                    System.err.print("\r" + Arrays.toString(all));
                 }
                 latch.countDown();
             });
@@ -134,9 +134,9 @@ class CountDownLatchDemo {
         }
 
         all[all.length - 1] = "总加载[100%]";
-        System.out.print("\r" + Arrays.toString(all));
+        System.err.print("\r" + Arrays.toString(all));
 
-        System.out.println("\n游戏开始...全军出击！！！");
+        System.err.println("\n游戏开始...全军出击！！！");
 
         service.shutdown();
     }

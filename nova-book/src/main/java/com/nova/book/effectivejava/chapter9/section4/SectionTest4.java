@@ -30,7 +30,7 @@ class SectionTest4 {
         hashMap.computeIfAbsent(2, k -> k * 2);
         hashMap.computeIfAbsent(3, k -> k * 2);
 
-        System.out.println("hashMap = " + JSONUtil.toJsonStr(hashMap));
+        System.err.println("hashMap = " + JSONUtil.toJsonStr(hashMap));
     }
 
     /**
@@ -42,9 +42,9 @@ class SectionTest4 {
         String b = "1";
         String c = new String("1");
 
-        System.out.println(a == b);
-        System.out.println(a == c);
-        System.out.println(a.intern() == c.intern());
+        System.err.println(a == b);
+        System.err.println(a == c);
+        System.err.println(a.intern() == c.intern());
     }
 
     /**
@@ -66,12 +66,12 @@ class SectionTest4 {
                 Threads.sleep(f);
                 total.addAndGet(f);
 
-                System.out.println("运动员：" + Thread.currentThread().getName() + "，成绩为：" + f);
+                System.err.println("运动员：" + Thread.currentThread().getName() + "，成绩为：" + f);
                 cd.countDown();
             });
         }
         cd.await();
-        System.out.println("全部结束，统计成绩，平均成绩为：" + total.get() / s);
+        System.err.println("全部结束，统计成绩，平均成绩为：" + total.get() / s);
         System.exit(0);
     }
 
@@ -92,9 +92,9 @@ class SectionTest4 {
             executor.submit(() -> {
                 try {
                     sp.acquire();
-                    System.out.println(Thread.currentThread().getName() + "，开始执行");
+                    System.err.println(Thread.currentThread().getName() + "，开始执行");
                     Threads.sleep(r.nextInt(2000));
-                    System.out.println(Thread.currentThread().getName() + "，结束执行");
+                    System.err.println(Thread.currentThread().getName() + "，结束执行");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
@@ -104,7 +104,7 @@ class SectionTest4 {
             });
         }
         cd.await();
-        System.out.println("全部结束，退出程序");
+        System.err.println("全部结束，退出程序");
         System.exit(0);
     }
 }

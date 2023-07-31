@@ -19,7 +19,7 @@ class ThreadProblem {
         for (int i = 0; i < 5000; i++) {
             x++;
         }
-        System.out.println("x = " + x);
+        System.err.println("x = " + x);
     }
 
     /**
@@ -31,7 +31,7 @@ class ThreadProblem {
         for (int i = 0; i < 5000; i++) {
             x++;
         }
-        System.out.println("x = " + x);
+        System.err.println("x = " + x);
     }
 
 }

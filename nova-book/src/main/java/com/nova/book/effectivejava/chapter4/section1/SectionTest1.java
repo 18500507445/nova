@@ -27,7 +27,7 @@ class SectionTest1 {
         list.add(2L);
 
         Integer i = (Integer) list.get(1);
-        System.out.println(i);
+        System.err.println(i);
     }
 
 

@@ -9,7 +9,7 @@ package com.nova.tools.leetcode;
 class StringTest {
 
     public static void main(String[] args) {
-        System.out.println(ip4Invalid());
+        System.err.println(ip4Invalid());
     }
 
     /**

@@ -55,8 +55,8 @@ public class MetroHashTest {
         }
         long endMetro = System.currentTimeMillis();
 
-        System.out.println("metroHash =============" + (endMetro - startMetro));
-        System.out.println("cityHash =============" + (endCity - startCity));
+        System.err.println("metroHash =============" + (endMetro - startMetro));
+        System.err.println("cityHash =============" + (endCity - startCity));
     }
 
 
@@ -79,8 +79,8 @@ public class MetroHashTest {
         }
         long endMetro = System.currentTimeMillis();
 
-        System.out.println("metroHash =============" + (endMetro - startMetro));
-        System.out.println("cityHash =============" + (endCity - startCity));
+        System.err.println("metroHash =============" + (endMetro - startMetro));
+        System.err.println("cityHash =============" + (endCity - startCity));
     }
 
 

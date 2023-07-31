@@ -16,7 +16,7 @@ class Cat {
         for (int i = 0; i < 100; i++) {
             NUM++;
         }
-        System.out.println(NUM);
+        System.err.println(NUM);
     }
 
 

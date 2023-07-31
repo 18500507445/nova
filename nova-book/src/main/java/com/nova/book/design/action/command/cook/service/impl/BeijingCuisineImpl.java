@@ -18,7 +18,7 @@ public class BeijingCuisineImpl implements CuisineService {
 
     @Override
     public void cook() {
-        System.out.println("北京菜");
+        System.err.println("北京菜");
         this.cook.doing();
     }
 }

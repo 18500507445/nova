@@ -32,7 +32,7 @@ public class VolatileThread {
             }).start();
         }
         Threads.sleep(1000);
-        System.out.println("count = " + count);
+        System.err.println("count = " + count);
     }
 
     /**
@@ -53,7 +53,7 @@ public class VolatileThread {
             }).start();
         }
         Threads.sleep(1000);
-        System.out.println("sum = " + sum);
+        System.err.println("sum = " + sum);
     }
 
 

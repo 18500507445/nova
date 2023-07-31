@@ -133,9 +133,9 @@ public class SpiderPlan {
             url = String.format(BASE_SEARCH_URL, System.currentTimeMillis()) + URLEncodeUtil.encode(url, Charset.defaultCharset());
             price = okHttp(url, ipObject.getString("ip"), ipObject.getIntValue("port"));
         } catch (Exception e) {
-            System.out.println("e = " + e);
+            System.err.println("e = " + e);
         }
-        System.out.println("耗时：" + timer.interval() + " ms，price：" + price);
+        System.err.println("耗时：" + timer.interval() + " ms，price：" + price);
     }
 
     static class Task implements Runnable {
@@ -223,7 +223,7 @@ public class SpiderPlan {
                     if (StrUtil.isNotBlank(result.get())) {
                         price = result.get();
                         longAdder.increment();
-                        System.out.println("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：" + price + "，次数：" + longAdder.longValue());
+                        System.err.println("time：" + DateUtil.now() + "，耗时：" + timer.interval() + "ms，价格：" + price + "，次数：" + longAdder.longValue());
                         timer.restart();
                         break;
                     }

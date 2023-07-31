@@ -19,12 +19,12 @@ public class AppTest {
         StartState startState = new StartState();
         startState.doAction(context);
 
-        System.out.println(context.getState());
+        System.err.println(context.getState());
 
         StopState stopState = new StopState();
         stopState.doAction(context);
 
-        System.out.println(context.getState());
+        System.err.println(context.getState());
     }
 
     @Test

@@ -32,26 +32,26 @@ class ListDemo {
     @Test
     public void processList() {
         long count = STRINGS.stream().filter(String::isEmpty).count();
-        System.out.println("空字符串数量为: " + count);
+        System.err.println("空字符串数量为: " + count);
 
         count = STRINGS.stream().filter(string -> string.length() == 3).count();
-        System.out.println("字符串长度为 3 的数量为: " + count);
+        System.err.println("字符串长度为 3 的数量为: " + count);
 
         List<String> filtered = STRINGS.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
-        System.out.println("筛选后的列表: " + filtered);
+        System.err.println("筛选后的列表: " + filtered);
 
         String mergedString = STRINGS.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
-        System.out.println("合并字符串: " + mergedString);
+        System.err.println("合并字符串: " + mergedString);
 
         List<Integer> squaresList = NUMBERS.stream().map(i -> i * i).distinct().collect(Collectors.toList());
-        System.out.println("Squares List: " + squaresList);
+        System.err.println("Squares List: " + squaresList);
 
         SecureRandom random = new SecureRandom();
-        random.ints().limit(10).sorted().forEach(System.out::println);
+        random.ints().limit(10).sorted().forEach(System.err::println);
 
         // 并行处理
         count = STRINGS.parallelStream().filter(String::isEmpty).count();
-        System.out.println("空字符串的数量为: " + count);
+        System.err.println("空字符串的数量为: " + count);
     }
 
     /**
@@ -70,8 +70,8 @@ class ListDemo {
             peopleNew.setDescription(people.getDescription());
             peopleListNew.add(peopleNew);
         });
-        peopleListNew.forEach(System.out::println);
-        System.out.println(JSONUtil.toJsonStr(peopleListNew));
+        peopleListNew.forEach(System.err::println);
+        System.err.println(JSONUtil.toJsonStr(peopleListNew));
 
     }
 
@@ -82,10 +82,10 @@ class ListDemo {
     @Test
     public void statisticsList() {
         IntSummaryStatistics stats = PEOPLE_LIST.stream().mapToInt(People::getAge).summaryStatistics();
-        System.out.println("max : " + stats.getMax());
-        System.out.println("min : " + stats.getMin());
-        System.out.println("sum : " + stats.getSum());
-        System.out.println("avg : " + stats.getAverage());
+        System.err.println("max : " + stats.getMax());
+        System.err.println("min : " + stats.getMin());
+        System.err.println("sum : " + stats.getSum());
+        System.err.println("avg : " + stats.getAverage());
     }
 
     /**
@@ -98,8 +98,8 @@ class ListDemo {
         //升序
         List<People> ascList = PEOPLE_LIST.stream().sorted(Comparator.comparing(People::getAge)).collect(Collectors.toList());
 
-        System.out.println(JSONUtil.toJsonStr(descList));
-        System.out.println(JSONUtil.toJsonStr(ascList));
+        System.err.println(JSONUtil.toJsonStr(descList));
+        System.err.println(JSONUtil.toJsonStr(ascList));
 
         //todo 排序方式 二 (正序)
         PEOPLE_LIST.sort(Comparator.comparing(People::getAge));
@@ -116,7 +116,7 @@ class ListDemo {
     @Test
     public void listGrouping() {
         Map<Integer, List<People>> peopleMap = PEOPLE_LIST.stream().collect(Collectors.groupingBy(People::getGroupId));
-        System.out.println(JSONUtil.toJsonStr(peopleMap));
+        System.err.println(JSONUtil.toJsonStr(peopleMap));
     }
 
 
@@ -131,15 +131,15 @@ class ListDemo {
         }
         //方式1
         String nameStr1 = String.join(",", nameList);
-        System.out.println(JSONUtil.toJsonStr(nameStr1));
+        System.err.println(JSONUtil.toJsonStr(nameStr1));
 
         //方式2
         String nameStr2 = StringUtils.join(nameList, ",");
-        System.out.println(JSONUtil.toJsonStr(nameStr2));
+        System.err.println(JSONUtil.toJsonStr(nameStr2));
 
         //方式3
         String collect = PEOPLE_LIST.stream().map(People::getName).collect(joining(","));
-        System.out.println(JSONUtil.toJsonStr(collect));
+        System.err.println(JSONUtil.toJsonStr(collect));
     }
 
 
@@ -150,7 +150,7 @@ class ListDemo {
     public void listFilter() {
         //过滤掉二组
         List<People> filterList = PEOPLE_LIST.stream().filter(people -> "一组".equals(people.getGroupName())).collect(Collectors.toList());
-        System.out.println(JSONUtil.toJsonStr(filterList));
+        System.err.println(JSONUtil.toJsonStr(filterList));
     }
 
     /**
@@ -159,7 +159,7 @@ class ListDemo {
     @Test
     public void listToMap() {
         Map<String, Integer> collect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge));
-        System.out.println(JSONUtil.toJsonStr(collect));
+        System.err.println(JSONUtil.toJsonStr(collect));
 
     }
 
@@ -169,7 +169,7 @@ class ListDemo {
     @Test
     public void listToObject() {
         List<Object> collect = PEOPLE_LIST.stream().map(People::getAge).collect(toList());
-        System.out.println(JSONUtil.toJsonStr(collect));
+        System.err.println(JSONUtil.toJsonStr(collect));
     }
 
     /**
@@ -178,7 +178,7 @@ class ListDemo {
     @Test
     public void listLimit() {
         List<People> collect = PEOPLE_LIST.stream().limit(2).collect(toList());
-        System.out.println(JSONUtil.toJsonStr(collect));
+        System.err.println(JSONUtil.toJsonStr(collect));
     }
 
     /**
@@ -187,7 +187,7 @@ class ListDemo {
     @Test
     public void listReduce() {
         BigDecimal total = PEOPLE_LIST.stream().map(People::getFee).reduce(BigDecimal.ZERO, BigDecimal::add);
-        System.out.println("bigDecimal-add:" + total);
+        System.err.println("bigDecimal-add:" + total);
     }
 
     /**
@@ -197,39 +197,39 @@ class ListDemo {
     public void calculation() {
         //方式一 属性bigDecimal
         BigDecimal maxBigDecimal = PEOPLE_LIST.stream().map(People::getFee).max(BigDecimal::compareTo).get();
-        System.out.println("statistics--maxBigDecimal:" + maxBigDecimal);
+        System.err.println("statistics--maxBigDecimal:" + maxBigDecimal);
 
 
         //属性double
         double doubleFee = PEOPLE_LIST.stream().mapToDouble(People::getDoubleFee).sum();
-        System.out.println("statistics--doubleFee:" + doubleFee);
+        System.err.println("statistics--doubleFee:" + doubleFee);
 
 
         //方式二
         IntSummaryStatistics statistics = PEOPLE_LIST.stream().collect(summarizingInt(People::getAge));
-        System.out.println("statistics--sum:" + statistics.getSum());
-        System.out.println("statistics--max:" + statistics.getMax());
-        System.out.println("statistics--min:" + statistics.getMin());
-        System.out.println("statistics--avg:" + statistics.getAverage());
+        System.err.println("statistics--sum:" + statistics.getSum());
+        System.err.println("statistics--max:" + statistics.getMax());
+        System.err.println("statistics--min:" + statistics.getMin());
+        System.err.println("statistics--avg:" + statistics.getAverage());
 
         Double doubleAvg = PEOPLE_LIST.stream().collect(averagingInt(People::getAge));
-        System.out.println("doubleAvg:" + doubleAvg);
+        System.err.println("doubleAvg:" + doubleAvg);
 
         //方式三
         int sum = PEOPLE_LIST.stream().mapToInt(People::getAge).sum();
         int max = PEOPLE_LIST.stream().mapToInt(People::getAge).max().getAsInt();
         int min = PEOPLE_LIST.stream().mapToInt(People::getAge).min().getAsInt();
         double asDouble = PEOPLE_LIST.stream().mapToInt(People::getAge).average().getAsDouble();
-        System.out.println("sum:" + sum);
-        System.out.println("max:" + max);
-        System.out.println("min:" + min);
-        System.out.println("asDouble:" + asDouble);
+        System.err.println("sum:" + sum);
+        System.err.println("max:" + max);
+        System.err.println("min:" + min);
+        System.err.println("asDouble:" + asDouble);
 
         //方式四 找出最大、最小的对象
         People maxData = PEOPLE_LIST.stream().max(Comparator.comparing(People::getAge)).get();
         People minData = PEOPLE_LIST.stream().min(Comparator.comparing(People::getAge)).get();
-        System.out.println("maxData:" + JSONUtil.toJsonStr(maxData));
-        System.out.println("minData:" + JSONUtil.toJsonStr(minData));
+        System.err.println("maxData:" + JSONUtil.toJsonStr(maxData));
+        System.err.println("minData:" + JSONUtil.toJsonStr(minData));
 
     }
 
@@ -239,7 +239,7 @@ class ListDemo {
     @Test
     public void listDistinct() {
         List<String> distinct = PEOPLE_LIST.stream().map(People::getName).distinct().collect(toList());
-        System.out.println("distinct:" + JSONUtil.toJsonStr(distinct));
+        System.err.println("distinct:" + JSONUtil.toJsonStr(distinct));
     }
 
 
@@ -250,11 +250,11 @@ class ListDemo {
     public void listMatch() {
         //所有人年龄是否都大于14岁
         boolean allResult = PEOPLE_LIST.stream().allMatch(i -> i.getAge().compareTo(14) > 0);
-        System.out.println("allResult:" + allResult);
+        System.err.println("allResult:" + allResult);
 
         //是否有大于14岁
         boolean oneResult = PEOPLE_LIST.stream().allMatch(i -> i.getAge().compareTo(14) > 0);
-        System.out.println("oneResult:" + oneResult);
+        System.err.println("oneResult:" + oneResult);
     }
 
 
@@ -264,11 +264,11 @@ class ListDemo {
     @Test
     public void listFind() {
         People first = PEOPLE_LIST.stream().findFirst().get();
-        System.out.println("findFirst:" + JSONUtil.toJsonStr(first));
+        System.err.println("findFirst:" + JSONUtil.toJsonStr(first));
 
         //并行的情况，那就不能确保是第一个，串行时数据较少findAny()是为了更高效
         People any = PEOPLE_LIST.stream().findAny().get();
-        System.out.println("findAny:" + JSONUtil.toJsonStr(any));
+        System.err.println("findAny:" + JSONUtil.toJsonStr(any));
     }
 
     /**
@@ -281,11 +281,11 @@ class ListDemo {
         int sum1 = list.stream().reduce(5, Integer::sum);
         // 并行流
         int sum2 = list.parallelStream().reduce(5, Integer::sum);
-        System.out.println("串行流执行结果：" + sum1);
-        System.out.println("并行流执行结果：" + sum2);
+        System.err.println("串行流执行结果：" + sum1);
+        System.err.println("并行流执行结果：" + sum2);
 
         int sum3 = list.parallelStream().reduce(0, Integer::sum) + 5;
-        System.out.println("并行流之外加5执行结果：" + sum3);
+        System.err.println("并行流之外加5执行结果：" + sum3);
     }
 
 

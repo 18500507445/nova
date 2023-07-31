@@ -13,16 +13,16 @@ import java.util.concurrent.TimeUnit;
 class FutureDemo {
 
     public static void main(String[] args) {
-        System.out.println("当前线程名称：" + Thread.currentThread().getName());
+        System.err.println("当前线程名称：" + Thread.currentThread().getName());
         Integer result = Future.of(() -> {
-                    System.out.println("future线程名称：" + Thread.currentThread().getName());
+                    System.err.println("future线程名称：" + Thread.currentThread().getName());
                     Thread.sleep(2000);
                     return 100;
                 })
                 .map(i -> i * 10)
                 .await(3000, TimeUnit.MILLISECONDS)
                 .get();
-        System.out.println(result);
+        System.err.println(result);
         // 当前线程名称：main
         // future线程名称：ForkJoinPool.commonPool-worker-3
         // 过三秒输出，1000

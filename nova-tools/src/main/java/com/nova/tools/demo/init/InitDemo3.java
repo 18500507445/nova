@@ -11,6 +11,6 @@ class InitDemo3 implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("[实现CommandLineRunner] 初始化");
+        System.err.println("[实现CommandLineRunner] 初始化");
     }
 }

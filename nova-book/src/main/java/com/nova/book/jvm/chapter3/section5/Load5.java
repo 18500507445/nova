@@ -8,16 +8,16 @@ package com.nova.book.jvm.chapter3.section5;
 public class Load5 {
 
     public static void main(String[] args) throws ClassNotFoundException {
-        System.out.println(Load5.class.getClassLoader());
+        System.err.println(Load5.class.getClassLoader());
         Class<?> aClass = Load5.class.getClassLoader().loadClass("com.nova.book.jvm.chapter3.section5.G");
-        System.out.println(aClass.getClassLoader());
+        System.err.println(aClass.getClassLoader());
     }
 }
 
 class G {
 
     static {
-        System.out.println("Classpath G init");
+        System.err.println("Classpath G init");
     }
 }
 

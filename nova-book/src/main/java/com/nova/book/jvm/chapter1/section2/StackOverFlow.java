@@ -22,7 +22,7 @@ class StackOverFlow {
             m1();
         } catch (Throwable e) {
             e.printStackTrace();
-            System.out.println("count = " + count);
+            System.err.println("count = " + count);
         }
     }
 

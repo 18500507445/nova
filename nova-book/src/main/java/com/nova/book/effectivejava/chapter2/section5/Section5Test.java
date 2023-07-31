@@ -24,7 +24,7 @@ class Section5Test {
     public void demoA() {
         cats.sort(Cat::compareTo);
 
-        System.out.println(JSONUtil.toJsonStr(cats));
+        System.err.println(JSONUtil.toJsonStr(cats));
     }
 
     /**
@@ -34,7 +34,7 @@ class Section5Test {
     public void demoB() {
         cats.sort(Comparator.comparingInt(Cat::getId));
 
-        System.out.println(JSONUtil.toJsonStr(cats));
+        System.err.println(JSONUtil.toJsonStr(cats));
     }
 
 

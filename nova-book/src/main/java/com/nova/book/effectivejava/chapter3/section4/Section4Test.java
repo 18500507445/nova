@@ -23,8 +23,8 @@ class Section4Test {
         c.add(2);
         c.addAll(Arrays.asList(4, 5, 6));
 
-        System.out.println("b.addCount() = " + b.addCount());
-        System.out.println("c.addCount() = " + c.addCount());
+        System.err.println("b.addCount() = " + b.addCount());
+        System.err.println("c.addCount() = " + c.addCount());
 
 
     }

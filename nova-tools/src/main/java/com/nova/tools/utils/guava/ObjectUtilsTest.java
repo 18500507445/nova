@@ -17,7 +17,7 @@ class ObjectUtilsTest {
     @Test
     public void test2() {
         // java.lang.String@7d6f77cc
-        System.out.println(ObjectUtils.identityToString("abc"));
+        System.err.println(ObjectUtils.identityToString("abc"));
     }
 
     /**
@@ -28,6 +28,6 @@ class ObjectUtilsTest {
         String str1 = null;
         String str2 = null;
         String str3 = "str233";
-        System.out.println(ObjectUtils.firstNonNull(str1, str2, str3));
+        System.err.println(ObjectUtils.firstNonNull(str1, str2, str3));
     }
 }

@@ -50,7 +50,7 @@ public class UploadTest {
         paramMap.put("city", "北京");
         paramMap.put("file", file);
         String result = HttpUtil.post("http://wthrcdn.etouch.cn/weather_mini", paramMap);
-        System.out.println(result);
+        System.err.println(result);
     }
 
     @Test

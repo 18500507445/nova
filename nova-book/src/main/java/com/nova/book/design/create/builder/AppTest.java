@@ -16,7 +16,7 @@ public class AppTest {
                 .id(1L)
                 .nickname("小明")
                 .build();
-        System.out.println(user);
+        System.err.println(user);
     }
 
 }

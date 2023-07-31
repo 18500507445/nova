@@ -22,7 +22,7 @@ class QueueExercise {
         blockingQueue.add(3);
 
         final Integer peek = blockingQueue.peek();
-        System.out.println("peek = " + peek);
+        System.err.println("peek = " + peek);
     }
 
     /**
@@ -36,7 +36,7 @@ class QueueExercise {
         linkedBlockingQueue.add(3);
 
         final Integer peek = linkedBlockingQueue.peek();
-        System.out.println("peek = " + peek);
+        System.err.println("peek = " + peek);
     }
 
     /**
@@ -51,7 +51,7 @@ class QueueExercise {
         blockingQueue.add(1);
 
         final Integer peek = blockingQueue.peek();
-        System.out.println("peek = " + peek);
+        System.err.println("peek = " + peek);
     }
 
     /**

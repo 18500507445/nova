@@ -72,9 +72,9 @@ class Customer implements Runnable {
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
             SecureRandom random = new SecureRandom();
             washbasin.acquire();
-            System.out.println(sdf.format(new Date()) + " " + name + " 开始洗手...");
+            System.err.println(sdf.format(new Date()) + " " + name + " 开始洗手...");
             Thread.sleep((long) (random.nextDouble() * 5000) + 2000);
-            System.out.println(sdf.format(new Date()) + " " + name + " 洗手完毕!");
+            System.err.println(sdf.format(new Date()) + " " + name + " 洗手完毕!");
             washbasin.release();
         } catch (Exception e) {
             e.printStackTrace();

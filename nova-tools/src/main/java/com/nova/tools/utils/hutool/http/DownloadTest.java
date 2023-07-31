@@ -43,7 +43,7 @@ public class DownloadTest {
     @Ignore
     public void downloadTest1() {
         final long size = HttpUtil.downloadFile("http://explorer.bbfriend.com/crossdomain.xml", "e:/temp/");
-        System.out.println("Download size: " + size);
+        System.err.println("Download size: " + size);
     }
 
     @Test
@@ -89,17 +89,17 @@ public class DownloadTest {
             file = HttpUtil.downloadFileFromUrl("https://repo1.maven.org/maven2/cn/hutool/hutool-all/5.4.0/hutool-all-5.4.0-sources.jar", FileUtil.file("d:/download/temp"), 1, new StreamProgress() {
                 @Override
                 public void start() {
-                    System.out.println("start");
+                    System.err.println("start");
                 }
 
                 @Override
                 public void progress(final long contentLength, final long progressSize) {
-                    System.out.println("download size:" + progressSize);
+                    System.err.println("download size:" + progressSize);
                 }
 
                 @Override
                 public void finish() {
-                    System.out.println("end");
+                    System.err.println("end");
                 }
             });
 
@@ -123,17 +123,17 @@ public class DownloadTest {
             file = HttpUtil.downloadFileFromUrl("https://repo1.maven.org/maven2/cn/hutool/hutool-all/5.4.0/hutool-all-5.4.0-sources.jar", FileUtil.file("d:/download/temp"), new StreamProgress() {
                 @Override
                 public void start() {
-                    System.out.println("start");
+                    System.err.println("start");
                 }
 
                 @Override
                 public void progress(final long contentLength, final long progressSize) {
-                    System.out.println("contentLength:" + contentLength + "download size:" + progressSize);
+                    System.err.println("contentLength:" + contentLength + "download size:" + progressSize);
                 }
 
                 @Override
                 public void finish() {
-                    System.out.println("end");
+                    System.err.println("end");
                 }
             });
 

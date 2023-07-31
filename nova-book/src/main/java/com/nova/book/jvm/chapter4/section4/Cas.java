@@ -32,6 +32,6 @@ public class Cas {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println(i);
+        System.err.println(i);
     }
 }

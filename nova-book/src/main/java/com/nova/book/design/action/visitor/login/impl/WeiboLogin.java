@@ -12,6 +12,6 @@ import com.nova.book.design.action.visitor.login.Visitor;
 public class WeiboLogin implements Login {
     @Override
     public void accept(Visitor visitor) {
-        System.out.println(visitor.getClass().getSimpleName() + "-微博登录");
+        System.err.println(visitor.getClass().getSimpleName() + "-微博登录");
     }
 }

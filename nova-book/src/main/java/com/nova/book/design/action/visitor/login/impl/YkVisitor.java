@@ -11,13 +11,13 @@ import com.nova.book.design.action.visitor.login.Visitor;
 public class YkVisitor implements Visitor {
     @Override
     public void visit(Login login) {
-        System.out.println("优酷访问者");
+        System.err.println("优酷访问者");
         login.accept(this);
     }
 
 //    @Override
 //    public void visitYk(Login login) {
-//        System.out.println("优酷访问者");
+//        System.err.println("优酷访问者");
 //        login.accept(this);
 //    }
 }

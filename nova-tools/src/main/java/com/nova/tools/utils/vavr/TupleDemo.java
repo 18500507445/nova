@@ -15,7 +15,7 @@ class TupleDemo {
     public static void main(String[] args) {
         String key = JAVA8._1;
         Integer value = JAVA8._2;
-        System.out.println("key:" + key + ",value:" + value);
+        System.err.println("key:" + key + ",value:" + value);
 
         /**
          * 这里有两种方式
@@ -33,7 +33,7 @@ class TupleDemo {
 
         String that = JAVA8.apply(
                 (s, i) -> s.substring(2) + "vr " + i / 8);
-        System.out.println(that);
+        System.err.println(that);
 
     }
 }

@@ -13,7 +13,7 @@ class Section3Test {
     public void demoA(){
         Cat instance1 = Cat.INSTANCE;
         Cat instance2 = Cat.INSTANCE;
-        System.out.println(instance2 == instance1);
+        System.err.println(instance2 == instance1);
     }
 
 }

@@ -22,8 +22,8 @@ class HttpServerAPI {
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange he) throws IOException {
-            System.out.println("Request " + count++);
-            System.out.println(he.getHttpContext().getPath());
+            System.err.println("Request " + count++);
+            System.err.println(he.getHttpContext().getPath());
 
             InputStream is = he.getRequestBody();
             String response = "<font color='red'>Lets Learn Java8.</font>";
@@ -41,8 +41,8 @@ class HttpServerAPI {
             hs.createContext("/java", new MyHandler());
             hs.setExecutor(null);
             hs.start();
-            System.out.println("---begin---");
-            System.out.println("Listening on " + hs.getAddress());
+            System.err.println("---begin---");
+            System.err.println("Listening on " + hs.getAddress());
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

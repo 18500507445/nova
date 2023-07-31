@@ -13,7 +13,7 @@ class Section2Test {
     public void demoA(){
         Cat cat = new Cat();
         String name = cat.getName();
-        System.out.println("name = " + name);
+        System.err.println("name = " + name);
         cat.setName(null);
 
     }

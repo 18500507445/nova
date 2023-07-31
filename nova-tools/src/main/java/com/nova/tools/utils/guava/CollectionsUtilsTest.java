@@ -27,13 +27,13 @@ class CollectionsUtilsTest {
         list2.add("1");
         list2.add("2");
         // 取交集 ,c
-        System.out.println(CollectionUtils.intersection(list1, list2));
+        System.err.println(CollectionUtils.intersection(list1, list2));
         // 并集, a,b,c,1,2
-        System.out.println(CollectionUtils.union(list1, list2));
+        System.err.println(CollectionUtils.union(list1, list2));
         // 差集,a,b
-        System.out.println(CollectionUtils.subtract(list1, list2));
+        System.err.println(CollectionUtils.subtract(list1, list2));
         // 1,2
-        System.out.println(CollectionUtils.subtract(list2, list1));
+        System.err.println(CollectionUtils.subtract(list2, list1));
     }
 
     /**
@@ -43,8 +43,8 @@ class CollectionsUtilsTest {
     public void test1() {
         List<String> list = new ArrayList<>();
         // true
-        System.out.println(CollectionUtils.isEmpty(list));
+        System.err.println(CollectionUtils.isEmpty(list));
         // 反过来
-        System.out.println(CollectionUtils.isNotEmpty(list));
+        System.err.println(CollectionUtils.isNotEmpty(list));
     }
 }

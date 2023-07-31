@@ -19,7 +19,7 @@ class SectionTest2 {
         Cat cat1 = new Cat(new Date());
         Date date = cat1.getDate();
         date.setTime(System.currentTimeMillis());
-        System.out.println("cat1 = " + cat1);
+        System.err.println("cat1 = " + cat1);
     }
 
 }

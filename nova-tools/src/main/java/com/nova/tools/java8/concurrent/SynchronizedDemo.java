@@ -46,7 +46,7 @@ class SynchronizedDemo {
 
         Threads.stop(executor);
 
-        System.out.println("Sync: " + count);
+        System.err.println("Sync: " + count);
     }
 
     /**
@@ -60,7 +60,7 @@ class SynchronizedDemo {
 
         Threads.stop(executor);
 
-        System.out.println("NonSync: " + count);
+        System.err.println("NonSync: " + count);
     }
 
     /**
@@ -74,7 +74,7 @@ class SynchronizedDemo {
 
         Threads.stop(executor);
 
-        System.out.println(count);
+        System.err.println(count);
     }
 
 

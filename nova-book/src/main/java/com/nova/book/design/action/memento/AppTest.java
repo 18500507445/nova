@@ -22,12 +22,12 @@ public class AppTest {
         careTaker.add(originator.saveStateToMemento());
 
         originator.setState("#3");
-        System.out.println("当前: " + originator.getState());
+        System.err.println("当前: " + originator.getState());
 
         originator.getStateFromMemento(careTaker.get(0));
-        System.out.println("第1个保存的状态: " + originator.getState());
+        System.err.println("第1个保存的状态: " + originator.getState());
         originator.getStateFromMemento(careTaker.get(1));
-        System.out.println("第2个保存的状态: " + originator.getState());
+        System.err.println("第2个保存的状态: " + originator.getState());
     }
 
 }

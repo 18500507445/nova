@@ -55,6 +55,6 @@ class MapDemo {
             groupList.add(groupPeople);
         }
 
-        System.out.println(JSONObject.toJSONString(groupList));
+        System.err.println(JSONObject.toJSONString(groupList));
     }
 }

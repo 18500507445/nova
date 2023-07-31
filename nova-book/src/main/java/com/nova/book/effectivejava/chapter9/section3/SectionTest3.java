@@ -46,7 +46,7 @@ class SectionTest3 {
      */
     @Test
     public void demoC() {
-        System.out.println(Integer.MAX_VALUE);
+        System.err.println(Integer.MAX_VALUE);
         ExecutorService executorService = Executors.newCachedThreadPool();
     }
 

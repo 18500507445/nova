@@ -24,11 +24,11 @@ class Section4Test {
     public void demoB() throws CloneNotSupportedException {
         Cat cat1 = new Cat();
         cat1.setName("one");
-        System.out.println(cat1);
+        System.err.println(cat1);
 
         Cat cat2 = cat1.clone();
         cat2.setName("two");
-        System.out.println(cat2);
+        System.err.println(cat2);
     }
 
 

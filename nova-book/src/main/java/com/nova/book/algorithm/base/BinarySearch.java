@@ -167,13 +167,13 @@ class BinarySearch {
     @Test
     public void demoD() {
         int index = binarySearchJava(ARR, 18);
-        System.out.println("index = " + index);
+        System.err.println("index = " + index);
     }
 
     @Test
     public void demoE() {
         int index = binarySearchLeftmost(MOST_ARR, 5);
-        System.out.println("index = " + index);
+        System.err.println("index = " + index);
     }
 
 

@@ -27,14 +27,14 @@ class MapExercise {
         for (int i = 0; i < aHundredMillion; i++) {
             map1.put(i, i);
         }
-        System.out.println("未初始化容量，耗时 ： " + timer.interval() + " ms");
+        System.err.println("未初始化容量，耗时 ： " + timer.interval() + " ms");
         timer.restart();
 
         Map<Integer, Integer> map2 = new HashMap<>(aHundredMillion);
         for (int i = 0; i < aHundredMillion; i++) {
             map2.put(i, i);
         }
-        System.out.println("初始化容量为10000000，耗时 ： " + timer.interval() + " ms");
+        System.err.println("初始化容量为10000000，耗时 ： " + timer.interval() + " ms");
     }
 
     /**
@@ -52,27 +52,27 @@ class MapExercise {
         map.put("2", "b");
 
         //第一种：普遍使用，二次取值
-        System.out.println("通过Map.keySet遍历key和value：");
+        System.err.println("通过Map.keySet遍历key和value：");
         for (String key : map.keySet()) {
-            System.out.println("key= " + key + " and value= " + map.get(key));
+            System.err.println("key= " + key + " and value= " + map.get(key));
         }
 
         //第二种
-        System.out.println("通过Map.entrySet使用iterator遍历key和value：");
+        System.err.println("通过Map.entrySet使用iterator遍历key和value：");
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+            System.err.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
 
         //第三种：推荐，尤其是容量大时
-        System.out.println("通过Map.entrySet遍历key和value");
+        System.err.println("通过Map.entrySet遍历key和value");
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+            System.err.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
 
         //第四种
-        System.out.println("通过Map.values()遍历所有的value，但不能遍历key");
+        System.err.println("通过Map.values()遍历所有的value，但不能遍历key");
         for (String v : map.values()) {
-            System.out.println("value= " + v);
+            System.err.println("value= " + v);
         }
     }
 
@@ -87,16 +87,16 @@ class MapExercise {
         map.put("3", "b");
         map.put("2", "c");
 
-        System.out.println("通过Map.entrySet遍历key和value");
+        System.err.println("通过Map.entrySet遍历key和value");
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+            System.err.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
 
-        System.out.println("treeMap降序排列,+降序，-正序");
+        System.err.println("treeMap降序排列,+降序，-正序");
         Map<String, String> mapNew = new TreeMap<>((o1, o2) -> +o2.compareTo(o1));
         mapNew.putAll(map);
         for (Map.Entry<String, String> entry : mapNew.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+            System.err.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
     }
 
@@ -111,7 +111,7 @@ class MapExercise {
         linkedHashMap.put("3", "c");
         linkedHashMap.put("2", "b");
         for (Map.Entry<String, String> entry : linkedHashMap.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+            System.err.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
     }
 
@@ -138,7 +138,7 @@ class MapExercise {
         hashTable.put("2", "b");
         hashTable.put("3", "c");
         for (Map.Entry<String, String> entry : hashTable.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+            System.err.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
     }
 }

@@ -52,15 +52,15 @@ class LombokTest {
         demoA.setName("123");
 
         String name = demoA.getName();
-        System.out.println("name = " + name);
+        System.err.println("name = " + name);
 
-        System.out.println("toString：" + demoA);
+        System.err.println("toString：" + demoA);
 
-        System.out.println("hashCode：" + demoA.hashCode());
+        System.err.println("hashCode：" + demoA.hashCode());
 
-        System.out.println("equals：" + demoA.equals(new DemoA()));
+        System.err.println("equals：" + demoA.equals(new DemoA()));
 
-        System.out.println("canEqual：" + demoA.canEqual(new DemoA()));
+        System.err.println("canEqual：" + demoA.canEqual(new DemoA()));
     }
 
     /**
@@ -84,7 +84,7 @@ class LombokTest {
     @Test
     public void demoB() {
         DemoB demoB = new DemoB().setAge(1).setName("wzh").setRemark("ok");
-        System.out.println("demoB = " + demoB.toString());
+        System.err.println("demoB = " + demoB.toString());
     }
 
     /**
@@ -93,7 +93,7 @@ class LombokTest {
     @Test
     public void demoC() {
         DemoC demoC = DemoC.builder().name("wzh").build();
-        System.out.println("demoC = " + demoC);
+        System.err.println("demoC = " + demoC);
     }
 
 

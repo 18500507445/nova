@@ -45,8 +45,8 @@ public class AppTest {
         OrderCal orderCal = new OrderCal(productList);
 
         // 输出商品信息
-        productList.forEach(e -> System.out.println(String.format("*** [%s  %sx%s]", e.getName(), e.getPrice(), e.getNum())));
-        System.out.println("总金额: " + orderCal.price());
+        productList.forEach(e -> System.err.println(String.format("*** [%s  %sx%s]", e.getName(), e.getPrice(), e.getNum())));
+        System.err.println("总金额: " + orderCal.price());
 
         // 一张折扣券（9折） & 一张满减券（满100减10）  -- 真实业务中，这里使用的优惠券是前端提交的，即动态数据 那么如何做到动态计算呢？？？
         FullDiscountCouponCalDecorator decorator = new FullDiscountCouponCalDecorator(

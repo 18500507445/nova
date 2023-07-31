@@ -36,7 +36,7 @@ class BitMapBloomFilterTest {
 
 
         for (int i = 0; i < 32; i++) {
-            System.out.println(i + "是否存在-->" + intMap.contains(i));
+            System.err.println(i + "是否存在-->" + intMap.contains(i));
         }
     }
 
@@ -52,7 +52,7 @@ class BitMapBloomFilterTest {
 
 
         for (int i = 0; i < 64; i++) {
-            System.out.println(i + "是否存在-->" + longMap.contains(i));
+            System.err.println(i + "是否存在-->" + longMap.contains(i));
         }
     }
 }

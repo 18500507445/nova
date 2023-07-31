@@ -19,11 +19,11 @@ class ArrayUtilsTest {
         int[] ints = new int[1];
         ints[0] = 3;
         // toString打印数组内容
-        System.out.println(ArrayUtils.toString(ints));
+        System.err.println(ArrayUtils.toString(ints));
         // add会自动帮你创建新的数组
         int[] newArr = ArrayUtils.add(ints, 7);
-        System.out.println(ArrayUtils.toString(ints));
-        System.out.println(ArrayUtils.toString(newArr));
+        System.err.println(ArrayUtils.toString(ints));
+        System.err.println(ArrayUtils.toString(newArr));
 
     }
 
@@ -34,6 +34,6 @@ class ArrayUtilsTest {
     public void test1() {
         Integer[] ints = new Integer[0];
         ints = null;
-        System.out.println(ArrayUtils.isEmpty(ints));
+        System.err.println(ArrayUtils.isEmpty(ints));
     }
 }

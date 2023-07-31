@@ -22,7 +22,7 @@ public class AppTest {
         context.add(b, 8);
         context.add(c, 2);
         int result = new MinusOperation(new PlusOperation(a, b), c).interpreter(context);
-        System.out.println("result = " + result);
+        System.err.println("result = " + result);
     }
 
 }

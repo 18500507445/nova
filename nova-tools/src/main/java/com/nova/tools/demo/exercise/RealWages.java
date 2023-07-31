@@ -16,11 +16,11 @@ class RealWages {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("请输入工资总数");
+        System.err.println("请输入工资总数");
         double all = sc.nextDouble();
-        System.out.println("请输入社保公积金缴纳基数");
+        System.err.println("请输入社保公积金缴纳基数");
         double sb = sc.nextDouble();
-        System.out.println("请输入户口性质：1表示城镇，2表示农村");
+        System.err.println("请输入户口性质：1表示城镇，2表示农村");
         //1为城镇，2为农村
         String hukou = sc.next();
         double shebao = 0;
@@ -59,11 +59,11 @@ class RealWages {
         } else if (jb < 1500) {
             geshui = jb * 0.03;
         }
-        System.out.println("您缴纳的公积金=" + gongjijin);
-        System.out.println("您缴纳的社保=" + shebao + "，包含：养老=" + yanglao + "，医疗=" + yiliao + "，失业=" + shiye);
-        System.out.println("您缴纳的个税=" + geshui);
+        System.err.println("您缴纳的公积金=" + gongjijin);
+        System.err.println("您缴纳的社保=" + shebao + "，包含：养老=" + yanglao + "，医疗=" + yiliao + "，失业=" + shiye);
+        System.err.println("您缴纳的个税=" + geshui);
         double shifagongzi = all - shebao - geshui - gongjijin;
-        System.out.println("实发工资=" + shifagongzi);
+        System.err.println("实发工资=" + shifagongzi);
     }
 
 }

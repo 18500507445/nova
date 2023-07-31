@@ -26,13 +26,13 @@ class DurationExample {
         // 访问Duration的时间
         long seconds = duration.getSeconds();
 
-        System.out.println("相差 : " + seconds + " 秒");
+        System.err.println("相差 : " + seconds + " 秒");
 
         LocalDateTime from = LocalDateTime.now();
         LocalDateTime to = from.plusDays(5);
         Duration duration2 = Duration.between(from, to);
 
-        System.out.println("从 from 到 to 相差 : " + duration2.toDays() + " 天");
+        System.err.println("从 from 到 to 相差 : " + duration2.toDays() + " 天");
     }
 
 }

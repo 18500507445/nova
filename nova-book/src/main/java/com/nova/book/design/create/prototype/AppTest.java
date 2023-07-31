@@ -22,9 +22,9 @@ public class AppTest {
         Sheep sheep2 = (Sheep) sheep.clone();
         Sheep sheep3 = (Sheep) sheep.clone();
 
-        System.out.println(JSONUtil.toJsonStr(sheep));
-        System.out.println(JSONUtil.toJsonStr(sheep2));
-        System.out.println(JSONUtil.toJsonStr(sheep3));
+        System.err.println(JSONUtil.toJsonStr(sheep));
+        System.err.println(JSONUtil.toJsonStr(sheep2));
+        System.err.println(JSONUtil.toJsonStr(sheep3));
     }
 
 }

@@ -29,7 +29,7 @@ class Section6Test {
     public void demoA() {
         //2不需要了 remove掉
         Object remove = MAP.remove(1);
-        System.out.println("remove = " + remove);
+        System.err.println("remove = " + remove);
     }
 
     /**
@@ -40,9 +40,9 @@ class Section6Test {
         //继承了AutoCloseable 自动关闭资源
         try (FileInputStream fis = new FileInputStream("")) {
             //todo 业务
-            System.out.println("读入文件");
+            System.err.println("读入文件");
         } catch (IOException e) {
-            System.out.println("路径错误");
+            System.err.println("路径错误");
         }
     }
 

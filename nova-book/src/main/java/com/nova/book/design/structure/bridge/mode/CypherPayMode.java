@@ -9,6 +9,6 @@ public class CypherPayMode implements IPayMode {
 
     @Override
     public void security() {
-        System.out.println("密码支付");
+        System.err.println("密码支付");
     }
 }

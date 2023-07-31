@@ -21,7 +21,7 @@ class Section5Test {
     @Test
     public void demoA() {
         String str = new String("abc");
-        System.out.println("str = " + str);
+        System.err.println("str = " + str);
     }
 
     /**
@@ -32,7 +32,7 @@ class Section5Test {
         Integer num = 100;
         for (Integer i = 0; i < num; i++) {
             i++;
-            System.out.println("i = " + i);
+            System.err.println("i = " + i);
         }
     }
 
@@ -46,13 +46,13 @@ class Section5Test {
             Date date90 = new Date(1990, Calendar.JANUARY, 0);
             Date date00 = new Date(2000, Calendar.JANUARY, 0);
             if (now.after(date90) && now.before(date00)) {
-                System.out.println("true = " + true);
+                System.err.println("true = " + true);
             }
         }
 
         for (int i = 0; i < 100; i++) {
             if (now.after(DATE_ONE) && now.before(DATE_TWO)) {
-                System.out.println("true = " + true);
+                System.err.println("true = " + true);
             }
         }
     }

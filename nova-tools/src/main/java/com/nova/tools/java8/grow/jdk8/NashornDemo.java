@@ -16,7 +16,7 @@ class NashornDemo {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
 
-        System.out.println(engine.getClass().getName());
-        System.out.println("Result:" + engine.eval("function f() { return 1; }; f() + 1;"));
+        System.err.println(engine.getClass().getName());
+        System.err.println("Result:" + engine.eval("function f() { return 1; }; f() + 1;"));
     }
 }

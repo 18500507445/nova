@@ -115,14 +115,14 @@ class ThreadMethod {
         Runnable task1 = () -> {
             int count = 0;
             while (true) {
-                System.out.println("----task1 " + count++);
+                System.err.println("----task1 " + count++);
             }
         };
 
         Runnable task2 = () -> {
             int count = 0;
             while (true) {
-                System.out.println("            ----task2 " + count++);
+                System.err.println("            ----task2 " + count++);
             }
         };
 

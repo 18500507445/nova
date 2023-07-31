@@ -1,6 +1,9 @@
 package com.nova.common.utils.list;
 
+import com.google.common.collect.Lists;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
@@ -318,8 +321,11 @@ public class CollStreamUtil {
      * @param <T>        泛型
      * @return 平均值BigDecimal
      */
-    public static <T> BigDecimal avgDecimal(Collection<T> collection, Function<T, BigDecimal> function) {
-        return nullDefaultEmpty(collection).stream().map(function).reduce(BigDecimal::subtract).orElse(BigDecimal.ZERO);
+    public static <T> BigDecimal avgDecimal(Collection<T> collection, Function<T, BigDecimal> function, RoundingMode roundingMode) {
+        return nullDefaultEmpty(collection).stream()
+                .map(function).reduce(BigDecimal::add)
+                .map(bigDecimal -> bigDecimal.divide(BigDecimal.valueOf(collection.size()), roundingMode))
+                .orElse(BigDecimal.ZERO);
     }
 
     /**
@@ -496,7 +502,7 @@ public class CollStreamUtil {
     }
 
     /**
-     * list根据对像某个字段进行去重
+     * list根据对像某个字段进行去重，乱序
      *
      * @param collection 源集合
      * @param function   去重的字段
@@ -504,7 +510,20 @@ public class CollStreamUtil {
      * @return 去重后的list
      */
     public static <T> List<T> distinct(Collection<T> collection, Function<? super T, ?> function) {
-        return (List<T>) nullDefaultEmpty(collection).stream().collect(Collectors.toMap(function, Function.identity(), (o1, o2) -> o1)).values();
+        return Lists.newArrayList(nullDefaultEmpty(collection).stream().collect(Collectors.toMap(function, Function.identity(), (o1, o2) -> o1)).values());
+    }
+
+    /**
+     * list根据对像某个字段进行去重
+     *
+     * @param collection 源集合
+     * @param function   去重的字段
+     * @param <T>        泛型
+     * @return 去重后的list
+     */
+    public static <T> List<T> distinctOrderly(Collection<T> collection, Function<? super T, ?> function) {
+        return Lists.newArrayList(nullDefaultEmpty(collection).stream()
+                .collect(Collectors.toMap(function, Function.identity(), (o1, o2) -> o1, LinkedHashMap::new)).values());
     }
 
     /**
@@ -528,5 +547,23 @@ public class CollStreamUtil {
      */
     private static <T> Collection<T> nullDefaultEmpty(Collection<T> list) {
         return Optional.ofNullable(list).orElse(Collections.emptyList());
+    }
+
+    public static void main(String[] args) {
+        ArrayList<BigDecimal> bigDecimals = Lists.newArrayList(
+                BigDecimal.valueOf(1),
+                BigDecimal.valueOf(1),
+                BigDecimal.valueOf(2),
+                BigDecimal.valueOf(3),
+                BigDecimal.valueOf(5),
+                BigDecimal.valueOf(2),
+                BigDecimal.valueOf(5),
+                BigDecimal.valueOf(1));
+        System.out.println(bigDecimals);
+        System.out.println(distinct(bigDecimals, bigDecimal -> bigDecimal));
+        System.out.println(distinctOrderly(bigDecimals, bigDecimal -> bigDecimal));
+
+        System.out.println(avgDecimal(bigDecimals, o -> o, RoundingMode.HALF_UP)); // 2.5 -> 3
+
     }
 }

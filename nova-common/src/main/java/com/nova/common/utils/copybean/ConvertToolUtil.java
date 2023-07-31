@@ -15,7 +15,6 @@ public class ConvertToolUtil {
      * @param target 复制给
      */
     public static void copyProperties(Object source, Object target) throws Exception {
-
         copyPropertiesExclude(source, target, null);
     }
 
@@ -27,16 +26,12 @@ public class ConvertToolUtil {
      * @param excludsArray 排除属性列表
      * @throws Exception
      */
-    public static void copyPropertiesExclude(Object from, Object to,
-                                             String[] excludsArray) throws Exception {
-
+    public static void copyPropertiesExclude(Object from, Object to, String[] excludsArray) throws Exception {
         List<String> excludesList = null;
-
         if (excludsArray != null && excludsArray.length > 0) {
             //构造列表对象
             excludesList = Arrays.asList(excludsArray);
         }
-
         Method[] fromMethods = from.getClass().getDeclaredMethods();
         Method[] toMethods = to.getClass().getDeclaredMethods();
         Method fromMethod = null, toMethod = null;
@@ -52,12 +47,10 @@ public class ConvertToolUtil {
             if (excludesList != null
                     && excludesList.contains(fromMethodName.substring(3)
                     .toLowerCase())) {
-
                 continue;
             }
             toMethodName = "set" + fromMethodName.substring(3);
             toMethod = findMethodByName(toMethods, toMethodName);
-
             if (toMethod == null) {
                 continue;
             }

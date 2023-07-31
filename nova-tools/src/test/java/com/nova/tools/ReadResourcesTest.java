@@ -56,6 +56,7 @@ public class ReadResourcesTest {
 
     /**
      * 属性值赋值静态变量
+     * 当前类需要注册成组件需要有@Component才可以拿到
      */
     @Test
     public void readStaticValue() {

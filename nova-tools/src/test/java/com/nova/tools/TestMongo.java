@@ -1,15 +1,19 @@
 package com.nova.tools;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.json.JSONUtil;
 import com.nova.tools.demo.entity.Topic;
+import com.nova.tools.demo.mongo.User;
+import com.nova.tools.demo.mongo.UserService;
 import com.starter.mongo.MongoService;
+import com.starter.mongo.entity.Page;
+import com.starter.mongo.wrapper.LambdaQueryWrapper;
+import com.starter.mongo.wrapper.Wrappers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @description: mongo-starter测试类
@@ -21,6 +25,9 @@ public class TestMongo {
 
     @Resource
     private MongoService mongoService;
+
+    @Resource
+    private UserService userService;
 
     /**
      * 保存demo
@@ -54,4 +61,52 @@ public class TestMongo {
         List<Topic> all = mongoService.findAll(Topic.class);
         all.forEach(System.out::println);
     }
+
+    /**
+     * 第二种插入
+     */
+    @Test
+    public void testInsert() {
+        User user = new User();
+        String now = DateUtil.now();
+        user.setId(1L).setLoginName("wzh").setPassWord("123").setAge(28).setCreateTime(now).setUpdateTime(now);
+        userService.save(user);
+    }
+
+    @Test
+    public void testUpdate() {
+        User user = new User();
+        user.setId(1L);
+        user.setPassWord("234");
+        userService.updateById(user);
+    }
+
+    @Test
+    public void testDelete() {
+        userService.removeById(1L);
+    }
+
+    @Test
+    public void testQuery() {
+        User user = userService.getById(1L);
+        System.out.println("user = " + JSONUtil.toJsonStr(user));
+    }
+
+    /**
+     * 分页查询
+     */
+    @Test
+    public void testQueryList() {
+        User req = new User();
+        req.setLoginName("wzh").setPassWord("123").setAge(28).setPageNo(1).setPageSize(20);
+        LambdaQueryWrapper<User> query = Wrappers.<User>lambdaQuery()
+                .eq(Objects.nonNull(req.getAge()), User::getAge, req.getAge())
+                .eq(Objects.nonNull(req.getLoginName()), User::getLoginName, req.getLoginName())
+                .eq(Objects.nonNull(req.getPassWord()), User::getPassWord, req.getPassWord())
+                .eq(Objects.nonNull(req.getAge()), User::getAge, req.getAge())
+                .between((Objects.nonNull(req.getStartTime()) && Objects.nonNull(req.getEndTime())), User::getCreateTime, req.getStartTime(), req.getEndTime());
+        Page<User> page = userService.page(query, req.getPageNo(), req.getPageSize());
+        System.out.println("page = " + JSONUtil.toJsonStr(page));
+    }
+
 }

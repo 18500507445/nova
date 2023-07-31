@@ -2,7 +2,7 @@ package com.nova.tools;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
-import com.nova.tools.demo.entity.Topic;
+import com.nova.tools.demo.mongo.Topic;
 import com.nova.tools.demo.mongo.User;
 import com.nova.tools.demo.mongo.UserService;
 import com.starter.mongo.MongoService;

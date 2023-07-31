@@ -109,14 +109,14 @@ public class ExportController extends BaseController {
         System.gc();
     }
 
-    public void asyncWrite(Integer total, Integer limit, HttpServletResponse response) throws InterruptedException, ExecutionException, IOException {
+    public void asyncWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws InterruptedException, ExecutionException, IOException {
         TimeInterval timer = DateUtil.timer();
         int sum = 0;
-        int count = total / limit + (total % limit > 0 ? 1 : 0);
-        CountDownLatch cd = new CountDownLatch(count);
+        int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
+        CountDownLatch cd = new CountDownLatch(totalNum);
         List<MyCallableTask> taskList = new ArrayList<>();
-        for (int i = 1; i <= count; i++) {
-            taskList.add(new MyCallableTask(i, limit, cd));
+        for (int i = 1; i <= totalNum; i++) {
+            taskList.add(new MyCallableTask(i, shardingSize, cd));
         }
         ThreadPoolExecutor threadPoolExecutor = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
         List<Future<List<ExportDO>>> futures = threadPoolExecutor.invokeAll(taskList);
@@ -134,15 +134,15 @@ public class ExportController extends BaseController {
         System.err.println("数据写入表格成功 , 共：" + sum + " 条, 耗时 ：" + timer.interval() + "ms");
     }
 
-    public List<ExportDO> selectAll(Integer total, Integer limit) throws InterruptedException {
+    public List<ExportDO> selectAll(Integer totalCount, Integer shardingSize) throws InterruptedException {
         TimeInterval timer = DateUtil.timer();
         List<MyCallableTask> taskList = new ArrayList<>();
         // 计算出多少页，即循环次数
-        int count = total / limit + (total % limit > 0 ? 1 : 0);
-        System.err.println("本次任务量: " + count);
-        CountDownLatch cd = new CountDownLatch(count);
-        for (int i = 1; i <= count; i++) {
-            taskList.add(new MyCallableTask(i, limit, cd));
+        int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
+        System.err.println("本次任务量: " + totalNum);
+        CountDownLatch cd = new CountDownLatch(totalCount);
+        for (int i = 1; i <= totalNum; i++) {
+            taskList.add(new MyCallableTask(i, shardingSize, cd));
         }
         List<ExportDO> resultList = new ArrayList<>();
         try {

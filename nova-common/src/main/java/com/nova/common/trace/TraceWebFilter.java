@@ -52,7 +52,7 @@ public class TraceWebFilter extends GenericFilterBean {
     /**
      * 打印访问日志
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({"unchecked"})
     private BodyReaderRequestWrapper printAccessLog(HttpServletRequest request) throws IOException {
         BodyReaderRequestWrapper requestWrapper;
         String requestUrl = request.getRequestURI();

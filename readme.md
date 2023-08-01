@@ -34,6 +34,7 @@
 
 9.nova-log
 * [异步log](nova-log/logNote.md)
+* log中拦截器的应用
 
 10.nova-login
 * [三方登录JustAuth](nova-login/loginNote.md)

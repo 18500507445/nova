@@ -3,3 +3,7 @@ server:
   port: 8080
   servlet:
     context-path: /
+
+# 线上log路径
+log:
+  path: /Users/wangzehui/Documents/Logs/nova/nova-log

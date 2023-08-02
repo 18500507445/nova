@@ -2,17 +2,17 @@ package com.starter.xxl;
 
 import com.xxl.job.core.executor.XxlJobExecutor;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @description: xxl-job自动装配配置类
  * @author: wzh
  * @date: 2023/4/22 22:12
  */
-@AutoConfiguration
+@Configuration
 @EnableConfigurationProperties({XxlProperties.class})
 public class XxlAutoConfiguration {
 

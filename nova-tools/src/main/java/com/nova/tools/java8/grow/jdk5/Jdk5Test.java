@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.System.err;
-
 /**
  * @author: wzh
  * @description jdk5测试类
@@ -39,14 +37,14 @@ public class Jdk5Test {
 
     @Test
     public void staticImport() {
-        out.println("Hi let learn java 8.");
+        System.err.println("Hi let learn java 8.");
 
     }
 
     @Test
     public void varArgs() {
         List<String> hello = Arrays.asList("王爵nice", "Gay冰", "A*熊");
-        out.println("hello = " + hello);
+        System.err.println("hello = " + hello);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.starter.redis;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  * @author: wzh
  * @date: 2023/4/22 20:08
  */
-@AutoConfiguration
+@Configuration
 public class RedisAutoConfiguration {
 
     /**

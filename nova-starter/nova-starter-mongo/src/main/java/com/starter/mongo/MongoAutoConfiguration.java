@@ -1,14 +1,14 @@
 package com.starter.mongo;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @description:
  * @author: wzh
  * @date: 2023/4/22 20:53
  */
-@AutoConfiguration
+@Configuration
 public class MongoAutoConfiguration {
 
     @Bean(name = "mongoService")

@@ -276,7 +276,7 @@ public class FileUtilTest {
     @Test
     @Ignore
     public void listFileNamesInJarTest() {
-        List<String> names = FileUtil.listFileNames("d:/test/hutool-core-5.1.0.jar!/cn/hutool/core/util ");
+        List<String> names = FileUtil.listFileNames("d:/test/hutool-core-5.1.0.jar!/cn/hutool/core/util");
         for (String name : names) {
             Console.log(name);
         }

@@ -1,11 +1,17 @@
 package com.nova.tools;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.io.resource.ClassPathResource;
+import cn.hutool.core.util.StrUtil;
 import com.nova.common.utils.spring.PropertiesUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author: wzh
@@ -61,6 +67,20 @@ public class ReadResourcesTest {
     @Test
     public void readStaticValue() {
         System.err.println("staticPath = " + ReadResourcesTest.STATIC_PATH);
+    }
+
+    /**
+     * 文件内容对比
+     */
+    @Test
+    public void fileContrast() {
+        ClassPathResource resource1 = new ClassPathResource("1.json");
+        ClassPathResource resource2 = new ClassPathResource("2.json");
+        List<String> list1 = StrUtil.split(resource1.readUtf8Str(), "\n");
+        List<String> list2 = StrUtil.split(resource2.readUtf8Str(), "\n");
+
+        Collection<String> subtract1 = CollUtil.subtract(list1, list2);
+        System.out.println(subtract1);
     }
 
 }

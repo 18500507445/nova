@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
+@SuppressWarnings("unchecked")
 public class RedisService {
 
     @Resource

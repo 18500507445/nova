@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @author loser
  * @date 2023/6/13
  */
+@SuppressWarnings("unchecked")
 public interface Func<T, LambdaQueryWrapper, R extends SFunction<T, ?>> extends Serializable {
 
     /**

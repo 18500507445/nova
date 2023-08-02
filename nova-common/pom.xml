@@ -24,11 +24,11 @@
         <commons.io.version>2.11.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
         <poi.version>4.1.2</poi.version>
-        <jwt.version>4.0.0</jwt.version>
+        <jwt.version>4.3.0</jwt.version>
         <vavr.version>1.0.0-alpha-4</vavr.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <jsch.version>0.1.55</jsch.version>
-        <oshi.version>6.2.2</oshi.version>
+        <oshi.version>6.4.0</oshi.version>
         <c3p0.version>0.9.5.5</c3p0.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <oss.version>3.16.0</oss.version>

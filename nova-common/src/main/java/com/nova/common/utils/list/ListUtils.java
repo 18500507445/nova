@@ -17,6 +17,7 @@ import java.util.stream.Stream;
  * https://blog.csdn.net/biewan0238/article/details/103061933 (true 和false排序)
  * @Date 2020/7/1 13:48
  */
+@SuppressWarnings("unchecked")
 public class ListUtils {
 
     private static final Integer MAX_NUMBER = 2;

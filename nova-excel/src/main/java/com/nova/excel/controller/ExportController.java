@@ -183,7 +183,6 @@ public class ExportController extends BaseController {
             if (ObjectUtil.isNotNull(pageList)) {
                 System.err.println("线程Id：" + threadId + ", 查询数据：" + pageList.size() + "条, 页码：" + task.getPageNum() + ", 耗时：" + threadTimer.interval() + "ms");
             }
-            task.getCd().countDown();
             System.err.println("剩余任务数  ================> " + cd.getCount());
             return pageList;
         }, THREAD_POOL).exceptionally(e -> {

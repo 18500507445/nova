@@ -189,7 +189,7 @@ public class ExportController extends BaseController {
             log.error("异常消息: {}", e.getMessage());
             return new ArrayList<>();
         }).thenApply(list -> {
-            //异常与否都要递减，否则主线程不会等待，这种写法不好理解可以上面去try-catch-finally
+            //后置处理，异常与否都要递减，否则主线程不会等待，这种写法不好理解可以在上面的代码块去try-catch-finally
             task.getCd().countDown();
             return list;
         })).collect(Collectors.toList());
@@ -285,6 +285,11 @@ public class ExportController extends BaseController {
             this.pageSize = pageSize;
             this.cd = cd;
         }
+    }
+
+    public static void main(String[] args) {
+        Object o = null;
+        System.out.println("ObjectUtil.equals(o,\"1\") = " + ObjectUtil.equals(o, "1"));
     }
 
 }

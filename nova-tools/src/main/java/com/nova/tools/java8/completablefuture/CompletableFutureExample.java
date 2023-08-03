@@ -32,40 +32,15 @@ import java.util.stream.Stream;
 public class CompletableFutureExample {
 
     /**
-     * 可以自定义线程池或使用默认线程池对数据进行异步处理，且可以根据需求选择是否返回异步结果！灵活的使用
-     */
-    @Test
-    public void demoA() throws ExecutionException, InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
-        Future<Integer> submit = executorService.submit(() -> {
-            Threads.sleep(2000);
-            return 100;
-        });
-        try {
-            Integer result = submit.get();
-            System.err.println(result);
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        //任务完成返回ture
-        while (!submit.isDone()) {
-            Threads.sleep(100);
-        }
-        Integer result = submit.get();
-        System.err.println(result);
-    }
-
-    /**
      * 处理计算结果
      * <p>
      * 任务提交类型
-     * runAsync：没有返回结果
-     * supplyAsync：有返回结果
+     * runAsync：开启异步任务，没有返回结果
+     * supplyAsync：开启异步任务，有返回结果
      * 并且两个都可以自定义线程池去执行
      */
     @Test
-    public void demoB() {
+    public void demoA() {
         CompletableFuture<Void> helloFuture = CompletableFuture.runAsync(() -> System.err.println("hello future"));
 
         CompletableFuture<Integer> integerCompletableFuture = CompletableFuture.supplyAsync(() -> 2333);
@@ -75,8 +50,8 @@ public class CompletableFutureExample {
      * 结果转换
      */
     @Test
-    public void demoC() {
-        CompletableFuture<Integer> uCompletableFuture = CompletableFuture.supplyAsync(() -> {
+    public void demoB() {
+        CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(() -> {
             System.err.println("开始执行运算");
             try {
                 TimeUnit.SECONDS.sleep(3);
@@ -89,7 +64,7 @@ public class CompletableFutureExample {
         });
 
         try {
-            Integer result = uCompletableFuture.whenComplete((a, b) -> {
+            Integer result = completableFuture.whenComplete((a, b) -> {
                 System.err.println("Result: " + a);
                 System.err.println("Exception: " + b);
             }).exceptionally(e -> {
@@ -104,18 +79,15 @@ public class CompletableFutureExample {
 
     /**
      * 扁平转换
-     * <p>
      * 任务依赖关系编排类型：一个任务执行依赖另外一个任务的执行结果
-     * thenApply()
-     * theCompose()
-     * <p>
-     * 相同点：两者都是用于连接多个CompletableFuture调用
-     * <p>
-     * 不同点：thenApply()接受一个函数作为参数，使用该函数处理上一个CompletableFuture调用的结果
-     * theCompose的参数为一个返回CompletableFuture实例的函数，该函数的参数是先前计算步骤的结果
+     * thenApply，任务后置处理，thenApply()接受一个函数作为参数，使用该函数处理上一个CompletableFuture调用的结果
+     * theCompose，连接两个异步任务，theCompose的参数为一个返回CompletableFuture实例的函数，该函数的参数是先前计算步骤的结果
+     * theCombine，合并两个异步任务
+     * applyToEither，获取最先完成的任务
+     * exceptionally，处理异常
      */
     @Test
-    public void demoD() {
+    public void demoC() {
         try {
             String result = CompletableFuture.supplyAsync(() -> 2333).thenApply(String::valueOf).get();
             System.err.println(result);
@@ -128,7 +100,7 @@ public class CompletableFutureExample {
      * 消费结果
      */
     @Test
-    public void demoE() throws ExecutionException, InterruptedException {
+    public void demoD() throws ExecutionException, InterruptedException {
         CompletableFuture.supplyAsync(() -> 9999).thenAccept(System.err::println).get();
     }
 
@@ -136,7 +108,7 @@ public class CompletableFutureExample {
      * 消费结果处理
      */
     @Test
-    public void demoF() throws ExecutionException, InterruptedException {
+    public void demoE() throws ExecutionException, InterruptedException {
         CompletableFuture.supplyAsync(() -> 9999)
                 .thenAcceptBoth(CompletableFuture.supplyAsync(() -> "7878"), (a, b) -> {
                     System.err.println("a = " + a);
@@ -144,15 +116,16 @@ public class CompletableFutureExample {
                 }).get();
     }
 
+    /**
+     * 无返回值的后置处理
+     */
     @Test
-    public void demoG() throws ExecutionException, InterruptedException {
+    public void demoF() throws ExecutionException, InterruptedException {
         CompletableFuture.supplyAsync(() -> {
             System.err.println("开始执行了");
             Threads.sleep(2000);
             return 9999;
-        }).thenRun(() -> {
-            System.err.println("执行结束了");
-        }).get();
+        }).thenRun(() -> System.err.println("执行结束了")).get();
     }
 
 
@@ -163,7 +136,7 @@ public class CompletableFutureExample {
      * runAfterBoth：两个任务都执行完成以后执行行的runnable方法
      */
     @Test
-    public void demoH() {
+    public void demoG() {
         try {
             String s = CompletableFuture.supplyAsync(() -> 23333)
                     .thenCombine(CompletableFuture.supplyAsync(() -> "8898"), (a, b) -> {
@@ -183,7 +156,7 @@ public class CompletableFutureExample {
      * 区别：applyToEither会将已经完成任务的执行结果作为所提供函数的参数，且该方法有返回值；acceptEither同样将已经完成任务的执行结果作为方法入参，但是无返回值；runAfterEither没有入参，也没有返回值。
      */
     @Test
-    public void demoI() throws ExecutionException, InterruptedException {
+    public void demoH() throws ExecutionException, InterruptedException {
         m1().acceptEither(m2(), t -> {
             System.err.println("t = " + t);
         }).get();
@@ -195,7 +168,7 @@ public class CompletableFutureExample {
      * allOf：都完成再触发
      */
     @Test
-    public void demoJ() throws ExecutionException, InterruptedException {
+    public void demoI() throws ExecutionException, InterruptedException {
         TimeInterval timer = DateUtil.timer();
         CompletableFuture.anyOf(m1(), m2())
                 .thenRun(() -> {
@@ -213,7 +186,7 @@ public class CompletableFutureExample {
      * 多个线程 数据合并取结果
      */
     @Test
-    public void demoK() throws ExecutionException, InterruptedException {
+    public void demoJ() throws ExecutionException, InterruptedException {
         TimeInterval timer = DateUtil.timer();
         CompletableFuture<Long> task1 = CompletableFuture.supplyAsync(() -> {
             long sum = 0;
@@ -240,7 +213,7 @@ public class CompletableFutureExample {
      * 区分 allOf和anyOf
      */
     @Test
-    public void demoL() {
+    public void demoK() {
         for (int i = 0; i < 5; i++) {
             List<CompletableFuture<Integer>> completableFutures = new ArrayList<>();
             completableFutures.add(m1());

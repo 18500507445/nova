@@ -6,6 +6,8 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.RejectPolicy;
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
@@ -13,6 +15,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.utils.list.PageUtils;
 import com.nova.excel.entity.ExportDO;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * @description: 线程合并结果后导出
@@ -76,7 +80,7 @@ public class ExportController extends BaseController {
         // 文件以附件形式下载
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
         //模拟数据库数据
-        List<ExportDO> exportList = selectAll(TOTAL, 50000);
+        List<ExportDO> exportList = selectAll(list.size(), 50000);
 
         //可以浏览器下载
         EasyExcel.write(response.getOutputStream(), ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
@@ -84,7 +88,7 @@ public class ExportController extends BaseController {
         //可以直接EasyExcel.write(fileName, ExportDO.class)下载到本地或者服务器
 //        EasyExcel.write(fileName, ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
 
-        log.info("当前耗时：{}ms", timer.interval());
+        log.info("exportEasyExcel接口耗时：{}ms", timer.interval());
         System.gc();
     }
 
@@ -104,15 +108,26 @@ public class ExportController extends BaseController {
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
 
         //异步写入
-        asyncWrite(TOTAL, 100000, response);
-        log.info("当前耗时：{}ms", timer.interval());
+        completableWrite(list.size(), 100000, response);
+        log.info("threadExportExcel接口耗时：{}ms", timer.interval());
         System.gc();
     }
 
-    public void asyncWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws InterruptedException, ExecutionException, IOException {
+    /**
+     * 线程池版本
+     *
+     * @param totalCount
+     * @param shardingSize
+     * @param response
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws IOException
+     */
+    public void threadPoolWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws InterruptedException, ExecutionException, IOException {
         TimeInterval timer = DateUtil.timer();
         int sum = 0;
         int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
+        System.err.println("本次任务量: " + totalNum);
         CountDownLatch cd = new CountDownLatch(totalNum);
         List<MyCallableTask> taskList = new ArrayList<>();
         for (int i = 1; i <= totalNum; i++) {
@@ -131,7 +146,58 @@ public class ExportController extends BaseController {
             }
         }
         cd.await();
-        System.err.println("数据写入表格成功 , 共：" + sum + " 条, 耗时 ：" + timer.interval() + "ms");
+        System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
+    }
+
+    /**
+     * 并行编排版本
+     *
+     * @param totalCount
+     * @param shardingSize
+     * @param response
+     */
+    public void completableWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws IOException, InterruptedException {
+        TimeInterval timer = DateUtil.timer();
+        int sum = 0;
+        int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
+        CountDownLatch cd = new CountDownLatch(totalNum);
+        List<CompletableTask> taskList = new ArrayList<>();
+        for (int i = 1; i <= totalNum; i++) {
+            taskList.add(new CompletableTask(i, shardingSize, cd));
+        }
+        ThreadPoolExecutor threadPool = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
+        List<CompletableFuture<List<ExportDO>>> completableFutures = taskList.stream().map(task -> CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeInterval threadTimer = DateUtil.timer();
+                //随机等待2-5秒，模拟数据库IO耗时
+                ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
+                System.err.println("线程Id：" + Thread.currentThread().getId() + ", 查询数据：" + list.size() + "条, 页码：" + task.getPageNum() + ", 耗时：" + threadTimer.interval() + "ms");
+                task.getCd().countDown();
+                System.err.println("剩余任务数  ================> " + cd.getCount());
+                return PageUtils.startPage(list, task.getPageNum(), task.getPageSize());
+            } catch (Exception ignored) {
+
+            }
+            return new ArrayList<ExportDO>();
+        }, threadPool)).collect(Collectors.toList());
+
+        //阻塞主线程，全部完成再返回
+        CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).join();
+        System.err.println("主线程等候完成，合并数据，耗时 ：" + timer.interval() + "ms");
+        timer.restart();
+        //遍历写入sheet
+        try (ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), ExportDO.class).build()) {
+            for (int i = 0; i < completableFutures.size(); i++) {
+                List<ExportDO> pageList = completableFutures.get(i).join();
+                // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样
+                WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + (i + 1)).build();
+                // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
+                excelWriter.write(pageList, writeSheet);
+                sum += pageList.size();
+            }
+        }
+        cd.await();
+        System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
     }
 
     public List<ExportDO> selectAll(Integer totalCount, Integer shardingSize) throws InterruptedException {
@@ -173,12 +239,27 @@ public class ExportController extends BaseController {
         @Override
         public List<ExportDO> call() {
             TimeInterval timer = DateUtil.timer();
-            System.err.println("线程：" + Thread.currentThread().getName() + " , 开始读取数据------");
+            ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
+
             List<ExportDO> pageList = PageUtils.startPage(list, pageNum, pageSize);
-            System.err.println("线程：" + Thread.currentThread().getName() + " , 读取数据  " + list.size() + ", 页数:" + pageNum + ", 耗时 ：" + timer.interval() + "ms");
+            System.err.println("线程Id：" + Thread.currentThread().getId() + ", 查询数据：" + list.size() + "条, 页码：" + pageNum + ", 耗时：" + timer.interval() + "ms");
             cd.countDown();
             System.err.println("剩余任务数  ================> " + cd.getCount());
             return pageList;
         }
     }
+
+    @Data
+    static class CompletableTask {
+        private final CountDownLatch cd;
+        private final Integer pageNum;
+        private final Integer pageSize;
+
+        public CompletableTask(Integer pageNum, Integer pageSize, CountDownLatch cd) {
+            this.pageNum = pageNum;
+            this.pageSize = pageSize;
+            this.cd = cd;
+        }
+    }
+
 }

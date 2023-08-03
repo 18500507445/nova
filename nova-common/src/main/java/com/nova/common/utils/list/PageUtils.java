@@ -68,16 +68,16 @@ public class PageUtils extends PageHelper {
         // 记录总数
         int count = list.size();
         // 页数
-        int pageCount = 0;
+        int pageCount;
         if (count % pageSize == 0) {
             pageCount = count / pageSize;
         } else {
             pageCount = count / pageSize + 1;
         }
         // 开始索引
-        int fromIndex = 0;
+        int fromIndex;
         // 结束索引
-        int toIndex = 0;
+        int toIndex;
         if (!pageNum.equals(pageCount)) {
             fromIndex = (pageNum - 1) * pageSize;
             toIndex = fromIndex + pageSize;

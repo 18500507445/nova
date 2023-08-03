@@ -1,5 +1,6 @@
 package com.nova.excel.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
@@ -7,6 +8,7 @@ import cn.hutool.core.lang.UUID;
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.RejectPolicy;
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
@@ -52,7 +54,7 @@ public class ExportController extends BaseController {
 
     public static String path;
 
-    public static List<ExportDO> list = new ArrayList<>();
+    public static List<ExportDO> LIST = new ArrayList<>();
 
     static {
         path = Objects.requireNonNull(ExportController.class.getResource("/")).getPath();
@@ -60,9 +62,11 @@ public class ExportController extends BaseController {
             ExportDO data = new ExportDO();
             data.setId(Convert.toLong(i));
             data.setName("名称" + i);
-            list.add(data);
+            LIST.add(data);
         }
     }
+
+    public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
 
     /**
      * 阿里easyExcel测试，多线程查询后合并100w然后导出
@@ -80,7 +84,7 @@ public class ExportController extends BaseController {
         // 文件以附件形式下载
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
         //模拟数据库数据
-        List<ExportDO> exportList = selectAll(list.size(), 50000);
+        List<ExportDO> exportList = selectAll(LIST.size(), 50000);
 
         //可以浏览器下载
         EasyExcel.write(response.getOutputStream(), ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
@@ -108,7 +112,7 @@ public class ExportController extends BaseController {
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
 
         //异步写入
-        completableWrite(list.size(), 100000, response);
+        threadPoolWrite(LIST.size(), 100000, response);
         log.info("threadExportExcel接口耗时：{}ms", timer.interval());
         System.gc();
     }
@@ -133,16 +137,17 @@ public class ExportController extends BaseController {
         for (int i = 1; i <= totalNum; i++) {
             taskList.add(new MyCallableTask(i, shardingSize, cd));
         }
-        ThreadPoolExecutor threadPoolExecutor = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
-        List<Future<List<ExportDO>>> futures = threadPoolExecutor.invokeAll(taskList);
+        List<Future<List<ExportDO>>> futures = THREAD_POOL.invokeAll(taskList);
         try (ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), ExportDO.class).build()) {
             for (int i = 0; i < futures.size(); i++) {
                 List<ExportDO> pageList = futures.get(i).get();
-                // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样
-                WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + (i + 1)).build();
-                // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
-                excelWriter.write(pageList, writeSheet);
-                sum += pageList.size();
+                if (CollUtil.isNotEmpty(pageList)) {
+                    // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样
+                    WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + (i + 1)).build();
+                    // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
+                    excelWriter.write(pageList, writeSheet);
+                    sum += pageList.size();
+                }
             }
         }
         cd.await();
@@ -165,21 +170,28 @@ public class ExportController extends BaseController {
         for (int i = 1; i <= totalNum; i++) {
             taskList.add(new CompletableTask(i, shardingSize, cd));
         }
-        ThreadPoolExecutor threadPool = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
         List<CompletableFuture<List<ExportDO>>> completableFutures = taskList.stream().map(task -> CompletableFuture.supplyAsync(() -> {
-            try {
-                TimeInterval threadTimer = DateUtil.timer();
-                //随机等待2-5秒，模拟数据库IO耗时
-                ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
-                System.err.println("线程Id：" + Thread.currentThread().getId() + ", 查询数据：" + list.size() + "条, 页码：" + task.getPageNum() + ", 耗时：" + threadTimer.interval() + "ms");
-                task.getCd().countDown();
-                System.err.println("剩余任务数  ================> " + cd.getCount());
-                return PageUtils.startPage(list, task.getPageNum(), task.getPageSize());
-            } catch (Exception ignored) {
-
+            TimeInterval threadTimer = DateUtil.timer();
+            long threadId = Thread.currentThread().getId();
+            //随机等待[2-5)秒，模拟数据库IO耗时
+            int i = RandomUtil.randomInt(2, 5);
+            if (i == 4) {
+                throw new RuntimeException("第" + task.getPageNum() + "页运行异常，当前线程id：" + threadId);
             }
-            return new ArrayList<ExportDO>();
-        }, threadPool)).collect(Collectors.toList());
+            ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
+            List<ExportDO> pageList = PageUtils.startPage(LIST, task.getPageNum(), task.getPageSize());
+            if (ObjectUtil.isNotNull(pageList)) {
+                System.err.println("线程Id：" + threadId + ", 查询数据：" + pageList.size() + "条, 页码：" + task.getPageNum() + ", 耗时：" + threadTimer.interval() + "ms");
+            }
+            task.getCd().countDown();
+            System.err.println("剩余任务数  ================> " + cd.getCount());
+            return pageList;
+        }, THREAD_POOL).exceptionally(e -> {
+            //异常与否都要递减，否则主线程不会等待，这种写法不好理解可以上面去try-catch-finally
+            task.getCd().countDown();
+            log.error("异常消息: {}", e.getMessage());
+            return new ArrayList<>();
+        })).collect(Collectors.toList());
 
         //阻塞主线程，全部完成再返回
         CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).join();
@@ -189,11 +201,13 @@ public class ExportController extends BaseController {
         try (ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), ExportDO.class).build()) {
             for (int i = 0; i < completableFutures.size(); i++) {
                 List<ExportDO> pageList = completableFutures.get(i).join();
-                // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样
-                WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + (i + 1)).build();
-                // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
-                excelWriter.write(pageList, writeSheet);
-                sum += pageList.size();
+                if (CollUtil.isNotEmpty(pageList)) {
+                    // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样
+                    WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + (i + 1)).build();
+                    // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
+                    excelWriter.write(pageList, writeSheet);
+                    sum += pageList.size();
+                }
             }
         }
         cd.await();
@@ -239,12 +253,22 @@ public class ExportController extends BaseController {
         @Override
         public List<ExportDO> call() {
             TimeInterval timer = DateUtil.timer();
-            ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
-
-            List<ExportDO> pageList = PageUtils.startPage(list, pageNum, pageSize);
-            System.err.println("线程Id：" + Thread.currentThread().getId() + ", 查询数据：" + list.size() + "条, 页码：" + pageNum + ", 耗时：" + timer.interval() + "ms");
-            cd.countDown();
-            System.err.println("剩余任务数  ================> " + cd.getCount());
+            int i = RandomUtil.randomInt(2, 5);
+            long threadId = Thread.currentThread().getId();
+            List<ExportDO> pageList = new ArrayList<>();
+            try {
+                if (i == 4) {
+                    throw new RuntimeException("第" + pageNum + "页运行异常，当前线程id：" + threadId);
+                }
+                ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
+                pageList = PageUtils.startPage(LIST, pageNum, pageSize);
+            } catch (RuntimeException e) {
+                log.error("异常消息: {}", e.getMessage());
+            } finally {
+                cd.countDown();
+                System.err.println("线程Id：" + threadId + ", 查询数据：" + pageList.size() + "条, 页码：" + pageNum + ", 耗时：" + timer.interval() + "ms");
+                System.err.println("剩余任务数  ================> " + cd.getCount());
+            }
             return pageList;
         }
     }

@@ -112,7 +112,7 @@ public class ExportController extends BaseController {
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
 
         //异步写入
-        threadPoolWrite(LIST.size(), 100000, response);
+        completableWrite(LIST.size(), 100000, response);
         log.info("threadExportExcel接口耗时：{}ms", timer.interval());
         System.gc();
     }
@@ -187,10 +187,12 @@ public class ExportController extends BaseController {
             System.err.println("剩余任务数  ================> " + cd.getCount());
             return pageList;
         }, THREAD_POOL).exceptionally(e -> {
-            //异常与否都要递减，否则主线程不会等待，这种写法不好理解可以上面去try-catch-finally
-            task.getCd().countDown();
             log.error("异常消息: {}", e.getMessage());
             return new ArrayList<>();
+        }).thenApply(list -> {
+            //异常与否都要递减，否则主线程不会等待，这种写法不好理解可以上面去try-catch-finally
+            task.getCd().countDown();
+            return list;
         })).collect(Collectors.toList());
 
         //阻塞主线程，全部完成再返回

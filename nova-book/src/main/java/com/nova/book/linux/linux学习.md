@@ -7,6 +7,8 @@
 （3）ls：list的简写，显示目标列表  
 （4）cd：进入
 （5）ps auxw|head -1;ps auxw|sort -rn -k3|head -10（cpu占用前十的进程）
+（6）java -XX:+PrintCommandLineFlags -version（查看jdk gc信息，默认的垃圾回收器）
+（7）java -XX:+PrintGCDetails -version（查看gc详细信息）
 
 #### 1.2 文件
 （1）open -e .zshrc：打开文件

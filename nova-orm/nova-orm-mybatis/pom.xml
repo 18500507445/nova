@@ -50,8 +50,8 @@
 
         <!-- Mysql驱动包 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
         <!-- mybatis (和父类pom spring-mybatis-starter里 mybatis版本保持一致)-->

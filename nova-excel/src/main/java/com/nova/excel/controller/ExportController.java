@@ -287,9 +287,5 @@ public class ExportController extends BaseController {
         }
     }
 
-    public static void main(String[] args) {
-        Object o = null;
-        System.out.println("ObjectUtil.equals(o,\"1\") = " + ObjectUtil.equals(o, "1"));
-    }
 
 }

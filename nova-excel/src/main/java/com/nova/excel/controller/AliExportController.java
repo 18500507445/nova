@@ -226,7 +226,7 @@ public class AliExportController extends BaseController {
         // 计算出多少页，即循环次数
         int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
         System.err.println("本次任务量: " + totalNum);
-        CountDownLatch cd = new CountDownLatch(totalCount);
+        CountDownLatch cd = new CountDownLatch(totalNum);
         for (int i = 1; i <= totalNum; i++) {
             taskList.add(new MyCallableTask(i, shardingSize, cd));
         }

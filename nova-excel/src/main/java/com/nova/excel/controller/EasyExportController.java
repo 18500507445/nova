@@ -104,7 +104,7 @@ public class EasyExportController extends BaseController {
         // 计算出多少页，即循环次数
         int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
         System.err.println("本次任务量: " + totalNum);
-        CountDownLatch cd = new CountDownLatch(totalCount);
+        CountDownLatch cd = new CountDownLatch(totalNum);
         for (int i = 1; i <= totalNum; i++) {
             taskList.add(new MyCallableTask(i, shardingSize, cd));
         }
@@ -141,6 +141,7 @@ public class EasyExportController extends BaseController {
             long threadId = Thread.currentThread().getId();
             List<EasyPoiExportDO> pageList = new ArrayList<>();
             try {
+//                ThreadUtil.sleep(RandomUtil.randomInt(5, 6), TimeUnit.SECONDS);
                 pageList = PageUtils.startPage(LIST, pageNum, pageSize);
             } catch (RuntimeException e) {
                 log.error("异常消息: {}", e.getMessage());

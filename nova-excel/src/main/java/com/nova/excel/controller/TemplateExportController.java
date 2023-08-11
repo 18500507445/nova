@@ -1,6 +1,6 @@
 package com.nova.excel.controller;
 
-import com.nova.excel.entity.ExportDO;
+import com.nova.excel.entity.AliEasyExportDO;
 import com.nova.excel.utils.BaseEasyExcelExport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
-public class TemplateExportController extends BaseEasyExcelExport<ExportDO> {
+public class TemplateExportController extends BaseEasyExcelExport<AliEasyExportDO> {
 
     @GetMapping("exportTemplateExcel")
     public void exportTemplateExcel() {
@@ -59,14 +59,14 @@ public class TemplateExportController extends BaseEasyExcelExport<ExportDO> {
         //分页参数进行查询
 
         //拼装数据，遍历放入结果集
-        List<ExportDO> list = new ArrayList<>();
+        List<AliEasyExportDO> list = new ArrayList<>();
         for (long aLong = lastNum; aLong <= pageNo * pageSize; aLong++) {
-            ExportDO exportDO = new ExportDO();
-            exportDO.setId(aLong);
-            exportDO.setName(String.valueOf(aLong));
-            list.add(exportDO);
+            AliEasyExportDO aliEasyExportDO = new AliEasyExportDO();
+            aliEasyExportDO.setId(aLong);
+            aliEasyExportDO.setName(String.valueOf(aLong));
+            list.add(aliEasyExportDO);
             lastNum++;
         }
-        list.forEach(exportDO -> resultList.add(Arrays.asList(exportDO.getId().toString(), exportDO.getName())));
+        list.forEach(aliEasyExportDO -> resultList.add(Arrays.asList(aliEasyExportDO.getId().toString(), aliEasyExportDO.getName())));
     }
 }

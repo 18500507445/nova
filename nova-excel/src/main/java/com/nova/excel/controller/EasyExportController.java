@@ -1,8 +1,5 @@
 package com.nova.excel.controller;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
@@ -13,22 +10,17 @@ import cn.hutool.core.util.RandomUtil;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.utils.list.PageUtils;
 import com.nova.excel.entity.EasyPoiExportDO;
+import com.nova.excel.utils.ExcelUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.*;
 
 /**
@@ -44,14 +36,11 @@ public class EasyExportController extends BaseController {
 
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
-    public static final int TOTAL = 1000000;
-
-    public static String path;
+    public static final int TOTAL = 200000;
 
     public static List<EasyPoiExportDO> LIST = new ArrayList<>();
 
     static {
-        path = Objects.requireNonNull(AliExportController.class.getResource("/")).getPath();
         for (int i = 1; i <= TOTAL; i++) {
             EasyPoiExportDO data = new EasyPoiExportDO();
             data.setId(Convert.toLong(i));
@@ -68,35 +57,16 @@ public class EasyExportController extends BaseController {
     @SneakyThrows
     @GetMapping("exportEasyPoi")
     public void exportEasyPoi() {
-        TimeInterval timer = DateUtil.timer();
         String fileName = UUID.fastUUID() + ".xlsx";
         HttpServletResponse response = getResponse();
         //模拟数据库数据
         List<EasyPoiExportDO> list = selectAll(LIST.size(), 50000);
-
-        ExportParams params = new ExportParams(null, "模板");
-        //可以设置样式和样式文件
-        params.setType(ExcelType.XSSF);
-        params.setStyle(EasyPoiExportDO.class);
-        Workbook workbook = ExcelExportUtil.exportExcel(params, EasyPoiExportDO.class, list);
-        downLoadExcel(fileName, response, workbook);
-        log.info("exportEasyExcel接口耗时：{}ms", timer.interval());
+        TimeInterval timer = DateUtil.timer();
+        ExcelUtils.exportExcel(list, null, "模板", EasyPoiExportDO.class, fileName, response);
+        System.err.println("写入表格完成,共：" + list.size() + " 条,耗时 ：" + timer.interval() + "ms");
         System.gc();
     }
 
-    private static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
-        try (OutputStream out = response.getOutputStream()) {
-            response.setCharacterEncoding("UTF-8");
-            response.setHeader("content-Type", "application/vnd.ms-excel");
-            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8"));
-            ByteArrayOutputStream bAos = new ByteArrayOutputStream();
-            workbook.write(bAos);
-            response.setHeader("Content-Length", String.valueOf(bAos.size()));
-            out.write(bAos.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public List<EasyPoiExportDO> selectAll(Integer totalCount, Integer shardingSize) throws InterruptedException {
         TimeInterval timer = DateUtil.timer();
@@ -141,7 +111,6 @@ public class EasyExportController extends BaseController {
             long threadId = Thread.currentThread().getId();
             List<EasyPoiExportDO> pageList = new ArrayList<>();
             try {
-//                ThreadUtil.sleep(RandomUtil.randomInt(5, 6), TimeUnit.SECONDS);
                 pageList = PageUtils.startPage(LIST, pageNum, pageSize);
             } catch (RuntimeException e) {
                 log.error("异常消息: {}", e.getMessage());

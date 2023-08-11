@@ -183,7 +183,7 @@ public class AliExportController extends BaseController {
             if (i == 4) {
                 throw new RuntimeException("第" + task.getPageNum() + "页运行异常，当前线程id：" + threadId);
             }
-            ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
+            ThreadUtil.sleep(i, TimeUnit.SECONDS);
             List<AliEasyExportDO> pageList = PageUtils.startPage(LIST, task.getPageNum(), task.getPageSize());
             if (ObjectUtil.isNotNull(pageList)) {
                 System.err.println("线程Id：" + threadId + ", 查询数据：" + pageList.size() + "条, 页码：" + task.getPageNum() + ", 耗时：" + threadTimer.interval() + "ms");
@@ -266,7 +266,7 @@ public class AliExportController extends BaseController {
                 if (i == 4) {
                     throw new RuntimeException("第" + pageNum + "页运行异常，当前线程id：" + threadId);
                 }
-                ThreadUtil.sleep(RandomUtil.randomInt(2, 5), TimeUnit.SECONDS);
+                ThreadUtil.sleep(i, TimeUnit.SECONDS);
                 pageList = PageUtils.startPage(LIST, pageNum, pageSize);
             } catch (RuntimeException e) {
                 log.error("异常消息: {}", e.getMessage());

@@ -1,5 +1,7 @@
 package com.nova.excel.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
@@ -14,6 +16,7 @@ import com.nova.excel.utils.ExcelUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,9 +39,11 @@ public class EasyExportController extends BaseController {
 
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
-    public static final int TOTAL = 200000;
+    public static final int TOTAL = 1000000;
 
     public static List<EasyPoiExportDO> LIST = new ArrayList<>();
+
+    public static final ThreadPoolExecutor POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
 
     static {
         for (int i = 1; i <= TOTAL; i++) {
@@ -59,17 +64,60 @@ public class EasyExportController extends BaseController {
     public void exportEasyPoi() {
         String fileName = UUID.fastUUID() + ".xlsx";
         HttpServletResponse response = getResponse();
-        //模拟数据库数据
-        List<EasyPoiExportDO> list = selectAll(LIST.size(), 50000);
-        TimeInterval timer = DateUtil.timer();
-        ExcelUtils.exportExcel(list, null, "模板", EasyPoiExportDO.class, fileName, response);
-        System.err.println("写入表格完成,共：" + list.size() + " 条,耗时 ：" + timer.interval() + "ms");
+
+        //普通导出
+//        normalExport(fileName, response, LIST.size(), 50000);
+
+        //大数据量
+        bigExport(fileName, response, LIST.size(), 50000);
         System.gc();
     }
 
-
-    public List<EasyPoiExportDO> selectAll(Integer totalCount, Integer shardingSize) throws InterruptedException {
+    /**
+     * 大数据量导出
+     *
+     * @param fileName
+     * @param response
+     * @param totalCount
+     * @param shardingSize
+     * @throws InterruptedException
+     */
+    public void bigExport(String fileName, HttpServletResponse response, Integer totalCount, Integer shardingSize) throws InterruptedException {
         TimeInterval timer = DateUtil.timer();
+        int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
+        System.err.println("本次任务量: " + totalNum);
+        List<MyCallableTask> taskList = new ArrayList<>();
+        CountDownLatch cd = new CountDownLatch(totalNum);
+        for (int i = 1; i <= totalNum; i++) {
+            taskList.add(new MyCallableTask(i, shardingSize, cd));
+        }
+        List<Future<List<EasyPoiExportDO>>> futures = POOL.invokeAll(taskList);
+        ExportParams exportParams = new ExportParams(null, "模板");
+        cd.await();
+        Workbook workbook = ExcelExportUtil.exportBigExcel(exportParams, EasyPoiExportDO.class, (queryParams, page) -> {
+            if (page > totalNum) {
+                return null;
+            }
+            List<Object> list;
+            try {
+                list = new ArrayList<>(futures.get(page - 1).get());
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+            System.err.println("共：" + totalNum + " 页，当前写入第 ：" + page + " 页，size：" + list.size() + " 条");
+            return list;
+        }, totalNum);
+        ExcelUtils.downLoadExcel(fileName, response, workbook);
+        System.err.println("主线程：" + Thread.currentThread().getName() + " , 共导出数据：" + totalCount + " , 整体耗时 ：" + timer.interval() + "ms");
+    }
+
+    /**
+     * @param totalCount
+     * @param shardingSize
+     * @return
+     * @throws InterruptedException
+     */
+    public void normalExport(String fileName, HttpServletResponse response, Integer totalCount, Integer shardingSize) throws InterruptedException {
         List<MyCallableTask> taskList = new ArrayList<>();
         // 计算出多少页，即循环次数
         int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
@@ -80,8 +128,7 @@ public class EasyExportController extends BaseController {
         }
         List<EasyPoiExportDO> resultList = new ArrayList<>();
         try {
-            ThreadPoolExecutor threadPoolExecutor = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
-            List<Future<List<EasyPoiExportDO>>> futures = threadPoolExecutor.invokeAll(taskList);
+            List<Future<List<EasyPoiExportDO>>> futures = POOL.invokeAll(taskList);
             for (Future<List<EasyPoiExportDO>> future : futures) {
                 resultList.addAll(future.get());
             }
@@ -89,8 +136,9 @@ public class EasyExportController extends BaseController {
             log.error("selectAll异常", e);
         }
         cd.await();
-        System.err.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " , 查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
-        return resultList;
+        TimeInterval timer = DateUtil.timer();
+        ExcelUtils.exportExcel(resultList, null, "模板", EasyPoiExportDO.class, fileName, response);
+        System.err.println("主线程：" + Thread.currentThread().getName() + " , 共导出数据：" + resultList.size() + " , 写入表格耗时 ：" + timer.interval() + "ms");
     }
 
     static class MyCallableTask implements Callable<List<EasyPoiExportDO>> {

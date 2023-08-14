@@ -5,6 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @description 通用测试类
  * @date: 2023/07/24 14:43
  */
+@Slf4j(topic = "commonTest")
 @SpringBootTest
 public class CommonTest {
 
@@ -72,5 +74,15 @@ public class CommonTest {
             list.add(arr);
             ThreadUtil.sleep(30, TimeUnit.MINUTES);
         }
+    }
+
+    /**
+     * grep console测试
+     */
+    @Test
+    public void testLog() {
+        log.info("记录:{}","infoLog");
+        log.warn("警告:{}","warnLog");
+        log.error("异常:{}","errorLog");
     }
 }

@@ -26,11 +26,12 @@ public class JsonUtil {
     }
 
     /**
-     * 展示字段处理
+     * json字段处理
      *
      * @param object    对象
      * @param fieldList 字段list
      * @param clazz     object.class
+     * @param type      枚举INCLUDE包含，EXCLUDE排除
      * @param <T>
      * @return
      */

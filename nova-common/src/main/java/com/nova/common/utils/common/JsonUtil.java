@@ -3,6 +3,7 @@ package com.nova.common.utils.common;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
+import com.alibaba.fastjson2.JSON;
 
 import java.util.HashSet;
 import java.util.List;
@@ -50,10 +51,10 @@ public class JsonUtil {
         set.addAll(fieldList);
         String jsonString = JSONObject.toJSONString(object, filter);
         String name = clazz.getName();
-        if (JSONObject.class.getName().equals(name)) {
-            return (T) JSONObject.parseObject(jsonString);
-        } else if (JSONArray.class.getName().equals(name)) {
-            return (T) JSONObject.parseArray(jsonString);
+        if (JSONObject.class.getName().equals(name) || com.alibaba.fastjson2.JSONObject.class.getName().equals(name)) {
+            return (T) JSON.parseObject(jsonString);
+        } else if (JSONArray.class.getName().equals(name) || com.alibaba.fastjson2.JSONArray.class.getName().equals(name)) {
+            return (T) JSON.parseArray(jsonString);
         } else {
             return null;
         }

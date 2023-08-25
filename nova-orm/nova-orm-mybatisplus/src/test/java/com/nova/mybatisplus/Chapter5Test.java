@@ -105,7 +105,7 @@ public class Chapter5Test {
                         // 设置父包模块名
 //                        .moduleName("system")
                         // 设置mapperXml生成路径
-                        .pathInfo(Collections.singletonMap(OutputFile.xml, "/Users/wangzehui/Downloads")))
+                        .pathInfo(Collections.singletonMap(OutputFile.xml, "/Users/wangzehui/Downloads/com/nova/mybatisplus")))
                 .strategyConfig(builder -> builder
                         // 设置需要生成的表名
                         .addInclude("user")

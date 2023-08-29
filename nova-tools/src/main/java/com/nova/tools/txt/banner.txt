@@ -51,12 +51,20 @@ lsp
 
 
 https://www.bootschool.net/ascii(文字生成banner)
-https://www.degraeve.com/img2txt.php(图片生成banner)
  _ __   _____   ____ _
 | '_ \ / _ \ \ / / _` |
 | | | | (_) \ V / (_| |
 |_| |_|\___/ \_/ \__,_|
 
-
+Envy，嫉妒
+Leaf，叶子
+Holy，神圣
+Lake，湖泊
+Lion，狮子
+Rank，阶层
+Star，恒星
+Tidy，整洁
+Tiny，微小的
+Visa，签证
 
 

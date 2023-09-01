@@ -1,7 +1,6 @@
 package com.nova.log.config;
 
 import cn.hutool.json.JSONUtil;
-import com.nova.common.core.model.entity.LogEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

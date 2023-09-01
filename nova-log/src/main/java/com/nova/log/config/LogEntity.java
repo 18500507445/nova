@@ -1,4 +1,4 @@
-package com.nova.common.core.model.entity;
+package com.nova.log.config;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import java.util.Map;
 
 /**
- * @author: wzh
+ * @author: wzh3
  * @description 日志实体类
  * @date: 2023/08/01 16:16
  */

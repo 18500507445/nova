@@ -8,18 +8,18 @@
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
 
-    <!-- 系统info日志输出 -->
+    <!-- 系统日志输出 -->
     <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-info.log</file>
+        <file>${log.path}/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
-            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-info.log</fileNamePattern>
-            <!-- 日志最大的历史 xx天 -->
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/info.log</fileNamePattern>
+            <!-- 日志最大的历史 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -32,11 +32,13 @@
         </filter>
     </appender>
 
-    <!-- 程序debug日志输出 -->
+    <!-- 系统日志输出 -->
     <appender name="file_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-debug.log</file>
+        <file>${log.path}/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-debug.log</fileNamePattern>
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/debug.log</fileNamePattern>
+            <!-- 日志最大的历史 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -49,11 +51,11 @@
         </filter>
     </appender>
 
-    <!-- 系统error日志输出 -->
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-error.log</file>
+        <file>${log.path}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-error.log</fileNamePattern>
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/error.log</fileNamePattern>
+            <!-- 日志最大的历史 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -66,20 +68,16 @@
         </filter>
     </appender>
 
-    <!-- 用户访问日志输出  -->
-    <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-user.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/sys-user.log</fileNamePattern>
-            <maxHistory>${log.maxHistory}</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${log.pattern}</pattern>
-        </encoder>
+    <!-- 异步日志输出 -->
+    <appender name="async_info" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold >0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="file_info" />
     </appender>
 
-    <!-- 系统模块日志级别控制  -->
-    <logger name="com.nova.log" level="debug"/>
     <!-- Spring日志级别控制  -->
     <logger name="org.springframework" level="warn"/>
 
@@ -89,14 +87,9 @@
 
     <!--系统操作日志-->
     <root level="info">
-        <appender-ref ref="file_info"/>
+        <appender-ref ref="async_info"/>
         <appender-ref ref="file_debug"/>
         <appender-ref ref="file_error"/>
     </root>
-
-    <!--系统用户操作日志-->
-    <logger name="sys-user" level="info">
-        <appender-ref ref="sys-user"/>
-    </logger>
 
 </configuration>

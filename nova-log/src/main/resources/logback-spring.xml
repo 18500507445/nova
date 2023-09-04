@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <springProperty scope="context" name="logPath" source="log.path" defaultValue="log.path"/>
+    <springProperty scope="context" name="logPath" source="logging.file.path" defaultValue="logging.file.path"/>
     <property name="log.path" value="${logPath}" />
     <property name="log.maxHistory" value="15"/>
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
+<!--    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>-->
+
+    <!-- 异步打印用这个，因为默认不开启打印方法和行数 -->
+    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -68,13 +71,19 @@
         </filter>
     </appender>
 
-    <!-- 异步日志输出 -->
-    <appender name="async_info" class="ch.qos.logback.classic.AsyncAppender">
+    <!-- 异步日志输出  -->
+    <appender name="async_console" class="ch.qos.logback.classic.AsyncAppender">
         <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
-        <discardingThreshold >0</discardingThreshold>
+        <discardingThreshold>0</discardingThreshold>
         <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
         <queueSize>512</queueSize>
+        <!-- 打印栈堆信息 开启性能降低和同步一样效果-->
+<!--        <includeCallerData>true</includeCallerData>-->
         <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="console" />
+    </appender>
+
+    <appender name="async_info" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="file_info" />
     </appender>
 
@@ -82,7 +91,7 @@
     <logger name="org.springframework" level="warn"/>
 
     <root level="debug">
-        <appender-ref ref="console"/>
+        <appender-ref ref="async_console"/>
     </root>
 
     <!--系统操作日志-->

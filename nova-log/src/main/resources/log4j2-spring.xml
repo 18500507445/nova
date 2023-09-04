@@ -5,13 +5,13 @@
 
     <Properties>
         <!-- 模块名称，影响日志配置名，日志文件名，根据自己项目进行配置 -->
-        <Property name="LOG_MODULE_NAME" value="nova-log"/>
+        <Property name="LOG_MODULE_NAME" value="${sys:appName}"/>
         <!-- 日志输出级别 info、warn、error -->
         <Property name="LOG_INFO_LEVEL" value="info"/>
         <Property name="LOG_WARN_LEVEL" value="warn"/>
         <Property name="LOG_ERROR_LEVEL" value="error"/>
         <!-- 在当前目录下创建名为log目录做日志存放的目录 -->
-        <Property name="FILE_PATH" value="/Users/wangzehui/Documents/Logs/nova/nova-log"/>
+        <Property name="FILE_PATH" value="${sys:LOG_PATH}"/>
         <!-- 日志文件大小，超过这个大小将被压缩 -->
         <Property name="LOG_MAX_SIZE" value="1024MB"/>
         <!-- 保留多少天以内的日志 -->
@@ -86,13 +86,13 @@
 
     <Loggers>
         <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
-        <Logger name="org.mybatis" level="info" additivity="false">
-            <AppenderRef ref="STDOUT"/>
+        <Logger name="org.springframework" level="${LOG_INFO_LEVEL}" additivity="false">
+            <AppenderRef ref="Console"/>
         </Logger>
 
         <!-- 开发环境使用 -->
         <!--<Root level="${LOG_INFO_LEVEL}">
-            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="Console"/>
         </Root>-->
 
         <!-- 测试，生产环境使用 -->

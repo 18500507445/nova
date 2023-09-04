@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: wzh
  * @date: 2022/11/19 17:19
  */
-@Slf4j
+@Slf4j(topic = "LogController")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")

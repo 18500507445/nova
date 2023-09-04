@@ -4,6 +4,11 @@ server:
   servlet:
     context-path: /
 
-# 线上log路径
-log:
-  path: /Users/wangzehui/Documents/Logs/nova/nova-log
+spring:
+  application:
+    name: nova-log
+
+# log路径
+logging:
+  file:
+    path: /Users/wangzehui/Documents/Logs/nova/${spring.application.name}

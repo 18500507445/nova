@@ -85,9 +85,9 @@ public class CommonTest {
      */
     @Test
     public void testLog() {
-        log.info("记录:{}","infoLog");
-        log.warn("警告:{}","warnLog");
-        log.error("异常:{}","errorLog");
+        log.info("记录:{}", "infoLog");
+        log.warn("警告:{}", "warnLog");
+        log.error("异常:{}", "errorLog");
     }
 
     @Autowired
@@ -100,6 +100,7 @@ public class CommonTest {
     public void demoA() {
         RespResult<String> success = RespResult.success("测试");
         String property = env.getProperty("spring.redis.host");
-        System.err.println(JSONUtil.toJsonStr(success));
+        System.err.println("success :" + JSONUtil.toJsonStr(success));
+        System.err.println("property :" + JSONUtil.toJsonStr(property));
     }
 }

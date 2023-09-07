@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
  * @author: wzh
  * @date: 2022/10/11 10:40
  */
+//@Component
 class InitDemo3 implements CommandLineRunner {
 
     @Override

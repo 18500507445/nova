@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
  * @author: wzh
  * @date: 2022/10/11 10:35
  */
+//@Component
 class InitDemo1 {
 
     /**

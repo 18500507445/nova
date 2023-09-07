@@ -20,7 +20,7 @@ public class TraceFilterConfig {
 
     @Bean
     public FilterRegistrationBean<TraceWebFilter> registerTraceFilter() {
-        FilterRegistrationBean<TraceWebFilter> registration = new FilterRegistrationBean<TraceWebFilter>();
+        FilterRegistrationBean<TraceWebFilter> registration = new FilterRegistrationBean<>();
         registration.setFilter(traceWebFilter);
         registration.addUrlPatterns("/*");
         registration.setName("traceWebFilter");

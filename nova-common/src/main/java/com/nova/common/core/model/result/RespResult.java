@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nova.common.trace.TraceHelper;
 import com.nova.common.utils.spring.SpringUtils;
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,6 +27,7 @@ public class RespResult<T> implements Serializable {
     /**
      * 结果信息
      */
+    @Getter
     private String message = RespResultCode.OK.getMessage();
 
     /**
@@ -36,6 +38,7 @@ public class RespResult<T> implements Serializable {
     /**
      * 返回结果的数据对象
      */
+    @Getter
     private T data;
 
     /**
@@ -196,17 +199,9 @@ public class RespResult<T> implements Serializable {
         return this;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public RespResult<T> setMessage(String msg) {
         this.message = msg;
         return this;
-    }
-
-    public String getDetailMessage() {
-        return detailMessage;
     }
 
     public RespResult<T> setDetailMessage(String detailMessage) {
@@ -217,10 +212,6 @@ public class RespResult<T> implements Serializable {
     public RespResult<T> setMessage(String msg, Object... params) {
         this.message = String.format(msg, params);
         return this;
-    }
-
-    public T getData() {
-        return data;
     }
 
     public RespResult<T> setData(T data) {

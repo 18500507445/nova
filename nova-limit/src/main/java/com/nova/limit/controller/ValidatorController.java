@@ -1,7 +1,8 @@
 package com.nova.limit.controller;
 
 import com.nova.common.core.model.business.ValidatorReqDTO;
-import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.result.RespResult;
+import com.nova.common.exception.base.ParamException;
 import com.nova.common.utils.common.ValidatorUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,17 +26,21 @@ public class ValidatorController {
      * validator
      */
     @PostMapping("validator")
-    public AjaxResult validator(@Validated ValidatorReqDTO reqDto) {
-        return AjaxResult.success("成功");
+    public RespResult<Void> validator(@Validated ValidatorReqDTO reqDTO) {
+        return RespResult.success();
     }
 
     /**
      * 自定义validator
      */
     @PostMapping("customValidator")
-    public AjaxResult customValidator(ValidatorReqDTO reqDto) {
-        ValidatorUtil.validate(reqDto);
-        return AjaxResult.success("成功");
+    public RespResult<Void> customValidator(ValidatorReqDTO reqDTO) {
+        try {
+            ValidatorUtil.validate(reqDTO);
+        } catch (ParamException e) {
+            return RespResult.error(e.getMessage());
+        }
+        return RespResult.success();
     }
 
 }

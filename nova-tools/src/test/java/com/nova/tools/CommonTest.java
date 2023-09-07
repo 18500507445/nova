@@ -2,8 +2,6 @@ package com.nova.tools;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.json.JSONUtil;
-import com.nova.common.core.model.result.RespResult;
 import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,8 +10,6 @@ import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,17 +86,4 @@ public class CommonTest {
         log.error("异常:{}", "errorLog");
     }
 
-    @Autowired
-    private ApplicationContext applicationContext;
-
-    @Autowired
-    private Environment env;
-
-    @Test
-    public void demoA() {
-        RespResult<String> success = RespResult.success("测试");
-        String property = env.getProperty("spring.redis.host");
-        System.err.println("success :" + JSONUtil.toJsonStr(success));
-        System.err.println("property :" + JSONUtil.toJsonStr(property));
-    }
 }

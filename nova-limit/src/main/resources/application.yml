@@ -5,6 +5,9 @@ server:
     context-path: /
 
 spring:
+  profiles:
+    active: local
+
   redis:
     host: 47.100.174.176
     port: 63799

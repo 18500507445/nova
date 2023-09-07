@@ -20,11 +20,7 @@ public class ValidatorUtil {
 
     }
 
-    private static final Validator VALIDATOR;
-
-    static {
-        VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
-    }
+    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
     public static void validate(Object object, Class<?>... groups) throws ParamException {
         Set<ConstraintViolation<Object>> constraintViolations = VALIDATOR.validate(object, groups);

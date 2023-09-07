@@ -27,7 +27,6 @@ public class GlobalExceptionAdvice {
     @ExceptionHandler(BindException.class)
     public AjaxResult handleBindException(BindException e) {
         log.debug("handleBindException：{}", e.getMessage());
-
         StringBuilder msg = new StringBuilder();
         List<FieldError> fieldErrors = e.getFieldErrors();
         for (FieldError fieldError : fieldErrors) {

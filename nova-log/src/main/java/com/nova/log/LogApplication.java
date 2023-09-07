@@ -5,10 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Objects;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@ComponentScan(basePackages = {"com.nova.common", "com.nova.framework", "com.nova.log"})
 public class LogApplication {
 
     public static void main(String[] args) {

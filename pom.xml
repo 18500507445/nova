@@ -47,6 +47,10 @@
         <java.version>1.8</java.version>
         <nova.version>1.0-SNAPSHOT</nova.version>
         <boot.version>2.7.15</boot.version>
+
+        <surefire.plugin.version>3.1.2</surefire.plugin.version>
+        <resources.plugin.version>3.3.1</resources.plugin.version>
+
     </properties>
 
     <!-- 依赖声明-->
@@ -128,5 +132,22 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <build>
+        <!-- 设置构建的 jar 包名 -->
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <plugins>
+            <!-- 打包过滤测试类 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
 
 </project>

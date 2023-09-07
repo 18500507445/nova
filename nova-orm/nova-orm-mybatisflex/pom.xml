@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nova-rom-mybatisflex</artifactId>
+    <artifactId>nova-orm-mybatisflex</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -8,6 +8,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -30,6 +31,7 @@ public class TestRedis {
         final Object o = redisService.get("234");
         System.err.println("o = " + o);
     }
+
 
     /**
      * 测试redisson加锁、解锁

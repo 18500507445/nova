@@ -13,7 +13,7 @@
     <modules>
         <module>nova-orm-mybatis</module>
         <module>nova-orm-mybatisplus</module>
-        <module>nova-rom-mybatisflex</module>
+        <module>nova-orm-mybatisflex</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 

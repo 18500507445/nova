@@ -7,13 +7,13 @@ server:
 spring:
   redis:
     # redis数据库索引（默认为0）
-    database: 0
+    database: 1
     # redis服务器地址
-    host: 47.100.174.176
+    host: 47.93.138.176
     # redis服务器连接端口
-    port: 63799
+    port: 6381
     # redis服务器连接密码（尽量设置密码，防止远程注入服务器挖矿）
-    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    password: myredis2018
     lettuce:
       pool:
         # 连接池最大连接数（使用负值表示没有限制）

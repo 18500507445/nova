@@ -1,6 +1,8 @@
 package com.nova.tools.demo.exercise;
 
 
+import lombok.Getter;
+
 /**
  * @author wzh
  * @date 2018/10/24 14:06
@@ -21,6 +23,7 @@ public class EnumTest {
     }
 }
 
+@Getter
 enum RequestTypeEnum {
 
     LOCKSEAT(1, "锁座"),
@@ -35,17 +38,9 @@ enum RequestTypeEnum {
 
     OFFINEREFUND(6, "会员卡退款");
 
-    private int code;
+    private final int code;
 
-    private String name;
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
+    private final String name;
 
     RequestTypeEnum(int code, String name) {
         this.code = code;

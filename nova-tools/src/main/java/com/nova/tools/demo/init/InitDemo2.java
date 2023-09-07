@@ -7,7 +7,6 @@ import org.springframework.beans.factory.InitializingBean;
  * @author: wzh
  * @date: 2022/10/11 10:39
  */
-//@Component
 class InitDemo2 implements InitializingBean {
 
     @Override

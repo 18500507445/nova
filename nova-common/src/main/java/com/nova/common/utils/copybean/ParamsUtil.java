@@ -14,11 +14,14 @@ import java.util.stream.Collectors;
  */
 public class ParamsUtil {
 
+    private ParamsUtil(){
+
+    }
+
     /**
      * 参数非空校验
      */
     public static void checkNotNull(@Nullable Object params) {
-
         Class<?> clazz = params.getClass();
         Field[] fields = clazz.getDeclaredFields();
         if (ArrayUtil.isEmpty(fields)) {

@@ -6,6 +6,7 @@ import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,12 @@ public class CommonTest {
         log.warn("警告:{}", "warnLog");
         log.error("异常:{}", "errorLog");
     }
+
+    @Test
+    public void traceIdTest() {
+        String traceId = TraceContext.traceId();
+        System.out.println("s = " + traceId);
+    }
+
 
 }

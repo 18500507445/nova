@@ -159,8 +159,8 @@ class ListDemo {
     @Test
     public void listToMap() {
         Map<String, Integer> collect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge));
+        Map<String, Integer> newCollect = PEOPLE_LIST.stream().collect(Collectors.toMap(People::getName, People::getAge));
         System.err.println(JSONUtil.toJsonStr(collect));
-
     }
 
     /**

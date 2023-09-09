@@ -1,5 +1,8 @@
 package com.nova.tools;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
+import com.google.common.collect.Lists;
 import com.starter.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -8,7 +11,10 @@ import org.redisson.api.RedissonClient;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,13 +31,6 @@ public class TestRedis {
 
     @Resource
     private RedissonClient redissonClient;
-
-    @Test
-    public void testRedis() {
-        final Object o = redisService.get("234");
-        System.err.println("o = " + o);
-    }
-
 
     /**
      * 测试redisson加锁、解锁
@@ -65,6 +64,56 @@ public class TestRedis {
 
     public void release(String key) {
         redissonClient.getLock(key).unlock();
+    }
+
+    @Test
+    public void testRedis() {
+        final Object o = redisService.getHashValue("testHash", "1");
+        final Object map = redisService.getHash("testHash");
+        System.err.println("o = " + o);
+        System.err.println("map = " + map);
+    }
+
+    /**
+     * 400w 数据 hash 230m内存
+     */
+    @Test
+    public void calculateRedisHash() {
+        int num = 4000000;
+        int sharding = 80000;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            list.add(i);
+        }
+        TimeInterval timer = DateUtil.timer();
+        List<List<Integer>> partition = Lists.partition(list, sharding);
+        for (List<Integer> integers : partition) {
+            Map<String, Object> hashMap = new HashMap<>(sharding);
+            for (Integer integer : integers) {
+                hashMap.put(String.valueOf(integer), integer);
+            }
+            redisService.setHash("testHash", hashMap);
+        }
+        System.err.println("耗时：" + timer.interval());
+    }
+
+    /**
+     * 400w数据 list 30m内存
+     */
+    @Test
+    public void calculateRedisList() {
+        int num = 4000000;
+        int sharding = 80000;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            list.add(i);
+        }
+        TimeInterval timer = DateUtil.timer();
+        List<List<Integer>> partition = Lists.partition(list, sharding);
+        for (List<Integer> integers : partition) {
+            redisService.setList("testList", integers);
+        }
+        System.err.println("耗时：" + timer.interval());
     }
 
 

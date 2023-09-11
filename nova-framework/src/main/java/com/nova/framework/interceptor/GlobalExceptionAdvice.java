@@ -1,6 +1,6 @@
 package com.nova.framework.interceptor;
 
-import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.result.RespResult;
 import com.nova.common.exception.base.ParamException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
@@ -21,11 +21,12 @@ public class GlobalExceptionAdvice {
 
     /**
      * 拦截的validator异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(BindException.class)
-    public AjaxResult handleBindException(BindException e) {
+    public RespResult handleBindException(BindException e) {
         log.debug("handleBindException：{}", e.getMessage());
         StringBuilder msg = new StringBuilder();
         List<FieldError> fieldErrors = e.getFieldErrors();
@@ -33,17 +34,18 @@ public class GlobalExceptionAdvice {
             String message = fieldError.getDefaultMessage();
             msg.append(message);
         }
-        return AjaxResult.error("1000", msg.toString());
+        return RespResult.error("1000", msg.toString());
     }
 
     /**
      * 自定义参数异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(ParamException.class)
-    public AjaxResult paramException(ParamException e) {
+    public RespResult paramException(ParamException e) {
         log.debug("paramException :{}", e.getMessage(), e);
-        return AjaxResult.error("1000", e.getMessage());
+        return RespResult.error("1000", e.getMessage());
     }
 }

@@ -48,7 +48,6 @@ public class DistributeLockAspect {
                 return point.proceed();
             } catch (Throwable throwable) {
                 log.error("获取Redis分布式锁[异常]，加锁失败", throwable);
-                throwable.printStackTrace();
             } finally {
                 redissonLock.release(lockName);
             }

@@ -1,9 +1,13 @@
 package com.starter.redis;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
@@ -40,6 +44,25 @@ public class RedisAutoConfiguration {
         return template;
     }
 
+    /**
+     * 第一数据源配置信息
+     */
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = "spring.redis")
+    public RedisProperties primaryRedisProperties() {
+        return new RedisProperties();
+    }
+
+    /**
+     * 第二数据源配置信息
+     */
+    @Bean
+    @ConfigurationProperties(prefix = "spring.redis2")
+    public RedisProperties secondRedisProperties() {
+        return new RedisProperties();
+    }
+
     @Bean(name = "redisService")
     public RedisService redisService() {
         return new RedisService();
@@ -64,10 +87,12 @@ public class RedisAutoConfiguration {
     public RedisTemplate<String, Object> secondRedisTemplate(@Value("${spring.redis2.database:-1}") int database,
                                                              @Value("${spring.redis2.host:default}") String hostName,
                                                              @Value("${spring.redis2.port:-1}") int port,
-                                                             @Value("${spring.redis2.password:default}") String password) {
+                                                             @Value("${spring.redis2.password:default}") String password,
+                                                             @Qualifier("secondRedisProperties") RedisProperties secondRedisProperties) {
         if ("default".equals(hostName)) {
             return null;
         }
+        System.out.println("secondRedisProperties = " + secondRedisProperties);
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory(database, hostName, port, password));
         template.setKeySerializer(RedisSerializer.string());

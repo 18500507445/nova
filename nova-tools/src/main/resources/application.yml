@@ -30,6 +30,19 @@ spring:
     #连接超时时间
     timeout: 10000
 
+  redis2:
+    database: 2
+    host: 47.100.174.176
+    port: 63799
+    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: 3000
+        max-idle: 8
+        min-idle: 0
+    timeout: 10000
+
   data:
     mongodb:
       host: 47.100.174.176

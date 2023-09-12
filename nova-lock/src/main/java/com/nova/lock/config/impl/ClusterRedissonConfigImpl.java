@@ -33,7 +33,6 @@ public class ClusterRedissonConfigImpl implements RedissonConfigStrategy {
             log.info("初始化[cluster]方式Config,redisAddress:" + address);
         } catch (Exception e) {
             log.error("cluster Redisson init error：{}", e.getMessage());
-            e.printStackTrace();
         }
         return config;
     }

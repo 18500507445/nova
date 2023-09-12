@@ -6,8 +6,14 @@ server:
 
 spring:
   redis:
+    # 自定义参数
     address: 47.100.174.176:63799
     type: standalone
+
+    # redis服务器地址
+    host: 47.100.174.176
+    # redis服务器连接端口
+    port: 63799
     password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
     database: 0
 

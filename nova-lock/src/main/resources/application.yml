@@ -4,13 +4,12 @@ server:
   servlet:
     context-path: /
 
-redisson:
-  lock:
-    server:
-      address: 47.100.174.176:63799
-      type: standalone
-      password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
-      database: 0
+spring:
+  redis:
+    address: 47.100.174.176:63799
+    type: standalone
+    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    database: 0
 
 jasypt:
   encryptor:

@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date: 2022/11/19 17:18
  */
 @Data
-@ConfigurationProperties(prefix = "redisson.lock.server")
+@ConfigurationProperties(prefix = "spring.redis")
 public class RedissonProperties {
 
     /**

@@ -1,6 +1,5 @@
 package com.nova.limit.config;
 
-import lombok.Data;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -30,7 +29,7 @@ public class RedissonConfig {
         Config config = new Config();
         String address = "redis://" + host + ":" + port;
         config.useSingleServer().setAddress(address);
-        if (null != password && !"".equals(password.trim())) {
+        if (null != password && !password.trim().isEmpty()) {
             config.useSingleServer().setPassword(password);
         }
         return Redisson.create(config);

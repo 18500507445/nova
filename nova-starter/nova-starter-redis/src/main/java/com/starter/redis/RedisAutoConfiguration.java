@@ -2,7 +2,6 @@ package com.starter.redis;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -44,10 +43,16 @@ public class RedisAutoConfiguration {
         return template;
     }
 
+
+    @Bean(name = "redisService")
+    public RedisService redisService() {
+        return new RedisService();
+    }
+
     /**
      * 第一数据源配置信息
      */
-    @Bean
+    @Bean(name = "primaryRedisProperties")
     @Primary
     @ConfigurationProperties(prefix = "spring.redis")
     public RedisProperties primaryRedisProperties() {
@@ -57,44 +62,20 @@ public class RedisAutoConfiguration {
     /**
      * 第二数据源配置信息
      */
-    @Bean
+    @Bean(name = "secondRedisProperties")
     @ConfigurationProperties(prefix = "spring.redis2")
     public RedisProperties secondRedisProperties() {
         return new RedisProperties();
     }
 
-    @Bean(name = "redisService")
-    public RedisService redisService() {
-        return new RedisService();
-    }
-
-    @Value("${spring.redis2.lettuce.pool.max-idle:-1}")
-    private int maxIdle;
-
-    @Value("${spring.redis2.lettuce.pool.max-active:-1}")
-    private int maxActive;
-
-    @Value("${spring.redis2.lettuce.pool.max-wait:-1}")
-    private long maxWaitMillis;
-
-    @Value("${spring.redis2.lettuce.pool.min-idle:-1}")
-    private int minIdle;
-
-    @Value("${spring.redis2.timeout:-1}")
-    private int timeout;
 
     @Bean(name = "secondRedisTemplate")
-    public RedisTemplate<String, Object> secondRedisTemplate(@Value("${spring.redis2.database:-1}") int database,
-                                                             @Value("${spring.redis2.host:default}") String hostName,
-                                                             @Value("${spring.redis2.port:-1}") int port,
-                                                             @Value("${spring.redis2.password:default}") String password,
-                                                             @Qualifier("secondRedisProperties") RedisProperties secondRedisProperties) {
-        if ("default".equals(hostName)) {
+    public RedisTemplate<String, Object> secondRedisTemplate(@Qualifier("secondRedisProperties") RedisProperties secondRedisProperties) {
+        if ("localhost".equals(secondRedisProperties.getHost())) {
             return null;
         }
-        System.out.println("secondRedisProperties = " + secondRedisProperties);
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(connectionFactory(database, hostName, port, password));
+        template.setConnectionFactory(connectionFactory(secondRedisProperties));
         template.setKeySerializer(RedisSerializer.string());
         template.setHashKeySerializer(RedisSerializer.string());
         template.setValueSerializer(RedisSerializer.json());
@@ -104,15 +85,22 @@ public class RedisAutoConfiguration {
 
     /**
      * 使用lettuce配置Redis连接信息
-     *
-     * @param database Redis数据库编号
-     * @param hostName 服务器地址
-     * @param port     端口
-     * @param password 密码
      */
-    public RedisConnectionFactory connectionFactory(int database, String hostName, int port, String password) {
+    public RedisConnectionFactory connectionFactory(RedisProperties redisProperties) {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName(hostName);
+        String host = redisProperties.getHost();
+        int port = redisProperties.getPort();
+        String password = redisProperties.getPassword();
+        int database = redisProperties.getDatabase();
+
+        Duration timeout = null == redisProperties.getTimeout() ? Duration.ZERO : redisProperties.getTimeout();
+
+        int maxIdle = redisProperties.getLettuce().getPool().getMaxIdle();
+        int minIdle = redisProperties.getLettuce().getPool().getMinIdle();
+        int maxActive = redisProperties.getLettuce().getPool().getMaxActive();
+        Duration maxWait = redisProperties.getLettuce().getPool().getMaxWait();
+
+        configuration.setHostName(host);
         configuration.setPort(port);
         if (null != password) {
             configuration.setPassword(password);
@@ -124,10 +112,10 @@ public class RedisAutoConfiguration {
         genericObjectPoolConfig.setMaxIdle(maxIdle);
         genericObjectPoolConfig.setMinIdle(minIdle);
         genericObjectPoolConfig.setMaxTotal(maxActive);
-        genericObjectPoolConfig.setMaxWait(Duration.ofMillis(maxWaitMillis));
+        genericObjectPoolConfig.setMaxWait(maxWait);
 
         LettuceClientConfiguration clientConfig = LettucePoolingClientConfiguration.builder()
-                .commandTimeout(Duration.ofMillis(timeout))
+                .commandTimeout(timeout)
                 .poolConfig(genericObjectPoolConfig)
                 .build();
 

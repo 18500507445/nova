@@ -51,6 +51,7 @@
         <surefire.plugin.version>3.1.2</surefire.plugin.version>
         <resources.plugin.version>3.3.1</resources.plugin.version>
 
+        <redission.version>3.18.0</redission.version>
     </properties>
 
     <!-- 依赖声明-->

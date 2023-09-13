@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date: 2022/9/8 19:43
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@ComponentScan(basePackages = {"com.nova.common", "com.nova.framework", "com.nova.excel"})
+@ComponentScan(basePackages = {"com.nova.common", "com.nova.excel"})
 public class ExcelApplication {
 
     public static void main(String[] args) {

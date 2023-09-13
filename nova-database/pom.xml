@@ -14,25 +14,13 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <druid.version>1.2.16</druid.version>
+        <druid.version>1.2.18</druid.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-common</artifactId>
-        </dependency>
-
-        <!-- SpringBoot Web容器 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- SpringBoot 拦截器 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!-- Mysql驱动包 -->

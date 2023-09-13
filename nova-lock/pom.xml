@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.nova</groupId>
-            <artifactId>nova-framework</artifactId>
+            <artifactId>nova-common</artifactId>
         </dependency>
 
         <dependency>

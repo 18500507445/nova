@@ -25,7 +25,6 @@
         <module>nova-common</module>
         <module>nova-database</module>
         <module>nova-excel</module>
-        <module>nova-framework</module>
         <module>nova-limit</module>
         <module>nova-lock</module>
         <module>nova-log</module>
@@ -67,14 +66,7 @@
             </dependency>
 
             <!-- 模块集成开始 -->
-            <!-- 核心组件 -->
-            <dependency>
-                <groupId>com.nova</groupId>
-                <artifactId>nova-framework</artifactId>
-                <version>${nova.version}</version>
-            </dependency>
-
-            <!-- 通用组件 -->
+            <!-- 通用组件、核心组件 -->
             <dependency>
                 <groupId>com.nova</groupId>
                 <artifactId>nova-common</artifactId>

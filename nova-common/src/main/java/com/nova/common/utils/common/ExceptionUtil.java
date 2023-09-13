@@ -1,15 +1,16 @@
 package com.nova.common.utils.common;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 /**
  * 错误信息处理类。
  */
 public class ExceptionUtil {
+
     /**
      * 获取exception的详细错误信息。
      */

@@ -1,4 +1,4 @@
-package com.nova.framework.interceptor;
+package com.nova.common.interceptor;
 
 import com.nova.common.core.model.result.RespResult;
 import com.nova.common.exception.base.ParamException;
@@ -26,7 +26,7 @@ public class GlobalExceptionAdvice {
      * @return
      */
     @ExceptionHandler(BindException.class)
-    public RespResult handleBindException(BindException e) {
+    public RespResult<Void> handleBindException(BindException e) {
         log.debug("handleBindException：{}", e.getMessage());
         StringBuilder msg = new StringBuilder();
         List<FieldError> fieldErrors = e.getFieldErrors();
@@ -44,7 +44,7 @@ public class GlobalExceptionAdvice {
      * @return
      */
     @ExceptionHandler(ParamException.class)
-    public RespResult paramException(ParamException e) {
+    public RespResult<Void> paramException(ParamException e) {
         log.debug("paramException :{}", e.getMessage(), e);
         return RespResult.error("1000", e.getMessage());
     }

@@ -78,7 +78,7 @@ public class AddressUtils {
                 }
             }
         } catch (Exception e) {
-            log.error("getIpAddress====>获取本地IP失败:{}", e);
+            log.error("getIpAddress====>获取本地IP失败", e);
         }
         return "";
     }
@@ -95,7 +95,7 @@ public class AddressUtils {
      * @return byte 字节
      */
     public static byte[] textToNumericFormatV4(String text) {
-        if (text.length() == 0) {
+        if (text.isEmpty()) {
             return null;
         }
 

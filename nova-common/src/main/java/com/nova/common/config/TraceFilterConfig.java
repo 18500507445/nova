@@ -1,4 +1,4 @@
-package com.nova.framework.config;
+package com.nova.common.config;
 
 import com.nova.common.trace.TraceWebFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

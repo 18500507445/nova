@@ -1,4 +1,4 @@
-package com.nova.framework.config;
+package com.nova.common.config;
 
 import com.nova.common.utils.thread.Threads;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;

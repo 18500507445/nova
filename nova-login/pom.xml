@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.nova</groupId>
-            <artifactId>nova-framework</artifactId>
+            <artifactId>nova-common</artifactId>
         </dependency>
 
         <!-- spring-boot 集成JustAuth三方登录 -->

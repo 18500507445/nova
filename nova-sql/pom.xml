@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nova-sql</artifactId>
     <description>sql练习模块</description>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

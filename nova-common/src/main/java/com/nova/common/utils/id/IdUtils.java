@@ -24,7 +24,7 @@ public class IdUtils {
 
 
     /**
-     /**
+     * /**
      * 获取随机UUID
      *
      * @return 随机UUID
@@ -72,6 +72,11 @@ public class IdUtils {
         return snowflake.nextId();
     }
 
+    public static String snowId() {
+        final Snowflake snowflake = IdUtil.getSnowflake();
+        return snowflake.nextIdStr();
+    }
+
     /**
      * 测试多线程下，生成雪花id
      */
@@ -96,7 +101,7 @@ public class IdUtils {
         } catch (InterruptedException e) {
             throw new UtilException(e);
         }
-        System.out.println("耗时：" + timer.interval() + "ms");
+        System.err.println("耗时：" + timer.interval() + "ms");
         Assert.equals(threadCount * idCountPerThread, set.size());
     }
 }

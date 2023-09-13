@@ -19,17 +19,17 @@ public class HttpRequestProxy {
     /**
      * 连接超时
      */
-    private static int connectTimeOut = 50000;
+    private static final int connectTimeOut = 50000;
 
     /**
      * 读取数据超时
      */
-    private static int readTimeOut = 6000000;
+    private static final int readTimeOut = 6000000;
 
     /**
      * 请求编码
      */
-    private static String requestEncoding = "GBK";
+    private static final String requestEncoding = "GBK";
 
     /**
      * 向指定 URL 发送GET方法的请求

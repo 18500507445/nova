@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>com.nova</groupId>
-            <artifactId>nova-framework</artifactId>
+            <artifactId>nova-common</artifactId>
             <exclusions>
                 <exclusion>
                     <artifactId>mybatis-spring-boot-starter</artifactId>

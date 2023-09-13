@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.Objects;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@ComponentScan(basePackages = {"com.nova.common", "com.nova.framework", "com.nova.log"})
+@ComponentScan(basePackages = {"com.nova.common", "com.nova.log"})
 public class LogApplication {
 
     public static void main(String[] args) {

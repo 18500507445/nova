@@ -1,12 +1,15 @@
 package com.nova.common.utils.security;
 
+import cn.hutool.json.JSONUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.interfaces.Claim;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description: jwt工具类
@@ -17,23 +20,26 @@ public class JwtUtils {
 
     private static final long EXPIRE_TIME = 24 * 60 * 60 * 1000;
 
+    private static final String SECRET = "abc";
+
     /**
      * 生成签名,expireTime后过期
      *
      * @return 加密的token
      */
-    public static String sign(String userName, String randomStr) {
+    public static String sign(String json) {
         try {
             Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-            Algorithm algorithm = Algorithm.HMAC256(randomStr);
-            return JWT.create()
-                    .withClaim("userName", userName)
-                    .withExpiresAt(date)
-                    .withIssuedAt(new Date())
-                    .sign(algorithm);
+            Algorithm algorithm = Algorithm.HMAC256(SECRET);
+            return JWT.create().withClaim("json", json).withExpiresAt(date).withIssuedAt(new Date()).sign(algorithm);
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static Map<String, Claim> parse(String token) {
+        Algorithm algorithm = Algorithm.HMAC256(SECRET);
+        return JWT.require(algorithm).build().verify(token).getClaims();
     }
 
     /**
@@ -43,8 +49,7 @@ public class JwtUtils {
      */
     public static boolean isTokenExpired(String token) {
         Date now = Calendar.getInstance().getTime();
-        DecodedJWT jwt = JWT.decode(token);
-        return jwt.getExpiresAt().before(now);
+        return JWT.decode(token).getExpiresAt().before(now);
     }
 
     /**
@@ -53,13 +58,11 @@ public class JwtUtils {
      * @param token 密钥
      * @return 是否正确
      */
-    public static boolean verify(String token, String userName, String randomStr) {
+    public static boolean verify(String token, String json) {
         try {
             //根据密码生成JWT效验器
-            Algorithm algorithm = Algorithm.HMAC256(randomStr);
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("userName", userName)
-                    .build();
+            Algorithm algorithm = Algorithm.HMAC256(SECRET);
+            JWTVerifier verifier = JWT.require(algorithm).withClaim("json", json).build();
             //效验TOKEN
             verifier.verify(token);
         } catch (Exception exception) {
@@ -69,13 +72,24 @@ public class JwtUtils {
     }
 
     public static void main(String[] args) {
-        String userName = "wzh";
-        String randomStr = "123";
+        Map<String, String> hashMap = new HashMap<>(16);
+        hashMap.put("id", "1");
+        hashMap.put("name", "wzh");
 
-        String token = sign(userName, randomStr);
+        String jsonStr = JSONUtil.toJsonStr(hashMap);
+
+        String token = sign(jsonStr);
         System.err.println("token：" + token);
 
-        boolean verify = verify(token, userName, randomStr);
+        boolean tokenExpired = isTokenExpired(token);
+        System.err.println("tokenExpired = " + tokenExpired);
+
+        boolean verify = verify(token, jsonStr);
         System.err.println("verify：" + verify);
+
+        Map<String, Claim> parse = parse(token);
+        String result = parse.get("json").asString();
+        System.out.println("result = " + result);
+
     }
 }

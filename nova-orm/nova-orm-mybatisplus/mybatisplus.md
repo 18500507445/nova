@@ -3,6 +3,9 @@
 * [Mybatisplus学习](https://baomidou.com/)
 * [学习视频](https://www.bilibili.com/video/BV1Bc411W7Wj?p=18&vd_source=bf69afcaca624e3b61a8f265c720a96b)
 * [参考笔记](https://blog.csdn.net/ewertyucf/article/details/130106739)
+* [细讲配置参数](https://yixinforu.blog.csdn.net/article/details/122562231?spm=1001.2014.3001.5502)
+* [常用注解](https://yixinforu.blog.csdn.net/article/details/122516135)
+* PageHelper源码核心类PageInterceptor（日志开关、拦截器、count查询）
 
 ### 第一章：入门篇（sql文件在resources路径下）
 * 引入依赖

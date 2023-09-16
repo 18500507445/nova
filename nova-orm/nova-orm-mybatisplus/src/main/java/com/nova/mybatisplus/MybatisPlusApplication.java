@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class MybatisPlusApplication {
 
     public static void main(String[] args) {
+        //关闭pageHelper启动banner图
+        System.setProperty("pagehelper.banner", "false");
         SpringApplication.run(MybatisPlusApplication.class, args);
     }
 

@@ -1,6 +1,9 @@
 package com.nova.mybatisplus;
 
 import cn.hutool.json.JSONUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nova.mybatisplus.chapter1.OneUserMapper;
 import com.nova.mybatisplus.entity.UserDO;
 import org.junit.jupiter.api.Test;
@@ -20,11 +23,38 @@ public class Chapter1Test {
     @Resource
     private OneUserMapper oneUserMapper;
 
+    /**
+     * 关闭 pageHelper启动banner
+     */
+    static {
+        System.setProperty("pagehelper.banner", "false");
+    }
+
     @Test
     public void selectList() {
+        PageHelper.startPage(1, 10);
         List<UserDO> userDOList = oneUserMapper.selectList(null);
-        String jsonStr = JSONUtil.toJsonStr(userDOList);
+        PageInfo<UserDO> pageInfo = new PageInfo<>(userDOList);
+        String jsonStr = JSONUtil.toJsonStr(pageInfo);
         System.err.println("jsonStr = " + jsonStr);
     }
+
+    @Test
+    public void pagingTwo() {
+        PageHelper.offsetPage(1, 10);
+    }
+
+    @Test
+    public void pagingThree() {
+        Page<UserDO> page = PageHelper.startPage(1, 10)
+                .doSelectPage(() -> oneUserMapper.selectList(null));
+    }
+
+    @Test
+    public void pagingFour() {
+        PageInfo<UserDO> pageInfo = PageHelper.startPage(1, 10)
+                .doSelectPageInfo(() -> oneUserMapper.selectList(null));
+    }
+
 
 }

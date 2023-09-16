@@ -68,7 +68,7 @@ mybatis-config.xml配置
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://47.100.174.176:3306/study"/>
                 <property name="username" value="root"/>
-                <property name="password" value="@wangzehui123"/>
+                <property name="password" value="password"/>
             </dataSource>
         </environment>
     </environments>
@@ -119,7 +119,7 @@ public class MybatisConfiguration {
     @Bean
     public DataSource dataSource(){
         return new PooledDataSource("com.mysql.cj.jdbc.Driver",
-                "jdbc:mysql://47.100.174.176:3306/study", "root", "@wangzehui123");
+                "jdbc:mysql://47.100.174.176:3306/study", "root", "password");
     }
 
     @Bean

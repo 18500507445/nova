@@ -45,7 +45,8 @@
 
 12.nova-orm
 * [mybatis学习](nova-orm/nova-orm-mybatis/mybatisNote.md)
-* [mybatisplus学习](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
+* [mybatisplus整合pageHelper学习](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
+* [mybatisflex学习](nova-orm/nova-orm-mybatisflex/mybatisflex.md)
 
 13.nova-rpc
 * [手写rpc框架](nova-rpc/nova-rpc-socket/rpcNote.md)

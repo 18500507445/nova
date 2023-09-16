@@ -22,7 +22,7 @@ spring:
           url: jdbc:mysql://47.100.174.176:3306/my_mall?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
           driver-class-name: com.mysql.cj.jdbc.Driver
 
-  ##关闭spring启动图
+  #关闭spring启动图
   main:
     banner-mode: off
 
@@ -30,9 +30,8 @@ mybatis-plus:
   global-config:
     #关闭mybatis-plus启动图
     banner: false
-
-  #打印log
   configuration:
+    #打印log
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #数据库 下划线命名映射小驼峰命名 user_name --> userName
     map-underscore-to-camel-case: true
@@ -40,7 +39,20 @@ mybatis-plus:
 
 jasypt:
   encryptor:
-    # 加密算法
     algorithm: PBEWITHHMACSHA512ANDAES_256
-    # 加密使用的盐
     password: jaspyt_password
+
+
+# pagehelper相关配置 可参考https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md
+pagehelper:
+  # 数据库方言 mysql
+  helperDialect: mysql
+  # 分页参数合理化，默认是false
+  # 启用合理化时，如果pageNum < 1会查询第一页，如果pageNum > pages会查询最后一页；
+  # 禁用合理化时，如果pageNum < 1 或 pageNum > pages会返回空数据
+  reasonable: true
+  # 支持通过Mapper接口参数来传递分页参数，默认值false
+  supportMethodsArguments: true
+  # 为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值
+  # 默认值countSql
+  params: count=countSql

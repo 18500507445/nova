@@ -123,9 +123,6 @@ public class TestOne {
         Account account = new Account();
         account.setId(4L).setAge(18).setBirthday(new Date());
         accountMapper.update(account);
-
-        //age = age + 1
-        accountMapper.updateByCondition(ACCOUNT.AGE, 1, QueryWrapper.create().where(ACCOUNT.ID.eq(4)));
     }
 
     @Test
@@ -143,9 +140,6 @@ public class TestOne {
     public void demoC() {
 
     }
-
-
-
 
 
 }

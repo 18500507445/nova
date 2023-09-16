@@ -16,24 +16,23 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <fastjson.version>2.0.20</fastjson.version>
+        <fastjson.version>2.0.40</fastjson.version>
         <hutool.version>5.8.20</hutool.version>
         <email.version>1.5</email.version>
         <guava.version>31.1-jre</guava.version>
         <thumbnailator.version>0.4.17</thumbnailator.version>
-        <commons.io.version>2.11.0</commons.io.version>
+        <commons.io.version>2.13.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
-        <poi.version>4.1.2</poi.version>
+        <poi.version>5.2.3</poi.version>
         <jwt.version>4.4.0</jwt.version>
         <vavr.version>1.0.0-alpha-4</vavr.version>
-        <bouncycastle.version>1.70</bouncycastle.version>
+        <bouncycastle.version>1.76</bouncycastle.version>
         <jsch.version>0.1.55</jsch.version>
-        <oshi.version>6.4.0</oshi.version>
+        <oshi.version>6.4.5</oshi.version>
         <c3p0.version>0.9.5.5</c3p0.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
-        <oss.version>3.16.0</oss.version>
+        <oss.version>3.17.0</oss.version>
         <jasypt.version>3.0.5</jasypt.version>
-        <jol.version>0.17</jol.version>
         <toolkit.version>8.16.0</toolkit.version>
         <mybatis.version>2.3.1</mybatis.version>
         <bitwalker.version>1.21</bitwalker.version>

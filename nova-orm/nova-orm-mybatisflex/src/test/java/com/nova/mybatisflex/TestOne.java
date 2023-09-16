@@ -125,7 +125,7 @@ public class TestOne {
         accountMapper.update(account);
 
         //age = age + 1
-        accountMapper.updateNumberAddByQuery(ACCOUNT.AGE, 1, QueryWrapper.create().where(ACCOUNT.ID.eq(4)));
+        accountMapper.updateByCondition(ACCOUNT.AGE, 1, QueryWrapper.create().where(ACCOUNT.ID.eq(4)));
     }
 
     @Test

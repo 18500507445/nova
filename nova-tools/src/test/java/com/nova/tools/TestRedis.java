@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public class TestRedis {
 
     @Resource
     private RedissonClient redissonClient;
+
+    @Resource
+    private RedisTemplate<String, Object> secondRedisTemplate;
 
     /**
      * 测试redisson加锁、解锁
@@ -73,6 +77,21 @@ public class TestRedis {
         System.err.println("o = " + o);
         System.err.println("map = " + map);
     }
+
+    /**
+     * 第二个redis数据源
+     */
+    @Test
+    public void secondRedis() {
+        final Object o1 = redisService.getHashValue("testHash", "1");
+        System.err.println("o1 = " + o1);
+
+
+        secondRedisTemplate.opsForValue().set("database2","1");
+        Object o = secondRedisTemplate.opsForValue().get("database2");
+        System.err.println("o = " + o);
+    }
+
 
     /**
      * 400w 数据 hash 230m内存

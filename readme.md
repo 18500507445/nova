@@ -24,6 +24,7 @@
 
 6.nova-limit
 * redis（jedis客户端。不推荐，1.线程不安全需要连接池 2.相比性能较差）
+* ![](./img/redis客户端对比.jpg)
 * [接口限流、请求响应拦截器、validation](nova-limit/limitNote.md)
 
 7.nova-lock

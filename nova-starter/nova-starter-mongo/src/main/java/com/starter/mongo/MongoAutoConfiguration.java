@@ -63,27 +63,33 @@ public class MongoAutoConfiguration {
     @Bean
     @Primary
     public MongoDatabaseFactory primaryMongoFactory(MongoProperties mongoProperties) throws UnsupportedEncodingException {
-        StringBuilder uri = new StringBuilder("mongodb://");
-        if (null != mongoProperties.getUsername()) {
-            uri.append(mongoProperties.getUsername());
+        String url;
+        if (null != mongoProperties.getUri()) {
+            url = mongoProperties.getUri();
+        } else {
+            StringBuilder uri = new StringBuilder("mongodb://");
+            if (null != mongoProperties.getUsername()) {
+                uri.append(mongoProperties.getUsername());
+                uri.append(":");
+            }
+            if (null != mongoProperties.getPassword()) {
+                String password = Arrays.toString(mongoProperties.getPassword());
+                password = password.replace("[", "").replace("]", "").replace(", ", "");
+                uri.append(URLEncoder.encode(password, "utf-8"));
+                uri.append("@");
+            }
+            uri.append(mongoProperties.getHost());
             uri.append(":");
+            uri.append(mongoProperties.getPort());
+            if (null != mongoProperties.getDatabase()) {
+                uri.append("/").append(mongoProperties.getDatabase());
+            }
+            if (null != mongoProperties.getAuthenticationDatabase()) {
+                uri.append("?authSource=").append(mongoProperties.getAuthenticationDatabase());
+            }
+            url = uri.toString();
         }
-        if (null != mongoProperties.getPassword()) {
-            String password = Arrays.toString(mongoProperties.getPassword());
-            password = password.replace("[", "").replace("]", "").replace(", ", "");
-            uri.append(URLEncoder.encode(password, "utf-8"));
-            uri.append("@");
-        }
-        uri.append(mongoProperties.getHost());
-        uri.append(":");
-        uri.append(mongoProperties.getPort());
-        if (null != mongoProperties.getDatabase()) {
-            uri.append("/").append(mongoProperties.getDatabase());
-        }
-        if (null != mongoProperties.getAuthenticationDatabase()) {
-            uri.append("?authSource=").append(mongoProperties.getAuthenticationDatabase());
-        }
-        return new SimpleMongoClientDatabaseFactory(uri.toString());
+        return new SimpleMongoClientDatabaseFactory(url);
     }
 
 }

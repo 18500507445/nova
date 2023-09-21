@@ -4,9 +4,21 @@ server:
   servlet:
     context-path: /
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include=*:
+
 spring:
   application:
-    name: nova-log
+    name: nova-tools
+
+  #SBA服务端地址
+  boot:
+    admin:
+      client:
+        url: http://localhost:8888
 
   redis:
     # redis数据库索引（默认为0）

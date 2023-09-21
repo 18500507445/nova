@@ -45,6 +45,8 @@
             <artifactId>redisson-spring-boot-starter</artifactId>
             <version>${redission.version}</version>
         </dependency>
+
+
     </dependencies>
 
 </project>

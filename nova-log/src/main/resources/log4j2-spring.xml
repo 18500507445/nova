@@ -18,7 +18,7 @@
         <Property name="LOG_DAYS" value="15"/>
         <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
         <!-- %logger{20} 表示 Logger 名字最长20个字符 -->
-        <Property name="LOG_PATTERN" value="%d [%t] [%thread] %-5level %logger{20} - %msg%n"/>
+        <Property name="LOG_PATTERN" value="%d [%t] [traceId:%X{X-B3-TraceId}] %-5level %logger{20} - %msg%n"/>
         <!--interval属性用来指定多久滚动一次 默认是1 hour-->
         <Property name="TIME_BASED_INTERVAL" value="1"/>
     </Properties>

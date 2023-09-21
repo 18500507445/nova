@@ -1,13 +1,12 @@
 package com.nova.common.trace;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.lang.generator.SnowflakeGenerator;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import org.slf4j.MDC;
 import org.springframework.core.NamedThreadLocal;
-
-import java.util.UUID;
 
 /**
  * @description: traceId和spanId工具类
@@ -19,11 +18,11 @@ public class TraceHelper {
     public static final ThreadLocal<Trace> CURRENT_SPAN = new NamedThreadLocal<>("TraceId Context");
 
     public static String genTraceId() {
-        return SecureUtil.md5(UUID.randomUUID().toString()).substring(2, 16);
+        return Convert.toStr(new SnowflakeGenerator().next());
     }
 
     public static String genSpanId() {
-        return Convert.toStr(new SnowflakeGenerator().next());
+        return SecureUtil.md5(UUID.randomUUID().toString()).substring(2, 16);
     }
 
     public static String getTraceId() {

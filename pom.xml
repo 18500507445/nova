@@ -80,7 +80,7 @@
                 <version>${nova.version}</version>
             </dependency>
 
-            <!-- mq-active组件 -->
+            <!-- mq组件 -->
             <dependency>
                 <groupId>com.nova</groupId>
                 <artifactId>nova-mq</artifactId>

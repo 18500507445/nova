@@ -265,7 +265,7 @@
             <version>${sba.version}</version>
         </dependency>
 
-        <!-- 更多的监控需要的依赖 -->
+        <!-- 更多的监控需要的依赖 访问：http://localhost:8080/actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

@@ -37,30 +37,33 @@
 9.nova-login
 * [三方登录JustAuth](nova-login/loginNote.md)
 
-10.nova-mq
+10.nova-monitor
+* [SBA监控后台]()
+
+11.nova-mq
 * active，kafka，rabbit，rocket（待定）
 
-11.nova-msg
+12.nova-msg
 * 发送邮件
 * 发送短信，多短信通道：阿里云、腾讯云、七牛云、云片
 
-12.nova-orm
+13.nova-orm
 * [mybatis学习](nova-orm/nova-orm-mybatis/mybatisNote.md)
 * [mybatisplus整合pageHelper学习](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
 * [mybatisflex学习](nova-orm/nova-orm-mybatisflex/mybatisflex.md)
 
-13.nova-rpc
+14.nova-rpc
 * [手写rpc框架](nova-rpc/nova-rpc-socket/rpcNote.md)
 * [websocket学习]
 
-14.nova-sql
+15.nova-sql
 * [sql练习](nova-sql/sqlNote.md)
 
-15.nova-starter（后续mq....）
+16.nova-starter（后续mq....）
 * 自定义starter：redis、mongo、xxlJob
 * <optional>true</optional>：防止依赖传递，导致引入后和项目的包冲突
 
-16.nova-tools
+17.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 * 引入了starter详情见测试类

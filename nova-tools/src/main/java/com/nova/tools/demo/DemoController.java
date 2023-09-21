@@ -1,7 +1,6 @@
 package com.nova.tools.demo;
 
-import cn.hutool.core.thread.ThreadUtil;
-import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.result.RespResult;
 import com.starter.redis.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +33,7 @@ public class DemoController {
      * -w: 以HTML表的格式输出结果
      */
     @GetMapping("abTest")
-    public AjaxResult abTest() {
-        ThreadUtil.sleep(300);
-        return AjaxResult.success();
+    public RespResult<Void> abTest() {
+        return RespResult.success();
     }
 }

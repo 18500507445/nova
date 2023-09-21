@@ -42,10 +42,10 @@ public class TraceWebFilter extends GenericFilterBean {
         }
         BodyReaderRequestWrapper requestWrapper = printAccessLog(request);
         String dTraceId = TraceHelper.getCurrentTrace().getTraceId();
-        log.error("trace web filter-traceId:{}", dTraceId);
+        log.info("trace web filter-traceId:{}", dTraceId);
         filterChain.doFilter(requestWrapper != null ? requestWrapper : request, resp);
         MDC.put(Trace.PARENT_SPAN, TraceHelper.genSpanId());
-        log.error("当前请求总耗时：{}ms", System.currentTimeMillis() - start);
+        log.error("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
         TraceHelper.clearCurrentTrace();
     }
 

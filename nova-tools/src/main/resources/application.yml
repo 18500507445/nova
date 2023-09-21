@@ -4,11 +4,19 @@ server:
   servlet:
     context-path: /
 
+#SBA监控客户端配置
 management:
   endpoints:
     web:
       exposure:
-        include=*:
+        # 暴露所有端点
+        include: "*"
+    # 是否启用actuator，默认true
+    enabled-by-default: true
+  endpoint:
+    health:
+      # 健康检查显示详细信息（db，redis，diskSpace，ping...），默认never，只显示一个up
+      show-details: always
 
 spring:
   application:

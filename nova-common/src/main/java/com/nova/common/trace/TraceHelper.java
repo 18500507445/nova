@@ -1,8 +1,7 @@
 package com.nova.common.trace;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.UUID;
-import cn.hutool.core.lang.generator.SnowflakeGenerator;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import org.slf4j.MDC;
@@ -17,8 +16,11 @@ public class TraceHelper {
 
     public static final ThreadLocal<Trace> CURRENT_SPAN = new NamedThreadLocal<>("TraceId Context");
 
+    /**
+     * 禁止 new SnowflakeGenerator().next()生成的id有重复的
+     */
     public static String genTraceId() {
-        return Convert.toStr(new SnowflakeGenerator().next());
+        return IdUtil.getSnowflake().nextIdStr();
     }
 
     public static String genSpanId() {
@@ -67,7 +69,6 @@ public class TraceHelper {
      * 清空traceId
      */
     public static void clearCurrentTrace() {
-        CURRENT_SPAN.set(null);
         CURRENT_SPAN.remove();
     }
 }

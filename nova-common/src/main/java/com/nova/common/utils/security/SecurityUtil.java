@@ -31,19 +31,19 @@ public class SecurityUtil {
      * app:ios和android的key
      * SfNJN1O69Zs1ekjB
      */
-    private static final String SECRET_KEY = "SfNJN1O69Zs1ekjB";
+    private static final String SECRET_KEY = "secret_key";
 
     /**
      * h5特有的key
      */
-    private static final String H5_SECRET_KEY = "LbskjQt8UuYysnGl";
+    private static final String H5_SECRET_KEY = "h5_secret_key";
 
     public static Map<String, String> KEY_MAP = new HashMap<>();
 
     static {
-        KEY_MAP.put("android", "GfQB6pIrPzGZPYzJ");
-        KEY_MAP.put("ios", "FMnb8FVDjMX4Pgwd");
-        KEY_MAP.put("h5", "NrRtQPDQDxv1h6NZ");
+        KEY_MAP.put("android", "android");
+        KEY_MAP.put("ios", "ios");
+        KEY_MAP.put("h5", "h5");
     }
 
     public synchronized static String decryptAllPara(String params, String clientType) {

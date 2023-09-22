@@ -78,7 +78,7 @@ public class HttpRequestProxy {
             while ((line = in.readLine()) != null) {
                 result.append(line);
             }
-            log.info("recv - {}", result);
+            log.info("result - {}", result);
         } catch (ConnectException e) {
             log.error("调用HttpUtils.sendGet ConnectException, url=" + url + ",param=" + param, e);
         } catch (SocketTimeoutException e) {
@@ -120,7 +120,7 @@ public class HttpRequestProxy {
             while ((line = in.readLine()) != null) {
                 result.append(line);
             }
-            log.info("recv - {}", result);
+            log.info("result - {}", result);
         } catch (ConnectException e) {
             log.error("调用HttpUtils.sendPost ConnectException, url=" + url + ",param=" + param, e);
         } catch (SocketTimeoutException e) {
@@ -447,7 +447,7 @@ public class HttpRequestProxy {
             while ((line = in.readLine()) != null) {
                 result.append(line);
             }
-            log.info("recv - {}", result);
+            log.info("result - {}", result);
         } catch (ConnectException e) {
             log.error("调用HttpUtils.sendPost ConnectException, url=" + url + ",param=" + param, e);
         } catch (SocketTimeoutException e) {
@@ -505,7 +505,7 @@ public class HttpRequestProxy {
                     result.append(new String(ret.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
                 }
             }
-            log.info("recv - {}", result);
+            log.info("result - {}", result);
             conn.disconnect();
             br.close();
         } catch (ConnectException e) {

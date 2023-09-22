@@ -7,7 +7,6 @@ import com.nova.common.utils.common.ValidatorUtil;
 import com.nova.common.utils.copybean.ParamsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author: wzh
@@ -15,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @date: 2023/09/07 15:36
  */
 @Slf4j(topic = "ParamTest")
-@SpringBootTest
 public class ParamTest {
 
     /**

@@ -29,7 +29,7 @@ public class AddressUtils {
      */
     public static final String UNKNOWN = "XX XX";
 
-    public static String getRealAddressByIP(String ip) {
+    public static String getRealAddressByIp(String ip) {
         if (ip.contains(",")) {
             ip = ip.split(",")[0];
         }
@@ -185,9 +185,8 @@ public class AddressUtils {
                     return true;
                 }
             case SECTION_5:
-                switch (b1) {
-                    case SECTION_6:
-                        return true;
+                if (b1 == SECTION_6) {
+                    return true;
                 }
             default:
                 return false;
@@ -195,6 +194,6 @@ public class AddressUtils {
     }
 
     public static void main(String[] args) {
-        System.err.println(getRealAddressByIP("223.221.240.148"));
+        System.err.println(getRealAddressByIp("223.221.240.148"));
     }
 }

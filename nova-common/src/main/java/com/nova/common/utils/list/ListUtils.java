@@ -92,15 +92,15 @@ public class ListUtils {
         String str1 = value1.toString();
         String str2 = value2.toString();
         if (value1 instanceof Number && value2 instanceof Number) {
-            int maxlen = Math.max(str1.length(), str2.length());
-            str1 = ListUtils.addZero2Str((Number) value1, maxlen);
-            str2 = ListUtils.addZero2Str((Number) value2, maxlen);
+            int maxLen = Math.max(str1.length(), str2.length());
+            str1 = ListUtils.addZero2Str((Number) value1, maxLen);
+            str2 = ListUtils.addZero2Str((Number) value2, maxLen);
         } else if (value1 instanceof Date && value2 instanceof Date) {
             long time1 = ((Date) value1).getTime();
             long time2 = ((Date) value2).getTime();
-            int maxlen = Long.toString(Math.max(time1, time2)).length();
-            str1 = ListUtils.addZero2Str(time1, maxlen);
-            str2 = ListUtils.addZero2Str(time2, maxlen);
+            int maxLen = Long.toString(Math.max(time1, time2)).length();
+            str1 = ListUtils.addZero2Str(time1, maxLen);
+            str2 = ListUtils.addZero2Str(time2, maxLen);
         }
         if (isAsc) {
             ret = str1.compareTo(str2);

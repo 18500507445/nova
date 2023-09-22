@@ -9,14 +9,13 @@ package com.nova.common.utils.string;
 public class MatchUtil {
 
     public static void main(String[] args) {
-
         long start = System.currentTimeMillis();
         //要比较的两个字符串
         String str1 = "今天是星期五";
         String str2 = "今天是星期";
         Integer num = matchValue(str1, str2);
         long end = System.currentTimeMillis();
-        System.err.println("相似度:" + num + "，耗时：" + (end - start) + "ms");
+        System.err.println("相似度:" + num + "% ，耗时：" + (end - start) + "ms");
     }
 
     public static Integer matchValue(String str1, String str2) {

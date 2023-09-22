@@ -27,11 +27,10 @@ public class CaffeineManagerConfig {
     @Bean(name = "caffeine")
     public CacheManager initCacheManager() {
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
-        Caffeine caffeine = Caffeine.newBuilder().initialCapacity(
-                Convert.toInt(caffeineConfig.getInitCapacity(), 100))
+        Caffeine<Object, Object> caffeine = Caffeine.newBuilder()
+                .initialCapacity(Convert.toInt(caffeineConfig.getInitCapacity(), 100))
                 .maximumSize(Convert.toInt(caffeineConfig.getMaxSize(), 1000))
-                .expireAfterAccess(Convert.toInt(caffeineConfig.getExpireAfterAccess(), 1000),
-                        TimeUnit.SECONDS);
+                .expireAfterAccess(Convert.toInt(caffeineConfig.getExpireAfterAccess(), 1000), TimeUnit.SECONDS);
         caffeineCacheManager.setCaffeine(caffeine);
         caffeineCacheManager.setCacheNames(StrUtil.isEmpty(caffeineConfig.getCacheNames()) ?
                 Lists.newArrayList("caffeine") : Arrays.asList(caffeineConfig.getCacheNames().split(";")));

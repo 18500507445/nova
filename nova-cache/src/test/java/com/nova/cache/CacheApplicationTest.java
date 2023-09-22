@@ -159,9 +159,7 @@ class CacheApplicationTest {
     public void MemcachedDemo() {
         String key = "nova-cache";
         memcachedUtil.createData(key, "1", 60L);
-
         Object cache = memcachedUtil.getData(key);
-
         System.err.println("cache = " + cache);
     }
 

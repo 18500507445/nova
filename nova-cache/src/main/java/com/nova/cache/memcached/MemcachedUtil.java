@@ -16,9 +16,10 @@ import java.util.Date;
 public class MemcachedUtil implements Serializable {
 
     /**
-     * 默认存储14 天
+     * 默认存储14天
+     * 1000毫秒开始
      */
-    private final static int DEFAULT_TIME = 1209600000;
+    private final static int DEFAULT_TIME = 1000 * 60 * 60 * 24 * 14;
 
     protected static MemCachedClient MC = new MemCachedClient();
 
@@ -51,6 +52,6 @@ public class MemcachedUtil implements Serializable {
     }
 
     public Object getData(String key) {
-        return (Object) MC.get(key);
+        return MC.get(key);
     }
 }

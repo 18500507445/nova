@@ -24,6 +24,9 @@ public class MailConfig {
     @Resource
     private JavaMailSender mailSender;
 
+    /**
+     * 注入官方配置类
+     */
     @Resource
     private MailProperties mailProperties;
 

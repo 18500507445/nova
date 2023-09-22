@@ -183,3 +183,9 @@ public class TwoUserServiceImpl extends ServiceImpl<TwoUserMapper, UserDO> imple
       <version>${dynamic.version}</version>
   </dependency>
   ~~~
+  
+* [开启事务](https://blog.csdn.net/qq_16159433/article/details/127223910?spm=1001.2014.3001.5502)
+> @DsTransactional: 多数据源事务的开启注解，用法同@Transactional相同。但是不能指定事务的一些属性，
+> 因为其实现的原理，也不需要任何其他的事务的配置。当发生任何Exception时都会执行回滚
+
+

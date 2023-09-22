@@ -6,7 +6,7 @@ import java.util.Collection;
 /**
  * 查询条件封装
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public interface Compare<LambdaQueryWrapper, R> extends Serializable {

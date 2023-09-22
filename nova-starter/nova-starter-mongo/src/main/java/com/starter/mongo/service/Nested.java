@@ -7,7 +7,7 @@ import java.util.function.Function;
  * 查询条件封装
  * <p>嵌套</p>
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public interface Nested<Param, LambdaQueryWrapper> extends Serializable {

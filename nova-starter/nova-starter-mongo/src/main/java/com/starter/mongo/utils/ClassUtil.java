@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 字节码工具
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public class ClassUtil {

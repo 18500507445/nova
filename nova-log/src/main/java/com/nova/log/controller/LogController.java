@@ -6,7 +6,6 @@ import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.result.AjaxResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +23,7 @@ public class LogController extends BaseController {
     /**
      * 异步log测试，性能差一倍
      */
-    @PostMapping("log")
+    @RequestMapping("log")
     public AjaxResult limit() {
         TimeInterval timer = DateUtil.timer();
         for (int i = 0; i < 500000; i++) {

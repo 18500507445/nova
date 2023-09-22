@@ -1,6 +1,7 @@
 package com.nova.common.core.backstage;
 
 import cn.hutool.core.util.ObjectUtil;
+import lombok.Getter;
 
 /**
  * 分页数据
@@ -15,10 +16,12 @@ public class PageDomain {
     /**
      * 当前记录起始索引
      */
+    @Getter
     private Integer pageNum;
     /**
      * 每页显示记录数
      */
+    @Getter
     private Integer pageSize;
     /**
      * 排序列
@@ -42,16 +45,8 @@ public class PageDomain {
         return toUnderScoreCase(orderByColumn) + " " + isAsc;
     }
 
-    public Integer getPageNum() {
-        return pageNum;
-    }
-
     public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
     }
 
     public void setPageSize(Integer pageSize) {

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * 条件构建器
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public class LambdaQueryWrapper<T>

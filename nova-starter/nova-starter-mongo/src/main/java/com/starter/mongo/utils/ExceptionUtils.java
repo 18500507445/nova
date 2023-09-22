@@ -6,7 +6,7 @@ import com.starter.mongo.exception.EasyMongoException;
 /**
  * 异常工具
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public final class ExceptionUtils {

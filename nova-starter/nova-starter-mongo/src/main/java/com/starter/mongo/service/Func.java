@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 功能接口
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 @SuppressWarnings("unchecked")

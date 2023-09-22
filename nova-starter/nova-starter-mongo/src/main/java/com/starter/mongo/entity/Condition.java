@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 条件
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public class Condition {

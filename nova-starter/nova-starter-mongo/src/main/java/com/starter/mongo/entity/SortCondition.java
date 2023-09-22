@@ -6,7 +6,7 @@ import com.starter.mongo.constant.ESortType;
 /**
  * 排序字段
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public class SortCondition {

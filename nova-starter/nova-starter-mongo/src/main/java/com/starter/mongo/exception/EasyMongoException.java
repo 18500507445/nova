@@ -3,7 +3,7 @@ package com.starter.mongo.exception;
 /**
  * mongo 异常类
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public class EasyMongoException extends RuntimeException {

@@ -3,7 +3,7 @@ package com.starter.mongo.entity;
 /**
  * 查询的列
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public class SelectField {

@@ -3,7 +3,7 @@ package com.starter.mongo.utils;
 /**
  * 字符串工具类
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public class StringUtils {

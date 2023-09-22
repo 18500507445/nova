@@ -3,11 +3,11 @@ package com.nova.tools;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.core.model.result.RespResult;
-import com.nova.common.core.model.result.ResultUtil;
-import com.nova.common.enums.ResultCode;
+import com.nova.common.core.model.result.RespResultCode;
+import com.nova.common.core.model.result.avic.ResultCode;
+import com.nova.common.core.model.result.avic.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @description:
@@ -15,14 +15,14 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @date: 2023/2/12 14:07
  */
 @Slf4j(topic = "commonTest")
-@SpringBootTest
 class ResultTest {
 
-    public static final String RESULT = "测试";
+    public static final Object RESULT = "测试";
 
     @Test
     public void demoA() {
-        RespResult<String> success = RespResult.success(RESULT);
+        RespResult<Object> success = RespResult.success(RespResultCode.OK);
+        success.setData(RESULT);
         System.err.println(JSONUtil.toJsonStr(success));
     }
 
@@ -34,8 +34,8 @@ class ResultTest {
 
     @Test
     public void demoC() {
-        String success = ResultUtil.makeResult(ResultCode.SUCCESS, RESULT);
-        System.err.println(success);
+        ResultVO<Object> success = ResultVO.success(ResultCode.SUCCESS, RESULT, "自定义消息");
+        System.err.println(JSONUtil.toJsonStr(success));
     }
 
 }

@@ -81,19 +81,19 @@ public class ResultVO<T> implements Serializable {
         return new ResultVO<T>(ResultCode.SUCCESS);
     }
 
-    public static <T> ResultVO<T> success(IRespResultCode resultCode, T data) {
-        return new ResultVO<T>(resultCode, data, true);
-    }
-
     public static <T> ResultVO<T> success(IRespResultCode resultCode, String bizMessage) {
         return new ResultVO<T>(resultCode, null, true, bizMessage);
+    }
+
+    public static <T> ResultVO<T> success(IRespResultCode resultCode, T data) {
+        return new ResultVO<T>(resultCode, data, true);
     }
 
     public static <T> ResultVO<T> success(IRespResultCode resultCode, T data, String bizMessage) {
         return new ResultVO<T>(resultCode, data, true, bizMessage);
     }
 
-    public static <T> ResultVO<T> failure(T data) {
+    public static <T> ResultVO<T> failure() {
         return new ResultVO<T>(ResultCode.FAILED);
     }
 

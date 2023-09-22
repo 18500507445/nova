@@ -1,5 +1,6 @@
 package com.nova.common.config;
 
+import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -17,75 +18,57 @@ public class Global {
     /**
      * 项目名称
      */
+    @Getter
     private static String name;
 
     /**
      * 版本
      */
+    @Getter
     private static String version;
 
     /**
      * 版权年份
      */
+    @Getter
     private static String copyrightYear;
 
     /**
      * 实例演示开关
      */
+    @Getter
     private static boolean demoEnabled;
 
     /**
      * 上传路径
      */
+    @Getter
     private static String profile;
 
     /**
      * 获取地址开关
      */
+    @Getter
     private static boolean addressEnabled;
-
-    public static String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         Global.name = name;
-    }
-
-    public static String getVersion() {
-        return version;
     }
 
     public void setVersion(String version) {
         Global.version = version;
     }
 
-    public static String getCopyrightYear() {
-        return copyrightYear;
-    }
-
     public void setCopyrightYear(String copyrightYear) {
         Global.copyrightYear = copyrightYear;
-    }
-
-    public static boolean isDemoEnabled() {
-        return demoEnabled;
     }
 
     public void setDemoEnabled(boolean demoEnabled) {
         Global.demoEnabled = demoEnabled;
     }
 
-    public static String getProfile() {
-        return profile;
-    }
-
     public void setProfile(String profile) {
         Global.profile = profile;
-    }
-
-    public static boolean isAddressEnabled() {
-        return addressEnabled;
     }
 
     public void setAddressEnabled(boolean addressEnabled) {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * mongo 基础方法接口
  *
- * @author loser
+ * @author wzh
  * @date 2023/6/13
  */
 public interface EasyMongoService<T> {

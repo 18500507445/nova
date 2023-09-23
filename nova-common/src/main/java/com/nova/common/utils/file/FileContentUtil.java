@@ -1,4 +1,4 @@
-package com.nova.common.utils.data;
+package com.nova.common.utils.file;
 
 import org.springframework.core.io.ClassPathResource;
 

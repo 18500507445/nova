@@ -49,7 +49,7 @@ public class ResultVO<T> implements Serializable {
 
     }
 
-    public ResultVO(IRespResultCode resultCode, T data, Boolean success) {
+    public ResultVO(IResultCode resultCode, T data, Boolean success) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = resultCode.getBizMessage();
         this.data = data;
@@ -59,7 +59,7 @@ public class ResultVO<T> implements Serializable {
         this.systemTime = System.currentTimeMillis();
     }
 
-    public ResultVO(IRespResultCode resultCode, T data, Boolean success, String bizMessage) {
+    public ResultVO(IResultCode resultCode, T data, Boolean success, String bizMessage) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = bizMessage;
         this.data = data;
@@ -69,7 +69,7 @@ public class ResultVO<T> implements Serializable {
         this.systemTime = System.currentTimeMillis();
     }
 
-    public ResultVO(IRespResultCode resultCode) {
+    public ResultVO(IResultCode resultCode) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = resultCode.getBizMessage();
         this.traceId = TraceHelper.getCurrentTrace().getTraceId();
@@ -81,15 +81,15 @@ public class ResultVO<T> implements Serializable {
         return new ResultVO<T>(ResultCode.SUCCESS);
     }
 
-    public static <T> ResultVO<T> success(IRespResultCode resultCode, String bizMessage) {
+    public static <T> ResultVO<T> success(IResultCode resultCode, String bizMessage) {
         return new ResultVO<T>(resultCode, null, true, bizMessage);
     }
 
-    public static <T> ResultVO<T> success(IRespResultCode resultCode, T data) {
+    public static <T> ResultVO<T> success(IResultCode resultCode, T data) {
         return new ResultVO<T>(resultCode, data, true);
     }
 
-    public static <T> ResultVO<T> success(IRespResultCode resultCode, T data, String bizMessage) {
+    public static <T> ResultVO<T> success(IResultCode resultCode, T data, String bizMessage) {
         return new ResultVO<T>(resultCode, data, true, bizMessage);
     }
 
@@ -97,15 +97,15 @@ public class ResultVO<T> implements Serializable {
         return new ResultVO<T>(ResultCode.FAILED);
     }
 
-    public static <T> ResultVO<T> failure(IRespResultCode resultCode, String bizMessage) {
+    public static <T> ResultVO<T> failure(IResultCode resultCode, String bizMessage) {
         return new ResultVO<T>(resultCode, null, false, bizMessage);
     }
 
-    public static <T> ResultVO<T> failure(IRespResultCode resultCode, T data) {
+    public static <T> ResultVO<T> failure(IResultCode resultCode, T data) {
         return new ResultVO<T>(resultCode, data, false);
     }
 
-    public static <T> ResultVO<T> failure(IRespResultCode resultCode, T data, String bizMessage) {
+    public static <T> ResultVO<T> failure(IResultCode resultCode, T data, String bizMessage) {
         return new ResultVO<T>(resultCode, data, false, bizMessage);
     }
 

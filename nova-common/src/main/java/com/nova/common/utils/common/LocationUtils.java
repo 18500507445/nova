@@ -1,4 +1,4 @@
-package com.nova.common.utils.data;
+package com.nova.common.utils.common;
 
 import java.awt.geom.Point2D;
 import java.math.BigDecimal;

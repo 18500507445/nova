@@ -32,21 +32,25 @@ public class TraceWebFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
-        long start = System.currentTimeMillis();
-        HttpServletRequest request = (HttpServletRequest) req;
-        String traceId = String.valueOf(request.getHeader(TraceHttpHeaderEnum.HEADER_TRACE_ID.getCode()));
-        if (StrUtil.isNotEmpty(traceId) && !"null".equals(traceId)) {
-            TraceHelper.setCurrentTrace(traceId);
-        } else {
-            TraceHelper.getCurrentTrace();
+        try {
+            long start = System.currentTimeMillis();
+            HttpServletRequest request = (HttpServletRequest) req;
+            String traceId = request.getHeader(TraceHttpHeaderEnum.HEADER_TRACE_ID.getCode());
+            if (StrUtil.isNotEmpty(traceId)) {
+                TraceHelper.setCurrentTrace(traceId);
+            } else {
+                TraceHelper.getCurrentTrace();
+            }
+            BodyReaderRequestWrapper requestWrapper = printAccessLog(request);
+            String currentTraceId = TraceHelper.getCurrentTrace().getTraceId();
+            log.info("trace web filter-traceId:{}", currentTraceId);
+            filterChain.doFilter(requestWrapper != null ? requestWrapper : request, resp);
+            //MDC放入spanId
+            MDC.put(Trace.PARENT_SPAN, TraceHelper.genSpanId());
+            log.error("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
+        } finally {
+            TraceHelper.clearCurrentTrace();
         }
-        BodyReaderRequestWrapper requestWrapper = printAccessLog(request);
-        String dTraceId = TraceHelper.getCurrentTrace().getTraceId();
-        log.info("trace web filter-traceId:{}", dTraceId);
-        filterChain.doFilter(requestWrapper != null ? requestWrapper : request, resp);
-        MDC.put(Trace.PARENT_SPAN, TraceHelper.genSpanId());
-        log.error("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
-        TraceHelper.clearCurrentTrace();
     }
 
     /**

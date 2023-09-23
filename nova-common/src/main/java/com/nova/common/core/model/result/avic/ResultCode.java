@@ -1,5 +1,8 @@
 package com.nova.common.core.model.result.avic;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +11,9 @@ import java.io.Serializable;
  * @author suo
  * @date 2023/8/23 21:15
  */
-public enum ResultCode implements IRespResultCode, Serializable {
+@Getter
+@AllArgsConstructor
+public enum ResultCode implements IResultCode, Serializable {
 
     SUCCESS("000000", "操作成功"),
 
@@ -39,24 +44,11 @@ public enum ResultCode implements IRespResultCode, Serializable {
     DATA_EXIST("720000", "数据已存在"),
 
     IM_NO_EXIST("811001", "IM账号未注册"),
+
     ;
 
     private final String bizCode;
 
     private final String bizMessage;
 
-    @Override
-    public String getBizCode() {
-        return bizCode;
-    }
-
-    @Override
-    public String getBizMessage() {
-        return bizMessage;
-    }
-
-    ResultCode(String bizCode, String bizMessage) {
-        this.bizCode = bizCode;
-        this.bizMessage = bizMessage;
-    }
 }

@@ -6,7 +6,7 @@ package com.nova.common.core.model.result.avic;
  * @author suo
  * @date 2023/8/23 21:15
  */
-public interface IRespResultCode {
+public interface IResultCode {
 
     String getBizCode();
 

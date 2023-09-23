@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 
 /**
- * @description: 配置Trace filter
+ * @description: TraceFilter配置
  * @author: wzh
  * @date: 2022/12/20 11:16
  */

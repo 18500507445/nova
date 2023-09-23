@@ -1,10 +1,15 @@
 package com.nova.common.core.model.result;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @description: 通用返回码对象(主要放各个模块的通用错误码)
  * @author: wzh
  * @date: 2022/12/20 11:16
  */
+@Getter
+@AllArgsConstructor
 public enum RespResultCode implements IRespResultCode {
 
     /**
@@ -67,24 +72,4 @@ public enum RespResultCode implements IRespResultCode {
      */
     private final String detailMessage;
 
-    RespResultCode(Integer code, String message, String detailMessage) {
-        this.code = code;
-        this.message = message;
-        this.detailMessage = detailMessage;
-    }
-
-    @Override
-    public Integer getCode() {
-        return code;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
-    }
-
-    @Override
-    public String getDetailMessage() {
-        return detailMessage;
-    }
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author: wzh
@@ -37,22 +36,23 @@ public class DemoController {
      * -w: 以HTML表的格式输出结果
      */
     @GetMapping("abTest")
-    public RespResult<Void> abTest(HttpServletRequest req, HttpServletResponse resp) {
-        String httpResult = HttpUtil.createGet("http://localhost:8080/api/abTest1").execute().body();
+    public RespResult<Void> abTest() {
+        return RespResult.success();
+    }
+
+    @GetMapping("traceTest")
+    public RespResult<Void> traceTest(HttpServletRequest req) {
         String traceId = req.getHeader("header_trace_id");
-        String headerTraceId = resp.getHeader("header_trace_id");
         System.err.println("abTest-traceId = " + traceId);
-        System.err.println("abTest-headerTraceId = " + headerTraceId);
+        String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header("header_trace_id",traceId).execute().body();
         System.err.println("httpResult = " + httpResult);
         return RespResult.success();
     }
 
-    @GetMapping("abTest1")
-    public RespResult<Void> abTest1(HttpServletRequest req, HttpServletResponse resp) {
+    @GetMapping("traceTest1")
+    public RespResult<Void> traceTest1(HttpServletRequest req) {
         String traceId = req.getHeader("header_trace_id");
-        String headerTraceId = resp.getHeader("header_trace_id");
         System.err.println("abTest1-traceId = " + traceId);
-        System.err.println("abTest1-headerTraceId = " + headerTraceId);
         return RespResult.success();
     }
 }

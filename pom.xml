@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>nova</name>
-    <description>Demo project for Maven</description>
+    <description>Nova project for Maven</description>
 
     <developers>
         <developer>
@@ -29,6 +29,7 @@
         <module>nova-lock</module>
         <module>nova-log</module>
         <module>nova-login</module>
+        <module>nova-monitor</module>
         <module>nova-mq</module>
         <module>nova-msg</module>
         <module>nova-orm</module>
@@ -37,7 +38,6 @@
         <module>nova-sql</module>
         <module>nova-starter</module>
         <module>nova-tools</module>
-        <module>nova-monitor</module>
     </modules>
 
     <properties>

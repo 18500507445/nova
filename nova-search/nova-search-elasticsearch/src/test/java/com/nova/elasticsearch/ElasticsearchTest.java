@@ -7,6 +7,7 @@ import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import com.nova.elasticsearch.dao.UserRepository;
 import com.nova.elasticsearch.entity.User;
 import com.nova.elasticsearch.service.UserService;
 import lombok.SneakyThrows;
@@ -17,6 +18,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -24,9 +26,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 
 import javax.annotation.Resource;
@@ -44,6 +49,12 @@ public class ElasticsearchTest {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private UserRepository userRepository;
+
+    @Resource
+    private ElasticsearchRestTemplate elasticsearchTemplate;
 
     @Test
     public void insertTest() {
@@ -73,6 +84,94 @@ public class ElasticsearchTest {
         User user = new User();
         user.setId("1");
         userService.delete(user);
+    }
+
+    /**
+     * 其它api
+     */
+    @Test
+    public void otherFunctions() {
+        List<String> idList = Arrays.asList("1", "2");
+        //批量查询
+        userRepository.findAllById(idList);
+        //批量删除
+        userRepository.deleteAllById(idList);
+        //批量保存
+        List<User> userList = new ArrayList<>();
+        userRepository.saveAll(userList);
+        //查询所有
+        userRepository.findAll();
+        //分页查询
+        Pageable page = PageRequest.of(0, 3, Sort.Direction.ASC, "id");
+        userRepository.findAll(page);
+    }
+
+    /**
+     * 分页查询
+     */
+    @Test
+    public void queryPage() {
+        Pageable page = PageRequest.of(0, 3, Sort.Direction.ASC, "id");
+
+        //根据一个值查询多个字段并高亮显示这里的查询是取并集，即多个字段只需要有一个字段满足即可
+        //需要查询的字段
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .should(QueryBuilders.matchQuery("username", "123"))
+                .should(QueryBuilders.matchQuery("password", "123"));
+        //构建高亮查询
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(boolQueryBuilder)
+                .withHighlightFields(
+                        new HighlightBuilder.Field("username")
+                        , new HighlightBuilder.Field("password"))
+                .withHighlightBuilder(new HighlightBuilder().preTags("<span style='color:red'>").postTags("</span>"))
+                //分页
+//                .withPageable(page)
+                .build();
+        //查询
+        SearchHits<User> search = elasticsearchTemplate.search(searchQuery, User.class);
+        //得到查询返回的内容
+        List<SearchHit<User>> searchHits = search.getSearchHits();
+        //设置一个最后需要返回的实体类集合
+        List<User> userList = new ArrayList<>();
+        //遍历返回的内容进行处理
+        for (SearchHit<User> searchHit : searchHits) {
+            //高亮的内容
+            Map<String, List<String>> highlightFields = searchHit.getHighlightFields();
+            //将高亮的内容填充到content中
+            searchHit.getContent().setUsername(highlightFields.get("username") == null ? searchHit.getContent().getUsername() : highlightFields.get("username").get(0));
+            searchHit.getContent().setPassword(highlightFields.get("password") == null ? searchHit.getContent().getPassword() : highlightFields.get("password").get(0));
+            //放到实体类中
+            userList.add(searchHit.getContent());
+        }
+        String jsonStr = JSONUtil.toJsonStr(userList);
+        System.err.println("jsonStr = " + jsonStr);
+    }
+
+    /**
+     * 模糊查询
+     */
+
+    @Test
+    public void demoA() {
+        String userName = "";
+        String password = "";
+
+        //查询对象
+        BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
+        //模糊搜索对象
+        BoolQueryBuilder keyBuilder = new BoolQueryBuilder();
+        keyBuilder.should(QueryBuilders.wildcardQuery("username", "*" + userName + "*"));
+        keyBuilder.should(QueryBuilders.wildcardQuery("password", "*" + password + "*"));
+        queryBuilder.must(keyBuilder);
+
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(queryBuilder)
+                .build();
+
+        SearchHits<User> search = elasticsearchTemplate.search(searchQuery, User.class);
+        //得到查询返回的内容
+        List<SearchHit<User>> searchHits = search.getSearchHits();
     }
 
 
@@ -142,20 +241,6 @@ public class ElasticsearchTest {
         // 关闭ES客户端
         transport.close();
         restClient.close();
-    }
-
-
-    @Resource
-    private ElasticsearchRestTemplate elasticsearchRestTemplate;
-
-    @Test
-    public void getListTest() {
-        PageRequest of = PageRequest.of(1, 10);
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        queryBuilder.withPageable(of);
-        SearchHits<User> search = elasticsearchRestTemplate.search(queryBuilder.build(), User.class);
-        List<SearchHit<User>> list = search.getSearchHits();
-        log.info("list 查询: {}", JSONUtil.toJsonStr(list));
     }
 
 

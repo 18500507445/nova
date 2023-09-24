@@ -25,7 +25,7 @@ public class User implements Serializable {
 
     /**
      * type : 字段数据类型
-     * analyzer : 分词器类型
+     * analyzer : 分词器类型 ik_max_word最大化分词，会将文本做最细粒度的拆分；ik_smart智能分词，会做最粗粒度的拆分
      * index : 是否索引(默认:true)
      * Keyword : 短语,不进行分词
      */

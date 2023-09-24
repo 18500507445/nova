@@ -23,7 +23,7 @@ public class LimitController {
     /**
      * redis计数器限流
      */
-    @PostMapping("redisLimit")
+    @RequestMapping("redisLimit")
     @AccessLimit(seconds = 5, maxCount = 5)
     public AjaxResult redisLimit() {
         return AjaxResult.success();

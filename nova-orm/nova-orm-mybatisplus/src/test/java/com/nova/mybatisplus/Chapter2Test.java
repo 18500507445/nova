@@ -23,6 +23,10 @@ public class Chapter2Test {
     @Resource
     private TwoUserService twoUserService;
 
+    static {
+        System.setProperty("pagehelper.banner", "false");
+    }
+
     /**
      * Mapper进行简单的增删改查
      */

@@ -7,7 +7,6 @@
 > 版本对应关系参考 <https://github.com/spring-projects/spring-data-elasticsearch/blob/main/src/main/asciidoc/preface.adoc>  
 
 
-
 ### 名词解释
 1. 索引（Index）：索引是 Elasticsearch 中存储、搜索和分析数据的地方，类似于关系型数据库中的表。一个索引可以包含多个文档，并且可以分布在一个或多个分片上。
 2. 类型（Type）：在 Elasticsearch 6.0 版本之前，一个索引可以包含多个类型。类型允许你对索引中的文档进行更细粒度的分类。然而，从 Elasticsearch 6.0 开始，类型被废弃，一个索引只能有一个默认类型 "_doc"。

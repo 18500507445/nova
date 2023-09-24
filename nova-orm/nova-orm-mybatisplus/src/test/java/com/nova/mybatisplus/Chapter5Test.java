@@ -35,6 +35,10 @@ public class Chapter5Test {
     @Resource
     private FiveUserService fiveUserService;
 
+    static {
+        System.setProperty("pagehelper.banner", "false");
+    }
+
     @Test
     public void logicDelete() {
         fiveUserMapper.deleteById(5);
@@ -119,13 +123,12 @@ public class Chapter5Test {
 
     /**
      * 多数据源
+     * 多数据源事务：@DSTransactional，直接作用于方法上
      */
     @Test
     public void dynamicDataSource() {
         MyOrder myOrder = myOrderMapper.selectById(1L);
-
         UserFiveDO result = fiveUserMapper.selectById(1671354213734621185L);
-
         System.err.println("myOrder = " + JSONUtil.toJsonStr(myOrder));
         System.err.println("result = " + JSONUtil.toJsonStr(result));
     }

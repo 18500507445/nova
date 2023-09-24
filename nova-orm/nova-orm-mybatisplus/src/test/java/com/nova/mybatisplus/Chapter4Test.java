@@ -26,6 +26,10 @@ public class Chapter4Test {
     @Resource
     private FourUserMapper fourUserMapper;
 
+    static {
+        System.setProperty("pagehelper.banner", "false");
+    }
+
     @Test
     public void insert() {
         UserDO userDO = new UserDO();

@@ -22,6 +22,10 @@ public class Chapter3Test {
     @Resource
     private ThreeUserMapper threeUserMapper;
 
+    static {
+        System.setProperty("pagehelper.banner", "false");
+    }
+
     /**
      * 等值查询eq，不等查询ne
      */

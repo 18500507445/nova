@@ -5,6 +5,8 @@ import com.nova.elasticsearch.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author: wzh
  * @description 实现类
@@ -29,5 +31,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<User> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> findById(String id) {
+        return  userRepository.findById(id);
     }
 }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+    <!-- 先级排序: FATAL > ERROR > WARN > INFO > DEBUG > TRACE -->
+
     <springProperty scope="context" name="logPath" source="logging.file.path" defaultValue="logging.file.path"/>
     <property name="log.path" value="${logPath}" />
     <property name="log.maxHistory" value="15"/>
@@ -20,6 +22,7 @@
     <!-- 系统日志输出 -->
     <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/info.log</file>
+        <!-- 滚动策略 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/info.log</fileNamePattern>
@@ -29,6 +32,7 @@
         <encoder>
             <pattern>${log.pattern}</pattern>
         </encoder>
+        <!-- 过滤掉所有日志级别低于INFO级别的日志事件 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
             <onMatch>ACCEPT</onMatch>
@@ -40,9 +44,7 @@
     <appender name="file_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 按天回滚 daily -->
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/debug.log</fileNamePattern>
-            <!-- 日志最大的历史 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -59,7 +61,6 @@
         <file>${log.path}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/error.log</fileNamePattern>
-            <!-- 日志最大的历史 -->
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -91,6 +92,7 @@
     <!-- Spring日志级别控制  -->
     <logger name="org.springframework" level="warn"/>
 
+    <!-- 定义debug及以上日志级别的异步输出到控制台 -->
     <root level="debug">
         <appender-ref ref="async_console"/>
     </root>

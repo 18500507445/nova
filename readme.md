@@ -56,8 +56,8 @@
 * [手写rpc框架](nova-rpc/nova-rpc-socket/rpcNote.md)
 * [websocket学习]
 
-15.nova-sql
-* [sql练习](nova-sql/sqlNote.md)
+15.nova-search
+* elasticsearch、solr
 
 16.nova-starter（后续mq....）
 * 自定义starter：redis、mongo、xxlJob
@@ -66,8 +66,10 @@
 17.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
-* 引入了starter详情见测试类
+* Sql练习
+* 使用starter详情见测试类
 * 配置文件加解密测试类（JasyptTest）
+
 ~~~yml
 jasypt:
   encryptor:

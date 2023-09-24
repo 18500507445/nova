@@ -3,17 +3,18 @@
 ### 简介:
 
 * (1)练习demo，java8特性，hutool测试类，guava测试类
+* (2)sql练习 https://github.com/dongxuyang1985/sql_in_action
 
 ##组织结构
 ```
 nova-tools
 ├── demo --练习demo
-├── doc -- toJson老师的文档，开源advanced项目总结文档
+├── doc -- 开源advanced项目总结文档
 ├── java8 -- java8-demo
 ├── letcode -- 刷题
-├── txt -- txt文本
-├── utils -- hutool、guava、vavr测试类
-└── vc -- vc、辰星公司
+├── sql -- sql练习
+├── txt -- 文本
+└── utils -- hutool、guava、vavr测试类
 ```
 
 ### Java基础

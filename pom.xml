@@ -35,7 +35,6 @@
         <module>nova-orm</module>
         <module>nova-rpc</module>
         <module>nova-search</module>
-        <module>nova-sql</module>
         <module>nova-starter</module>
         <module>nova-tools</module>
     </modules>

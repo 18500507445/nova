@@ -3,9 +3,10 @@ package com.nova.common.utils.id;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * SnowFlake雪花算法自增id
+ * SnowFlake雪花算法自增id，不建议使用，直接hutool线程工具类
  */
 @Slf4j
+@Deprecated
 public class SnowFlakeUtil {
 
     private final long id;

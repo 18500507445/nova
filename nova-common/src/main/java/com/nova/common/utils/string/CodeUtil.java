@@ -3,7 +3,7 @@ package com.nova.common.utils.string;
 import java.util.Random;
 
 /**
- * @author : wzh
+ * @author: wzh
  * @description: 唯一ID生成唯一邀请码
  * @date: 2022/5/16 17:48
  */

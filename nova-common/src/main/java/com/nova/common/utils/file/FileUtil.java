@@ -18,24 +18,13 @@ public class FileUtil {
     }
 
     public static void readFileByLines(File file, Consumer<? super String> action) {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(file));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String tempString;
             while ((tempString = reader.readLine()) != null) {
                 action.accept(tempString);
             }
-            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e1) {
-
-                }
-            }
         }
     }
 

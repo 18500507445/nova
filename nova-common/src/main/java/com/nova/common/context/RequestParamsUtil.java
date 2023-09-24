@@ -1,6 +1,7 @@
 package com.nova.common.context;
 
 import cn.hutool.core.util.StrUtil;
+import com.nova.common.constant.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public class RequestParamsUtil {
             return result;
         }
         try {
-            param = URLDecoder.decode(queryString, "utf-8");
+            param = URLDecoder.decode(queryString, Constants.UTF8);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }

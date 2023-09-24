@@ -10,6 +10,10 @@ import java.util.concurrent.*;
 @Slf4j(topic = "Threads")
 public class Threads {
 
+    private Threads(){
+
+    }
+
     /**
      * sleep等待,单位为毫秒
      */

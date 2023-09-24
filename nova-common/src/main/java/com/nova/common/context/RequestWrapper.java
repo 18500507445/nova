@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @description: body reader header请求处理
+ * @description: 对HttpServletRequest进行包装，处理header、reader、body
  * @author: wzh
  * @date: 2022/12/20 11:16
  */
@@ -31,19 +31,16 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             if (ins != null) {
                 isr = new BufferedReader(new InputStreamReader(ins));
                 char[] charBuffer = new char[128];
-                int readCount = 0;
+                int readCount;
                 while ((readCount = isr.read(charBuffer)) != -1) {
                     sb.append(charBuffer, 0, readCount);
                 }
             }
-        } catch (IOException e) {
-            throw e;
         } finally {
             if (isr != null) {
                 isr.close();
             }
         }
-        sb.toString();
         body = sb.toString();
     }
 
@@ -55,7 +52,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
     @Override
     public ServletInputStream getInputStream() throws IOException {
         final ByteArrayInputStream byteArrayIns = new ByteArrayInputStream(body.getBytes());
-        ServletInputStream servletIns = new ServletInputStream() {
+        return new ServletInputStream() {
             @Override
             public boolean isFinished() {
                 return false;
@@ -76,9 +73,13 @@ public class RequestWrapper extends HttpServletRequestWrapper {
                 return byteArrayIns.read();
             }
         };
-        return servletIns;
     }
 
+    /**
+     * 添加header
+     * @param name
+     * @param value
+     */
     public void addHeader(String name, String value) {
         headerMap.put(name, value);
     }

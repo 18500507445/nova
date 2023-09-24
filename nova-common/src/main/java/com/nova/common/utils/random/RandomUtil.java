@@ -12,25 +12,29 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 随机工具类
- * 微信红包算法 https://wenku.baidu.com/view/a15fee9cfe0a79563c1ec5da50e2524de518d092.html
- *
  * @description:
  * @author: wzh
  * @date: 2022/6/17 13:32
  */
 public class RandomUtil {
 
-    public static Object random(Map<Object, Object> map) {
-        Set<Map.Entry<Object, Object>> entries = map.entrySet();
+    /**
+     * 权重随机对象 key:Object，value:权重
+     *
+     * @param map
+     * @return
+     */
+    public static Object random(Map<Object, Long> map) {
+        Set<Map.Entry<Object, Long>> entries = map.entrySet();
         Random random = new Random();
         int sum = 0;
-        for (Map.Entry<Object, Object> entry : entries) {
+        for (Map.Entry<Object, Long> entry : entries) {
             int valueInt = Integer.parseInt(String.valueOf(entry.getValue()));
             sum += valueInt;
         }
         int randomInt = random.nextInt(sum) + 1;
         int sumTemp = 0;
-        for (Map.Entry<Object, Object> entry : entries) {
+        for (Map.Entry<Object, Long> entry : entries) {
             int valueInt = Integer.parseInt(String.valueOf(entry.getValue()));
             sumTemp += valueInt;
             if (randomInt <= sumTemp) {

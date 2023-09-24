@@ -22,10 +22,10 @@ class RandomTest {
      */
     @Test
     public void demoA() {
-        Map<Object, Object> map = new HashMap<>(16);
-        map.put("A", "1");
-        map.put("B", "1");
-        map.put("C", "1");
+        Map<Object, Long> map = new HashMap<>(16);
+        map.put("A", 1L);
+        map.put("B", 1L);
+        map.put("C", 1L);
 
         for (int i = 0; i < 1000; i++) {
             String random = RandomUtil.random(map).toString();

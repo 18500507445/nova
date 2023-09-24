@@ -35,7 +35,6 @@ public class Md5Utils {
         }
         String paramSignStr = StringUtils.join(paramPairs, "&");
 
-
         // 按UTF-8进行URL编码
         try {
             paramSignStr = URLEncoder.encode(paramSignStr, "UTF-8");
@@ -44,8 +43,7 @@ public class Md5Utils {
         }
 
         //把得到的字符串进行 MD5（转小写），得到 sign
-        String targetSign = chenXinSign(paramSignStr);
-        return targetSign;
+        return chenXinSign(paramSignStr);
     }
 
 
@@ -140,7 +138,7 @@ public class Md5Utils {
         try {
             return new String(toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         } catch (Exception e) {
-            log.error("not supported charset...{}", e);
+            log.error("not supported charset...", e);
             return s;
         }
     }

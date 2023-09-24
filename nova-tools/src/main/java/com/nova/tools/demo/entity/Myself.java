@@ -26,7 +26,6 @@ public class Myself {
      */
     public static final String STRING_SUCCESS = "success";
 
-    public static final String SEAT_CODE = "1_2_3";
 
     /**
      * 布尔 true

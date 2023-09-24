@@ -8,6 +8,7 @@ import java.util.Random;
 
 /**
  * @description: 红包算法模拟
+ * @see <a href="https://https://wenku.baidu.com/view/a15fee9cfe0a79563c1ec5da50e2524de518d092.html</a>
  * @author: wzh
  * @date: 2023/1/21 20:44
  */

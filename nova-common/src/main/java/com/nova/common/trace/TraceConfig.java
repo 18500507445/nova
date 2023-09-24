@@ -1,6 +1,6 @@
-package com.nova.common.config;
+package com.nova.common.trace;
 
-import com.nova.common.trace.TraceWebFilter;
+import com.nova.common.trace.TraceFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,15 +13,15 @@ import javax.annotation.Resource;
  * @date: 2022/12/20 11:16
  */
 @Configuration
-public class TraceFilterConfig {
+public class TraceConfig {
 
     @Resource
-    private TraceWebFilter traceWebFilter;
+    private TraceFilter traceFilter;
 
     @Bean
-    public FilterRegistrationBean<TraceWebFilter> registerTraceFilter() {
-        FilterRegistrationBean<TraceWebFilter> registration = new FilterRegistrationBean<>();
-        registration.setFilter(traceWebFilter);
+    public FilterRegistrationBean<TraceFilter> registerTraceFilter() {
+        FilterRegistrationBean<TraceFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(traceFilter);
         registration.addUrlPatterns("/*");
         registration.setName("traceWebFilter");
         registration.setOrder(1);

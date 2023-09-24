@@ -4,7 +4,8 @@ package com.nova.common.exception.file;
  * 工具类异常
  */
 public class UtilException extends RuntimeException {
-    private static final long serialVersionUID = 8247610319171014183L;
+
+    private static final long serialVersionUID = 1L;
 
     public UtilException(Throwable e) {
         super(e.getMessage(), e);

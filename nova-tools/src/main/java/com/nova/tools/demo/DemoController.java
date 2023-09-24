@@ -2,6 +2,7 @@ package com.nova.tools.demo;
 
 import cn.hutool.http.HttpUtil;
 import com.nova.common.core.model.result.RespResult;
+import com.nova.common.trace.Trace;
 import com.starter.redis.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,16 +43,16 @@ public class DemoController {
 
     @GetMapping("traceTest")
     public RespResult<Void> traceTest(HttpServletRequest req) {
-        String traceId = req.getHeader("header_trace_id");
+        String traceId = req.getHeader(Trace.HEADER_TRACE_ID);
         System.err.println("abTest-traceId = " + traceId);
-        String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header("header_trace_id",traceId).execute().body();
+        String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header("header_trace_id", traceId).execute().body();
         System.err.println("httpResult = " + httpResult);
         return RespResult.success();
     }
 
     @GetMapping("traceTest1")
     public RespResult<Void> traceTest1(HttpServletRequest req) {
-        String traceId = req.getHeader("header_trace_id");
+        String traceId = req.getHeader(Trace.HEADER_TRACE_ID);
         System.err.println("abTest1-traceId = " + traceId);
         return RespResult.success();
     }

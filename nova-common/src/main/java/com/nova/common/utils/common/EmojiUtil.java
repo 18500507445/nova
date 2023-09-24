@@ -25,10 +25,8 @@ public class EmojiUtil {
         if (StringUtils.isBlank(str)) {
             return "";
         }
-
         try {
             String patternString = "([\\x{10000}-\\x{10ffff}\ud800-\udfff])";
-
             Pattern pattern = Pattern.compile(patternString);
             Matcher matcher = pattern.matcher(str);
             StringBuffer sb = new StringBuffer();

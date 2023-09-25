@@ -15,17 +15,12 @@ public class Trace implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * log日志配置文件也需要取出来 [%X{X-B3-TraceId}]
+     * （1）log日志配置文件也需要取出来 [%X{X-B3-TraceId}]
+     * （2）http请求发送traceId放入header中
      */
-    public static final String TRACE = "X-B3-TraceId";
+    public static final String TRACE = "traceId";
 
-    public static final String PARENT_SPAN = "X-B3-SpanId";
-
-    /**
-     * http请求发送traceId放入header中
-     */
-    public static final String HEADER_TRACE_ID = "header_trace_id";
-
+    public static final String PARENT_SPAN = "spanId";
 
     /**
      * 分布式traceId

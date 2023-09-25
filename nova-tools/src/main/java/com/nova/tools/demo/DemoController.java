@@ -1,16 +1,12 @@
 package com.nova.tools.demo;
 
-import cn.hutool.http.HttpUtil;
 import com.nova.common.core.model.result.RespResult;
-import com.nova.common.trace.Trace;
 import com.starter.redis.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: wzh
@@ -24,6 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 public class DemoController {
 
     private final RedisService redisService;
+
+    /**
+     * 如何根据qps，如何评估开启线程数量
+     * 200qps，接口单次耗时：0.5秒，那么1秒请求数是 1/0.5 = 2
+     * 机器核数为10，那么10 * 2 = 20，也就是10核1秒并行处理20个请求
+     * 200(qps)/20(parallelRequest/1s) = 10 ,10个线程
+     * 备注：ab test测试返回的Requests per second 约等于 qps数量
+     */
 
     /**
      * apache ab测试
@@ -41,19 +45,5 @@ public class DemoController {
         return RespResult.success();
     }
 
-    @GetMapping("traceTest")
-    public RespResult<Void> traceTest(HttpServletRequest req) {
-        String traceId = req.getHeader(Trace.HEADER_TRACE_ID);
-        System.err.println("abTest-traceId = " + traceId);
-        String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header("header_trace_id", traceId).execute().body();
-        System.err.println("httpResult = " + httpResult);
-        return RespResult.success();
-    }
 
-    @GetMapping("traceTest1")
-    public RespResult<Void> traceTest1(HttpServletRequest req) {
-        String traceId = req.getHeader(Trace.HEADER_TRACE_ID);
-        System.err.println("abTest1-traceId = " + traceId);
-        return RespResult.success();
-    }
 }

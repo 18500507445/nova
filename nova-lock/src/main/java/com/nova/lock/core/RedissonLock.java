@@ -1,6 +1,7 @@
 package com.nova.lock.core;
 
 import com.nova.lock.config.RedissonManager;
+import com.nova.lock.enums.LockType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RLock;
 import org.redisson.api.RQueue;
+import org.redisson.api.RReadWriteLock;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,12 +36,28 @@ public class RedissonLock {
      *
      * @return boolean
      */
-    public boolean lock(String lockName, long expireSeconds) {
-        RLock rLock = redissonManager.getRedisson().getLock(lockName);
-        boolean getLock;
+    public boolean lock(LockType lockType, String lockName, long expireSeconds) {
+        RLock rLock;
+        switch (lockType) {
+            case FAIR:
+                rLock = redissonManager.getRedisson().getFairLock(lockName);
+                break;
+            case READ:
+                RReadWriteLock readWriteLock = redissonManager.getRedisson().getReadWriteLock(lockName);
+                rLock = readWriteLock.readLock();
+                break;
+            case WRITE:
+                RReadWriteLock rwLock = redissonManager.getRedisson().getReadWriteLock(lockName);
+                rLock = rwLock.writeLock();
+                break;
+            default:
+                //默认可重入锁
+                rLock = redissonManager.getRedisson().getLock(lockName);
+        }
+        boolean flag;
         try {
-            getLock = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
-            if (getLock) {
+            flag = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
+            if (flag) {
                 log.info("获取Redisson分布式锁[成功]，lockName={}", lockName);
             } else {
                 log.info("获取Redisson分布式锁[失败]，lockName={}", lockName);
@@ -48,7 +66,7 @@ public class RedissonLock {
             log.error("获取Redisson分布式锁[异常]，lockName=" + lockName, e);
             return false;
         }
-        return getLock;
+        return flag;
     }
 
     /**
@@ -61,9 +79,7 @@ public class RedissonLock {
     }
 
     /**
-     * 加锁操作
-     *
-     * @return boolean
+     * 加锁
      */
     public void isLock(String lockName) {
         RLock rLock = redissonManager.getRedisson().getLock(lockName);
@@ -78,8 +94,7 @@ public class RedissonLock {
      * 查询是否有锁
      */
     public boolean isLocked(String lockName) {
-        RLock rLock = redissonManager.getRedisson().getLock(lockName);
-        return rLock.isLocked();
+        return redissonManager.getRedisson().getLock(lockName).isLocked();
     }
 
     /**

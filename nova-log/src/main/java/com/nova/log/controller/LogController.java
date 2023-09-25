@@ -2,12 +2,18 @@ package com.nova.log.controller;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.http.HttpUtil;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.result.RespResult;
+import com.nova.common.trace.Trace;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description: 异步logController
@@ -33,4 +39,19 @@ public class LogController extends BaseController {
         return AjaxResult.success("ok");
     }
 
+    @GetMapping("traceTest")
+    public RespResult<Void> traceTest(HttpServletRequest req) {
+        String traceId = req.getHeader(Trace.TRACE);
+        log.error("abTest-traceId ：{}", traceId);
+        String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header("header_trace_id", traceId).execute().body();
+        log.error("httpResult ：{}", httpResult);
+        return RespResult.success();
+    }
+
+    @GetMapping("traceTest1")
+    public RespResult<Void> traceTest1(HttpServletRequest req) {
+        String traceId = req.getHeader(Trace.TRACE);
+        log.error("abTest1-traceId ：{}", traceId);
+        return RespResult.success();
+    }
 }

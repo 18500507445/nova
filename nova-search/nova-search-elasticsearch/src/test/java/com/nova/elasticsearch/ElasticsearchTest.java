@@ -151,9 +151,8 @@ public class ElasticsearchTest {
     /**
      * 模糊查询
      */
-
     @Test
-    public void demoA() {
+    public void likeQuery() {
         String userName = "";
         String password = "";
 
@@ -195,6 +194,19 @@ public class ElasticsearchTest {
 
         SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         log.info("client 查询: {}", searchResponse.toString());
+    }
+
+    @Test
+    public void queryByRestHighLevelClientList() throws IOException {
+        SearchRequest searchRequest = new SearchRequest("user");
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        BoolQueryBuilder filterQueryBuilders = QueryBuilders.boolQuery();
+        filterQueryBuilders.must(QueryBuilders.termsQuery("index", new ArrayList<>()));
+        searchSourceBuilder.postFilter(filterQueryBuilders);
+        searchSourceBuilder.from(0);
+        searchSourceBuilder.size(10000);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
     }
 
     @Test

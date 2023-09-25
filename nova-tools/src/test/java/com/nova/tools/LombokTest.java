@@ -1,5 +1,6 @@
-package com.nova.tools.demo.exercise;
+package com.nova.tools;
 
+import cn.hutool.json.JSONUtil;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -35,13 +36,17 @@ class LombokTest {
     @Data
     @Builder
     static class DemoC {
-        private String name;
+        /**
+         * 开启建造者模式，设置默认值，添加如下注解，作用于实体字段上
+         */
+        @Builder.Default
+        private String name = "默认";
     }
 
     /**
      * 相当于以下注解
      * 1.ToString
-     * 2.EqualsAndHashCode--可以使用字段为该类生成 Equals 和 HashCode 方法
+     * 2.EqualsAndHashCode--可以使用字段为该类生成Equals和HashCode方法
      * 3.Getter
      * 4.非final字段Setter
      * 5.RequiredArgsConstructor--为每个需要特殊处理的字段生成一个带有对应参数的构造函数，比如final和被@NonNull注解的字段
@@ -53,13 +58,9 @@ class LombokTest {
 
         String name = demoA.getName();
         System.err.println("name = " + name);
-
         System.err.println("toString：" + demoA);
-
         System.err.println("hashCode：" + demoA.hashCode());
-
         System.err.println("equals：" + demoA.equals(new DemoA()));
-
         System.err.println("canEqual：" + demoA.canEqual(new DemoA()));
     }
 
@@ -92,8 +93,8 @@ class LombokTest {
      */
     @Test
     public void demoC() {
-        DemoC demoC = DemoC.builder().name("wzh").build();
-        System.err.println("demoC = " + demoC);
+        DemoC demoC = DemoC.builder().build();
+        System.err.println("demoC = " + JSONUtil.toJsonStr(demoC));
     }
 
 

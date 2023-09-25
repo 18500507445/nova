@@ -1,23 +1,25 @@
 package com.nova.common.utils.common;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * @author: wzh
  * @description json工具类
  * @date: 2023/08/18 16:57
  */
+@Slf4j(topic = "JsonUtil")
 public class JsonUtil {
 
     private JsonUtil() {
@@ -129,12 +131,43 @@ public class JsonUtil {
      */
     public static Map jsonToMap(String jsonData) {
         try {
-            return com.alibaba.fastjson2.JSONObject.parseObject(jsonData, Map.class);
+            return JSONObject.parseObject(jsonData, Map.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    public static <T> List<T> parseArray(String text, Class<T> clazz) {
+        if (StrUtil.isEmpty(text)) {
+            return new ArrayList<>();
+        }
+        try {
+            return MAPPER.readValue(text, MAPPER.getTypeFactory().constructCollectionType(List.class, clazz));
+        } catch (IOException e) {
+            log.error("json parse err,json:{}", text, e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JsonNode parseTree(String text) {
+        try {
+            return MAPPER.readTree(text);
+        } catch (IOException e) {
+            log.error("json parse err,json:{}", text, e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JsonNode parseTree(byte[] text) {
+        try {
+            return MAPPER.readTree(text);
+        } catch (IOException e) {
+            log.error("json parse err,json:{}", text, e);
+            throw new RuntimeException(e);
+        }
+    }
+
 }
 
 

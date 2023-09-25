@@ -14,7 +14,10 @@ import org.springframework.core.NamedThreadLocal;
  */
 public class TraceHelper {
 
-    public static final ThreadLocal<Trace> CURRENT_SPAN = new NamedThreadLocal<>("TraceId Context");
+    /**
+     * trace对象上下文
+     */
+    public static final ThreadLocal<Trace> TRACE_CONTEXT = new NamedThreadLocal<>("TraceId Context");
 
     /**
      * 禁止 new SnowflakeGenerator().next()生成的id有重复的
@@ -43,32 +46,32 @@ public class TraceHelper {
         trace.setSpanId(genSpanId());
         MDC.put(Trace.TRACE, trace.getTraceId());
         MDC.put(Trace.PARENT_SPAN, trace.getSpanId());
-        CURRENT_SPAN.set(trace);
+        TRACE_CONTEXT.set(trace);
     }
 
     /**
      * 获取traceId
      */
     public static Trace getCurrentTrace() {
-        Trace trace = CURRENT_SPAN.get();
+        Trace trace = TRACE_CONTEXT.get();
         if (trace == null) {
             trace = new Trace();
             trace.setTraceId(genTraceId());
-            trace.setSpanId(genSpanId());
             MDC.put(Trace.TRACE, trace.getTraceId());
-        } else {
-            // spanId每次不一样，重新生成
-            trace.setSpanId(genSpanId());
         }
+        // spanId每次不一样，重新生成，放到MDC中
+        trace.setSpanId(genSpanId());
         MDC.put(Trace.PARENT_SPAN, trace.getSpanId());
-        CURRENT_SPAN.set(trace);
+        TRACE_CONTEXT.set(trace);
         return trace;
     }
 
     /**
      * 清空traceId
      */
-    public static void clearCurrentTrace() {
-        CURRENT_SPAN.remove();
+    public static void removeTrace() {
+        MDC.remove(Trace.TRACE);
+        MDC.remove(Trace.PARENT_SPAN);
+        TRACE_CONTEXT.remove();
     }
 }

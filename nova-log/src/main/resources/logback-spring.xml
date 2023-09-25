@@ -6,10 +6,10 @@
     <springProperty scope="context" name="logPath" source="logging.file.path" defaultValue="logging.file.path"/>
     <property name="log.path" value="${logPath}" />
     <property name="log.maxHistory" value="15"/>
-<!--    <property name="log.pattern" value="%d [%t] [%X{X-B3-TraceId}] %-5level %logger{20} - [%method,%line] - %msg%n"/>-->
+<!--    <property name="log.pattern" value="%d [%t] [traceId:%X{TraceId}] [spanId:%X{SpanId}] %-5level %logger{20} - [%method,%line] - %msg%n"/>-->
 
     <!-- 异步打印用这个，因为默认不开启打印方法和行数 -->
-    <property name="log.pattern" value="%d{MM-dd HH:mm:ss-SSS} [%t] [traceId:%X{X-B3-TraceId}] %-5level %logger{20} - %msg%n"/>
+    <property name="log.pattern" value="%d{MM-dd HH:mm:ss-SSS} [%t] [traceId:%X{traceId}] [spanId:%X{spanId}] %-5level %logger{20} - %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">

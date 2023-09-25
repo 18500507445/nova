@@ -25,7 +25,7 @@ import java.util.TreeMap;
  * @date: 2022/12/20 11:16
  */
 @Component
-@Slf4j
+@Slf4j(topic = "TraceFilter")
 public class TraceFilter extends GenericFilterBean {
 
     @Override
@@ -33,7 +33,7 @@ public class TraceFilter extends GenericFilterBean {
         try {
             long start = System.currentTimeMillis();
             HttpServletRequest request = (HttpServletRequest) req;
-            String traceId = request.getHeader(Trace.HEADER_TRACE_ID);
+            String traceId = request.getHeader(Trace.TRACE);
             //正常启动单服务可能拿不到，需要生成一个，如果网关进行设置了直接放入Trace对象
             if (StrUtil.isNotEmpty(traceId)) {
                 TraceHelper.setCurrentTrace(traceId);
@@ -45,7 +45,7 @@ public class TraceFilter extends GenericFilterBean {
 
             //todo 正常逻辑应该网关进行处理放入header进行透传
             if (StrUtil.isBlank(traceId)) {
-                requestWrapper.addHeader(Trace.HEADER_TRACE_ID, currentTraceId);
+                requestWrapper.addHeader(Trace.TRACE, currentTraceId);
             }
 
             log.info("trace web filter-traceId:{}", currentTraceId);
@@ -54,7 +54,7 @@ public class TraceFilter extends GenericFilterBean {
             MDC.put(Trace.PARENT_SPAN, TraceHelper.genSpanId());
             log.error("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
         } finally {
-            TraceHelper.clearCurrentTrace();
+            TraceHelper.removeTrace();
         }
     }
 

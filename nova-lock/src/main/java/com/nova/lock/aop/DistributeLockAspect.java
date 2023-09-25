@@ -2,6 +2,7 @@ package com.nova.lock.aop;
 
 import com.nova.lock.annotation.Lock;
 import com.nova.lock.core.RedissonLock;
+import com.nova.lock.enums.LockType;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -42,7 +43,7 @@ public class DistributeLockAspect {
         String lockName = lock.value();
         //获取超时时间
         int expireSeconds = lock.expireSeconds();
-        if (redissonLock.lock(lockName, expireSeconds)) {
+        if (redissonLock.lock(LockType.REENTRANT, lockName, expireSeconds)) {
             try {
                 log.info("获取Redis分布式锁[成功]，加锁完成，开始执行业务逻辑...");
                 return point.proceed();

@@ -18,9 +18,12 @@ import java.util.Map;
  */
 public class JwtUtils {
 
+    /**
+     * 缓存时间一天
+     */
     private static final long EXPIRE_TIME = 24 * 60 * 60 * 1000;
 
-    private static final String SECRET = "abc";
+    private static final String SECRET = "nova";
 
     /**
      * 生成签名,expireTime后过期
@@ -87,9 +90,13 @@ public class JwtUtils {
         boolean verify = verify(token, jsonStr);
         System.err.println("verify：" + verify);
 
-        Map<String, Claim> parse = parse(token);
-        String result = parse.get("json").asString();
-        System.out.println("result = " + result);
-
+        Map<String, Claim> parse;
+        try {
+            parse = parse(token);
+            String result = parse.get("json").asString();
+            System.err.println("result = " + result);
+        } catch (Exception e) {
+            System.err.println("The Token's Signature resulted invalid");
+        }
     }
 }

@@ -18,9 +18,9 @@ public class Trace implements Serializable {
      * （1）log日志配置文件也需要取出来 [%X{X-B3-TraceId}]
      * （2）http请求发送traceId放入header中
      */
-    public static final String TRACE = "traceId";
+    public static final String TRACE_ID = "traceId";
 
-    public static final String PARENT_SPAN = "spanId";
+    public static final String SPAN_ID = "spanId";
 
     /**
      * 分布式traceId

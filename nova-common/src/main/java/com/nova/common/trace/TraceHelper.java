@@ -31,7 +31,7 @@ public class TraceHelper {
     }
 
     public static String getTraceId() {
-        return MDC.get(Trace.TRACE);
+        return MDC.get(Trace.TRACE_ID);
     }
 
     /**
@@ -44,8 +44,8 @@ public class TraceHelper {
         Trace trace = new Trace();
         trace.setTraceId(traceId);
         trace.setSpanId(genSpanId());
-        MDC.put(Trace.TRACE, trace.getTraceId());
-        MDC.put(Trace.PARENT_SPAN, trace.getSpanId());
+        MDC.put(Trace.TRACE_ID, trace.getTraceId());
+        MDC.put(Trace.SPAN_ID, trace.getSpanId());
         TRACE_CONTEXT.set(trace);
     }
 
@@ -57,21 +57,21 @@ public class TraceHelper {
         if (trace == null) {
             trace = new Trace();
             trace.setTraceId(genTraceId());
-            MDC.put(Trace.TRACE, trace.getTraceId());
+            MDC.put(Trace.TRACE_ID, trace.getTraceId());
         }
         // spanId每次不一样，重新生成，放到MDC中
         trace.setSpanId(genSpanId());
-        MDC.put(Trace.PARENT_SPAN, trace.getSpanId());
+        MDC.put(Trace.SPAN_ID, trace.getSpanId());
         TRACE_CONTEXT.set(trace);
         return trace;
     }
 
     /**
-     * 清空traceId
+     * 清空trace对象
      */
     public static void removeTrace() {
-        MDC.remove(Trace.TRACE);
-        MDC.remove(Trace.PARENT_SPAN);
+        MDC.remove(Trace.TRACE_ID);
+        MDC.remove(Trace.SPAN_ID);
         TRACE_CONTEXT.remove();
     }
 }

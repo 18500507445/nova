@@ -41,7 +41,7 @@ public class LogController extends BaseController {
 
     @GetMapping("traceTest")
     public RespResult<Void> traceTest(HttpServletRequest req) {
-        String traceId = req.getHeader(Trace.TRACE);
+        String traceId = req.getHeader(Trace.TRACE_ID);
         log.error("abTest-traceId ：{}", traceId);
         String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header("header_trace_id", traceId).execute().body();
         log.error("httpResult ：{}", httpResult);
@@ -50,7 +50,7 @@ public class LogController extends BaseController {
 
     @GetMapping("traceTest1")
     public RespResult<Void> traceTest1(HttpServletRequest req) {
-        String traceId = req.getHeader(Trace.TRACE);
+        String traceId = req.getHeader(Trace.TRACE_ID);
         log.error("abTest1-traceId ：{}", traceId);
         return RespResult.success();
     }

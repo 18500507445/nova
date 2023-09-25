@@ -33,7 +33,7 @@ public class TraceFilter extends GenericFilterBean {
         try {
             long start = System.currentTimeMillis();
             HttpServletRequest request = (HttpServletRequest) req;
-            String traceId = request.getHeader(Trace.TRACE);
+            String traceId = request.getHeader(Trace.TRACE_ID);
             //正常启动单服务可能拿不到，需要生成一个，如果网关进行设置了直接放入Trace对象
             if (StrUtil.isNotEmpty(traceId)) {
                 TraceHelper.setCurrentTrace(traceId);
@@ -45,13 +45,13 @@ public class TraceFilter extends GenericFilterBean {
 
             //todo 正常逻辑应该网关进行处理放入header进行透传
             if (StrUtil.isBlank(traceId)) {
-                requestWrapper.addHeader(Trace.TRACE, currentTraceId);
+                requestWrapper.addHeader(Trace.TRACE_ID, currentTraceId);
             }
 
             log.info("trace web filter-traceId:{}", currentTraceId);
             filterChain.doFilter(requestWrapper, resp);
             //MDC放入spanId
-            MDC.put(Trace.PARENT_SPAN, TraceHelper.genSpanId());
+            MDC.put(Trace.SPAN_ID, TraceHelper.genSpanId());
             log.error("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
         } finally {
             TraceHelper.removeTrace();

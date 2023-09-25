@@ -43,7 +43,7 @@ public class LogController extends BaseController {
     public RespResult<Void> traceTest(HttpServletRequest req) {
         String traceId = req.getHeader(Trace.TRACE_ID);
         log.error("abTest-traceId ：{}", traceId);
-        String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header("header_trace_id", traceId).execute().body();
+        String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header(Trace.TRACE_ID, traceId).execute().body();
         log.error("httpResult ：{}", httpResult);
         return RespResult.success();
     }

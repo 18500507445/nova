@@ -41,7 +41,7 @@ public class TraceFilter extends GenericFilterBean {
                 TraceHelper.getCurrentTrace();
             }
             RequestWrapper requestWrapper = printAccessLog(request);
-            String currentTraceId = TraceHelper.getCurrentTrace().getTraceId();
+            String currentTraceId = null == MDC.get(Trace.TRACE_ID) ? TraceHelper.getCurrentTrace().getTraceId() : MDC.get(Trace.TRACE_ID);
 
             //todo 正常逻辑应该网关进行处理放入header进行透传
             if (StrUtil.isBlank(traceId)) {

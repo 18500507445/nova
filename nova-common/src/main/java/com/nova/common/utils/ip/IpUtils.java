@@ -119,13 +119,15 @@ public class IpUtils {
         byte[] macAddressBytes = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
         // 下面代码是把mac地址拼装成String
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < macAddressBytes.length; i++) {
-            if (i != 0) {
-                sb.append("-");
+        if (macAddressBytes.length > 0) {
+            for (int i = 0; i < macAddressBytes.length; i++) {
+                if (i != 0) {
+                    sb.append("-");
+                }
+                // mac[i] & 0xFF 是为了把byte转化为正整数
+                String s = Integer.toHexString(macAddressBytes[i] & 0xFF);
+                sb.append(s.length() == 1 ? 0 + s : s);
             }
-            // mac[i] & 0xFF 是为了把byte转化为正整数
-            String s = Integer.toHexString(macAddressBytes[i] & 0xFF);
-            sb.append(s.length() == 1 ? 0 + s : s);
         }
         return sb.toString().trim().toUpperCase();
     }

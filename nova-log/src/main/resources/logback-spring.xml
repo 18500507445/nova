@@ -4,7 +4,7 @@
     <!-- 先级排序: FATAL > ERROR > WARN > INFO > DEBUG > TRACE -->
 
     <springProperty scope="context" name="logPath" source="logging.file.path" defaultValue="logging.file.path"/>
-    <property name="log.path" value="${logPath}" />
+    <property name="log.path" value="${logPath}"/>
     <property name="log.maxHistory" value="15"/>
 <!--    <property name="log.pattern" value="%d [%t] [traceId:%X{TraceId}] [spanId:%X{SpanId}] %-5level %logger{20} - [%method,%line] - %msg%n"/>-->
 

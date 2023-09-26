@@ -37,6 +37,7 @@
         <mybatis.version>2.3.1</mybatis.version>
         <bitwalker.version>1.21</bitwalker.version>
         <sba.version>2.7.11</sba.version>
+        <transmittable.version>2.14.3</transmittable.version>
     </properties>
 
     <dependencies>
@@ -269,6 +270,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- 阿里线程工具，可以多线程环境中传递值 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>${transmittable.version}</version>
         </dependency>
 
     </dependencies>

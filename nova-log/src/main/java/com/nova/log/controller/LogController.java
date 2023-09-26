@@ -4,10 +4,8 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.http.HttpUtil;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.core.model.result.RespResult;
 import com.nova.common.trace.Trace;
-import com.nova.common.utils.ip.IpUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,35 +29,18 @@ public class LogController extends BaseController {
      * 异步log测试，性能差一倍
      */
     @RequestMapping("log")
-    public AjaxResult limit() {
+    public RespResult<Void> limit() {
         TimeInterval timer = DateUtil.timer();
         for (int i = 0; i < 500000; i++) {
             log.info("这是{}条日志！", i);
         }
         log.info("当前耗时：{}ms", timer.interval());
-        return AjaxResult.success("ok");
+        return RespResult.success();
     }
 
     @GetMapping("traceTest")
-    public RespResult<Void> traceTest(HttpServletRequest req) throws Exception {
+    public RespResult<Void> traceTest(HttpServletRequest req) {
         String traceId = req.getHeader(Trace.TRACE_ID);
-
-        String ipAddr = IpUtils.getIpAddress(req);
-        System.err.println("ipAddr = " + ipAddr);
-
-        String host = IpUtils.getHostIp();
-        System.err.println("host = " + host);
-
-        String hostName = IpUtils.getHostName();
-        System.err.println("hostName = " + hostName);
-
-        String macAddress = IpUtils.getMacAddress();
-        System.err.println("macAddress = " + macAddress);
-
-        String ip = getIp();
-        String hostIp = getHostIp();
-        System.err.println("ip = " + ip);
-        System.err.println("hostIp = " + hostIp);
         log.error("abTest-traceId ：{}", traceId);
         String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header(Trace.TRACE_ID, traceId).execute().body();
         log.error("httpResult ：{}", httpResult);

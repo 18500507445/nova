@@ -4,8 +4,8 @@ import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.alibaba.ttl.TransmittableThreadLocal;
 import org.slf4j.MDC;
-import org.springframework.core.NamedThreadLocal;
 
 /**
  * @description: traceId和spanId工具类
@@ -15,9 +15,9 @@ import org.springframework.core.NamedThreadLocal;
 public class TraceHelper {
 
     /**
-     * trace对象上下文
+     * trace对象上下文，支持父子线程之间的数据传递
      */
-    public static final ThreadLocal<Trace> TRACE_CONTEXT = new NamedThreadLocal<>("TraceId Context");
+    public static final ThreadLocal<Trace> TRACE_CONTEXT = new TransmittableThreadLocal<>();
 
     /**
      * 禁止 new SnowflakeGenerator().next()生成的id有重复的

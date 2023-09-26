@@ -1,5 +1,7 @@
 package com.nova.tools.demo.init;
 
+import com.nova.common.utils.ip.IpUtils;
+
 import javax.annotation.PostConstruct;
 
 /**
@@ -10,6 +12,8 @@ import javax.annotation.PostConstruct;
 //@Component
 class InitDemo1 {
 
+    public static String internetIp = null;
+
     /**
      * 如何在程序启动时 初始化数据或执行其它业务
      *
@@ -19,5 +23,6 @@ class InitDemo1 {
     @PostConstruct
     void init() {
         System.err.println("[注解@PostConstruct] 初始化");
+        internetIp = IpUtils.getInternetIp("curl cip.cc");
     }
 }

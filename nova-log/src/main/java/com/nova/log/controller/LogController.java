@@ -7,6 +7,7 @@ import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.core.model.result.RespResult;
 import com.nova.common.trace.Trace;
+import com.nova.common.utils.ip.IpUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +41,25 @@ public class LogController extends BaseController {
     }
 
     @GetMapping("traceTest")
-    public RespResult<Void> traceTest(HttpServletRequest req) {
+    public RespResult<Void> traceTest(HttpServletRequest req) throws Exception {
         String traceId = req.getHeader(Trace.TRACE_ID);
+
+        String ipAddr = IpUtils.getIpAddress(req);
+        System.err.println("ipAddr = " + ipAddr);
+
+        String host = IpUtils.getHostIp();
+        System.err.println("host = " + host);
+
+        String hostName = IpUtils.getHostName();
+        System.err.println("hostName = " + hostName);
+
+        String macAddress = IpUtils.getMacAddress();
+        System.err.println("macAddress = " + macAddress);
+
+        String ip = getIp();
+        String hostIp = getHostIp();
+        System.err.println("ip = " + ip);
+        System.err.println("hostIp = " + hostIp);
         log.error("abTest-traceId ：{}", traceId);
         String httpResult = HttpUtil.createGet("http://localhost:8080/api/traceTest1").header(Trace.TRACE_ID, traceId).execute().body();
         log.error("httpResult ：{}", httpResult);

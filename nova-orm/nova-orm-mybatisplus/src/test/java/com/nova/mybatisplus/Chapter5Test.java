@@ -12,6 +12,10 @@ import com.nova.mybatisplus.entity.MyOrder;
 import com.nova.mybatisplus.entity.UserFiveDO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionException;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
 import java.util.Collections;
@@ -34,6 +38,9 @@ public class Chapter5Test {
 
     @Resource
     private FiveUserService fiveUserService;
+
+    @Resource
+    private DataSourceTransactionManager transactionManager;
 
     static {
         System.setProperty("pagehelper.banner", "false");
@@ -122,8 +129,7 @@ public class Chapter5Test {
 
 
     /**
-     * 多数据源
-     * 多数据源事务：@DSTransactional，直接作用于方法上
+     * 多数据源查询
      */
     @Test
     public void dynamicDataSource() {
@@ -131,6 +137,41 @@ public class Chapter5Test {
         UserFiveDO result = fiveUserMapper.selectById(1671354213734621185L);
         System.err.println("myOrder = " + JSONUtil.toJsonStr(myOrder));
         System.err.println("result = " + JSONUtil.toJsonStr(result));
+    }
+
+    /**
+     * 手动开启事务
+     */
+    @Test
+    public void testTransaction() {
+        //开启事务
+        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+        try {
+            UserFiveDO userDO = new UserFiveDO();
+            userDO.setName("transaction").setAge(1).setEmail("xxxxx@qq.com").setGender(GenderEnum.MAN);
+            fiveUserMapper.insert(userDO);
+
+            //模拟异常
+//            System.out.println(1 / 0);
+
+            // 提交事务
+            transactionManager.commit(status);
+        } catch (TransactionException e) {
+            // 回滚事务
+            transactionManager.rollback(status);
+
+            //方法2：用于开启注解@Transactional
+            //TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+    }
+
+    /**
+     * 多数据源事务：@DSTransactional，直接作用于方法上
+     */
+    @Test
+    public void testDsTransaction() {
+//        fiveUserService.theSame();
+        fiveUserService.notAlike();
     }
 
 

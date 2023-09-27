@@ -33,7 +33,7 @@
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
-        <!--阿里数据库连接池 -->
+        <!--德鲁伊连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>

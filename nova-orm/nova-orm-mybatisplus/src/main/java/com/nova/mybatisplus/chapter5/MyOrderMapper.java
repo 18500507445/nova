@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date: 2023/06/21 17:04
  */
 @Mapper
-@DS("my_mall")
+@DS("mall")
 public interface MyOrderMapper extends BaseMapper<MyOrder> {
 
 }

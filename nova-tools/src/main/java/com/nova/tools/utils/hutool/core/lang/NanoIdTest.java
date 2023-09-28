@@ -2,15 +2,10 @@ package com.nova.tools.utils.hutool.core.lang;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.id.NanoId;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**

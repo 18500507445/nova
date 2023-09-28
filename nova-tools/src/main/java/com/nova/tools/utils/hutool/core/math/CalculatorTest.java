@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.math;
 
-import cn.hutool.core.math.Calculator;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.math.Calculator;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {

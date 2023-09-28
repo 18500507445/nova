@@ -3,9 +3,8 @@ package com.nova.tools.utils.hutool.core.io;
 import cn.hutool.core.io.CharsetDetector;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
-import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import cn.hutool.core.util.CharsetUtil;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.Charset;
@@ -21,7 +20,6 @@ public class CharsetDetectorTest {
     }
 
     @Test
-    @Ignore
     public void issue2547() {
         final Charset detect = CharsetDetector.detect(IoUtil.DEFAULT_LARGE_BUFFER_SIZE,
                 ResourceUtil.getStream("d:/test/default.txt"));

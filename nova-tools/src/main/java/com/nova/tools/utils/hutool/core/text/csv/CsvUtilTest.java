@@ -3,13 +3,12 @@ package com.nova.tools.utils.hutool.core.text.csv;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.text.csv.*;
 import cn.hutool.core.util.CharsetUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -52,7 +51,6 @@ public class CsvUtilTest {
     }
 
     @Test
-    @Ignore
     public void readTest3() {
         CsvReader reader = CsvUtil.getReader();
         String path = FileUtil.isWindows() ? "d:/test/test.csv" : "~/test/test.csv";
@@ -90,7 +88,6 @@ public class CsvUtilTest {
     }
 
     @Test
-    @Ignore
     public void writeTest() {
         String path = FileUtil.isWindows() ? "d:/test/testWrite.csv" : "~/test/testWrite.csv";
         CsvWriter writer = CsvUtil.getWriter(path, CharsetUtil.CHARSET_UTF_8);
@@ -102,7 +99,6 @@ public class CsvUtilTest {
     }
 
     @Test
-    @Ignore
     public void writeBeansTest() {
 
         @Data
@@ -138,7 +134,6 @@ public class CsvUtilTest {
     }
 
     @Test
-    @Ignore
     public void readLfTest() {
         final CsvReader reader = CsvUtil.getReader();
         String path = FileUtil.isWindows() ? "d:/test/rw_test.csv" : "~/test/rw_test.csv";
@@ -149,7 +144,6 @@ public class CsvUtilTest {
     }
 
     @Test
-    @Ignore
     public void writeWrapTest() {
         List<List<Object>> resultList = new ArrayList<>();
         List<Object> list = new ArrayList<>();
@@ -168,7 +162,6 @@ public class CsvUtilTest {
     }
 
     @Test
-    @Ignore
     public void writeDataTest() {
         @Data
         @AllArgsConstructor

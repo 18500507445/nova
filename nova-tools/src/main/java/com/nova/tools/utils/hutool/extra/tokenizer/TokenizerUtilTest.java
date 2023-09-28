@@ -1,6 +1,7 @@
 package com.nova.tools.utils.hutool.extra.tokenizer;
 
 import cn.hutool.core.collection.IterUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.tokenizer.Result;
 import cn.hutool.extra.tokenizer.TokenizerEngine;
 import cn.hutool.extra.tokenizer.TokenizerUtil;
@@ -12,7 +13,6 @@ import cn.hutool.extra.tokenizer.engine.jieba.JiebaEngine;
 import cn.hutool.extra.tokenizer.engine.mmseg.MmsegEngine;
 import cn.hutool.extra.tokenizer.engine.mynlp.MynlpEngine;
 import cn.hutool.extra.tokenizer.engine.word.WordEngine;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**

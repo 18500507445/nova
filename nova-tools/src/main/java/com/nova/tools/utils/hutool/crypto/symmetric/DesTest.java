@@ -1,11 +1,11 @@
 package com.nova.tools.utils.hutool.crypto.symmetric;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.Mode;
 import cn.hutool.crypto.Padding;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.DES;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**

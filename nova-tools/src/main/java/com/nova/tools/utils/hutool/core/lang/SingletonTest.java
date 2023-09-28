@@ -5,7 +5,6 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Singleton;
 import cn.hutool.core.thread.ThreadUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class SingletonTest {

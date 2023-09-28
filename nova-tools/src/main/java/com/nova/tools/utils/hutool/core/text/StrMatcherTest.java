@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.text;
 
-import cn.hutool.core.text.StrMatcher;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.text.StrMatcher;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

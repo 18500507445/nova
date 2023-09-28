@@ -1,11 +1,10 @@
 package com.nova.tools.utils.hutool.jwt;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.exceptions.ValidateException;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTValidator;
 import cn.hutool.jwt.signers.JWTSignerUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;

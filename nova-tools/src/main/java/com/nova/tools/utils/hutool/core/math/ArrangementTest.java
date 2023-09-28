@@ -1,14 +1,12 @@
 package com.nova.tools.utils.hutool.core.math;
 
-import java.util.List;
-
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.lang.Console;
 import cn.hutool.core.math.Arrangement;
 import cn.hutool.core.math.MathUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
-import cn.hutool.core.lang.Console;
+import java.util.List;
 
 /**
  * 排列单元测试
@@ -58,7 +56,6 @@ public class ArrangementTest {
     }
 
     @Test
-    @Ignore
     public void selectTest2() {
         List<String[]> list = MathUtil.arrangementSelect(new String[]{"1", "1", "3", "4"});
         for (String[] strings : list) {

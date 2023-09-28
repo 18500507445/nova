@@ -1,11 +1,10 @@
 package com.nova.tools.utils.hutool.setting.yaml;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.setting.yaml.YamlUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -24,7 +23,6 @@ public class YamlUtilTest {
     }
 
     @Test
-    @Ignore
     public void dumpTest() {
         final Dict dict = Dict.create()
                 .set("name", "hutool")

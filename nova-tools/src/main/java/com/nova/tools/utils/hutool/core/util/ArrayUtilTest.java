@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.util;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ArrayUtil;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

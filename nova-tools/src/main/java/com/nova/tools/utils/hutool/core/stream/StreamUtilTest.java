@@ -1,15 +1,14 @@
 package com.nova.tools.utils.hutool.core.stream;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.stream.CollectorUtil;
 import cn.hutool.core.stream.StreamUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

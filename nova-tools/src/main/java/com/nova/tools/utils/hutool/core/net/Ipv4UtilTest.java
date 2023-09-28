@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.net;
 
-import cn.hutool.core.net.Ipv4Util;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.net.Ipv4Util;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

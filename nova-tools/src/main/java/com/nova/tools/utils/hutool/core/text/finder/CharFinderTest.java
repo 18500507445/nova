@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.text.finder;
 
-import cn.hutool.core.text.finder.CharFinder;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.text.finder.CharFinder;
 import org.junit.jupiter.api.Test;
 
 public class CharFinderTest {

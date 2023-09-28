@@ -1,10 +1,10 @@
 package com.nova.tools.utils.hutool.http.body;
 
 import cn.hutool.core.io.resource.StringResource;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.http.HttpResource;
 import cn.hutool.http.body.MultipartBody;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

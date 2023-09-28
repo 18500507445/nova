@@ -1,5 +1,6 @@
 package com.nova.tools.utils.hutool.json;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.json.serialize.GlobalSerializeMapping;
@@ -7,7 +8,6 @@ import cn.hutool.json.serialize.JSONDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**

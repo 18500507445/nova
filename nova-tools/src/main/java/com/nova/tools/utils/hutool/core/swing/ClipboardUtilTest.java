@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.core.swing;
 
 import cn.hutool.core.lang.Assert;
-import org.junit.jupiter.api.Test;
-
 import cn.hutool.core.swing.clipboard.ClipboardUtil;
+import org.junit.jupiter.api.Test;
 
 /**
  * 剪贴板工具类单元测试

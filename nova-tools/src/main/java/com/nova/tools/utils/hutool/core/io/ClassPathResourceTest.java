@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.io;
 
 import cn.hutool.core.io.resource.ClassPathResource;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -2,8 +2,8 @@ package com.nova.tools.utils.hutool.json;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
-import cn.hutool.core.convert.ConvertException;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.util.CharsetUtil;
@@ -15,7 +15,6 @@ import com.nova.tools.utils.hutool.json.test.bean.Exam;
 import com.nova.tools.utils.hutool.json.test.bean.JsonNode;
 import com.nova.tools.utils.hutool.json.test.bean.KeyBean;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

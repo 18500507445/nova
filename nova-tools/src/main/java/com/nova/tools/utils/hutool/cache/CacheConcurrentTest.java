@@ -8,7 +8,6 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ConcurrencyTester;
 import cn.hutool.core.thread.ThreadUtil;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,7 +20,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 class CacheConcurrentTest {
 
     @Test
-    @Ignore
     public void fifoCacheTest() {
         int threadCount = 4000;
         final Cache<String, String> cache = new FIFOCache<>(3);
@@ -52,7 +50,6 @@ class CacheConcurrentTest {
     }
 
     @Test
-    @Ignore
     public void lruCacheTest() {
         int threadCount = 40000;
         final Cache<String, String> cache = new LRUCache<>(1000);

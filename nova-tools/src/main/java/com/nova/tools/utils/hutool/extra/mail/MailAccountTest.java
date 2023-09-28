@@ -1,11 +1,10 @@
 package com.nova.tools.utils.hutool.extra.mail;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.mail.GlobalMailAccount;
 import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
 import com.sun.mail.util.MailSSLSocketFactory;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.security.GeneralSecurityException;
@@ -34,7 +33,6 @@ public class MailAccountTest {
      * 已经测试通过
      */
     @Test
-    @Ignore
     public void customPropertyTest() throws GeneralSecurityException {
         MailAccount mailAccount = new MailAccount();
         mailAccount.setFrom("xxx@xxx.com");

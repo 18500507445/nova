@@ -3,7 +3,6 @@ package com.nova.tools.utils.hutool.crypto;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.GlobalBouncyCastleProvider;
 import cn.hutool.crypto.KeyUtil;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.security.KeyPair;
@@ -16,7 +15,6 @@ public class KeyUtilTest {
      * 测试关闭BouncyCastle支持时是否会正常抛出异常，即关闭是否有效
      */
     @Test
-    @Ignore
     public void generateKeyPairTest() {
         GlobalBouncyCastleProvider.setUseBouncyCastle(false);
         KeyPair pair = KeyUtil.generateKeyPair("SM2");

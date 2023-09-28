@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.util;
 
-import cn.hutool.core.util.JAXBUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.JAXBUtil;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.annotation.*;
@@ -14,15 +14,7 @@ import javax.xml.bind.annotation.*;
  */
 public class JAXBUtilTest {
 
-    private final String xmlStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<school>\n" +
-            "    <school_name>西安市第一中学</school_name>\n" +
-            "    <school_address>西安市雁塔区长安堡一号</school_address>\n" +
-            "    <room>\n" +
-            "        <room_no>101</room_no>\n" +
-            "        <room_name>101教室</room_name>\n" +
-            "    </room>\n" +
-            "</school>\n";
+    private final String xmlStr = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<school>\n" + "    <school_name>西安市第一中学</school_name>\n" + "    <school_address>西安市雁塔区长安堡一号</school_address>\n" + "    <room>\n" + "        <room_no>101</room_no>\n" + "        <room_name>101教室</room_name>\n" + "    </room>\n" + "</school>\n";
 
     @Test
     public void beanToXmlTest() {

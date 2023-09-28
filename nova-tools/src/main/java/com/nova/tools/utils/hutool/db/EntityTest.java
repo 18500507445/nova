@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.db;
 
-import cn.hutool.db.Entity;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.db.Entity;
 import com.nova.tools.utils.hutool.db.pojo.User;
 import org.junit.jupiter.api.Test;
 

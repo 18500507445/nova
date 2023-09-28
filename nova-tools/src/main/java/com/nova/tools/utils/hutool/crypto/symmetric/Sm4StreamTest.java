@@ -1,7 +1,6 @@
 package com.nova.tools.utils.hutool.crypto.symmetric;
 
 import cn.hutool.crypto.symmetric.SM4;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -16,7 +15,6 @@ public class Sm4StreamTest {
     private static final boolean IS_CLOSE = false;
 
     @Test
-    @Ignore
     public void sm4Test() {
         String source = "d:/test/sm4_1.txt";
         String target = "d:/test/sm4_2.data";

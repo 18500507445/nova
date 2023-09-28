@@ -1,6 +1,7 @@
 package com.nova.tools.utils.hutool.db;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.db.ActiveEntity;
@@ -9,9 +10,7 @@ import cn.hutool.db.Entity;
 import cn.hutool.db.handler.EntityListHandler;
 import cn.hutool.db.sql.Condition;
 import cn.hutool.db.sql.Condition.LikeType;
-import cn.hutool.core.lang.Assert;
 import com.nova.tools.utils.hutool.db.pojo.User;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -129,7 +128,6 @@ public class CRUDTest {
      * @throws SQLException SQL异常
      */
     @Test
-    @Ignore
     public void crudTest() throws SQLException {
 
         // 增
@@ -152,7 +150,6 @@ public class CRUDTest {
     }
 
     @Test
-    @Ignore
     public void insertBatchTest() throws SQLException {
         User user1 = new User();
         user1.setName("张三");
@@ -178,7 +175,6 @@ public class CRUDTest {
     }
 
     @Test
-    @Ignore
     public void insertBatchOneTest() throws SQLException {
         User user1 = new User();
         user1.setName("张三");

@@ -2,9 +2,8 @@ package com.nova.tools.utils.hutool.captcha;
 
 import cn.hutool.captcha.*;
 import cn.hutool.captcha.generator.MathGenerator;
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import cn.hutool.core.lang.Console;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -25,7 +24,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void lineCaptchaTest3() {
         // 定义图形验证码的长和宽
         LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 70, 4, 15);
@@ -34,7 +32,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void lineCaptchaWithMathTest() {
         // 定义图形验证码的长和宽
         LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 80);
@@ -44,7 +41,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void lineCaptchaTest2() {
 
         // 定义图形验证码的长和宽
@@ -64,7 +60,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void circleCaptchaTest() {
 
         // 定义图形验证码的长和宽
@@ -77,7 +72,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void shearCaptchaTest() {
 
         // 定义图形验证码的长和宽
@@ -90,7 +84,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void shearCaptchaTest2() {
 
         // 定义图形验证码的长和宽
@@ -102,7 +95,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void ShearCaptchaWithMathTest() {
         // 定义图形验证码的长和宽
         ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(200, 45, 4, 4);
@@ -115,7 +107,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void GifCaptchaTest() {
         GifCaptcha captcha = CaptchaUtil.createGifCaptcha(200, 100, 4);
         captcha.write("d:/test/gif_captcha.gif");
@@ -123,7 +114,6 @@ public class CaptchaTest {
     }
 
     @Test
-    @Ignore
     public void bgTest() {
         LineCaptcha captcha = CaptchaUtil.createLineCaptcha(200, 100, 4, 1);
         captcha.setBackground(Color.WHITE);

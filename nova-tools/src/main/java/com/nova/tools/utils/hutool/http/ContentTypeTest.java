@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.http;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.http.ContentType;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -2,7 +2,6 @@ package com.nova.tools.utils.hutool.poi.excel;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.poi.excel.ExcelUtil;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.Map;
 public class IssueI53OSTTest {
 
     @Test
-    @Ignore
     public void readTest() {
         Map<String, Object> result = new HashMap<>();
         List<Object> header = new ArrayList<>();

@@ -2,7 +2,6 @@ package com.nova.tools.utils.hutool.core.lang;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Tuple;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;

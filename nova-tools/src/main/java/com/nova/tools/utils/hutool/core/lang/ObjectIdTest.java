@@ -1,13 +1,11 @@
 package com.nova.tools.utils.hutool.core.lang;
 
-import java.util.HashSet;
-
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.ObjectId;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
 
 /**
  * ObjectId单元测试
@@ -28,7 +26,6 @@ public class ObjectIdTest {
     }
 
     @Test
-    @Ignore
     public void nextTest() {
         Console.log(ObjectId.next());
     }

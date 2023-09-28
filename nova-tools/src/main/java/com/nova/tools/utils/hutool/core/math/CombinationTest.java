@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.math;
 
-import cn.hutool.core.math.Combination;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.math.Combination;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

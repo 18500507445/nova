@@ -4,8 +4,8 @@ import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.LineHandler;
 import cn.hutool.core.io.resource.ResourceUtil;
-import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.RandomUtil;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;

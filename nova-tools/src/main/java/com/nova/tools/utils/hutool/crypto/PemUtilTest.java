@@ -2,13 +2,12 @@ package com.nova.tools.utils.hutool.crypto;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.PemUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.asymmetric.SM2;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
@@ -17,14 +16,14 @@ import java.security.PublicKey;
 
 public class PemUtilTest {
 
-    @Test
-    public void readPrivateKeyTest() {
+    @Testpublic
+    void readPrivateKeyTest() {
         final PrivateKey privateKey = PemUtil.readPemPrivateKey(ResourceUtil.getStream("test_private_key.pem"));
         Assert.notNull(privateKey);
     }
 
-    @Test
-    public void readPublicKeyTest() {
+    @Testpublic
+    void readPublicKeyTest() {
         final PublicKey publicKey = PemUtil.readPemPublicKey(ResourceUtil.getStream("test_public_key.csr"));
         Assert.notNull(publicKey);
     }
@@ -63,7 +62,6 @@ public class PemUtilTest {
     }
 
     @Test
-    @Ignore
     public void readECPrivateKeyTest2() {
         // https://gitee.com/dromara/hutool/issues/I37Z75
         final byte[] d = PemUtil.readPem(FileUtil.getInputStream("d:/test/keys/priv.key"));

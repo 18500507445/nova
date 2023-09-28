@@ -3,20 +3,15 @@ package com.nova.tools.utils.hutool.core.collection;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.date.StopWatch;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.PageUtil;
 import cn.hutool.core.util.RandomUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ListUtilTest {
 
@@ -38,7 +33,6 @@ public class ListUtilTest {
     }
 
     @Test
-    @Ignore
     public void splitBenchTest() {
         final List<String> list = new ArrayList<>();
         CollUtil.padRight(list, RandomUtil.randomInt(1000_0000, 1_0000_0000), "test");

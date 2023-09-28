@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.db;
 
-import cn.hutool.db.PageResult;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.db.PageResult;
 import org.junit.jupiter.api.Test;
 
 public class PageResultTest {

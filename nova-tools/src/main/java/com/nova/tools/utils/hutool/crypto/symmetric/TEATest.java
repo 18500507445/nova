@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.crypto.symmetric;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import cn.hutool.crypto.symmetric.XXTEA;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**

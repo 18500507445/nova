@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.db;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.db.Page;
 import cn.hutool.db.sql.Order;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class PageTest {

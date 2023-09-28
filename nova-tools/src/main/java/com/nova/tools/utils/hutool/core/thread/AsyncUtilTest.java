@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.core.thread;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.thread.AsyncUtil;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 public class AsyncUtilTest {
 
     @Test
-    @Ignore
     public void waitAndGetTest() {
         CompletableFuture<String> hutool = CompletableFuture.supplyAsync(() -> {
             ThreadUtil.sleep(1, TimeUnit.SECONDS);

@@ -5,13 +5,11 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ConcurrencyTester;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 public class ConcurrencyTesterTest {
 
     @Test
-    @Ignore
     public void concurrencyTesterTest() {
         ConcurrencyTester tester = ThreadUtil.concurrencyTest(100, () -> {
             long delay = RandomUtil.randomLong(100, 1000);
@@ -22,7 +20,6 @@ public class ConcurrencyTesterTest {
     }
 
     @Test
-    @Ignore
     public void multiTest() {
         ConcurrencyTester ct = new ConcurrencyTester(5);
         for (int i = 0; i < 3; i++) {

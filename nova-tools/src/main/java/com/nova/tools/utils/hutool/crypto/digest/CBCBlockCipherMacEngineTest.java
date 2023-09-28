@@ -1,12 +1,12 @@
 package com.nova.tools.utils.hutool.crypto.digest;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.KeyUtil;
 import cn.hutool.crypto.digest.mac.Mac;
 import cn.hutool.crypto.digest.mac.SM4MacEngine;
 import org.bouncycastle.crypto.CipherParameters;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.ParametersWithIV;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class CBCBlockCipherMacEngineTest {

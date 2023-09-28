@@ -5,7 +5,6 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 public class PicTransferTest {
 
     @Test
-    @Ignore
     public void findTest() throws SQLException {
         Db.use().find(
                 ListUtil.of("NAME", "TYPE", "GROUP", "PIC"),

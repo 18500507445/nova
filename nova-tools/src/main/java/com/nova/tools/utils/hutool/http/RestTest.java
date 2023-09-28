@@ -1,12 +1,11 @@
 package com.nova.tools.utils.hutool.http;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -26,7 +25,6 @@ public class RestTest {
     }
 
     @Test
-    @Ignore
     public void postTest() {
         HttpRequest request = HttpRequest.post("http://localhost:8090/rest/restTest/")//
                 .body(JSONUtil.createObj()
@@ -36,7 +34,6 @@ public class RestTest {
     }
 
     @Test
-    @Ignore
     public void postTest2() {
         String result = HttpUtil.post("http://localhost:8090/rest/restTest/", JSONUtil.createObj()//
                 .set("aaa", "aaaValue")
@@ -45,7 +42,6 @@ public class RestTest {
     }
 
     @Test
-    @Ignore
     public void getWithBodyTest() {
         HttpRequest request = HttpRequest.get("http://localhost:8888/restTest")//
                 .header(Header.CONTENT_TYPE, "application/json")
@@ -56,7 +52,6 @@ public class RestTest {
     }
 
     @Test
-    @Ignore
     public void getWithBodyTest2() {
         HttpRequest request = HttpRequest.get("https://ad.oceanengine.com/open_api/2/advertiser/info/")//
                 // Charles代理

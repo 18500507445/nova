@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.text;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.text.NamingCase;
 import cn.hutool.core.util.CharUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class NamingCaseTest {

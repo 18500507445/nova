@@ -8,14 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 /**
@@ -49,7 +46,6 @@ public class OptTest {
     }
 
     @Test
-    @Ignore
     public void ifPresentOrElseTest() {
         // 存在就打印对应的值，不存在则用{@code System.err.println}打印另一句字符串
         Opt.ofNullable("Hello Hutool!").ifPresentOrElse(Console::log, () -> Console.error("Ops!Something is wrong!"));

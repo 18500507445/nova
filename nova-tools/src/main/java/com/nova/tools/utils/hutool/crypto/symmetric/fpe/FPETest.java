@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.crypto.symmetric.fpe;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.symmetric.fpe.FPE;
 import org.bouncycastle.crypto.util.BasicAlphabetMapper;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class FPETest {

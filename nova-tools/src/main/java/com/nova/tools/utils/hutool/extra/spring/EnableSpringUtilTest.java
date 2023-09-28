@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.extra.spring;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.spring.EnableSpringUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

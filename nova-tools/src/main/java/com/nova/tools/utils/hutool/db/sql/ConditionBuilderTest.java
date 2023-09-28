@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.db.sql;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.db.sql.Condition;
 import cn.hutool.db.sql.ConditionBuilder;
 import cn.hutool.db.sql.LogicalOperator;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class ConditionBuilderTest {

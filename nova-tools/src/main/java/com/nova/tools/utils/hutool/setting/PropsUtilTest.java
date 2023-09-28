@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.setting;
 
-import cn.hutool.setting.dialect.PropsUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.setting.dialect.PropsUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;

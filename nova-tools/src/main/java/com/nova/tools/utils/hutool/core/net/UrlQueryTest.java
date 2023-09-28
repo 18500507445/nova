@@ -1,11 +1,11 @@
 package com.nova.tools.utils.hutool.core.net;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.net.url.UrlQuery;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.URLUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.Charset;

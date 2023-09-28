@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.jwt;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTHeader;
 import cn.hutool.jwt.JWTUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;

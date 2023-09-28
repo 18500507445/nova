@@ -1,13 +1,12 @@
 package com.nova.tools.utils.hutool.setting;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.log.LogFactory;
 import cn.hutool.log.dialect.console.ConsoleLogFactory;
 import cn.hutool.setting.dialect.Props;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.aspectj.lang.annotation.Before;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -39,7 +38,6 @@ public class PropsTest {
     }
 
     @Test
-    @Ignore
     public void propTestForAbsPAth() {
         //noinspection MismatchedQueryAndUpdateOfCollection
         Props props = new Props("d:/test.properties");

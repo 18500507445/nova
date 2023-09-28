@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.collection;
 
 import cn.hutool.core.collection.UniqueKeySet;
+import cn.hutool.core.lang.Assert;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

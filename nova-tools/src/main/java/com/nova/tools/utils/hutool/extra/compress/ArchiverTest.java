@@ -6,7 +6,6 @@ import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.extra.compress.CompressUtil;
 import cn.hutool.extra.compress.archiver.StreamArchiver;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -15,7 +14,6 @@ import java.io.File;
 public class ArchiverTest {
 
     @Test
-    @Ignore
     public void zipTest() {
         final File file = FileUtil.file("d:/test/compress/test.zip");
         StreamArchiver.create(CharsetUtil.CHARSET_UTF_8, ArchiveStreamFactory.ZIP, file)
@@ -27,7 +25,6 @@ public class ArchiverTest {
     }
 
     @Test
-    @Ignore
     public void tarTest() {
         final File file = FileUtil.file("d:/test/compress/test.tar");
         StreamArchiver.create(CharsetUtil.CHARSET_UTF_8, ArchiveStreamFactory.TAR, file)
@@ -39,7 +36,6 @@ public class ArchiverTest {
     }
 
     @Test
-    @Ignore
     public void cpioTest() {
         final File file = FileUtil.file("d:/test/compress/test.cpio");
         StreamArchiver.create(CharsetUtil.CHARSET_UTF_8, ArchiveStreamFactory.CPIO, file)
@@ -51,7 +47,6 @@ public class ArchiverTest {
     }
 
     @Test
-    @Ignore
     public void sevenZTest() {
         final File file = FileUtil.file("d:/test/compress/test.7z");
         CompressUtil.createArchiver(CharsetUtil.CHARSET_UTF_8, ArchiveStreamFactory.SEVEN_Z, file)
@@ -63,7 +58,6 @@ public class ArchiverTest {
     }
 
     @Test
-    @Ignore
     public void tgzTest() {
         final File file = FileUtil.file("d:/test/compress/test.tgz");
         CompressUtil.createArchiver(CharsetUtil.CHARSET_UTF_8, "tgz", file)

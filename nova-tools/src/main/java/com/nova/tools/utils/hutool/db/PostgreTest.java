@@ -1,16 +1,14 @@
 package com.nova.tools.utils.hutool.db;
 
-import java.sql.SQLException;
-
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.lang.Console;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.Page;
 import cn.hutool.db.PageResult;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
-import cn.hutool.core.lang.Console;
+import java.sql.SQLException;
 
 /**
  * PostgreSQL 单元测试
@@ -20,7 +18,6 @@ import cn.hutool.core.lang.Console;
 public class PostgreTest {
 
     @Test
-    @Ignore
     public void insertTest() throws SQLException {
         for (int id = 100; id < 200; id++) {
             Db.use("postgre").insert(Entity.create("user")//
@@ -31,7 +28,6 @@ public class PostgreTest {
     }
 
     @Test
-    @Ignore
     public void pageTest() throws SQLException {
         PageResult<Entity> result = Db.use("postgre").page(Entity.create("user"), new Page(2, 10));
         for (Entity entity : result) {
@@ -40,7 +36,6 @@ public class PostgreTest {
     }
 
     @Test
-    @Ignore
     public void upsertTest() throws SQLException {
         Db db = Db.use("postgre");
         db.executeBatch("drop table if exists ctest",

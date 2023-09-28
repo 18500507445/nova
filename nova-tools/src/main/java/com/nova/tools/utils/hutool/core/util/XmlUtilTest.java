@@ -3,13 +3,12 @@ package com.nova.tools.utils.hutool.core.util;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.XmlUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -45,7 +44,6 @@ public class XmlUtilTest {
     }
 
     @Test
-    @Ignore
     public void writeTest() {
         String result = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>"//
                 + "<returnsms>"//
@@ -283,7 +281,6 @@ public class XmlUtilTest {
     }
 
     @Test
-    @Ignore
     public void formatTest() {
         // https://github.com/looly/hutool/pull/1234
         Document xml = XmlUtil.createXml("NODES");

@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.db;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
-import cn.hutool.core.lang.Assert;
-
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 

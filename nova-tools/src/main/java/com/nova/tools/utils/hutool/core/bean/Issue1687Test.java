@@ -3,9 +3,9 @@ package com.nova.tools.utils.hutool.core.bean;
 import cn.hutool.core.annotation.Alias;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;

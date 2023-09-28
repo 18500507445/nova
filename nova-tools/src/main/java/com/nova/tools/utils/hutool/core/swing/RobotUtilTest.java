@@ -1,15 +1,12 @@
 package com.nova.tools.utils.hutool.core.swing;
 
-import cn.hutool.core.swing.RobotUtil;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.junit.jupiter.api.Test;
-
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.swing.RobotUtil;
+import org.junit.jupiter.api.Test;
 
 public class RobotUtilTest {
 
     @Test
-    @Ignore
     public void captureScreenTest() {
         RobotUtil.captureScreen(FileUtil.file("e:/screen.jpg"));
     }

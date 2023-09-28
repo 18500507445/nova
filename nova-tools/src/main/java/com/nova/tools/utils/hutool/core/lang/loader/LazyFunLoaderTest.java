@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.lang.loader;
 
-import cn.hutool.core.lang.loader.LazyFunLoader;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.lang.loader.LazyFunLoader;
 import org.junit.jupiter.api.Test;
 
 public class LazyFunLoaderTest {

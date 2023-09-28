@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.crypto.digest;
 
-import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.crypto.digest.BCrypt;
 import org.junit.jupiter.api.Test;
 
 public class BCryptTest {

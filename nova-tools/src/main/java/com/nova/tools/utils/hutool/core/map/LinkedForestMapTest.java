@@ -2,11 +2,11 @@ package com.nova.tools.utils.hutool.core.map;
 
 import cn.hutool.core.collection.CollStreamUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.ForestMap;
 import cn.hutool.core.map.LinkedForestMap;
 import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.map.TreeEntry;
-import cn.hutool.core.lang.Assert;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 

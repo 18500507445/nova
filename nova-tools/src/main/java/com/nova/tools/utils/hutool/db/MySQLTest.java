@@ -1,13 +1,11 @@
 package com.nova.tools.utils.hutool.db;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.Page;
 import cn.hutool.db.PageResult;
-import cn.hutool.core.lang.Assert;
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
@@ -22,14 +20,13 @@ import java.util.List;
 public class MySQLTest {
 
     @Before("")
-    @Ignore
+
     public static void createTable() throws SQLException {
         Db db = Db.use("mysql");
         db.executeBatch("drop table if exists testuser", "CREATE TABLE if not exists `testuser` ( `id` int(11) NOT NULL, `account` varchar(255) DEFAULT NULL, `pass` varchar(255) DEFAULT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
     }
 
     @Test
-    @Ignore
     public void insertTest() throws SQLException {
         for (int id = 100; id < 200; id++) {
             Db.use("mysql").insert(Entity.create("user")//
@@ -48,7 +45,6 @@ public class MySQLTest {
      * @throws SQLException SQL异常
      */
     @Test
-    @Ignore
     public void txTest() throws SQLException {
         Db.use("mysql").tx(db -> {
             int update = db.update(Entity.create("user").set("text", "描述100"), Entity.create().set("id", 100));
@@ -62,7 +58,6 @@ public class MySQLTest {
     }
 
     @Test
-    @Ignore
     public void pageTest() throws SQLException {
         PageResult<Entity> result = Db.use("mysql").page(Entity.create("user"), new Page(2, 10));
         for (Entity entity : result) {
@@ -71,14 +66,12 @@ public class MySQLTest {
     }
 
     @Test
-    @Ignore
     public void getTimeStampTest() throws SQLException {
         final List<Entity> all = Db.use("mysql").findAll("test");
         Console.log(all);
     }
 
     @Test
-    @Ignore
     public void upsertTest() throws SQLException {
         Db db = Db.use("mysql");
         db.insert(Entity.create("testuser").set("id", 1).set("account", "ice").set("pass", "123456"));

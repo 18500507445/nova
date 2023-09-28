@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.dfa;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.dfa.FoundWord;
 import cn.hutool.dfa.WordTree;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

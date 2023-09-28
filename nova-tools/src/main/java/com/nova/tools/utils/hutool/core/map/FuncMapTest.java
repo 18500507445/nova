@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.map;
 
-import cn.hutool.core.map.FuncMap;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.map.FuncMap;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

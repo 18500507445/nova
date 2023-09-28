@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.crypto.digest;
 
-import cn.hutool.crypto.digest.MD5;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.crypto.digest.MD5;
 import org.junit.jupiter.api.Test;
 
 /**

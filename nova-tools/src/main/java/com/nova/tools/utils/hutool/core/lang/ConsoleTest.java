@@ -1,10 +1,8 @@
 package com.nova.tools.utils.hutool.core.lang;
 
 import cn.hutool.core.lang.Console;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.junit.jupiter.api.Test;
-
 import cn.hutool.core.thread.ThreadUtil;
+import org.junit.jupiter.api.Test;
 
 /**
  * 控制台单元测试
@@ -60,7 +58,6 @@ public class ConsoleTest {
     }
 
     @Test
-    @Ignore
     public void inputTest() {
         Console.log("Please input something: ");
         String input = Console.input();
@@ -68,7 +65,6 @@ public class ConsoleTest {
     }
 
     @Test
-    @Ignore
     public void printProgressTest() {
         for (int i = 0; i < 100; i++) {
             Console.printProgress('#', 100, i / 100D);

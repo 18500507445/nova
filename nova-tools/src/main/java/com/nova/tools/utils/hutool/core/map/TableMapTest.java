@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.map;
 
-import cn.hutool.core.map.TableMap;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.map.TableMap;
 import org.junit.jupiter.api.Test;
 
 public class TableMapTest {

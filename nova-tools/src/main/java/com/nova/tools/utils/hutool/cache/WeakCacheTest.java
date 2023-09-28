@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.cache;
 
 import cn.hutool.cache.impl.WeakCache;
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import cn.hutool.core.lang.Console;
 import org.junit.jupiter.api.Test;
 
 public class WeakCacheTest {
@@ -23,7 +22,6 @@ public class WeakCacheTest {
     }
 
     @Test
-    @Ignore
     public void removeByGcTest() {
         // https://gitee.com/dromara/hutool/issues/I51O7M
         WeakCache<String, String> cache = new WeakCache<>(-1);

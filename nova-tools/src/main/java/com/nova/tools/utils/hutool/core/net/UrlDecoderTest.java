@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.net;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class UrlDecoderTest {

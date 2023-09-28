@@ -4,13 +4,11 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.extra.compress.CompressUtil;
 import cn.hutool.extra.compress.extractor.Extractor;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 public class ExtractorTest {
 
     @Test
-    @Ignore
     public void zipTest() {
         Extractor extractor = CompressUtil.createExtractor(
                 CharsetUtil.defaultCharset(),
@@ -20,7 +18,6 @@ public class ExtractorTest {
     }
 
     @Test
-    @Ignore
     public void sevenZTest() {
         Extractor extractor = CompressUtil.createExtractor(
                 CharsetUtil.defaultCharset(),
@@ -30,7 +27,6 @@ public class ExtractorTest {
     }
 
     @Test
-    @Ignore
     public void tgzTest() {
         Extractor extractor = CompressUtil.createExtractor(
                 CharsetUtil.defaultCharset(),

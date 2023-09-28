@@ -1,10 +1,8 @@
 package com.nova.tools.utils.hutool.core.lang;
 
 import cn.hutool.core.lang.Assert;
-import cn.hutool.core.lang.Assert;
-import org.junit.jupiter.api.Test;
-
 import cn.hutool.core.text.StrFormatter;
+import org.junit.jupiter.api.Test;
 
 public class StrFormatterTest {
 

@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.http.useragent;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class UserAgentUtilTest {

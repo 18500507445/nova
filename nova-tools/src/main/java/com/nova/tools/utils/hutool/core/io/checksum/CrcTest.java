@@ -3,9 +3,9 @@ package com.nova.tools.utils.hutool.core.io.checksum;
 import cn.hutool.core.io.checksum.CRC16;
 import cn.hutool.core.io.checksum.CRC8;
 import cn.hutool.core.io.checksum.crc16.CRC16XModem;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**

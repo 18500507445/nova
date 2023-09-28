@@ -2,8 +2,8 @@ package com.nova.tools.utils.hutool.core.annotation.scanner;
 
 import cn.hutool.core.annotation.scanner.ElementAnnotationScanner;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ReflectUtil;
 import org.junit.jupiter.api.Test;
 
 import java.lang.annotation.Annotation;

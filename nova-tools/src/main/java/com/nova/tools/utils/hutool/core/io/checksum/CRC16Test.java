@@ -1,15 +1,6 @@
 package com.nova.tools.utils.hutool.core.io.checksum;
 
-import cn.hutool.core.io.checksum.crc16.CRC16Ansi;
-import cn.hutool.core.io.checksum.crc16.CRC16CCITT;
-import cn.hutool.core.io.checksum.crc16.CRC16CCITTFalse;
-import cn.hutool.core.io.checksum.crc16.CRC16DNP;
-import cn.hutool.core.io.checksum.crc16.CRC16IBM;
-import cn.hutool.core.io.checksum.crc16.CRC16Maxim;
-import cn.hutool.core.io.checksum.crc16.CRC16Modbus;
-import cn.hutool.core.io.checksum.crc16.CRC16USB;
-import cn.hutool.core.io.checksum.crc16.CRC16X25;
-import cn.hutool.core.io.checksum.crc16.CRC16XModem;
+import cn.hutool.core.io.checksum.crc16.*;
 import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 

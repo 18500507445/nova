@@ -2,16 +2,12 @@ package com.nova.tools.utils.hutool.core.convert;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.lang.TypeReference;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 转换为集合测试

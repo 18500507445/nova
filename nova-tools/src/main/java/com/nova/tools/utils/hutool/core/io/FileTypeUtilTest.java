@@ -3,9 +3,8 @@ package com.nova.tools.utils.hutool.core.io;
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import cn.hutool.core.lang.Console;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedInputStream;
@@ -20,7 +19,6 @@ import java.io.IOException;
 public class FileTypeUtilTest {
 
     @Test
-    @Ignore
     public void fileTypeUtilTest() {
         File file = FileUtil.file("hutool.jpg");
         String type = FileTypeUtil.getType(file);
@@ -32,7 +30,6 @@ public class FileTypeUtilTest {
     }
 
     @Test
-    @Ignore
     public void emptyTest() {
         File file = FileUtil.file("d:/empty.txt");
         String type = FileTypeUtil.getType(file);
@@ -40,7 +37,6 @@ public class FileTypeUtilTest {
     }
 
     @Test
-    @Ignore
     public void docTest() {
         File file = FileUtil.file("f:/test/test.doc");
         String type = FileTypeUtil.getType(file);
@@ -48,7 +44,6 @@ public class FileTypeUtilTest {
     }
 
     @Test
-    @Ignore
     public void ofdTest() {
         File file = FileUtil.file("e:/test.ofd");
         String hex = IoUtil.readHex64Upper(FileUtil.getInputStream(file));
@@ -60,7 +55,6 @@ public class FileTypeUtilTest {
 
 
     @Test
-    @Ignore
     public void inputStreamAndFilenameTest() {
         File file = FileUtil.file("e:/laboratory/test.xlsx");
         String type = FileTypeUtil.getType(file);
@@ -68,7 +62,6 @@ public class FileTypeUtilTest {
     }
 
     @Test
-    @Ignore
     public void getTypeFromInputStream() throws IOException {
         File file = FileUtil.file("d:/test/pic.jpg");
         final BufferedInputStream inputStream = FileUtil.getInputStream(file);
@@ -79,7 +72,6 @@ public class FileTypeUtilTest {
     }
 
     @Test
-    @Ignore
     public void webpTest() {
         // https://gitee.com/dromara/hutool/issues/I5BGTF
         final File file = FileUtil.file("d:/test/a.webp");

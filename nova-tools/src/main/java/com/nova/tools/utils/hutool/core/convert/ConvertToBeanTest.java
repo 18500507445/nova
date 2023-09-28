@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.convert;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.map.CaseInsensitiveMap;
-import cn.hutool.core.lang.Assert;
 import com.nova.tools.utils.hutool.core.bean.BeanUtilTest;
 import org.junit.jupiter.api.Test;
 

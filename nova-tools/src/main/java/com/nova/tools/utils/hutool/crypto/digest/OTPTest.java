@@ -1,10 +1,10 @@
 package com.nova.tools.utils.hutool.crypto.digest;
 
 import cn.hutool.core.codec.Base32;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.digest.HmacAlgorithm;
 import cn.hutool.crypto.digest.otp.HOTP;
 import cn.hutool.crypto.digest.otp.TOTP;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;

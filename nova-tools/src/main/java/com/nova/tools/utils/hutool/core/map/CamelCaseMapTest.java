@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.map;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.CamelCaseLinkedMap;
 import cn.hutool.core.map.CamelCaseMap;
 import cn.hutool.core.util.SerializeUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class CamelCaseMapTest {

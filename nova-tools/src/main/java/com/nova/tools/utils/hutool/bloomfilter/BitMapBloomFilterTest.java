@@ -4,7 +4,6 @@ import cn.hutool.bloomfilter.BitMapBloomFilter;
 import cn.hutool.bloomfilter.bitMap.IntMap;
 import cn.hutool.bloomfilter.bitMap.LongMap;
 import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -25,7 +24,6 @@ class BitMapBloomFilterTest {
     }
 
     @Test
-    @Ignore
     public void testIntMap() {
         IntMap intMap = new IntMap();
 
@@ -41,7 +39,6 @@ class BitMapBloomFilterTest {
     }
 
     @Test
-    @Ignore
     public void testLongMap() {
         LongMap longMap = new LongMap();
 

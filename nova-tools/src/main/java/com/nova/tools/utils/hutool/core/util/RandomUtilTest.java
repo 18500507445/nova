@@ -1,11 +1,10 @@
 package com.nova.tools.utils.hutool.core.util;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ByteUtil;
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.math.RoundingMode;
@@ -41,7 +40,6 @@ public class RandomUtilTest {
     }
 
     @Test
-    @Ignore
     public void randomBooleanTest() {
         Console.log(RandomUtil.randomBoolean());
     }
@@ -71,7 +69,6 @@ public class RandomUtilTest {
     }
 
     @Test
-    @Ignore
     public void randomStringWithoutStrTest() {
         for (int i = 0; i < 100; i++) {
             final String s = RandomUtil.randomStringWithoutStr(8, "0IPOL");

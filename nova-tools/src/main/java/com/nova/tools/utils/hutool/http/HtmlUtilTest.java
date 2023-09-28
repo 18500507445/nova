@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.http;
 
-import cn.hutool.http.HtmlUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.http.HtmlUtil;
 import org.junit.jupiter.api.Test;
 
 /**

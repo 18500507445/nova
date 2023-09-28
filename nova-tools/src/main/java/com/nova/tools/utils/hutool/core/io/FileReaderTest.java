@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.core.io;
 
+import cn.hutool.core.io.file.FileReader;
 import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
-
-import cn.hutool.core.io.file.FileReader;
 
 /**
  * 文件读取测试

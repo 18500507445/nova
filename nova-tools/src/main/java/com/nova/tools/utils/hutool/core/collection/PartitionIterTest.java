@@ -4,8 +4,8 @@ import cn.hutool.core.collection.LineIter;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.collection.PartitionIter;
 import cn.hutool.core.io.resource.ResourceUtil;
-import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.NumberUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

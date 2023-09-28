@@ -1,18 +1,12 @@
 package com.nova.tools.utils.hutool.core.stream;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.stream.CollectorUtil;
 import cn.hutool.core.stream.StreamUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CollectorUtilTest {

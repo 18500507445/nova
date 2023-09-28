@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.db.dialect;
 
-import cn.hutool.db.dialect.DriverUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.db.dialect.DriverUtil;
 import org.junit.jupiter.api.Test;
 
 public class DriverUtilTest {

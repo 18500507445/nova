@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.crypto.symmetric;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.crypto.symmetric.RC4;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class RC4Test {

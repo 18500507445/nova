@@ -3,7 +3,6 @@ package com.nova.tools.utils.hutool.extra.ssh;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.extra.ssh.SshjSftp;
 import org.aspectj.lang.annotation.Before;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -20,13 +19,12 @@ public class SftpTest {
     private SshjSftp sshjSftp;
 
     @Before("")
-    @Ignore
+
     public void init() {
         sshjSftp = new SshjSftp("ip", 22, "test", "test", CharsetUtil.CHARSET_UTF_8);
     }
 
     @Test
-    @Ignore
     public void lsTest() {
         List<String> files = sshjSftp.ls("/");
         if (files != null && !files.isEmpty()) {
@@ -35,33 +33,28 @@ public class SftpTest {
     }
 
     @Test
-    @Ignore
     public void downloadTest() {
         sshjSftp.recursiveDownloadFolder("/home/test/temp", new File("C:\\Users\\akwangl\\Downloads\\temp"));
     }
 
     @Test
-    @Ignore
     public void uploadTest() {
         sshjSftp.upload("/home/test/temp/", new File("C:\\Users\\akwangl\\Downloads\\temp\\辽宁_20190718_104324.CIME"));
     }
 
     @Test
-    @Ignore
     public void mkDirTest() {
         boolean flag = sshjSftp.mkdir("/home/test/temp");
         System.err.println("是否创建成功: " + flag);
     }
 
     @Test
-    @Ignore
     public void mkDirsTest() {
         // 在当前目录下批量创建目录
         sshjSftp.mkDirs("/home/test/temp");
     }
 
     @Test
-    @Ignore
     public void delDirTest() {
         sshjSftp.delDir("/home/test/temp");
     }

@@ -8,7 +8,6 @@ import cn.hutool.db.DbRuntimeException;
 import cn.hutool.db.Entity;
 import cn.hutool.db.handler.EntityListHandler;
 import org.aspectj.lang.annotation.Before;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -19,7 +18,7 @@ import java.util.List;
  *
  * @author looly
  */
-@Ignore
+
 public class ConcurentTest {
 
     private Db db;

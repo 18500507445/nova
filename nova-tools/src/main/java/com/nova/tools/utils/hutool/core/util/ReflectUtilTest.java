@@ -3,6 +3,7 @@ package com.nova.tools.utils.hutool.core.util;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.date.Week;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ClassUtil;
@@ -10,8 +11,6 @@ import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.nova.tools.utils.hutool.json.test.bean.ExamInfoDict;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -122,7 +121,6 @@ public class ReflectUtilTest {
     }
 
     @Test
-    @Ignore
     public void getMethodBenchTest() {
         // 预热
         getMethodWithReturnTypeCheck(TestBenchClass.class, false, "getH");

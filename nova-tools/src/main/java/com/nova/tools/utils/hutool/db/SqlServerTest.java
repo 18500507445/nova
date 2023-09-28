@@ -1,15 +1,13 @@
 package com.nova.tools.utils.hutool.db;
 
-import java.sql.SQLException;
-
+import cn.hutool.core.lang.Console;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.Page;
 import cn.hutool.db.PageResult;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
-import cn.hutool.core.lang.Console;
+import java.sql.SQLException;
 
 /**
  * SQL Server操作单元测试
@@ -19,13 +17,11 @@ import cn.hutool.core.lang.Console;
 public class SqlServerTest {
 
     @Test
-    @Ignore
     public void createTableTest() throws SQLException {
         Db.use("sqlserver").execute("create table T_USER(ID bigint, name varchar(255))");
     }
 
     @Test
-    @Ignore
     public void insertTest() throws SQLException {
         for (int id = 100; id < 200; id++) {
             Db.use("sqlserver").insert(Entity.create("T_USER")//
@@ -36,7 +32,6 @@ public class SqlServerTest {
     }
 
     @Test
-    @Ignore
     public void pageTest() throws SQLException {
         PageResult<Entity> result = Db.use("sqlserver").page(Entity.create("T_USER"), new Page(2, 10));
         for (Entity entity : result) {

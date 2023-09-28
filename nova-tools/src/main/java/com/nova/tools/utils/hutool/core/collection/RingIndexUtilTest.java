@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.collection;
 
 import cn.hutool.core.collection.RingIndexUtil;
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.thread.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

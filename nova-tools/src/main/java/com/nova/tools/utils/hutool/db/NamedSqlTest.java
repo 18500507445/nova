@@ -1,10 +1,10 @@
 package com.nova.tools.utils.hutool.db;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.sql.NamedSql;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;

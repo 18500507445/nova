@@ -1,10 +1,9 @@
 package com.nova.tools.utils.hutool.core.lang;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.WeightRandom;
 import org.junit.jupiter.api.Test;
-
-import cn.hutool.core.collection.CollUtil;
 
 
 /**

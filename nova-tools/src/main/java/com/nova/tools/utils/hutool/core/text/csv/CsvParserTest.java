@@ -1,10 +1,10 @@
 package com.nova.tools.utils.hutool.core.text.csv;
 
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.text.csv.CsvParser;
 import cn.hutool.core.text.csv.CsvRow;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringReader;

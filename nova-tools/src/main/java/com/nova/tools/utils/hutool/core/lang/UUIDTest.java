@@ -4,7 +4,6 @@ import cn.hutool.core.collection.ConcurrentHashSet;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

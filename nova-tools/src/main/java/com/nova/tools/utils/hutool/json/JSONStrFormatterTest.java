@@ -1,10 +1,9 @@
 package com.nova.tools.utils.hutool.json;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.json.JSONStrFormatter;
 import cn.hutool.json.JSONUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,7 +35,6 @@ public class JSONStrFormatterTest {
     }
 
     @Test
-    @Ignore
     public void formatTest4() {
         String jsonStr = "{\"employees\":[{\"firstName\":\"Bill\",\"lastName\":\"Gates\"},{\"firstName\":\"George\",\"lastName\":\"Bush\"},{\"firstName\":\"Thomas\",\"lastName\":\"Carter\"}]}";
         Console.log(JSONUtil.formatJsonStr(jsonStr));

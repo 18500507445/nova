@@ -1,5 +1,6 @@
 package com.nova.tools.utils.hutool.db;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.Page;
@@ -7,8 +8,6 @@ import cn.hutool.db.PageResult;
 import cn.hutool.db.handler.EntityListHandler;
 import cn.hutool.db.sql.Condition;
 import cn.hutool.log.StaticLog;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.sql.PreparedStatement;
@@ -114,7 +113,6 @@ public class DbTest {
     }
 
     @Test
-    @Ignore
     public void txTest() throws SQLException {
         Db.use().tx(db -> {
             db.insert(Entity.create("user").set("name", "unitTestUser2"));
@@ -124,7 +122,6 @@ public class DbTest {
     }
 
     @Test
-    @Ignore
     public void queryFetchTest() throws SQLException {
         // https://gitee.com/dromara/hutool/issues/I4JXWN
         Db.use().query((conn -> {
@@ -138,7 +135,6 @@ public class DbTest {
     }
 
     @Test
-    @Ignore
     public void findWithDotTest() throws SQLException {
         Db.use().find(Entity.create("user").set("a.b", "1"));
     }

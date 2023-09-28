@@ -1,14 +1,13 @@
 package com.nova.tools.utils.hutool.core.collection;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.map.MapProxy;
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import cn.hutool.core.lang.Assert;
-import org.junit.jupiter.api.Test;
-
-import cn.hutool.core.map.MapProxy;
 
 public class MapProxyTest {
 

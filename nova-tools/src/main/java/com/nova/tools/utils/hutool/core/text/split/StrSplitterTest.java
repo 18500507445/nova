@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.text.split;
 
-import cn.hutool.core.text.StrSplitter;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.text.StrSplitter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

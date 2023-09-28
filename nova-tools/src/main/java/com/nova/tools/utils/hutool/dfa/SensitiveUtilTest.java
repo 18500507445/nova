@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.dfa;
 
 import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.dfa.SensitiveUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

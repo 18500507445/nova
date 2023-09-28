@@ -4,13 +4,12 @@ import cn.hutool.core.annotation.Alias;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.text.csv.*;
 import cn.hutool.core.util.CharsetUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.util.List;
 import java.util.Map;
@@ -106,7 +105,6 @@ public class CsvReaderTest {
     }
 
     @Test
-    @Ignore
     public void readTest2() {
         final CsvReader reader = CsvUtil.getReader();
         final CsvData read = reader.read(FileUtil.file("d:/test/test.csv"));
@@ -116,7 +114,6 @@ public class CsvReaderTest {
     }
 
     @Test
-    @Ignore
     public void readTest3() {
         final CsvReadConfig csvReadConfig = CsvReadConfig.defaultConfig();
         csvReadConfig.setContainsHeader(true);
@@ -198,7 +195,6 @@ public class CsvReaderTest {
     }
 
     @Test
-    @Ignore
     public void streamTest() {
         final CsvReader reader = CsvUtil.getReader(ResourceUtil.getUtf8Reader("test_bean.csv"));
         reader.stream().limit(2).forEach(Console::log);

@@ -1,11 +1,11 @@
 package com.nova.tools.utils.hutool.json.xml;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.json.XML;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class XMLTest {

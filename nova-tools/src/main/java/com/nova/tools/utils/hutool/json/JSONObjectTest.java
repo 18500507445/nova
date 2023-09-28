@@ -8,6 +8,7 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -18,8 +19,6 @@ import com.nova.tools.utils.hutool.json.test.bean.report.CaseReport;
 import com.nova.tools.utils.hutool.json.test.bean.report.StepReport;
 import com.nova.tools.utils.hutool.json.test.bean.report.SuiteReport;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -37,7 +36,6 @@ import java.util.*;
 public class JSONObjectTest {
 
     @Test
-    @Ignore
     public void toStringTest() {
         final String str = "{\"code\": 500, \"data\":null}";
         final JSONObject jsonObject = new JSONObject(str);
@@ -167,7 +165,6 @@ public class JSONObjectTest {
     }
 
     @Test
-    @Ignore
     public void parseStringWithBomTest() {
         final String jsonStr = FileUtil.readUtf8String("f:/test/jsontest.txt");
         final JSONObject json = new JSONObject(jsonStr);

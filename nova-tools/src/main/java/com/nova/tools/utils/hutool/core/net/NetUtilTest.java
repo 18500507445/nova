@@ -1,11 +1,10 @@
 package com.nova.tools.utils.hutool.core.net;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.PatternPool;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.ReUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpCookie;
@@ -21,21 +20,18 @@ import java.util.List;
 public class NetUtilTest {
 
     @Test
-    @Ignore
     public void getLocalhostStrTest() {
         String localhost = NetUtil.getLocalhostStr();
         Assert.notNull(localhost);
     }
 
     @Test
-    @Ignore
     public void getLocalhostTest() {
         InetAddress localhost = NetUtil.getLocalhost();
         Assert.notNull(localhost);
     }
 
     @Test
-    @Ignore
     public void getLocalMacAddressTest() {
         String macAddress = NetUtil.getLocalMacAddress();
         Assert.notNull(macAddress);
@@ -58,7 +54,6 @@ public class NetUtilTest {
     }
 
     @Test
-    @Ignore
     public void isUsableLocalPortTest() {
         Assert.isTrue(NetUtil.isUsableLocalPort(80));
     }
@@ -88,14 +83,12 @@ public class NetUtilTest {
     }
 
     @Test
-    @Ignore
     public void isOpenTest() {
         InetSocketAddress address = new InetSocketAddress("www.hutool.cn", 443);
         Assert.isTrue(NetUtil.isOpen(address, 200));
     }
 
     @Test
-    @Ignore
     public void getDnsInfoTest() {
         final List<String> txt = NetUtil.getDnsInfo("hutool.cn", "TXT");
         Console.log(txt);

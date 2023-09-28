@@ -1,11 +1,11 @@
 package com.nova.tools.utils.hutool.core.text.split;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.text.finder.CharFinder;
 import cn.hutool.core.text.finder.LengthFinder;
 import cn.hutool.core.text.finder.PatternFinder;
 import cn.hutool.core.text.finder.StrFinder;
 import cn.hutool.core.text.split.SplitIter;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

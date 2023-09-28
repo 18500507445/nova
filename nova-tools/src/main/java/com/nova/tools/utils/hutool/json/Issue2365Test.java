@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.json;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.json.JSONUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class Issue2365Test {

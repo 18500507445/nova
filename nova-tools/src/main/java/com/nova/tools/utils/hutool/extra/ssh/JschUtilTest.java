@@ -1,13 +1,12 @@
 package com.nova.tools.utils.hutool.extra.ssh;
 
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.extra.ssh.JschRuntimeException;
 import cn.hutool.extra.ssh.JschUtil;
 import cn.hutool.extra.ssh.Sftp;
-import cn.hutool.core.lang.Assert;
 import com.jcraft.jsch.Session;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -20,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 public class JschUtilTest {
 
     @Test
-    @Ignore
     public void bindPortTest() {
         //新建会话，此会话用于ssh连接到跳板机（堡垒机），此处为10.1.1.1:22
         Session session = JschUtil.getSession("looly.centos", 22, "test", "123456");
@@ -30,7 +28,6 @@ public class JschUtilTest {
 
 
     @Test
-    @Ignore
     public void bindRemotePort() throws InterruptedException {
         // 建立会话
         Session session = JschUtil.getSession("looly.centos", 22, "test", "123456");
@@ -44,7 +41,6 @@ public class JschUtilTest {
     }
 
     @Test
-    @Ignore
     public void sftpTest() {
         Session session = JschUtil.getSession("looly.centos", 22, "root", "123456");
         Sftp sftp = JschUtil.createSftp(session);
@@ -53,7 +49,6 @@ public class JschUtilTest {
     }
 
     @Test
-    @Ignore
     public void reconnectIfTimeoutTest() throws InterruptedException {
         Session session = JschUtil.getSession("sunnyserver", 22, "mysftp", "liuyang1234");
         Sftp sftp = JschUtil.createSftp(session);
@@ -81,7 +76,6 @@ public class JschUtilTest {
     }
 
     @Test
-    @Ignore
     public void getSessionTest() {
         JschUtil.getSession("192.168.1.134", 22, "root", "aaa", null);
     }

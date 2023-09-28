@@ -1,12 +1,12 @@
 package com.nova.tools.utils.hutool.jwt;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.KeyUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.signers.AlgorithmUtil;
 import cn.hutool.jwt.signers.JWTSigner;
 import cn.hutool.jwt.signers.JWTSignerUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class JWTSignerTest {

@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.log;
 
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.script.ScriptRuntimeException;
 import cn.hutool.script.ScriptUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import javax.script.CompiledScript;

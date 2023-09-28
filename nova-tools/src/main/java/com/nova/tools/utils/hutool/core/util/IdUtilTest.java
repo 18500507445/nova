@@ -4,12 +4,11 @@ import cn.hutool.core.collection.ConcurrentHashSet;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.exceptions.UtilException;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
@@ -45,7 +44,6 @@ public class IdUtilTest {
      * UUID的性能测试
      */
     @Test
-    @Ignore
     public void benchTest() {
         TimeInterval timer = DateUtil.timer();
         for (int i = 0; i < 1000000; i++) {
@@ -75,7 +73,6 @@ public class IdUtilTest {
     }
 
     @Test
-    @Ignore
     public void snowflakeBenchTest() {
         final Set<Long> set = new ConcurrentHashSet<>();
         final Snowflake snowflake = IdUtil.getSnowflake(1, 1);
@@ -106,7 +103,6 @@ public class IdUtilTest {
     }
 
     @Test
-    @Ignore
     public void snowflakeBenchTest2() {
         final Set<Long> set = new ConcurrentHashSet<>();
 

@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.cron.pattern;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.cron.CronException;
-import cn.hutool.cron.pattern.CronPattern;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.cron.pattern.CronPattern;
 import org.junit.jupiter.api.Test;
 
 /**

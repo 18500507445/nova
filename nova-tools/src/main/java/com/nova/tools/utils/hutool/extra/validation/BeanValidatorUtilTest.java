@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.extra.validation;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.validation.BeanValidationResult;
 import cn.hutool.extra.validation.ValidationUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import javax.validation.constraints.NotBlank;

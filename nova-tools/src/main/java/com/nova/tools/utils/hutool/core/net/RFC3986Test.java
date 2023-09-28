@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.net;
 
 import cn.hutool.core.codec.PercentCodec;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.net.RFC3986;
 import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.UnsupportedEncodingException;

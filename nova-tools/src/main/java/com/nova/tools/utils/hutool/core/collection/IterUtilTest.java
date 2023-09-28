@@ -4,19 +4,12 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.FilterIter;
 import cn.hutool.core.collection.IterUtil;
 import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.lang.Assert;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * {@link IterUtil} 单元测试

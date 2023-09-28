@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.setting;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.setting.Setting;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -35,7 +34,6 @@ public class SettingTest {
     }
 
     @Test
-    @Ignore
     public void settingTestForAbsPath() {
         //noinspection MismatchedQueryAndUpdateOfCollection
         Setting setting = new Setting("d:\\excel-plugin\\other.setting", true);

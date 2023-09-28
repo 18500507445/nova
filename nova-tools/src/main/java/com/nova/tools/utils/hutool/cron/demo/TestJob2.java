@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.cron.demo;
 
-import java.util.concurrent.TimeUnit;
-
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 测试定时任务，当触发到定时的时间点时，执行doTest方法

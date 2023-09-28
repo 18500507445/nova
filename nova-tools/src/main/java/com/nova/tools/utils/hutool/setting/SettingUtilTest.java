@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.setting;
 
-import cn.hutool.setting.SettingUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.setting.SettingUtil;
 import org.junit.jupiter.api.Test;
 
 public class SettingUtilTest {

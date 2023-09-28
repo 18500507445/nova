@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.crypto.symmetric;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.symmetric.ZUC;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class ZucTest {

@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.util;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.HashUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 /**

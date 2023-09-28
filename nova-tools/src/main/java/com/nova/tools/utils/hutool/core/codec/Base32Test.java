@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.codec;
 
 import cn.hutool.core.codec.Base32;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class Base32Test {

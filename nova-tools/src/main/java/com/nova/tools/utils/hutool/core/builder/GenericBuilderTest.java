@@ -1,12 +1,12 @@
 package com.nova.tools.utils.hutool.core.builder;
 
 import cn.hutool.core.builder.GenericBuilder;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

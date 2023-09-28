@@ -1,10 +1,9 @@
 package com.nova.tools.utils.hutool.system;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.system.oshi.CpuInfo;
 import cn.hutool.system.oshi.OshiUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import oshi.software.os.OSProcess;
 
@@ -32,7 +31,6 @@ public class OshiTest {
     }
 
     @Test
-    @Ignore
     public void getUsedTest() {
         while (true) {
             Console.log(OshiUtil.getCpuInfo().getUsed());

@@ -1,13 +1,11 @@
 package com.nova.tools.utils.hutool.core.text;
 
-import cn.hutool.core.text.StrBuilder;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.junit.jupiter.api.Test;
-
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.text.StrBuilder;
+import org.junit.jupiter.api.Test;
 
 /**
  * StrBuilder单元测试
@@ -20,7 +18,6 @@ public class StrBuilderTest {
      * StrBuilder的性能测试
      */
     @Test
-    @Ignore
     public void benchTest() {
         TimeInterval timer = DateUtil.timer();
         StrBuilder builder = StrBuilder.create();

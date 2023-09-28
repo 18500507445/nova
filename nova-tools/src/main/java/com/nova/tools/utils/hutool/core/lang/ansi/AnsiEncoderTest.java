@@ -1,12 +1,11 @@
 package com.nova.tools.utils.hutool.core.lang.ansi;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.ansi.*;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class AnsiEncoderTest {
 
@@ -17,7 +16,6 @@ public class AnsiEncoderTest {
     }
 
     @Test
-    @Ignore
     public void colorfulEncodeTest() {
         String text = "Hutool▀████▀";
         final AnsiColors ansiColors = new AnsiColors(AnsiColors.BitDepth.EIGHT);

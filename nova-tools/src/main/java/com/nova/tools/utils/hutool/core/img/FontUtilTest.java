@@ -4,7 +4,7 @@ import cn.hutool.core.img.FontUtil;
 import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.awt.Font;
+import java.awt.*;
 
 public class FontUtilTest {
 

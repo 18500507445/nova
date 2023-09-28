@@ -3,10 +3,10 @@ package com.nova.tools.utils.hutool.core.annotation;
 import cn.hutool.core.annotation.AnnotationAttribute;
 import cn.hutool.core.annotation.CacheableSynthesizedAnnotationAttributeProcessor;
 import cn.hutool.core.annotation.SynthesizedAnnotation;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Opt;
 import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.lang.annotation.Annotation;

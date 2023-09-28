@@ -1,10 +1,9 @@
 package com.nova.tools.utils.hutool.core.util;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.mutable.MutableObj;
 import cn.hutool.core.util.ReferenceUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.lang.ref.PhantomReference;
@@ -42,7 +41,6 @@ public class ReferenceUtilTest {
     }
 
     @Test
-    @Ignore
     public void gcTest() {
         // https://blog.csdn.net/zmx729618/article/details/54093532
         // 弱引用的对象必须使用可变对象，不能使用常量对象（比如String）

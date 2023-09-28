@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.codec;
 
 import cn.hutool.core.codec.Base62;
-import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.RandomUtil;
 import org.junit.jupiter.api.Test;
 
 /**

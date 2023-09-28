@@ -1,6 +1,7 @@
 package com.nova.tools.utils.hutool.db;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.ds.DSFactory;
@@ -13,7 +14,6 @@ import cn.hutool.db.ds.hikari.HikariDSFactory;
 import cn.hutool.db.ds.pooled.PooledDSFactory;
 import cn.hutool.db.ds.tomcat.TomcatDSFactory;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;

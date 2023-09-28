@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.exceptions;
 
 import cn.hutool.core.exceptions.CheckedUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.func.Func1;
 import cn.hutool.core.lang.func.VoidFunc0;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

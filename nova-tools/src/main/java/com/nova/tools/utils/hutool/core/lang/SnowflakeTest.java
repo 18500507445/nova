@@ -8,8 +8,6 @@ import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -55,7 +53,6 @@ public class SnowflakeTest {
     }
 
     @Test
-    @Ignore
     public void uniqueTest() {
         // 测试并发环境下生成ID是否重复
         Snowflake snowflake = IdUtil.getSnowflake(0, 0);
@@ -79,7 +76,6 @@ public class SnowflakeTest {
     }
 
     @Test
-    @Ignore
     public void snowflakeRandomSequenceTest() {
         final Snowflake snowflake = new Snowflake(null, 0, 0,
                 false, Snowflake.DEFAULT_TIME_OFFSET, 2);
@@ -91,7 +87,6 @@ public class SnowflakeTest {
     }
 
     @Test
-    @Ignore
     public void uniqueOfRandomSequenceTest() {
         // 测试并发环境下生成ID是否重复
         final Snowflake snowflake = new Snowflake(null, 0, 0,

@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.text;
 
-import cn.hutool.core.text.UnicodeUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.text.UnicodeUtil;
 import org.junit.jupiter.api.Test;
 
 /**

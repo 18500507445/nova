@@ -1,10 +1,10 @@
 package com.nova.tools.utils.hutool.json;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;

@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.math;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.math.MathUtil;
 import cn.hutool.core.math.Money;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class MoneyTest {

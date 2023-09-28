@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.crypto.symmetric;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class PBKDF2Test {

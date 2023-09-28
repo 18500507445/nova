@@ -1,14 +1,13 @@
 package com.nova.tools.utils.hutool.core.lang.hash;
 
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.hash.CityHash;
 import cn.hutool.core.lang.hash.MetroHash;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -40,7 +39,6 @@ public class MetroHashTest {
      * 数据量越大 MetroHash 优势越明显，
      */
     @Test
-    @Ignore
     public void bulkHashing64Test() {
         String[] strArray = getRandomStringArray();
         long startCity = System.currentTimeMillis();
@@ -64,7 +62,6 @@ public class MetroHashTest {
      * 数据量越大 MetroHash 优势越明显，
      */
     @Test
-    @Ignore
     public void bulkHashing128Test() {
         String[] strArray = getRandomStringArray();
         long startCity = System.currentTimeMillis();

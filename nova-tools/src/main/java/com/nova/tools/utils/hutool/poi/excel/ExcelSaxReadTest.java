@@ -4,16 +4,14 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.cell.FormulaCellValue;
 import cn.hutool.poi.excel.sax.Excel03SaxReader;
 import cn.hutool.poi.excel.sax.handler.RowHandler;
-import cn.hutool.poi.exceptions.POIException;
 import org.apache.poi.ss.usermodel.CellStyle;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -74,7 +72,6 @@ public class ExcelSaxReadTest {
     }
 
     @Test
-    @Ignore
     public void readBlankLineTest() {
         ExcelUtil.readBySax("e:/ExcelBlankLine.xlsx", 0, (sheetIndex, rowIndex, rowList) -> {
             if (StrUtil.isAllEmpty(Convert.toStrArray(rowList))) {
@@ -100,7 +97,6 @@ public class ExcelSaxReadTest {
     }
 
     @Test
-    @Ignore
     public void readBySaxTest2() {
         ExcelUtil.readBySax("d:/test/456789.xlsx", "0", (sheetIndex, rowIndex, rowList) -> Console.log(rowList));
     }
@@ -116,7 +112,6 @@ public class ExcelSaxReadTest {
     }
 
     @Test
-    @Ignore
     public void handle07CellTest() {
         ExcelUtil.readBySax("d:/test/test.xlsx", -1, new RowHandler() {
 
@@ -134,7 +129,6 @@ public class ExcelSaxReadTest {
     }
 
     @Test
-    @Ignore
     public void handle03CellTest() {
         ExcelUtil.readBySax("d:/test/test.xls", -1, new RowHandler() {
 
@@ -202,7 +196,6 @@ public class ExcelSaxReadTest {
     }
 
     @Test
-    @Ignore
     public void dateReadXlsxTest2() {
         ExcelUtil.readBySax("d:/test/custom_date_format2.xlsx", 0,
                 (i, i1, list) -> Console.log(list)
@@ -210,7 +203,6 @@ public class ExcelSaxReadTest {
     }
 
     @Test
-    @Ignore
     public void readBlankTest() {
         File file = new File("D:/test/b.xlsx");
 
@@ -220,7 +212,6 @@ public class ExcelSaxReadTest {
     }
 
     @Test
-    @Ignore
     public void readXlsmTest() {
         ExcelUtil.readBySax("d:/test/WhiteListTemplate.xlsm", -1,
                 (sheetIndex, rowIndex, rowlist) -> Console.log("[{}] [{}] {}", sheetIndex, rowIndex, rowlist));

@@ -2,13 +2,11 @@ package com.nova.tools.utils.hutool.core.lang;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.ConsoleTable;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 public class ConsoleTableTest {
 
     @Test
-    @Ignore
     public void printSBCTest() {
         ConsoleTable t = ConsoleTable.create();
         t.addHeader("姓名", "年龄");
@@ -36,7 +34,6 @@ public class ConsoleTableTest {
     }
 
     @Test
-    @Ignore
     public void printDBCTest() {
         ConsoleTable t = ConsoleTable.create().setSBCMode(false);
         t.addHeader("姓名", "年龄");

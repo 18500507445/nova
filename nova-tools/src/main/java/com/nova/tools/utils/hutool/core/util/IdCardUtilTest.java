@@ -2,8 +2,8 @@ package com.nova.tools.utils.hutool.core.util;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.IdcardUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.IdcardUtil;
 import org.junit.jupiter.api.Test;
 
 /**

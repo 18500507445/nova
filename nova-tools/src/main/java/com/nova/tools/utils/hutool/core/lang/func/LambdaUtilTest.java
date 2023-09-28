@@ -1,12 +1,11 @@
 package com.nova.tools.utils.hutool.core.lang.func;
 
-import cn.hutool.core.lang.func.LambdaUtil;
 import cn.hutool.core.lang.Assert;
-import org.junit.jupiter.api.Test;
-
+import cn.hutool.core.lang.func.LambdaUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.junit.jupiter.api.Test;
 
 import java.lang.invoke.MethodHandleInfo;
 

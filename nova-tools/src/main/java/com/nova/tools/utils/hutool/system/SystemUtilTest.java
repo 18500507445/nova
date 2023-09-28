@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.system;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.system.*;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -11,7 +10,6 @@ import java.io.File;
 public class SystemUtilTest {
 
     @Test
-    @Ignore
     public void dumpTest() {
         SystemUtil.dumpSystemInfo();
     }

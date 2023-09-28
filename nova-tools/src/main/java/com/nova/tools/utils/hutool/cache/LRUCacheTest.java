@@ -2,11 +2,10 @@ package com.nova.tools.utils.hutool.cache;
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LRUCache;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CountDownLatch;
@@ -20,7 +19,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class LRUCacheTest {
 
     @Test
-    @Ignore
     public void putTest() {
         //https://github.com/dromara/hutool/issues/2227
         final LRUCache<String, String> cache = CacheUtil.newLRUCache(100, 10);

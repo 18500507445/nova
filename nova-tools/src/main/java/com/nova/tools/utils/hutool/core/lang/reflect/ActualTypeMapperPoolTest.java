@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.lang.reflect;
 
-import cn.hutool.core.lang.reflect.ActualTypeMapperPool;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.lang.reflect.ActualTypeMapperPool;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Type;

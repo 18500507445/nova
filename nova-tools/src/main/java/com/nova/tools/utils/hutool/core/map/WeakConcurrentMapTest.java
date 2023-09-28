@@ -1,11 +1,11 @@
 package com.nova.tools.utils.hutool.core.map;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.WeakConcurrentMap;
 import cn.hutool.core.thread.ConcurrencyTester;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class WeakConcurrentMapTest {

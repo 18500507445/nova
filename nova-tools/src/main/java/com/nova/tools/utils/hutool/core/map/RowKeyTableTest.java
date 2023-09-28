@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.core.map;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.multi.RowKeyTable;
 import cn.hutool.core.map.multi.Table;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

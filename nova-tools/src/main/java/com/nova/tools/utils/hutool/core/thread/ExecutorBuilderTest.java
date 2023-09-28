@@ -4,7 +4,6 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.RejectPolicy;
 import cn.hutool.core.thread.ThreadUtil;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ThreadPoolExecutor;
@@ -12,7 +11,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ExecutorBuilderTest {
 
     @Test
-    @Ignore
     public void CallerRunsPolicyTest() {
         // https://gitee.com/dromara/hutool/pulls/660
         final ThreadPoolExecutor executor = ExecutorBuilder.create().setCorePoolSize(1).setMaxPoolSize(1).setHandler(RejectPolicy.BLOCK.getValue()).build();

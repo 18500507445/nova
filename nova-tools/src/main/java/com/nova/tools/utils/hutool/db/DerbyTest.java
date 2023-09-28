@@ -1,10 +1,8 @@
 package com.nova.tools.utils.hutool.db;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
-import cn.hutool.core.lang.Assert;
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
@@ -37,14 +35,12 @@ public class DerbyTest {
     }
 
     @Test
-    @Ignore
     public void queryTest() throws SQLException {
         List<Entity> query = Db.use(DS_GROUP_NAME).query("select * from test");
         Assert.equals(4, query.size());
     }
 
     @Test
-    @Ignore
     public void findTest() throws SQLException {
         List<Entity> query = Db.use(DS_GROUP_NAME).find(Entity.create("test"));
         Assert.equals(4, query.size());

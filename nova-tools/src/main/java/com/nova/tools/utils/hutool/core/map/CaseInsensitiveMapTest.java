@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.map;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Pair;
 import cn.hutool.core.map.CaseInsensitiveLinkedMap;
 import cn.hutool.core.map.CaseInsensitiveMap;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class CaseInsensitiveMapTest {

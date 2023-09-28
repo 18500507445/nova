@@ -1,5 +1,6 @@
 package com.nova.tools.utils.hutool.extra.expression;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.extra.expression.ExpressionEngine;
 import cn.hutool.extra.expression.ExpressionUtil;
@@ -9,7 +10,6 @@ import cn.hutool.extra.expression.engine.mvel.MvelEngine;
 import cn.hutool.extra.expression.engine.qlexpress.QLExpressEngine;
 import cn.hutool.extra.expression.engine.rhino.RhinoEngine;
 import cn.hutool.extra.expression.engine.spel.SpELEngine;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

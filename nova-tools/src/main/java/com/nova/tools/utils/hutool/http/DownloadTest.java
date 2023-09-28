@@ -3,12 +3,11 @@ package com.nova.tools.utils.hutool.http;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.core.io.StreamProgress;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.http.HttpGlobalConfig;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -25,7 +24,6 @@ import java.util.UUID;
 public class DownloadTest {
 
     @Test
-    @Ignore
     public void downloadPicTest() {
         final String url = "http://wx.qlogo.cn/mmopen/vKhlFcibVUtNBVDjcIowlg0X8aJfHXrTNCEFBukWVH9ta99pfEN88lU39MKspCUCOP3yrFBH3y2NbV7sYtIIlon8XxLwAEqv2/0";
         HttpUtil.downloadFile(url, "e:/pic/t3.jpg");
@@ -33,21 +31,18 @@ public class DownloadTest {
     }
 
     @Test
-    @Ignore
     public void downloadSizeTest() {
         final String url = "https://res.t-io.org/im/upload/img/67/8948/1119501/88097554/74541310922/85/231910/366466 - 副本.jpg";
         HttpRequest.get(url).setSSLProtocol("TLSv1.2").executeAsync().writeBody("e:/pic/366466.jpg");
     }
 
     @Test
-    @Ignore
     public void downloadTest1() {
         final long size = HttpUtil.downloadFile("http://explorer.bbfriend.com/crossdomain.xml", "e:/temp/");
         System.err.println("Download size: " + size);
     }
 
     @Test
-    @Ignore
     public void downloadTest() {
         // 带进度显示的文件下载
         HttpUtil.downloadFile("http://mirrors.sohu.com/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso", FileUtil.file("d:/"), new StreamProgress() {
@@ -73,7 +68,6 @@ public class DownloadTest {
     }
 
     @Test
-    @Ignore
     public void downloadFileFromUrlTest1() {
         final File file = HttpUtil.downloadFileFromUrl("http://groovy-lang.org/changelogs/changelog-3.0.5.html", "d:/download/temp");
         Assert.notNull(file);
@@ -82,7 +76,6 @@ public class DownloadTest {
     }
 
     @Test
-    @Ignore
     public void downloadFileFromUrlTest2() {
         File file = null;
         try {
@@ -116,7 +109,6 @@ public class DownloadTest {
     }
 
     @Test
-    @Ignore
     public void downloadFileFromUrlTest3() {
         File file = null;
         try {
@@ -148,7 +140,6 @@ public class DownloadTest {
     }
 
     @Test
-    @Ignore
     public void downloadFileFromUrlTest4() {
         File file = null;
         try {
@@ -168,7 +159,6 @@ public class DownloadTest {
 
 
     @Test
-    @Ignore
     public void downloadFileFromUrlTest5() {
         File file = null;
         try {
@@ -196,7 +186,6 @@ public class DownloadTest {
     }
 
     @Test
-    @Ignore
     public void downloadTeamViewerTest() throws IOException {
         // 此URL有3次重定向, 需要请求4次
         final String url = "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe";

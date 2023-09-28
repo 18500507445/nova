@@ -1,9 +1,8 @@
 package com.nova.tools.utils.hutool.cron.pattern;
 
-import cn.hutool.cron.CronException;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.cron.pattern.CronPatternBuilder;
 import cn.hutool.cron.pattern.Part;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class CronPatternBuilderTest {

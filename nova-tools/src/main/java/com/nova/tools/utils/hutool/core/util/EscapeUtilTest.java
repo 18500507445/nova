@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.util;
 
-import cn.hutool.core.util.EscapeUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.EscapeUtil;
 import org.junit.jupiter.api.Test;
 
 public class EscapeUtilTest {

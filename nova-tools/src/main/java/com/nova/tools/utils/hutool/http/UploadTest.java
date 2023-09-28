@@ -6,7 +6,6 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -26,7 +25,6 @@ public class UploadTest {
      * 多文件上传测试
      */
     @Test
-    @Ignore
     public void uploadFilesTest() {
         File file = FileUtil.file("d:\\图片1.JPG");
         File file2 = FileUtil.file("d:\\图片3.png");
@@ -41,7 +39,6 @@ public class UploadTest {
     }
 
     @Test
-    @Ignore
     public void uploadFileTest() {
         File file = FileUtil.file("D:\\face.jpg");
 
@@ -54,7 +51,6 @@ public class UploadTest {
     }
 
     @Test
-    @Ignore
     public void uploadTest2() {
         //客户端
         String url = "http://192.168.1.200:8888/meta/upload/img";
@@ -74,7 +70,6 @@ public class UploadTest {
     }
 
     @Test
-    @Ignore
     public void smmsTest() {
         // https://github.com/dromara/hutool/issues/2079
         // hutool的user agent 被封了

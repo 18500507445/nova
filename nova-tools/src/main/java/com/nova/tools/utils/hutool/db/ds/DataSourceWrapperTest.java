@@ -1,8 +1,8 @@
 package com.nova.tools.utils.hutool.db.ds;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.db.ds.DataSourceWrapper;
 import cn.hutool.db.ds.simple.SimpleDataSource;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class DataSourceWrapperTest {

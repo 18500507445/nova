@@ -2,7 +2,6 @@ package com.nova.tools.utils.hutool.db;
 
 import cn.hutool.db.Entity;
 import cn.hutool.db.Session;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -15,7 +14,6 @@ import java.sql.SQLException;
 public class SessionTest {
 
     @Test
-    @Ignore
     public void transTest() {
         Session session = Session.create("test");
         try {
@@ -28,7 +26,6 @@ public class SessionTest {
     }
 
     @Test
-    @Ignore
     public void txTest() throws SQLException {
         Session.create("test").tx(session -> session.update(Entity.create().set("age", 78), Entity.create("user").set("name", "unitTestUser")));
     }

@@ -5,7 +5,6 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.nova.tools.utils.hutool.json.test.bean.ResultBean;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -18,7 +17,6 @@ import org.junit.jupiter.api.Test;
 public class Issue1200Test {
 
     @Test
-    @Ignore
     public void toBeanTest() {
         final JSONObject jsonObject = JSONUtil.parseObj(ResourceUtil.readUtf8Str("issue1200.json"));
         Console.log(jsonObject);

@@ -1,9 +1,9 @@
 package com.nova.tools.utils.hutool.core.lang.intern;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.intern.InternUtil;
 import cn.hutool.core.lang.intern.Interner;
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class InternUtilTest {

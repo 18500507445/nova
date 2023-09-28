@@ -1,5 +1,6 @@
 package com.nova.tools.utils.hutool.extra.template;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.extra.template.Template;
@@ -7,7 +8,6 @@ import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
 import cn.hutool.extra.template.engine.velocity.VelocityEngine;
-import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
 public class VelocityTest {

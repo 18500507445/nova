@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.core.util;
 
-import cn.hutool.core.util.CreditCodeUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.CreditCodeUtil;
 import org.junit.jupiter.api.Test;
 
 /**

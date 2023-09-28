@@ -1,7 +1,7 @@
 package com.nova.tools.utils.hutool.extra.pinyin;
 
-import cn.hutool.extra.pinyin.PinyinUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import org.junit.jupiter.api.Test;
 
 public class PinyinUtilTest {

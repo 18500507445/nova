@@ -2,8 +2,8 @@ package com.nova.tools.utils.hutool.core.bean.copier;
 
 import cn.hutool.core.bean.copier.BeanCopier;
 import cn.hutool.core.bean.copier.CopyOptions;
-import lombok.Data;
 import cn.hutool.core.lang.Assert;
+import lombok.Data;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

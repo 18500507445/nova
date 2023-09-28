@@ -1,6 +1,7 @@
 package com.nova.tools.utils.hutool.poi.excel;
 
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -8,8 +9,6 @@ import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.cell.CellHandler;
 import lombok.Data;
-import cn.hutool.core.lang.Assert;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -147,7 +146,6 @@ public class ExcelReadTest {
     }
 
     @Test
-    @Ignore
     public void excelReadToBeanListTest2() {
         ExcelReader reader = ExcelUtil.getReader("f:/test/toBean.xlsx");
         reader.addHeaderAlias("姓名", "name");
@@ -169,7 +167,6 @@ public class ExcelReadTest {
     }
 
     @Test
-    @Ignore
     public void readDoubleTest() {
         ExcelReader reader = ExcelUtil.getReader("f:/test/doubleTest.xls");
         final List<List<Object>> read = reader.read();
@@ -188,14 +185,12 @@ public class ExcelReadTest {
     }
 
     @Test
-    @Ignore
     public void readCellsTest() {
         final ExcelReader reader = ExcelUtil.getReader("merge_test.xlsx");
         reader.read((cell, value) -> Console.log("{}, {} {}", cell.getRowIndex(), cell.getColumnIndex(), value));
     }
 
     @Test
-    @Ignore
     public void readTest() {
         // 测试合并单元格是否可以正常读到第一个单元格的值
         final ExcelReader reader = ExcelUtil.getReader("d:/test/人员体检信息表.xlsx");
@@ -222,7 +217,6 @@ public class ExcelReadTest {
     }
 
     @Test
-    @Ignore
     public void readEmptyTest() {
         final ExcelReader reader = ExcelUtil.getReader("d:/test/issue.xlsx");
         final List<Map<String, Object>> maps = reader.readAll();
@@ -230,7 +224,6 @@ public class ExcelReadTest {
     }
 
     @Test
-    @Ignore
     public void readNullRowTest() {
         final ExcelReader reader = ExcelUtil.getReader("d:/test/1.-.xls");
         reader.read((CellHandler) Console::log);

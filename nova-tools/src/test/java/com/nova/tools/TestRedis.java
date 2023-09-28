@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,13 +27,13 @@ import java.util.concurrent.TimeUnit;
 @Slf4j(topic = "testRedis")
 public class TestRedis {
 
-    @Resource
+    @Autowired
     private RedisService redisService;
 
-    @Resource
+    @Autowired
     private RedissonClient redissonClient;
 
-    @Resource
+    @Autowired
     private RedisTemplate<String, Object> secondRedisTemplate;
 
     /**
@@ -87,7 +87,7 @@ public class TestRedis {
         System.err.println("o1 = " + o1);
 
 
-        secondRedisTemplate.opsForValue().set("database2","1");
+        secondRedisTemplate.opsForValue().set("database2", "1");
         Object o = secondRedisTemplate.opsForValue().get("database2");
         System.err.println("o = " + o);
     }

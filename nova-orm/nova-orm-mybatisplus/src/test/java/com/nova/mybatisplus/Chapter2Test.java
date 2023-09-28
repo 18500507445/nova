@@ -5,9 +5,8 @@ import com.nova.mybatisplus.chapter2.TwoUserMapper;
 import com.nova.mybatisplus.chapter2.TwoUserService;
 import com.nova.mybatisplus.entity.UserDO;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.annotation.Resource;
 
 /**
  * @author: wzh
@@ -17,10 +16,10 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class Chapter2Test {
 
-    @Resource
+    @Autowired
     private TwoUserMapper twoUserMapper;
 
-    @Resource
+    @Autowired
     private TwoUserService twoUserService;
 
     static {

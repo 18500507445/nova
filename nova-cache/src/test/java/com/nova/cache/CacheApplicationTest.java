@@ -8,9 +8,9 @@ import com.nova.cache.memcached.MemcachedUtil;
 import com.nova.cache.redis.RedisService;
 import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,13 +19,13 @@ import java.util.Map;
 @SpringBootTest
 class CacheApplicationTest {
 
-    @Resource
+    @Autowired
     private RedisService redisService;
 
-    @Resource
+    @Autowired
     private CaffeineCacheUtil caffeineCacheUtil;
 
-    @Resource
+    @Autowired
     private MemcachedUtil memcachedUtil;
 
     /**

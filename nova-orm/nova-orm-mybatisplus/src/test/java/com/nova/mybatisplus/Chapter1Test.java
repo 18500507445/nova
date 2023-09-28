@@ -7,9 +7,9 @@ import com.github.pagehelper.PageInfo;
 import com.nova.mybatisplus.chapter1.OneUserMapper;
 import com.nova.mybatisplus.entity.UserDO;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,7 +20,7 @@ import java.util.List;
 @SpringBootTest
 public class Chapter1Test {
 
-    @Resource
+    @Autowired
     private OneUserMapper oneUserMapper;
 
     /**

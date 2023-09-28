@@ -3,9 +3,8 @@ package com.nova.mybatisplus.chapter5;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.nova.mybatisplus.entity.UserFiveDO;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * @author: wzh
@@ -13,13 +12,12 @@ import javax.annotation.Resource;
  * @date: 2023/06/15 19:54
  */
 @Service
+@AllArgsConstructor
 public class FiveUserServiceImpl extends ServiceImpl<FiveUserMapper, UserFiveDO> implements FiveUserService {
 
-    @Resource
-    private FiveUserMapper fiveUserMapper;
+    private final FiveUserMapper fiveUserMapper;
 
-    @Resource
-    private MyOrderMapper myOrderMapper;
+    private final MyOrderMapper myOrderMapper;
 
     @Override
     @DSTransactional

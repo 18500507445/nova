@@ -26,7 +26,7 @@ import java.util.List;
 @SpringBootTest
 public class SolrManageTest {
 
-    @Resource
+    @Autowired
     private SolrClient solrClient;
 
     public static final String CORE_NAME = "testcore";

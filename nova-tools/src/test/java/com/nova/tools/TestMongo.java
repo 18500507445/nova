@@ -10,9 +10,9 @@ import com.starter.mongo.entity.Page;
 import com.starter.mongo.wrapper.LambdaQueryWrapper;
 import com.starter.mongo.wrapper.Wrappers;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -23,10 +23,10 @@ import java.util.*;
 @SpringBootTest
 public class TestMongo {
 
-    @Resource
+    @Autowired
     private MongoService mongoService;
 
-    @Resource
+    @Autowired
     private UserService userService;
 
     /**

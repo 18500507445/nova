@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.nova.mybatisplus.chapter3.ThreeUserMapper;
 import com.nova.mybatisplus.entity.UserDO;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -19,7 +19,7 @@ import java.util.*;
 @SpringBootTest
 public class Chapter3Test {
 
-    @Resource
+    @Autowired
     private ThreeUserMapper threeUserMapper;
 
     static {

@@ -7,12 +7,12 @@ import com.starter.mongo.service.EasyMongoService;
 import com.starter.mongo.utils.ClassUtil;
 import com.starter.mongo.utils.QueryBuildUtils;
 import com.starter.mongo.wrapper.LambdaQueryWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class EasyMongoServiceImpl<T> implements EasyMongoService<T> {
      */
     private final Class<T> targetClass = (Class<T>) ClassUtil.getTClass(this);
 
-    @Resource
+    @Autowired
     protected MongoTemplate mongoTemplate;
 
     @Override

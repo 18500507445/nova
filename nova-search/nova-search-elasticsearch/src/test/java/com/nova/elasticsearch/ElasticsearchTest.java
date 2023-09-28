@@ -47,13 +47,13 @@ import java.util.*;
 @Slf4j
 public class ElasticsearchTest {
 
-    @Resource
+    @Autowired
     private UserService userService;
 
-    @Resource
+    @Autowired
     private UserRepository userRepository;
 
-    @Resource
+    @Autowired
     private ElasticsearchRestTemplate elasticsearchTemplate;
 
     @Test

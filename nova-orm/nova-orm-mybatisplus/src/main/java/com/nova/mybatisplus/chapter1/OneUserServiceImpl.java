@@ -1,9 +1,9 @@
 package com.nova.mybatisplus.chapter1;
 
 import com.nova.mybatisplus.entity.UserDO;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -12,10 +12,10 @@ import java.util.List;
  * @date: 2023/06/15 19:54
  */
 @Service
+@AllArgsConstructor
 public class OneUserServiceImpl implements OneUserService {
 
-    @Resource
-    private OneUserMapper oneUserMapper;
+    private final OneUserMapper oneUserMapper;
 
     @Override
     public List<UserDO> selectList() {

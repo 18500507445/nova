@@ -11,13 +11,13 @@ import com.nova.mybatisplus.chapter5.MyOrderMapper;
 import com.nova.mybatisplus.entity.MyOrder;
 import com.nova.mybatisplus.entity.UserFiveDO;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,16 +30,16 @@ import java.util.Map;
 @SpringBootTest
 public class Chapter5Test {
 
-    @Resource
+    @Autowired
     private FiveUserMapper fiveUserMapper;
 
-    @Resource
+    @Autowired
     private MyOrderMapper myOrderMapper;
 
-    @Resource
+    @Autowired
     private FiveUserService fiveUserService;
 
-    @Resource
+    @Autowired
     private DataSourceTransactionManager transactionManager;
 
     static {

@@ -9,9 +9,9 @@ import com.nova.mybatisplus.chapter4.FourUserMapper;
 import com.nova.mybatisplus.entity.UserActiveRecordDO;
 import com.nova.mybatisplus.entity.UserDO;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import java.util.Map;
 @SpringBootTest
 public class Chapter4Test {
 
-    @Resource
+    @Autowired
     private FourUserMapper fourUserMapper;
 
     static {

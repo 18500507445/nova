@@ -16,6 +16,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <justauth.version>1.4.0</justauth.version>
+        <sa-token.version>1.36.0</sa-token.version>
     </properties>
 
     <dependencies>
@@ -29,6 +30,26 @@
             <groupId>com.xkcoding.justauth</groupId>
             <artifactId>justauth-spring-boot-starter</artifactId>
             <version>${justauth.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>${sa-token.version}</version>
+        </dependency>
+
+        <!-- Sa-Token整合Redis（使用 jackson 序列化方式） -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-redis-jackson</artifactId>
+            <version>${sa-token.version}</version>
+        </dependency>
+
+        <!-- Sa-Token 整合 jwt -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-jwt</artifactId>
+            <version>${sa-token.version}</version>
         </dependency>
 
     </dependencies>

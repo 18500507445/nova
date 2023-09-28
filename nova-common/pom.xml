@@ -261,7 +261,6 @@
             <version>${transmittable.version}</version>
         </dependency>
 
-
         <!-- Emoji工具依赖 -->
         <dependency>
             <groupId>com.vdurmont</groupId>

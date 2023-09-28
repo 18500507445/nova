@@ -16,13 +16,13 @@ import java.security.PublicKey;
 
 public class PemUtilTest {
 
-    @Testpublic
+    @Test
     void readPrivateKeyTest() {
         final PrivateKey privateKey = PemUtil.readPemPrivateKey(ResourceUtil.getStream("test_private_key.pem"));
         Assert.notNull(privateKey);
     }
 
-    @Testpublic
+    @Test
     void readPublicKeyTest() {
         final PublicKey publicKey = PemUtil.readPemPublicKey(ResourceUtil.getStream("test_public_key.csr"));
         Assert.notNull(publicKey);

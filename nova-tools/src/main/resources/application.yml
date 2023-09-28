@@ -99,3 +99,9 @@ jasypt:
     algorithm: PBEWITHHMACSHA512ANDAES_256
     # 加密使用的盐
     password: jaspyt_password
+
+
+# log配置
+logging:
+  file:
+    path: /Users/wangzehui/Documents/Logs/nova/${spring.application.name}

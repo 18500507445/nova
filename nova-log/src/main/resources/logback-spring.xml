@@ -2,6 +2,7 @@
 <configuration>
 
     <!-- 先级排序: FATAL > ERROR > WARN > INFO > DEBUG > TRACE -->
+    <!-- 日志颜色，使用%red(红色)，%green(绿色)，%yellow(黄色)直接包裹，比如：[traceId:%red(%X{traceId})] -->
 
     <springProperty scope="context" name="logPath" source="logging.file.path" defaultValue="logging.file.path"/>
     <property name="log.path" value="${logPath}"/>

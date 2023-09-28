@@ -1,12 +1,12 @@
 package com.nova.database.config;
 
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
 import com.nova.common.enums.DataSourceType;
-import com.nova.common.utils.spring.SpringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -60,7 +60,7 @@ public class DruidConfig {
      */
     public void setDataSource(Map<Object, Object> targetDataSources, String sourceName, String beanName) {
         try {
-            DataSource dataSource = SpringUtils.getBean(beanName);
+            DataSource dataSource = SpringUtil.getBean(beanName);
             targetDataSources.put(sourceName, dataSource);
         } catch (Exception e) {
 

@@ -1,6 +1,6 @@
 package com.nova.common.utils.common;
 
-import com.nova.common.utils.spring.SpringUtils;
+import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
@@ -16,7 +16,7 @@ public class MessageUtils {
      * @return 获取国际化翻译值
      */
     public static String message(String code, Object... args) {
-        MessageSource messageSource = SpringUtils.getBean(MessageSource.class);
+        MessageSource messageSource = SpringUtil.getBean(MessageSource.class);
         return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
 }

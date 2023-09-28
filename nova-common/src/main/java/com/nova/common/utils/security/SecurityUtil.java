@@ -1,8 +1,8 @@
 package com.nova.common.utils.security;
 
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Base64Utils;
@@ -49,10 +49,10 @@ public class SecurityUtil {
     public synchronized static String decryptAllPara(String params, String clientType) {
         String decryptvalue = "";
         try {
-            if (StringUtils.isNotBlank(clientType)) {
-                if (StringUtils.equals("h5", clientType)) {
+            if (StrUtil.isNotBlank(clientType)) {
+                if (StrUtil.equals("h5", clientType)) {
                     decryptvalue = Decrypt(params.getBytes(StandardCharsets.UTF_8), H5_SECRET_KEY);
-                } else if (ArrayUtils.contains(new String[]{"android", "ios"}, clientType)) {
+                } else if (ArrayUtil.contains(new String[]{"android", "ios"}, clientType)) {
                     decryptvalue = Decrypt(URLDecoder.decode(params, "utf-8").getBytes(StandardCharsets.UTF_8), SECRET_KEY);
                 }
             } else {

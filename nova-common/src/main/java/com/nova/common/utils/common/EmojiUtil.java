@@ -1,6 +1,6 @@
 package com.nova.common.utils.common;
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -22,7 +22,7 @@ public class EmojiUtil {
      * @Description emoji表情转换
      */
     public static String emojiConvertToUtf(String str) {
-        if (StringUtils.isBlank(str)) {
+        if (StrUtil.isBlank(str)) {
             return "";
         }
         try {
@@ -52,7 +52,7 @@ public class EmojiUtil {
      * @Description 还原emoji表情的字符串
      */
     public static String utfemojiRecovery(String str) {
-        if (StringUtils.isBlank(str)) {
+        if (StrUtil.isBlank(str)) {
             return "";
         }
         try {

@@ -1,6 +1,6 @@
 package com.nova.common.utils.jax;
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,7 @@ public class Md5Utils {
         for (Map.Entry<String, Object> entry : paramsMap.entrySet()) {
             paramPairs.add(String.valueOf(entry.getValue()));
         }
-        String paramSignStr = StringUtils.join(paramPairs, "&");
+        String paramSignStr = StrUtil.join("&", paramPairs);
 
         // 按UTF-8进行URL编码
         try {
@@ -60,7 +60,7 @@ public class Md5Utils {
         }
         Collections.sort(list, Collator.getInstance(Locale.ENGLISH));
 
-        String paramSignStr = StringUtils.join(list, "");
+        String paramSignStr = StrUtil.join("", list);
 
         System.err.println("参数签名内容:[{" + paramSignStr + "}]");
 

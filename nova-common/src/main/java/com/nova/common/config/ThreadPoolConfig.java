@@ -1,13 +1,14 @@
 package com.nova.common.config;
 
+import cn.hutool.core.thread.ThreadFactoryBuilder;
 import com.nova.common.utils.thread.Threads;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -57,8 +58,8 @@ public class ThreadPoolConfig {
      */
     @Bean(name = "scheduledExecutorService")
     protected ScheduledExecutorService scheduledExecutorService() {
-        return new ScheduledThreadPoolExecutor(CORE_POOL_SIZE,
-                new BasicThreadFactory.Builder().namingPattern("schedule-pool-%d").daemon(true).build(),
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().build();
+        return new ScheduledThreadPoolExecutor(CORE_POOL_SIZE, namedThreadFactory,
                 new ThreadPoolExecutor.CallerRunsPolicy()) {
             @Override
             protected void afterExecute(Runnable r, Throwable t) {

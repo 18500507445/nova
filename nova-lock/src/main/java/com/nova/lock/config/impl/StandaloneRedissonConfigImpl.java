@@ -1,10 +1,10 @@
 package com.nova.lock.config.impl;
 
-import com.nova.lock.enums.RedissonEnum;
+import cn.hutool.core.util.StrUtil;
 import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
+import com.nova.lock.enums.RedissonEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 /**
@@ -27,7 +27,7 @@ public class StandaloneRedissonConfigImpl implements RedissonConfigStrategy {
             String redisAddr = RedissonEnum.REDIS_CONNECTION_PREFIX.getConstant_value() + address;
             config.useSingleServer().setAddress(redisAddr);
             config.useSingleServer().setDatabase(database);
-            if (StringUtils.isNotBlank(password)) {
+            if (StrUtil.isNotBlank(password)) {
                 config.useSingleServer().setPassword(password);
             }
             log.info("初始化[standalone]方式Config,redisAddress:" + address);

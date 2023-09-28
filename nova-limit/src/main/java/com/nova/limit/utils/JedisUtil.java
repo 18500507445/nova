@@ -1,11 +1,10 @@
 package com.nova.limit.utils;
 
 import cn.hutool.core.util.SerializeUtil;
+import cn.hutool.core.util.StrUtil;
 import com.nova.limit.config.BloomFilterHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.*;
 
@@ -73,7 +72,7 @@ public class JedisUtil {
      * @return long 1-成功 0-失败
      */
     public long expire(String key, long seconds) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return 0L;
         }
         try (Jedis jedis = this.jedisPool.getResource()) {
@@ -89,7 +88,7 @@ public class JedisUtil {
      * @return long 1-成功 0-失败
      */
     public long expireAt(String key, int unixTimestamp) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return 0L;
         }
         try (Jedis jedis = this.jedisPool.getResource()) {
@@ -257,7 +256,7 @@ public class JedisUtil {
     }
 
     public boolean headPush(String key, List<String> list) {
-        if (StringUtils.isBlank(key) || (list == null) || (list.size() == 0)) {
+        if (StrUtil.isBlank(key) || (list == null) || (list.size() == 0)) {
             return false;
         }
         for (String value : list) {
@@ -274,7 +273,7 @@ public class JedisUtil {
      * @return
      */
     public boolean tailPush(String key, String... value) {
-        if (StringUtils.isBlank(key) || (value == null)) {
+        if (StrUtil.isBlank(key) || (value == null)) {
             return false;
         }
         try (Jedis jedis = this.jedisPool.getResource()) {
@@ -296,7 +295,7 @@ public class JedisUtil {
     }
 
     public boolean tailPush(String key, List<String> list) {
-        if (StringUtils.isBlank(key) || (list == null) || (list.size() == 0)) {
+        if (StrUtil.isBlank(key) || (list == null) || (list.size() == 0)) {
             return false;
         }
         for (String value : list) {
@@ -358,7 +357,7 @@ public class JedisUtil {
      * @return
      */
     public long llen(String key) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return 0L;
         }
         try (Jedis jedis = this.jedisPool.getResource()) {
@@ -378,7 +377,7 @@ public class JedisUtil {
      * @return
      */
     public List<String> lrange(String key, long start, long end) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return null;
         }
         try (Jedis jedis = this.jedisPool.getResource()) {
@@ -399,7 +398,7 @@ public class JedisUtil {
      * @return String 返回结果链表
      */
     public String ltrim(String key, long start, long end) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return "-";
         }
         try (Jedis jedis = this.jedisPool.getResource()) {
@@ -638,7 +637,7 @@ public class JedisUtil {
      * @return boolean true/false
      */
     public boolean setSet(String key, String member) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return false;
         }
         try (Jedis jedis = jedisPool.getResource()) {
@@ -660,7 +659,7 @@ public class JedisUtil {
     }
 
     public boolean setSet(String key, List<String> members) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return false;
         }
         try (Jedis jedis = jedisPool.getResource()) {
@@ -743,7 +742,7 @@ public class JedisUtil {
      * @return long 当集合 key 不存在时，返回 0
      */
     public long scard(String key) {
-        if (StringUtils.isBlank(key)) {
+        if (StrUtil.isBlank(key)) {
             return 0L;
         }
         try (Jedis jedis = this.jedisPool.getResource()) {
@@ -959,6 +958,7 @@ public class JedisUtil {
 
     /**
      * 执行lua脚本
+     *
      * @param scriptLua
      * @param keys
      * @param args

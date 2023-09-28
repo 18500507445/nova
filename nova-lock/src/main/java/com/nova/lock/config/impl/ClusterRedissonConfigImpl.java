@@ -1,10 +1,10 @@
 package com.nova.lock.config.impl;
 
-import com.nova.lock.enums.RedissonEnum;
+import cn.hutool.core.util.StrUtil;
 import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
+import com.nova.lock.enums.RedissonEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 /**
@@ -26,7 +26,7 @@ public class ClusterRedissonConfigImpl implements RedissonConfigStrategy {
             // 设置cluster节点的服务IP和端口
             for (String addrToken : addrTokens) {
                 config.useClusterServers().addNodeAddress(RedissonEnum.REDIS_CONNECTION_PREFIX.getConstant_value() + addrToken);
-                if (StringUtils.isNotBlank(password)) {
+                if (StrUtil.isNotBlank(password)) {
                     config.useClusterServers().setPassword(password);
                 }
             }

@@ -1,7 +1,7 @@
 package com.nova.common.utils.jax;
 
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +32,7 @@ public class ExportCSVUtils {
         File fileLoad = new File(tempFile.getCanonicalPath());
         response.reset();
         String origin = request.getHeader("Origin");
-        if (StringUtils.isNotBlank(origin)) {
+        if (StrUtil.isNotBlank(origin)) {
             response.addHeader("Access-Control-Allow-Origin", origin);
         }
         response.addHeader("Access-Control-Expose-Headers", "filename");

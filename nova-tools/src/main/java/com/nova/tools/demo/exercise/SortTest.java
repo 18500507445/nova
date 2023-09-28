@@ -1,9 +1,9 @@
 package com.nova.tools.demo.exercise;
 
 
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.json.JSONUtil;
 import com.nova.tools.demo.entity.Myself;
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -22,7 +22,7 @@ class SortTest {
     public void addAll() {
         int[] arr1 = {33, 23, 78, 90, 1, 5};
         int[] arr2 = {4, 2, 6, 99, 100};
-        int[] ints = ArrayUtils.addAll(arr1, arr2);
+        int[] ints = ArrayUtil.addAll(arr1, arr2);
         Arrays.sort(ints);
         for (int i : ints) {
             System.err.println(i);

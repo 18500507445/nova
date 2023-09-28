@@ -1,7 +1,7 @@
 package com.nova.common.utils.spring;
 
 import cn.hutool.core.util.ObjectUtil;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -137,7 +137,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      * @return true 测试环境
      */
     public static boolean isDev() {
-        return StringUtils.equals(getActiveProfile(), "dev");
+        return StrUtil.equals(getActiveProfile(), "dev");
     }
 
     /**
@@ -146,7 +146,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      * @return true 正式环境
      */
     public static boolean isPro() {
-        return StringUtils.equals(getActiveProfile(), "pro");
+        return StrUtil.equals(getActiveProfile(), "pro");
     }
 
     /**
@@ -155,7 +155,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      * @return true 本地环境
      */
     public static boolean isLocal() {
-        return StringUtils.equals(getActiveProfile(), "local");
+        return StrUtil.equals(getActiveProfile(), "local");
     }
 
     /**
@@ -164,7 +164,7 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      * @return true 后台环境
      */
     public static boolean isAdmin() {
-        return StringUtils.equals(getActiveProfile(), "admin");
+        return StrUtil.equals(getActiveProfile(), "admin");
     }
 
 }

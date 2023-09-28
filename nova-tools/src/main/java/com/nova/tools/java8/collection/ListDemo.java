@@ -3,7 +3,7 @@ package com.nova.tools.java8.collection;
 import cn.hutool.json.JSONUtil;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -134,7 +134,7 @@ class ListDemo {
         System.err.println(JSONUtil.toJsonStr(nameStr1));
 
         //方式2
-        String nameStr2 = StringUtils.join(nameList, ",");
+        String nameStr2 = StrUtil.join(",", nameList);
         System.err.println(JSONUtil.toJsonStr(nameStr2));
 
         //方式3
@@ -287,7 +287,6 @@ class ListDemo {
         int sum3 = list.parallelStream().reduce(0, Integer::sum) + 5;
         System.err.println("并行流之外加5执行结果：" + sum3);
     }
-
 
 
 }

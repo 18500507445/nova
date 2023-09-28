@@ -5,7 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
@@ -75,7 +75,7 @@ class ManualJob {
     }
 
     public void start() {
-        if (StringUtils.isBlank(IP)) {
+        if (StrUtil.isBlank(IP)) {
             log.debug("未获取到主机ip地址");
             return;
         }

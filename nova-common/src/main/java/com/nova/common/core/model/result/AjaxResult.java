@@ -1,8 +1,6 @@
 package com.nova.common.core.model.result;
 
 import cn.hutool.core.util.ObjectUtil;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.HashMap;
 
@@ -317,6 +315,7 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 返回错误消息
+     *
      * @param code
      * @param msg
      * @return
@@ -357,13 +356,5 @@ public class AjaxResult extends HashMap<String, Object> {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-                .append("code", getCode())
-                .append("msg", getMsg())
-                .append("data", getData())
-                .toString();
-    }
 
 }

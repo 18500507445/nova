@@ -1,7 +1,7 @@
 package com.nova.common.utils.common;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author: wzh
@@ -30,14 +30,14 @@ public class VersionUtils {
      * 客户端版本 <= 目标版本
      */
     public static boolean le(String clientVersion, String targetVersion) {
-        return StringUtils.equals(clientVersion, targetVersion) || lt(clientVersion, targetVersion);
+        return StrUtil.equals(clientVersion, targetVersion) || lt(clientVersion, targetVersion);
     }
 
     /**
      * 客户端版本 >= 目标版本
      */
     public static boolean ge(String clientVersion, String targetVersion) {
-        return StringUtils.equals(clientVersion, targetVersion) || gt(clientVersion, targetVersion);
+        return StrUtil.equals(clientVersion, targetVersion) || gt(clientVersion, targetVersion);
     }
 
     /**
@@ -46,7 +46,7 @@ public class VersionUtils {
     public static boolean compareVersion(String newVersion, String clientVersion) {
         boolean result = false;
         try {
-            if (StringUtils.isBlank(newVersion) || StringUtils.isBlank(clientVersion)) {
+            if (StrUtil.isBlank(newVersion) || StrUtil.isBlank(clientVersion)) {
                 return false;
             }
             String[] v1s = newVersion.split("\\.");

@@ -1,12 +1,12 @@
 package com.nova.common.utils.list;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.nova.common.core.backstage.PageDomain;
 import com.nova.common.core.backstage.TableSupport;
 import com.nova.common.exception.file.UtilException;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class PageUtils extends PageHelper {
      * 检查字符，防止注入绕过
      */
     public static String escapeOrderBySql(String value) {
-        if (StringUtils.isNotEmpty(value) && !isValidOrderBySql(value)) {
+        if (StrUtil.isNotEmpty(value) && !isValidOrderBySql(value)) {
             throw new UtilException("参数不符合规范，不能进行查询");
         }
         return value;

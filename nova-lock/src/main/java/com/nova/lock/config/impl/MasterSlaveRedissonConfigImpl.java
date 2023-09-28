@@ -1,10 +1,10 @@
 package com.nova.lock.config.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.nova.lock.enums.RedissonEnum;
 import com.nova.lock.config.RedissonConfigStrategy;
 import com.nova.lock.config.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class MasterSlaveRedissonConfigImpl implements RedissonConfigStrategy {
             String masterNodeAddr = addrTokens[0];
             // 设置主节点ip
             config.useMasterSlaveServers().setMasterAddress(masterNodeAddr);
-            if (StringUtils.isNotBlank(password)) {
+            if (StrUtil.isNotBlank(password)) {
                 config.useMasterSlaveServers().setPassword(password);
             }
             config.useMasterSlaveServers().setDatabase(database);

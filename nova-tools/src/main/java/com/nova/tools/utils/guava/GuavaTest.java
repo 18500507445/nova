@@ -1,12 +1,12 @@
 package com.nova.tools.utils.guava;
 
+import cn.hutool.core.util.StrUtil;
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.collect.*;
 import com.google.common.primitives.Ints;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -170,7 +170,7 @@ class GuavaTest {
         // a,b,c
         System.err.println(joiner.join(list));
         // jdk8中实现这类需求也比较方便
-        System.err.println(list.stream().filter(StringUtils::isNotBlank)
+        System.err.println(list.stream().filter(StrUtil::isNotBlank)
                 .collect(Collectors.joining(",")));
 
         String str = "a,b,\"\",,  c  ,";

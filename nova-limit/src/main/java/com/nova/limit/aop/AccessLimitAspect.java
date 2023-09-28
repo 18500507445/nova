@@ -1,12 +1,12 @@
 package com.nova.limit.aop;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.nova.common.constant.Constants;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.limit.annotation.AccessLimit;
 import com.nova.limit.utils.JedisUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -59,7 +59,7 @@ public class AccessLimitAspect extends BaseController {
         String ip = getIp();
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (null != attributes && StringUtils.isNotBlank(ip)) {
+        if (null != attributes && StrUtil.isNotBlank(ip)) {
             HttpServletRequest request = attributes.getRequest();
             HttpServletResponse response = attributes.getResponse();
             String requestUrl = request.getRequestURI();

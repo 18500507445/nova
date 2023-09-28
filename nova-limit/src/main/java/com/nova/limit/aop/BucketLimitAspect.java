@@ -1,12 +1,12 @@
 package com.nova.limit.aop;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.limit.annotation.BucketLimit;
 import com.nova.limit.utils.JedisUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -62,7 +62,7 @@ public class BucketLimitAspect extends BaseController implements InitializingBea
         String message = accessLimit.message();
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (null != attributes && StringUtils.isNotBlank(scriptLua)) {
+        if (null != attributes && StrUtil.isNotBlank(scriptLua)) {
             HttpServletRequest request = attributes.getRequest();
             HttpServletResponse response = attributes.getResponse();
             String requestUrl = request.getRequestURI();

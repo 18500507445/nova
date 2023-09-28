@@ -41,7 +41,7 @@
     </properties>
 
     <dependencies>
-        <!-- Spring/SpringBoot Web容器，实现对SpringMVC的自动化配置-->
+        <!-- SpringBoot Web容器 mvc、tomcat、context-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -63,12 +63,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
-        <!-- Spring框架基本的核心工具 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
         </dependency>
 
         <!-- netty -->

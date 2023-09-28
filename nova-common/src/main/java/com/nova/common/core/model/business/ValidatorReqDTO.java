@@ -1,10 +1,10 @@
 package com.nova.common.core.model.business;
 
 import com.nova.common.core.model.pojo.BaseReqDTO;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.*;
 
 /**
  * @description: Validator请求对象

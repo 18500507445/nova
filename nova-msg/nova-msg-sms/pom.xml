@@ -20,6 +20,7 @@
         <tencentcloud.version>3.1.740</tencentcloud.version>
         <yunpiansms.version>1.2.7</yunpiansms.version>
         <qiniusms.version>7.13.0</qiniusms.version>
+        <sms4j.version>3.0.1</sms4j.version>
     </properties>
 
     <dependencies>
@@ -30,24 +31,35 @@
             <artifactId>aliyun-java-sdk-core</artifactId>
             <version>${aliyun-sms.version}</version>
         </dependency>
+
         <!-- 腾讯云短信服务 -->
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.742</version>
+            <version>${tencentcloud.version}</version>
         </dependency>
+
         <!-- 云片短信服务 -->
         <dependency>
             <groupId>com.yunpian.sdk</groupId>
             <artifactId>yunpian-java-sdk</artifactId>
             <version>${yunpiansms.version}</version>
         </dependency>
+
         <!-- 七牛云短信服务 -->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
             <version>${qiniusms.version}</version>
         </dependency>
+
+        <!-- 短信整合Sms4j -->
+        <dependency>
+            <groupId>org.dromara.sms4j</groupId>
+            <artifactId>sms4j-spring-boot-starter</artifactId>
+            <version>${sms4j.version}</version>
+        </dependency>
+
 
     </dependencies>
 

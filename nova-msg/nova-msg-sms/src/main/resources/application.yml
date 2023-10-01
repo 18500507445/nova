@@ -16,3 +16,54 @@ sms:
     aliyun:
     yunpian:
 
+
+  # 标注从yml读取配置
+  config-type: yaml
+  #打印banner
+  isPrint: false
+  #核心线程池大小
+  corePoolSize: 10
+  #最大线程数
+  maxPoolSize: 30
+  #队列容量
+  queueCapacity: 50
+  #设置线程池关闭的时候等待所有任务都完成再继续销毁其他的Bean
+  shutdownStrategy: true
+  blends:
+    # 自定义的标识，也就是configId这里可以是任意值（最好不要是中文）
+    tx1:
+      #厂商标识，标定此配置是哪个厂商，详细请看厂商标识介绍部分
+      supplier: tencent
+      #您的accessKey
+      access-key-id: 您的accessKey
+      #您的accessKeySecret
+      access-key-secret: 您的accessKeySecret
+      #您的短信签名
+      signature: 您的短信签名
+      #模板ID 非必须配置，如果使用sendMessage的快速发送需此配置
+      template-id: xxxxxxxx
+      #您的sdkAppId
+      sdk-app-id: 您的sdkAppId
+
+    tx2:
+      #框架定义的厂商名称标识
+      supplier: alibaba
+      #有些称为accessKey有些称之为apiKey，也有称为sdkKey或者appId。
+      access-key-id: 您的accessKey
+      #称为accessSecret有些称之为apiSecret。
+      access-key-secret: 您的accessSecret
+      #您的短信签名
+      signature: XXX测试签名
+      #模板ID 如果不需要简化的sendMessage方法可以不配置
+      template-id: 1603670
+      # 随机权重，负载均衡的权重值依赖于此，默认为1，如不需要负载均衡可不进行配置
+      weight: 1
+      #配置标识名称 如果你使用的yml进行配置，则blends下层配置的就是这个，可为空，如果你使用的接口类配置，则需要设置值
+      #需要注意的是，不同的配置之间config-id不能重复，否则会发生配置丢失的问题
+      config-id: XXX
+      #短信自动重试间隔时间  默认五秒
+      retry-interval: 5
+      # 短信重试次数，默认0次不重试，如果你需要短信重试则根据自己的需求修改值即可
+      max-retries: 0
+
+

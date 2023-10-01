@@ -55,6 +55,7 @@ public class MybatisConfiguration {
 }
 ~~~
 mybatis-config.xml配置
+
 ~~~xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
@@ -73,7 +74,7 @@ mybatis-config.xml配置
         </environment>
     </environments>
     <mappers>
-        <mapper class="com.nova.mybatis.mapper.StudentMapper"/>
+        <mapper class="com.nova.orm.mybatis.mapper.StudentMapper"/>
     </mappers>
 </configuration>
 ~~~

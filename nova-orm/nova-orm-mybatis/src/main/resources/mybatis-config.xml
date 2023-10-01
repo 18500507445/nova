@@ -15,6 +15,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper class="com.nova.mybatis.mapper.StudentMapper"/>
+        <mapper class="com.nova.orm.mybatis.mapper.StudentMapper"/>
     </mappers>
 </configuration>

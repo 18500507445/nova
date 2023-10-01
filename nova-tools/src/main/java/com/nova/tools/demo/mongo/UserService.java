@@ -1,6 +1,6 @@
 package com.nova.tools.demo.mongo;
 
-import com.starter.mongo.service.EasyMongoService;
+import com.nova.starter.mongo.service.EasyMongoService;
 
 /**
  * @author: wzh

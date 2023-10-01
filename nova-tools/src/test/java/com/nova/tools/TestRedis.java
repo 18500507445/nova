@@ -3,7 +3,7 @@ package com.nova.tools;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import com.google.common.collect.Lists;
-import com.starter.redis.RedisService;
+import com.nova.starter.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RLock;

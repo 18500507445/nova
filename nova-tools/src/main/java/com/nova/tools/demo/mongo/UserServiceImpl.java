@@ -1,6 +1,6 @@
 package com.nova.tools.demo.mongo;
 
-import com.starter.mongo.service.impl.EasyMongoServiceImpl;
+import com.nova.starter.mongo.service.impl.EasyMongoServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.starter.mongo.MongoAutoConfiguration
+com.nova.starter.mongo.MongoAutoConfiguration

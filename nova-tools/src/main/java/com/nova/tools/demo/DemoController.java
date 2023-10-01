@@ -1,7 +1,7 @@
 package com.nova.tools.demo;
 
 import com.nova.common.core.model.result.RespResult;
-import com.starter.redis.RedisService;
+import com.nova.starter.redis.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

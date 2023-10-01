@@ -6,49 +6,14 @@
         <groupId>com.nova</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>nova-log-logback</module>
+        <module>nova-log-log4j2</module>
+    </modules>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nova-log</artifactId>
-    <description>log日志</description>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-
-        <disruptor.version>3.4.4</disruptor.version>
-
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.nova</groupId>
-            <artifactId>nova-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-                <!--排除springboot默认的logback依赖 -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- 性能方面推荐使用异步的 Log4j2 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <!-- 异步,使用 log4j2 的 AsyncLogger 时需要包含 disruptor -->
-        <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-            <version>${disruptor.version}</version>
-        </dependency>
-
-    </dependencies>
 </project>

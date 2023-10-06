@@ -1,8 +1,10 @@
 package com.nova.common.utils.ip;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSONObject;
+import com.nova.common.config.Global;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +14,8 @@ import java.net.NetworkInterface;
 import java.util.Enumeration;
 
 /**
- * 获取地址类
+ * 根据ip获取地理位置工具类
+ * @author wzh
  */
 public class AddressUtils {
 
@@ -36,7 +39,7 @@ public class AddressUtils {
         if (internalIp(ip)) {
             return "内网IP";
         }
-        if (true) {
+        if (Global.isAddressEnabled()) {
             try {
                 String rspStr = HttpUtil.createGet(IP_URL)
                         .form("ip", ip)
@@ -47,6 +50,7 @@ public class AddressUtils {
                     log.error("获取地理位置异常 {}", ip);
                     return UNKNOWN;
                 }
+                rspStr = StrUtil.subBetween(rspStr, "if(window.IPCallBack) {IPCallBack(", ");}");
                 JSONObject obj = JSONObject.parseObject(rspStr);
                 String region = obj.getString("pro");
                 String city = obj.getString("city");

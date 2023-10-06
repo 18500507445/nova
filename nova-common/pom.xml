@@ -38,6 +38,7 @@
         <bitwalker.version>1.21</bitwalker.version>
         <sba.version>2.7.11</sba.version>
         <transmittable.version>2.14.3</transmittable.version>
+        <ip2region.version>2.7.0</ip2region.version>
 
         <!-- hutool工具类需要的依赖 -->
         <emoji-java.version>5.1.1</emoji-java.version>
@@ -272,6 +273,13 @@
                     <artifactId>json</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- 离线ip工具类 -->
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+            <version>${ip2region.version}</version>
         </dependency>
 
     </dependencies>

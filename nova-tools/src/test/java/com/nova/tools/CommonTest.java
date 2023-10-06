@@ -2,6 +2,7 @@ package com.nova.tools;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
+import com.nova.common.utils.common.LinuxUtils;
 import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -87,10 +88,22 @@ public class CommonTest {
         log.error("异常:{}", "errorLog");
     }
 
+    /**
+     * 获取traceId
+     */
     @Test
     public void traceIdTest() {
         String traceId = TraceContext.traceId();
         System.out.println("s = " + traceId);
+    }
+
+    /**
+     * 测试linux命令
+     */
+    @Test
+    public void testLinuxCommand() {
+        String s = LinuxUtils.executeLinux("curl cip.cc");
+        System.out.println(s);
     }
 
 

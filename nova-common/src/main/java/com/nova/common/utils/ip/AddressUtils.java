@@ -3,7 +3,6 @@ package com.nova.common.utils.ip;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSONObject;
-import com.nova.common.config.Global;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +36,7 @@ public class AddressUtils {
         if (internalIp(ip)) {
             return "内网IP";
         }
-        if (Global.isAddressEnabled()) {
+        if (true) {
             try {
                 String rspStr = HttpUtil.createGet(IP_URL)
                         .form("ip", ip)

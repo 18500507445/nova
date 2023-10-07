@@ -21,7 +21,7 @@ public class User implements Serializable {
      * 必须有 id,这里的 id 是全局唯一的标识，等同于 es 中的"_id"
      */
     @Id
-    private String id;
+    private Long id;
 
     /**
      * type : 字段数据类型

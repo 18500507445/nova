@@ -25,6 +25,7 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -57,17 +58,19 @@ public class ElasticsearchTest {
 
     @Test
     public void insertTest() {
-        User user = new User();
-        user.setId("1");
-        user.setUsername("张三");
-        user.setPassword("password");
-        userService.save(user);
+        for (int i = 1; i <= 5; i++) {
+            User user = new User();
+            user.setId((long) i);
+            user.setUsername("张三_" + i);
+            user.setPassword("password_" + i);
+            userService.save(user);
+        }
     }
 
     @Test
     public void findByIdTest() {
         Optional<User> entity = userService.findById("1");
-        log.info("查询成功：{}", JSONUtil.toJsonStr(entity));
+        entity.ifPresent(user -> log.info("查询成功：{}", JSONUtil.toJsonStr(user)));
     }
 
     @Test
@@ -81,7 +84,7 @@ public class ElasticsearchTest {
     @Test
     public void deleteTest() {
         User user = new User();
-        user.setId("1");
+        user.setId(1L);
         userService.delete(user);
     }
 
@@ -94,15 +97,17 @@ public class ElasticsearchTest {
         //批量查询
         userRepository.findAllById(idList);
         //批量删除
-        userRepository.deleteAllById(idList);
+//        userRepository.deleteAllById(idList);
         //批量保存
         List<User> userList = new ArrayList<>();
         userRepository.saveAll(userList);
         //查询所有
         userRepository.findAll();
+
         //分页查询
         Pageable page = PageRequest.of(0, 3, Sort.Direction.ASC, "id");
-        userRepository.findAll(page);
+        Page<User> pageList = userRepository.findAll(page);
+        System.err.println("pageList = " + pageList);
     }
 
     /**
@@ -115,8 +120,8 @@ public class ElasticsearchTest {
         //根据一个值查询多个字段并高亮显示这里的查询是取并集，即多个字段只需要有一个字段满足即可
         //需要查询的字段
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
-                .should(QueryBuilders.matchQuery("username", "123"))
-                .should(QueryBuilders.matchQuery("password", "123"));
+                .should(QueryBuilders.matchQuery("username", "张三"))
+                .should(QueryBuilders.matchQuery("password", "password"));
         //构建高亮查询
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(boolQueryBuilder)
@@ -152,8 +157,8 @@ public class ElasticsearchTest {
      */
     @Test
     public void likeQuery() {
-        String userName = "";
-        String password = "";
+        String userName = "张三";
+        String password = "password";
 
         //查询对象
         BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
@@ -168,8 +173,16 @@ public class ElasticsearchTest {
                 .build();
 
         SearchHits<User> search = elasticsearchTemplate.search(searchQuery, User.class);
+
+        List<User> userList = new ArrayList<>();
         //得到查询返回的内容
         List<SearchHit<User>> searchHits = search.getSearchHits();
+        for (SearchHit<User> searchHit : searchHits) {
+            //放到实体类中
+            userList.add(searchHit.getContent());
+        }
+        String jsonStr = JSONUtil.toJsonStr(userList);
+        System.err.println("jsonStr = " + jsonStr);
     }
 
 
@@ -191,21 +204,14 @@ public class ElasticsearchTest {
         highlightBuilder.postTags("</em>"); // 高亮显示的结束标签
         searchSourceBuilder.highlighter(highlightBuilder);
 
-        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-        log.info("client 查询: {}", searchResponse.toString());
-    }
+        //按照id从下标几开始查询
+        searchSourceBuilder.from(1);
+        searchSourceBuilder.size(3);
 
-    @Test
-    public void queryByRestHighLevelClientList() throws IOException {
-        SearchRequest searchRequest = new SearchRequest("user");
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        BoolQueryBuilder filterQueryBuilders = QueryBuilders.boolQuery();
-        filterQueryBuilders.must(QueryBuilders.termsQuery("index", new ArrayList<>()));
-        searchSourceBuilder.postFilter(filterQueryBuilders);
-        searchSourceBuilder.from(0);
-        searchSourceBuilder.size(10000);
-        searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        for (org.elasticsearch.search.SearchHit hit : searchResponse.getInternalResponse().hits().getHits()) {
+            log.info("client 查询: {}", JSONUtil.toJsonStr(hit.getSourceAsMap()));
+        }
     }
 
     @Test
@@ -221,22 +227,22 @@ public class ElasticsearchTest {
 
         //删除
         DeleteResponse delete = client.delete(e -> e.index(indexName).id("1"));
-        System.out.println(delete.result());
+        System.err.println(delete.result());
 
         //查询
         GetResponse<User> query = client.get(e -> e.index(indexName).id("1"), User.class);
-        System.out.println(query.source().toString());
+        System.err.println("user = " + JSONUtil.toJsonStr(query.source()));
 
         //修改
         Map<String, Object> map = new HashMap<>();
         map.put("username", "username");
         UpdateResponse<User> update = client.update(e -> e.index(indexName).id("1").doc(map), User.class);
-        System.out.println(update.result());
+        System.err.println(update.result());
 
         //创建
         User user = new User();
         CreateResponse create = client.create(e -> e.index(indexName).id("1").document(user));
-        System.out.println(create.result());
+        System.err.println(create.result());
 
         //批量添加
         List<BulkOperation> list = new ArrayList<>();
@@ -247,7 +253,7 @@ public class ElasticsearchTest {
                 .create(d -> d.document(user).id("1").index(indexName))
                 .build());
         BulkResponse bulkResponse = client.bulk(e -> e.index(indexName).operations(list));
-        System.out.println(bulkResponse.toString());
+        System.err.println(bulkResponse.toString());
 
         // 关闭ES客户端
         transport.close();

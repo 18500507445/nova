@@ -35,7 +35,7 @@
 * [sa-token登录](nova-login/loginNote.md)
 
 8.nova-monitor
-* [SBA监控后台]()
+* [SBA监控后台](nova-monitor/sbaNote.md)
 
 9.nova-mq
 * active，kafka，rabbit，rocket（待定）

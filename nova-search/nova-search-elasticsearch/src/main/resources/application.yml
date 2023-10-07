@@ -6,7 +6,7 @@ server:
 
 spring:
   elasticsearch:
-    uris: ip:port
+    uris: http://225297c275c2.c.methodot.com
 
 jasypt:
   encryptor:

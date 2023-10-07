@@ -11,7 +11,7 @@
 
     <artifactId>nova-cache</artifactId>
     <packaging>pom</packaging>
-    <description>本地cache、caffeine、redis(lettuce客户端)、限流(jedis客户端)、redisson分布式锁、布隆过滤器、validation</description>
+    <description>本地cache、caffeine、redis(lettuce客户端)、限流(jedis客户端)、redisson分布式锁、布隆过滤器</description>
 
     <modules>
         <module>nova-cache-limit</module>

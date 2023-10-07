@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>nova-cache-limit</artifactId>
-    <description>接口限流、请求和响应拦截器处理数据、validation</description>
+    <description>接口限流、请求和响应拦截器处理数据</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -13,7 +13,7 @@
 2.nova-cache
 * nova-cache-redis：Memcached、caffeine、redis（lettuce客户端）
 * nova-cache-lock：[redisson分布式锁](nova-cache/lockNote.md)
-* nova-cache-limit：[接口限流、请求响应拦截器、validation](nova-cache/limitNote.md)
+* nova-cache-limit：[接口限流、请求，响应拦截器](nova-cache/limitNote.md)
 * ![](./img/redis客户端对比.jpg)
 * redis与jedis客户端对比，不推荐使用jedis。1.线程不安全需要连接池 2.相比性能较差
 

@@ -60,7 +60,6 @@
             <version>${sms4j.version}</version>
         </dependency>
 
-
     </dependencies>
 
 </project>

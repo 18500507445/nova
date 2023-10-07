@@ -1,7 +1,6 @@
-package com.nova.tools.demo;
+package com.nova.tools.controller;
 
 import com.nova.common.core.model.result.RespResult;
-import com.nova.starter.redis.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @description 测试Controller
  * @date: 2023/05/26 12:09
  */
-@Slf4j(topic = "DemoController")
+@Slf4j(topic = "AbTestController")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
-public class DemoController {
-
-    private final RedisService redisService;
+public class AbTestController {
 
     /**
      * 如何根据qps，如何评估开启线程数量

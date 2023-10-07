@@ -10,41 +10,13 @@
     </parent>
 
     <artifactId>nova-cache</artifactId>
-    <description>本地cache、redis、分布式锁</description>
+    <packaging>pom</packaging>
+    <description>本地cache、caffeine、redis(lettuce客户端)、限流(jedis客户端)、redisson分布式锁、布隆过滤器、validation</description>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-
-        <memcached.version>3.0.2</memcached.version>
-    </properties>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>com.nova</groupId>
-            <artifactId>nova-common</artifactId>
-        </dependency>
-
-        <!-- springboot 集成redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <!-- caffeine 本地缓存 -->
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
-        </dependency>
-
-        <!-- Memcached -->
-        <dependency>
-            <groupId>com.whalin</groupId>
-            <artifactId>Memcached-Java-Client</artifactId>
-            <version>${memcached.version}</version>
-        </dependency>
-
-    </dependencies>
+    <modules>
+        <module>nova-cache-limit</module>
+        <module>nova-cache-lock</module>
+        <module>nova-cache-redis</module>
+    </modules>
 
 </project>

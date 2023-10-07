@@ -11,7 +11,11 @@
 * [xxl-job源码笔记](https://www.processon.com/preview/6433f533b433fa00159576a8)
 
 2.nova-cache
-* Memcached、caffeine、redis（lettuce客户端）
+* nova-cache-redis：Memcached、caffeine、redis（lettuce客户端）
+* nova-cache-lock：[redisson分布式锁](nova-cache/lockNote.md)
+* nova-cache-limit：[接口限流、请求响应拦截器、validation](nova-cache/limitNote.md)
+* ![](./img/redis客户端对比.jpg)
+* redis与jedis客户端对比，不推荐使用jedis。1.线程不安全需要连接池 2.相比性能较差
 
 3.nova-common
 * 框架核心组件、通用工具包（包括常量类，工具类，枚举类，异常类）
@@ -22,48 +26,41 @@
 5.nova-excel
 * [excel工具类](nova-excel/excelNote.md)
 
-6.nova-limit
-* redis（jedis客户端。不推荐，1.线程不安全需要连接池 2.相比性能较差）
-* ![](./img/redis客户端对比.jpg)
-* [接口限流、请求响应拦截器、validation](nova-limit/limitNote.md)
-
-7.nova-lock
-* [redisson分布式锁](nova-lock/lockNote.md)
-
-8.nova-log
+6.nova-log
 * [异步log](nova-log/logNote.md)
+* logback与log4j2性能对比
 * log中拦截器的应用
 
-9.nova-login
-* [三方登录JustAuth](nova-login/loginNote.md)
+7.nova-login
+* [sa-token登录](nova-login/loginNote.md)
 
-10.nova-monitor
+8.nova-monitor
 * [SBA监控后台]()
 
-11.nova-mq
+9.nova-mq
 * active，kafka，rabbit，rocket（待定）
 
-12.nova-msg
-* 发送邮件
-* 发送短信，多短信通道：阿里云、腾讯云、七牛云、云片
+10.nova-msg
+* mail-发送邮件
+* sms-（1）多短信通道：阿里云、腾讯云、七牛云、云片   （2）Sms4j现成框架，开箱即用
 
-13.nova-orm
+11.nova-orm
 * [mybatis学习](nova-orm/nova-orm-mybatis/mybatisNote.md)
 * [mybatisplus整合pageHelper学习](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
 * [mybatisflex学习](nova-orm/nova-orm-mybatisflex/mybatisflex.md)
 
-14.nova-rpc
+12.nova-rpc
 * [手写rpc框架](nova-rpc/nova-rpc-socket/rpcNote.md)
 * [websocket学习]
 
-15.nova-search
+13.nova-search
 * elasticsearch、solr
 
-16.nova-starter（后续mq....）
+14.nova-starter（后续mq....）
 * 自定义starter：redis、mongo、xxlJob
 * <optional>true</optional>：防止依赖传递，导致引入后和项目的包冲突
 
-17.nova-tools
+15.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 * Sql练习

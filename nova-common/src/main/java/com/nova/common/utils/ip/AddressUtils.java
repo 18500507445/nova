@@ -5,8 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.config.Global;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -17,9 +16,8 @@ import java.util.Enumeration;
  * 根据ip获取地理位置工具类
  * @author wzh
  */
+@Slf4j(topic = "AddressUtils")
 public class AddressUtils {
-
-    private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
     /**
      * IP地址查询

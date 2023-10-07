@@ -3,6 +3,7 @@ package com.nova.common.utils.security;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Base64Utils;
@@ -18,14 +19,12 @@ import java.util.Map;
 
 
 /**
- * @ClassName: SecurityUtil.java
  * @description: 请求URL地址加密解密工具类
  * @author: wzh
  * @date: 2021/11/21 10:56
  */
+@Slf4j(topic = "SecurityUtil")
 public class SecurityUtil {
-
-    private static final Logger log = LoggerFactory.getLogger(SecurityUtil.class);
 
     /**
      * app:ios和android的key

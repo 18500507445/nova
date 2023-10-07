@@ -1,8 +1,7 @@
 package com.nova.common.utils.jax;
 
 import cn.hutool.core.util.StrUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -14,9 +13,8 @@ import java.util.*;
 /**
  * Md5加密方法
  */
+@Slf4j(topic = "Md5Utils")
 public class Md5Utils {
-
-    private static final Logger log = LoggerFactory.getLogger(Md5Utils.class);
 
     public static String getTargetSign(String param) {
         Map<String, Object> paramsMap = new TreeMap<String, Object>();

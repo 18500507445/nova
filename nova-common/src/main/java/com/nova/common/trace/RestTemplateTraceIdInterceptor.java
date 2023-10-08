@@ -25,4 +25,26 @@ public class RestTemplateTraceIdInterceptor implements ClientHttpRequestIntercep
         }
         return clientHttpRequestExecution.execute(httpRequest, bytes);
     }
+
+    public static void main(String[] args) {
+        /**
+         *
+         * @Configuration
+         * public class RestTemplateConfiguration {
+         *
+         *     @Bean
+         *     public RestTemplate restTemplate() {
+         *         RestTemplate restTemplate = new RestTemplate();
+         *         restTemplate.setInterceptors(Collections.singletonList(restTemplateTraceIdInterceptor()));
+         *         return restTemplate;
+         *     }
+         *
+         *     @Bean
+         *     public RestTemplateTraceIdInterceptor restTemplateTraceIdInterceptor() {
+         *         return new RestTemplateTraceIdInterceptor();
+         *     }
+         * }
+         *
+         */
+    }
 }

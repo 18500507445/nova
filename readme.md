@@ -42,7 +42,9 @@
 
 10.nova-msg
 * mail-发送邮件
-* sms-（1）多短信通道：阿里云、腾讯云、七牛云、云片   （2）Sms4j现成框架，开箱即用
+* sms-短信
+>（1）多短信通道：阿里云、腾讯云、七牛云、云片  
+ （2）Sms4j现成框架，开箱即用
 
 11.nova-orm
 * [mybatis学习](nova-orm/nova-orm-mybatis/mybatisNote.md)

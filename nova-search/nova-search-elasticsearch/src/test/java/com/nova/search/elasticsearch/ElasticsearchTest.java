@@ -217,7 +217,7 @@ public class ElasticsearchTest {
     @Test
     public void queryByRestClient() throws IOException {
         // 创建低级客户端
-        RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200)).build();
+        RestClient restClient = RestClient.builder(new HttpHost("225297c275c2.c.methodot.com", 9200)).build();
         // 使用Jackson映射器创建传输层
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
         // 创建API客户端

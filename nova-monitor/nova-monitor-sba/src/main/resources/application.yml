@@ -6,5 +6,5 @@ server:
 
 spring:
   application:
-    name: nova-monitor
+    name: nova-monitor-sba
 

@@ -5,6 +5,7 @@ import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class ElasticsearchConfig extends AbstractElasticsearchConfiguration {
      */
     public static RestHighLevelClient restHighLevelClient;
 
+    @NotNull
     @Override
     public RestHighLevelClient elasticsearchClient() {
         String[] split = uris.get(0).split(":");

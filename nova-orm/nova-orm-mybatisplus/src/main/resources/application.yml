@@ -59,3 +59,8 @@ pagehelper:
   # 为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值
   # 默认值countSql
   params: count=countSql
+
+  # 是否自动检测dialect
+  autoDialect: true
+  # 多数据源时，是否自动检测dialect
+  autoRuntimeDialect: true

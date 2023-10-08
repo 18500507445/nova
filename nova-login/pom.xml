@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>nova-login-sa</module>
+        <module>nova-login-justauth</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 

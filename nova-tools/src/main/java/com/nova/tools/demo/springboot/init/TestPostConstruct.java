@@ -23,6 +23,6 @@ public class TestPostConstruct {
      */
     @PostConstruct
     void init() {
-        System.err.println("[注解@PostConstruct] 初始化");
+        System.err.println("[@PostConstruct] 初始化");
     }
 }

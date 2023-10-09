@@ -17,6 +17,6 @@ public class TestCommandLineRunner implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        System.err.println("[实现CommandLineRunner] 初始化");
+        System.err.println("[CommandLineRunner] 初始化");
     }
 }

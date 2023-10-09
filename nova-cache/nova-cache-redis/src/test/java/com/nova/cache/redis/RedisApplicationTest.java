@@ -6,6 +6,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.nova.cache.redis.caffeine.CaffeineCacheUtil;
 import com.nova.cache.redis.memcached.MemcachedUtil;
 import com.nova.cache.redis.redis.RedisService;
+import com.nova.common.utils.id.IdUtils;
 import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,17 @@ class RedisApplicationTest {
             System.err.println(o);
         }
     }
+
+    @Test
+    public void testLock() {
+        for (int i = 0; i < 50; i++) {
+            String uuid = IdUtils.randomUuid();
+            boolean lock = redisService.lock(uuid, 1);
+            System.err.println("lock = " + lock + ", " + i);
+            redisService.unlock(uuid);
+        }
+    }
+
 
     /**
      * 存储Object对象或者json字符串

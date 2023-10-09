@@ -35,6 +35,7 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
 
@@ -53,7 +54,7 @@ public class ElasticsearchTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
+    @Resource
     private ElasticsearchRestTemplate elasticsearchTemplate;
 
     @Test

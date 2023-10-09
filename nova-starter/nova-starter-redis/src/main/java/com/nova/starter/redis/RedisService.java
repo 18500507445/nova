@@ -740,7 +740,7 @@ public class RedisService {
      */
     public boolean unlock(String key, String value) {
         // 这里使用Lua脚本保证原子性操作
-        String script = "if  redis.call('get', KEYS[1]) == ARGV[1] then " +
+        String script = "if redis.call('get', KEYS[1]) == ARGV[1] then " +
                 "return redis.call('del', KEYS[1]) " +
                 "else return 0 end";
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);

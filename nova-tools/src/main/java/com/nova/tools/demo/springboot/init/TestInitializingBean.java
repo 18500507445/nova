@@ -18,6 +18,6 @@ public class TestInitializingBean implements InitializingBean {
      */
     @Override
     public void afterPropertiesSet() {
-        System.err.println("[实现InitializingBean] 初始化");
+        System.err.println("[InitializingBean] 初始化");
     }
 }

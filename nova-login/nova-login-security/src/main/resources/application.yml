@@ -1,0 +1,22 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: nova-login-security
+
+  #  security设置
+  security:
+    user:
+      name: admin
+      password: 123456
+
+jasypt:
+  encryptor:
+    # 加密算法
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    # 加密使用的盐
+    password: jaspyt_password

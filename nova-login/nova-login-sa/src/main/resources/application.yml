@@ -6,7 +6,7 @@ server:
 
 spring:
   application:
-    name: nova-login
+    name: nova-login-sa
   redis:
     database: 1
     host: 47.100.174.176

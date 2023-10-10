@@ -28,7 +28,7 @@ class InstantExample {
         // 3秒前
         Instant earlier = now.minusSeconds(3);
 
-        System.err.println("current : " + now.toString());
+        System.err.println("current : " + now);
         System.err.println("later   : " + later);
         System.err.println("earlier : " + earlier);
     }

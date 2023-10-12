@@ -94,7 +94,7 @@ public class CommonTest {
     @Test
     public void traceIdTest() {
         String traceId = TraceContext.traceId();
-        System.out.println("s = " + traceId);
+        System.err.println("s = " + traceId);
     }
 
     /**
@@ -103,8 +103,13 @@ public class CommonTest {
     @Test
     public void testLinuxCommand() {
         String s = LinuxUtils.executeLinux("curl cip.cc");
-        System.out.println(s);
+        System.err.println(s);
     }
 
+    @Test
+    public void getIp() {
+        String ip = LinuxUtils.getInternetIp("curl cip.cc");
+        System.err.println("ip = " + ip);
+    }
 
 }

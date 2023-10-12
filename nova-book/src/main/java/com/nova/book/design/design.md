@@ -13,7 +13,6 @@
 6. 单一职责原则
     - ⼀个类和方法只做⼀件事
 ---
-/Users/wangzehui/Documents/IdeaProjects/nova
 
 ### 创建型
 提供创建对象的机制， 能够提升已有代码的灵活性和可复用性。

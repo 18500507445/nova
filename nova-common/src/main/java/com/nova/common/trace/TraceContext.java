@@ -12,7 +12,7 @@ import org.slf4j.MDC;
  * @author: wzh
  * @date: 2022/12/20 11:16
  */
-public class TraceHelper {
+public class TraceContext {
 
     /**
      * trace对象上下文，支持父子线程之间的数据传递

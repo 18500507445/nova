@@ -27,9 +27,11 @@
 * [excel工具类](nova-excel/excelNote.md)
 
 6.nova-log
-* [异步log](nova-log/logNote.md)
-* logback与log4j2性能对比
-* log中拦截器的应用
+* [开启异步log](nova-log/logNote.md)
+* logback中拦截器的应用
+* [sleuth链路追踪]
+* [TLog官方文档](https://tlog.yomahub.com/)
+* [SpringBoot集成TLog日志](https://blog.csdn.net/qq_33204709/article/details/131871588)
 
 7.nova-login
 * [sa-token登录](nova-login/loginNote.md)

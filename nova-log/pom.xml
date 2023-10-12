@@ -11,6 +11,8 @@
     <modules>
         <module>nova-log-logback</module>
         <module>nova-log-log4j2</module>
+        <module>nova-log-tlog</module>
+        <module>nova-log-sleuth</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>

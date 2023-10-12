@@ -1,7 +1,7 @@
 package com.nova.common.config;
 
 import com.nova.common.trace.Trace;
-import com.nova.common.trace.TraceHelper;
+import com.nova.common.trace.TraceContext;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.MDC;
 import org.springframework.core.task.TaskDecorator;
@@ -23,7 +23,7 @@ public class MdcTaskDecorator implements TaskDecorator {
 //                    // 现在：@Async线程上下文！ 恢复Web线程上下文的MDC数据
 //                    MDC.setContextMap(copyOfContextMap);
 //                }
-                MDC.put(Trace.TRACE_ID, TraceHelper.genSpanId());
+                MDC.put(Trace.TRACE_ID, TraceContext.genSpanId());
                 runnable.run();
             } finally {
                 MDC.clear();

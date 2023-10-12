@@ -1,7 +1,7 @@
 package com.nova.common.core.model.result.avic;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.nova.common.trace.TraceHelper;
+import com.nova.common.trace.TraceContext;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -54,7 +54,7 @@ public class ResultVO<T> implements Serializable {
         this.bizMessage = resultCode.getBizMessage();
         this.data = data;
         this.success = success;
-        this.traceId = TraceHelper.getCurrentTrace().getTraceId();
+        this.traceId = TraceContext.getCurrentTrace().getTraceId();
         this.env = SpringUtil.getActiveProfile();
         this.systemTime = System.currentTimeMillis();
     }
@@ -64,7 +64,7 @@ public class ResultVO<T> implements Serializable {
         this.bizMessage = bizMessage;
         this.data = data;
         this.success = success;
-        this.traceId = TraceHelper.getCurrentTrace().getTraceId();
+        this.traceId = TraceContext.getCurrentTrace().getTraceId();
         this.env = SpringUtil.getActiveProfile();
         this.systemTime = System.currentTimeMillis();
     }
@@ -72,7 +72,7 @@ public class ResultVO<T> implements Serializable {
     public ResultVO(IResultCode resultCode) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = resultCode.getBizMessage();
-        this.traceId = TraceHelper.getCurrentTrace().getTraceId();
+        this.traceId = TraceContext.getCurrentTrace().getTraceId();
         this.env = SpringUtil.getActiveProfile();
         this.systemTime = System.currentTimeMillis();
     }

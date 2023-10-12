@@ -2,7 +2,7 @@ package com.nova.common.core.model.result;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nova.common.trace.TraceHelper;
+import com.nova.common.trace.TraceContext;
 import lombok.Data;
 import lombok.Getter;
 
@@ -66,8 +66,8 @@ public class RespResult<T> implements Serializable {
     public RespResult(Integer code, String message) {
         this.code = code;
         this.message = message;
-        this.traceId = TraceHelper.getCurrentTrace().getTraceId();
-        this.spanId = TraceHelper.getCurrentTrace().getSpanId();
+        this.traceId = TraceContext.getCurrentTrace().getTraceId();
+        this.spanId = TraceContext.getCurrentTrace().getSpanId();
         this.env = SpringUtil.getActiveProfile();
     }
 
@@ -75,8 +75,8 @@ public class RespResult<T> implements Serializable {
         this.code = code;
         this.message = message;
         this.detailMessage = detailMessage;
-        this.traceId = TraceHelper.getCurrentTrace().getTraceId();
-        this.spanId = TraceHelper.getCurrentTrace().getSpanId();
+        this.traceId = TraceContext.getCurrentTrace().getTraceId();
+        this.spanId = TraceContext.getCurrentTrace().getSpanId();
         this.env = SpringUtil.getActiveProfile();
     }
 
@@ -93,8 +93,8 @@ public class RespResult<T> implements Serializable {
         this.code = respResultCode.getCode();
         this.message = respResultCode.getMessage();
         this.detailMessage = respResultCode.getDetailMessage();
-        this.traceId = TraceHelper.getCurrentTrace().getTraceId();
-        this.spanId = TraceHelper.getCurrentTrace().getSpanId();
+        this.traceId = TraceContext.getCurrentTrace().getTraceId();
+        this.spanId = TraceContext.getCurrentTrace().getSpanId();
         this.env = SpringUtil.getActiveProfile();
     }
 

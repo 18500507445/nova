@@ -5,5 +5,5 @@ com.nova.shopping.common.aop.DistributeLockAspect,\
 com.nova.shopping.common.config.database.DruidProperties,\
 com.nova.shopping.common.config.database.DataSourceAspect,\
 com.nova.shopping.common.config.redis.RedisConfig,\
-com.nova.shopping.common.config.redisson.RedissonConfiguration
+com.nova.shopping.common.config.redisson.RedissonConfig
 

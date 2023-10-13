@@ -60,10 +60,6 @@ spring:
             multi-statement-allow: true
 
   redis:
-    # 自定义参数
-    address: 47.100.174.176:63799
-    type: standalone
-
     database: 0
     host: 47.100.174.176
     port: 63799

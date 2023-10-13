@@ -1,11 +1,11 @@
 package com.nova.shopping.common.config.redisson;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,12 +19,11 @@ import java.util.concurrent.TimeUnit;
  * @date 2023/03/26 20:53
  */
 @Slf4j
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Component
 public class RedissonLock {
 
-    private RedissonManager redissonManager;
+    @Resource
+    private RedissonClient redissonClient;
 
     /**
      * 加锁操作
@@ -32,7 +31,7 @@ public class RedissonLock {
      * @return boolean
      */
     public boolean lock(String lockName, long expireSeconds) {
-        RLock rLock = redissonManager.getRedisson().getLock(lockName);
+        RLock rLock = redissonClient.getLock(lockName);
         boolean getLock;
         try {
             getLock = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
@@ -49,7 +48,7 @@ public class RedissonLock {
      * @param lockName 锁名称
      */
     public void release(String lockName) {
-        redissonManager.getRedisson().getLock(lockName).unlock();
+        redissonClient.getLock(lockName).unlock();
     }
 
     /**
@@ -58,7 +57,7 @@ public class RedissonLock {
      * @return boolean
      */
     public void isLock(String lockName) {
-        RLock rLock = redissonManager.getRedisson().getLock(lockName);
+        RLock rLock = redissonClient.getLock(lockName);
         try {
             rLock.lock();
         } catch (Exception e) {
@@ -70,7 +69,7 @@ public class RedissonLock {
      * 查询是否有锁
      */
     public boolean isLocked(String lockName) {
-        RLock rLock = redissonManager.getRedisson().getLock(lockName);
+        RLock rLock = redissonClient.getLock(lockName);
         return rLock.isLocked();
     }
 }

@@ -35,6 +35,7 @@
         <module>nova-search</module>
         <module>nova-starter</module>
         <module>nova-tools</module>
+        <module>nova-shopping</module>
     </modules>
 
     <properties>

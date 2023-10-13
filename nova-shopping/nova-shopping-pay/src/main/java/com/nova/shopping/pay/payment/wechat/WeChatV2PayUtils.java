@@ -10,7 +10,7 @@ import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
-import com.mall.pay.payment.open.WeChatPayment;
+import com.nova.shopping.pay.payment.open.WeChatPayment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

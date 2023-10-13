@@ -24,6 +24,7 @@
         <hutool.version>5.8.20</hutool.version>
         <fastjson.version>2.0.40</fastjson.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
+        <jasypt.version>3.0.5</jasypt.version>
     </properties>
 
     <dependencies>
@@ -136,5 +137,12 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>${jasypt.version}</version>
+        </dependency>
+
     </dependencies>
 </project>

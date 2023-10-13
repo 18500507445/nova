@@ -22,7 +22,7 @@ spring:
     active: dev
 
   application:
-    name: mall-order
+    name: nova-shopping-order
 
 # 日志配置
 logging:

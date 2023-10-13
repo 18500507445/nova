@@ -22,7 +22,7 @@ spring:
     active: dev
 
   application:
-    name: mall-order
+    name: nova-shopping-pay
 
 # 日志配置
 logging:
@@ -32,7 +32,7 @@ logging:
 
   # 线上log路径
   file:
-    path: /Users/wangzehui/Documents/Logs/my-mall/${spring.application.name}
+    path: /Users/wangzehui/Documents/Logs/nova-shopping-pay/${spring.application.name}
 
 # MyBatis
 mybatis:

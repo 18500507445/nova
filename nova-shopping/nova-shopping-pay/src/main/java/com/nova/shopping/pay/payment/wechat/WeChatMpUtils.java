@@ -1,6 +1,6 @@
 package com.nova.shopping.pay.payment.wechat;
 
-import com.mall.pay.payment.open.WeChatPayment;
+import com.nova.shopping.pay.payment.open.WeChatPayment;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;

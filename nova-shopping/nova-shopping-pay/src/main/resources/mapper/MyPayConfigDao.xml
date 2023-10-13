@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mall.pay.dao.MyPayConfigDao">
+<mapper namespace="com.nova.shopping.pay.dao.MyPayConfigDao">
     
-    <resultMap type="com.mall.pay.entity.MyPayConfig" id="MyPayConfigResult">
+    <resultMap type="com.nova.shopping.pay.entity.MyPayConfig" id="MyPayConfigResult">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="source" column="source" jdbcType="VARCHAR"/>
         <result property="sid" column="sid" jdbcType="VARCHAR"/>
@@ -53,7 +53,7 @@
         from my_pay_config
     </sql>
 
-    <select id="selectMyPayConfigList" parameterType="com.mall.pay.entity.MyPayConfig" resultMap="MyPayConfigResult">
+    <select id="selectMyPayConfigList" parameterType="com.nova.shopping.pay.entity.MyPayConfig" resultMap="MyPayConfigResult">
         <include refid="selectMyPayConfigVo"/>
         <where>
             <if test="payWay != null "> and pay_way = #{payWay}</if>
@@ -80,7 +80,7 @@
         where id = #{id}
     </select>
 
-    <insert id="insertMyPayConfig" parameterType="com.mall.pay.entity.MyPayConfig" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertMyPayConfig" parameterType="com.nova.shopping.pay.entity.MyPayConfig" useGeneratedKeys="true" keyProperty="id">
         insert into my_pay_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="payWay != null">pay_way,</if>
@@ -126,7 +126,7 @@
         </trim>
     </insert>
 
-    <update id="updateMyPayConfig" parameterType="com.mall.pay.entity.MyPayConfig">
+    <update id="updateMyPayConfig" parameterType="com.nova.shopping.pay.entity.MyPayConfig">
         update my_pay_config
         <trim prefix="SET" suffixOverrides=",">
             <if test="payWay != null">pay_way = #{payWay},</if>

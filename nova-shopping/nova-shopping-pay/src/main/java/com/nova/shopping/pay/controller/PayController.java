@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
-import com.nova.shopping.common.config.RedisService;
+import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.BaseController;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;

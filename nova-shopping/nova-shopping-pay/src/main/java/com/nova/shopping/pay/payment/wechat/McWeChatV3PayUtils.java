@@ -3,7 +3,7 @@ package com.nova.shopping.pay.payment.wechat;
 import com.github.binarywang.wxpay.bean.merchanttransfer.TransferCreateRequest;
 import com.github.binarywang.wxpay.bean.merchanttransfer.TransferCreateResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
-import com.mall.pay.payment.open.WeChatPayment;
+import com.nova.shopping.pay.payment.open.WeChatPayment;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.nova.shopping.common.config;
+package com.nova.shopping.common.config.redis;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;

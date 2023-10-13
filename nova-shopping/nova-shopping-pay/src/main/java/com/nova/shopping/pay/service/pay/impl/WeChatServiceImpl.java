@@ -10,7 +10,7 @@ import com.github.binarywang.wxpay.bean.result.enums.TradeTypeEnum;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
-import com.nova.shopping.common.config.RedisService;
+import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.BaseController;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;

@@ -3,7 +3,7 @@ package com.nova.shopping.pay.service.pay.impl;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.nova.shopping.common.config.RedisService;
+import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;

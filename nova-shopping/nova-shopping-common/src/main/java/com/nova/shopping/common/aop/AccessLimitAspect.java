@@ -3,7 +3,7 @@ package com.nova.shopping.common.aop;
 import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.shopping.common.annotation.AccessLimit;
-import com.nova.shopping.common.config.RedisService;
+import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.BaseController;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;

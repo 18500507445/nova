@@ -1,4 +1,4 @@
-package com.nova.shopping.common.config;
+package com.nova.shopping.common.config.redis;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;

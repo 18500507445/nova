@@ -2,7 +2,7 @@ package com.nova.shopping.pay.payment.wechat;
 
 import com.github.binarywang.wxpay.bean.entpay.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
-import com.mall.pay.payment.open.WeChatPayment;
+import com.nova.shopping.pay.payment.open.WeChatPayment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

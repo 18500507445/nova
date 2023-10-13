@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mall.pay.dao.MyPayListDao">
+<mapper namespace="com.nova.shopping.pay.dao.MyPayListDao">
 
-    <resultMap type="com.mall.pay.entity.MyPayList" id="MyPayListResult">
+    <resultMap type="com.nova.shopping.pay.entity.MyPayList" id="MyPayListResult">
         <result property="id" column="id"/>
         <result property="source" column="source"/>
         <result property="sid" column="sid"/>
@@ -53,7 +53,7 @@
         from my_pay_list
     </sql>
 
-    <select id="selectMyPayListList" parameterType="com.mall.pay.entity.MyPayList" resultMap="MyPayListResult">
+    <select id="selectMyPayListList" parameterType="com.nova.shopping.pay.entity.MyPayList" resultMap="MyPayListResult">
         <include refid="selectMyPayListVo"/>
         <where>
             <if test="source != null  and source != ''"> and source = #{source}</if>
@@ -80,7 +80,7 @@
         where id = #{id}
     </select>
 
-    <insert id="insertMyPayList" parameterType="com.mall.pay.entity.MyPayList" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertMyPayList" parameterType="com.nova.shopping.pay.entity.MyPayList" useGeneratedKeys="true" keyProperty="id">
         insert into my_pay_list
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="source != null">source,</if>
@@ -122,7 +122,7 @@
         </trim>
     </insert>
 
-    <update id="updateMyPayList" parameterType="com.mall.pay.entity.MyPayList">
+    <update id="updateMyPayList" parameterType="com.nova.shopping.pay.entity.MyPayList">
         update my_pay_list
         <trim prefix="SET" suffixOverrides=",">
             <if test="source != null">source = #{source},</if>

@@ -2,7 +2,7 @@ package com.nova.shopping.order.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSONObject;
-import com.nova.shopping.common.config.RedisService;
+import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.order.dao.MySeckillOrderDao;
 import com.nova.shopping.order.entity.MySeckillOrder;

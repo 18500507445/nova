@@ -1,0 +1,33 @@
+{
+  "autoRenewing": false,
+  "orderId": "202212071435098448dad87ff1.107459075",
+  "packageName": "com.score.predict",
+  "applicationId": 107459075,
+  "applicationIdString": "107459075",
+  "kind": 0,
+  "productId": "test01",
+  "productName": "测试商品",
+  "purchaseTime": 1670394937000,
+  "purchaseTimeMillis": 1670394937000,
+  "purchaseState": 0,
+  "developerPayload": "16703949092189813",
+  "purchaseToken": "00000184eb4c016b26059eea38b68ba0b0a2f736d29e92170676666f615c085dc61b3285e5baa812x434e.1.107459075",
+  "consumptionState": 0,
+  "confirmed": 0,
+  "purchaseType": 0,
+  "currency": "CNY",
+  "price": 100,
+  "country": "CN",
+  "payOrderId": "sandbox202212071435376818A1D17",
+  "payType": "71",
+  "sdkChannel": "1"
+}
+
+
+
+{
+  "responseCode": "0",
+  "purchaseTokenData": "{\"autoRenewing\":false,\"orderId\":\"202008172303339595b1212421.123456\",\"packageName\":\"com.huawei.packagename\",\"applicationId\":123456,\"kind\":0,\"productId\":\"3\",\"productName\":\"商品名称\",\"purchaseTime\":1597676623000,\"purchaseTimeMillis\":1597676623000,\"purchaseState\":0,\"developerPayload\":\"payload data\",\"purchaseToken\":\"00000173741056a37eef310dff9c6a86fec57efafe318ae478e52d9c4261994d64c8f6fc8ea1abbdx5347.5.3089\",\"consumptionState\":0,\"confirmed\":0,\"currency\":\"CNY\",\"price\":\"100\",\"country\":\"CN\",\"payOrderId\":\"WX123456789ce8e23ee927\",\"payType\":\"17\"}",
+  "dataSignature": "FiJJZYRdVIFgEzDA4GbGrR/JbmExXgXJOnYLINc1besVPKakC01NuwfD54HFYKcm092iwoctqEbGleODbwjINRv047320p51dzeXozB8ozjqXQ2DlkaMgYUe0CLgB72ttkYG2EIrHyJullNpPuaMXNQ6R5DOrY0XRLDF4yOpiRoSHuQohTVk2wx5ugZ7537E2c5ZCc/AmiGLJT1Uxh4EDyTB8aGBZTWJgy2D/ogJLW86PKpVREhJEWxVco1IbVe5dvjutheh5oBfRcsJg+AgSLoNgbKvjn1dNlEGc4VoRsJSBP1M5ukYgh16r4y7DBqBA/QrRE7ocvzzPm/W/teeng==",
+  "signatureAlgorithm": "SHA256WithRSA"
+}

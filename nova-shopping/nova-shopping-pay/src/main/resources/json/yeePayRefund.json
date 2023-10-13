@@ -1,0 +1,6 @@
+{
+  "msg": "操作成功",
+  "code": "0",
+  "data": "{\"code\":\"OPR00000\",\"residualAmount\":\"0.00\",\"orderId\":\"16653698093098973\",\"uniqueRefundNo\":\"1002202210100000004534985624\",\"parentMerchantNo\":\"10014244530\",\"message\":\"成功\",\"refundRequestId\":\"3034a341155a42d88a3eea2addd93620\",\"refundRequestDate\":\"2022-10-10 10:44:04\",\"merchantNo\":\"10014244530\",\"status\":\"PROCESSING\",\"refundAmount\":\"1.00\"}",
+  "function": ""
+}

@@ -105,6 +105,14 @@
                 <version>${nova.version}</version>
             </dependency>
 
+
+            <!-- shopping单独组件 -->
+            <dependency>
+                <groupId>com.nova</groupId>
+                <artifactId>nova-shopping-common</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

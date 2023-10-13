@@ -15,6 +15,83 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <weixin.pay.version>4.5.0</weixin.pay.version>
+        <weixin.mp.version>4.5.0</weixin.mp.version>
+        <alipay.version>4.38.0.ALL</alipay.version>
+        <google.pay.version>v3-rev142-1.25.0</google.pay.version>
+
     </properties>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.nova</groupId>
+            <artifactId>nova-shopping-common</artifactId>
+        </dependency>
+
+        <!-- 支付宝sdk -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>${alipay.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>fastjson</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 微信支付 -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-pay</artifactId>
+            <version>${weixin.pay.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                    <groupId>org.bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 公众号（包括订阅号和服务号） -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>${weixin.mp.version}</version>
+        </dependency>
+
+        <!-- 易宝业务sdk -->
+        <dependency>
+            <groupId>com.my.pay</groupId>
+            <artifactId>yop-java-sdk</artifactId>
+            <version>3.2.25</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/lib/yop-java-sdk-3.2.25-jdk18json.jar</systemPath>
+        </dependency>
+
+        <!--谷歌支付api -->
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-androidpublisher</artifactId>
+            <version>${google.pay.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>j2objc-annotations</artifactId>
+                    <groupId>com.google.j2objc</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
 </project>

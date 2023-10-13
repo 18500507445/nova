@@ -1,0 +1,92 @@
+# 数据源配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 主库数据源
+      master:
+        url: jdbc:mysql://47.100.174.176:3306/my_mall?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: root
+        password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+        # 驱动 mysql：com.mysql.cj.jdbc.Driver oracle：oracle.jdbc.OracleDriver
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      # 从库数据源
+      slave:
+        # 从数据源开关/默认关闭
+        enabled: ture
+        url: jdbc:mysql://47.100.174.176:3306/my_mall2?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: root
+        password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+        # 驱动 mysql：com.mysql.cj.jdbc.Driver oracle：oracle.jdbc.OracleDriver
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 5
+      # 最大连接池数量
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        # 设置白名单，不填则允许所有访问
+        allow:
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+        login-username:
+        login-password:
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+
+  redis:
+    # 自定义参数
+    address: 47.100.174.176:63799
+    type: standalone
+
+    database: 0
+    host: 47.100.174.176
+    port: 63799
+    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 10000
+
+  rabbitmq:
+    addresses: 47.100.174.176:5672
+    username: root #账号
+    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4) #密码
+    virtual-host: /
+    listener:
+      simple:
+        retry:
+          initial-interval: 1000 #1秒后重试
+          enabled: true #启用发布重试
+          max-attempts: 3 #传递消息的最大尝试次数
+          max-interval: 10000 #尝试的最大时间间隔
+          multiplier: 1.0 #应用于先前传递重试时间间隔的乘数
+

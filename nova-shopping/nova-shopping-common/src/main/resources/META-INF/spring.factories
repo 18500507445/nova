@@ -1,0 +1,8 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.nova.shopping.common.config.RedisConfig,\
+com.nova.shopping.common.config.database.DruidProperties,\
+com.nova.shopping.common.config.database.DataSourceAspect,\
+com.nova.shopping.common.config.redisson.RedissonConfiguration,\
+com.nova.shopping.common.aop.AccessLimitAspect,\
+com.nova.shopping.common.aop.DistributeLockAspect,\

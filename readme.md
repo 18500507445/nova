@@ -60,11 +60,16 @@
 13.nova-search
 * elasticsearch、solr
 
-14.nova-starter（后续mq....）
+14.nova-shopping
+* 单独项目购物，涵盖了下单和支付、秒杀逻辑
+* 依赖也是单独的和common包pom区分开
+* 代码也是独立，参考了各个优秀的模块直接拿现成的整合进来
+
+15.nova-starter（后续mq....）
 * 自定义starter：redis、mongo、xxlJob
 * <optional>true</optional>：防止依赖传递，导致引入后和项目的包冲突
 
-15.nova-tools
+16.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 * Sql练习

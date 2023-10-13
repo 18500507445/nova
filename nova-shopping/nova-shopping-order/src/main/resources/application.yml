@@ -1,0 +1,67 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # 最多接收数，需要大于 max-connections + accept-count 超出的连接拒绝
+    max-connections: 10000
+    # 连接数满后的排队数，默认为100
+    accept-count: 500
+    threads:
+      # tomcat最大线程数，默认为200
+      max: 800
+      # Tomcat启动初始化的线程数，默认值10
+      min-spare: 400
+
+# 环境
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: mall-order
+
+# 日志配置
+logging:
+  level:
+    com.my.pay: debug
+    org.springframework: warn
+
+  # 线上log路径
+  file:
+    path: /Users/wangzehui/Documents/Logs/nova-shopping-order/${spring.application.name}
+
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.mall.order
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Dao.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+
+#xxl:
+#  job:
+#    accessToken: token
+#    admin:
+#      addresses: http://172.30.16.74:8080
+#    executor:
+#      address:
+#      appname: xxl-job-order-job
+#      ip:
+#      logpath: /opt/logbak/xxl-job/jobhandler
+#      logretentiondays: -1
+#      port: -1
+
+jasypt:
+  encryptor:
+    # 加密算法
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    # 加密使用的盐
+    password: jaspyt_password
+

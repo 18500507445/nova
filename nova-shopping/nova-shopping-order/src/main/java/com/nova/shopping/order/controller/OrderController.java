@@ -10,7 +10,7 @@ import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.dto.BaseReqDTO;
 import com.nova.shopping.common.constant.dto.OrderParam;
 import com.nova.shopping.common.constant.result.AjaxResult;
-import com.nova.shopping.common.constant.result.RespResultCode;
+import com.nova.shopping.common.constant.result.RespResultEnum;
 import com.nova.shopping.order.entity.MyGoods;
 import com.nova.shopping.order.entity.MySeckillOrder;
 import com.nova.shopping.order.entity.MyUser;
@@ -117,12 +117,12 @@ public class OrderController extends BaseController {
         final Long userId = baseReqDTO.getUserId();
         final Long goodsId = baseReqDTO.getGoodsId();
         if (ObjectUtil.isAllEmpty(userId, goodsId)) {
-            return AjaxResult.error(RespResultCode.ERR_PARAM_NOT_LEGAL);
+            return AjaxResult.error(RespResultEnum.ERR_PARAM_NOT_LEGAL);
         }
 
         //基本信息校验
         if (!checkBase(userId, goodsId)) {
-            AjaxResult.error(RespResultCode.BUY_NOT_ESTABLISHED);
+            AjaxResult.error(RespResultEnum.BUY_NOT_ESTABLISHED);
         }
 
         //3秒内用户请求总数不超过数据库最大连接数 4/5
@@ -130,14 +130,14 @@ public class OrderController extends BaseController {
         redisService.incr(userTotalRequestKey, 1L);
         int userTotalRequest = Convert.toInt(redisService.get(userTotalRequestKey), 0);
         if (userTotalRequest >= maxActive) {
-            return AjaxResult.error(RespResultCode.REPEATED_BUSY);
+            return AjaxResult.error(RespResultEnum.REPEATED_BUSY);
         }
         redisService.expire(userTotalRequestKey, 3L);
 
         //缓存预热，然后lua脚本保证查询库存和扣减原子性
         final Long stock = redisService.execute(script, Convert.toStr(goodsId));
         if (stock < 0) {
-            return AjaxResult.error(RespResultCode.REPEATED_BUSY);
+            return AjaxResult.error(RespResultEnum.REPEATED_BUSY);
         }
         /**
          * 几种方案
@@ -147,7 +147,7 @@ public class OrderController extends BaseController {
          * 1.
          * 2.
          */
-        return AjaxResult.success(RespResultCode.ORDER_QUEUING);
+        return AjaxResult.success(RespResultEnum.ORDER_QUEUING);
     }
 
 

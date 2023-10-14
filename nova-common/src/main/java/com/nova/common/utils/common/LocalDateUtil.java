@@ -1,5 +1,8 @@
 package com.nova.common.utils.common;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -15,6 +18,7 @@ import java.util.regex.Pattern;
  * @description 日期工具类
  * @date: 2023/09/22 16:57
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateUtil {
 
     /**

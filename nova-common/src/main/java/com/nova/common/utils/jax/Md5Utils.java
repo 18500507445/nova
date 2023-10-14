@@ -1,6 +1,8 @@
 package com.nova.common.utils.jax;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
@@ -14,6 +16,7 @@ import java.util.*;
  * Md5加密方法
  */
 @Slf4j(topic = "Md5Utils")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Md5Utils {
 
     public static String getTargetSign(String param) {

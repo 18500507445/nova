@@ -1,5 +1,8 @@
 package com.nova.common.utils.file;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,6 +11,7 @@ import java.util.Properties;
 /**
  * 2019/9/11
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ConfigFileUtil {
 
     public static Map<String, String> resourcePropertyFileToMap(String resourcePropertyFileName) {

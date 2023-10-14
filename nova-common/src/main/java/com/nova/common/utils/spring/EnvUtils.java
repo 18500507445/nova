@@ -2,17 +2,16 @@ package com.nova.common.utils.spring;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  * @author: wzh
  * @description 判断环境工具类
  * @date: 2023/09/28 11:12
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class EnvUtils {
-
-    private EnvUtils() {
-
-    }
 
     /**
      * 是否是测试

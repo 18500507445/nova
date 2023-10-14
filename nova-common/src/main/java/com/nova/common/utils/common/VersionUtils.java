@@ -1,6 +1,8 @@
 package com.nova.common.utils.common;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class VersionUtils {
 
     /**

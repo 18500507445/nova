@@ -85,4 +85,5 @@ public class Global {
     public static String getUploadPath() {
         return getProfile() + "/upload";
     }
+
 }

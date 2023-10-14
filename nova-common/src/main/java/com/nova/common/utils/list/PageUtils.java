@@ -6,6 +6,8 @@ import com.github.pagehelper.PageHelper;
 import com.nova.common.core.backstage.PageDomain;
 import com.nova.common.core.backstage.TableSupport;
 import com.nova.common.exception.file.UtilException;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 /**
  * 分页工具类
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PageUtils extends PageHelper {
 
     /**

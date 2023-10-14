@@ -1,11 +1,15 @@
 package com.nova.common.utils.file;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.io.*;
 import java.util.function.Consumer;
 
 /**
  * 2019/9/11
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FileUtil {
 
     public static String getExtension(String fileName) {

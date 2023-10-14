@@ -1,10 +1,15 @@
 package com.nova.shopping.common.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @description: 支付方式枚举
  * @author: wzh
  * @date: 2023/4/14 18:31
  */
+@Getter
+@AllArgsConstructor
 public enum PayWayEnum {
 
     DEFAULT(0, "默认"),
@@ -23,7 +28,6 @@ public enum PayWayEnum {
 
     HUA_WEI_PAY(7, "华为支付");
 
-
     /**
      * 支付方式
      */
@@ -33,19 +37,6 @@ public enum PayWayEnum {
      * 支付名称
      */
     private final String name;
-
-    public int getPayWay() {
-        return payWay;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    PayWayEnum(int payWay, String name) {
-        this.payWay = payWay;
-        this.name = name;
-    }
 
     public static PayWayEnum valuesOf(int payWay) {
         switch (payWay) {

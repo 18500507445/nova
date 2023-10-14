@@ -1,10 +1,15 @@
 package com.nova.shopping.common.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @description: 业务枚举类
  * @author: wzh
  * @date: 2023/4/14 19:18
  */
+@Getter
+@AllArgsConstructor
 public enum BusinessEnum {
 
     DEFAULT(0, "默认"),
@@ -20,11 +25,6 @@ public enum BusinessEnum {
      * 业务名称
      */
     private final String name;
-
-    BusinessEnum(int code, String name) {
-        this.code = code;
-        this.name = name;
-    }
 
     public static BusinessEnum valuesOf(int code) {
         switch (code) {

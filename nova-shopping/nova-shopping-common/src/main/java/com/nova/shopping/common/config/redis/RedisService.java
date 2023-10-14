@@ -37,17 +37,14 @@ public class RedisService {
      *
      * @param key  键
      * @param time 时间(秒)
-     * @return Boolean
      */
-    public Boolean expire(String key, Long time) {
+    public void expire(String key, Long time) {
         try {
             if (time > 0) {
                 redisTemplate.expire(key, time, TimeUnit.SECONDS);
             }
-            return true;
         } catch (Exception e) {
             log.error("Exception: {}", e.getMessage());
-            return false;
         }
     }
 

@@ -3,6 +3,8 @@ package com.nova.common.utils.common;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
@@ -17,11 +19,8 @@ import java.util.List;
  * @date: 2023/10/06 10:08
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LinuxUtils {
-
-    private LinuxUtils() {
-
-    }
 
     /**
      * 执行Linux命令

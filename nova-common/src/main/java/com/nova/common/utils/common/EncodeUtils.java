@@ -1,5 +1,8 @@
 package com.nova.common.utils.common;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -10,6 +13,7 @@ import java.util.Base64;
  * @description 编码转换
  * @date: 2023/07/24 13:33
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class EncodeUtils {
 
     private static final String DEFAULT_URL_ENCODING = "UTF-8";

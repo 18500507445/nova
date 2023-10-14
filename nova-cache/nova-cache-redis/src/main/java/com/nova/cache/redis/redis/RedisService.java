@@ -3,7 +3,6 @@ package com.nova.cache.redis.redis;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -16,6 +15,7 @@ import org.springframework.data.redis.serializer.SerializationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +31,7 @@ public class RedisService {
 
     private static final String LOCK_PREFIX = "redisLock";
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     /**
@@ -39,17 +39,14 @@ public class RedisService {
      *
      * @param key  键
      * @param time 时间(秒)
-     * @return Boolean
      */
-    public Boolean expire(String key, Long time) {
+    public void expire(String key, Long time) {
         try {
             if (time > 0) {
                 redisTemplate.expire(key, time, TimeUnit.SECONDS);
             }
-            return true;
         } catch (Exception e) {
             log.error("Exception: {}", e.getMessage());
-            return false;
         }
     }
 

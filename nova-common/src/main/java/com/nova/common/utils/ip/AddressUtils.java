@@ -5,6 +5,8 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.config.Global;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.Inet4Address;
@@ -17,6 +19,7 @@ import java.util.Enumeration;
  * @author wzh
  */
 @Slf4j(topic = "AddressUtils")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddressUtils {
 
     /**

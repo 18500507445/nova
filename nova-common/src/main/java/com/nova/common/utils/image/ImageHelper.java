@@ -1,9 +1,9 @@
 package com.nova.common.utils.image;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -15,6 +15,7 @@ import java.util.UUID;
  * @date 2022/7/7 18:08
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ImageHelper {
 
     //常量

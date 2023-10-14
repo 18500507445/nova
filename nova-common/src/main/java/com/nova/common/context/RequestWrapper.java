@@ -69,7 +69,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             }
 
             @Override
-            public int read() throws IOException {
+            public int read() {
                 return byteArrayIns.read();
             }
         };

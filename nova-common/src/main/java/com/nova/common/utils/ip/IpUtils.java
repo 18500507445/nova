@@ -1,6 +1,8 @@
 package com.nova.common.utils.ip;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import java.net.UnknownHostException;
  * @author wzh
  */
 @Slf4j(topic = "IpUtils")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class IpUtils {
 
     private static final String UNKNOWN = "unknown";

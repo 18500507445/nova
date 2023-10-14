@@ -3,6 +3,8 @@ package com.nova.common.utils.http;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpUtil;
 import com.nova.common.constant.Constants;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
@@ -15,6 +17,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HttpRequestProxy {
 
     /**

@@ -2,6 +2,8 @@ package com.nova.common.utils.jax;
 
 
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +14,9 @@ import java.net.URLEncoder;
 /**
  * 导出excel表格
  *
- * @Date 2019/5/16 13:06
+ * @date 2019/5/16 13:06
  **/
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExportCSVUtils {
 
     /**

@@ -41,6 +41,7 @@ class ListExercise {
         LinkedList<String> linkedList = new LinkedList<>();
         linkedList.addFirst("1");
         linkedList.addLast("2");
+        System.err.println("linkedList = " + linkedList);
     }
 
     /**

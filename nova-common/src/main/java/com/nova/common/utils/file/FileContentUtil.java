@@ -1,5 +1,7 @@
 package com.nova.common.utils.file;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
@@ -10,6 +12,7 @@ import java.net.URLDecoder;
  * @author: wzh
  * @date: 2022/12/5 21:36
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FileContentUtil {
 
     /**

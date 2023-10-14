@@ -1,5 +1,8 @@
 package com.nova.common.utils.common;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.awt.geom.Point2D;
 import java.math.BigDecimal;
 
@@ -7,6 +10,7 @@ import java.math.BigDecimal;
  * @date: 2019/5/27 19:50
  * @description: 根据两点坐标计算两点之间的距离
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocationUtils {
 
     /**

@@ -2,6 +2,8 @@ package com.nova.common.utils.random;
 
 
 import com.nova.common.utils.common.LocalDateUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -17,6 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author: wzh
  * @date: 2022/6/17 13:32
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RandomUtil {
 
     /**

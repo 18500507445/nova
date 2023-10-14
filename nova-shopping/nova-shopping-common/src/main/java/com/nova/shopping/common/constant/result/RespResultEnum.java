@@ -2,8 +2,9 @@ package com.nova.shopping.common.constant.result;
 
 /**
  * 通用返回码对象(主要放各个模块的通用错误码)
+ * @author wzh
  */
-public enum RespResultCode implements IRespResultCode {
+public enum RespResultEnum {
 
     /**
      * 成功
@@ -75,24 +76,10 @@ public enum RespResultCode implements IRespResultCode {
      */
     private final String detailMessage;
 
-    RespResultCode(Integer code, String message, String detailMessage) {
+    RespResultEnum(Integer code, String message, String detailMessage) {
         this.code = code;
         this.message = message;
         this.detailMessage = detailMessage;
     }
 
-    @Override
-    public Integer getCode() {
-        return code;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
-    }
-
-    @Override
-    public String getDetailMessage() {
-        return detailMessage;
-    }
 }

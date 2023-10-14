@@ -2,6 +2,8 @@ package com.nova.common.utils.ip;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.lionsoul.ip2region.xdb.Searcher;
 
@@ -15,11 +17,8 @@ import java.io.*;
  * @date: 2023/10/06 13:20
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RegionUtils {
-
-    private RegionUtils() {
-
-    }
 
     //数据下载地址：https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb
     public static BufferedInputStream INPUT_STREAM = FileUtil.getInputStream("ip2region.xdb");

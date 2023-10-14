@@ -3,6 +3,8 @@ package com.nova.common.utils.image;
 import cn.hutool.core.lang.UUID;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +15,7 @@ import java.io.IOException;
  * @author: wzh
  * @date: 2022/12/5 20:39
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AliUploadImage {
 
     /**

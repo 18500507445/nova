@@ -1,6 +1,8 @@
 package com.nova.common.utils.common;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -13,6 +15,7 @@ import java.util.regex.Pattern;
  * @author: wzh
  * @date: 2022/8/4 21:29
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class EmojiUtil {
 
     /**

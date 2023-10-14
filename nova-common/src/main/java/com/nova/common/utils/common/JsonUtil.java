@@ -9,6 +9,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -20,11 +22,8 @@ import java.util.*;
  * @date: 2023/08/18 16:57
  */
 @Slf4j(topic = "JsonUtil")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JsonUtil {
-
-    private JsonUtil() {
-
-    }
 
     public enum Type {
         INCLUDE,

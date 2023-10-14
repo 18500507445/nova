@@ -5,6 +5,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +18,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2022/10/11 17:15
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JwtUtils {
 
     /**

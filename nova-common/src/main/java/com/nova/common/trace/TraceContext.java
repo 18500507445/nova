@@ -30,6 +30,9 @@ public class TraceContext {
         return SecureUtil.md5(UUID.randomUUID().toString()).substring(2, 16);
     }
 
+    /**
+     * 从MDC获取traceId
+     */
     public static String getTraceId() {
         return MDC.get(Trace.TRACE_ID);
     }
@@ -37,16 +40,17 @@ public class TraceContext {
     /**
      * 设置traceId
      */
-    public static void setCurrentTrace(String traceId) {
+    public static Trace setCurrentTrace(String traceId) {
         if (StrUtil.isBlank(traceId)) {
             traceId = genTraceId();
         }
         Trace trace = new Trace();
         trace.setTraceId(traceId);
         trace.setSpanId(genSpanId());
-        MDC.put(Trace.TRACE_ID, trace.getTraceId());
+        MDC.put(Trace.TRACE_ID, StrUtil.isNotBlank(TracerUtils.getTraceId()) ? TracerUtils.getTraceId() : trace.getTraceId());
         MDC.put(Trace.SPAN_ID, trace.getSpanId());
         TRACE_CONTEXT.set(trace);
+        return trace;
     }
 
     /**
@@ -55,14 +59,9 @@ public class TraceContext {
     public static Trace getCurrentTrace() {
         Trace trace = TRACE_CONTEXT.get();
         if (trace == null) {
-            trace = new Trace();
-            trace.setTraceId(genTraceId());
-            MDC.put(Trace.TRACE_ID, trace.getTraceId());
+            //如果为空，从新设置一次
+            trace = setCurrentTrace("");
         }
-        // spanId每次不一样，重新生成，放到MDC中
-        trace.setSpanId(genSpanId());
-        MDC.put(Trace.SPAN_ID, trace.getSpanId());
-        TRACE_CONTEXT.set(trace);
         return trace;
     }
 

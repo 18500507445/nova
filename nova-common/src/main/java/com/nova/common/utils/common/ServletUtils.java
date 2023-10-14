@@ -2,6 +2,8 @@ package com.nova.common.utils.common;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -14,6 +16,7 @@ import java.io.IOException;
 /**
  * 客户端工具类
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServletUtils {
 
     /**

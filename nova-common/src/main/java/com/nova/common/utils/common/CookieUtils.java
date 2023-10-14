@@ -1,5 +1,8 @@
 package com.nova.common.utils.common;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +13,9 @@ import java.net.URLEncoder;
 /**
  * Cookie工具类
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CookieUtils {
+
     /**
      * 设置 Cookie（生成时间为1天）
      *
@@ -115,4 +120,5 @@ public class CookieUtils {
         }
         return value;
     }
+
 }

@@ -2,6 +2,8 @@ package com.nova.common.utils.common;
 
 
 import com.nova.common.exception.base.ParamException;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -14,11 +16,8 @@ import java.util.Set;
  * @author wzh
  * @date 2023/6/22 21:13
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ValidatorUtil {
-
-    private ValidatorUtil() {
-
-    }
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 

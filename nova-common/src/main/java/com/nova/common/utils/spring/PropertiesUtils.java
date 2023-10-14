@@ -1,5 +1,7 @@
 package com.nova.common.utils.spring;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -16,10 +18,8 @@ import java.util.Properties;
  * @date: 2023/07/24 13:25
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertiesUtils {
-
-    private PropertiesUtils() {
-    }
 
     /**
      * 属性文件与属性集合的关系

@@ -1,5 +1,8 @@
 package com.nova.common.utils.common;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +12,7 @@ import java.util.Map.Entry;
 /**
  * request请求参数转换Map通用处理方法
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MapDataUtil {
 
     public static Map<String, Object> convertDataMap(HttpServletRequest request) {

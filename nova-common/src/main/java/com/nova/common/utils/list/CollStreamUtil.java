@@ -1,6 +1,8 @@
 package com.nova.common.utils.list;
 
 import com.google.common.collect.Lists;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,6 +17,7 @@ import java.util.stream.Stream;
  * 包含：转新集合，过滤，分组，排序，求和，平均，最大值，最小值，分隔，合并，去重
  * @date: 2023/07/24 13:29
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CollStreamUtil {
 
     /**

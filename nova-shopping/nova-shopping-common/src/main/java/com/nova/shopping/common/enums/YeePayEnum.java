@@ -1,10 +1,15 @@
 package com.nova.shopping.common.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @description: 易宝入网枚举
  * @author: wzh
  * @date: 2023/4/8 11:55
  */
+@Getter
+@AllArgsConstructor
 public enum YeePayEnum {
 
     DEFAULT("DEFAULT", 5),
@@ -26,20 +31,6 @@ public enum YeePayEnum {
      * 体育nt_user_setting表开户状态 入网状态 0未开户 1开户 2待审核 3已识别 4审核中 5审核拒绝
      */
     private final Integer openAccountStatus;
-
-    public String getApplicationStatus() {
-        return applicationStatus;
-    }
-
-
-    public Integer getOpenAccountStatus() {
-        return openAccountStatus;
-    }
-
-    YeePayEnum(String applicationStatus, Integer openAccountStatus) {
-        this.applicationStatus = applicationStatus;
-        this.openAccountStatus = openAccountStatus;
-    }
 
     public static YeePayEnum valuesOf(String applicationStatus) {
         switch (applicationStatus) {

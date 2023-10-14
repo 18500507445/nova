@@ -1,6 +1,7 @@
 package com.nova.shopping.common.constant.result;
 
 import cn.hutool.core.util.ObjectUtil;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 /**
  * 返回实体类
  */
+@Getter
 @ToString
 public class AjaxResult extends HashMap<String, Object> {
 
@@ -299,32 +301,16 @@ public class AjaxResult extends HashMap<String, Object> {
         return new AjaxResult(code, msg, null);
     }
 
-    public Type getType() {
-        return type;
-    }
-
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public String getCode() {
-        return code;
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public Object getData() {
-        return data;
     }
 
     public void setData(Object data) {

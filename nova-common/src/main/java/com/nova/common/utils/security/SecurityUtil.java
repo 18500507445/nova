@@ -3,9 +3,9 @@ package com.nova.common.utils.security;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.Base64Utils;
 
 import javax.crypto.Cipher;
@@ -24,6 +24,7 @@ import java.util.Map;
  * @date: 2021/11/21 10:56
  */
 @Slf4j(topic = "SecurityUtil")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityUtil {
 
     /**

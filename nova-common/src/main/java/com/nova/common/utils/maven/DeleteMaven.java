@@ -1,5 +1,8 @@
 package com.nova.common.utils.maven;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.io.File;
 import java.util.Objects;
 
@@ -11,6 +14,7 @@ import java.util.Objects;
  * @author: wzh
  * @date: 2022/8/6 13:17
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DeleteMaven {
 
     /**

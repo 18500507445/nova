@@ -3,6 +3,8 @@ package com.nova.common.utils.list;
 import cn.hutool.json.JSONUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
@@ -18,6 +20,7 @@ import java.util.stream.Stream;
  * @Date 2020/7/1 13:48
  */
 @SuppressWarnings("unchecked")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ListUtils {
 
     private static final Integer MAX_NUMBER = 2;

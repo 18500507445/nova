@@ -1,6 +1,8 @@
 package com.nova.common.utils.copybean;
 
 import cn.hutool.core.util.ArrayUtil;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.lang.Nullable;
 
@@ -12,11 +14,8 @@ import java.util.stream.Collectors;
 /**
  * 参数非空校验，Bean拷贝
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ParamsUtil {
-
-    private ParamsUtil(){
-
-    }
 
     /**
      * 参数非空校验

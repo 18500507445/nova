@@ -21,5 +21,6 @@ public class BaseReqDTO extends BaseController {
 
     private Long goodsId;
 
+    @Builder.Default
     private String requestIp = getIp();
 }

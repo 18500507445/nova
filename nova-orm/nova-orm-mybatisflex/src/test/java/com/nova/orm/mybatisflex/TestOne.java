@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 import java.util.*;
 
-import static com.nova.mybatisflex.entity.table.AccountTableDef.ACCOUNT;
+import static com.nova.orm.mybatisflex.entity.table.AccountTableDef.ACCOUNT;
 
 
 /**
@@ -123,22 +123,6 @@ public class TestOne {
         Account account = new Account();
         account.setId(4L).setAge(18).setBirthday(new Date());
         accountMapper.update(account);
-    }
-
-    @Test
-    public void demoA() {
-
-    }
-
-    @Test
-    public void demoB() {
-
-    }
-
-
-    @Test
-    public void demoC() {
-
     }
 
 

@@ -33,9 +33,9 @@
         <module>nova-orm</module>
         <module>nova-rpc</module>
         <module>nova-search</module>
+        <module>nova-shopping</module>
         <module>nova-starter</module>
         <module>nova-tools</module>
-        <module>nova-shopping</module>
     </modules>
 
     <properties>

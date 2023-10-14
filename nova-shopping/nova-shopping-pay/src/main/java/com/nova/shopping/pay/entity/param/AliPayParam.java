@@ -59,6 +59,7 @@ public class AliPayParam implements Serializable {
     /**
      * 支付成功后回跳地址,H5支付特有
      */
+    @Builder.Default
     private String returnUrl = "http://backtoclient.com";
 
     /**

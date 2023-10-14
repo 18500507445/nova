@@ -79,7 +79,7 @@ public class BaseController {
     /**
      * 获取用户请求IP地址
      */
-    public String getIp() {
+    public static String getIp() {
         String result = "";
         String createIp = getIpAddr(getRequest());
         if (StrUtil.isNotBlank(createIp)) {

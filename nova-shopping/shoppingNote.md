@@ -2,20 +2,21 @@
 ### 简介:
 * (1)主导重构了支付项目，但是没有自己的代码，所以我想把这块继续优化一下，细细打磨，从表的设计开始到代码的落地
 * (2)同时呢也负责了一个藏品电商项目，下单流程可以进行优化
-* (3)已接入api：微信开发者联盟sdk(支付,小程序,公众号)、阿里、易宝、谷歌支付sdk、快手支付
+* (3)已接入api：微信开发者联盟sdk(支付,小程序,公众号)、支付宝、苹果支付、易宝支付(官方sdk)、谷歌支付(官方sdk)、快手支付、华为支付
 * (4)[梳理的下单、支付流程图](https://www.processon.com/preview/642e300f769dd24760953fd7)
 
 ### 组织结构
 ```
 nova-shopping
-├── annotation --注解
-├── aspectj -- aop
-├── common -- 常量，拦截器，结果包装类
-├── config -- 配置类
-├── job -- xxljob 执行器
-├── payment -- 支付工具类
-├── service -- 支付接口，业务接口
-└── utils -- 工具类，货币转换
+├── nova-shopping-common        --通用包
+│     ├─annotation          --注解
+│     ├─aop                 -- aop
+│     ├─config              -- 配置类
+│     ├─constant            -- 常量，拦截器，结果包装类
+│     └─enums               -- 枚举类   
+├── nova-shopping-order         --下单组件
+└── nova-shopping-pay           --支付组件
+      └─payment             -- wechat(微信支付工具、企业微信工具、商家微信工具、公众号)，open(其它各种支付工具)
 ```
 
 ### 秒杀超卖几种方案

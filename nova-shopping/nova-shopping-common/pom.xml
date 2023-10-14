@@ -144,5 +144,11 @@
             <version>${jasypt.version}</version>
         </dependency>
 
+        <!-- netty 解决启动warn警告问题 -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

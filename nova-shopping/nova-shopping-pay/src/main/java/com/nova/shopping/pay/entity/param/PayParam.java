@@ -3,6 +3,7 @@ package com.nova.shopping.pay.entity.param;
 import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.shopping.common.constant.dto.PayReqDTO;
+import com.nova.shopping.common.enums.PayWayEnum;
 import lombok.*;
 
 import java.nio.charset.StandardCharsets;
@@ -33,7 +34,7 @@ public class PayParam extends PayReqDTO {
     private String type;
 
     /**
-     * 支付方式: {@link com.my.pay.enums.PayWayEnum}
+     * 支付方式: {@link PayWayEnum}
      */
     private Integer payWay;
 
@@ -53,6 +54,7 @@ public class PayParam extends PayReqDTO {
      * 支付宝：商品的标题
      * 微信：对一笔交易的具体描述信息
      */
+    @Builder.Default
     private String subject = "充值";
 
     /**
@@ -100,6 +102,7 @@ public class PayParam extends PayReqDTO {
      * GBP：英镑
      * EUR：欧元
      */
+    @Builder.Default
     private String currencyType = "CNY";
 
     public String getReturnUrl() {

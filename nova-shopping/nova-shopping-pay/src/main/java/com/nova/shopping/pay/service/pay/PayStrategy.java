@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @description: 支付策略实现类
+ * (2)也可以实现InitializingBean，重写afterPropertiesSet方法，applicationContext获取PayService的实现类放入Map
  * @author: wzh
  * @date: 2023/3/20 17:46
  */
@@ -123,4 +124,5 @@ public class PayStrategy implements ApplicationContextAware {
         }
         return null;
     }
+
 }

@@ -80,7 +80,7 @@ Long stock = (Long) redisTemplate.execute(redisScript, Collections.singletonList
 可以利用my_seckill_order表，userId+goodsId唯一索引，多次插入报错
 
 ### 项目启动参数
->nohup java -Xms1g -Xmx1g -Xmn256m -Xss512k -XX:PermSize=512m -XX:MaxPermSize=512m -jar /app/my_pay.jar >/dev/null 2>&1 &
+>nohup java -Xms1g -Xmx1g -Xmn256m -Xss512k -XX:PermSize=512m -XX:MaxPermSize=512m -jar /app/pay.jar >/dev/null 2>&1 &
 
 ### 排查配置微信支付问题，可以看到详细的返回错误信息（其它支付方式很少出问题）
 ~~~linux

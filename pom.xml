@@ -46,7 +46,7 @@
         <java.version>1.8</java.version>
         <nova.version>1.0-SNAPSHOT</nova.version>
 
-        <boot.version>2.7.15</boot.version>
+        <boot.version>2.7.17</boot.version>
         <spring.cloud.version>2021.0.5</spring.cloud.version>
 
         <surefire.plugin.version>3.1.2</surefire.plugin.version>

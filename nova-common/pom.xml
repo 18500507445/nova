@@ -29,7 +29,6 @@
         <bouncycastle.version>1.76</bouncycastle.version>
         <jsch.version>0.1.55</jsch.version>
         <oshi.version>6.4.5</oshi.version>
-        <c3p0.version>0.9.5.5</c3p0.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <oss.version>3.17.0</oss.version>
         <jasypt.version>3.0.5</jasypt.version>
@@ -213,12 +212,6 @@
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
             <version>${jsch.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>${c3p0.version}</version>
         </dependency>
 
         <!-- 阿里云oss上传图片 -->

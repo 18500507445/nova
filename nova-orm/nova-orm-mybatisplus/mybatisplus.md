@@ -24,7 +24,7 @@ mybatis-plus:
   #关闭mybatis-plus启动图
   global-config:
     banner: false
-  #打印log
+  #打印sql-log
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ~~~

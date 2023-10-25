@@ -1,5 +1,6 @@
 package com.nova.tools.product;
 
+import cn.hutool.core.util.EnumUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,8 +12,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ChannelEnum {
-
-    DEFAULT(0, "默认"),
 
     JD(1, "京东"),
 
@@ -30,15 +29,6 @@ public enum ChannelEnum {
      * 获取渠道枚举
      */
     public static ChannelEnum getChannel(int channelId) {
-        switch (channelId) {
-            case 1:
-                return JD;
-            case 2:
-                return AFK;
-            case 3:
-                return YX;
-            default:
-                return DEFAULT;
-        }
+        return EnumUtil.getBy(ChannelEnum::getChannelId, channelId, JD);
     }
 }

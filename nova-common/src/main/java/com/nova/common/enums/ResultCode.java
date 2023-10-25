@@ -1,5 +1,6 @@
 package com.nova.common.enums;
 
+import cn.hutool.core.util.EnumUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,5 +22,12 @@ public enum ResultCode {
     private final String code;
 
     private final String message;
+
+    /**
+     * 获取返回code枚举类
+     */
+    public static ResultCode getResultCode(String code) {
+        return EnumUtil.getBy(ResultCode::getCode, code, SUCCESS);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.nova.book.design.structure.composite;
 
 import lombok.Data;
+import lombok.Getter;
 import org.assertj.core.util.Lists;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Employee {
     private String name;
     private String dept;
 
+    @Getter
     private List<Employee> subordinates;
 
     public Employee(String name, String dept) {
@@ -29,10 +31,6 @@ public class Employee {
 
     public void remove(Employee e) {
         this.subordinates.remove(e);
-    }
-
-    public List<Employee> getSubordinates() {
-        return this.subordinates;
     }
 
 }

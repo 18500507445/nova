@@ -3,6 +3,7 @@ package com.nova.tools.utils.hutool.core.util;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.EnumUtil;
+import lombok.Getter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -39,6 +40,9 @@ public class EnumUtilTest {
         // 枚举中字段互相映射使用
         TestEnum testEnum = EnumUtil.getBy(TestEnum::ordinal, 1);
         Assert.equals("TEST2", testEnum.name());
+
+        TestEnum byType = EnumUtil.getBy(TestEnum::getType, 1, TestEnum.TEST1);
+        System.err.println("byType = " + byType);
     }
 
     @Test
@@ -70,6 +74,7 @@ public class EnumUtilTest {
         Assert.equals("type1", enumMap.get("TEST1"));
     }
 
+    @Getter
     public enum TestEnum {
         TEST1("type1"), TEST2("type2"), TEST3("type3");
 
@@ -81,12 +86,5 @@ public class EnumUtilTest {
         @SuppressWarnings("unused")
         private String name;
 
-        public String getType() {
-            return this.type;
-        }
-
-        public String getName() {
-            return this.name;
-        }
     }
 }

@@ -1,8 +1,5 @@
 package com.nova.tools.product;
 
-import com.nova.tools.product.ChannelEnum;
-import com.nova.tools.product.ChannelFactory;
-import com.nova.tools.product.AbstractChannelBase;
 import org.springframework.stereotype.Component;
 
 /**

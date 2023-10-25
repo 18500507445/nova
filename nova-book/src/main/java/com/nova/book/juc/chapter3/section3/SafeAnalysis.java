@@ -95,12 +95,12 @@ class MyAspect {
      */
     private long start = 0L;
 
-    @Before("execution(* *(..))")
+    @Before("execution(* *(com.nova.book.juc.chapter3.section3))")
     public void before() {
         start = System.nanoTime();
     }
 
-    @After("execution(* *(..))")
+    @After("execution(* *(com.nova.book.juc.chapter3.section3))")
     public void after() {
         long end = System.nanoTime();
         System.err.println("cost time:" + (end - start));

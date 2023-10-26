@@ -1,6 +1,6 @@
 create table if not exists shopping.my_goods
 (
-    id          bigint(19) auto_increment
+    id          bigint auto_increment
         primary key,
     name        varchar(64)                              null comment '用户名',
     price       decimal(10, 2) default 0.00              not null comment '金额',
@@ -16,10 +16,10 @@ create table if not exists shopping.my_goods
 
 create table if not exists shopping.my_order
 (
-    id              bigint(19) auto_increment
+    id              bigint auto_increment
         primary key,
-    user_id         bigint(19)                           null comment '用户id',
-    goods_id        bigint(19) default 0                 not null comment '商品id',
+    user_id         bigint                           null comment '用户id',
+    goods_id        bigint default 0                 not null comment '商品id',
     price           decimal(10, 2)                       null comment '价格',
     status          tinyint(2) default 0                 not null comment '订单状态：0默认，1成功，2已发货，3失败，4退款，5过期',
     pay_status      tinyint(2)                           null comment '支付状态：0默认，1成功，2处理中，3失败，4退款',
@@ -33,7 +33,7 @@ create table if not exists shopping.my_order
 
 create table if not exists shopping.my_pay_config
 (
-    id                bigint(19) auto_increment
+    id                bigint auto_increment
         primary key,
     source            varchar(128)                       null,
     sid               varchar(4096)                      null comment '渠道号',
@@ -65,7 +65,7 @@ create index PAY_CONFIG_INDX01
 
 create table if not exists shopping.my_pay_list
 (
-    id               bigint(19) auto_increment
+    id               bigint auto_increment
         primary key,
     source           varchar(64)                          null,
     sid              varchar(64)                          not null comment '渠道号',
@@ -102,11 +102,11 @@ create index UNION_KEY
 
 create table if not exists shopping.my_pay_order
 (
-    id            bigint(19) auto_increment
+    id            bigint auto_increment
         primary key,
     source        varchar(64)                              null,
     sid           varchar(64)                              null comment '渠道号',
-    pay_config_id bigint(19)                               null comment '支付配置表id',
+    pay_config_id bigint                               null comment '支付配置表id',
     product_id    varchar(64)                              null comment '产品id',
     user_name     varchar(64)                              null comment '用户名',
     order_id      varchar(64)                              not null comment '订单id、聚合订单id',
@@ -146,11 +146,11 @@ create index PAY_ORDER_INDX04
 
 create table if not exists shopping.my_seckill_order
 (
-    id          bigint(19) auto_increment
+    id          bigint auto_increment
         primary key,
-    user_id     bigint(19)                         null comment '用户id',
-    goods_id    bigint(19)                         null comment '商品id',
-    order_id    bigint(19)                         null comment '订单id',
+    user_id     bigint                         null comment '用户id',
+    goods_id    bigint                         null comment '商品id',
+    order_id    bigint                         null comment '订单id',
     update_time datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
     create_time datetime default CURRENT_TIMESTAMP not null comment '创建时间'
 )
@@ -158,7 +158,7 @@ create table if not exists shopping.my_seckill_order
 
 create table if not exists shopping.my_user
 (
-    id          bigint(19) auto_increment
+    id          bigint auto_increment
         primary key,
     name        varchar(64)                          null comment '用户名',
     status      tinyint(2) default 0                 not null comment '用户状态：0正常，1封号',

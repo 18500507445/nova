@@ -155,6 +155,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
      */
     public abstract String getMessagePool();
 
+
     // ---------------------------------地址Api（预留）---------------------------------
 
 

@@ -38,17 +38,17 @@ public class YxChannel extends AbstractChannelBase {
     }
 
     @Override
-    public String getGoodsList() {
+    public String getProductList() {
         return null;
     }
 
     @Override
-    public String getGoodsDetail() {
+    public String getProductDetail() {
         return null;
     }
 
     @Override
-    public String goodsNotify(HttpServletRequest request) {
+    public String productNotify(HttpServletRequest request) {
         return null;
     }
 

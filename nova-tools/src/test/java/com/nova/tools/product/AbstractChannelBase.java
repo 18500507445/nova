@@ -59,12 +59,12 @@ public abstract class AbstractChannelBase implements InitializingBean {
     /**
      * 获取商品列表（sku、spu）
      */
-    public abstract String getGoodsList();
+    public abstract String getProductList();
 
     /**
      * 获取商品详情
      */
-    public abstract String getGoodsDetail();
+    public abstract String getProductDetail();
 
     /**
      * 获取商品价格
@@ -83,7 +83,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
     /**
      * 商品变更
      */
-    public abstract String goodsNotify(HttpServletRequest request);
+    public abstract String productNotify(HttpServletRequest request);
 
     /**
      * 商品价格变更

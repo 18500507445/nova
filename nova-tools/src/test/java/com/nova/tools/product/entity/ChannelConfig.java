@@ -1,4 +1,4 @@
-package com.nova.tools.product;
+package com.nova.tools.product.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

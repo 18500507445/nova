@@ -247,8 +247,6 @@ public class SpiderPlan {
     private static String okHttp(String url, String ip, int port) throws IOException {
         String result = "";
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        //代理服务器的IP和端口号
-        builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port)));
         OkHttpClient httpClient = builder
                 //设置读取超时时间
                 .readTimeout(500, TimeUnit.MILLISECONDS)
@@ -256,7 +254,10 @@ public class SpiderPlan {
                 .connectionPool(new ConnectionPool(5, 10, TimeUnit.SECONDS))
                 //设置写的超时时间
                 .writeTimeout(200, TimeUnit.MILLISECONDS)
-                .connectTimeout(200, TimeUnit.MILLISECONDS).build();
+                .connectTimeout(200, TimeUnit.MILLISECONDS)
+                //代理服务器的IP和端口号
+                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port)))
+                .build();
 
         Request request = new Request.Builder().url(url).build();
         Response httpResponse = httpClient.newCall(request).execute();

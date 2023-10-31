@@ -1,6 +1,8 @@
-package com.nova.tools.product;
+package com.nova.tools.product.base;
 
 import cn.hutool.core.util.StrUtil;
+import com.nova.tools.product.entity.ChannelConfig;
+import com.nova.tools.product.enums.ChannelEnum;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +28,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
      */
     public abstract ChannelConfig getChannelConfig();
 
-
     // ---------------------------------令牌Api---------------------------------
-
 
     /**
      * 获取渠道访问令牌
@@ -42,9 +42,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
         throw new UnsupportedOperationException(EXCEPTION_MESSAGE);
     }
 
-
     // ---------------------------------商品Api---------------------------------
-
 
     /**
      * 获取品牌信息
@@ -80,19 +78,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
         throw new UnsupportedOperationException(EXCEPTION_MESSAGE);
     }
 
-    /**
-     * 商品变更
-     */
-    public abstract String productNotify(HttpServletRequest request);
-
-    /**
-     * 商品价格变更
-     */
-    public abstract String priceNotify(HttpServletRequest request);
-
-
     // ---------------------------------订单Api---------------------------------
-
 
     /**
      * 提交订单
@@ -109,19 +95,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
      */
     public abstract boolean isAreaSell();
 
-    /**
-     * 订单状态变更通知
-     */
-    public abstract String orderStatusNotify(HttpServletRequest request);
-
-    /**
-     * 订单发货信息变更通知
-     */
-    public abstract String orderDeliveryNotify(HttpServletRequest request);
-
-
     // ---------------------------------物流Api---------------------------------
-
 
     /**
      * 订单物流
@@ -133,20 +107,12 @@ public abstract class AbstractChannelBase implements InitializingBean {
      */
     public abstract String logisticsStatusNotify(HttpServletRequest request);
 
-
     // ---------------------------------售后Api---------------------------------
-
 
     /**
      * 提交售后单
      */
     public abstract String createAfterSaleOrder();
-
-    /**
-     * 售后单状态变更通知
-     */
-    public abstract String afterSaleStatusNotify(HttpServletRequest request);
-
 
     // ---------------------------------消息池Api---------------------------------
 
@@ -155,9 +121,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
      */
     public abstract String getMessagePool();
 
-
     // ---------------------------------地址Api（预留）---------------------------------
-
 
     /**
      * 获取省份，一级地址

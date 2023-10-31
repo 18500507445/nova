@@ -1,5 +1,9 @@
 package com.nova.tools.product;
 
+import com.nova.tools.product.base.AbstractChannelBase;
+import com.nova.tools.product.base.ChannelFactory;
+import com.nova.tools.product.channel.YxChannel;
+import com.nova.tools.product.enums.ChannelEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,7 +29,12 @@ public class ChannelTest {
 
         AbstractChannelBase yxChannel = channelFactory.get(ChannelEnum.YX);
         System.err.println("YxRefreshToken = " + yxChannel.refreshToken());
+    }
 
+    @Test
+    public void messageTest() {
+        YxChannel yxChannel = channelFactory.get(ChannelEnum.JD, YxChannel.class);
+        System.err.println("productChange = " + yxChannel.productChange(null));
     }
 
 }

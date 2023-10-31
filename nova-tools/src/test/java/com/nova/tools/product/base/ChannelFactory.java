@@ -1,6 +1,7 @@
-package com.nova.tools.product;
+package com.nova.tools.product.base;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.nova.tools.product.enums.ChannelEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -24,6 +25,17 @@ public class ChannelFactory {
      */
     public AbstractChannelBase get(ChannelEnum channelEnum) {
         return CONTAINER.get(channelEnum);
+    }
+
+    /**
+     * 子类获取
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends AbstractChannelBase> T get(ChannelEnum channelEnum, Class<T> clazz) {
+        if (AbstractChannelBase.class.isAssignableFrom(clazz)) {
+            return (T) CONTAINER.get(channelEnum);
+        }
+        return null;
     }
 
     /**

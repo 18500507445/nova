@@ -1,5 +1,10 @@
-package com.nova.tools.product;
+package com.nova.tools.product.channel;
 
+import com.nova.tools.product.entity.ChannelConfig;
+import com.nova.tools.product.enums.ChannelEnum;
+import com.nova.tools.product.base.ChannelFactory;
+import com.nova.tools.product.base.AbstractChannelBase;
+import com.nova.tools.product.base.ChannelMessage;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date: 2023/10/24 10:34
  */
 @Component
-public class JdChannel extends AbstractChannelBase {
+public class JdChannel extends AbstractChannelBase implements ChannelMessage {
 
     @Override
     public ChannelEnum getChannel() {
@@ -24,7 +29,7 @@ public class JdChannel extends AbstractChannelBase {
 
     @Override
     public String getToken() {
-        return this.getChannel().getChannelName() + "_token";
+        return this.getChannel().getName() + "_token";
     }
 
     @Override
@@ -32,9 +37,10 @@ public class JdChannel extends AbstractChannelBase {
         ChannelFactory.add(getChannel(), this);
     }
 
+
     @Override
     public String refreshToken() {
-        return this.getChannel().getChannelName() + "_refreshToken";
+        return this.getChannel().getName() + "_refreshToken";
     }
 
     @Override
@@ -58,16 +64,6 @@ public class JdChannel extends AbstractChannelBase {
     }
 
     @Override
-    public String productNotify(HttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public String priceNotify(HttpServletRequest request) {
-        return null;
-    }
-
-    @Override
     public String createOrder() {
         return null;
     }
@@ -80,16 +76,6 @@ public class JdChannel extends AbstractChannelBase {
     @Override
     public boolean isAreaSell() {
         return false;
-    }
-
-    @Override
-    public String orderStatusNotify(HttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public String orderDeliveryNotify(HttpServletRequest request) {
-        return null;
     }
 
     @Override
@@ -108,13 +94,38 @@ public class JdChannel extends AbstractChannelBase {
     }
 
     @Override
-    public String afterSaleStatusNotify(HttpServletRequest request) {
-        return null;
-    }
-
-    @Override
     public String getMessagePool() {
         return null;
     }
 
+
+    @Override
+    public String productChange(HttpServletRequest request) {
+        return this.getChannel().getName();
+    }
+
+    @Override
+    public String priceChange(HttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public String orderStatusChange(HttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public String orderDeliveryChange(HttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public String afterSaleStatusChange(HttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public String messageChange() {
+        return null;
+    }
 }

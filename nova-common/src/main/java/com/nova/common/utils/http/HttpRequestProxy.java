@@ -66,7 +66,7 @@ public class HttpRequestProxy {
      */
     public static String sendGet(String url, String param, String contentType) {
         StringBuilder result = new StringBuilder();
-        BufferedReader in = null;
+        BufferedReader in;
         try {
             String urlNameString = ObjectUtil.isNotEmpty(param) ? url + "?" + param : url;
             log.info("sendGet - {}", urlNameString);

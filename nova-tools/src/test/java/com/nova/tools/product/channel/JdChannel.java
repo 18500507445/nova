@@ -1,13 +1,15 @@
 package com.nova.tools.product.channel;
 
+import com.nova.tools.product.base.AbstractChannelBase;
+import com.nova.tools.product.base.ChannelFactory;
+import com.nova.tools.product.base.ChannelMessage;
 import com.nova.tools.product.entity.ChannelConfig;
 import com.nova.tools.product.enums.ChannelEnum;
-import com.nova.tools.product.base.ChannelFactory;
-import com.nova.tools.product.base.AbstractChannelBase;
-import com.nova.tools.product.base.ChannelMessage;
+import com.nova.tools.product.init.CommonInit;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author: wzh
@@ -23,20 +25,19 @@ public class JdChannel extends AbstractChannelBase implements ChannelMessage {
     }
 
     @Override
-    public ChannelConfig getChannelConfig() {
-        return null;
+    public void afterPropertiesSet() {
+        ChannelFactory.add(getChannel(), this);
+    }
+
+    @Override
+    public ChannelConfig getConfig() {
+        return CommonInit.CONFIG_MAP.get(getChannel().getName());
     }
 
     @Override
     public String getToken() {
         return this.getChannel().getName() + "_token";
     }
-
-    @Override
-    public void afterPropertiesSet() {
-        ChannelFactory.add(getChannel(), this);
-    }
-
 
     @Override
     public String refreshToken() {
@@ -94,38 +95,33 @@ public class JdChannel extends AbstractChannelBase implements ChannelMessage {
     }
 
     @Override
-    public String getMessagePool() {
-        return null;
-    }
-
-
-    @Override
-    public String productChange(HttpServletRequest request) {
-        return this.getChannel().getName();
-    }
-
-    @Override
-    public String priceChange(HttpServletRequest request) {
+    public String productChange(Map<String, Object> params) {
         return null;
     }
 
     @Override
-    public String orderStatusChange(HttpServletRequest request) {
+    public String priceChange(Map<String, Object> params) {
         return null;
     }
 
     @Override
-    public String orderDeliveryChange(HttpServletRequest request) {
+    public String orderStatusChange(Map<String, Object> params) {
         return null;
     }
 
     @Override
-    public String afterSaleStatusChange(HttpServletRequest request) {
+    public String orderDeliveryChange(Map<String, Object> params) {
         return null;
     }
 
     @Override
-    public String messageChange() {
+    public String afterSaleStatusChange(Map<String, Object> params) {
         return null;
     }
+
+    @Override
+    public String addressChange(Map<String, Object> params) {
+        return null;
+    }
+
 }

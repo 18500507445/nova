@@ -1,6 +1,6 @@
 package com.nova.tools.product.base;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author: wzh
@@ -12,31 +12,32 @@ public interface ChannelMessage {
     /**
      * 商品变更
      */
-    String productChange(HttpServletRequest request);
+    String productChange(Map<String, Object> params);
 
     /**
      * 商品价格变更
      */
-    String priceChange(HttpServletRequest request);
+    String priceChange(Map<String, Object> params);
 
     /**
-     * 订单状态变更通知
+     * 订单状态变更
      */
-    String orderStatusChange(HttpServletRequest request);
+    String orderStatusChange(Map<String, Object> params);
 
     /**
-     * 订单发货信息变更通知
+     * 订单发货信息变更
      */
-    String orderDeliveryChange(HttpServletRequest request);
+    String orderDeliveryChange(Map<String, Object> params);
 
     /**
-     * 售后单状态变更通知
+     * 售后单状态变更
      */
-    String afterSaleStatusChange(HttpServletRequest request);
+    String afterSaleStatusChange(Map<String, Object> params);
 
     /**
-     * 渠道消息池通知接口
+     * 地址变更
      */
-    String messageChange();
+    String addressChange(Map<String, Object> params);
+
 
 }

@@ -18,6 +18,8 @@ public abstract class AbstractChannelBase implements InitializingBean {
     //异常提示消息
     public final String EXCEPTION_MESSAGE = StrUtil.indexedFormat("子类：[{0}] 没有此方法，按需手动复写", this.getClass().getSimpleName());
 
+    // ---------------------------------基础功能---------------------------------
+
     /**
      * 获取当前渠道
      */
@@ -26,7 +28,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
     /**
      * 获取渠道配置
      */
-    public abstract ChannelConfig getChannelConfig();
+    public abstract ChannelConfig getConfig();
 
     // ---------------------------------令牌Api---------------------------------
 
@@ -114,12 +116,6 @@ public abstract class AbstractChannelBase implements InitializingBean {
      */
     public abstract String createAfterSaleOrder();
 
-    // ---------------------------------消息池Api---------------------------------
-
-    /**
-     * 获取消息信息
-     */
-    public abstract String getMessagePool();
 
     // ---------------------------------地址Api（预留）---------------------------------
 

@@ -1,5 +1,6 @@
 package com.nova.tools.product.entity;
 
+import com.nova.tools.product.enums.ChannelEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,11 @@ public class ChannelConfig {
      * 主键id
      */
     private Long id;
+
+    /**
+     * 名称{@link ChannelEnum#getName()}
+     */
+    private String name;
 
     /**
      * 环境 默认1 dev，2 pro

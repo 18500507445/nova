@@ -44,6 +44,7 @@ public class TestXxlJob {
 
     /**
      * 2、分片广播任务
+     * 应用场景，大数据量情况下，多台机器分片处理，按照业务id % 当前分片数做sql查询
      */
     @XxlJob("shardingJobHandler")
     public void shardingJobHandler() throws Exception {

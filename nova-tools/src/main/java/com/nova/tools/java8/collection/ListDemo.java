@@ -260,10 +260,12 @@ class ListDemo {
 
     /**
      * list find查找元素
+     * list取第一个
      */
     @Test
     public void listFind() {
-        People first = PEOPLE_LIST.stream().findFirst().get();
+        //orElse或者直接get()
+        People first = PEOPLE_LIST.stream().findFirst().orElse(null);
         System.err.println("findFirst:" + JSONUtil.toJsonStr(first));
 
         //并行的情况，那就不能确保是第一个，串行时数据较少findAny()是为了更高效

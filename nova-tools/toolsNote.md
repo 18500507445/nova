@@ -8,14 +8,40 @@
 ##组织结构
 ```
 nova-tools
-├── demo --练习demo
-├── doc -- 开源advanced项目总结文档
+├── demo --练习demo，线程、springboot、mongoTemplate
+├── doc -- 开源advanced面试、jscprout面试
 ├── java8 -- java8-demo
 ├── letcode -- 刷题
 ├── sql -- sql练习
 ├── txt -- 文本
-└── utils -- hutool、guava、vavr测试类
+└── utils -- hutool工具测试类、guava工具测试类、vavr工具测试类
 ```
+
+## 🛠️包含组件
+一个Java基础工具类，对文件、流、加密解密、转码、正则、线程、XML等JDK方法进行封装，组成各种Util工具类，同时提供以下组件：
+
+| 模块                 | 介绍                                             |
+|--------------------|------------------------------------------------|
+| hutool-aop         | JDK动态代理封装，提供非IOC下的切面支持                         |
+| hutool-bloomFilter | 布隆过滤，提供一些Hash算法的布隆过滤                           |
+| hutool-cache       | 简单缓存实现                                         |
+| hutool-core        | 核心，包括Bean操作、日期、各种Util等                         |
+| hutool-cron        | 定时任务模块，提供类Crontab表达式的定时任务                      |
+| hutool-crypto      | 加密解密模块，提供对称、非对称和摘要算法封装                         |
+| hutool-db          | JDBC封装后的数据操作，基于ActiveRecord思想                  |
+| hutool-dfa         | 基于DFA模型的多关键字查找                                 |
+| hutool-extra       | 扩展模块，对第三方封装（模板引擎、邮件、Servlet、二维码、Emoji、FTP、分词等） |
+| hutool-http        | 基于HttpUrlConnection的Http客户端封装                  |
+| hutool-log         | 自动识别日志实现的日志门面                                  |
+| hutool-script      | 脚本执行封装，例如Javascript                            |
+| hutool-setting     | 功能更强大的Setting配置文件和Properties封装                 |
+| hutool-system      | 系统参数调用封装（JVM信息等）                               |
+| hutool-json        | JSON实现                                         |
+| hutool-captcha     | 图片验证码实现                                        |
+| hutool-poi         | 针对POI中Excel和Word的封装                            |
+| hutool-jwt         | JSON Web Token (JWT)封装实现                       |
+
+-------------------------------------------------------------------------------
 
 ### Java基础
 * [《Java 线程池详解》](https://mp.weixin.qq.com/s/hrPUZQEm6zp76Euj5ScaZw)
@@ -35,6 +61,7 @@ nova-tools
 * [《保证接口数据安全的10种方案》](https://mp.weixin.qq.com/s/ftcY--lukUb7LI3OpLDObQ)
 * [《生产中遇到cpu过高，我们该如何排查》](https://www.bilibili.com/video/BV1yR4y1r76E/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
 * [《秒杀下单-库存超卖》](https://www.bilibili.com/video/BV1Lm4y1P7oY/?spm_id_from=333.999.0.0&vd_source=04ff874447812687f3346175b839011e)
+* [多线程事务怎么回滚？说用 @Transactional 可以回去等通知了！](https://mp.weixin.qq.com/s/Vrzelq7JcP_71Mt1OJFS1w)
 
 
 ### 设计模式
@@ -89,6 +116,7 @@ nova-tools
 * [《有一种数据类型，Redis要存两次，为什么》](https://mp.weixin.qq.com/s/-zhVXT0R2_DwrbVxodgb1w)
 * [《SpringBoot+Redis：模拟10w人的，秒杀抢单》](https://mp.weixin.qq.com/s/Hivp90udm8f-3_dn9DLQdg)
 * [《Redis如何保证接口的幂等性》](https://mp.weixin.qq.com/s/16nrpU9QEqZ_KUx8WOzJ5w)
+* [Lua + Redis + SpringBoot = 王炸！](https://mp.weixin.qq.com/s/JTswEJ8tvcN7XFkxEie2Kw)
 
 ### 工具
 * [《Java诊断工具Arthas常见命令（超详细实战教程）》](https://mp.weixin.qq.com/s/UnEydFrSyXUb01CF75zcaw)

@@ -4,10 +4,12 @@ import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.trace.Trace;
 import com.nova.common.trace.TraceContext;
+import com.nova.common.utils.common.LinuxUtils;
 import com.nova.common.utils.spring.EnvUtils;
 import com.nova.tools.product.entity.ChannelConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -69,7 +71,9 @@ public class CommonInit {
 
 
     @PostConstruct
+    @Order(-1)
     void initConfig() {
+        System.err.println("initConfig，初始化顺序 -1");
         List<ChannelConfig> configList = new ArrayList<>();
         ChannelConfig jdConfig1 = ChannelConfig.builder().id(1L).name("jd").env(1).key("key").build();
         ChannelConfig jdConfig2 = ChannelConfig.builder().id(2L).name("jd").env(2).key("key").build();
@@ -97,6 +101,16 @@ public class CommonInit {
      */
     public void refresh() {
         System.err.println("修改配置，进行刷新缓存");
-        EXECUTOR_POOL.submit(wrap(this::refresh, MDC.get(Trace.TRACE_ID)));
+        EXECUTOR_POOL.submit(wrap(this::initConfig, MDC.get(Trace.TRACE_ID)));
+    }
+
+    public static String INTERNET_IP = "00";
+
+    @PostConstruct
+    @Order(-2)
+    void initIp() {
+        System.err.println("initIp，初始化顺序 -2");
+        INTERNET_IP = LinuxUtils.getInternetIp("curl cip.cc");
+        log.warn("获取公网ip后2位，初始化RespResult.IP {}", INTERNET_IP);
     }
 }

@@ -60,7 +60,7 @@ create table if not exists shopping.my_pay_config
 )
     comment '支付配置表';
 
-create index PAY_CONFIG_INDX01
+create index PAY_CONFIG_INDEX01
     on shopping.my_pay_config (source);
 
 create table if not exists shopping.my_pay_list
@@ -91,10 +91,10 @@ create table if not exists shopping.my_pay_list
 )
     comment '支付列表';
 
-create index PAY_LIST_INDX01
+create index PAY_LIST_INDEX01
     on shopping.my_pay_list (source);
 
-create index PAY_LIST_INDX02
+create index PAY_LIST_INDEX02
     on shopping.my_pay_list (sid);
 
 create index UNION_KEY
@@ -132,16 +132,16 @@ create table if not exists shopping.my_pay_order
 )
     comment '支付订单表明细表';
 
-create index PAY_ORDER_INDX01
+create index PAY_ORDER_INDEX01
     on shopping.my_pay_order (trade_status);
 
-create index PAY_ORDER_INDX02
+create index PAY_ORDER_INDEX02
     on shopping.my_pay_order (user_name);
 
-create index PAY_ORDER_INDX03
+create index PAY_ORDER_INDEX03
     on shopping.my_pay_order (trade_no);
 
-create index PAY_ORDER_INDX04
+create index PAY_ORDER_INDEX04
     on shopping.my_pay_order (create_time);
 
 create table if not exists shopping.my_seckill_order

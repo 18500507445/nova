@@ -1,7 +1,7 @@
 package com.nova.excel.controller;
 
 import com.nova.excel.entity.AliEasyExportDO;
-import com.nova.excel.utils.BaseEasyExcelExport;
+import com.nova.excel.template.EasyExcelExportBase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
-public class TemplateExportController extends BaseEasyExcelExport<AliEasyExportDO> {
+public class TemplateExportController extends EasyExcelExportBase<AliEasyExportDO> {
 
     @GetMapping("exportTemplateExcel")
     public void exportTemplateExcel() {

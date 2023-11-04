@@ -31,8 +31,8 @@ public class ActiveConfig {
         RedeliveryPolicy redeliveryPolicy = new RedeliveryPolicy();
         //是否在每次尝试重新发送失败后,增长这个等待时间
         redeliveryPolicy.setUseExponentialBackOff(true);
-        //重发次数,设置为10次
-        redeliveryPolicy.setMaximumRedeliveries(10);
+        //重发次数,默认6次
+        redeliveryPolicy.setMaximumRedeliveries(3);
         //重发时间间隔,默认为1秒
         redeliveryPolicy.setInitialRedeliveryDelay(1);
         //第一次失败后重新发送之前等待500毫秒,第二次失败再等待500 * 2毫秒,这里的2就是value

@@ -1,4 +1,4 @@
-package com.nova.excel.utils;
+package com.nova.excel.template;
 
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
@@ -21,7 +21,7 @@ import java.util.Map;
  * @date: 2023/07/24 13:39
  */
 @Slf4j
-public abstract class BaseEasyExcelExport<T> {
+public abstract class EasyExcelExportBase<T> {
 
     /**
      * 导出到excel，支持大数量的分批写入

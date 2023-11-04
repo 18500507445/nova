@@ -6,6 +6,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.hutool.core.util.StrUtil;
+import lombok.Getter;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -224,16 +225,13 @@ public class ExcelUtils {
     /**
      * Excel 类型枚举
      */
+    @Getter
     enum ExcelTypeEnum {
         XLS("xls"), XLSX("xlsx");
         private String value;
 
         ExcelTypeEnum(String value) {
             this.value = value;
-        }
-
-        public String getValue() {
-            return value;
         }
 
         public void setValue(String value) {

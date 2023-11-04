@@ -1,4 +1,4 @@
-package nova.log.sleuth.controller;
+package com.nova.log.sleuth.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

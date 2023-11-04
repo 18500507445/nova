@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>nova-mq-active</module>
-        <module>nova-mq-rabbit</module>
         <module>nova-mq-kafka</module>
+        <module>nova-mq-rabbit</module>
         <module>nova-mq-rocket</module>
     </modules>
 

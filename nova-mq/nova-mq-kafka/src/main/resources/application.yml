@@ -4,9 +4,12 @@ server:
   servlet:
     context-path: /
 
+spring:
   kafka:
-    bootstrap-servers: 127.0.0.1:9092
-    producer: # producer 生产者
+    # 指定 Kafka Broker 地址，可以设置多个，以逗号分隔
+    bootstrap-servers: 80fa601ba239.c.methodot.com:31845
+    # producer 生产者
+    producer:
       retries: 3 # 重试次数
       acks: 1 # 应答级别:多少个分区副本备份完成时向生产者发送ack确认(可选0、1、all/-1)
       batch-size: 16384 # 批量大小
@@ -24,7 +27,17 @@ server:
       enable-auto-commit: false
       # 键/值的反序列化方式
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     listener: # Kafka Consumer Listener 监听器配置
       missing-topics-fatal: false # 消费监听接口监听的主题不存在时，默认会报错。所以通过设置为 false ，解决报错
       ack-mode: MANUAL # 开启手动 ack
+
+
+# 只打印 WARN 级别
+logging:
+  level:
+    org:
+      springframework:
+        kafka: WARN
+      apache:
+        kafka: WARN

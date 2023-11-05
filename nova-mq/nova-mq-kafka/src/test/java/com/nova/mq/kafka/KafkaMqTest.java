@@ -6,6 +6,7 @@ import com.nova.mq.kafka.utils.KafkaProducerUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
@@ -24,6 +25,15 @@ public class KafkaMqTest {
 
     @Resource
     private KafkaProducerUtil kafkaProducerUtil;
+
+    @Resource
+    private KafkaTemplate<Object, Object> kafkaTemplate;
+
+    @Test
+    public void demoA() {
+        kafkaTemplate.send("topicA", "123");
+    }
+
 
     /**
      * kafka测试

@@ -95,6 +95,7 @@ public class RabbitConfig {
      */
     @Bean
     public Queue queueSimpleOne() {
+        // Queue:名字 默认 | durable: 是否持久化 | exclusive: 是否排它 | autoDelete: 是否自动删除
         return new Queue(RabbitConstants.QUEUE_SIMPLE_ONE);
     }
 
@@ -157,7 +158,10 @@ public class RabbitConfig {
      */
     @Bean
     public Binding bindingDirectOne() {
-        return BindingBuilder.bind(queueDirectOne()).to(directExchange()).with("directOne").noargs();
+        return BindingBuilder
+                .bind(queueDirectOne())
+                .to(directExchange())
+                .with("directOne").noargs();
     }
 
     /**
@@ -173,7 +177,10 @@ public class RabbitConfig {
      */
     @Bean
     public Binding bindingDirectDl() {
-        return BindingBuilder.bind(queueDirectDl()).to(directDlExchange()).with("directDl").noargs();
+        return BindingBuilder
+                .bind(queueDirectDl())
+                .to(directDlExchange())
+                .with("directDl").noargs();
     }
 
     /**

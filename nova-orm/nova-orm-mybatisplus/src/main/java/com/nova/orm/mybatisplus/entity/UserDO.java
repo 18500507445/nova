@@ -1,5 +1,6 @@
 package com.nova.orm.mybatisplus.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -40,7 +41,9 @@ public class UserDO {
 
     /**
      * 邮箱
+     * mybatis-plus在修改数据库表的时候会自动忽略掉值为null的字段，所以需要使用注解
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String email;
 
     @TableField("user_name")

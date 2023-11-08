@@ -35,6 +35,8 @@ public class ResultVO<T> implements Serializable {
      */
     private String traceId;
 
+    private String spanId;
+
     /**
      * 系统时间
      */
@@ -55,6 +57,7 @@ public class ResultVO<T> implements Serializable {
         this.data = data;
         this.success = success;
         this.traceId = TraceContext.getCurrentTrace().getTraceId();
+        this.spanId = TraceContext.getCurrentTrace().getSpanId();
         this.env = SpringUtil.getActiveProfile();
         this.systemTime = System.currentTimeMillis();
     }
@@ -65,48 +68,63 @@ public class ResultVO<T> implements Serializable {
         this.data = data;
         this.success = success;
         this.traceId = TraceContext.getCurrentTrace().getTraceId();
+        this.spanId = TraceContext.getCurrentTrace().getSpanId();
         this.env = SpringUtil.getActiveProfile();
         this.systemTime = System.currentTimeMillis();
     }
 
-    public ResultVO(IResultCode resultCode) {
+    public ResultVO(IResultCode resultCode, Boolean success) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = resultCode.getBizMessage();
+        this.success = success;
         this.traceId = TraceContext.getCurrentTrace().getTraceId();
+        this.spanId = TraceContext.getCurrentTrace().getSpanId();
         this.env = SpringUtil.getActiveProfile();
         this.systemTime = System.currentTimeMillis();
     }
 
     public static <T> ResultVO<T> success() {
-        return new ResultVO<T>(ResultCode.SUCCESS);
+        return new ResultVO<>(ResultCode.SUCCESS, true);
     }
 
-    public static <T> ResultVO<T> success(IResultCode resultCode, String bizMessage) {
-        return new ResultVO<T>(resultCode, null, true, bizMessage);
+    public static <T> ResultVO<T> success(T data) {
+        return new ResultVO<>(ResultCode.SUCCESS, data, true);
+    }
+
+    public static <T> ResultVO<T> success(IResultCode resultCode) {
+        return new ResultVO<>(resultCode, true);
     }
 
     public static <T> ResultVO<T> success(IResultCode resultCode, T data) {
-        return new ResultVO<T>(resultCode, data, true);
+        return new ResultVO<>(resultCode, data, true);
+    }
+
+    public static <T> ResultVO<T> success(IResultCode resultCode, String bizMessage) {
+        return new ResultVO<>(resultCode, null, true, bizMessage);
     }
 
     public static <T> ResultVO<T> success(IResultCode resultCode, T data, String bizMessage) {
-        return new ResultVO<T>(resultCode, data, true, bizMessage);
+        return new ResultVO<>(resultCode, data, true, bizMessage);
     }
 
     public static <T> ResultVO<T> failure() {
-        return new ResultVO<T>(ResultCode.FAILED);
+        return new ResultVO<>(ResultCode.FAILED, true);
+    }
+
+    public static <T> ResultVO<T> failure(IResultCode resultCode) {
+        return new ResultVO<>(resultCode, false);
     }
 
     public static <T> ResultVO<T> failure(IResultCode resultCode, String bizMessage) {
-        return new ResultVO<T>(resultCode, null, false, bizMessage);
+        return new ResultVO<>(resultCode, null, false, bizMessage);
     }
 
     public static <T> ResultVO<T> failure(IResultCode resultCode, T data) {
-        return new ResultVO<T>(resultCode, data, false);
+        return new ResultVO<>(resultCode, data, false);
     }
 
     public static <T> ResultVO<T> failure(IResultCode resultCode, T data, String bizMessage) {
-        return new ResultVO<T>(resultCode, data, false, bizMessage);
+        return new ResultVO<>(resultCode, data, false, bizMessage);
     }
 
 }

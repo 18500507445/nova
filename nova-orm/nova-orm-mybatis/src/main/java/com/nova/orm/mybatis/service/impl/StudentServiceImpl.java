@@ -1,8 +1,8 @@
 package com.nova.orm.mybatis.service.impl;
 
-import com.nova.orm.mybatis.service.StudentService;
 import com.nova.orm.mybatis.mapper.StudentMapper;
-import org.springframework.stereotype.Component;
+import com.nova.orm.mybatis.service.StudentService;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  * @author: wzh
  * @date: 2023/1/1 16:18
  */
-@Component
+@Service
 public class StudentServiceImpl implements StudentService {
 
     @Resource
-    StudentMapper studentMapper;
+    private StudentMapper studentMapper;
 
     /**
      * 事务的隔离级别默认：PROPAGATION_REQUIRED

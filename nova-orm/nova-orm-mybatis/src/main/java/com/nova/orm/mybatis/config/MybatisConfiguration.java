@@ -25,8 +25,8 @@ import java.io.IOException;
  * @date: 2022/12/31 20:34
  */
 @Configuration
-@MapperScan("com.nova.mybatis.mapper")
-@ComponentScan("com.nova.mybatis.service")
+@MapperScan("com.nova.orm.mybatis.mapper")
+@ComponentScan("com.nova.orm.mybatis.service")
 @EnableTransactionManagement
 public class MybatisConfiguration {
 

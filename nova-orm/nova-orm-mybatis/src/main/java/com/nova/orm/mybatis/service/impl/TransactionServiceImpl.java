@@ -3,11 +3,16 @@ package com.nova.orm.mybatis.service.impl;
 import com.nova.orm.mybatis.mapper.StudentMapper;
 import com.nova.orm.mybatis.service.StudentService;
 import com.nova.orm.mybatis.service.TransactionService;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @description:
@@ -80,7 +85,7 @@ public class TransactionServiceImpl implements TransactionService {
         studentService.insertSix();
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     @Override
     public void testNew() {
         studentMapper.insertOne();
@@ -89,5 +94,78 @@ public class TransactionServiceImpl implements TransactionService {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    @Resource
+    private DataSourceTransactionManager transactionManager;
+
+    @Override
+    @Transactional
+    public void a() {
+        studentMapper.insertA();
+        //主线程等待，可以添加join()
+        CompletableFuture.runAsync(() -> {
+            b();
+            c();
+        }).join();
+    }
+
+    @Override
+    @Transactional
+    public void a1() {
+        try {
+            studentMapper.insertA();
+            //主线程等待，可以添加join()
+            CompletableFuture.runAsync(() -> {
+                //获取当前线程的事务状态
+                TransactionStatus subStatus = TransactionAspectSupport.currentTransactionStatus();
+                try {
+                    b();
+                    c();
+                } catch (Exception e) {
+                    System.err.println("线程异常");
+                    //不要写成TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()这样，要先获取才生效
+                    subStatus.setRollbackOnly();
+                    throw new RuntimeException(e);
+                }
+            }).join();
+        } catch (Exception e) {
+            System.err.println("主线程异常");
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+
+    }
+
+    @Override
+    public void aPro() {
+        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+        try {
+            studentMapper.insertA();
+            CompletableFuture.runAsync(() -> {
+                TransactionStatus status1 = transactionManager.getTransaction(new DefaultTransactionDefinition());
+                try {
+                    b();
+                    c();
+                    transactionManager.commit(status1);
+                } catch (Exception e) {
+                    System.err.println("线程异常");
+                    transactionManager.rollback(status1);
+                    throw new RuntimeException(e);
+                }
+            }).join();
+            transactionManager.commit(status);
+        } catch (Exception e) {
+            System.err.println("主线程异常");
+            transactionManager.rollback(status);
+        }
+    }
+
+    public void b() {
+        studentMapper.insertB();
+    }
+
+    public int c() {
+        studentMapper.insertC();
+        return 1 / 0;
     }
 }

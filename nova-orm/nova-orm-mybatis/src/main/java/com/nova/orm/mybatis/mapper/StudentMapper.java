@@ -36,4 +36,13 @@ public interface StudentMapper {
 
     @Insert("insert into student(name, age) values('事务7', 18)")
     void insertSeven();
+
+    @Insert("insert into student(name, age) values('insertA', 18)")
+    void insertA();
+
+    @Insert("insert into student(name, age) values('insertB', 18)")
+    int insertB();
+
+    @Insert("insert into student(name, age) values('insertC', 18)")
+    void insertC();
 }

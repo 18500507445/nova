@@ -97,4 +97,25 @@ public class MybatisTests {
         transactionService.testNew();
     }
 
+    /**
+     * 不加join，a入库，bc回滚
+     * 加join，a回滚，bc入库
+     */
+    @Test
+    public void testA() {
+        transactionService.a();
+    }
+
+    @Test
+    public void testA1() {
+        transactionService.a1();
+    }
+
+    /**
+     * 手动管理事务，abc都回滚
+     */
+    @Test
+    public void testPro() {
+        transactionService.aPro();
+    }
 }

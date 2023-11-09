@@ -23,4 +23,10 @@ public interface TransactionService {
     void testNever();
 
     void testNew();
+
+    void a();
+
+    void a1();
+
+    void aPro();
 }

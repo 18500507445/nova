@@ -144,7 +144,7 @@ public class Chapter5Test {
      */
     @Test
     public void testTransaction() {
-        //开启事务
+        //手动开启事务
         TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
         try {
             UserFiveDO userDO = new UserFiveDO();

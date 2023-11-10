@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @date: 2022/8/4 21:29
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class EmojiUtil {
+public final class EmojiUtil {
 
     /**
      * @param str 待转换字符串

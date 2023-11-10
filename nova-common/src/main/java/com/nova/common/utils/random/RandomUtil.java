@@ -20,7 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date: 2022/6/17 13:32
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class RandomUtil {
+public final class RandomUtil {
 
     /**
      * 权重随机对象 key:Object，value:权重

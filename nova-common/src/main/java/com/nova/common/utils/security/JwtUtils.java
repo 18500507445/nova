@@ -19,7 +19,7 @@ import java.util.Map;
  * @date: 2022/10/11 17:15
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class JwtUtils {
+public final class JwtUtils {
 
     /**
      * 缓存时间一天

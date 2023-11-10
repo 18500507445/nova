@@ -19,7 +19,7 @@ import java.util.Map;
  * @author yml
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class YamlUtil {
+public final class YamlUtil {
 
     public static Map<?, ?> loadYaml(String fileName) throws FileNotFoundException {
         InputStream in = YamlUtil.class.getClassLoader().getResourceAsStream(fileName);

@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @author: wzh
  * @date: 2022/8/30 15:30
  */
-@ControllerAdvice
 @Slf4j
+@ControllerAdvice
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override

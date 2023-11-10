@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  */
 @SuppressWarnings("unchecked")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ListUtils {
+public final class ListUtils {
 
     private static final Integer MAX_NUMBER = 2;
 

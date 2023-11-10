@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class LinuxUtils {
+public final class LinuxUtils {
 
     /**
      * 执行Linux命令

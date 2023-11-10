@@ -20,7 +20,7 @@ import java.util.concurrent.CountDownLatch;
  * ID生成器工具类
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class IdUtils {
+public final class IdUtils {
 
     /**
      * /**

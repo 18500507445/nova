@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * @date: 2020/4/20 19:27
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MatchUtil {
+public final class MatchUtil {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();

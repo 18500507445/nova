@@ -19,7 +19,7 @@ import java.util.Properties;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PropertiesUtils {
+public final class PropertiesUtils {
 
     /**
      * 属性文件与属性集合的关系

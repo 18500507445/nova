@@ -5,6 +5,8 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.slf4j.MDC;
 
 /**
@@ -12,7 +14,8 @@ import org.slf4j.MDC;
  * @author: wzh
  * @date: 2022/12/20 11:16
  */
-public class TraceContext {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class TraceContext {
 
     /**
      * trace对象上下文，支持父子线程之间的数据传递

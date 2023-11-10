@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ImageHelper {
+public final class ImageHelper {
 
     //常量
     private static final Integer ZERO = 0;

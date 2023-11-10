@@ -23,7 +23,7 @@ import java.util.*;
  */
 @Slf4j(topic = "JsonUtil")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class JsonUtil {
+public final class JsonUtil {
 
     public enum Type {
         INCLUDE,

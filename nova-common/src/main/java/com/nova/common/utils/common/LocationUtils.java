@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @description: 根据两点坐标计算两点之间的距离
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class LocationUtils {
+public final class LocationUtils {
 
     /**
      * 平均半径,单位：m

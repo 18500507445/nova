@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class HttpRequestProxy {
+public final class HttpRequestProxy {
 
     /**
      * 连接超时

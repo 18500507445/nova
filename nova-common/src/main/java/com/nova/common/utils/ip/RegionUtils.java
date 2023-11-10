@@ -18,7 +18,7 @@ import java.io.*;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class RegionUtils {
+public final class RegionUtils {
 
     //数据下载地址：https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb
     public static BufferedInputStream INPUT_STREAM = FileUtil.getInputStream("ip2region.xdb");

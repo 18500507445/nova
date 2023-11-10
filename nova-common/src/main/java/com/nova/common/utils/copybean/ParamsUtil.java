@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * 参数非空校验，Bean拷贝
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ParamsUtil {
+public final class ParamsUtil {
 
     /**
      * 参数非空校验

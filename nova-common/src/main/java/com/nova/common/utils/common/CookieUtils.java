@@ -14,7 +14,7 @@ import java.net.URLEncoder;
  * Cookie工具类
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CookieUtils {
+public final class CookieUtils {
 
     /**
      * 设置 Cookie（生成时间为1天）

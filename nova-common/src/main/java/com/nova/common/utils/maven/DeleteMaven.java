@@ -15,7 +15,7 @@ import java.util.Objects;
  * @date: 2022/8/6 13:17
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DeleteMaven {
+public final class DeleteMaven {
 
     /**
      * 注意：MAVEN_REPO_PATH 的值需要替换成你自己的maven本地仓库地址

@@ -160,7 +160,7 @@ public class AliExportController extends BaseController {
     }
 
     /**
-     * 并行编排版本
+     * 并行编排版本，分批写入多个sheet
      *
      * @param totalCount
      * @param shardingSize

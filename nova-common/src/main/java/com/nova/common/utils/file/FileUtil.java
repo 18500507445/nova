@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  * 2019/9/11
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FileUtil {
+public final class FileUtil {
 
     public static String getExtension(String fileName) {
         return fileName.substring(fileName.lastIndexOf("."));

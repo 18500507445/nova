@@ -11,7 +11,7 @@ import java.util.concurrent.*;
  */
 @Slf4j(topic = "Threads")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Threads {
+public final class Threads {
 
     /**
      * sleep等待,单位为毫秒

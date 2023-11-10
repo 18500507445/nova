@@ -17,7 +17,7 @@ import java.io.IOException;
  * 客户端工具类
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ServletUtils {
+public final class ServletUtils {
 
     /**
      * 定义移动端请求的所有可能类型

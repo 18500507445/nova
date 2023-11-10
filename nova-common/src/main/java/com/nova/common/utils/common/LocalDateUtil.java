@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  * @date: 2023/09/22 16:57
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class LocalDateUtil {
+public final class LocalDateUtil {
 
     /**
      * 自定义格式化

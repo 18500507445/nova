@@ -20,7 +20,7 @@ import java.util.Enumeration;
  */
 @Slf4j(topic = "AddressUtils")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class AddressUtils {
+public final class AddressUtils {
 
     /**
      * IP地址查询

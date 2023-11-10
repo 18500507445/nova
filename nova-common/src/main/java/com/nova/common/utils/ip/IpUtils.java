@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
  */
 @Slf4j(topic = "IpUtils")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class IpUtils {
+public final class IpUtils {
 
     private static final String UNKNOWN = "unknown";
 

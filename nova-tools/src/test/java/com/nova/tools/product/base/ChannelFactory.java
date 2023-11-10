@@ -2,6 +2,8 @@ package com.nova.tools.product.base;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.tools.product.enums.ChannelEnum;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -13,7 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date: 2023/10/24 10:11
  */
 @Component
-public class ChannelFactory {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ChannelFactory {
 
     /**
      * 渠道容器

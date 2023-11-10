@@ -14,7 +14,7 @@ import java.util.Base64;
  * @date: 2023/07/24 13:33
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class EncodeUtils {
+public final class EncodeUtils {
 
     private static final String DEFAULT_URL_ENCODING = "UTF-8";
 

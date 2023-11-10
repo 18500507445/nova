@@ -17,7 +17,7 @@ import java.net.URLEncoder;
  * @date 2019/5/16 13:06
  **/
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ExportCSVUtils {
+public final class ExportCSVUtils {
 
     /**
      * 写入csv结束，写出流

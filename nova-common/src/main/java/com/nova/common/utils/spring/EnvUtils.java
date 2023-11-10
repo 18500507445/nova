@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * @date: 2023/09/28 11:12
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class EnvUtils {
+public final class EnvUtils {
 
     /**
      * 是否是测试

@@ -17,7 +17,7 @@ import java.util.List;
  * 分页工具类
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PageUtils extends PageHelper {
+public final class PageUtils extends PageHelper {
 
     /**
      * 仅支持字母、数字、下划线、空格、逗号、小数点（支持多个字段排序）

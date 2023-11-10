@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ConvertToolUtil {
+public final class ConvertToolUtil {
 
     /**
      * 利用反射实现对象之间相同属性复制

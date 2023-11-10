@@ -13,7 +13,7 @@ import java.util.Map.Entry;
  * request请求参数转换Map通用处理方法
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MapDataUtil {
+public final class MapDataUtil {
 
     public static Map<String, Object> convertDataMap(HttpServletRequest request) {
         Map<String, String[]> properties = request.getParameterMap();

@@ -11,7 +11,7 @@ import java.util.Random;
  * @date: 2022/5/16 17:48
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CodeUtil {
+public final class CodeUtil {
 
     /**
      * 自定义进制(0,1没有加入,容易与o,l混淆)

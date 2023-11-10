@@ -16,7 +16,7 @@ import java.io.IOException;
  * @date: 2022/12/5 20:39
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class AliUploadImage {
+public final class AliUploadImage {
 
     /**
      * 阿里域名

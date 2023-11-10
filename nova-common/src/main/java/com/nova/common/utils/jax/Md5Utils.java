@@ -17,7 +17,7 @@ import java.util.*;
  */
 @Slf4j(topic = "Md5Utils")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Md5Utils {
+public final class Md5Utils {
 
     public static String getTargetSign(String param) {
         Map<String, Object> paramsMap = new TreeMap<String, Object>();

@@ -12,7 +12,7 @@ import java.util.Properties;
  * 2019/9/11
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ConfigFileUtil {
+public final class ConfigFileUtil {
 
     public static Map<String, String> resourcePropertyFileToMap(String resourcePropertyFileName) {
         Properties properties = new Properties();

@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Slf4j(topic = "SecurityUtil")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SecurityUtil {
+public final class SecurityUtil {
 
     /**
      * app:ios和android的key

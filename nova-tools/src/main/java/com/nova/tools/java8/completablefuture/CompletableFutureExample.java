@@ -81,6 +81,7 @@ public class CompletableFutureExample {
      * 扁平转换
      * 任务依赖关系编排类型：一个任务执行依赖另外一个任务的执行结果
      * thenApply，任务后置处理，thenApply()接受一个函数作为参数，使用该函数处理上一个CompletableFuture调用的结果
+     * thenAccept，任务后置处理，thenAccept()接受一个函数作为参数，不用return
      * theCompose，连接两个异步任务，theCompose的参数为一个返回CompletableFuture实例的函数，该函数的参数是先前计算步骤的结果
      * theCombine，合并两个异步任务
      * applyToEither，获取最先完成的任务
@@ -89,7 +90,9 @@ public class CompletableFutureExample {
     @Test
     public void demoC() {
         try {
-            String result = CompletableFuture.supplyAsync(() -> 2333).thenApply(String::valueOf).get();
+            String result = CompletableFuture.supplyAsync(() -> {
+                return 2333;
+            }).thenApply(String::valueOf).get();
             System.err.println(result);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -101,7 +104,15 @@ public class CompletableFutureExample {
      */
     @Test
     public void demoD() throws ExecutionException, InterruptedException {
+        //写法一
         CompletableFuture.supplyAsync(() -> 9999).thenAccept(System.err::println).get();
+
+        //写法二
+        CompletableFuture.supplyAsync(() -> {
+            return 9999;
+        }).thenAccept(s -> {
+            System.err.println(s);
+        }).get();
     }
 
     /**

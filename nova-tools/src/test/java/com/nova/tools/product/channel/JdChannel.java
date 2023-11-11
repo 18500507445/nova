@@ -35,7 +35,7 @@ public class JdChannel extends AbstractChannelBase implements ChannelMessage {
     }
 
     @Override
-    public String getToken() {
+    public <T> String getToken(T t, T... args) {
         return this.getChannel().getName() + "_token";
     }
 

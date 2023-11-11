@@ -28,7 +28,7 @@ public class ChannelTest {
     @Test
     public void channelTest() {
         AbstractChannelBase jdChannel = channelFactory.get(ChannelEnum.JD);
-        System.err.println("JdToken = " + jdChannel.getToken());
+        System.err.println("JdToken = " + jdChannel.getToken(null));
         System.err.println("JdRefreshToken = " + jdChannel.refreshToken());
         System.err.println("JdChannel = " + jdChannel.getChannel());
 

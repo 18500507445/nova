@@ -35,7 +35,7 @@ public abstract class AbstractChannelBase implements InitializingBean {
     /**
      * 获取渠道访问令牌
      */
-    public abstract String getToken();
+    public abstract <T> String getToken(T t, T... args);
 
     /**
      * 刷新令牌

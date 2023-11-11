@@ -52,7 +52,7 @@ class OptionalDemo {
         user.setAge(30);
         Optional<User> optionalUser = Optional.of(user);
 
-        //orElse不管street是否为null都进入方法，orElseGet就不会进去，需要做好区分，这是一个坑
+        //orElse调用方法不管street是否为null都进入方法，orElseGet就不会进去，需要做好区分，这是一个坑
         String s1 = optionalUser.map(User::getAddress).map(Address::getStreet).orElse(printf());
         String s2 = optionalUser.map(User::getAddress).map(Address::getStreet).orElseGet(this::printf);
         System.err.println("s1 = " + s1);

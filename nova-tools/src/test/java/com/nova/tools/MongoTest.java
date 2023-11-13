@@ -21,7 +21,7 @@ import java.util.*;
  * @date: 2023/4/22 21:09
  */
 @SpringBootTest
-public class TestMongo {
+public class MongoTest {
 
     @Autowired
     private MongoService mongoService;

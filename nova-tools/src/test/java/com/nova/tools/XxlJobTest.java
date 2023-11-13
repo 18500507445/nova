@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  */
 @SpringBootTest
 @Slf4j
-public class TestXxlJob {
+public class XxlJobTest {
 
     /**
      * 1、简单任务示例（Bean模式）

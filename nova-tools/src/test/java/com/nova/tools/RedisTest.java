@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 @SpringBootTest
 @Slf4j(topic = "testRedis")
-public class TestRedis {
+public class RedisTest {
 
     @Autowired
     private RedisService redisService;

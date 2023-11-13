@@ -29,11 +29,9 @@
         <bouncycastle.version>1.76</bouncycastle.version>
         <jsch.version>0.1.55</jsch.version>
         <oshi.version>6.4.5</oshi.version>
-        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <oss.version>3.17.0</oss.version>
         <jasypt.version>3.0.5</jasypt.version>
         <toolkit.version>8.16.0</toolkit.version>
-        <mybatis.version>2.3.1</mybatis.version>
         <bitwalker.version>1.21</bitwalker.version>
         <sba.version>2.7.11</sba.version>
         <transmittable.version>2.14.3</transmittable.version>
@@ -41,6 +39,11 @@
 
         <!-- hutool工具类需要的依赖 -->
         <emoji-java.version>5.1.1</emoji-java.version>
+
+        <!-- spring-boot 2.7.17版本 -->
+        <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
+        <!-- 不要升级了，springboot3之前最高次版本 -->
+        <mybatis.version>2.3.1</mybatis.version>
 
     </properties>
 
@@ -142,6 +145,12 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 阿里JSON解析器 -->

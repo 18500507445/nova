@@ -19,7 +19,7 @@ import java.util.List;
  * @date: 2023/07/24 14:42
  */
 @SpringBootTest
-public class ReadResourcesTest {
+public class ResourcesTest {
 
     @Autowired
     private Environment env;
@@ -66,7 +66,7 @@ public class ReadResourcesTest {
      */
     @Test
     public void readStaticValue() {
-        System.err.println("staticPath = " + ReadResourcesTest.STATIC_PATH);
+        System.err.println("staticPath = " + ResourcesTest.STATIC_PATH);
     }
 
     /**

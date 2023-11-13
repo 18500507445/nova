@@ -4,12 +4,11 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.SimpleCache;
 import cn.hutool.core.thread.ConcurrencyTester;
 import cn.hutool.core.thread.ThreadUtil;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 public class SimpleCacheTest {
 
-    @Before("")
+    @Test
     public void putTest() {
         final SimpleCache<String, String> cache = new SimpleCache<>();
         ThreadUtil.execute(() -> cache.put("key1", "value1"));

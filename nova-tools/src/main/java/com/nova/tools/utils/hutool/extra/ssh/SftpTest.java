@@ -2,7 +2,6 @@ package com.nova.tools.utils.hutool.extra.ssh;
 
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.extra.ssh.SshjSftp;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -18,7 +17,7 @@ public class SftpTest {
 
     private SshjSftp sshjSftp;
 
-    @Before("")
+    @Test
 
     public void init() {
         sshjSftp = new SshjSftp("ip", 22, "test", "test", CharsetUtil.CHARSET_UTF_8);

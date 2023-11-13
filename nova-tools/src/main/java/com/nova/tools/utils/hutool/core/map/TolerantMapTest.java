@@ -3,7 +3,6 @@ package com.nova.tools.utils.hutool.core.map;
 import cn.hutool.core.map.TolerantMap;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -12,7 +11,7 @@ public class TolerantMapTest {
 
     private final TolerantMap<String, String> map = TolerantMap.of(new HashMap<>(), "default");
 
-    @Before("")
+    @Test
     public void before() {
         map.put("monday", "星期一");
         map.put("tuesday", "星期二");

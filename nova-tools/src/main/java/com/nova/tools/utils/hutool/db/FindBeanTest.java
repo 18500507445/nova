@@ -4,7 +4,6 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import com.nova.tools.utils.hutool.db.pojo.User;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -19,7 +18,7 @@ public class FindBeanTest {
 
     Db db;
 
-    @Before("")
+    @Test
     public void init() {
         db = Db.use("test");
     }

@@ -6,7 +6,6 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.Page;
 import cn.hutool.db.PageResult;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -19,8 +18,7 @@ import java.util.List;
  */
 public class MySQLTest {
 
-    @Before("")
-
+    @Test
     public static void createTable() throws SQLException {
         Db db = Db.use("mysql");
         db.executeBatch("drop table if exists testuser", "CREATE TABLE if not exists `testuser` ( `id` int(11) NOT NULL, `account` varchar(255) DEFAULT NULL, `pass` varchar(255) DEFAULT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8");

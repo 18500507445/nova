@@ -6,7 +6,6 @@ import cn.hutool.log.LogFactory;
 import cn.hutool.log.dialect.console.ConsoleLogFactory;
 import cn.hutool.setting.dialect.Props;
 import lombok.Data;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -21,7 +20,7 @@ import java.util.Objects;
  */
 public class PropsTest {
 
-    @Before("")
+    @Test
     public void init() {
         LogFactory.setCurrentLogFactory(ConsoleLogFactory.class);
     }

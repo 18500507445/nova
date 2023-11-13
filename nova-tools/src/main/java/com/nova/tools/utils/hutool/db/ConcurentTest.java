@@ -7,7 +7,6 @@ import cn.hutool.db.Db;
 import cn.hutool.db.DbRuntimeException;
 import cn.hutool.db.Entity;
 import cn.hutool.db.handler.EntityListHandler;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ public class ConcurentTest {
 
     private Db db;
 
-    @Before("")
+    @Test
     public void init() {
         db = Db.use("test");
     }

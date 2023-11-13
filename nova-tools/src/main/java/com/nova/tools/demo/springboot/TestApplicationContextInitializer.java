@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @date: 2023/10/08 17:07
  */
 @Component
-public class TestApplicationContextInitializer implements ApplicationContextInitializer {
+public class TestApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
     /**
      * 应用场景：在最开始激活一些配置，或者利用这时候class还没被类加载器加载的时机，进行动态字节码注入等操作
@@ -21,6 +21,7 @@ public class TestApplicationContextInitializer implements ApplicationContextInit
      * 方式一：启动类，springApplication.addInitializers(new TestApplicationContextInitializer())
      * 方式二：自动装配SPI扩展机制，org.springframework.context.ApplicationContextInitializer=com.example.demo.TestApplicationContextInitializer
      * 方式三：配置文件配置，context.initializer.classes=com.example.demo.TestApplicationContextInitializer
+     *
      * @param applicationContext
      */
     @Override

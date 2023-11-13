@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanPath;
 import cn.hutool.core.lang.Assert;
 import com.nova.tools.utils.hutool.core.lang.test.bean.ExamInfoDict;
 import com.nova.tools.utils.hutool.core.lang.test.bean.UserInfoDict;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class BeanPathTest {
 
     Map<String, Object> tempMap;
 
-    @Before("")
+    @Test
     public void init() {
         // ------------------------------------------------- 考试信息列表
         final ExamInfoDict examInfoDict = new ExamInfoDict();

@@ -6,7 +6,6 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.db.Page;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -22,7 +21,7 @@ public class H2Test {
 
     private static final String DS_GROUP_NAME = "h2";
 
-    @Before("")
+    @Test
     public static void init() throws SQLException {
         Db db = Db.use(DS_GROUP_NAME);
         db.execute("CREATE TABLE test(a INTEGER, b BIGINT)");

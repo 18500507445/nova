@@ -7,7 +7,6 @@ import cn.hutool.core.map.ForestMap;
 import cn.hutool.core.map.LinkedForestMap;
 import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.map.TreeEntry;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -16,7 +15,7 @@ public class LinkedForestMapTest {
 
     private final ForestMap<String, String> treeNodeMap = new LinkedForestMap<>(false);
 
-    @Before("")
+    @Test
     public void beforeTest() {
         // a -> b -> c -> d
         treeNodeMap.putLinkedNodes("a", "b", "bbb");

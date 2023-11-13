@@ -49,6 +49,7 @@
         <boot.version>2.7.17</boot.version>
         <spring.cloud.version>2021.0.5</spring.cloud.version>
 
+        <!-- maven插件版本 -->
         <surefire.plugin.version>3.1.2</surefire.plugin.version>
         <resources.plugin.version>3.3.1</resources.plugin.version>
 

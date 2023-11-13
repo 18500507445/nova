@@ -19,7 +19,7 @@
         <fastjson.version>2.0.40</fastjson.version>
         <hutool.version>5.8.20</hutool.version>
         <email.version>1.5</email.version>
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.1.3-jre</guava.version>
         <thumbnailator.version>0.4.17</thumbnailator.version>
         <commons.io.version>2.13.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
@@ -48,16 +48,10 @@
     </properties>
 
     <dependencies>
-        <!-- SpringBoot Web容器 mvc、tomcat、context-->
+        <!-- SpringBoot Web容器 mvc、tomcat、context、aop-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- SpringBoot 拦截器 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!-- SpringBoot 测试类 -->

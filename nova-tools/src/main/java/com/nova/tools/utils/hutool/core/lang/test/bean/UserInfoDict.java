@@ -18,7 +18,7 @@ public class UserInfoDict implements Serializable {
     // 头像地址
     private String photoPath;
     private List<ExamInfoDict> examInfoDict;
-    private UserInfoRedundCount userInfoRedundCount;
+    private UserInfoRefundCount userInfoRefundCount;
 
     public Integer getId() {
         return id;
@@ -52,12 +52,12 @@ public class UserInfoDict implements Serializable {
         this.examInfoDict = examInfoDict;
     }
 
-    public UserInfoRedundCount getUserInfoRedundCount() {
-        return userInfoRedundCount;
+    public UserInfoRefundCount getUserInfoRedundCount() {
+        return userInfoRefundCount;
     }
 
-    public void setUserInfoRedundCount(UserInfoRedundCount userInfoRedundCount) {
-        this.userInfoRedundCount = userInfoRedundCount;
+    public void setUserInfoRedundCount(UserInfoRefundCount userInfoRefundCount) {
+        this.userInfoRefundCount = userInfoRefundCount;
     }
 
     @Override
@@ -79,6 +79,6 @@ public class UserInfoDict implements Serializable {
 
     @Override
     public String toString() {
-        return "UserInfoDict [id=" + id + ", realName=" + realName + ", photoPath=" + photoPath + ", examInfoDict=" + examInfoDict + ", userInfoRedundCount=" + userInfoRedundCount + "]";
+        return "UserInfoDict [id=" + id + ", realName=" + realName + ", photoPath=" + photoPath + ", examInfoDict=" + examInfoDict + ", userInfoRedundCount=" + userInfoRefundCount + "]";
     }
 }

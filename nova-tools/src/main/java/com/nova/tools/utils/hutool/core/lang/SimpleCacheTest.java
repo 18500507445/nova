@@ -6,6 +6,9 @@ import cn.hutool.core.thread.ConcurrencyTester;
 import cn.hutool.core.thread.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 本地缓存（简单缓存）
+ */
 public class SimpleCacheTest {
 
     @Test

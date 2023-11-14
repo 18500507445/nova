@@ -1,4 +1,4 @@
-package com.nova.tools.product.base;
+package com.nova.tools.product.manager;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.tools.product.enums.ChannelEnum;
@@ -21,12 +21,12 @@ public final class ChannelFactory {
     /**
      * 渠道容器
      */
-    private static final Map<ChannelEnum, AbstractChannelBase> CONTAINER = new ConcurrentHashMap<>();
+    private static final Map<ChannelEnum, AbstractChannel> CONTAINER = new ConcurrentHashMap<>();
 
     /**
      * 获取渠道
      */
-    public AbstractChannelBase get(ChannelEnum channelEnum) {
+    public AbstractChannel get(ChannelEnum channelEnum) {
         return CONTAINER.get(channelEnum);
     }
 
@@ -34,8 +34,8 @@ public final class ChannelFactory {
      * 子类获取
      */
     @SuppressWarnings("unchecked")
-    public <T extends AbstractChannelBase> T get(ChannelEnum channelEnum, Class<T> clazz) {
-        if (AbstractChannelBase.class.isAssignableFrom(clazz)) {
+    public <T extends AbstractChannel> T get(ChannelEnum channelEnum, Class<T> clazz) {
+        if (AbstractChannel.class.isAssignableFrom(clazz)) {
             return (T) CONTAINER.get(channelEnum);
         }
         return null;
@@ -44,7 +44,7 @@ public final class ChannelFactory {
     /**
      * 渠道放入容器
      */
-    public static <T extends AbstractChannelBase> void add(ChannelEnum channelEnum, T abstractChannelBase) {
+    public static <T extends AbstractChannel> void add(ChannelEnum channelEnum, T abstractChannelBase) {
         if (ObjectUtil.isAllNotEmpty(channelEnum, abstractChannelBase)) {
             CONTAINER.put(channelEnum, abstractChannelBase);
         }

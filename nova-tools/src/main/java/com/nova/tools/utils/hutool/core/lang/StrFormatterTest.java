@@ -4,6 +4,9 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.text.StrFormatter;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 字符串格式化
+ */
 public class StrFormatterTest {
 
     @Test

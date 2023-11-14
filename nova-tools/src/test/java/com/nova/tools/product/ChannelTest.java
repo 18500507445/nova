@@ -1,11 +1,11 @@
 package com.nova.tools.product;
 
 import cn.hutool.json.JSONUtil;
-import com.nova.tools.product.base.AbstractChannelBase;
-import com.nova.tools.product.base.ChannelFactory;
+import com.nova.tools.product.manager.AbstractChannel;
+import com.nova.tools.product.manager.ChannelFactory;
 import com.nova.tools.product.channel.YxChannel;
 import com.nova.tools.product.enums.ChannelEnum;
-import com.nova.tools.product.init.CommonInit;
+import com.nova.tools.product.manager.ChannelInit;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,16 +23,16 @@ public class ChannelTest {
     private ChannelFactory channelFactory;
 
     @Resource
-    private CommonInit commonInit;
+    private ChannelInit channelInit;
 
     @Test
     public void channelTest() {
-        AbstractChannelBase jdChannel = channelFactory.get(ChannelEnum.JD);
+        AbstractChannel jdChannel = channelFactory.get(ChannelEnum.JD);
         System.err.println("JdToken = " + jdChannel.getToken(null));
         System.err.println("JdRefreshToken = " + jdChannel.refreshToken());
         System.err.println("JdChannel = " + jdChannel.getChannel());
 
-        AbstractChannelBase yxChannel = channelFactory.get(ChannelEnum.YX);
+        AbstractChannel yxChannel = channelFactory.get(ChannelEnum.YX);
         System.err.println("YxRefreshToken = " + yxChannel.refreshToken());
     }
 
@@ -47,7 +47,7 @@ public class ChannelTest {
     public void configTest() {
         YxChannel yxChannel = channelFactory.get(ChannelEnum.YX, YxChannel.class);
         System.out.println("config = " + JSONUtil.toJsonStr(yxChannel.getConfig()));
-        commonInit.refresh();
+        channelInit.refresh();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.nova.tools.product.base;
+package com.nova.tools.product.manager;
 
 import java.util.Map;
 

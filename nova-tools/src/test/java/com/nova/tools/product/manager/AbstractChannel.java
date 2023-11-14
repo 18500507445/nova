@@ -1,4 +1,4 @@
-package com.nova.tools.product.base;
+package com.nova.tools.product.manager;
 
 import cn.hutool.core.util.StrUtil;
 import com.nova.tools.product.entity.ChannelConfig;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 设计思路，各个渠道都有的，抽取成抽象方法，子类必须实现，如果拿不准的，抽取成普通方法，求同存异
  * @date: 2023/10/24 10:25
  */
-public abstract class AbstractChannelBase implements InitializingBean {
+public abstract class AbstractChannel implements InitializingBean {
 
     //异常提示消息
     public final String EXCEPTION_MESSAGE = StrUtil.indexedFormat("子类：[{0}] 没有此方法，按需手动复写", this.getClass().getSimpleName());

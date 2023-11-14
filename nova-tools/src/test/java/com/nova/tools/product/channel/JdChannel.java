@@ -1,11 +1,11 @@
 package com.nova.tools.product.channel;
 
-import com.nova.tools.product.base.AbstractChannelBase;
-import com.nova.tools.product.base.ChannelFactory;
-import com.nova.tools.product.base.ChannelMessage;
+import com.nova.tools.product.manager.AbstractChannel;
+import com.nova.tools.product.manager.ChannelFactory;
+import com.nova.tools.product.manager.ChannelMessage;
 import com.nova.tools.product.entity.ChannelConfig;
 import com.nova.tools.product.enums.ChannelEnum;
-import com.nova.tools.product.init.CommonInit;
+import com.nova.tools.product.manager.ChannelInit;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import java.util.Map;
  * @date: 2023/10/24 10:34
  */
 @Component
-public class JdChannel extends AbstractChannelBase implements ChannelMessage {
+public class JdChannel extends AbstractChannel implements ChannelMessage {
 
     @Override
     public ChannelEnum getChannel() {
@@ -31,7 +31,7 @@ public class JdChannel extends AbstractChannelBase implements ChannelMessage {
 
     @Override
     public ChannelConfig getConfig() {
-        return CommonInit.CONFIG_MAP.get(getChannel().getName());
+        return ChannelInit.CONFIG_MAP.get(getChannel().getName());
     }
 
     @Override

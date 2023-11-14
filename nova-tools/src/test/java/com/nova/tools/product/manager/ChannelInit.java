@@ -1,4 +1,4 @@
-package com.nova.tools.product.init;
+package com.nova.tools.product.manager;
 
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.core.util.StrUtil;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  */
 @Component
 @Slf4j(topic = "ConfigInit")
-public class CommonInit {
+public class ChannelInit {
 
     //<name，config>
     public static Map<String, ChannelConfig> CONFIG_MAP = new HashMap<>();

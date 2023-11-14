@@ -18,6 +18,5 @@ class CompositionDemo {
 
         Function1<Integer, Integer> func4 = func2.compose(func1);
         System.err.println(func4.apply(2));
-
     }
 }

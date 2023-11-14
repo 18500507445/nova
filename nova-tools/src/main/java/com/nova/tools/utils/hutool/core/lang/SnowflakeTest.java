@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Snowflake单元测试
+ * Snowflake单元测试（雪花算法）
  *
  * @author Looly
  */

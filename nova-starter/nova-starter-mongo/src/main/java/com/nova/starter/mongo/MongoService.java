@@ -1,6 +1,7 @@
 package com.nova.starter.mongo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -19,7 +20,8 @@ import java.util.List;
 public class MongoService {
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    @Qualifier("primaryMongoTemplate")
+    private MongoTemplate primaryMongoTemplate;
 
     /**
      * 保存数据对象，集合为数据对象中@Document 注解所配置的collection
@@ -27,7 +29,7 @@ public class MongoService {
      * @param obj 数据对象
      */
     public void save(Object obj) {
-        mongoTemplate.save(obj);
+        primaryMongoTemplate.save(obj);
     }
 
     /**
@@ -37,7 +39,7 @@ public class MongoService {
      * @param collectionName 集合名
      */
     public void save(Object obj, String collectionName) {
-        mongoTemplate.save(obj, collectionName);
+        primaryMongoTemplate.save(obj, collectionName);
     }
 
     /**
@@ -46,7 +48,7 @@ public class MongoService {
      * @param obj 数据对象
      */
     public void remove(Object obj) {
-        mongoTemplate.remove(obj);
+        primaryMongoTemplate.remove(obj);
     }
 
     /**
@@ -56,7 +58,7 @@ public class MongoService {
      * @param collectionName 集合名
      */
     public void remove(Object obj, String collectionName) {
-        mongoTemplate.remove(obj, collectionName);
+        primaryMongoTemplate.remove(obj, collectionName);
     }
 
     /**
@@ -70,7 +72,7 @@ public class MongoService {
         Criteria criteria = Criteria.where(key).is(value);
         criteria.and(key).is(value);
         Query query = Query.query(criteria);
-        mongoTemplate.remove(query, collectionName);
+        primaryMongoTemplate.remove(query, collectionName);
     }
 
     /**
@@ -89,7 +91,7 @@ public class MongoService {
         for (int i = 0; i < updateKeys.length; i++) {
             update.set(updateKeys[i], updateValues[i]);
         }
-        mongoTemplate.updateFirst(query, update, collectionName);
+        primaryMongoTemplate.updateFirst(query, update, collectionName);
     }
 
     /**
@@ -108,7 +110,7 @@ public class MongoService {
         for (int i = 0; i < updateKeys.length; i++) {
             update.set(updateKeys[i], updateValues[i]);
         }
-        mongoTemplate.updateMulti(query, update, collectionName);
+        primaryMongoTemplate.updateMulti(query, update, collectionName);
     }
 
     /**
@@ -129,7 +131,7 @@ public class MongoService {
             }
         }
         Query query = Query.query(criteria);
-        return mongoTemplate.find(query, obj.getClass());
+        return primaryMongoTemplate.find(query, obj.getClass());
     }
 
     /**
@@ -151,7 +153,7 @@ public class MongoService {
             }
         }
         Query query = Query.query(criteria);
-        return mongoTemplate.find(query, obj.getClass(), collectionName);
+        return primaryMongoTemplate.find(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -175,7 +177,7 @@ public class MongoService {
         }
         Query query = Query.query(criteria);
         query.with(Sort.by(Sort.Direction.DESC, sort));
-        return mongoTemplate.find(query, obj.getClass(), collectionName);
+        return primaryMongoTemplate.find(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -196,7 +198,7 @@ public class MongoService {
             }
         }
         Query query = Query.query(criteria);
-        return mongoTemplate.findOne(query, obj.getClass());
+        return primaryMongoTemplate.findOne(query, obj.getClass());
     }
 
     /**
@@ -218,7 +220,7 @@ public class MongoService {
             }
         }
         Query query = Query.query(criteria);
-        return mongoTemplate.findOne(query, obj.getClass(), collectionName);
+        return primaryMongoTemplate.findOne(query, obj.getClass(), collectionName);
     }
 
     /**
@@ -228,7 +230,7 @@ public class MongoService {
      * @return
      */
     public List<? extends Object> findAll(Object obj) {
-        return mongoTemplate.findAll(obj.getClass());
+        return primaryMongoTemplate.findAll(obj.getClass());
     }
 
     /**
@@ -239,7 +241,7 @@ public class MongoService {
      * @return
      */
     public <T> List<T> findAll(Class<T> clazz) {
-        return mongoTemplate.findAll(clazz);
+        return primaryMongoTemplate.findAll(clazz);
     }
 
     /**
@@ -250,7 +252,7 @@ public class MongoService {
      * @return
      */
     public List<?> findAll(Object obj, String collectionName) {
-        return mongoTemplate.findAll(obj.getClass(), collectionName);
+        return primaryMongoTemplate.findAll(obj.getClass(), collectionName);
     }
 
     /**
@@ -262,6 +264,6 @@ public class MongoService {
      * @return
      */
     public <T> List<T> findAll(Class<T> clazz, String collectionName) {
-        return mongoTemplate.findAll(clazz, collectionName);
+        return primaryMongoTemplate.findAll(clazz, collectionName);
     }
 }

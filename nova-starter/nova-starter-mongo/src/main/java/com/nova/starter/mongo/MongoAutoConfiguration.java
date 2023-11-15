@@ -1,6 +1,5 @@
 package com.nova.starter.mongo;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +42,6 @@ public class MongoAutoConfiguration {
      */
     @Bean(name = "primaryMongoTemplate")
     @Primary
-    @Qualifier("primaryMongoTemplate")
     public MongoTemplate primaryMongoTemplate() throws UnsupportedEncodingException {
         MongoProperties mongoProperties = this.primaryMongoProperties();
         if (null != mongoProperties.getHost()) {

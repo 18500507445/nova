@@ -15,7 +15,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <dynamic.version>1.1.4</dynamic.version>
+        <dynamic.version>1.1.5</dynamic.version>
     </properties>
 
     <dependencies>

@@ -1,6 +1,7 @@
 package com.nova.excel.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.nova.common.core.model.pojo.BaseDO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 public class AliEasyExportDO extends BaseDO {
 
     @ExcelProperty(value = "id", index = 0)
+    @ColumnWidth(10)
     private Long id;
 
     @ExcelProperty(value = "姓名", index = 1)

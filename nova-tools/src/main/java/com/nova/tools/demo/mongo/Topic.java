@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -60,10 +59,11 @@ public class Topic {
     /**
      * 创建时间
      */
-    private Date created;
+    private String createTime;
 
     /**
      * 逻辑删除
      */
-    private Boolean deleted;
+    private Boolean delFlag;
+
 }

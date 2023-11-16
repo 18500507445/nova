@@ -47,9 +47,13 @@ public class MongoTest {
         topic.setSelect(select);
 
         topic.setAnswer(1);
-        topic.setCreated(new Date());
-        topic.setDeleted(false);
+        topic.setCreateTime(DateUtil.now());
+        topic.setDelFlag(false);
         topic.setNote("计算机组成原理");
+
+        String simpleName = topic.getClass().getSimpleName().toLowerCase();
+        mongoService.save(topic, simpleName + "_" + DateUtil.today());
+
         mongoService.save(topic);
     }
 

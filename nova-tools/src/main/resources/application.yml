@@ -21,6 +21,9 @@ management:
 spring:
   application:
     name: nova-tools
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
 
   #SBA服务端地址
   boot:
@@ -63,6 +66,7 @@ spring:
         min-idle: 0
     timeout: 10000
 
+  #mongo 配置信息
   data:
     mongodb:
       host: 47.100.174.176

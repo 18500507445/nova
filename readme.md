@@ -65,11 +65,14 @@
 * 依赖也是单独的和common包pom区分开
 * 代码也是独立，参考了各个优秀的模块直接拿现成的整合进来
 
-15.nova-starter（后续mq....）
+15.nova-spring
+* spring-aop、spring-ioc、spring-mvc、spring-mybatis、springboot相关源码
+
+16.nova-starter
 * 自定义starter：redis、mongo、xxlJob
 * <optional>true</optional>：防止依赖传递，导致引入后和项目的包冲突
 
-16.nova-tools
+17.nova-tools
 * [练习demo，java8，hutool、guava测试类，微信公众号文章](nova-tools/toolsNote.md)
 * [互联网Java工程师进阶知识完全扫盲-advanced](summary.md)
 * Sql练习

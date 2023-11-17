@@ -34,9 +34,9 @@
         <module>nova-rpc</module>
         <module>nova-search</module>
         <module>nova-shopping</module>
+        <module>nova-spring</module>
         <module>nova-starter</module>
         <module>nova-tools</module>
-        <module>nova-spring</module>
     </modules>
 
     <properties>

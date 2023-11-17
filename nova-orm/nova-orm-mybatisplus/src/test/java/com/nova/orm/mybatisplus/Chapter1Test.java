@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description 第一章测试类：入门篇
+ * @description 第一章测试类：入门篇，pagehelper的分页
  * @date: 2023/06/15 20:01
  */
 @SpringBootTest
@@ -55,6 +55,5 @@ public class Chapter1Test {
         PageInfo<UserDO> pageInfo = PageHelper.startPage(1, 10)
                 .doSelectPageInfo(() -> oneUserMapper.selectList(null));
     }
-
 
 }

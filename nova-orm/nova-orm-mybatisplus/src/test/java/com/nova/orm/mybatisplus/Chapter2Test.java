@@ -1,6 +1,7 @@
 package com.nova.orm.mybatisplus;
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nova.orm.mybatisplus.chapter2.TwoUserMapper;
 import com.nova.orm.mybatisplus.chapter2.TwoUserService;
 import com.nova.orm.mybatisplus.entity.UserDO;
@@ -96,5 +97,14 @@ public class Chapter2Test {
         System.err.println("jsonStr = " + JSONUtil.toJsonStr(userDO));
     }
 
+
+    /**
+     * 内置的分页插件
+     */
+    @Test
+    public void queryListByPage() {
+        Page<UserDO> page = twoUserMapper.selectPage(new Page<>(1, 5), null);
+        System.err.println("jsonStr = " + JSONUtil.toJsonStr(page));
+    }
 
 }

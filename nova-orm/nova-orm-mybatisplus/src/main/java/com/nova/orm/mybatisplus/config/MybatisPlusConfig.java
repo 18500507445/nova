@@ -26,7 +26,7 @@ public class MybatisPlusConfig {
         //MybatisPlusInterceptor插件，默认提供分页插件，如需其他MP内置插件，则需自定义该Bean
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
-        //分页插件
+        //分页插件 用依赖包自己的Page对象，不是pagehelper的Page
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
 
         //配置防止全表更新拦截器

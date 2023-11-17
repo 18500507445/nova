@@ -37,6 +37,7 @@
         <artifactId>spring-boot-admin-starter-client</artifactId>
         <version>${sba.version}</version>
     </dependency>
+
     <!-- 更多的监控需要的依赖 -->
     <dependency>
         <groupId>org.springframework.boot</groupId>

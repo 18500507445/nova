@@ -35,20 +35,18 @@ public class TraceFilter extends GenericFilterBean {
             String traceId = request.getHeader(Trace.TRACE_ID);
             //正常启动单服务可能拿不到，需要生成一个，如果网关进行设置了直接放入Trace对象
             if (StrUtil.isNotEmpty(traceId)) {
-                Trace trace = TraceContext.setCurrentTrace(traceId);
-                traceId = trace.getTraceId();
+                traceId = TraceContext.setCurrentTrace(traceId).getTraceId();
             } else {
-                Trace currentTrace = TraceContext.getCurrentTrace();
-                traceId = currentTrace.getTraceId();
+                traceId = TraceContext.getCurrentTrace().getTraceId();
             }
             RequestWrapper requestWrapper = printAccessLog(request);
 
             //todo 正常逻辑应该网关进行处理放入header进行透传
-            if (StrUtil.isNotBlank(traceId)) {
+            if (StrUtil.isNotBlank(traceId) && null != requestWrapper) {
                 requestWrapper.addHeader(Trace.TRACE_ID, traceId);
             }
 
-            filterChain.doFilter(requestWrapper, resp);
+            filterChain.doFilter(requestWrapper != null ? requestWrapper : request, resp);
             log.error("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
         } finally {
             TraceContext.removeTrace();
@@ -60,7 +58,7 @@ public class TraceFilter extends GenericFilterBean {
      */
     @SuppressWarnings({"unchecked"})
     private RequestWrapper printAccessLog(HttpServletRequest request) throws IOException {
-        RequestWrapper requestWrapper = new RequestWrapper(request);
+        RequestWrapper requestWrapper;
         String requestUrl = request.getRequestURI();
         SortedMap<String, Object> paramResult = new TreeMap<>(RequestParamsUtil.getUrlParams(request));
         try {
@@ -68,10 +66,11 @@ public class TraceFilter extends GenericFilterBean {
             if (!StrUtil.equals(HttpMethod.GET.name(), request.getMethod())) {
                 String contentType = request.getContentType();
                 if (StrUtil.containsIgnoreCase(contentType, "json")) {
-                    String body = getBody(requestWrapper);
+                    String body = getBody(requestWrapper = new RequestWrapper(request));
                     if (StrUtil.isNotBlank(body)) {
                         paramResult.putAll(JSONObject.parseObject(body, Map.class));
                     }
+                    return requestWrapper;
                 } else if (StrUtil.containsIgnoreCase(contentType, "form")) {
                     paramResult.putAll(RequestParamsUtil.getFormParams(request));
                 }
@@ -79,7 +78,7 @@ public class TraceFilter extends GenericFilterBean {
         } finally {
             log.info("请求apiName：{}，方式：{}，body：{}", requestUrl, request.getMethod(), JSONObject.toJSONString(paramResult));
         }
-        return requestWrapper;
+        return null;
     }
 
     public static String getBody(HttpServletRequest request) {

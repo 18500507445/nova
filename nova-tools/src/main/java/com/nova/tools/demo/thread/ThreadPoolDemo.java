@@ -21,9 +21,9 @@ class ThreadPoolDemo {
      */
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
-    private static final ThreadPoolExecutor service = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+    private static final ThreadPoolExecutor SERVICE = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
-    private static final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
+    private static final BlockingQueue<Integer> QUEUE = new LinkedBlockingQueue<>();
 
     @Test
     public void demoA() {
@@ -50,13 +50,13 @@ class ThreadPoolDemo {
     public void demoB() throws InterruptedException {
         TimeInterval timer = DateUtil.timer();
         for (int i = 0; i < 1000; i++) {
-            queue.put(i);
+            QUEUE.put(i);
         }
         for (int j = 0; j < 50; j++) {
-            service.submit((Runnable) () -> {
+            SERVICE.submit((Runnable) () -> {
                 while (true) {
                     try {
-                        System.err.println(queue.take() + "--" + Thread.currentThread().getId());
+                        System.err.println(QUEUE.take() + "--" + Thread.currentThread().getId());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -67,8 +67,8 @@ class ThreadPoolDemo {
         System.err.println("耗时:" + timer.interval());
 
         // 优雅关闭线程池
-        service.shutdown();
-        service.awaitTermination(3, TimeUnit.SECONDS);
+        SERVICE.shutdown();
+        SERVICE.awaitTermination(3, TimeUnit.SECONDS);
     }
 
     /**

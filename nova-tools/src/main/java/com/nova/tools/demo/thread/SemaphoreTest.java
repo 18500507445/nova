@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 
 /**
- * @description:
+ * @description: 线程信号量测试
  * @author: wzh
  * @date: 2021/3/31 14:33
  */

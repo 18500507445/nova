@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.context.RequestParamsUtil;
 import com.nova.common.context.RequestWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.filter.GenericFilterBean;
@@ -55,30 +54,34 @@ public class TraceFilter extends GenericFilterBean {
 
     /**
      * 打印访问日志
+     * 经过测试，get方式也可以传from表单（接口用实体类接收，不用添加@RequestBody）和body-json
+     * 因为无法控制编程规范问题，所以都需要打印
      */
     @SuppressWarnings({"unchecked"})
     private RequestWrapper printAccessLog(HttpServletRequest request) throws IOException {
-        RequestWrapper requestWrapper;
+        RequestWrapper requestWrapper = null;
         String requestUrl = request.getRequestURI();
         SortedMap<String, Object> paramResult = new TreeMap<>(RequestParamsUtil.getUrlParams(request));
+        String contentType = request.getContentType();
         try {
-            //非get方式，处理body
-            if (!StrUtil.equals(HttpMethod.GET.name(), request.getMethod())) {
-                String contentType = request.getContentType();
+            //get请求，少判断一次，直接return
+            if (StrUtil.isNotBlank(contentType)) {
+                //json
                 if (StrUtil.containsIgnoreCase(contentType, "json")) {
                     String body = getBody(requestWrapper = new RequestWrapper(request));
                     if (StrUtil.isNotBlank(body)) {
                         paramResult.putAll(JSONObject.parseObject(body, Map.class));
                     }
-                    return requestWrapper;
-                } else if (StrUtil.containsIgnoreCase(contentType, "form")) {
+                }
+                //from
+                if (StrUtil.containsIgnoreCase(contentType, "form")) {
                     paramResult.putAll(RequestParamsUtil.getFormParams(request));
                 }
             }
         } finally {
             log.info("请求apiName：{}，方式：{}，body：{}", requestUrl, request.getMethod(), JSONObject.toJSONString(paramResult));
         }
-        return null;
+        return requestWrapper;
     }
 
     public static String getBody(HttpServletRequest request) {

@@ -76,7 +76,7 @@ public class TwoUserServiceImpl extends ServiceImpl<TwoUserMapper, UserDO> imple
   (5)自定义配置字段名和实体类属性名映射，@TableField("user_name")  
   (6)sql中属性是关键字，@TableField("`desc`")  
   (7)字段失效，@TableField(select = false)，默认是展示
-  (8)视图属性，实体类字段，但是表中没有对应的字段，@TableField(exist = false)
+  (8)视图属性，实体类字段，但是表中没有对应的字段，@TableField(exist = false)，就是说忽略某些字段
 
 * 条件构造器QueryWrapper，例子Chapter3Test
 

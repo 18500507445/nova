@@ -39,7 +39,8 @@ public class ChannelTest {
     @Test
     public void messageTest() {
         YxChannel yxChannel = channelFactory.get(ChannelEnum.YX, YxChannel.class);
-        System.err.println("productChange = " + yxChannel.productChange(null));
+        assert yxChannel != null;
+        yxChannel.productMessage("");
     }
 
 

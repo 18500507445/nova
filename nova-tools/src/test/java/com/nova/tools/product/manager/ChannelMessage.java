@@ -1,7 +1,5 @@
 package com.nova.tools.product.manager;
 
-import java.util.Map;
-
 /**
  * @author: wzh
  * @description 渠道消息接口，（1）主动拉取消息推送接口 如：京东（2）渠道回调通知消息 如：网易严选
@@ -10,34 +8,23 @@ import java.util.Map;
 public interface ChannelMessage {
 
     /**
-     * 商品变更
+     * 商品消息（基础信息的消息、库存消息、价格消息、上下架）
      */
-    String productChange(Map<String, Object> params);
+    <T> void productMessage(T t);
 
     /**
-     * 商品价格变更
+     * 订单消息（取消、异常）
      */
-    String priceChange(Map<String, Object> params);
+    <T> void orderMessage(T t);
 
     /**
-     * 订单状态变更
+     * 物流消息（退货、收货）
      */
-    String orderStatusChange(Map<String, Object> params);
+    <T> void logisticsMessage(T t);
 
     /**
-     * 订单发货信息变更
+     * 售后消息
      */
-    String orderDeliveryChange(Map<String, Object> params);
-
-    /**
-     * 售后单状态变更
-     */
-    String afterSaleStatusChange(Map<String, Object> params);
-
-    /**
-     * 地址变更
-     */
-    String addressChange(Map<String, Object> params);
-
+    <T> void afterSaleMessage(T t);
 
 }

@@ -1,15 +1,11 @@
 package com.nova.tools.product.channel;
 
-import com.nova.tools.product.manager.AbstractChannel;
-import com.nova.tools.product.manager.ChannelFactory;
-import com.nova.tools.product.manager.ChannelMessage;
 import com.nova.tools.product.entity.ChannelConfig;
 import com.nova.tools.product.enums.ChannelEnum;
-import com.nova.tools.product.manager.ChannelInit;
+import com.nova.tools.product.manager.*;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * @author: wzh
@@ -17,7 +13,7 @@ import java.util.Map;
  * @date: 2023/10/24 10:39
  */
 @Component
-public class YxChannel extends AbstractChannel implements ChannelMessage {
+public final class YxChannel extends AbstractChannel implements ChannelConvert, ChannelMessage {
 
     @Override
     public ChannelEnum getChannel() {
@@ -90,33 +86,67 @@ public class YxChannel extends AbstractChannel implements ChannelMessage {
     }
 
     @Override
-    public String productChange(Map<String, Object> params) {
+    public <T> void productMessage(T t) {
+
+    }
+
+    @Override
+    public <T> void orderMessage(T t) {
+
+    }
+
+    @Override
+    public <T> void logisticsMessage(T t) {
+
+    }
+
+    @Override
+    public <T> void afterSaleMessage(T t) {
+
+    }
+
+    @Override
+    public <T> Object brandConvert(Object context, T value) {
         return null;
     }
 
     @Override
-    public String priceChange(Map<String, Object> params) {
+    public <T> Object categoryConvert(Object context, T value) {
         return null;
     }
 
     @Override
-    public String orderStatusChange(Map<String, Object> params) {
+    public <T> Object skuConvert(Object context, T value) {
         return null;
     }
 
     @Override
-    public String orderDeliveryChange(Map<String, Object> params) {
+    public <T> Object pictureConvert(Object context, T value) {
         return null;
     }
 
     @Override
-    public String afterSaleStatusChange(Map<String, Object> params) {
+    public <T> Object attrConvert(Object context, T value) {
         return null;
     }
 
     @Override
-    public String addressChange(Map<String, Object> params) {
+    public <T> Object stockConvert(Object context, T value) {
         return null;
     }
 
+    @Override
+    public <T> Object taxConvert(Object context, T value) {
+        return null;
+    }
+
+    @Override
+    public <T> Object specConvert(Object context, T value) {
+        return null;
+    }
+
+    @Override
+    public <T> Object areaConvert(Object context, T value) {
+        return null;
+    }
 }

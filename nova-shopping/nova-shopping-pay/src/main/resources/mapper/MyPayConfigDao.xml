@@ -69,8 +69,8 @@
             <if test="notifyUrl != null  and notifyUrl != ''"> and notify_url = #{notifyUrl}</if>
             <if test="weight != null "> and weight = #{weight}</if>
             <if test="status != null "> and status = #{status}</if>
-            <if test="source != null  and source != ''"> and source like concat('%',${source},'%')</if>
-            <if test="sid != null  and sid != ''"> and sid like concat('%',${sid},'%')</if>
+            <if test="source != null  and source != ''"> and source like concat('%',#{source},'%')</if>
+            <if test="sid != null  and sid != ''"> and sid like concat('%',#{sid},'%')</if>
             <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
         </where>
     </select>

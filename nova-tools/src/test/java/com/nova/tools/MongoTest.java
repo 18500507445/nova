@@ -2,18 +2,22 @@ package com.nova.tools;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
-import com.nova.tools.demo.mongo.Topic;
-import com.nova.tools.demo.mongo.User;
-import com.nova.tools.demo.mongo.UserService;
 import com.nova.starter.mongo.MongoService;
 import com.nova.starter.mongo.entity.Page;
 import com.nova.starter.mongo.wrapper.LambdaQueryWrapper;
 import com.nova.starter.mongo.wrapper.Wrappers;
+import com.nova.tools.demo.mongo.Topic;
+import com.nova.tools.demo.mongo.User;
+import com.nova.tools.demo.mongo.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @description: mongo-starter测试类
@@ -25,6 +29,9 @@ public class MongoTest {
 
     @Autowired
     private MongoService mongoService;
+
+    @Autowired
+    private MongoTemplate primaryMongoTemplate;
 
     @Autowired
     private UserService userService;
@@ -54,7 +61,7 @@ public class MongoTest {
         String simpleName = topic.getClass().getSimpleName().toLowerCase();
         mongoService.save(topic, simpleName + "_" + DateUtil.today());
 
-        mongoService.save(topic);
+        primaryMongoTemplate.save(topic);
     }
 
     /**
@@ -65,6 +72,15 @@ public class MongoTest {
         List<Topic> all = mongoService.findAll(Topic.class);
         all.forEach(System.err::println);
     }
+
+    @Test
+    public void testFindOne() {
+        Topic one = mongoService.findOne(Topic.class, new String[]{"answer"}, new Object[]{1});
+
+        primaryMongoTemplate.save(one);
+        System.out.println("one = " + one);
+    }
+
 
     /**
      * 第二种插入

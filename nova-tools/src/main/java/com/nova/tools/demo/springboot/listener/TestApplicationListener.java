@@ -2,11 +2,8 @@ package com.nova.tools.demo.springboot.listener;
 
 import com.alibaba.fastjson2.JSONObject;
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -22,19 +19,9 @@ import java.util.List;
  */
 @Component
 @RequiredArgsConstructor
-public class TestApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
-
-    private static boolean aFlag = false;
+public class TestApplicationListener {
 
     private final ApplicationEventPublisher applicationEventPublisher;
-
-    @Override
-    public void onApplicationEvent(@NotNull ContextRefreshedEvent event) {
-        if (!aFlag) {
-            aFlag = true;
-            System.err.println("[ApplicationListener] 初始化，我已经监听到了");
-        }
-    }
 
     @Async
     @EventListener(condition = "#event.id == 1")
@@ -51,7 +38,7 @@ public class TestApplicationListener implements ApplicationListener<ContextRefre
     }
 
     @Test
-    public void demoA() {
+    public void testPushEvent() {
         applicationEventPublisher.publishEvent(new Event<>(1, Arrays.asList("123", "456")));
         applicationEventPublisher.publishEvent(new Event<>(2, "123"));
     }

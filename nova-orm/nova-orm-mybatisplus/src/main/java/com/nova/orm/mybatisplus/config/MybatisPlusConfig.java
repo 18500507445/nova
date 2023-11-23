@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfig {
 
     /**
-     * @see <a href="https://baomidou.com/pages/2976a3/#mybatisplusinterceptor</a>
+     * @see <a href="https://baomidou.com/pages/2976a3/#mybatisplusinterceptor">插件官方说明</a>
      * <p>
      * 新的分页插件,一缓和二缓遵循mybatis的规则,需要设置 MybatisConfiguration#useDeprecatedExecutor = false 避免缓存出现问题(该属性会在旧插件移除后一同移除)
      */

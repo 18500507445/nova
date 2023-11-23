@@ -17,7 +17,7 @@ class SectionTest7 {
      * @link <a href="https://www.baidu.com</a>
      *
      * @see SecureRandom
-     * @see <a href="https://www.baidu.com</a>
+     * @see <a href="https://www.baidu.com">百度</a>
      */
     @Test
     public void demoA() {

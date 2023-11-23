@@ -60,7 +60,7 @@ class ManualJob {
      * (3)DiscardOldestPolicy：丢弃队列最前面任务,执行该任务
      * (4)CallerRunsPolicy：不丢弃任务，直接运行任务的run方法，即使用主线程执行任务
      *
-     * @see <a href="https://blog.csdn.net/dodod2012/article/details/107464723</a>
+     * @see <a href="https://blog.csdn.net/dodod2012/article/details/107464723">手动创建线程池</a>
      */
     private static final ExecutorService SERVICE = new ThreadPoolExecutor(THREAD_COUNT, 10,
             0L, TimeUnit.MILLISECONDS,

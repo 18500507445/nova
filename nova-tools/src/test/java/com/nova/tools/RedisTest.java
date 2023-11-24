@@ -112,6 +112,9 @@ public class RedisTest {
                 hashMap.put(String.valueOf(integer), integer);
             }
             redisService.setHash("testHash", hashMap);
+            long interval = timer.interval();
+            System.err.println("耗时 ：" + interval + " ms");
+            timer.restart();
         }
         System.err.println("耗时：" + timer.interval());
     }

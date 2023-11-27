@@ -44,7 +44,7 @@ public class AccessLimitAspect extends BaseController {
     }
 
     @Around("dsPointCut()")
-    public Object before(ProceedingJoinPoint point) throws Throwable {
+    public Object around(ProceedingJoinPoint point) throws Throwable {
         // 使用Java反射技术获取方法上是否有注解类
         MethodSignature signature = (MethodSignature) point.getSignature();
         AccessLimit accessLimit = signature.getMethod().getDeclaredAnnotation(AccessLimit.class);

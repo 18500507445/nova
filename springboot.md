@@ -138,7 +138,7 @@ public ConfigurableApplicationContext run(String... args) {
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::               (v2.7.17)
+ :: Spring Boot ::               (v2.7.18)
 ~~~
 * 应用上下文模块（前置处理、刷新、后置处理） ConfigurableApplicationContext
 * 发出启动结束事件并结束计时

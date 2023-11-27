@@ -40,7 +40,7 @@
         <!-- hutool工具类需要的依赖 -->
         <emoji-java.version>5.1.1</emoji-java.version>
 
-        <!-- spring-boot 2.7.17版本 -->
+        <!-- spring-boot 2.7.18版本 -->
         <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
         <!-- 不要升级了，springboot3之前最高次版本 -->
         <mybatis.version>2.3.1</mybatis.version>

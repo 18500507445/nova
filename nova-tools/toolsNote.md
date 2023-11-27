@@ -120,6 +120,7 @@ nova-tools
 * [《关于MyBatis我总结了10种通用的写法》](https://mp.weixin.qq.com/s/tEa873nQXPtRjPgA7_XYvw)
 * [《最全的Spring依赖注入方式，你都会了吗？》](https://mp.weixin.qq.com/s/rJ358sJ5YJ6dCNF4Qm6uEw)
 * [《SpringAOP看这篇就够了》](https://mp.weixin.qq.com/s/-joW1MSQ1O-XiIaQ0najXA)
+* [《Spring Aop的@Before,@Around,@After,@AfterReturn,@AfterThrowing的理解》](https://blog.csdn.net/zhanglf02/article/details/78132304?spm=1001.2014.3001.5501)
 * [《日志打印的正确姿势》](https://mp.weixin.qq.com/s/TkM2Be-3dVVlUmwzoJImQA)
 * [《SpringBoot+Netty+WebSocket实现消息推送》](https://mp.weixin.qq.com/s/bS1LLtYW7YcH6lpuKUxH2A)
 * [《SpringBoot玩一玩代码混淆，防止反编译代码泄露》](https://mp.weixin.qq.com/s/Dz5TFEZg_fs5P-lxcZ2psQ)

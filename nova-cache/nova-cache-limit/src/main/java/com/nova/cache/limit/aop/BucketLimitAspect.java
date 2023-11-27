@@ -50,7 +50,7 @@ public class BucketLimitAspect extends BaseController implements InitializingBea
     }
 
     @Around("dsPointCut()")
-    public Object before(ProceedingJoinPoint point) throws Throwable {
+    public Object around(ProceedingJoinPoint point) throws Throwable {
         MethodSignature signature = (MethodSignature) point.getSignature();
         BucketLimit accessLimit = signature.getMethod().getDeclaredAnnotation(BucketLimit.class);
         if (accessLimit == null) {

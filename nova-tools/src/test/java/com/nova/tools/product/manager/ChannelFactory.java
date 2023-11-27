@@ -24,14 +24,14 @@ public final class ChannelFactory {
     private static final Map<ChannelEnum, AbstractChannel> CONTAINER = new ConcurrentHashMap<>();
 
     /**
-     * 获取渠道
+     * 获取渠道基类
      */
     public AbstractChannel get(ChannelEnum channelEnum) {
         return CONTAINER.get(channelEnum);
     }
 
     /**
-     * 子类获取
+     * 渠道子类获取
      */
     @SuppressWarnings("unchecked")
     public <T extends AbstractChannel> T get(ChannelEnum channelEnum, Class<T> clazz) {

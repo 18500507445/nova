@@ -98,21 +98,24 @@ public class MybatisTests {
     }
 
     /**
-     * 不加join，a入库，bc回滚
-     * 加join，a回滚，bc入库
+     * 不加join（主线程不等待），a入库，bc回滚
+     * 加join（主线程等待），a回滚，bc入库
      */
     @Test
     public void testA() {
         transactionService.a();
     }
 
+    /**
+     * 普通版，已经符合要求
+     */
     @Test
     public void testA1() {
         transactionService.a1();
     }
 
     /**
-     * 手动管理事务，abc都回滚
+     * 升级版，纯手动管理事务，abc都回滚
      */
     @Test
     public void testPro() {

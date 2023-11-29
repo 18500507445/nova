@@ -10,6 +10,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,13 +31,13 @@ public class WorkListener {
      * (1)可以在配置类里添加listenerContainer设置PrefetchCount为1个
      * 然后RabbitListener注解添加containerFactory = "listenerContainer"
      * (2)channel.basicQos(1);
-     * {@link RabbitConfig#listenerContainer()}
+     * {@link RabbitConfig#rabbitListenerContainerFactory(ConnectionFactory)} ()}
      *
      * @param message
      */
     @SneakyThrows
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE), containerFactory = "listenerContainer")
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE), containerFactory = "rabbitListenerContainerFactory")
     public void pollingOne(Message message, Channel channel) {
         channel.basicQos(1);
         ThreadUtil.sleep(500);
@@ -52,7 +53,7 @@ public class WorkListener {
      */
     @SneakyThrows
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE), containerFactory = "listenerContainer")
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_ONE), containerFactory = "rabbitListenerContainerFactory")
     public void pollingTwo(Message message, Channel channel) {
         channel.basicQos(1);
         ThreadUtil.sleep(1000);
@@ -71,7 +72,7 @@ public class WorkListener {
      */
     @SneakyThrows
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_TWO), concurrency = "2", containerFactory = "listenerContainer")
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_WORK_TWO), concurrency = "2", containerFactory = "rabbitListenerContainerFactory")
     public void pollingThread(Message message) {
         long tag = message.getMessageProperties().getDeliveryTag();
         ThreadUtil.sleep(100);

@@ -4,6 +4,9 @@ import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,8 +32,8 @@ public class RabbitConfig {
     @Value("${spring.rabbitmq.virtual-host}")
     private String virtualHost;
 
-    @Bean
-    public ConnectionFactory rabbitConnectionFactory() {
+    @Bean(name = "connectionFactory")
+    public ConnectionFactory a() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.getRabbitConnectionFactory().setRequestedChannelMax(4095);
         connectionFactory.setAddresses(addresses);
@@ -40,10 +43,27 @@ public class RabbitConfig {
         return connectionFactory;
     }
 
-    @Bean(name = "listenerContainer")
-    public SimpleRabbitListenerContainerFactory listenerContainer() {
+    /**
+     * 生产者设置
+     * （1）添加消息转换器
+     */
+    @Bean
+    public RabbitTemplate rabbitTemplate(@Qualifier("connectionFactory") ConnectionFactory connectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        return rabbitTemplate;
+    }
+
+    /**
+     * 监听者设置
+     * （1）添加消息转换器MessageConverter
+     * （2）每次取一条
+     */
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(@Qualifier("connectionFactory") ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(rabbitConnectionFactory());
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
         //将PrefetchCount设定为1表示一次只能取一个
         factory.setPrefetchCount(1);
         return factory;

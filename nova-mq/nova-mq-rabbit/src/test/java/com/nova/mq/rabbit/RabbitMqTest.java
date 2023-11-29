@@ -1,5 +1,6 @@
 package com.nova.mq.rabbit;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.nova.common.core.model.business.MessageBO;
 import com.nova.mq.rabbit.config.RabbitConstants;
 import com.nova.mq.rabbit.listener.SimpleListener;
@@ -140,6 +141,7 @@ public class RabbitMqTest {
     public void simpleTwo() {
         Object receive = rabbitTemplate.convertSendAndReceive(RabbitConstants.QUEUE_SIMPLE_TWO, MSG);
         System.err.println("receive = " + receive);
+        ThreadUtil.sleep(5000);
     }
 
     /**
@@ -158,6 +160,7 @@ public class RabbitMqTest {
     @Test
     public void simpleFour() {
         rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FOUR, MessageBO.builder().id(1).message(MSG).build());
+        ThreadUtil.sleep(5000);
     }
 
     /**
@@ -170,6 +173,7 @@ public class RabbitMqTest {
         map.put("id", 1);
         map.put("message", MSG);
         rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FIVE, map);
+        ThreadUtil.sleep(5000);
     }
 
 

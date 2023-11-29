@@ -38,6 +38,7 @@ public class SimpleListener {
     /**
      * 简单队列2 (有返回值)
      * {@link RabbitConfig#queueSimpleTwo()}} 需要申明队列
+     *
      * @param message
      * @return
      */

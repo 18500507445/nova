@@ -103,11 +103,19 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional
     public void a() {
         studentMapper.insertA();
-        //主线程等待，可以添加join()
         CompletableFuture.runAsync(() -> {
             b();
             c();
         }).join();
+    }
+
+    public void b() {
+        studentMapper.insertB();
+    }
+
+    public int c() {
+        studentMapper.insertC();
+        return 1 / 0;
     }
 
     @Override
@@ -160,12 +168,5 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
-    public void b() {
-        studentMapper.insertB();
-    }
 
-    public int c() {
-        studentMapper.insertC();
-        return 1 / 0;
-    }
 }

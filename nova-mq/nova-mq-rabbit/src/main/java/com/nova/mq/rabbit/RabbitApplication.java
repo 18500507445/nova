@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @description:
+ * @description: rabbitMQ启动类
  * @author: wzh
  * @date: 2023/4/21 09:50
  */

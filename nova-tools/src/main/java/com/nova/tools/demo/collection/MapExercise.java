@@ -2,10 +2,12 @@ package com.nova.tools.demo.collection;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.json.JSONUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * @description: map
@@ -78,7 +80,8 @@ class MapExercise {
 
 
     /**
-     * TreeMap默认是按键值的升序排序，它是通过红黑树实现的
+     * TreeMap，有序，默认是按键值的升序排序，它是通过红黑树实现的
+     * 线程不安全
      */
     @Test
     public void treeMap() {
@@ -101,7 +104,7 @@ class MapExercise {
     }
 
     /**
-     * 关联数组、哈希表、有序（可以记录元素存储的顺序）
+     * 关联数组、哈希表、有序（可以记录元素存储的顺序，FIFO）
      * 线程不安全
      */
     @Test
@@ -117,7 +120,7 @@ class MapExercise {
 
 
     /**
-     * 线程安全的
+     * 线程安全（性能较好，sync锁住数组元素）
      */
     @Test
     public void concurrentHashMap() {
@@ -126,9 +129,25 @@ class MapExercise {
 
 
     /**
-     * 不建议用
-     * key和value都不允许为null
      * 线程安全
+     * 有序
+     * 性能最好，没有锁，依靠cas（compare and swap），有就替换
+     * 并发跳跃表
+     */
+    @Test
+    public void demoA() {
+        ConcurrentSkipListMap<String, String> skipListMap = new ConcurrentSkipListMap<>();
+        skipListMap.put("1", "a");
+        skipListMap.put("2", "b");
+        skipListMap.put("3", "c");
+        System.out.println("skipListMap = " + JSONUtil.toJsonStr(skipListMap));
+    }
+
+
+    /**
+     * 线程安全
+     * 不建议用（性能极低，sync锁住整个对象，效率低下）
+     * key和value都不允许为null
      */
     @Test
     @Deprecated
@@ -141,4 +160,5 @@ class MapExercise {
             System.err.println("key= " + entry.getKey() + " and value= " + entry.getValue());
         }
     }
+
 }

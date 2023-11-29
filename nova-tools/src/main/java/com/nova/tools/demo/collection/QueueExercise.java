@@ -1,5 +1,6 @@
 package com.nova.tools.demo.collection;
 
+import cn.hutool.json.JSONUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
@@ -21,8 +22,13 @@ class QueueExercise {
         blockingQueue.add(2);
         blockingQueue.add(3);
 
+        //peek是查看队列中第一个元素，不删除
         final Integer peek = blockingQueue.peek();
+
+        //poll是查看队列中第一个元素，并删除
+        blockingQueue.poll();
         System.err.println("peek = " + peek);
+        System.err.println("blockingQueue = " + JSONUtil.toJsonStr(blockingQueue));
     }
 
     /**

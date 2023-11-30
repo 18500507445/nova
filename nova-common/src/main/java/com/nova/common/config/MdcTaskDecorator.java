@@ -23,7 +23,7 @@ public class MdcTaskDecorator implements TaskDecorator {
 //                    // 现在：@Async线程上下文！ 恢复Web线程上下文的MDC数据
 //                    MDC.setContextMap(copyOfContextMap);
 //                }
-                MDC.put(Trace.TRACE_ID, TraceContext.genSpanId());
+                MDC.put(Trace.TRACE_ID, TraceContext.getTraceId());
                 runnable.run();
             } finally {
                 MDC.clear();

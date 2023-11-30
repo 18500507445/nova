@@ -59,7 +59,8 @@ public class SimpleListener {
     @RabbitHandler
     @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_THREE))
     public void three(Message message) {
-        System.err.println("简单模式three消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        String json = new String(message.getBody());
+        System.err.println("简单模式three消息：" + JSONUtil.toJsonStr(json));
     }
 
     /**

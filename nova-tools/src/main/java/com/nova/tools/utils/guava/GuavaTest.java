@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
  */
 class GuavaTest {
 
+
+    /**
+     * 检查参数
+     */
     @Test
     public void test8() {
         String param = null;

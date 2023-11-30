@@ -1,6 +1,7 @@
 package com.nova.mq.rabbit;
 
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.json.JSONUtil;
 import com.nova.common.core.model.business.MessageBO;
 import com.nova.mq.rabbit.config.RabbitConstants;
 import com.nova.mq.rabbit.listener.SimpleListener;
@@ -150,7 +151,10 @@ public class RabbitMqTest {
      */
     @Test
     public void simpleThree() {
-        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_THREE, MSG);
+        Map<String, Object> map = new HashMap<>(16);
+        map.put("id", 1);
+        map.put("message", MSG);
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_THREE, map);
     }
 
     /**
@@ -159,7 +163,8 @@ public class RabbitMqTest {
      */
     @Test
     public void simpleFour() {
-        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FOUR, MessageBO.builder().id(1).message(MSG).build());
+        MessageBO build = MessageBO.builder().id(1).message(MSG).build();
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FOUR, build);
         ThreadUtil.sleep(5000);
     }
 
@@ -172,7 +177,7 @@ public class RabbitMqTest {
         Map<String, Object> map = new HashMap<>(16);
         map.put("id", 1);
         map.put("message", MSG);
-        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FIVE, map);
+        rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_SIMPLE_FIVE, JSONUtil.toJsonStr(map));
         ThreadUtil.sleep(5000);
     }
 

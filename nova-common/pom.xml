@@ -48,7 +48,7 @@
     </properties>
 
     <dependencies>
-        <!-- SpringBoot Web容器 mvc、tomcat、context-->
+        <!-- SpringBoot Web容器 包含了mvc、tomcat、context、log、json依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

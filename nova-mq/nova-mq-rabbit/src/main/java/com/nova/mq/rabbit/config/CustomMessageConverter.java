@@ -39,7 +39,7 @@ public class CustomMessageConverter implements MessageConverter {
 
     /**
      * 根据消息类型，解析成<T>，根据message.getMessageProperties().getInferredArgumentType()进行类型推断 </>
-     *
+     * 支持的有（1）jsonString转Message对象（2）对象转对象
      * @param message the message to convert
      * @return
      * @throws MessageConversionException

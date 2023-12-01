@@ -67,6 +67,7 @@ public class RedisTest {
     }
 
     public void release(String key) {
+        log.info("获取Redisson分布式锁[解锁]，key={}", key);
         redissonClient.getLock(key).unlock();
     }
 

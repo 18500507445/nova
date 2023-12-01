@@ -23,6 +23,11 @@ public class TestApplicationListener {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
+    /**
+     * 需要启动类开启异步注解，@EnableAsync
+     *
+     * @param event
+     */
     @Async
     @EventListener(condition = "#event.id == 1")
     public void eventOne(Event<List<String>> event) {
@@ -37,6 +42,9 @@ public class TestApplicationListener {
         System.out.println("t = " + JSONObject.toJSONString(t));
     }
 
+    /**
+     * 放到springboot测试类，写这里只是一个case
+     */
     @Test
     public void testPushEvent() {
         applicationEventPublisher.publishEvent(new Event<>(1, Arrays.asList("123", "456")));

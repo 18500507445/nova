@@ -3,6 +3,7 @@ package com.nova.tools;
 import cn.hutool.json.JSONUtil;
 import lombok.*;
 import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +34,11 @@ class LombokTest {
         private String remark;
     }
 
+    /**
+     * @SuperBuilder 生成的构建器可以通过子类继承扩展,@Builder 不支持继承扩展
+     */
     @Data
-    @Builder
+    @SuperBuilder
     static class DemoC {
         /**
          * 开启建造者模式，设置默认值，添加如下注解，作用于实体字段上

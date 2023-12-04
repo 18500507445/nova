@@ -6,8 +6,8 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.lang.Opt;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -20,21 +20,21 @@ public class MapUtilTest {
     enum PeopleEnum {GIRL, BOY, CHILD}
 
     @Data
-    @Builder
+    @SuperBuilder
     public static class User {
         private Long id;
         private String name;
     }
 
     @Data
-    @Builder
+    @SuperBuilder
     public static class Group {
         private Long id;
         private List<User> users;
     }
 
     @Data
-    @Builder
+    @SuperBuilder
     public static class UserGroup {
         private Long userId;
         private Long groupId;

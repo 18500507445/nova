@@ -4,8 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 import org.junit.jupiter.api.Test;
 
 public class BeanCopyMappingTest {
@@ -29,19 +29,19 @@ public class BeanCopyMappingTest {
     }
 
     @Data
-    @Builder
+    @SuperBuilder
     public static class A {
         private String carNo;
     }
 
     @Data
-    @Builder
+    @SuperBuilder
     public static class B {
         private String car;
     }
 
     @Data
-    @Builder
+    @SuperBuilder
     public static class C {
         private String carNo;
     }

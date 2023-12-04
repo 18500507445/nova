@@ -1,6 +1,10 @@
 package com.nova.tools.demo.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,7 +15,7 @@ import java.util.Date;
  * @date: 2019/6/14 14:09
  */
 @Data
-@Builder
+@SuperBuilder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor

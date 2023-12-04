@@ -2,9 +2,9 @@ package com.nova.tools.product.entity;
 
 import com.nova.tools.product.enums.ChannelEnum;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
@@ -14,7 +14,7 @@ import java.util.Date;
  * @date: 2023/10/26 17:46
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ChannelConfig {

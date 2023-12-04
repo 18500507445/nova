@@ -1,7 +1,7 @@
 package com.nova.book.effectivejava.chapter1.section2;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @description:
@@ -9,7 +9,7 @@ import lombok.Data;
  * @date: 2023/2/12 14:59
  */
 @Data
-@Builder
+@SuperBuilder
 class Cat {
 
     private Integer id;

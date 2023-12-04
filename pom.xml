@@ -108,11 +108,29 @@
                 <version>${nova.version}</version>
             </dependency>
 
-
             <!-- shopping单独组件 -->
             <dependency>
                 <groupId>com.nova</groupId>
                 <artifactId>nova-shopping-common</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
+            <!-- starter组件 -->
+            <dependency>
+                <groupId>nova.starter.redis</groupId>
+                <artifactId>nova-starter-redis</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>nova.starter.mongo</groupId>
+                <artifactId>nova-starter-mongo</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>nova.starter.xxl</groupId>
+                <artifactId>nova-starter-xxl</artifactId>
                 <version>${nova.version}</version>
             </dependency>
 

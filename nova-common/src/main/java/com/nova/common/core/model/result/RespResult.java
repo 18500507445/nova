@@ -135,11 +135,11 @@ public class RespResult<T> implements Serializable {
     }
 
     public static <T> RespResult<T> error(String msg) {
-        return new RespResult<T>(RespResultCode.SYS_EXCEPTION.getCode(), msg, msg);
+        return new RespResult<>(RespResultCode.SYS_EXCEPTION.getCode(), msg, msg);
     }
 
     public static <T> RespResult<T> error(String msg, String detailMessage) {
-        return new RespResult<T>(RespResultCode.SYS_EXCEPTION.getCode(), msg, detailMessage);
+        return new RespResult<>(RespResultCode.SYS_EXCEPTION.getCode(), msg, detailMessage);
     }
 
     public static <T> RespResult<T> error(String msg, T data) {
@@ -156,7 +156,7 @@ public class RespResult<T> implements Serializable {
 
 
     public static <T> RespResult<T> error(Integer code, String msg, String detailMessage) {
-        return new RespResult<T>(code, msg, detailMessage);
+        return new RespResult<>(code, msg, detailMessage);
     }
 
     public static <T> RespResult<T> error(Integer code, String msg, T data) {

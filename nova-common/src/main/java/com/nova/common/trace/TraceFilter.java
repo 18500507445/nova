@@ -46,7 +46,7 @@ public class TraceFilter extends GenericFilterBean {
             }
 
             filterChain.doFilter(requestWrapper != null ? requestWrapper : request, resp);
-            log.error("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
+            log.info("当前请求总耗时：{} ms", System.currentTimeMillis() - start);
         } finally {
             TraceContext.removeTrace();
         }

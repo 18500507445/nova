@@ -111,6 +111,10 @@ public class ResultVO<T> implements Serializable {
         return new ResultVO<>(ResultCode.FAILED, true);
     }
 
+    public static <T> ResultVO<T> failure(String bizMessage) {
+        return new ResultVO<>(ResultCode.FAILED, null, false, bizMessage);
+    }
+
     public static <T> ResultVO<T> failure(IResultCode resultCode) {
         return new ResultVO<>(resultCode, false);
     }

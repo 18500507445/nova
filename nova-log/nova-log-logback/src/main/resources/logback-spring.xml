@@ -7,6 +7,8 @@
     <springProperty scope="context" name="logPath" source="logging.file.path" defaultValue="logging.file.path"/>
     <property name="log.path" value="${logPath}"/>
     <property name="log.maxHistory" value="15"/>
+    <!-- 表示单个日志文件的最大大小,这里设置为1024MB。当日志文件内容长度超过这个大小时,会进行轮转 -->
+    <property name="log.maxFileSize" value="10240MB"/>
 
     <!-- 同步打印，可以打印方法和行号 -->
     <property name="log.pattern" value="%d [%t] [traceId:%X{TraceId}] [spanId:%X{SpanId}] %-5level %logger{20} - [%method,%line] - %msg%n"/>
@@ -100,12 +102,12 @@
     <!-- Spring日志级别控制  warn级别及以上 -->
     <logger name="org.springframework" level="warn"/>
 
-    <!-- 定义debug及以上日志级别的异步输出到控制台 -->
+    <!-- 定义控制台日志，debug及以上日志级别的异步输出 -->
     <root level="debug">
         <appender-ref ref="async_console"/>
     </root>
 
-    <!--系统操作日志-->
+    <!-- 定义服务器日志 -->
     <root level="info">
         <appender-ref ref="async_info"/>
         <appender-ref ref="debug_log"/>

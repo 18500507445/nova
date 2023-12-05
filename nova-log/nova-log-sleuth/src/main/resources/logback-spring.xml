@@ -95,12 +95,12 @@
     <!-- Spring日志级别控制  -->
     <logger name="org.springframework" level="warn"/>
 
-    <!-- 定义debug及以上日志级别的异步输出到控制台 -->
+    <!-- 定义控制台日志，debug及以上日志级别的异步输出 -->
     <root level="debug">
         <appender-ref ref="async_console"/>
     </root>
 
-    <!--系统操作日志-->
+    <!-- 定义服务器日志 -->
     <root level="info">
         <appender-ref ref="async_info"/>
         <appender-ref ref="debug_log"/>

@@ -8,19 +8,22 @@
     <property name="log.path" value="${logPath}"/>
     <property name="log.maxHistory" value="15"/>
 
+    <!-- 同步打印，可以打印方法和行号 -->
+    <property name="log.pattern" value="%d [%t] [traceId:%X{TraceId}] [spanId:%X{SpanId}] %-5level %logger{20} - [%method,%line] - %msg%n"/>
+
     <!-- 异步打印用这个，因为默认不开启打印方法和行数 -->
-    <property name="log.pattern" value="%d{MM-dd HH:mm:ss-SSS} [%t] [traceId:%X{traceId}] [spanId:%X{spanId}] %-5level %logger{20} - %msg%n"/>
+    <property name="log.pattern.async" value="%d{MM-dd HH:mm:ss-SSS} [%t] [traceId:%X{traceId}] [spanId:%X{spanId}] %-5level %logger{20} - %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <!--日志消息格式设置 -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${log.pattern}</pattern>
+            <pattern>${log.pattern.async}</pattern>
         </encoder>
     </appender>
 
-    <!-- 系统日志输出 -->
-    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- info日志输出 -->
+    <appender name="info_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/info.log</file>
         <!-- 滚动策略 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -30,7 +33,7 @@
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${log.pattern.async}</pattern>
         </encoder>
         <!-- 过滤掉所有日志级别低于INFO级别的日志事件 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -40,15 +43,15 @@
         </filter>
     </appender>
 
-    <!-- 系统日志输出 -->
-    <appender name="file_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- debug日志输出 -->
+    <appender name="debug_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/debug.log</fileNamePattern>
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${log.pattern.async}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
@@ -57,14 +60,15 @@
         </filter>
     </appender>
 
-    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- error日志输出 -->
+    <appender name="error_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/error.log</fileNamePattern>
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${log.pattern.async}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
@@ -73,20 +77,19 @@
         </filter>
     </appender>
 
-    <!-- 异步日志输出  -->
+    <!-- 异步控制台输出  -->
     <appender name="async_console" class="ch.qos.logback.classic.AsyncAppender">
         <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
         <discardingThreshold>0</discardingThreshold>
         <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
         <queueSize>512</queueSize>
-        <!-- 打印栈堆信息 开启性能降低和同步一样效果-->
-<!--        <includeCallerData>true</includeCallerData>-->
         <!-- 添加附加的appender,最多只能添加一个 -->
         <appender-ref ref="console" />
     </appender>
 
+    <!-- 异步info级别输出  -->
     <appender name="async_info" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="file_info" />
+        <appender-ref ref="info_log" />
     </appender>
 
     <!-- Spring日志级别控制  -->
@@ -100,8 +103,8 @@
     <!--系统操作日志-->
     <root level="info">
         <appender-ref ref="async_info"/>
-        <appender-ref ref="file_debug"/>
-        <appender-ref ref="file_error"/>
+        <appender-ref ref="debug_log"/>
+        <appender-ref ref="error_log"/>
     </root>
 
 </configuration>

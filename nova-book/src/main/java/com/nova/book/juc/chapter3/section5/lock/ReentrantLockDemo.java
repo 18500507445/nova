@@ -89,12 +89,9 @@ class ReentrantLockDemo {
                 }
                 log.debug("拿到锁了。。");
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                log.debug("没有获取到锁。。");
-                return;
-            } finally {
-                Lock.unlock();
+                throw new RuntimeException(e);
             }
+            Lock.unlock();
         }, "t2");
 
         Lock.lock();

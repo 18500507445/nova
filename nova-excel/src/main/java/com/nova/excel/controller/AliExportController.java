@@ -17,6 +17,8 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.utils.list.PageUtils;
 import com.nova.excel.entity.AliEasyExportDO;
+import com.nova.excel.entity.WaterMark;
+import com.nova.excel.utils.WaterMarkHandler;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -56,6 +58,8 @@ public class AliExportController extends BaseController {
 
     public static List<AliEasyExportDO> LIST = new ArrayList<>();
 
+    public static WaterMark WATER_MARK = new WaterMark();
+
     static {
         path = Objects.requireNonNull(AliExportController.class.getResource("/")).getPath();
         for (int i = 1; i <= TOTAL; i++) {
@@ -69,6 +73,11 @@ public class AliExportController extends BaseController {
             data.setUpdateTime(DateUtil.now());
             LIST.add(data);
         }
+
+        WATER_MARK.setContent("仅供Nova项目使用，翻版必究");
+        WATER_MARK.setWidth(600);
+        WATER_MARK.setHeight(400);
+        WATER_MARK.setYAxis(200);
     }
 
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
@@ -92,7 +101,12 @@ public class AliExportController extends BaseController {
         List<AliEasyExportDO> exportList = selectAll(LIST.size(), 50000);
 
         //可以浏览器下载
-        EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
+        EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class)
+                .inMemory(true)
+                .excelType(ExcelTypeEnum.XLSX)
+                .sheet("模板")
+                .registerWriteHandler(new WaterMarkHandler(WATER_MARK))
+                .doWrite(exportList);
 
         //可以直接EasyExcel.write(fileName, ExportDO.class)下载到本地或者服务器
 //        EasyExcel.write(fileName, ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
@@ -117,6 +131,7 @@ public class AliExportController extends BaseController {
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
 
         //异步写入
+//        threadPoolWrite(LIST.size(), 100000, response);
         completableWrite(LIST.size(), 100000, response);
         log.info("threadExportExcel接口耗时：{}ms", timer.interval());
         System.gc();
@@ -272,6 +287,7 @@ public class AliExportController extends BaseController {
                 log.error("异常消息: {}", e.getMessage());
             } finally {
                 cd.countDown();
+                assert pageList != null;
                 System.err.println("线程Id：" + threadId + ", 查询数据：" + pageList.size() + "条, 页码：" + pageNum + ", 耗时：" + timer.interval() + "ms");
                 System.err.println("剩余任务数  ================> " + cd.getCount());
             }

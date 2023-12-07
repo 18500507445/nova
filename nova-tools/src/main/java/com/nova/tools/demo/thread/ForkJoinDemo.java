@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  * @description (1)ForkJoinPool 默认线程池大小=CPU核心数 并非设置越大越好，IO密集型任务 受限于磁盘IO
  * (2)fork-join和ThreadPool，各自有各自的应用场景，二者是并存互补的关系
  * (3)递归任务，很适合用fork-join。如分治任务：分而治之，父任务，依赖于子任务的完成
+ * (4)IO密集型任务，不适合fork-join，因为IO密集型任务，CPU核心数不够，任务执行时间过长，会导致CPU空转，浪费CPU资源
  * @date: 2023/07/24 16:49
  */
 public class ForkJoinDemo {
@@ -107,7 +108,7 @@ public class ForkJoinDemo {
      * 任务分而治之，递归拆分10组进行求和
      */
     @Test
-    public void demoD() {
+    public void demoB() {
         TimeInterval timer = DateUtil.timer();
         ForkJoinPool pool = new ForkJoinPool();
         TaskA task = new TaskA(0L, 10000000000L);
@@ -135,7 +136,6 @@ public class ForkJoinDemo {
                     sum += i;
                 }
                 return sum;
-
             } else {
                 long mid = (start + end) / 2;
                 TaskA left = new TaskA(start, mid);

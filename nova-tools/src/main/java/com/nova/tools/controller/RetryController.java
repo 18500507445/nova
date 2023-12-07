@@ -1,6 +1,7 @@
 package com.nova.tools.controller;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.rholder.retry.*;
 import com.nova.common.core.model.result.avic.ResultVO;
@@ -64,7 +65,7 @@ public class RetryController {
     private final RemoteService remoteService;
 
     /**
-     * 注意事项：因为Retryable是走aop的所以直接掉会失效
+     * 注意事项：因为Retryable是走aop的所以直接掉用会失效，需交给spring管理才可以
      */
     @GetMapping("retry")
     public ResultVO<String> retry() {
@@ -88,24 +89,35 @@ public class RetryController {
         }
     }
 
+    /**
+     * WaitStrategies.exponentialWait：指数倍数，每次重试间隔时间 = multiplier * 2^n，n为重试次数
+     * WaitStrategies.fixedWait：固定等待策略，每次重试间隔固定时间，比如500毫秒
+     * WaitStrategies.fibonacciWait：斐波那契策略，例如数列：1，1，2，3，5，8，13，21，34，55，89……这个数列从第3项开始 ，每一项都等于前两项之和。
+     * WaitStrategies.randomWait：随机等待策略，每次重试间隔随机时间，比如0-1000毫秒
+     * WaitStrategies.incrementingWait：递增等待策略，根据初始值和递增值，等待时长依次递增
+     */
     public void guavaRetryDemo() throws ExecutionException, RetryException {
         // 创建重试器
-        Retryer<String> retryer = RetryerBuilder.<String>newBuilder()
-                .retryIfResult(StrUtil::isBlank) // 结果为null、""才重试
+        Retryer<String> retryer = RetryerBuilder.<String>newBuilder().retryIfResult(StrUtil::isBlank) // 结果为null、""才重试
                 .retryIfException() // 有异常就重试
-                .withWaitStrategy(WaitStrategies.fixedWait(500, TimeUnit.MILLISECONDS)) // 每次重试间隔500毫秒
-                .withStopStrategy(StopStrategies.stopAfterAttempt(3)) // 最多重试3次
+                .withWaitStrategy(WaitStrategies.fibonacciWait(1000, 1, TimeUnit.MINUTES))
+//                .withWaitStrategy(WaitStrategies.fixedWait(500, TimeUnit.MILLISECONDS))
+//                .withWaitStrategy(WaitStrategies.exponentialWait(1000, 1, TimeUnit.MINUTES))
+                .withStopStrategy(StopStrategies.stopAfterAttempt(10)) // 最多重试3次
                 .build();
 
         LongAdder longAdder = new LongAdder();
         // 测试重试
         String result = retryer.call(() -> {
             longAdder.increment();
-            log.error("重试次数：{}", longAdder.longValue());
+            log.error("重试次数：{}，时间：{}", longAdder.longValue(), DateUtil.now());
             // 这是要重试的方法
-            if (Math.random() < 0.5) {
+            int i = RandomUtil.randomInt(100);
+            if (i > 100) {
+                log.error("success");
                 return "success";
             } else {
+                log.error("fail");
                 return "";
             }
         });

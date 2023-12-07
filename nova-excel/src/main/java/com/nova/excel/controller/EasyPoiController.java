@@ -35,7 +35,7 @@ import java.util.concurrent.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
-public class EasyExportController extends BaseController {
+public class EasyPoiController extends BaseController {
 
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 

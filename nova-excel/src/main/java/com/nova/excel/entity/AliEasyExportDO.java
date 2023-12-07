@@ -1,5 +1,6 @@
 package com.nova.excel.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.nova.common.core.model.pojo.BaseDO;
@@ -42,4 +43,8 @@ public class AliEasyExportDO extends BaseDO {
 
     @ExcelProperty(value = "修改时间", index = 6)
     private String updateTime;
+
+    //字段忽略
+    @ExcelIgnore
+    private String ignore;
 }

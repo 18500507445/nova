@@ -110,6 +110,7 @@ public class SpiderPlan {
         for (int i = 0; i < COUNT; i++) {
             queryList.add(skuId);
         }
+        //切割list
         List<List<String>> partition = ListUtil.partition(queryList, PAGE_SIZE);
         LongAdder longAdder = new LongAdder();
 

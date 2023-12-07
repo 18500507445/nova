@@ -24,7 +24,7 @@ public interface TransactionService {
 
     void testNew();
 
-    void a();
+    void a() throws InterruptedException;
 
     void a1();
 

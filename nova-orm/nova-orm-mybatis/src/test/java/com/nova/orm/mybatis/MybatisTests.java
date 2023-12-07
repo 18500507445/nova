@@ -102,7 +102,7 @@ public class MybatisTests {
      * 加join（主线程等待），a回滚，bc入库
      */
     @Test
-    public void testA() {
+    public void testA() throws InterruptedException {
         transactionService.a();
     }
 

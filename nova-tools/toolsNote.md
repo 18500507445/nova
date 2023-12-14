@@ -61,6 +61,7 @@ nova-tools
 * @NotBlank 验证注解的元素值不为空（不为null、去除首位空格后长度为0），不同于@NotEmpty，@NotBlank只应用于字符串且在比较时会去除字符串的空格
 * @Email 验证注解的元素值是Email，也可以通过正则表达式和flag指定自定义的email格式
 * @URL 必须是一个URL
+* @Range(min,max) 数字必须大于min，小于max，[min，max]区间
 
 ### Java基础
 * [《Java 线程池详解》](https://mp.weixin.qq.com/s/hrPUZQEm6zp76Euj5ScaZw)

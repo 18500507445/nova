@@ -72,8 +72,7 @@ public final class TraceContext {
      * 清空trace对象
      */
     public static void removeTrace() {
-        MDC.remove(Trace.TRACE_ID);
-        MDC.remove(Trace.SPAN_ID);
+        MDC.clear();
         TRACE_CONTEXT.remove();
     }
 }

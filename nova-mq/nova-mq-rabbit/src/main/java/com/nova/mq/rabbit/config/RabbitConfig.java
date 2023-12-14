@@ -6,9 +6,12 @@ import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 
 /**
@@ -19,26 +22,26 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    @Value("${spring.rabbitmq.addresses}")
-    private String addresses;
+    @Bean(name = "primaryProperties")
+    @Primary
+    @ConfigurationProperties(prefix = "spring.rabbitmq")
+    @ConditionalOnMissingBean
+    public RabbitProperties primaryProperties() {
+        return new RabbitProperties();
+    }
 
-    @Value("${spring.rabbitmq.username}")
-    private String username;
-
-    @Value("${spring.rabbitmq.password}")
-    private String password;
-
-    @Value("${spring.rabbitmq.virtual-host}")
-    private String virtualHost;
-
-    @Bean(name = "connectionFactory")
-    public ConnectionFactory a() {
+    @Bean(name = "primaryConnectionFactory")
+    public ConnectionFactory connectionFactory(@Qualifier("primaryProperties") RabbitProperties primaryProperties) {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.getRabbitConnectionFactory().setRequestedChannelMax(4095);
-        connectionFactory.setAddresses(addresses);
-        connectionFactory.setUsername(username);
-        connectionFactory.setPassword(password);
-        connectionFactory.setVirtualHost(virtualHost);
+        //默认2047
+        connectionFactory.getRabbitConnectionFactory().setRequestedChannelMax(primaryProperties.getRequestedChannelMax());
+        connectionFactory.setAddresses(primaryProperties.getAddresses());
+        connectionFactory.setUsername(primaryProperties.getUsername());
+        connectionFactory.setPassword(primaryProperties.getPassword());
+        connectionFactory.setVirtualHost(primaryProperties.getVirtualHost());
+        if (null != primaryProperties.getCache().getChannel().getSize()) {
+            connectionFactory.setChannelCacheSize(primaryProperties.getCache().getChannel().getSize());
+        }
         return connectionFactory;
     }
 
@@ -47,8 +50,8 @@ public class RabbitConfig {
      * （1）添加消息转换器
      */
     @Bean
-    public RabbitTemplate rabbitTemplate(@Qualifier("connectionFactory") ConnectionFactory connectionFactory) {
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+    public RabbitTemplate rabbitTemplate(@Qualifier("primaryConnectionFactory") ConnectionFactory primaryConnectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(primaryConnectionFactory);
         rabbitTemplate.setMessageConverter(new CustomMessageConverter());
         return rabbitTemplate;
     }
@@ -59,9 +62,9 @@ public class RabbitConfig {
      * （2）每次取一条
      */
     @Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(@Qualifier("connectionFactory") ConnectionFactory connectionFactory) {
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(@Qualifier("primaryConnectionFactory") ConnectionFactory primaryConnectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
+        factory.setConnectionFactory(primaryConnectionFactory);
         factory.setMessageConverter(new CustomMessageConverter());
         //将PrefetchCount设定为1表示一次只能取一个
         factory.setPrefetchCount(1);

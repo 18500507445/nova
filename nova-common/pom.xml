@@ -37,6 +37,7 @@
         <sba.version>2.7.11</sba.version>
         <transmittable.version>2.14.3</transmittable.version>
         <ip2region.version>2.7.0</ip2region.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
 
         <!-- hutool工具类需要的依赖 -->
         <emoji-java.version>5.1.1</emoji-java.version>
@@ -296,6 +297,19 @@
             <groupId>org.lionsoul</groupId>
             <artifactId>ip2region</artifactId>
             <version>${ip2region.version}</version>
+        </dependency>
+
+        <!-- bean转换工具 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
         </dependency>
 
     </dependencies>

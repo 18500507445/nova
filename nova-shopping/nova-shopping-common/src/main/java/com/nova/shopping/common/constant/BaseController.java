@@ -69,7 +69,7 @@ public class BaseController {
             String[] split = createIp.split(",");
             if (split.length > 1) {
                 if (StrUtil.isNotBlank(split[1])) {
-                    return split[1];
+                    return split[1].trim();
                 }
             }
         }
@@ -80,17 +80,16 @@ public class BaseController {
      * 获取用户请求IP地址
      */
     public static String getIp() {
-        String result = "";
         String createIp = getIpAddr(getRequest());
         if (StrUtil.isNotBlank(createIp)) {
             String[] split = createIp.split(",");
             if (split.length > 0) {
                 if (StrUtil.isNotBlank(split[0])) {
-                    result = split[0];
+                    return split[0].trim();
                 }
             }
         }
-        return result.trim();
+        return "";
     }
 
     /**

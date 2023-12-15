@@ -103,4 +103,5 @@ public final class IdUtils {
         System.err.println("耗时：" + timer.interval() + "ms");
         Assert.equals(threadCount * idCountPerThread, set.size());
     }
+
 }

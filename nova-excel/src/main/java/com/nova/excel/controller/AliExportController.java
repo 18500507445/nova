@@ -176,7 +176,7 @@ public class AliExportController extends BaseController {
 
     /**
      * 并行编排版本，分批写入多个sheet
-     *
+     * todo 纯装逼，这个CountDownLatch不需要用，CompletableFuture.allOf就代表了countDown后await进行主线程阻塞，这为了计数才用它的
      * @param totalCount
      * @param shardingSize
      * @param response
@@ -260,7 +260,7 @@ public class AliExportController extends BaseController {
         return resultList;
     }
 
-    static class MyCallableTask implements Callable<List<AliEasyExportDO>> {
+    private static final class MyCallableTask implements Callable<List<AliEasyExportDO>> {
         private final CountDownLatch cd;
         private final Integer pageNum;
         private final Integer pageSize;
@@ -296,7 +296,7 @@ public class AliExportController extends BaseController {
     }
 
     @Data
-    static class CompletableTask {
+    private static final class CompletableTask {
         private final CountDownLatch cd;
         private final Integer pageNum;
         private final Integer pageSize;

@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.NumberUtil;
 import com.nova.common.utils.thread.Threads;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.stream.Stream;
  * @author: wzh
  * @date: 2022/11/18 13:41
  */
+@Slf4j
 public class CompletableFutureExample {
 
     /**
@@ -90,10 +92,17 @@ public class CompletableFutureExample {
     @Test
     public void demoC() {
         try {
-            String result = CompletableFuture.supplyAsync(() -> {
+            CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
+                System.err.println("supplyAsync = " + "2333");
                 return 2333;
-            }).thenApply(String::valueOf).get();
-            System.err.println(result);
+            }).thenApply(s -> {
+                System.err.println("thenApply = " + "转成字符串后返回");
+                return s + "";
+            }).exceptionally(e -> {
+                log.error("demoC: {}", e.getMessage());
+                return null;
+            });
+            System.err.println(completableFuture.get());
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -222,6 +231,7 @@ public class CompletableFutureExample {
 
     /**
      * 区分 allOf和anyOf
+     * allOf就相当于CountDownLatch.countDown和await
      */
     @Test
     public void demoK() {

@@ -36,7 +36,7 @@ public final class JsonUtil {
      *
      * @param object    对象
      * @param fieldList 字段list
-     * @param clazz     object.class
+     * @param clazz     JSONObject.class或JSONArray.class
      * @param type      枚举INCLUDE包含，EXCLUDE排除
      * @param <T>
      * @return

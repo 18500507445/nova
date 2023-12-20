@@ -14,9 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.TransactionException;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -144,34 +141,26 @@ public class Chapter5Test {
      */
     @Test
     public void testTransaction() {
-        //手动开启事务
-        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
-        try {
-            UserFiveDO userDO = new UserFiveDO();
-            userDO.setName("transaction").setAge(1).setEmail("xxxxx@qq.com").setGender(GenderEnum.MAN);
-            fiveUserMapper.insert(userDO);
-
-            //模拟异常
-//            System.out.println(1 / 0);
-
-            // 提交事务
-            transactionManager.commit(status);
-        } catch (TransactionException e) {
-            // 回滚事务
-            transactionManager.rollback(status);
-
-            //方法2：用于开启注解@Transactional
-            //TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-        }
+        fiveUserService.defaultCase();
     }
 
     /**
      * 多数据源事务：@DSTransactional，直接作用于方法上
+     * (1)同库数据源
+     * (2)不同库数据源
      */
     @Test
     public void testDsTransaction() {
 //        fiveUserService.theSame();
         fiveUserService.notAlike();
+    }
+
+    /**
+     * mp手动管理事务，是不行的
+     */
+    @Test
+    public void testManualTest() {
+        fiveUserService.manual();
     }
 
 

@@ -10,13 +10,20 @@ import com.nova.orm.mybatisplus.entity.UserFiveDO;
  */
 public interface FiveUserService extends IService<UserFiveDO> {
 
+    void defaultCase();
+
     /**
-     * 测试 同数据源 事务
+     * 测试mp 同数据源 事务
      */
     void theSame();
 
     /**
-     * 测试 不同数据源 事务
+     * 测试mp 不同数据源 事务
      */
     void notAlike();
+
+    /**
+     * 测试mp 手动管理事务
+     */
+    void manual();
 }

@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
-    public DynamicDataSource(DataSource defaultTargetDataSource, Map<Object, Object> targetDataSources) {
-        super.setDefaultTargetDataSource(defaultTargetDataSource);
+    public DynamicDataSource(DataSource defaultDataSource, Map<Object, Object> targetDataSources) {
+        super.setDefaultTargetDataSource(defaultDataSource);
         super.setTargetDataSources(targetDataSources);
         super.afterPropertiesSet();
     }

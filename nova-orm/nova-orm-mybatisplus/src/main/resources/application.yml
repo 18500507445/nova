@@ -8,11 +8,11 @@ server:
 spring:
   datasource:
     dynamic:
-      primary: master
+      primary: study
       # 不使用严格模式
       strict: false
       datasource:
-        master:
+        study:
           # 可以不设置，默认德鲁伊
           type: com.alibaba.druid.pool.DruidDataSource
           username: root

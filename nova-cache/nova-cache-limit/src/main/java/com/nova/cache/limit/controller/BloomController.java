@@ -32,7 +32,7 @@ public class BloomController {
     private final RedissonClient redissonClient;
 
     /**
-     * redis
+     * redis实现布隆过滤器
      */
     @PostMapping("redis")
     public void redis() {
@@ -60,6 +60,9 @@ public class BloomController {
         System.err.println("漏掉了" + j + "个,验证结果耗时：" + timer.interval() + "ms");
     }
 
+    /**
+     * redisson实现布隆过滤器
+     */
     @PostMapping("redisson")
     public void redisson() {
         RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter("phoneList");

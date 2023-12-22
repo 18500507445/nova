@@ -61,6 +61,11 @@ public class DruidConfig {
     public void setDataSource(Map<Object, Object> targetDataSources, String sourceName, String beanName) {
         try {
             DataSource dataSource = SpringUtil.getBean(beanName);
+
+            //也可以这要用，但是没测试过
+
+//            DataSource dataSource = Convert.convert(DataSource.class, AopContext.currentProxy());
+
             targetDataSources.put(sourceName, dataSource);
         } catch (Exception e) {
 

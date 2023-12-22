@@ -7,7 +7,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @description:
+ * @description: 令牌桶
  * @author: wzh
  * @date: 2023/4/18 23:56
  */

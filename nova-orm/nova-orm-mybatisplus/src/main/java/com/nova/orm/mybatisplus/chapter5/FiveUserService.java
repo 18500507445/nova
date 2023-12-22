@@ -26,4 +26,5 @@ public interface FiveUserService extends IService<UserFiveDO> {
      * 测试mp 手动管理事务
      */
     void manual();
+
 }

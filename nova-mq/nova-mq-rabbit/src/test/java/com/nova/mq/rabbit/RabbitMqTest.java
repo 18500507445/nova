@@ -4,7 +4,7 @@ import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
 import com.nova.common.core.model.business.MessageBO;
 import com.nova.mq.rabbit.config.RabbitConstants;
-import com.nova.mq.rabbit.listener.SimpleListener;
+import com.nova.mq.rabbit.listener.DirectSimpleListener;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -117,17 +117,18 @@ public class RabbitMqTest {
             //channel.basicNack(delivery.getEnvelope().getDeliveryTag(), false, true);
 
             /**
-             * 跟上面一样，最后一个参数为false，只不过这里省了
+             * 跟上面一样也是拒绝应答，最后一个参数为false，只不过这里省了
              */
             //channel.basicReject(delivery.getEnvelope().getDeliveryTag(), false);
         }, s -> {
         });
     }
 
+    //--------------简单直连模式，使用默认的系统直连交换机，不用config进行绑定，路由key等于队列名称--------------
 
     /**
      * 简单模式1
-     * {@link SimpleListener#one(Message)}
+     * {@link DirectSimpleListener#one(Message)}
      */
     @Test
     public void simpleOne() {
@@ -135,8 +136,8 @@ public class RabbitMqTest {
     }
 
     /**
-     * 简单模式2
-     * {@link SimpleListener#two(Message)}
+     * 简单模式2，接收返回
+     * {@link DirectSimpleListener#two(Message)}
      */
     @Test
     public void simpleTwo() {
@@ -147,7 +148,7 @@ public class RabbitMqTest {
 
     /**
      * 简单模式3
-     * {@link SimpleListener#three(Message)}
+     * {@link DirectSimpleListener#three(Message)}
      */
     @Test
     public void simpleThree() {
@@ -159,7 +160,7 @@ public class RabbitMqTest {
 
     /**
      * 简单模式4
-     * {@link SimpleListener#four(MessageBO)}
+     * {@link DirectSimpleListener#four(MessageBO)}
      */
     @Test
     public void simpleFour() {
@@ -170,7 +171,7 @@ public class RabbitMqTest {
 
     /**
      * 简单模式5
-     * {@link SimpleListener#five(Map)}
+     * {@link DirectSimpleListener#five(Map)}
      */
     @Test
     public void simpleFive() {
@@ -181,6 +182,7 @@ public class RabbitMqTest {
         ThreadUtil.sleep(5000);
     }
 
+    //--------------工作轮训模式，使用默认的系统直连交换机，不用config进行绑定，路由key等于队列名称--------------
 
     /**
      * 工作轮询模式-轮询
@@ -212,6 +214,9 @@ public class RabbitMqTest {
         }
     }
 
+    //--------------广播交换机，手动创建，config进行队列绑定，设置routingKey，优点：1对多，延迟适中--------------
+
+
     /**
      * 广播模式
      */
@@ -220,6 +225,10 @@ public class RabbitMqTest {
         String exchangeName = RabbitConstants.EXCHANGE_FANOUT;
         rabbitTemplate.convertAndSend(exchangeName, "", MSG);
     }
+
+
+    //--------------直连交换机，手动创建，config进行队列绑定，设置routingKey，优点：延迟低，速度快--------------
+
 
     /**
      * 直连模式1
@@ -241,11 +250,14 @@ public class RabbitMqTest {
     /**
      * 直连模式3
      * 过期进入死信队列
+     * todo 偷懒了，干脆队列三的监听都直接不写了，反正也不用他干活，设置了过期直接进入死信队列，哈哈
      */
     @Test
     public void directTestThree() {
         rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_DIRECT, "directThree", MSG);
     }
+
+    //--------------主题交换机，手动创建，config进行队列绑定，设置routingKey，优点：模糊匹配，延迟适中--------------
 
     /**
      * 主题模式

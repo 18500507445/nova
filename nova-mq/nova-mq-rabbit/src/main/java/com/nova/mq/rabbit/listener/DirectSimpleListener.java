@@ -20,7 +20,7 @@ import java.util.Map;
  * @date: 2023/1/6 15:42
  */
 @Component
-public class SimpleListener {
+public class DirectSimpleListener {
 
     /**
      * 简单队列1 (无返回值)
@@ -43,7 +43,7 @@ public class SimpleListener {
      * @return
      */
     @RabbitHandler
-    @RabbitListener(queues = RabbitConstants.QUEUE_SIMPLE_TWO)
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.QUEUE_SIMPLE_TWO))
     public String two(Message message) {
         System.err.println("简单模式two消息：" + JSONUtil.toJsonStr(new String(message.getBody())));
         return "收到";

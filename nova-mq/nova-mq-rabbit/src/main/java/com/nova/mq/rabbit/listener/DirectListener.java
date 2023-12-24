@@ -41,7 +41,7 @@ public class DirectListener {
     @RabbitListener(queues = RabbitConstants.QUEUE_DIRECT_TWO, ackMode = "MANUAL")
     public void two(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        //false消息从队列中移除
+        //拒绝应答
         channel.basicReject(tag, false);
         System.err.println("直连模式two,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  * @date: 2023/1/6 17:54
  */
 @Component
-public class WorkListener {
+public class DirectWorkListener {
 
     /**
      * 工作队列1-1

@@ -73,7 +73,7 @@ public class ChannelInit {
     @PostConstruct
     @Order(-1)
     void initConfig() {
-        System.err.println("initConfig，初始化顺序 -1");
+        log.error("initConfig，初始化顺序 -1");
         List<ChannelConfig> configList = new ArrayList<>();
         ChannelConfig jdConfig1 = ChannelConfig.builder().id(1L).name("jd").env(1).key("key").build();
         ChannelConfig jdConfig2 = ChannelConfig.builder().id(2L).name("jd").env(2).key("key").build();
@@ -100,7 +100,7 @@ public class ChannelInit {
      * 异步刷新缓存
      */
     public void refresh() {
-        System.err.println("修改配置，进行刷新缓存");
+        log.error("修改配置，进行刷新缓存");
         EXECUTOR_POOL.submit(wrap(this::initConfig, MDC.get(Trace.TRACE_ID)));
     }
 

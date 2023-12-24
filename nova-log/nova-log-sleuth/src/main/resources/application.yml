@@ -16,3 +16,10 @@ logging:
   file:
     path: /Users/wangzehui/Documents/Logs/nova/${spring.application.name}
 
+#  level:
+#    org:
+#      springframework:
+#        web:
+#          servlet:
+#            DispatcherServlet: DEBUG
+

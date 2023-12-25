@@ -109,6 +109,8 @@ public class SleuthController {
     @GetMapping("/demoG")
     public void demoG() {
         log.error("demoG");
+        log.warn("main-threadId = {}", Thread.currentThread().getId());
+        new Thread(() -> log.error("demoG-thread-noWrap")).start();
         new Thread(ThreadWrap.runnableWrap(() -> log.error("demoG-thread"))).start();
     }
 
@@ -118,6 +120,8 @@ public class SleuthController {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 20, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
         threadPoolExecutor.setThreadFactory(new CustomizableThreadFactory("ThreadPoolExecutor"));
         threadPoolExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+
+        threadPoolExecutor.submit(() -> log.error("demoH-thread-noWrap"));
         threadPoolExecutor.submit(ThreadWrap.runnableWrap(() -> log.error("demoH-thread")));
     }
 

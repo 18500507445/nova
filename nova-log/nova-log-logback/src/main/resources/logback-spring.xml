@@ -11,9 +11,9 @@
     <property name="log.maxFileSize" value="10240MB"/>
 
     <!-- 同步打印，可以打印方法和行号 -->
-    <property name="log.pattern" value="%d [%t] [traceId:%X{TraceId}] [spanId:%X{SpanId}] %-5level %logger{20} - [%method,%line] - %msg%n"/>
+    <property name="log.pattern" value="%d{MM-dd HH:mm:ss-SSS} [%t] [traceId:%X{TraceId}] [spanId:%X{SpanId}] %-5level %logger{20} - [%method,%line] - %msg%n"/>
 
-    <!-- 异步打印用这个，因为默认不开启打印方法和行数 -->
+    <!-- 异步打印，因为默认不开启打印方法和行数 -->
     <property name="log.pattern.async" value="%d{MM-dd HH:mm:ss-SSS} [%t] [traceId:%X{traceId}] [spanId:%X{spanId}] %-5level %logger{20} - %msg%n"/>
 
     <!-- 控制台输出 -->
@@ -24,7 +24,7 @@
         </encoder>
     </appender>
 
-    <!-- info日志输出 -->
+    <!-- 系统info日志输出 -->
     <appender name="info_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/info.log</file>
         <!-- 滚动策略 -->
@@ -45,15 +45,15 @@
         </filter>
     </appender>
 
-    <!-- debug日志输出 -->
-    <appender name="debug_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/debug.log</file>
+    <!-- 系统warn日志输出 -->
+    <appender name="warn_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/debug.log</fileNamePattern>
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern.async}</pattern>
+            <pattern>${log.pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
@@ -62,7 +62,7 @@
         </filter>
     </appender>
 
-    <!-- error日志输出 -->
+    <!-- 系统error日志输出 -->
     <appender name="error_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -70,7 +70,7 @@
             <maxHistory>${log.maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern.async}</pattern>
+            <pattern>${log.pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
@@ -110,7 +110,7 @@
     <!-- 定义服务器日志 -->
     <root level="info">
         <appender-ref ref="async_info"/>
-        <appender-ref ref="debug_log"/>
+        <appender-ref ref="warn_log"/>
         <appender-ref ref="error_log"/>
     </root>
 

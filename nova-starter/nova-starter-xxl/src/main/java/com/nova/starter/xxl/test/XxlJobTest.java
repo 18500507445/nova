@@ -1,9 +1,7 @@
-package com.nova.tools;
+package com.nova.starter.xxl.test;
 
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -25,8 +23,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author xuxueli 2019-12-11 21:52:51
  */
-@SpringBootTest
-@Slf4j
 public class XxlJobTest {
 
     /**
@@ -239,10 +235,10 @@ public class XxlJobTest {
     }
 
     public void init() {
-        log.info("init");
+        System.out.println("init" + "init");
     }
 
     public void destroy() {
-        log.info("destroy");
+        System.out.println("destroy" + "destroy");
     }
 }

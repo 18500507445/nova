@@ -1,6 +1,7 @@
 package com.nova.tools;
 
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
@@ -17,34 +18,6 @@ class LombokTest {
     @Data
     static class DemoA {
         private String name;
-    }
-
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Slf4j
-    @Setter
-    @Getter
-    @ToString
-    @Accessors(chain = true)
-    static class DemoB {
-        private String name;
-
-        private Integer age;
-
-        private String remark;
-    }
-
-    /**
-     * @SuperBuilder 生成的构建器可以通过子类继承扩展,@Builder 不支持继承扩展
-     */
-    @Data
-    @SuperBuilder
-    static class DemoC {
-        /**
-         * 开启建造者模式，设置默认值，添加如下注解，作用于实体字段上
-         */
-        @Builder.Default
-        private String name = "默认";
     }
 
     /**
@@ -66,6 +39,21 @@ class LombokTest {
         System.err.println("hashCode：" + demoA.hashCode());
         System.err.println("equals：" + demoA.equals(new DemoA()));
         System.err.println("canEqual：" + demoA.canEqual(new DemoA()));
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Slf4j
+    @Setter
+    @Getter
+    @ToString
+    @Accessors(chain = true)
+    static class DemoB {
+        private String name;
+
+        private Integer age;
+
+        private String remark;
     }
 
     /**
@@ -92,14 +80,38 @@ class LombokTest {
         System.err.println("demoB = " + demoB.toString());
     }
 
+
     /**
-     * Builder开启建造者模式
+     * SuperBuilder 生成的构建器可以通过子类继承扩展,@Builder 不支持继承扩展
      */
+    @Data
+    @SuperBuilder
+    static class DemoC {
+        /**
+         * 开启建造者模式，设置默认值，添加如下注解，作用于实体字段上
+         */
+        @Builder.Default
+        private String name = "默认";
+    }
+
     @Test
     public void demoC() {
         DemoC demoC = DemoC.builder().build();
         System.err.println("demoC = " + JSONUtil.toJsonStr(demoC));
     }
 
+
+    @Data
+    static class DemoD {
+        private String pId = "1";
+        private boolean isOpen = false;
+    }
+
+    @Test
+    public void demoD() {
+        DemoD demoD = new DemoD();
+        System.err.println("demoD-ByHutoolJson = " + JSONUtil.toJsonStr(demoD));
+        System.err.println("demoD-ByAliJson = " + JSONObject.toJSONString(demoD));
+    }
 
 }

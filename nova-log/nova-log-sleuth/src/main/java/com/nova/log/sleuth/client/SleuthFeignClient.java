@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @date: 2023/12/24 19:30
  */
 @FeignClient(name = "sleuth-remote", url = "http://localhost:8081/api")
-public interface SleuthRemoteService {
+public interface SleuthFeignClient {
 
     @GetMapping("/sleuthTest")
     void sleuthTest();

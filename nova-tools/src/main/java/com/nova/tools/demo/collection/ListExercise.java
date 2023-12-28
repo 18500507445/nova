@@ -1,9 +1,11 @@
 package com.nova.tools.demo.collection;
 
-import cn.hutool.json.JSONUtil;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -20,7 +22,7 @@ class ListExercise {
      */
     @Test
     public void arrayList() {
-        List<String> arrayList = new ArrayList<>();
+        List<String> list = new ArrayList<>();
     }
 
     /**
@@ -33,15 +35,15 @@ class ListExercise {
     }
 
     /**
-     * 双向循环链表实现，插入、删除效率高、查找和便利效率低
+     * 双向循环链表实现，头插、删除效率高、查找和便利效率低
      * 可以当做堆栈、队列（单项、双向）使用，线程不安全
      */
     @Test
     public void linkList() {
-        LinkedList<String> linkedList = new LinkedList<>();
-        linkedList.addFirst("1");
-        linkedList.addLast("2");
-        System.err.println("linkedList = " + linkedList);
+        LinkedList<String> list = new LinkedList<>();
+        list.addFirst("1");
+        list.addLast("2");
+        System.err.println("linkedList = " + list);
     }
 
     /**
@@ -58,12 +60,12 @@ class ListExercise {
      */
     @Test
     public void copyOnWriteList() {
-        List<String> copyOnWriteList = new CopyOnWriteArrayList<>();
-        copyOnWriteList.add("a");
-        copyOnWriteList.add("b");
-        copyOnWriteList.add("c");
+        List<String> list = new CopyOnWriteArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
 
-        System.err.println(JSONUtil.toJsonStr(copyOnWriteList));
+        System.err.println("list = " + list);
     }
 
 }

@@ -1,9 +1,12 @@
 package com.nova.log.sleuth.controller;
 
-import com.nova.log.sleuth.client.SleuthRemoteService;
+import com.nova.log.sleuth.client.SleuthFeignClient;
 import com.nova.log.sleuth.thread.ThreadWrap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
+import org.springframework.cloud.sleuth.Span;
+import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -21,6 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @author: wzh
  * @description Sleuth
  * @date: 2023/10/12 15:45
+ * @see <a href="https://blog.csdn.net/Allocator/article/details/121662155">springcloud-sleuth 自定义traceId, spanId日志pattern
  */
 @Slf4j(topic = "SleuthController")
 @RequiredArgsConstructor
@@ -28,10 +33,13 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/api")
 public class SleuthController {
 
-    private final SleuthRemoteService sleuthRemoteService;
+    private final SleuthFeignClient sleuthFeignClient;
 
     private final Executor jdkExecutor;
 
+    private final RestTemplate restTemplate;
+
+    private final Tracer tracer;
 
     /**
      * 复制一个SleuthApplication端口8081，添加add-vm-options（-Dserver.port=8081），进行测试，
@@ -40,6 +48,14 @@ public class SleuthController {
     @GetMapping("/sleuthTest")
     public void sleuthTest() {
         log.error("sleuthTest");
+
+        Span span = tracer.currentSpan();
+        if (span != null) {
+            String traceId = span.context().traceId();
+            String spanId = span.context().spanId();
+            Boolean sampled = span.context().sampled();
+            System.err.println("traceId = " + traceId + "，spanId = " + spanId + "，sampled = " + sampled);
+        }
     }
 
     /**
@@ -48,7 +64,6 @@ public class SleuthController {
     @GetMapping("/demoA")
     public void demoA() {
         log.error("demoA");
-        RestTemplate restTemplate = new RestTemplate();
         restTemplate.exchange("http://127.0.0.1:8081/api/sleuthTest", HttpMethod.GET, null, String.class);
     }
 
@@ -57,8 +72,9 @@ public class SleuthController {
      */
     @GetMapping("/demoB")
     public void demoB() {
-        log.error("demoB");
-        sleuthRemoteService.sleuthTest();
+        Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
+        log.error("MDC-map：{}", copyOfContextMap);
+        sleuthFeignClient.sleuthTest();
     }
 
     /**
@@ -67,7 +83,7 @@ public class SleuthController {
     @GetMapping("/demoC")
     public void demoC() {
         log.error("demoC");
-        new Thread(sleuthRemoteService::sleuthTest).start();
+        new Thread(sleuthFeignClient::sleuthTest).start();
     }
 
     /**
@@ -79,7 +95,7 @@ public class SleuthController {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 20, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
         threadPoolExecutor.setThreadFactory(new CustomizableThreadFactory("ThreadPoolExecutor"));
         threadPoolExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        threadPoolExecutor.submit(sleuthRemoteService::sleuthTest);
+        threadPoolExecutor.submit(sleuthFeignClient::sleuthTest);
     }
 
     /**
@@ -88,7 +104,7 @@ public class SleuthController {
     @GetMapping("/demoE")
     public void demoE() {
         log.error("demoE");
-        jdkExecutor.execute(sleuthRemoteService::sleuthTest);
+        jdkExecutor.execute(sleuthFeignClient::sleuthTest);
     }
 
     @GetMapping("/demoF")
@@ -103,7 +119,7 @@ public class SleuthController {
     @Async("springExecutor")
     public void async() {
         log.error("async");
-        sleuthRemoteService.sleuthTest();
+        sleuthFeignClient.sleuthTest();
     }
 
     @GetMapping("/demoG")

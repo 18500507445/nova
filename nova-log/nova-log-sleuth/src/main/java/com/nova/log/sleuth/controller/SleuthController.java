@@ -42,8 +42,7 @@ public class SleuthController {
     private final Tracer tracer;
 
     /**
-     * 复制一个SleuthApplication端口8081，添加add-vm-options（-Dserver.port=8081），进行测试，
-     * 发现http调用后traceId是不同的，所以还是后续手动维护TraceId吧，不要用cloud-sleuth依赖包
+     * 复制一个SleuthApplication端口8081，添加add-vm-options（-Dserver.port=8081），进行测试
      */
     @GetMapping("/sleuthTest")
     public void sleuthTest() {
@@ -72,6 +71,7 @@ public class SleuthController {
      */
     @GetMapping("/demoB")
     public void demoB() {
+        //当前线程的上下文信息的副本
         Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
         log.error("MDC-map：{}", copyOfContextMap);
         sleuthFeignClient.sleuthTest();

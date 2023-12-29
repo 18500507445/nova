@@ -2,6 +2,7 @@ package com.nova.tools;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.lang.ConsistentHash;
 import com.google.common.collect.Lists;
 import com.nova.starter.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -139,5 +137,22 @@ public class RedisTest {
         System.err.println("耗时：" + timer.interval());
     }
 
+
+    private static final int NUM_KEYS = 16;
+
+    private static final String[] KEYS = {
+            "key0", "key1", "key2", "key3", "key4", "key5", "key6", "key7",
+            "key8", "key9", "key10", "key11", "key12", "key13", "key14", "key15"
+    };
+
+    // 构建一致性哈希环
+    public static final ConsistentHash<String> CONSISTENT_HASH = new ConsistentHash<>(NUM_KEYS, Arrays.asList(KEYS));
+
+    @Test
+    public void hashCodeTest() {
+        String product = "12334";
+        String key = CONSISTENT_HASH.get(product);
+        System.out.println("key = " + key);
+    }
 
 }

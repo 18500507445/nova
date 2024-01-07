@@ -7,6 +7,7 @@ import com.nova.cache.lock.config.impl.MasterSlaveRedissonConfigImpl;
 import com.nova.cache.lock.config.impl.SentinelRedissonConfigImpl;
 import com.nova.cache.lock.config.impl.StandaloneRedissonConfigImpl;
 import com.nova.cache.lock.enums.RedisConnectionEnum;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
@@ -18,14 +19,11 @@ import org.redisson.config.Config;
  * @author wzh
  * @date 2022/12/26 23:10
  */
+@Getter
 @Slf4j
 public class RedissonManager {
 
     private Redisson redisson = null;
-
-    public Redisson getRedisson() {
-        return redisson;
-    }
 
     private RedissonManager() {
 

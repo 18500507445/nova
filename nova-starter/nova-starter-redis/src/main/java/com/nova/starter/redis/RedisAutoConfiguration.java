@@ -2,6 +2,7 @@ package com.nova.starter.redis;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,7 @@ import java.time.Duration;
  * @date: 2023/4/22 20:08
  */
 @Configuration
+@ConditionalOnClass(name = "org.springframework.data.redis.core.RedisTemplate")
 public class RedisAutoConfiguration {
 
     /**

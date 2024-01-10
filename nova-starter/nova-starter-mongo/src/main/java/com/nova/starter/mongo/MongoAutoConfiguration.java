@@ -1,5 +1,7 @@
 package com.nova.starter.mongo;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,7 @@ import java.util.Arrays;
  * @date: 2023/4/22 20:53
  */
 @Configuration
+@ConditionalOnClass(name = "org.springframework.data.mongodb.core.MongoTemplate")
 public class MongoAutoConfiguration {
 
     @Bean(name = "mongoService")
@@ -39,9 +42,11 @@ public class MongoAutoConfiguration {
 
     /**
      * 默认 MongoTemplate
+     * ConditionalOnBean 只有当名为primaryMongoProperties的Bean存在于容器中时，才会创建和配置primaryMongoTemplate的bean
      */
     @Bean(name = "primaryMongoTemplate")
     @Primary
+    @ConditionalOnBean(name = "primaryMongoProperties")
     public MongoTemplate primaryMongoTemplate() throws UnsupportedEncodingException {
         MongoProperties mongoProperties = this.primaryMongoProperties();
         if (null != mongoProperties.getHost()) {
@@ -60,6 +65,7 @@ public class MongoAutoConfiguration {
      */
     @Bean
     @Primary
+    @ConditionalOnBean(name = "primaryMongoProperties")
     public MongoDatabaseFactory primaryMongoFactory(MongoProperties mongoProperties) throws UnsupportedEncodingException {
         String url;
         if (null != mongoProperties.getUri()) {

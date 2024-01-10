@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author: wzh
  * @date: 2023/4/22 22:10
  */
+// 指定了前缀为"xxl.job"的配置属性，可以再其它类里进行注入使用了
 @ConfigurationProperties("xxl.job")
 public class XxlProperties {
 

@@ -2,6 +2,7 @@ package com.nova.starter.xxl;
 
 import com.xxl.job.core.executor.XxlJobExecutor;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,9 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2023/4/22 22:12
  */
 @Configuration
+//指定了XxlProperties为一个属性类
 @EnableConfigurationProperties({XxlProperties.class})
+@ConditionalOnClass(name = "com.nova.starter.xxl.XxlProperties")
 public class XxlAutoConfiguration {
 
     @Bean

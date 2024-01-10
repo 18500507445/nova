@@ -140,7 +140,7 @@ public class TransactionServiceImpl implements TransactionService {
             studentMapper.insertA();
             //主线程等待，可以添加join()
             CompletableFuture.runAsync(() -> {
-                //（1）先获取当前线程的事务状态
+                //（1）声明式事务可以这样用，先获取当前线程的事务状态
                 TransactionStatus subStatus = TransactionAspectSupport.currentTransactionStatus();
                 try {
                     b();

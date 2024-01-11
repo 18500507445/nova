@@ -78,10 +78,10 @@ class MapExercise {
         }
     }
 
-
     /**
-     * TreeMap，有序，默认是按键值的升序排序，它是通过红黑树实现的
-     * 线程不安全
+     * 线程：不安全
+     * 性能：
+     * 场景：底层通过红黑树实现的，reeMap，有序，默认是按键值的升序排序
      */
     @Test
     public void treeMap() {
@@ -103,9 +103,11 @@ class MapExercise {
         }
     }
 
+
     /**
-     * 关联数组、哈希表、有序（可以记录元素存储的顺序，FIFO）
-     * 线程不安全
+     * 线程：不安全
+     * 性能：
+     * 场景：关联数组、哈希表、有序（可以记录元素存储的顺序，FIFO）
      */
     @Test
     public void linkedHashMap() {
@@ -120,22 +122,22 @@ class MapExercise {
 
 
     /**
-     * 线程安全（性能较好，sync锁住数组元素）
+     * 线程：安全
+     * 性能：性能一般，sync锁住数组元素
+     * 场景：并发场景
      */
     @Test
     public void concurrentHashMap() {
         Map<String, String> concurrentHashMap = new ConcurrentHashMap<>(16);
     }
 
-
     /**
-     * 线程安全
-     * 有序
-     * 性能最好，没有锁，依靠cas（compare and swap），有就替换
-     * 并发跳跃表
+     * 线程：安全
+     * 性能：性能最好，没有锁，依靠cas（compare and swap），有就替换
+     * 场景：并发跳跃表，有序
      */
     @Test
-    public void demoA() {
+    public void concurrentSkipListMap() {
         ConcurrentSkipListMap<String, String> skipListMap = new ConcurrentSkipListMap<>();
         skipListMap.put("1", "a");
         skipListMap.put("2", "b");
@@ -145,9 +147,9 @@ class MapExercise {
 
 
     /**
-     * 线程安全
-     * 不建议用（性能极低，sync锁住整个对象，效率低下）
-     * key和value都不允许为null
+     * 线程：安全
+     * 性能：不建议用（性能极低，sync锁住整个对象，效率低下）
+     * 场景：key和value都不允许为null
      */
     @Test
     @Deprecated

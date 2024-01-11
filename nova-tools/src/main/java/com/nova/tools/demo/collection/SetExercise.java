@@ -16,9 +16,9 @@ import java.util.concurrent.ConcurrentHashMap;
 class SetExercise {
 
     /**
-     * 底层基于HashMap实现
-     * 线程不安全
-     * 无序
+     * 线程：不安全
+     * 性能：很好
+     * 场景：底层基于HashMap实现，无序
      */
     @Test
     public void hashSet() {

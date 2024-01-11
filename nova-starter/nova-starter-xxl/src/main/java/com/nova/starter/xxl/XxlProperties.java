@@ -1,6 +1,12 @@
 package com.nova.starter.xxl;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @description:
@@ -9,6 +15,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 // 指定了前缀为"xxl.job"的配置属性，可以再其它类里进行注入使用了
 @ConfigurationProperties("xxl.job")
+@Validated
+@Data
 public class XxlProperties {
 
     /**
@@ -24,67 +32,30 @@ public class XxlProperties {
     /**
      * 控制器配置
      */
+    @NotNull(message = "控制器配置不能为空")
     private AdminProperties admin;
 
     /**
      * 执行器配置
      */
+    @NotNull(message = "执行器配置不能为空")
     private ExecutorProperties executor;
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public void setAdmin(AdminProperties admin) {
-        this.admin = admin;
-    }
-
-    public void setExecutor(ExecutorProperties executor) {
-        this.executor = executor;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public AdminProperties getAdmin() {
-        return admin;
-    }
-
-    public ExecutorProperties getExecutor() {
-        return executor;
-    }
 
     /**
      * XXL-Job 调度器配置类
      */
+    @Data
+    @Valid
     public static class AdminProperties {
 
-        /**
-         * 调度器地址
-         */
+        @NotEmpty(message = "调度器地址不能为空")
         private String addresses;
-
-        public void setAddresses(String addresses) {
-            this.addresses = addresses;
-        }
-
-        public String getAddresses() {
-            return addresses;
-        }
     }
 
     /**
      * XXL-Job 执行器配置类
      */
+    @Data
     public static class ExecutorProperties {
 
         /**
@@ -125,45 +96,5 @@ public class XxlProperties {
          * 日志保留天数
          */
         private Integer logRetentionDays = LOG_RETENTION_DAYS_DEFAULT;
-
-        public void setAppName(String appName) {
-            this.appName = appName;
-        }
-
-        public void setIp(String ip) {
-            this.ip = ip;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public void setLogPath(String logPath) {
-            this.logPath = logPath;
-        }
-
-        public void setLogRetentionDays(Integer logRetentionDays) {
-            this.logRetentionDays = logRetentionDays;
-        }
-
-        public String getAppName() {
-            return appName;
-        }
-
-        public String getIp() {
-            return ip;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public String getLogPath() {
-            return logPath;
-        }
-
-        public Integer getLogRetentionDays() {
-            return logRetentionDays;
-        }
     }
 }

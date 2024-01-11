@@ -17,17 +17,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 class ListExercise {
 
     /**
-     * 数组实现的，随机查找和遍历效率高，插入、删除效率低
-     * 有序、可重复、线程不安全
+     * 线程：不安全
+     * 性能：很好
+     * 场景：数组实现的，随机查找和遍历效率高，插入、删除效率低。有序、可重复
      */
     @Test
     public void arrayList() {
         List<String> list = new ArrayList<>();
+        System.out.println("list = " + list);
     }
 
     /**
-     * 与arrayList相似
-     * 线程安全、性能略低
+     * 线程：安全
+     * 性能：性能略低
+     * 场景：与arrayList相似
      */
     @Test
     public void vector() {
@@ -35,8 +38,9 @@ class ListExercise {
     }
 
     /**
-     * 双向循环链表实现，头插、删除效率高、查找和便利效率低
-     * 可以当做堆栈、队列（单项、双向）使用，线程不安全
+     * 线程：不安全
+     * 性能：双向循环链表实现，头插、删除效率高、查找和便利效率低
+     * 场景：可以当做堆栈、队列（单项、双向）使用
      */
     @Test
     public void linkList() {
@@ -47,8 +51,9 @@ class ListExercise {
     }
 
     /**
-     * LinkedList如何进行线程安全处理
-     * 方法一：Collections.synchronizedList(new LinkedList())但是不推荐，用下列的代码吧
+     * 线程：安全
+     * 性能：很好
+     * 场景：LinkedList如何进行线程安全处理，方法一：Collections.synchronizedList(new LinkedList())但是不推荐，用下列的代码吧
      */
     @Test
     public void concurrentLinkedQueue() {
@@ -56,7 +61,9 @@ class ListExercise {
     }
 
     /**
-     * 适用于多读，少写的场景，性能很好
+     * 线程：安全
+     * 性能：很好
+     * 场景：适用于多读，少写的
      */
     @Test
     public void copyOnWriteList() {

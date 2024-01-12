@@ -7,15 +7,11 @@ import com.google.common.collect.Lists;
 import com.nova.starter.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.redisson.api.RKeys;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: redis-starter测试类
@@ -29,78 +25,9 @@ public class RedisTest {
     @Autowired
     private RedisService redisService;
 
-    @Autowired
-    private RedissonClient redissonClient;
 
     @Autowired
     private RedisTemplate<String, Object> secondRedisTemplate;
-
-    /**
-     * 测试redisson加锁、解锁
-     */
-    @Test
-    public void testRedisson() {
-        String key = "redissonLock";
-
-        boolean lock = lock(key, 100L);
-        boolean isLock = isLocked(key);
-        System.err.println("lock = " + lock);
-        System.err.println("isLock = " + isLock);
-
-        release(key);
-        System.out.println("isLocked(key) = " + isLocked(key));
-        System.out.println("getExpirationTime(key) = " + getExpirationTime(key));
-        boolean lock2 = lock(key, 100L);
-
-        System.out.println("getExpirationTime(key) = " + getExpirationTime(key));
-        System.err.println("lock2 = " + lock2);
-
-        System.out.println("isLocked(key) = " + isLocked(key));
-
-    }
-
-
-    public boolean lock(String key, long expireSeconds) {
-        RLock rLock = redissonClient.getLock(key);
-        boolean flag = false;
-        try {
-            flag = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            log.error("Redisson分布式锁【异常】，key = " + key, e);
-        } finally {
-            if (flag) {
-                log.info("Redisson分布式锁【成功】，key = {}", key);
-            } else {
-                log.info("Redisson分布式锁【失败】，key = {}", key);
-            }
-        }
-        return flag;
-    }
-
-    public void release(String key) {
-        log.info("Redisson分布式锁【解锁】，key = {}", key);
-        redissonClient.getLock(key).unlock();
-    }
-
-    /**
-     * 查询是否有锁
-     */
-    public boolean isLocked(String lockName) {
-        return redissonClient.getLock(lockName).isLocked();
-    }
-
-    /**
-     * 获取过期时间
-     */
-    public Long getExpirationTime(String key) {
-        RKeys rKeys = redissonClient.getKeys();
-        long milliseconds = rKeys.remainTimeToLive(key);
-        if (milliseconds >= 0) {
-            return milliseconds / 1000;
-        } else {
-            return milliseconds;
-        }
-    }
 
     @Test
     public void testRedis() {
@@ -117,7 +44,6 @@ public class RedisTest {
     public void secondRedis() {
         final Object o1 = redisService.getHashValue("testHash", "1");
         System.err.println("o1 = " + o1);
-
 
         secondRedisTemplate.opsForValue().set("database2", "1");
         Object o = secondRedisTemplate.opsForValue().get("database2");
@@ -187,5 +113,21 @@ public class RedisTest {
         String key = CONSISTENT_HASH.get(product);
         System.out.println("key = " + key);
     }
+
+    @Test
+    public void testLock() {
+        String key = "testLock";
+        boolean lock = redisService.lock(key, key, 1000);
+        System.err.println("lock = " + lock);
+
+
+        Object o = redisService.get(key);
+        System.err.println("o = " + o);
+
+        boolean unlock = redisService.unlock(key, key);
+        System.err.println("unlock = " + unlock);
+    }
+
+
 
 }

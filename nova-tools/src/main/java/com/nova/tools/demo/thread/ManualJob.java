@@ -3,9 +3,9 @@ package com.nova.tools.demo.thread;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
-import com.nova.common.utils.thread.Threads;
-import lombok.extern.slf4j.Slf4j;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
@@ -81,7 +81,7 @@ class ManualJob {
         }
         //todo 可做解锁ip处理 情景举例：一个任务执行失败了，扔到重试表里，重试表有个locker字段，定时任务一直扫表，哪台机器哪个线程抢到任务locker放ip，然后当任务被线程处理，locker清除ip
         System.err.println("模拟：清除该ip锁定的任务后,睡眠2s");
-        Threads.sleep(2000);
+        ThreadUtil.sleep(2000);
 
         System.err.println("------------准备处理业务------------");
         SERVICE.execute(new RetryTask());
@@ -103,7 +103,7 @@ class ManualJob {
                     System.err.println("------------允许TASK个数：" + taskNum);
 
                     if (taskNum == 0) {
-                        Threads.sleep(1000);
+                        ThreadUtil.sleep(1000);
                         break;
                     }
 

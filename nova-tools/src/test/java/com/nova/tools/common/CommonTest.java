@@ -1,4 +1,4 @@
-package com.nova.tools;
+package com.nova.tools.common;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;

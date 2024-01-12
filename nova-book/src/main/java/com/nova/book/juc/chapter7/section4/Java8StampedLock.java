@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter7.section4;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.locks.StampedLock;
@@ -25,7 +25,7 @@ class Java8StampedLock {
         new Thread(() -> {
             dataContainer.read(0);
         }, "t1").start();
-        Threads.sleep(500);
+        ThreadUtil.sleep(500);
         new Thread(() -> {
             dataContainer.read(0);
             //dataContainer.write(9999);
@@ -45,7 +45,7 @@ class DataContainerStamped {
     public void read(long readTime) {
         long stamp = lock.tryOptimisticRead();
         log.debug("optimistic read locking...{}", stamp);
-        Threads.sleep(readTime);
+        ThreadUtil.sleep(readTime);
         if (lock.validate(stamp)) {
             log.debug("read finish...{}, data:{}", stamp, data);
             return;
@@ -55,7 +55,7 @@ class DataContainerStamped {
         try {
             stamp = lock.readLock();
             log.debug("read lock {}", stamp);
-            Threads.sleep(readTime);
+            ThreadUtil.sleep(readTime);
             log.debug("read finish...{}, data:{}", stamp, data);
         } finally {
             log.debug("read unlock {}", stamp);
@@ -67,7 +67,7 @@ class DataContainerStamped {
         long stamp = lock.writeLock();
         log.debug("write lock {}", stamp);
         try {
-            Threads.sleep(2000);
+            ThreadUtil.sleep(2000);
             this.data = newData;
         } finally {
             log.debug("write unlock {}", stamp);

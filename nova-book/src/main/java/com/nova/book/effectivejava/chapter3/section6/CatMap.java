@@ -18,7 +18,7 @@ import java.util.function.Function;
  * 需要每个实现类都要修改，新增这个方法，或者我们选择破坏接口完整性，将新增的方法声明为另外的接口（这样显然会导致接口设计丑陋复杂）
  * 怎么处理这种问题？我们可以设计一个BaseMapper ，作为抽象类实现Mapper，其他的实现类可以继承BaseMapper，在需要新增一个方法的时候，
  * 只要在BaseMapper 中添加一个基本的默认实现，就能避免修改几百个问题
- *
+ * <p>
  * 补充说明：虽然这种方法是一种解决方案，但还是建议，不是特殊情况，尽量避免接口在广泛使用后进行修改，最好在设计之时认真考虑情况需要哪些功能，
  * 也可以考虑版本化接口方案或者接口继承初始版本： public interface IMapper 更新方式1：public interface IMapper2，在接口被使用的位置，
  * 提供重载方法，并行提供 IMapper2 的方法更新方式2： public interface IMapper2 extends IMapper：因为是子类，

@@ -8,7 +8,7 @@ import lombok.Data;
  * @date: 2023/2/14 19:46
  */
 @Data
-class Cat implements Cloneable{
+class Cat implements Cloneable {
 
     private Integer id;
 

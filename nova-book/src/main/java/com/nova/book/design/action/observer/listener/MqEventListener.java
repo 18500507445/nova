@@ -5,7 +5,7 @@ package com.nova.book.design.action.observer.listener;
  * @author: wzh
  * @date: 2022/12/31 10:08
  */
-public class MqEventListener implements EventListener{
+public class MqEventListener implements EventListener {
 
     @Override
     public void doEvent(Object obj) {

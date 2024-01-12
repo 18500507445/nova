@@ -4,6 +4,7 @@
 ~~~java
 @DataSource(value = DataSourceType.MASTER)
 ~~~
+
 * 方式二：[《动态数据源依赖》](https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter)
 ~~~xml
 <dependencies>
@@ -14,7 +15,4 @@
     </dependency>
 </dependencies>
 ~~~
-
-### 收集的知识
-* [《百度》](https://www.baidu.com)
 

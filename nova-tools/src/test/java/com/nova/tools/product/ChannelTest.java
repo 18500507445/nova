@@ -1,11 +1,11 @@
 package com.nova.tools.product;
 
 import cn.hutool.json.JSONUtil;
-import com.nova.tools.product.manager.AbstractChannel;
-import com.nova.tools.product.manager.ChannelFactory;
-import com.nova.tools.product.channel.YxChannel;
+import com.nova.tools.product.base.AbstractChannel;
+import com.nova.tools.product.base.ChannelFactory;
+import com.nova.tools.product.base.impl.YxChannel;
 import com.nova.tools.product.enums.ChannelEnum;
-import com.nova.tools.product.manager.ChannelInit;
+import com.nova.tools.product.base.ChannelInit;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

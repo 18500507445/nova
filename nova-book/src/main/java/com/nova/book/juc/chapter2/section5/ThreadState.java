@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter2.section5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -45,7 +45,7 @@ class ThreadState {
             @Override
             public void run() {
                 synchronized (obj) {
-                    Threads.sleep(1000000);// timed_waiting
+                    ThreadUtil.sleep(1000000);// timed_waiting
                 }
             }
         };
@@ -67,13 +67,13 @@ class ThreadState {
             @Override
             public void run() {
                 synchronized (obj) { // blocked
-                    Threads.sleep(1000000);
+                    ThreadUtil.sleep(1000000);
                 }
             }
         };
         t6.start();
 
-        Threads.sleep(500);
+        ThreadUtil.sleep(500);
 
         log.debug("t1 state {}", t1.getState());
         log.debug("t2 state {}", t2.getState());

@@ -38,6 +38,7 @@ class SectionTest4 {
 
     /**
      * 下来放个方法 比如第一个addUser对象，第二个addCat对象，建议不重载，直接定义两个不同的方法
+     *
      * @param o
      */
     public void add(Object o) {

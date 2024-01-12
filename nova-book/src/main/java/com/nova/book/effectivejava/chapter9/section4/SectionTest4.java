@@ -1,7 +1,7 @@
 package com.nova.book.effectivejava.chapter9.section4;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
-import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -63,7 +63,7 @@ class SectionTest4 {
         for (int i = 0; i < s; i++) {
             executor.submit(() -> {
                 int f = baseMs + r.nextInt(2000);
-                Threads.sleep(f);
+                ThreadUtil.sleep(f);
                 total.addAndGet(f);
 
                 System.err.println("运动员：" + Thread.currentThread().getName() + "，成绩为：" + f);
@@ -93,7 +93,7 @@ class SectionTest4 {
                 try {
                     sp.acquire();
                     System.err.println(Thread.currentThread().getName() + "，开始执行");
-                    Threads.sleep(r.nextInt(2000));
+                    ThreadUtil.sleep(r.nextInt(2000));
                     System.err.println(Thread.currentThread().getName() + "，结束执行");
                 } catch (InterruptedException e) {
                     e.printStackTrace();

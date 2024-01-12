@@ -1,4 +1,4 @@
-package com.nova.tools.product.manager;
+package com.nova.tools.product.base;
 
 import cn.hutool.core.util.StrUtil;
 import com.nova.tools.product.entity.ChannelConfig;

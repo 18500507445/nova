@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.lionsoul.ip2region.xdb.Searcher;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
-import java.io.*;
 
 /**
  * @author: wzh
@@ -19,6 +22,8 @@ import java.io.*;
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RegionUtils {
+
+    public static final String UN_KNOW = "未知ip";
 
     //数据下载地址：https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb
     public static BufferedInputStream INPUT_STREAM = FileUtil.getInputStream("ip2region.xdb");
@@ -43,7 +48,7 @@ public final class RegionUtils {
             String regionInfo = searcher.search(ip);
             region = getCityInfo(regionInfo);
             long cost = TimeUnit.NANOSECONDS.toMicros(System.nanoTime() - sTime);
-            System.out.printf("{IP属地 : %s, ip: %s, 耗时: %d 纳秒}\n", region, ip, cost);
+            System.err.printf("【IP属地 : %s, ip: %s, 耗时: %d 纳秒】\n", region, ip, cost);
         } catch (Exception e) {
             log.error("IP地址异常 {} : {}", ip, e);
         }
@@ -84,13 +89,13 @@ public final class RegionUtils {
                 return cityArr[0];
             }
         }
-        return "未知IP";
+        return UN_KNOW;
     }
 
     public static void main(String[] args) {
         for (int i = 0; i < 5; i++) {
-            String region = getRegion("223.221.240.148");
-            System.out.println("region = " + region);
+            String region = getRegion("183.242.4.250");
+            System.err.println("region = " + region);
         }
     }
 }

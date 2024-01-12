@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5.lock;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -20,7 +20,7 @@ class DeadLock {
         Thread t1 = new Thread(() -> {
             synchronized (A) {
                 log.debug("lock A");
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 synchronized (B) {
                     log.debug("lock B");
                     log.debug("操作...");
@@ -31,7 +31,7 @@ class DeadLock {
         Thread t2 = new Thread(() -> {
             synchronized (B) {
                 log.debug("lock B");
-                Threads.sleep(500);
+                ThreadUtil.sleep(500);
                 synchronized (A) {
                     log.debug("lock A");
                     log.debug("操作...");

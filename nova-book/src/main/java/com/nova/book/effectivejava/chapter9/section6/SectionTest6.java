@@ -13,12 +13,12 @@ class SectionTest6 {
      * 不用延迟初始化，导致循环依赖
      */
     @Test
-    public void demoA(){
+    public void demoA() {
         B b = new B();
     }
 
     @Test
-    public void demoB(){
+    public void demoB() {
         C c = new C();
     }
 

@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +28,7 @@ class TopicQueueMsg {
 
         new Thread(() -> {
             while (true) {
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 Message message = queue.take();
             }
         }, "消费者").start();

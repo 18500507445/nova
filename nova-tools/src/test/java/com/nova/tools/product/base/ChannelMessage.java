@@ -1,4 +1,4 @@
-package com.nova.tools.product.manager;
+package com.nova.tools.product.base;
 
 /**
  * @author: wzh

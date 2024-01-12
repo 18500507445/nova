@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter7.section4;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -42,7 +42,7 @@ class DataContainer {
         r.lock();
         try {
             log.debug("读取");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             return data;
         } finally {
             log.debug("释放读锁...");
@@ -55,7 +55,7 @@ class DataContainer {
         w.lock();
         try {
             log.debug("写入");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
         } finally {
             log.debug("释放写锁...");
             w.unlock();

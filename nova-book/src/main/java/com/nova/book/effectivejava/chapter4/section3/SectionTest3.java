@@ -13,7 +13,7 @@ class SectionTest3 {
      * 数组 编译正确，运行报错
      */
     @Test
-    public void demoA(){
+    public void demoA() {
         Object[] arr = new String[3];
         arr[0] = 1L;
     }
@@ -22,7 +22,7 @@ class SectionTest3 {
      * list 编译就报错
      */
     @Test
-    public void demoB(){
+    public void demoB() {
         //List<String> list = new ArrayList<Object>();
     }
 

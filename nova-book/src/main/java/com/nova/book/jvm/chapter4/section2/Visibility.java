@@ -1,6 +1,6 @@
 package com.nova.book.jvm.chapter4.section2;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 
 /**
  * @description: volatile只能保证可见性，不能保证原子性
@@ -20,7 +20,7 @@ class Visibility {
         });
         t.start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         // 如果不加volatile关键字，线程t不会如预想的停下来
         run = false;
         System.err.println("线程停止");

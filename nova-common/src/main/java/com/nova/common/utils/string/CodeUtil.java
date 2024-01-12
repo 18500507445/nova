@@ -16,22 +16,22 @@ public final class CodeUtil {
     /**
      * 自定义进制(0,1没有加入,容易与o,l混淆)
      */
-    private static final char[] r = new char[]{'q', 'w', 'e', '8', 'a', 's', '2', 'd', 'z', 'x', '9', 'c', '7', 'p', '5', 'i', 'k', '3', 'm', 'j', 'u', 'f', 'r', '4', 'v', 'y', 'l', 't', 'n', '6', 'b', 'g', 'h'};
+    private static final char[] R = new char[]{'q', 'w', 'e', '8', 'a', 's', '2', 'd', 'z', 'x', '9', 'c', '7', 'p', '5', 'i', 'k', '3', 'm', 'j', 'u', 'f', 'r', '4', 'v', 'y', 'l', 't', 'n', '6', 'b', 'g', 'h'};
 
     /**
      * (不能与自定义进制有重复)
      */
-    private static final char b = 'o';
+    private static final char B = 'o';
 
     /**
      * 进制长度
      */
-    private static final int binLen = r.length;
+    private static final int BIN_LEN = R.length;
 
     /**
      * 序列长度
      */
-    private static final int s = 4;
+    private static final int S = 4;
 
     /**
      * 根据ID生成六位随机码
@@ -43,22 +43,22 @@ public final class CodeUtil {
         char[] buf = new char[32];
         int charPos = 32;
 
-        while ((id / binLen) > 0) {
-            int ind = (int) (id % binLen);
+        while ((id / BIN_LEN) > 0) {
+            int ind = (int) (id % BIN_LEN);
             // System.err.println(num + "-->" + ind);
-            buf[--charPos] = r[ind];
-            id /= binLen;
+            buf[--charPos] = R[ind];
+            id /= BIN_LEN;
         }
-        buf[--charPos] = r[(int) (id % binLen)];
+        buf[--charPos] = R[(int) (id % BIN_LEN)];
         // System.err.println(num + "-->" + num % binLen);
         String str = new String(buf, charPos, (32 - charPos));
         // 不够长度的自动随机补全
-        if (str.length() < s) {
+        if (str.length() < S) {
             StringBuilder sb = new StringBuilder();
-            sb.append(b);
+            sb.append(B);
             Random rnd = new Random();
-            for (int i = 1; i < s - str.length(); i++) {
-                sb.append(r[rnd.nextInt(binLen)]);
+            for (int i = 1; i < S - str.length(); i++) {
+                sb.append(R[rnd.nextInt(BIN_LEN)]);
             }
             str += sb.toString();
         }
@@ -70,17 +70,17 @@ public final class CodeUtil {
         long res = 0L;
         for (int i = 0; i < chs.length; i++) {
             int ind = 0;
-            for (int j = 0; j < binLen; j++) {
-                if (chs[i] == r[j]) {
+            for (int j = 0; j < BIN_LEN; j++) {
+                if (chs[i] == R[j]) {
                     ind = j;
                     break;
                 }
             }
-            if (chs[i] == b) {
+            if (chs[i] == B) {
                 break;
             }
             if (i > 0) {
-                res = res * binLen + ind;
+                res = res * BIN_LEN + ind;
             } else {
                 res = ind;
             }
@@ -98,8 +98,10 @@ public final class CodeUtil {
     public static String generate(int pwdLen) {
         //35是因为数组是从0开始的，26个字母+10个数字
         final int maxNum = 75;
-        int i;  //生成的随机数
-        int count = 0; //生成的密码的长度
+        //生成的随机数
+        int i;
+        //生成的密码的长度
+        int count = 0;
 
         char[] str = {
                 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -108,11 +110,11 @@ public final class CodeUtil {
                 '~', '!', '@', '#', '$', '%', '^', '&'
         };
         //buffer线程安全，但是性能略低
-        StringBuffer pwd = new StringBuffer();
+        StringBuilder pwd = new StringBuilder();
         Random r = new Random();
         while (count < pwdLen) {
-            // 生成随机数，取绝对值，防止生成负数，
-            i = Math.abs(r.nextInt(maxNum));  //生成的数最大为36-1
+            // 生成随机数，取绝对值，防止生成负数，生成的数最大为36-1
+            i = Math.abs(r.nextInt(maxNum));
             if (i < str.length) {
                 pwd.append(str[i]);
                 count++;

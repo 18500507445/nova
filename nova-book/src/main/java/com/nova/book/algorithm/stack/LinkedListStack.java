@@ -122,7 +122,7 @@ class LinkedListStackTest {
      * 移除顶部
      */
     @Test
-    public void demoB(){
+    public void demoB() {
         LinkedListStack<Object> stack = new LinkedListStack<>(3);
         stack.push(1);
         stack.push(2);

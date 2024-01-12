@@ -1,10 +1,8 @@
 package com.nova.book.effectivejava.chapter9.section1;
 
 import cn.hutool.core.date.DateUtil;
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -40,7 +38,7 @@ class StopThread {
             System.err.println(DateUtil.now());
         });
         t.start();
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         stop = true;
     }
 
@@ -48,7 +46,7 @@ class StopThread {
      * 可以将private static volatile boolean stop;
      */
     @Test
-    public void demoA(){
+    public void demoA() {
 
     }
 
@@ -70,7 +68,7 @@ class StopThread {
             System.err.println(DateUtil.now());
         });
         t.start();
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         setStop();
     }
 

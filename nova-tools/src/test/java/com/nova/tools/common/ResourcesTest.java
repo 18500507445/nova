@@ -1,4 +1,4 @@
-package com.nova.tools;
+package com.nova.tools.common;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.resource.ClassPathResource;

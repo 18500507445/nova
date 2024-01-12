@@ -22,7 +22,7 @@ public class AppTest {
     }
 
     @Test
-    public void demoB(){
+    public void demoB() {
         //目标对象
         UserDao target = new UserDao();
         //代理对象
@@ -32,7 +32,7 @@ public class AppTest {
     }
 
     @Test
-    public void demoC(){
+    public void demoC() {
         System.err.println("--------自己来--------");
         You you = new You();
         you.happyMarry();

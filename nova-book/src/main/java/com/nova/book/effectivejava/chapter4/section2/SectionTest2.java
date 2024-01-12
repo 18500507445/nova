@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 class SectionTest2 {
 
     @Test
-    public void demoA(){
-        Cache.add("1",new Object());
+    public void demoA() {
+        Cache.add("1", new Object());
 
         Object o = Cache.get("1");
         System.err.println(o);

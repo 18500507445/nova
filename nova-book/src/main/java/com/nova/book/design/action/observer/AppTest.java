@@ -30,7 +30,7 @@ public class AppTest {
     }
 
     @Test
-    public void demoB(){
+    public void demoB() {
         //利用JDK中的Observer进行讲解
         MyObservable observable = new MyObservable();
 

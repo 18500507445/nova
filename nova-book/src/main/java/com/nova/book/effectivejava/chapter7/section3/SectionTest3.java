@@ -16,7 +16,7 @@ import java.util.List;
 class SectionTest3 {
 
     @Test
-    public void demoA(){
+    public void demoA() {
         List<Integer> list1 = Arrays.asList(1, 2, 3, 4);
         List<Integer> list2 = Arrays.asList(3, 4, 5, 6);
 
@@ -28,5 +28,5 @@ class SectionTest3 {
 
     }
 
-    
+
 }

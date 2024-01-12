@@ -1,6 +1,6 @@
 package com.nova.tools.java8.datetime;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -19,7 +19,7 @@ class DurationExample {
     void demoA() {
         // 创建Duration实例
         Instant first = Instant.now();
-        Threads.sleep(3000);
+        ThreadUtil.sleep(3000);
         Instant second = Instant.now();
         Duration duration = Duration.between(first, second);
 

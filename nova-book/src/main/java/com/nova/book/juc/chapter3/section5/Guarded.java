@@ -2,7 +2,7 @@ package com.nova.book.juc.chapter3.section5;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Hashtable;
@@ -44,7 +44,7 @@ class Guarded {
 
         new Thread(() -> {
             log.debug("执行计算");
-            Threads.sleep(2000);
+            ThreadUtil.sleep(2000);
             guarded.complete(6 + 2);
         }, "t2").start();
     }
@@ -62,7 +62,7 @@ class Guarded {
 
         new Thread(() -> {
             log.debug("执行计算");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             guarded.complete(6 - 2);
         }, "t2").start();
     }
@@ -75,7 +75,7 @@ class Guarded {
         for (int i = 0; i < 3; i++) {
             new People().start();
         }
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         for (Integer id : Mailboxes.getIds()) {
             new Postman(id, "" + id).start();
         }

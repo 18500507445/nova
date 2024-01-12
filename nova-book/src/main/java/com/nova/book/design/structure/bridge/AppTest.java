@@ -1,9 +1,9 @@
 package com.nova.book.design.structure.bridge;
 
 
+import com.nova.book.design.structure.bridge.channel.AliPay;
 import com.nova.book.design.structure.bridge.channel.Payment;
 import com.nova.book.design.structure.bridge.channel.WxPay;
-import com.nova.book.design.structure.bridge.channel.AliPay;
 import com.nova.book.design.structure.bridge.mode.CypherPayMode;
 import com.nova.book.design.structure.bridge.mode.FacePayMode;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.nova.tools;
+package com.nova.tools.db;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;

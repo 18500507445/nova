@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter7.section5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ class TopicSemaphorePool {
         for (int i = 0; i < 4; i++) {
             new Thread(() -> {
                 Connection conn = pool.borrow();
-                Threads.sleep(new Random().nextInt(1000));
+                ThreadUtil.sleep(new Random().nextInt(1000));
                 pool.free(conn);
             }).start();
         }

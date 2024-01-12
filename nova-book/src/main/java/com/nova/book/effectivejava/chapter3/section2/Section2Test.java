@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class Section2Test {
 
     @Test
-    public void demoA(){
+    public void demoA() {
         Cat cat = new Cat();
         String name = cat.getName();
         System.err.println("name = " + name);

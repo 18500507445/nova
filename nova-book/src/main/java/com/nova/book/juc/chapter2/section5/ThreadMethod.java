@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter2.section5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -36,14 +36,14 @@ class ThreadMethod {
             @SneakyThrows
             @Override
             public void run() {
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
             }
         };
 
         log.debug("t2 state:{}", t2.getState());
         t2.start();
         log.debug("t2 state:{}", t2.getState());
-        Threads.sleep(500);
+        ThreadUtil.sleep(500);
         log.debug("t2 state:{}", t2.getState());
     }
 
@@ -54,12 +54,12 @@ class ThreadMethod {
             @Override
             public void run() {
                 log.debug("enter sleep");
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
             }
         };
         t3.start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("interrupt....");
         t3.interrupt();
     }
@@ -79,7 +79,7 @@ class ThreadMethod {
             }
         }, "t3");
         t3.start();
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("interrupt....");
         t3.interrupt();
     }
@@ -103,7 +103,7 @@ class ThreadMethod {
         log.debug("t4 state:{}", t4.getState());
         t4.start();
         log.debug("t4 state:{}", t4.getState());
-        Threads.sleep(500);
+        ThreadUtil.sleep(500);
         log.debug("t4 state:{}", t4.getState());
     }
 
@@ -148,7 +148,7 @@ class ThreadMethod {
             @Override
             public void run() {
                 log.debug("t5，开始");
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 log.debug("t5，结束");
                 r = 10;
             }
@@ -165,7 +165,7 @@ class ThreadMethod {
             @Override
             public void run() {
                 log.debug("t6，开始");
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
                 log.debug("t6，结束");
                 r = 10;
             }
@@ -196,7 +196,7 @@ class ThreadMethod {
         //设置该线程为守护线程
         t7.setDaemon(true);
         t7.start();
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("main，结果为：{}", r);
     }
 

@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.locks.Condition;
@@ -47,7 +47,7 @@ class CorrectPostureStep {
                 log.debug("有烟没？[{}]", hasCigarette);
                 if (!hasCigarette) {
                     log.debug("没烟，先歇会！");
-                    Threads.sleep(2000);
+                    ThreadUtil.sleep(2000);
                 }
                 log.debug("有烟没？[{}]", hasCigarette);
                 if (hasCigarette) {
@@ -64,7 +64,7 @@ class CorrectPostureStep {
             }, "打工人").start();
         }
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         new Thread(() -> {
             // 这里能不能加 synchronized (room)？答：不能
             hasCigarette = true;
@@ -102,7 +102,7 @@ class CorrectPostureStep {
             }, "打工人").start();
         }
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         new Thread(() -> {
             synchronized (room) {
                 hasCigarette = true;
@@ -156,7 +156,7 @@ class CorrectPostureStep {
             }
         }, "小女").start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         new Thread(() -> {
             synchronized (room) {
                 hasTakeout = true;
@@ -212,7 +212,7 @@ class CorrectPostureStep {
             }
         }, "小女").start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         new Thread(() -> {
             synchronized (room) {
                 hasTakeout = true;
@@ -277,7 +277,7 @@ class CorrectPostureStep {
             }
         }, "小女").start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         new Thread(() -> {
             ROOM.lock();
             try {
@@ -288,7 +288,7 @@ class CorrectPostureStep {
             }
         }, "外卖员").start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         new Thread(() -> {
             ROOM.lock();
             try {

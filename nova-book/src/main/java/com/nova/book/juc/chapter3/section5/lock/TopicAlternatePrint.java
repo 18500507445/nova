@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5.lock;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.locks.Condition;
@@ -41,7 +41,7 @@ class TopicAlternatePrint {
             awaitSignal.print("c", c, a);
         }).start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         awaitSignal.lock();
         try {
             System.err.println("开始...");

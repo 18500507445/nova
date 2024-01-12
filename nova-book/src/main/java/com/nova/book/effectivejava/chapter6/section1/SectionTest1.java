@@ -13,7 +13,7 @@ class SectionTest1 {
      * null值检查
      */
     @Test
-    public void demoA(){
+    public void demoA() {
 
     }
 

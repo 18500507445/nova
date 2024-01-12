@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 class SectionTest4 {
 
     @Test
-    public void demoA(){
+    public void demoA() {
         BigDecimal bigDecimal = new BigDecimal("1.00");
     }
 

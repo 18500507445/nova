@@ -1,21 +1,20 @@
 package com.nova.common.config;
 
 import cn.hutool.core.thread.ThreadFactoryBuilder;
-import com.nova.common.utils.thread.Threads;
+import com.nova.common.utils.thread.MdcTaskDecorator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * @author wzh
  * @description: 线程池配置
  * @date 2022/7/18 16:24
  */
+@Slf4j(topic = "ThreadPoolConfig")
 @Configuration
 public class ThreadPoolConfig {
 
@@ -48,7 +47,6 @@ public class ThreadPoolConfig {
         executor.setKeepAliveSeconds(KEEP_ALIVE_SECONDS);
         // 线程池对拒绝任务(无线程可用)的处理策略
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-
         executor.setTaskDecorator(new MdcTaskDecorator());
         return executor;
     }
@@ -64,8 +62,28 @@ public class ThreadPoolConfig {
             @Override
             protected void afterExecute(Runnable r, Throwable t) {
                 super.afterExecute(r, t);
-                Threads.printException(r, t);
+                printException(r, t);
             }
         };
+    }
+
+    public static void printException(Runnable r, Throwable t) {
+        if (t == null && r instanceof Future<?>) {
+            try {
+                Future<?> future = (Future<?>) r;
+                if (future.isDone()) {
+                    future.get();
+                }
+            } catch (CancellationException ce) {
+                t = ce;
+            } catch (ExecutionException ee) {
+                t = ee.getCause();
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        if (t != null) {
+            log.error(t.getMessage(), t);
+        }
     }
 }

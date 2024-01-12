@@ -1,5 +1,6 @@
 package com.nova.tools.demo.thread.mergerequest;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
 import com.google.common.collect.Lists;
 import com.nova.common.utils.thread.Threads;
@@ -149,7 +150,7 @@ class Merge3 {
             List<RequestPromise> list = new ArrayList<>();
             while (true) {
                 if (queue.isEmpty()) {
-                    Threads.sleep(10);
+                    ThreadUtil.sleep(10);
                     continue;
                 }
 
@@ -163,7 +164,7 @@ class Merge3 {
 
                 // 用户ID=5的批次和之后的批次，请求都会超时
                 if (list.stream().anyMatch(e -> e.getUserRequest().getUserId().equals(5L))) {
-                    Threads.sleep(200);
+                    ThreadUtil.sleep(200);
                 }
 
                 log.debug("合并扣减库存：{}", JSONUtil.toJsonStr(list));

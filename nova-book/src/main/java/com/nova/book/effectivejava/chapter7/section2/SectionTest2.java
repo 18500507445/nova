@@ -10,12 +10,11 @@ import org.junit.jupiter.api.Test;
 class SectionTest2 {
 
     @Test
-    public void demoA(){
+    public void demoA() {
         for (int i = 0; i < 5; i++) {
             System.err.println(i);
         }
     }
-
 
 
 }

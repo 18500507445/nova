@@ -18,6 +18,7 @@ class SectionTest5 {
 
     /**
      * 可以设计成这样的
+     *
      * @param args0
      * @param otherArgs
      */

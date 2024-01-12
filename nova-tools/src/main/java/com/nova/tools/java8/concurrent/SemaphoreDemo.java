@@ -1,5 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,7 @@ class SemaphoreDemo {
             permit = semaphore.tryAcquire(1, TimeUnit.SECONDS);
             if (permit) {
                 System.err.println("Semaphore acquired");
-                Threads.sleep(3000);
+                ThreadUtil.sleep(3000);
             } else {
                 System.err.println("Could not acquire semaphore");
             }

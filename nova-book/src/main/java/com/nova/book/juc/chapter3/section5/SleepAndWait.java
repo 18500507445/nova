@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -19,7 +19,7 @@ class SleepAndWait {
                 log.debug("t1 获得锁");
 
                 try {
-                    Threads.sleep(2000);
+                    ThreadUtil.sleep(2000);
 
                     lock.wait();
                 } catch (InterruptedException e) {
@@ -28,7 +28,7 @@ class SleepAndWait {
             }
         }, "t1").start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         synchronized (lock) {
             log.debug("main 获得锁");
         }

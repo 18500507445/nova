@@ -1,4 +1,4 @@
-package com.nova.common.config;
+package com.nova.common.utils.thread;
 
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.MDC;

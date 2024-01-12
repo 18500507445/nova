@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * 管理所有的共享对象
+ *
  * @description: 当用户请求时提供一个已创建的实例或者不存在时创建一个新的实例
  * @author: wzh
  * @date: 2022/12/31 10:38

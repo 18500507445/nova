@@ -1,5 +1,6 @@
 package com.nova.tools.demo.thread.mergerequest;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,20 +26,20 @@ class Merge1 {
      */
     private final BlockingQueue<RequestPromise> queue = new LinkedBlockingQueue<>(10);
 
-    private static final ExecutorService pool = Executors.newCachedThreadPool();
+    private static final ExecutorService POOL = Executors.newCachedThreadPool();
 
     public static void main(String[] args) throws InterruptedException {
         Merge1 killDemo = new Merge1();
         killDemo.mergeJob();
         log.debug("等待mergeJob启动");
-        Threads.sleep(1500);
+        ThreadUtil.sleep(1500);
 
         List<Future<Result>> list = new ArrayList<>();
         final CountDownLatch latch = new CountDownLatch(10);
         for (int i = 1; i <= 10; i++) {
             final Long orderId = i + 100L;
             final Long userId = (long) i;
-            Future<Result> future = pool.submit(() -> {
+            Future<Result> future = POOL.submit(() -> {
                 latch.countDown();
                 return killDemo.operate(new UserRequest(orderId, userId, 1));
             });
@@ -55,7 +56,7 @@ class Merge1 {
             }
         });
 
-        Threads.stop(pool);
+        Threads.stop(POOL);
     }
 
     /**
@@ -91,7 +92,7 @@ class Merge1 {
             ArrayList<RequestPromise> list = new ArrayList<>();
             while (true) {
                 if (queue.isEmpty()) {
-                    Threads.sleep(10);
+                    ThreadUtil.sleep(10);
                     continue;
                 }
 

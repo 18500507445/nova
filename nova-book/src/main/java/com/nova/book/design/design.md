@@ -1,4 +1,5 @@
 ### 面向对象设计六大原则
+
 1. 里式替换原则
     - 多态，子类可扩展⽗类
 2. 开闭原则
@@ -12,10 +13,13 @@
     - 建⽴单⼀接⼝，尽量将庞大的接口拆分成更小&更具体的接口
 6. 单一职责原则
     - ⼀个类和方法只做⼀件事
+
 ---
 
 ### 创建型
+
 提供创建对象的机制， 能够提升已有代码的灵活性和可复用性。
+
 1. [工厂方法（Factory Method）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/create/factory_method/工厂方法模式.md)
 2. [抽象工厂（AbstractFactory）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/create/abstract_factory/抽象工厂模式.md)
 3. [建造者（Builder）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/create/builder/建造者模式.md)
@@ -23,7 +27,9 @@
 5. [单例（Singleton）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/create/singleton/单例模式.md)
 
 ### 结构型
+
 将对象和类按某种布局组成更大的结构，并同时保持结构的灵活和⾼效。
+
 1. [适配器（Adapter）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/structure/adapter/适配器模式.md)
 2. [桥接（Bridge）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/structure/bridge/桥接模式.md)
 3. [组合（Composite）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/structure/composite/组合模式.md)
@@ -33,7 +39,9 @@
 7. [代理（Proxy）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/structure/proxy/代理模式.md)
 
 ### 行为型
+
 负责对象间的高效沟通和职责委派。
+
 1. [职责链（Chain of Responsibility）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/action/chain/责任链模式.md)
 2. [命令（Command）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/action/command/命令模式.md)
 3. [解释器（Interpreter）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/action/interpreter/解释器模式.md)
@@ -47,6 +55,7 @@
 11. [访问者（Visitor）](/Users/wangzehui/Documents/IdeaProjects/nova/nova-book/src/main/java/com/nova/book/design/action/visitor/访问者模式.md)
 
 ##### 相关资料
+
 - 23种设计模式-思维导图 https://www.processon.com/view/link/61dce52ef346fb06cb8f047a
 - 23种设计模式-UML类图 https://www.processon.com/view/link/61dba3ad0e3e7441577314a5
 - 图说设计模式 https://design-patterns.readthedocs.io/zh_CN/latest/index.html

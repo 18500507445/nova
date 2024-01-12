@@ -23,7 +23,7 @@ public class AppTest {
 
 
     @Test
-    public void testPeople(){
+    public void testPeople() {
         // 起初 这个人只会走路...
         Person person = new SimplePerson();
         // 现在给他装饰下，配个单车
@@ -35,7 +35,7 @@ public class AppTest {
     }
 
     @Test
-    public void testCoupon(){
+    public void testCoupon() {
         ArrayList<Product> productList = Lists.newArrayList(
                 Product.builder().name("台灯").price(BigDecimal.valueOf(100)).num(1).build(),
                 Product.builder().name("钢笔").price(BigDecimal.valueOf(9.9)).num(2).build(),

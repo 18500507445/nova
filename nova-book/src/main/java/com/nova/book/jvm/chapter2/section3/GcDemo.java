@@ -1,9 +1,6 @@
 package com.nova.book.jvm.chapter2.section3;
 
-import cn.hutool.core.thread.ThreadUtil;
-
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 演示gc

@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter7.section1;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ class CustomPool {
         for (int i = 0; i < 3; i++) {
             int j = i;
             threadPool.execute(() -> {
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 log.debug("{}", j);
             });
         }

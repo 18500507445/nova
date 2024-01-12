@@ -1,5 +1,6 @@
 package com.nova.tools.demo.thread.mergerequest;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +47,7 @@ class Merge2 {
         Merge2 killDemo = new Merge2();
         killDemo.mergeJob();
         log.debug("等待mergeJob启动");
-        Threads.sleep(1500);
+        ThreadUtil.sleep(1500);
 
         List<Future<Result>> futureList = new ArrayList<>();
         CountDownLatch countDownLatch = new CountDownLatch(10);

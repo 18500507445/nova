@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter7.section7;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -26,12 +26,12 @@ class CyclicBarrierDemo {
             CountDownLatch latch = new CountDownLatch(2);
             service.submit(() -> {
                 log.debug("task1 start...");
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 latch.countDown();
             });
             service.submit(() -> {
                 log.debug("task2 start...");
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
                 latch.countDown();
             });
 
@@ -55,7 +55,7 @@ class CyclicBarrierDemo {
         for (int i = 0; i < 3; i++) {
             service.submit(() -> {
                 log.debug("task1 start...");
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 try {
                     barrier.await(); // 2-1=1
                 } catch (InterruptedException | BrokenBarrierException e) {
@@ -64,7 +64,7 @@ class CyclicBarrierDemo {
             });
             service.submit(() -> {
                 log.debug("task2 start...");
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
                 try {
                     barrier.await(); // 1-1=0
                 } catch (InterruptedException | BrokenBarrierException e) {

@@ -19,7 +19,7 @@ public class AppTest {
     }
 
     @Test
-    public void demoB(){
+    public void demoB() {
         //放在Heap中
         String s = "Hello World";
         //放在常量池中

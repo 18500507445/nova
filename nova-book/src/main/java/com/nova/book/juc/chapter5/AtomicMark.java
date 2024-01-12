@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +31,7 @@ class AtomicMark {
             log.debug(bag.toString());
         }, "保洁阿姨").start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("想换一只新垃圾袋？");
         boolean success = ref.compareAndSet(prev, new GarbageBag("空垃圾袋"), true, false);
         log.debug("换了么？" + success);

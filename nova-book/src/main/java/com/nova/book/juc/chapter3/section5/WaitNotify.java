@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -40,7 +40,7 @@ class WaitNotify {
         }, "t2").start();
 
         // 主线程两秒后执行
-        Threads.sleep(500);
+        ThreadUtil.sleep(500);
 
         log.debug("唤醒 obj 上其它线程");
 

@@ -2,8 +2,8 @@ package com.nova.tools.java8.completablefuture;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.NumberUtil;
-import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -143,7 +143,7 @@ public class CompletableFutureExample {
     public void demoF() throws ExecutionException, InterruptedException {
         CompletableFuture.supplyAsync(() -> {
             System.err.println("开始执行了");
-            Threads.sleep(2000);
+            ThreadUtil.sleep(2000);
             return 9999;
         }).thenRun(() -> System.err.println("执行结束了")).get();
     }
@@ -255,7 +255,7 @@ public class CompletableFutureExample {
     private static CompletableFuture<Integer> m1() {
         int i = 3333;
         return CompletableFuture.supplyAsync(() -> {
-            Threads.sleep(i);
+            ThreadUtil.sleep(i);
             return i;
         });
     }
@@ -265,7 +265,7 @@ public class CompletableFutureExample {
         return CompletableFuture.supplyAsync(() -> {
             try {
 //                return 8877;
-                Threads.sleep(i);
+                ThreadUtil.sleep(i);
                 throw new RuntimeException();
             } catch (Exception ignored) {
 
@@ -277,7 +277,7 @@ public class CompletableFutureExample {
     private static CompletableFuture<Integer> m3() {
         int i = 5555;
         return CompletableFuture.supplyAsync(() -> {
-            Threads.sleep(i);
+            ThreadUtil.sleep(i);
             return i;
         });
     }
@@ -368,15 +368,15 @@ public class CompletableFutureExample {
     public void circularPrintln() {
         List<CompletableFuture<String>> completableFutures = new ArrayList<>();
         CompletableFuture<String> printA = CompletableFuture.supplyAsync(() -> {
-            Threads.sleep(500);
+            ThreadUtil.sleep(500);
             return "A";
         });
         CompletableFuture<String> printB = CompletableFuture.supplyAsync(() -> {
-            Threads.sleep(1500);
+            ThreadUtil.sleep(1500);
             return "B";
         });
         CompletableFuture<String> printC = CompletableFuture.supplyAsync(() -> {
-            Threads.sleep(2500);
+            ThreadUtil.sleep(2500);
             return "C";
         });
 

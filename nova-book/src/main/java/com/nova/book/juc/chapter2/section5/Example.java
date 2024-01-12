@@ -2,7 +2,7 @@ package com.nova.book.juc.chapter2.section5;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class Example {
     @Test
     public void sleep() throws InterruptedException {
         while (true) {
-            Threads.sleep(50);
+            ThreadUtil.sleep(50);
         }
     }
 
@@ -43,7 +43,7 @@ class Example {
             @SneakyThrows
             @Override
             public void run() {
-                Threads.sleep(1);
+                ThreadUtil.sleep(1);
                 r = 10;
             }
         };
@@ -52,7 +52,7 @@ class Example {
             @SneakyThrows
             @Override
             public void run() {
-                Threads.sleep(2);
+                ThreadUtil.sleep(2);
                 r1 = 20;
             }
         };
@@ -74,7 +74,7 @@ class Example {
     public void twoPhaseTermination() {
         TwoPhaseTermination monitor = new TwoPhaseTermination();
         monitor.start();
-        Threads.sleep(3000);
+        ThreadUtil.sleep(3000);
         monitor.stop();
     }
 
@@ -90,9 +90,9 @@ class Example {
             @Override
             public void run() {
                 log.debug("洗水壶");
-                Threads.sleep(1);
+                ThreadUtil.sleep(1);
                 log.debug("烧开水");
-                Threads.sleep(5);
+                ThreadUtil.sleep(5);
             }
         };
 
@@ -101,11 +101,11 @@ class Example {
             @Override
             public void run() {
                 log.debug("洗茶壶");
-                Threads.sleep(1);
+                ThreadUtil.sleep(1);
                 log.debug("洗茶杯");
-                Threads.sleep(1);
+                ThreadUtil.sleep(1);
                 log.debug("拿茶叶");
-                Threads.sleep(1);
+                ThreadUtil.sleep(1);
                 t1.join();
                 log.debug("泡茶");
             }
@@ -139,7 +139,7 @@ class TwoPhaseTermination {
                 }
                 try {
                     log.debug("执行监控记录");
-                    Threads.sleep(1);
+                    ThreadUtil.sleep(1);
                 } catch (Exception e) {
                     e.printStackTrace();
                     //重新设置打断标记，因为catch后变为false
@@ -167,7 +167,7 @@ class TwoPhaseTermination {
                     break;
                 }
                 log.debug("执行监控记录");
-                Threads.sleep(1);
+                ThreadUtil.sleep(1);
             }
         });
         monitor.start();

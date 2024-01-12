@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 
 /**
  * Cglib子类代理工厂
+ *
  * @description: 对UserDao在内存中动态构建一个子类对象，因为采用的是继承，所以不能对final修饰的类进行代理
  * @author: wzh
  * @date: 2022/12/31 10:38
@@ -25,6 +26,7 @@ public class ProxyFactory implements MethodInterceptor {
 
     /**
      * 给目标对象创建一个代理对象
+     *
      * @return
      */
     public Object getProxyInstance() {

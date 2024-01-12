@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 class SectionTest2 {
 
     @Test
-    public void demoA(){
+    public void demoA() {
         System.err.println(WeekEnum.ONE.ordinal());
     }
 
     @Test
-    public void demoB(){
+    public void demoB() {
         System.err.println(WeekEnum.valuesOf(1));
     }
 

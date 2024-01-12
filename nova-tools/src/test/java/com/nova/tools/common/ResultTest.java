@@ -1,4 +1,4 @@
-package com.nova.tools;
+package com.nova.tools.common;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.common.core.model.result.AjaxResult;

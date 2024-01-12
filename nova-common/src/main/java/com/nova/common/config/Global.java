@@ -56,7 +56,7 @@ public class Global {
      */
     @Getter
     @Setter
-    private static boolean addressEnabled;
+    private static boolean addressEnabled = true;
 
     /**
      * 获取导入上传路径

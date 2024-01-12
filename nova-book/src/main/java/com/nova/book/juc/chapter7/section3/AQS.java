@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter7.section3;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
@@ -22,7 +22,7 @@ class AQS {
             lock.lock();
             try {
                 log.debug("locking...");
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
             } finally {
                 log.debug("unlocking...");
                 lock.unlock();

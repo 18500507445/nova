@@ -9,7 +9,7 @@ import lombok.Data;
  */
 class Cat {
 
-    static class BlackCat{
+    static class BlackCat {
         private Integer id;
 
         private String name;
@@ -24,7 +24,7 @@ class Cat {
     }
 
     @Data
-    static class BlueCat{
+    static class BlueCat {
         private Integer id;
 
         private String name;

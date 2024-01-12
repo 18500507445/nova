@@ -2,7 +2,7 @@ package com.nova.book.juc.chapter7.section6;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -37,21 +37,21 @@ class CountDownLatchDemo {
         final TimeInterval timer = DateUtil.timer();
         new Thread(() -> {
             log.debug("begin...");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             latch.countDown();
             log.debug("end...{}", latch.getCount());
         }, "t1").start();
 
         new Thread(() -> {
             log.debug("begin...");
-            Threads.sleep(2000);
+            ThreadUtil.sleep(2000);
             latch.countDown();
             log.debug("end...{}", latch.getCount());
         }, "t2").start();
 
         new Thread(() -> {
             log.debug("begin...");
-            Threads.sleep(1500);
+            ThreadUtil.sleep(1500);
             latch.countDown();
             log.debug("end...{}", latch.getCount());
         }, "t3").start();
@@ -76,19 +76,19 @@ class CountDownLatchDemo {
         CountDownLatch latch = new CountDownLatch(3);
         service.submit(() -> {
             log.debug("begin...");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             latch.countDown();
             log.debug("end...{}", latch.getCount());
         });
         service.submit(() -> {
             log.debug("begin...");
-            Threads.sleep(2000);
+            ThreadUtil.sleep(2000);
             latch.countDown();
             log.debug("end...{}", latch.getCount());
         });
         service.submit(() -> {
             log.debug("begin...");
-            Threads.sleep(1500);
+            ThreadUtil.sleep(1500);
             latch.countDown();
             log.debug("end...{}", latch.getCount());
         });
@@ -120,7 +120,7 @@ class CountDownLatchDemo {
             int x = j;
             service.submit(() -> {
                 for (int i = 0; i <= 100; i++) {
-                    Threads.sleep(r.nextInt(100));
+                    ThreadUtil.sleep(r.nextInt(100));
                     all[x] = Thread.currentThread().getName() + "(" + (i + "%") + ")";
                     System.err.print("\r" + Arrays.toString(all));
                 }

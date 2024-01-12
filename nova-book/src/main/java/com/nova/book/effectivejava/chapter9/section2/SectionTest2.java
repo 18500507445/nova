@@ -2,7 +2,7 @@ package com.nova.book.effectivejava.chapter9.section2;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -21,7 +21,7 @@ class SectionTest2 {
         Pool pool = new Pool(new LinkedList<Integer>() {
             @Override
             public boolean add(Integer s) {
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 return super.add(s);
             }
         });
@@ -42,10 +42,10 @@ class SectionTest2 {
             final int x = i;
             new Thread(() -> {
                 pool.add(x);
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
             }).start();
         }
-        Threads.sleep(1500);
+        ThreadUtil.sleep(1500);
         System.err.println("pool.size() = " + pool.size());
         System.err.println("耗时 = " + timer.interval());
     }
@@ -58,10 +58,10 @@ class SectionTest2 {
             final int x = i;
             new Thread(() -> {
                 pool.add(x);
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
             }).start();
         }
-        Threads.sleep(1500);
+        ThreadUtil.sleep(1500);
         System.err.println("pool.size() = " + pool.size());
         System.err.println("耗时 = " + timer.interval());
     }

@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5.lock;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +63,7 @@ class Philosopher extends Thread {
 
     private void eat() {
         log.debug("eating...");
-        Threads.sleep(500);
+        ThreadUtil.sleep(500);
     }
 }
 

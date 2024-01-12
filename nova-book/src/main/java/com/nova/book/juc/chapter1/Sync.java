@@ -1,8 +1,7 @@
 package com.nova.book.juc.chapter1;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.TimeInterval;
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -16,7 +15,7 @@ class Sync {
     public static void main(String[] args) {
         new Thread(() -> {
             log.debug("异步开始，time：{}", DateUtil.now());
-            Threads.sleep(2000);
+            ThreadUtil.sleep(2000);
         }).start();
         log.debug("do other things...");
     }

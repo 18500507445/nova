@@ -22,7 +22,7 @@ class Section1Test {
     }
 
     @Test
-    public void demoB(){
+    public void demoB() {
         Cat a = new Cat(1, "wzh", "black");
         BlackCat b = new BlackCat();
         b.setId(1);

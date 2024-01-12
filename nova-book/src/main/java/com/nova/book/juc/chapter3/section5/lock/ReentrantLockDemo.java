@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5.lock;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
@@ -69,7 +69,7 @@ class ReentrantLockDemo {
         Lock.lock();
         t1.start();
 
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
 
         log.debug("打断 t1");
         t1.interrupt();
@@ -97,7 +97,7 @@ class ReentrantLockDemo {
         Lock.lock();
         log.debug("拿到锁了。。");
         t2.start();
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         Lock.unlock();
         log.debug("释放了锁。。");
     }

@@ -14,8 +14,8 @@ class SectionTest7 {
     /**
      * 优雅的代码注释
      * {@link SecureRandom#nextBytes(byte[])}
-     * @link <a href="https://www.baidu.com</a>
      *
+     * @link <a href="https://www.baidu.com</a>
      * @see SecureRandom
      * @see <a href="https://www.baidu.com">百度</a>
      */

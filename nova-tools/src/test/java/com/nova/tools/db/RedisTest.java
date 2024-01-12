@@ -1,4 +1,4 @@
-package com.nova.tools;
+package com.nova.tools.db;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.nova.starter.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RKeys;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,31 +43,63 @@ public class RedisTest {
         String key = "redissonLock";
 
         boolean lock = lock(key, 100L);
+        boolean isLock = isLocked(key);
         System.err.println("lock = " + lock);
+        System.err.println("isLock = " + isLock);
 
         release(key);
+        System.out.println("isLocked(key) = " + isLocked(key));
+        System.out.println("getExpirationTime(key) = " + getExpirationTime(key));
+        boolean lock2 = lock(key, 100L);
+
+        System.out.println("getExpirationTime(key) = " + getExpirationTime(key));
+        System.err.println("lock2 = " + lock2);
+
+        System.out.println("isLocked(key) = " + isLocked(key));
+
     }
+
 
     public boolean lock(String key, long expireSeconds) {
         RLock rLock = redissonClient.getLock(key);
-        boolean getLock;
+        boolean flag = false;
         try {
-            getLock = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
-            if (getLock) {
-                log.info("获取Redisson分布式锁[成功]，key={}", key);
-            } else {
-                log.info("获取Redisson分布式锁[失败]，key={}", key);
-            }
+            flag = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            log.error("获取Redisson分布式锁[异常]，key=" + key, e);
-            return false;
+            log.error("Redisson分布式锁【异常】，key = " + key, e);
+        } finally {
+            if (flag) {
+                log.info("Redisson分布式锁【成功】，key = {}", key);
+            } else {
+                log.info("Redisson分布式锁【失败】，key = {}", key);
+            }
         }
-        return getLock;
+        return flag;
     }
 
     public void release(String key) {
-        log.info("获取Redisson分布式锁[解锁]，key={}", key);
+        log.info("Redisson分布式锁【解锁】，key = {}", key);
         redissonClient.getLock(key).unlock();
+    }
+
+    /**
+     * 查询是否有锁
+     */
+    public boolean isLocked(String lockName) {
+        return redissonClient.getLock(lockName).isLocked();
+    }
+
+    /**
+     * 获取过期时间
+     */
+    public Long getExpirationTime(String key) {
+        RKeys rKeys = redissonClient.getKeys();
+        long milliseconds = rKeys.remainTimeToLive(key);
+        if (milliseconds >= 0) {
+            return milliseconds / 1000;
+        } else {
+            return milliseconds;
+        }
     }
 
     @Test

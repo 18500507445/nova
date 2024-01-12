@@ -1,5 +1,6 @@
 package com.nova.cache.redis;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
@@ -7,7 +8,6 @@ import com.nova.cache.redis.caffeine.CaffeineCacheUtil;
 import com.nova.cache.redis.memcached.MemcachedUtil;
 import com.nova.cache.redis.redis.RedisService;
 import com.nova.common.utils.id.IdUtils;
-import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,14 +72,14 @@ class RedisApplicationTest {
      */
     @Test
     public void incr() {
-        Threads.sleep(2000);
+        ThreadUtil.sleep(2000);
         String key = "total";
         redisService.incr(key, 5L);
-        Threads.sleep(5000);
+        ThreadUtil.sleep(5000);
         redisService.decr(key, 1L);
         redisService.expire(key, 60L);
 
-        Threads.sleep(5000);
+        ThreadUtil.sleep(5000);
         redisService.expire(key, 60L);
     }
 

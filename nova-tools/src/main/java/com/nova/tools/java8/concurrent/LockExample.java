@@ -1,5 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +54,7 @@ class LockExample {
         executor.submit(() -> {
             lock.lock();
             try {
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
             } finally {
                 lock.unlock();
             }
@@ -78,7 +79,7 @@ class LockExample {
         executor.submit(() -> {
             lock.writeLock().lock();
             try {
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 map.put("foo", "bar");
             } finally {
                 lock.writeLock().unlock();
@@ -89,7 +90,7 @@ class LockExample {
             lock.readLock().lock();
             try {
                 System.err.println(map.get("foo"));
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
             } finally {
                 lock.readLock().unlock();
             }
@@ -110,7 +111,7 @@ class LockExample {
         executor.submit(() -> {
             long stamp = lock.writeLock();
             try {
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 map.put("foo", "bar");
             } finally {
                 lock.unlockWrite(stamp);
@@ -121,7 +122,7 @@ class LockExample {
             long stamp = lock.readLock();
             try {
                 System.err.println(map.get("foo"));
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
             } finally {
                 lock.unlockRead(stamp);
             }
@@ -140,9 +141,9 @@ class LockExample {
             long stamp = lock.tryOptimisticRead();
             try {
                 System.err.println("Optimistic Lock Valid: " + lock.validate(stamp));
-                Threads.sleep(1000);
+                ThreadUtil.sleep(1000);
                 System.err.println("Optimistic Lock Valid: " + lock.validate(stamp));
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
                 System.err.println("Optimistic Lock Valid: " + lock.validate(stamp));
             } finally {
                 lock.unlock(stamp);
@@ -153,7 +154,7 @@ class LockExample {
             long stamp = lock.writeLock();
             try {
                 System.err.println("Write Lock acquired");
-                Threads.sleep(2000);
+                ThreadUtil.sleep(2000);
             } finally {
                 lock.unlock(stamp);
                 System.err.println("Write done");

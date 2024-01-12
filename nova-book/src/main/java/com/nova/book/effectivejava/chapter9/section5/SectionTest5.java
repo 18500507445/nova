@@ -8,5 +8,4 @@ package com.nova.book.effectivejava.chapter9.section5;
 class SectionTest5 {
 
 
-
 }

@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5.lock;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -46,14 +46,14 @@ class BigRoom {
     public void sleep() throws InterruptedException {
         synchronized (studyRoom) {
             log.debug("sleeping 2 小时");
-            Threads.sleep(2000);
+            ThreadUtil.sleep(2000);
         }
     }
 
     public void study() throws InterruptedException {
         synchronized (bedRoom) {
             log.debug("study 1 小时");
-            Threads.sleep(1);
+            ThreadUtil.sleep(1);
         }
     }
 

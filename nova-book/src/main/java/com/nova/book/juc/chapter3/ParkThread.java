@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.locks.LockSupport;
@@ -20,14 +20,14 @@ class ParkThread {
     public static void main(String[] args) throws Exception {
         Thread t1 = new Thread(() -> {
             log.debug("start...");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             log.debug("park...");
             LockSupport.park();
             log.debug("resume...");
         }, "t1");
         t1.start();
 
-        Threads.sleep(2000);
+        ThreadUtil.sleep(2000);
         log.debug("unPark...");
         LockSupport.unpark(t1);
     }

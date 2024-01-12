@@ -18,7 +18,7 @@ import java.net.UnknownHostException;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IpUtils {
 
-    private static final String UNKNOWN = "unknown";
+    private static final String UNKNOWN = "未知ip";
 
     public static String getIpAddr(HttpServletRequest request) {
         String ip = null;
@@ -37,7 +37,7 @@ public final class IpUtils {
                 ip = request.getHeader("Proxy-Client-IP");
             }
             // 通过WebLogic代理获取ip
-            if (StrUtil.isEmpty(ip) || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+            if (StrUtil.isEmpty(ip) || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
                 ip = request.getHeader("WL-Proxy-Client-IP");
             }
             // 通过负载均衡获取IP地址（HTTP_CLIENT_IP、HTTP_X_FORWARDED_FOR）
@@ -67,7 +67,7 @@ public final class IpUtils {
             log.error("获取IP地址异常 ", e);
         }
         //使用代理，则获取第一个IP地址
-        if (StrUtil.isNotBlank(ip) && ip.indexOf(",") > 0) {
+        if (ip != null && StrUtil.isNotBlank(ip) && ip.indexOf(",") > 0) {
             ip = ip.substring(0, ip.indexOf(","));
         }
         return ip;

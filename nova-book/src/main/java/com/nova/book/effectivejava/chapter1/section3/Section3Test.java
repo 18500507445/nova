@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class Section3Test {
 
     @Test
-    public void demoA(){
+    public void demoA() {
         Cat instance1 = Cat.INSTANCE;
         Cat instance2 = Cat.INSTANCE;
         System.err.println(instance2 == instance1);

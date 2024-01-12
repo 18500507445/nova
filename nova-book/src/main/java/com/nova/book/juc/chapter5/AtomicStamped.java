@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter5;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.atomic.AtomicStampedReference;
@@ -24,7 +24,7 @@ class AtomicStamped {
         log.debug("版本 {}", stamp);
         // 如果中间有其它线程干扰，发生了 ABA 现象
         other();
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         // 尝试改为 C
         log.debug("change A->C {}", ref.compareAndSet(prev, "C", stamp, stamp + 1));
     }
@@ -34,7 +34,7 @@ class AtomicStamped {
             log.debug("change A->B {}", ref.compareAndSet(ref.getReference(), "B", ref.getStamp(), ref.getStamp() + 1));
             log.debug("更新版本为 {}", ref.getStamp());
         }, "t1").start();
-        Threads.sleep(500);
+        ThreadUtil.sleep(500);
         new Thread(() -> {
             log.debug("change B->A {}", ref.compareAndSet(ref.getReference(), "A", ref.getStamp(), ref.getStamp() + 1));
             log.debug("更新版本为 {}", ref.getStamp());

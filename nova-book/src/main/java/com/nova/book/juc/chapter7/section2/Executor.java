@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter7.section2;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -59,7 +59,7 @@ class Executor {
     public static void submit() {
         final Future<String> future = pool.submit(() -> {
             log.debug("Callable Submit");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             return "OK";
         });
 
@@ -78,17 +78,17 @@ class Executor {
             List<Future<String>> futures = pool.invokeAll(Arrays.asList(
                     () -> {
                         log.debug("begin1");
-                        Threads.sleep(1000);
+                        ThreadUtil.sleep(1000);
                         return "1";
                     },
                     () -> {
                         log.debug("begin2");
-                        Threads.sleep(500);
+                        ThreadUtil.sleep(500);
                         return "2";
                     },
                     () -> {
                         log.debug("begin3");
-                        Threads.sleep(2000);
+                        ThreadUtil.sleep(2000);
                         return "3";
                     }
             ));
@@ -140,21 +140,21 @@ class Executor {
     public static void shutDown() {
         Future<Integer> result1 = pool.submit(() -> {
             log.debug("task 1 running...");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             log.debug("task 1 finish...");
             return 1;
         });
 
         Future<Integer> result2 = pool.submit(() -> {
             log.debug("task 2 running...");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             log.debug("task 2 finish...");
             return 2;
         });
 
         Future<Integer> result3 = pool.submit(() -> {
             log.debug("task 3 running...");
-            Threads.sleep(1000);
+            ThreadUtil.sleep(1000);
             log.debug("task 3 finish...");
             return 3;
         });

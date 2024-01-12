@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section5.lock;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -17,7 +17,7 @@ class LiveLock {
         new Thread(() -> {
             // 期望减到 0 退出循环
             while (count > 0) {
-                Threads.sleep(200);
+                ThreadUtil.sleep(200);
                 count--;
                 log.debug("count: {}", count);
             }
@@ -26,7 +26,7 @@ class LiveLock {
         new Thread(() -> {
             // 期望超过 20 退出循环
             while (count < 20) {
-                Threads.sleep(200);
+                ThreadUtil.sleep(200);
                 count++;
                 log.debug("count: {}", count);
             }

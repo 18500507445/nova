@@ -1,6 +1,6 @@
 package com.nova.book.effectivejava.chapter9.section1;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -31,7 +31,7 @@ public class VolatileThread {
                 }
             }).start();
         }
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         System.err.println("count = " + count);
     }
 
@@ -52,7 +52,7 @@ public class VolatileThread {
                 }
             }).start();
         }
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         System.err.println("sum = " + sum);
     }
 

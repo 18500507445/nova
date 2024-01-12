@@ -18,6 +18,7 @@ class Section4Test {
 
     /**
      * 绕过了构造器，直接创建了cat2对象
+     *
      * @throws CloneNotSupportedException
      */
     @Test

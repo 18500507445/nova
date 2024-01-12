@@ -1,6 +1,6 @@
 package com.nova.book.juc.chapter3.section2;
 
-import com.nova.common.utils.thread.Threads;
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -152,7 +152,7 @@ class NumberOne {
 class NumberTwo {
     @SneakyThrows
     public synchronized void a() {
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("1");
     }
 
@@ -166,7 +166,7 @@ class NumberThree {
 
     @SneakyThrows
     public synchronized void a() {
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("1");
     }
 
@@ -184,7 +184,7 @@ class NumberFive {
 
     @SneakyThrows
     public static synchronized void a() {
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("1");
     }
 
@@ -199,7 +199,7 @@ class NumberSix {
 
     @SneakyThrows
     public static synchronized void a() {
-        Threads.sleep(1000);
+        ThreadUtil.sleep(1000);
         log.debug("1");
     }
 

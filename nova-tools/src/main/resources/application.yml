@@ -22,8 +22,13 @@ spring:
   application:
     name: nova-tools
   jackson:
+    ## 全局日期格式化
     date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: Asia/Shanghai
+    time-zone: GMT+8
+
+    ## 时间戳（与上面互斥）
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
 
   #SBA服务端地址
   boot:

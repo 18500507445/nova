@@ -7,6 +7,7 @@
         select * from user where name = #{name}
     </select>
 
+    <!-- 批量插入，判空 -->
     <insert id="batchInsert" parameterType="java.util.List">
         <foreach collection="list" item="item" separator=";">
             <trim prefix="insert into user" suffix=";">

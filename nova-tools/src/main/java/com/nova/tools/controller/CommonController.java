@@ -1,5 +1,7 @@
 package com.nova.tools.controller;
 
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.RespResult;
@@ -52,10 +54,10 @@ public class CommonController extends BaseController {
     }
 
     /**
-     * validator
+     * validator，匹配分组1
      */
     @PostMapping("/validator")
-    public RespResult<String> validator(@Validated @RequestBody ValidatorReqDTO reqDTO) {
+    public RespResult<String> validator(@Validated(ValidatorReqDTO.GroupOne.class) @RequestBody ValidatorReqDTO reqDTO) {
         HttpServletRequest request = getRequest();
         String header = request.getHeader(Trace.TRACE_ID);
         return RespResult.success(header);
@@ -77,11 +79,21 @@ public class CommonController extends BaseController {
     @Data
     @AllArgsConstructor
     public static class DateTime{
+
+        //millis：毫秒，unixtime：秒
+        @JSONField(format = "millis")
         private Date time;
     }
 
     @GetMapping(value = "/time", name = "ResponseBody，测试全局时间戳")
     public RespResult<DateTime> time() {
         return RespResult.success(new DateTime(new Date()));
+    }
+
+    @GetMapping(value = "/jsonTime", name = "ResponseBody，测试全局时间戳")
+    public RespResult<JSONObject> jsonTime() {
+        String jsonString = JSONObject.toJSONString(new DateTime(new Date()));
+        JSONObject jsonObject = JSONObject.parseObject(jsonString);
+        return RespResult.success(jsonObject);
     }
 }

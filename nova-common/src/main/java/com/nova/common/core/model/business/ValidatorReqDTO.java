@@ -1,11 +1,13 @@
 package com.nova.common.core.model.business;
 
 import com.nova.common.core.model.pojo.BaseReqDTO;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 
 /**
@@ -14,7 +16,7 @@ import javax.validation.constraints.*;
  * @date: 2022/12/19 20:58
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
+@lombok.Data
 public class ValidatorReqDTO extends BaseReqDTO {
 
     /**
@@ -27,16 +29,39 @@ public class ValidatorReqDTO extends BaseReqDTO {
     /**
      * 年龄
      */
-    @DecimalMin(value = "19", message = "年龄不能小于18岁")
-    @DecimalMax(value = "60", message = "年龄不能大于60岁")
+    @Range(min = 18, max = 60, message = "年龄只能在18-60之间")
     private Integer age;
-
-    @Range(min = 19, max = 60, message = "年龄只能在19-60之间")
-    private Integer age1;
 
     @Email(message = "邮件格式不正确")
     private String email;
 
     private String name;
+
+    /**
+     * 分组one 校验
+     */
+    public interface GroupOne {
+
+    }
+
+    /**
+     * 分组Two 校验
+     */
+    public interface GroupTwo {
+
+    }
+
+    //嵌套校验
+    @Valid
+    private Data data;
+
+    @lombok.Data
+    private static class Data {
+
+        //匹配分组2
+        @NotBlank(message = "data内部id不能为空", groups = GroupTwo.class)
+        private String id;
+    }
+
 
 }

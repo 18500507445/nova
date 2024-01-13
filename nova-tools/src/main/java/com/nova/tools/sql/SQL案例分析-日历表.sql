@@ -12,7 +12,7 @@ CREATE TABLE calendar(
   CONSTRAINT uk_calendar UNIQUE (calendar_date)
 );
 
---生成2022-01-01开始的一年数据
+-- 生成2022-01-01开始的一年数据
 INSERT INTO calendar
 WITH RECURSIVE c(n, dt, y, m, d, doy, dom, dow, work_day) AS (
 SELECT 1, '2022-01-01', year('2022-01-01'), month('2022-01-01'), day('2022-01-01'),

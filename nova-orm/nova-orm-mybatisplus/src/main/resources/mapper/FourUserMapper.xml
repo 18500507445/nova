@@ -7,29 +7,5 @@
         select * from user where name = #{name}
     </select>
 
-    <!-- 批量插入，判空 -->
-    <insert id="batchInsert" parameterType="java.util.List">
-        <foreach collection="list" item="item" separator=";">
-            <trim prefix="insert into user" suffix=";">
-                <trim prefix="(" suffix=")" suffixOverrides=",">
-                    <if test="item.age != null">
-                        age,
-                    </if>
-                    <if test="item.name != null and item.name != ''">
-                        name,
-                    </if>
-                </trim>
-
-                <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-                    <if test="item.age != null">
-                        #{item.age,jdbcType=INTEGER},
-                    </if>
-                    <if test="item.name != null and item.name != ''">
-                        #{item.name,jdbcType=VARCHAR},
-                    </if>
-                </trim>
-            </trim>
-        </foreach>
-    </insert>
 </mapper>
 

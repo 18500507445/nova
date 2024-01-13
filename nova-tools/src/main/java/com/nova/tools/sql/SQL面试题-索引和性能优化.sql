@@ -7,7 +7,7 @@ CREATE TABLE t1 (
   dt DATE);
 CREATE INDEX idx1 ON t1(dt);
 
---下面的查询语句有没有性能问题？
+-- 下面的查询语句有没有性能问题？
 SELECT *
 FROM t1
 WHERE YEAR(dt) = '2019';

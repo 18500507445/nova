@@ -2,8 +2,11 @@ package com.nova.orm.mybatis.mapper;
 
 import com.nova.orm.mybatis.entity.Student;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.Map;
 
 /**
  * @description:
@@ -45,4 +48,8 @@ public interface StudentMapper {
 
     @Insert("insert into student(name, age) values('insertC', 18)")
     void insertC();
+
+    @MapKey("name")
+    @Select("select id, name, age, create_time as createTime from student")
+    Map<String,Student> selectMap();
 }

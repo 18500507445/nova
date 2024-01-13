@@ -32,7 +32,7 @@ FROM users
 ORDER BY create_time, id
 LIMIT 20 offset 100000;
 
--- KEYSET分页
+-- KEY SET分页
 EXPLAIN 
 SELECT *
 FROM users

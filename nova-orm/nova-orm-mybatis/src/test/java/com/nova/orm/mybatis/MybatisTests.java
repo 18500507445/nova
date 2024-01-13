@@ -2,6 +2,7 @@ package com.nova.orm.mybatis;
 
 
 import com.nova.orm.mybatis.config.MybatisConfiguration;
+import com.nova.orm.mybatis.entity.Student;
 import com.nova.orm.mybatis.mapper.StudentMapper;
 import com.nova.orm.mybatis.service.StudentService;
 import com.nova.orm.mybatis.service.TransactionService;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @description: 引入spring-test依赖 使用@ExtendWith、@ContextConfiguration获取上下文
@@ -121,4 +123,14 @@ public class MybatisTests {
     public void testPro() {
         transactionService.aPro();
     }
+
+    /**
+     * MapKey进行分组
+     */
+    @Test
+    public void testSelectMap() {
+        Map<String, Student> map = studentMapper.selectMap();
+        System.err.println("map = " + map);
+    }
+
 }

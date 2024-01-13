@@ -2,6 +2,8 @@ package com.nova.orm.mybatis.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @description:
  * @author: wzh
@@ -15,5 +17,7 @@ public class Student {
     private String name;
 
     private int age;
+
+    private Date createTime;
 
 }

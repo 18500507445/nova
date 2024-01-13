@@ -96,9 +96,6 @@
         <appender-ref ref="info_log" />
     </appender>
 
-    <!-- 系统模块日志级别控制  debug级别及以上 -->
-    <logger name="com.nova.log.logback" level="debug"/>
-
     <!-- Spring日志级别控制  warn级别及以上 -->
     <logger name="org.springframework" level="warn"/>
 

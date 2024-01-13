@@ -1,5 +1,3 @@
--- 视频地址：
-
 CREATE TABLE test(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   col1 INT,

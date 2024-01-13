@@ -156,7 +156,7 @@ public class Chapter5Test {
     }
 
     /**
-     * mp手动管理事务，是不行的
+     * mp手动管理事务，跨库不行
      */
     @Test
     public void testManualTest() {

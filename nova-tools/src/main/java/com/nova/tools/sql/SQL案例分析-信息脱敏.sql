@@ -1,5 +1,3 @@
--- 视频地址：https://www.bilibili.com/video/BV1y94y1d7v7
-
 -- 创建示例表
 CREATE TABLE users
     ( id        INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
@@ -22,11 +20,7 @@ SELECT name "隐藏之前",
 FROM users;
 
 # 隐藏手机号
-SELECT phone "隐藏之前",
-       insert(phone, char_length(phone)-7, 4, '****') "隐藏之后"
-FROM users;
+SELECT phone "隐藏之前",insert(phone, char_length(phone)-7, 4, '****') "隐藏之后" FROM users;
 
 # 隐藏身份证号
-SELECT id_card "隐藏之前",
-       insert(id_card, 7, 8, '*******') "隐藏之后"
-FROM users;
+SELECT id_card "隐藏之前",insert(id_card, 7, 8, '*******') "隐藏之后" FROM users;

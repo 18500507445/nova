@@ -3,6 +3,7 @@ package com.nova.cache.redis.redis;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -68,7 +69,7 @@ public class RedisService {
 
         redisTemplate.execute(new RedisCallback<Object>() {
             @Override
-            public Object doInRedis(RedisConnection connection) throws DataAccessException {
+            public Object doInRedis(@NotNull RedisConnection connection) throws DataAccessException {
                 potentiallyUsePsetEx(connection);
                 return null;
             }
@@ -483,6 +484,16 @@ public class RedisService {
             log.error("Exception: {}", e.getMessage());
             return 0L;
         }
+    }
+
+    /**
+     * 随机移除key对应集合中的count个元素
+     *
+     * @param key
+     * @param count
+     */
+    public List<Object> setPop(String key, Long count) {
+        return redisTemplate.opsForSet().pop(key, count);
     }
 
     /**

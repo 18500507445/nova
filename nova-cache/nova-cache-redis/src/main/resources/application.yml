@@ -29,6 +29,15 @@ spring:
     #连接超时时间
     timeout: 10000
 
+  cache:
+    ## 指定缓存类型
+    type: redis
+    redis:
+      ## 指定存活时间 单位：ms
+      time-to-live: 86400000
+
+      ## 是否缓存空值，可以防止缓存穿透
+      cache-null-values: true
 
 #caffeine 本地缓存配置
 caffeine:

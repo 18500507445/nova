@@ -26,7 +26,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-    ## 时间戳（与上面互斥）
+    ## 时间戳（与上面互斥），但不能解决LocalDateTime转时间戳（JacksonCustomizerConfig类解决）
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: true
 

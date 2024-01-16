@@ -44,5 +44,10 @@
             <version>${memcached.version}</version>
         </dependency>
 
+        <!-- spring cache -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
     </dependencies>
 </project>

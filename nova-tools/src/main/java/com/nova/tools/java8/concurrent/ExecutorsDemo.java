@@ -18,7 +18,7 @@ class ExecutorsDemo {
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
     @Test
-    private void demoA() {
+    public void demoA() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
             try {

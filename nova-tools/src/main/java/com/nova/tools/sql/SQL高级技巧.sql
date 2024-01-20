@@ -18,7 +18,7 @@ select age,count(1),sum(age) as age_sum from study.user group by age with rollup
 ## 子查询提取
 with m1 as(select * from study.user where age > 20) select * from m1 where m1.id > 1;
 
-## 优雅插入ignore，有就忽略，无则插入
+## 优雅插入ignore，有就忽略，无则插入（按照唯一索引来插入的）
 insert ignore into study.user (id, name, age, email, user_name, `desc`, hide, status, gender, contact)
 values (1, 'Jone', 18, 'test1@baomidou.com', null, null, null, 0, 1, null);
 
@@ -30,3 +30,4 @@ values (1, 'Jone', 18, 'test1@baomidou.com', null, null, null, 0, 1, null);
 insert into study.user (id, name, age, email, user_name, `desc`, hide, status, gender, contact)
 values (1, 'Jone', 18, 'test1@baomidou.com', null, null, null, 0, 1, null)
 on duplicate key update age = age + 10;
+

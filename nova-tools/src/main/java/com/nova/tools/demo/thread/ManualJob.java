@@ -70,7 +70,9 @@ class ManualJob {
 
     public static void main(String[] args) {
         final ManualJob manualJob = new ManualJob();
+        //一个开始
         manualJob.start();
+        //一个处理
         manualJob.process();
     }
 

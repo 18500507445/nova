@@ -18,7 +18,7 @@ public class DerbyTest {
     private static final String DS_GROUP_NAME = "derby";
 
     @Test
-    public static void init() throws SQLException {
+    public void init() throws SQLException {
         Db db = Db.use(DS_GROUP_NAME);
         try {
             db.execute("CREATE TABLE test(a INTEGER, b BIGINT)");

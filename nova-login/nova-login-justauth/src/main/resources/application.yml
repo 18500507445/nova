@@ -64,7 +64,6 @@ justauth:
       client-id: 10**********6
       client-secret: 1f7d08**********5b7**********29e
       redirect-uri: http://oauth.xkcoding.com/demo/oauth/coding/callback
-      coding-group-name: xx
     OSCHINA:
       client-id: 10**********6
       client-secret: 1f7d08**********5b7**********29e

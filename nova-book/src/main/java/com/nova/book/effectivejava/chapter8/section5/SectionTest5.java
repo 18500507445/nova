@@ -7,11 +7,6 @@ package com.nova.book.effectivejava.chapter8.section5;
  */
 class SectionTest5 {
 
-    /**
-     * @param c collection containing elements to be added to this list
-     * @return <tt>true</tt> if this list changed as a result of the call
-     * @throws NullPointerException if the specified collection is null
-     */
     public boolean addAll() {
         return true;
     }

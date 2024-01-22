@@ -22,7 +22,7 @@ public class H2Test {
     private static final String DS_GROUP_NAME = "h2";
 
     @Test
-    public static void init() throws SQLException {
+    public void init() throws SQLException {
         Db db = Db.use(DS_GROUP_NAME);
         db.execute("CREATE TABLE test(a INTEGER, b BIGINT)");
 

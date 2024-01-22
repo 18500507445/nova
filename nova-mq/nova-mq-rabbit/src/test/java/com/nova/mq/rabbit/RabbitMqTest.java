@@ -265,6 +265,10 @@ public class RabbitMqTest {
     @Test
     public void topicTest() {
         rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_TOPIC, "three.two.one", MSG);
+
+        for (int i = 0; i < 100; i++) {
+            rabbitTemplate.convertAndSend(RabbitConstants.EXCHANGE_TOPIC, "three", MSG);
+        }
     }
 
 }

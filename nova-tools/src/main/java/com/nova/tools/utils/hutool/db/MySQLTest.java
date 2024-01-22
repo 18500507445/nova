@@ -19,7 +19,7 @@ import java.util.List;
 public class MySQLTest {
 
     @Test
-    public static void createTable() throws SQLException {
+    public void createTable() throws SQLException {
         Db db = Db.use("mysql");
         db.executeBatch("drop table if exists testuser", "CREATE TABLE if not exists `testuser` ( `id` int(11) NOT NULL, `account` varchar(255) DEFAULT NULL, `pass` varchar(255) DEFAULT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
     }

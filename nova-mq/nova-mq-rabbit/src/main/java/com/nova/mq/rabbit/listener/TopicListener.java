@@ -38,6 +38,17 @@ public class TopicListener {
     @RabbitListener(queues = RabbitConstants.QUEUE_TOPIC_THREE)
     public void three(Message message, Channel channel) {
         long tag = message.getMessageProperties().getDeliveryTag();
-        System.err.println("主题模式3,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("主题模式3-one,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+    }
+
+    /**
+     * 多个队列监听，自动多worker模式
+     */
+    @SneakyThrows
+    @RabbitHandler
+    @RabbitListener(queues = RabbitConstants.QUEUE_TOPIC_THREE)
+    public void threeCopy(Message message, Channel channel) {
+        long tag = message.getMessageProperties().getDeliveryTag();
+        System.err.println("主题模式3-two,消息id:" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 }

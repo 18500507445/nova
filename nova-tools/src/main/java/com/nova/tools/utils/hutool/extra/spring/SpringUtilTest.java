@@ -7,7 +7,6 @@ import cn.hutool.extra.spring.SpringUtil;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 
@@ -109,8 +108,7 @@ public class SpringUtilTest {
     @Data
     public static class TestAutoWired {
 
-        @Autowired
-        // @Resource
+        @Resource
         private TestBean autowiredBean;
 
         @Resource

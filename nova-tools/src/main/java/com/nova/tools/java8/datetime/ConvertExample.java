@@ -1,7 +1,5 @@
 package com.nova.tools.java8.datetime;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.*;
 import java.util.Date;
 
@@ -19,8 +17,7 @@ class ConvertExample {
      * @param localDate
      * @return
      */
-    @Test
-    void toDate(LocalDate localDate) {
+    public void toDate(LocalDate localDate) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDate.atStartOfDay().atZone(zone).toInstant();
         Date from = Date.from(instant);
@@ -33,7 +30,6 @@ class ConvertExample {
      * @param localDateTime
      * @return
      */
-    @Test
     void toDate(LocalDateTime localDateTime) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
@@ -47,7 +43,6 @@ class ConvertExample {
      * @param localTime
      * @return
      */
-    @Test
     void toDate(LocalTime localTime) {
         LocalDate localDate = LocalDate.now();
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
@@ -63,7 +58,6 @@ class ConvertExample {
      * @param date
      * @return
      */
-    @Test
     void toLocalDate(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
@@ -78,7 +72,6 @@ class ConvertExample {
      * @param date
      * @return
      */
-    @Test
     void toLocalDateTime(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
@@ -92,7 +85,6 @@ class ConvertExample {
      * @param date
      * @return
      */
-    @Test
     void toLocalTime(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();

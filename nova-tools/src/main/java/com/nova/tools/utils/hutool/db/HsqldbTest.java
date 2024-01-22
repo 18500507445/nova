@@ -18,7 +18,7 @@ public class HsqldbTest {
     private static final String DS_GROUP_NAME = "hsqldb";
 
     @Test
-    public static void init() throws SQLException {
+    public void init() throws SQLException {
         Db db = Db.use(DS_GROUP_NAME);
         db.execute("CREATE TABLE test(a INTEGER, b BIGINT)");
         db.insert(Entity.create("test").set("a", 1).set("b", 11));

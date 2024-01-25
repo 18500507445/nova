@@ -18,7 +18,7 @@ import java.util.List;
  * @description linux命令工具类
  * @date: 2023/10/06 10:08
  */
-@Slf4j
+@Slf4j(topic = "LinuxUtils")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LinuxUtils {
 

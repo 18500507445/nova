@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * 单个工作表导出
- * @author wangzehui
+ * @author wzh
  */
 @RequiredArgsConstructor
 public class WaterMarkHandler implements SheetWriteHandler {

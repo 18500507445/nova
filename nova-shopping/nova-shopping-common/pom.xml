@@ -16,7 +16,6 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <mybatis.boot.version>2.3.1</mybatis.boot.version>
         <druid.version>1.2.20</druid.version>
         <xx.job.verson>2.4.0</xx.job.verson>
 
@@ -25,9 +24,9 @@
         <jasypt.version>3.0.5</jasypt.version>
 
         <!-- spring-boot 2.7.18版本 -->
-        <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
+        <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
         <!-- 不要升级了，springboot3之前最高次版本 -->
-        <mybatis.version>2.3.1</mybatis.version>
+        <mybatis.version>2.3.2</mybatis.version>
     </properties>
 
     <dependencies>
@@ -85,7 +84,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.boot.version}</version>
+            <version>${mybatis.version}</version>
         </dependency>
 
         <dependency>

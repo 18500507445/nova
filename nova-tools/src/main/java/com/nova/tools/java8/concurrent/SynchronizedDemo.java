@@ -1,6 +1,5 @@
 package com.nova.tools.java8.concurrent;
 
-import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
@@ -44,7 +43,7 @@ class SynchronizedDemo {
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::incrementSync));
 
-        Threads.stop(executor);
+        executor.shutdown();
 
         System.err.println("Sync: " + count);
     }
@@ -58,7 +57,7 @@ class SynchronizedDemo {
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::increment));
 
-        Threads.stop(executor);
+        executor.shutdown();
 
         System.err.println("NonSync: " + count);
     }
@@ -72,7 +71,7 @@ class SynchronizedDemo {
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SynchronizedDemo::incrementSyncClass));
 
-        Threads.stop(executor);
+        executor.shutdown();
 
         System.err.println(count);
     }

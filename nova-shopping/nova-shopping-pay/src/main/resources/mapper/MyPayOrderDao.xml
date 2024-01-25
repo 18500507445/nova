@@ -257,10 +257,10 @@
         </foreach>
     </delete>
 
-    <select id="selectNtPayOrderByOrderIdAndPayWay" resultMap="MyPayOrderResult">
+    <select id="selectMyPayOrderByOrderIdAndPayWay" resultMap="MyPayOrderResult">
         <include refid="selectMyPayOrderVo"/>
         where order_id = #{orderId}
-          and pay_way = #{payWay}
+        and pay_way = #{payWay}
     </select>
 </mapper>
 

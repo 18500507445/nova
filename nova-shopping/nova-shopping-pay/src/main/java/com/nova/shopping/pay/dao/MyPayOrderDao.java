@@ -2,6 +2,7 @@ package com.nova.shopping.pay.dao;
 
 import com.nova.shopping.pay.entity.MyPayOrder;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -60,6 +61,8 @@ public interface MyPayOrderDao {
      * @return 结果
      */
     int deleteMyPayOrderByIds(String[] ids);
+
+    MyPayOrder selectMyPayOrderByOrderIdAndPayWay(@Param("orderId") String orderId, @Param("payWay") int payWay);
 
 }
 

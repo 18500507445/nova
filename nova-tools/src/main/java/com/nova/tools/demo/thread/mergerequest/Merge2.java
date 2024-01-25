@@ -1,7 +1,6 @@
 package com.nova.tools.demo.thread.mergerequest;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ class Merge2 {
             }
         });
 
-        Threads.stop(pool);
+        pool.shutdown();
     }
 
 

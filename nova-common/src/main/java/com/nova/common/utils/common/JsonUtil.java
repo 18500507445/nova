@@ -83,7 +83,7 @@ public final class JsonUtil {
         try {
             return MAPPER.writeValueAsString(data);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("json parse err,data:{}", data, e);
         }
         return null;
     }
@@ -98,7 +98,7 @@ public final class JsonUtil {
         try {
             return MAPPER.readValue(jsonData, beanType);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("json parse err,jsonData:{}", jsonData, e);
         }
         return null;
     }
@@ -117,7 +117,7 @@ public final class JsonUtil {
         try {
             return MAPPER.readValue(jsonData, javaType);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("json parse err,jsonData:{}", jsonData, e);
         }
         return null;
     }
@@ -132,7 +132,7 @@ public final class JsonUtil {
         try {
             return JSONObject.parseObject(jsonData, Map.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("json parse err,jsonData:{}", jsonData, e);
         }
         return null;
     }

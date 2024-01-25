@@ -3,7 +3,6 @@ package com.nova.tools.demo.thread.mergerequest;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
 import com.google.common.collect.Lists;
-import com.nova.common.utils.thread.Threads;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -114,7 +113,7 @@ class Merge3 {
         log.debug("------- 库存 -------");
         log.debug("库存最终数量 :{}", STOCK);
 
-        Threads.stop(pool);
+        pool.shutdown();
     }
 
     /**

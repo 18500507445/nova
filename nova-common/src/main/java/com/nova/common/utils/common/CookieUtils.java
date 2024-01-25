@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 
 /**
  * Cookie工具类
+ * @author wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CookieUtils {

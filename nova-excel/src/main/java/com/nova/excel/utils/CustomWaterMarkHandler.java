@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * 多个工作表导出
- * @author wangzehui
+ * @author wzh
  */
 public class CustomWaterMarkHandler implements SheetWriteHandler {
 

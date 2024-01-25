@@ -3,6 +3,7 @@ package com.nova.common.utils.common;
 import cn.hutool.core.util.StrUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -15,6 +16,7 @@ import java.util.regex.Pattern;
  * @author: wzh
  * @date: 2022/8/4 21:29
  */
+@Slf4j(topic = "EmojiUtil")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class EmojiUtil {
 
@@ -36,14 +38,14 @@ public final class EmojiUtil {
             while (matcher.find()) {
                 try {
                     matcher.appendReplacement(sb, "<emoji>" + URLEncoder.encode(matcher.group(1), "UTF-8") + "</emoji>");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    log.error("出现异常", e);
                 }
             }
             matcher.appendTail(sb);
             return sb.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("出现异常", e);
             return str;
         }
     }
@@ -69,14 +71,14 @@ public final class EmojiUtil {
                 try {
                     matcher.appendReplacement(sb, URLDecoder.decode(matcher.group(1), "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    log.error("出现异常", e);
                 }
             }
             matcher.appendTail(sb);
             return sb.toString().replaceAll("<emoji>", "").replaceAll("</emoji>", "");
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("出现异常", e);
             return str;
         }
     }

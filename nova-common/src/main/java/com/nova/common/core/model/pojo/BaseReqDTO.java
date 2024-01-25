@@ -1,6 +1,6 @@
 package com.nova.common.core.model.pojo;
 
-import com.nova.common.core.model.entity.BasePage;
+import com.nova.common.core.model.business.BasePage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

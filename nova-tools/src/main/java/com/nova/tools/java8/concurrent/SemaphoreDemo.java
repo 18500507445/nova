@@ -1,7 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
@@ -65,7 +64,7 @@ class SemaphoreDemo {
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(SemaphoreDemo::increment));
 
-        Threads.stop(executor);
+        executor.shutdown();
 
         System.err.println("Increment: " + count);
     }
@@ -76,7 +75,8 @@ class SemaphoreDemo {
 
         IntStream.range(0, 10).forEach(i -> executor.submit(SemaphoreDemo::doWork));
 
-        Threads.stop(executor);
+        executor.shutdown();
+
     }
 
 }

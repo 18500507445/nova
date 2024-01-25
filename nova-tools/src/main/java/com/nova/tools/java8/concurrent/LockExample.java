@@ -1,7 +1,6 @@
 package com.nova.tools.java8.concurrent;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.nova.common.utils.thread.Threads;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -44,7 +43,7 @@ class LockExample {
 
         IntStream.range(0, NUM_INCREMENTS).forEach(i -> executor.submit(LockExample::increment));
 
-        Threads.stop(executor);
+        executor.shutdown();
 
         System.err.println(count);
     }
@@ -67,7 +66,7 @@ class LockExample {
             System.err.println("Lock acquired: " + locked);
         });
 
-        Threads.stop(executor);
+        executor.shutdown();
     }
 
     @Test
@@ -98,7 +97,7 @@ class LockExample {
         executor.submit(readTask);
         executor.submit(readTask);
 
-        Threads.stop(executor);
+        executor.shutdown();
     }
 
 
@@ -130,7 +129,7 @@ class LockExample {
         executor.submit(readTask);
         executor.submit(readTask);
 
-        Threads.stop(executor);
+        executor.shutdown();
     }
 
     @Test
@@ -161,7 +160,7 @@ class LockExample {
             }
         });
 
-        Threads.stop(executor);
+        executor.shutdown();
     }
 
     @Test
@@ -185,6 +184,6 @@ class LockExample {
             }
         });
 
-        Threads.stop(executor);
+        executor.shutdown();
     }
 }

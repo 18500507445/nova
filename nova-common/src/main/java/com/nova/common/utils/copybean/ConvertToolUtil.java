@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author wzh
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ConvertToolUtil {
 
@@ -37,8 +40,8 @@ public final class ConvertToolUtil {
         }
         Method[] fromMethods = from.getClass().getDeclaredMethods();
         Method[] toMethods = to.getClass().getDeclaredMethods();
-        Method fromMethod = null, toMethod = null;
-        String fromMethodName = null, toMethodName = null;
+        Method fromMethod, toMethod;
+        String fromMethodName, toMethodName;
 
         for (Method method : fromMethods) {
             fromMethod = method;
@@ -64,9 +67,7 @@ public final class ConvertToolUtil {
             }
             // 集合类判空处理
             if (value instanceof Collection) {
-
                 Collection<?> newValue = (Collection<?>) value;
-
                 if (newValue.size() <= 0) {
                     continue;
                 }

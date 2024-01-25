@@ -1,5 +1,6 @@
 package com.nova.common.utils.string;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -19,8 +20,11 @@ public final class MatchUtil {
         String str1 = "今天是星期五";
         String str2 = "今天是星期";
         Integer num = matchValue(str1, str2);
-        long end = System.currentTimeMillis();
-        System.err.println("相似度:" + num + "% ，耗时：" + (end - start) + "ms");
+        System.err.println("相似度:" + num + "% ，耗时：" + (System.currentTimeMillis() - start) + "ms");
+
+        long start1 = System.currentTimeMillis();
+        double similar = StrUtil.similar(str1, str2);
+        System.err.println("similar相似度:" + similar + "% ，耗时：" + (System.currentTimeMillis() - start1) + "ms");
     }
 
     public static Integer matchValue(String str1, String str2) {

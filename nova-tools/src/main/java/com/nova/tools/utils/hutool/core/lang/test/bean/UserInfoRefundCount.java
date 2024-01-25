@@ -1,38 +1,20 @@
 package com.nova.tools.utils.hutool.core.lang.test.bean;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class UserInfoRefundCount implements Serializable {
 
     private static final long serialVersionUID = -8397291070139255181L;
-    private String finishedRatio; // 完成率
+    // 完成率
+    private String finishedRatio;
 
-    private Integer ownershipExamCount; // 自己有多少道题
+    // 自己有多少道题
+    private Integer ownershipExamCount;
 
-    private Integer answeredExamCount; // 当前回答了多少道题
-
-    public Integer getOwnershipExamCount() {
-        return ownershipExamCount;
-    }
-
-    public void setOwnershipExamCount(Integer ownershipExamCount) {
-        this.ownershipExamCount = ownershipExamCount;
-    }
-
-    public Integer getAnsweredExamCount() {
-        return answeredExamCount;
-    }
-
-    public void setAnsweredExamCount(Integer answeredExamCount) {
-        this.answeredExamCount = answeredExamCount;
-    }
-
-    public String getFinishedRatio() {
-        return finishedRatio;
-    }
-
-    public void setFinishedRatio(String finishedRatio) {
-        this.finishedRatio = finishedRatio;
-    }
+    // 当前回答了多少道题
+    private Integer answeredExamCount;
 
 }

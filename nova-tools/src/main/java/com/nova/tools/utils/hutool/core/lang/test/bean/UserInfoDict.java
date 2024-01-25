@@ -1,5 +1,7 @@
 package com.nova.tools.utils.hutool.core.lang.test.bean;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import java.util.Objects;
  *
  * @author 质量过关
  */
+@Data
 public class UserInfoDict implements Serializable {
     private static final long serialVersionUID = -936213991463284306L;
     // 用户Id
@@ -19,38 +22,6 @@ public class UserInfoDict implements Serializable {
     private String photoPath;
     private List<ExamInfoDict> examInfoDict;
     private UserInfoRefundCount userInfoRefundCount;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public String getPhotoPath() {
-        return photoPath;
-    }
-
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
-    }
-
-    public List<ExamInfoDict> getExamInfoDict() {
-        return examInfoDict;
-    }
-
-    public void setExamInfoDict(List<ExamInfoDict> examInfoDict) {
-        this.examInfoDict = examInfoDict;
-    }
 
     public UserInfoRefundCount getUserInfoRedundCount() {
         return userInfoRefundCount;

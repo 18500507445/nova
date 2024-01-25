@@ -109,7 +109,7 @@ public class DirectWorkListener {
              * boolean requeue：如果 requeue 参数设置为 true，RabbitMQ 会重新将这条消息存入队列，以便发送给下一个订阅的消费者；
              * 反之设置为false，则 RabbitMQ 立即会还把消息从队列中移除，而不会把它发送给新的消费者。
              */
-            //channel.basicNack(tag, false, true);
+//            channel.basicNack(tag, false, true);
 
             /**
              * 拒绝消息

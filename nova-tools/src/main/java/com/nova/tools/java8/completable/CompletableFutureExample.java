@@ -132,9 +132,10 @@ public class CompletableFutureExample {
     }
 
     /**
+     * todo 我的理解 whenComplete = thenApply + exceptionally
      * whenComplete和whenCompleteAsync
      * 传入两个参数（结果值，异常）
-     * 无返回
+     * 无自己的返回
      */
     @Test
     public void whenCompleteTest() throws ExecutionException, InterruptedException {
@@ -149,7 +150,7 @@ public class CompletableFutureExample {
             System.out.println("e = " + e);
         }, POOL);
 
-        //todo 注意结果是supplyAsync返回的，不是whenCompleteAsync的
+        //todo 注意结果是supplyAsync返回的 2333，不是whenCompleteAsync的
         Integer result = whenCompleteAsync.get();
         System.out.println("result = " + result);
     }
@@ -340,17 +341,23 @@ public class CompletableFutureExample {
         CompletableFuture<Void> taskA = CompletableFuture.runAsync(() -> {
             ThreadUtil.sleep(2000);
             System.err.println("taskA。。。");
+            throw new RuntimeException("taskA异常");
         }, POOL);
 
         CompletableFuture<Void> taskB = CompletableFuture.runAsync(() -> {
             ThreadUtil.sleep(3000);
             System.err.println("taskB。。。");
+//            throw new RuntimeException("taskB异常");
         }, POOL);
 
-
-        CompletableFuture.allOf(taskA, taskB).join();
-        System.err.println("都完成");
+        CompletableFuture.allOf(taskA, taskB).thenRun(() -> {
+            System.err.println("都完成");
+        }).exceptionally(e -> {
+            System.err.println("e = " + e.getCause().getMessage());
+            throw new RuntimeException(e.getCause().getMessage());
+        }).join();
     }
+
 
     /**
      * 任意一个任务完成
@@ -368,7 +375,6 @@ public class CompletableFutureExample {
         }, POOL);
 
         CompletableFuture.anyOf(taskA, taskB).join();
-
         System.err.println("任意完成");
     }
 
@@ -379,9 +385,14 @@ public class CompletableFutureExample {
     public void exceptionallyTest() throws ExecutionException, InterruptedException {
         CompletableFuture<String> taskA = CompletableFuture.supplyAsync(() -> {
             System.err.println("taskA。。。");
-            int a = 1 / 0;
+//            int a = 1 / 0;
             return "taskA";
         }, POOL);
+
+        taskA.thenAccept(s -> {
+            int a = 1 / 0;
+            System.out.println("thenAccept = " + s);
+        });
 
         taskA.exceptionally(e -> {
             System.err.println("exceptionally");

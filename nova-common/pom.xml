@@ -18,9 +18,11 @@
 
         <fastjson.version>2.0.45</fastjson.version>
         <hutool.version>5.8.25</hutool.version>
-        <email.version>1.5</email.version>
-        <guava.version>32.1.3-jre</guava.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <guava.version>33.0.0-jre</guava.version>
         <guava.retry.version>2.0.0</guava.retry.version>
+
+        <email.version>1.5</email.version>
         <thumbnailator.version>0.4.17</thumbnailator.version>
         <commons.io.version>2.13.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
@@ -37,15 +39,13 @@
         <sba.version>2.7.11</sba.version>
         <transmittable.version>2.14.3</transmittable.version>
         <ip2region.version>2.7.0</ip2region.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
 
         <!-- hutool工具类需要的依赖 -->
         <emoji-java.version>5.1.1</emoji-java.version>
 
-        <!-- spring-boot 2.7.18版本 -->
-        <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
-        <!-- 不要升级了，springboot3之前最高次版本 -->
-        <mybatis.version>2.3.1</mybatis.version>
+        <!-- 兼容到spring-boot-starter 2.7.18版本，不建议升级了 -->
+        <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
+        <mybatis.version>2.3.2</mybatis.version>
 
     </properties>
 

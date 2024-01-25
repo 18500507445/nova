@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2022/12/20 15:40
  */
 @Component
-public class CaffeineManagerConfig {
+public class CaffeineConfig {
 
     @Resource
     private CaffeineProperties caffeineProperties;

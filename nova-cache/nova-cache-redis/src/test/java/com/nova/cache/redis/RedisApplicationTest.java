@@ -4,7 +4,7 @@ import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.nova.cache.redis.caffeine.CaffeineCacheUtil;
+import com.nova.cache.redis.caffeine.CacheUtil;
 import com.nova.cache.redis.memcached.MemcachedUtil;
 import com.nova.cache.redis.redis.RedisService;
 import com.nova.common.utils.id.IdUtils;
@@ -24,7 +24,7 @@ class RedisApplicationTest {
     private RedisService redisService;
 
     @Autowired
-    private CaffeineCacheUtil caffeineCacheUtil;
+    private CacheUtil cacheUtil;
 
     @Autowired
     private MemcachedUtil memcachedUtil;
@@ -158,9 +158,9 @@ class RedisApplicationTest {
         //application.yml caffeine.cacheNames名称一致
         String cacheName = "caffeine";
         String key = "nova-cache";
-        caffeineCacheUtil.putCache(cacheName, key, "1");
+        cacheUtil.put(cacheName, key, "1");
 
-        Object cache = caffeineCacheUtil.getCache(cacheName, key);
+        Object cache = cacheUtil.get(cacheName, key);
         System.err.println("cache = " + cache);
     }
 

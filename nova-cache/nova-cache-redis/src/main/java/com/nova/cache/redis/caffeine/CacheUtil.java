@@ -21,16 +21,16 @@ import java.util.List;
 @Configuration
 @Order(2)
 @Import(CaffeineProperties.class)
-public class CaffeineCacheUtil {
+public class CacheUtil {
 
     @Resource
-    private CacheManager caffeineCacheManager;
+    private CacheManager cacheManager;
 
     /**
      * 获取缓存
      */
-    public Object getCache(String cacheName, Object key) {
-        Cache cache = caffeineCacheManager.getCache(cacheName);
+    public Object get(String cacheName, Object key) {
+        Cache cache = cacheManager.getCache(cacheName);
         if (null == cache) {
             return null;
         }
@@ -44,8 +44,8 @@ public class CaffeineCacheUtil {
     /**
      * 添加缓存
      */
-    public void putCache(String cacheName, Object key, Object value) {
-        Cache cache = caffeineCacheManager.getCache(cacheName);
+    public void put(String cacheName, Object key, Object value) {
+        Cache cache = cacheManager.getCache(cacheName);
         if (null == cache) {
             String errMsg = String.format("缓存cacheName未配置，请检查！cacheName:%s", cacheName);
             log.error(errMsg);
@@ -58,8 +58,8 @@ public class CaffeineCacheUtil {
     /**
      * 清空缓存
      */
-    public void clearCache(String cacheName) {
-        Cache cache = caffeineCacheManager.getCache(cacheName);
+    public void clear(String cacheName) {
+        Cache cache = cacheManager.getCache(cacheName);
         if (cache != null) {
             cache.clear();
         }
@@ -68,8 +68,8 @@ public class CaffeineCacheUtil {
     /**
      * 失效缓存
      */
-    public void evictCache(String cacheName, Object key) {
-        Cache cache = caffeineCacheManager.getCache(cacheName);
+    public void evict(String cacheName, Object key) {
+        Cache cache = cacheManager.getCache(cacheName);
         if (null == cache) {
             String errMsg = String.format("缓存cacheName未配置，请检查！cacheName:%s", cacheName);
             log.error(errMsg);
@@ -81,7 +81,7 @@ public class CaffeineCacheUtil {
     /**
      * 获取所有的缓存Name
      */
-    public List<String> cacheNames() {
-        return new ArrayList<>(caffeineCacheManager.getCacheNames());
+    public List<String> getAll() {
+        return new ArrayList<>(cacheManager.getCacheNames());
     }
 }

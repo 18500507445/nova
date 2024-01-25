@@ -39,6 +39,7 @@ spring:
       ## 是否缓存空值，可以防止缓存穿透
       cache-null-values: true
 
+
 #caffeine 本地缓存配置
 caffeine:
   cacheNames: caffeine

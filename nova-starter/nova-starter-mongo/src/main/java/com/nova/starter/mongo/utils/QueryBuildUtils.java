@@ -1,10 +1,10 @@
 package com.nova.starter.mongo.utils;
 
-import com.nova.starter.mongo.entity.Condition;
-import com.nova.starter.mongo.entity.SortCondition;
 import com.nova.starter.mongo.constant.ECompare;
 import com.nova.starter.mongo.constant.EConditionType;
 import com.nova.starter.mongo.constant.ESortType;
+import com.nova.starter.mongo.entity.Condition;
+import com.nova.starter.mongo.entity.SortCondition;
 import com.nova.starter.mongo.wrapper.ConditionWrapper;
 import com.nova.starter.mongo.wrapper.LambdaQueryWrapper;
 import org.springframework.data.domain.Sort;

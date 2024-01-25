@@ -1,8 +1,8 @@
 package com.nova.tools.product.base.impl;
 
+import com.nova.tools.product.base.*;
 import com.nova.tools.product.entity.ChannelConfig;
 import com.nova.tools.product.enums.ChannelEnum;
-import com.nova.tools.product.base.*;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;

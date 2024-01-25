@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "caffeine", ignoreInvalidFields = true)
-public class CaffeineConfig {
+public class CaffeineProperties {
 
     /**
      * cache name配置

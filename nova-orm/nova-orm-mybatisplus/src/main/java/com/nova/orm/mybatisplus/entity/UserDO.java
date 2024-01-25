@@ -43,7 +43,7 @@ public class UserDO {
      * 邮箱
      * mybatis-plus在修改数据库表的时候会自动忽略掉值为null的字段，所以需要使用注解
      */
-    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    @TableField(updateStrategy = FieldStrategy.DEFAULT)
     private String email;
 
     @TableField("user_name")

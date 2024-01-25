@@ -1,9 +1,9 @@
 package com.nova.tools.java8.collection;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.nova.tools.demo.entity.Myself;
 import com.nova.tools.demo.entity.People;
-import cn.hutool.core.util.StrUtil;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

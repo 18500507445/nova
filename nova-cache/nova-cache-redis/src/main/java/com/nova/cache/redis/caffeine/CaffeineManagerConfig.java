@@ -21,19 +21,20 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class CaffeineManagerConfig {
+
     @Resource
-    private CaffeineConfig caffeineConfig;
+    private CaffeineProperties caffeineProperties;
 
     @Bean(name = "caffeine")
     public CacheManager initCacheManager() {
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
         Caffeine<Object, Object> caffeine = Caffeine.newBuilder()
-                .initialCapacity(Convert.toInt(caffeineConfig.getInitCapacity(), 100))
-                .maximumSize(Convert.toInt(caffeineConfig.getMaxSize(), 1000))
-                .expireAfterAccess(Convert.toInt(caffeineConfig.getExpireAfterAccess(), 1000), TimeUnit.SECONDS);
+                .initialCapacity(Convert.toInt(caffeineProperties.getInitCapacity(), 100))
+                .maximumSize(Convert.toInt(caffeineProperties.getMaxSize(), 1000))
+                .expireAfterAccess(Convert.toInt(caffeineProperties.getExpireAfterAccess(), 1000), TimeUnit.SECONDS);
         caffeineCacheManager.setCaffeine(caffeine);
-        caffeineCacheManager.setCacheNames(StrUtil.isEmpty(caffeineConfig.getCacheNames()) ?
-                Lists.newArrayList("caffeine") : Arrays.asList(caffeineConfig.getCacheNames().split(";")));
+        caffeineCacheManager.setCacheNames(StrUtil.isEmpty(caffeineProperties.getCacheNames()) ?
+                Lists.newArrayList("caffeine") : Arrays.asList(caffeineProperties.getCacheNames().split(";")));
         caffeineCacheManager.setAllowNullValues(false);
         return caffeineCacheManager;
     }

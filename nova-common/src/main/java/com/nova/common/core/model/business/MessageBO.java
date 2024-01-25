@@ -1,7 +1,10 @@
 package com.nova.common.core.model.business;
 
 import com.nova.common.core.model.pojo.BaseBO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**

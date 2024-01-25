@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @Order(2)
-@Import(CaffeineConfig.class)
+@Import(CaffeineProperties.class)
 public class CaffeineCacheUtil {
 
     @Resource

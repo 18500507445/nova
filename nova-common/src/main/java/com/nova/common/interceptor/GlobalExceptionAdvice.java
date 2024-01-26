@@ -1,7 +1,8 @@
 package com.nova.common.interceptor;
 
 import com.nova.common.core.model.result.RespResult;
-import com.nova.common.exception.base.ParamException;
+import com.nova.common.core.model.result.ResultCode;
+import com.nova.common.exception.base.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -27,25 +28,22 @@ public class GlobalExceptionAdvice {
      */
     @ExceptionHandler(BindException.class)
     public RespResult<Void> handleBindException(BindException e) {
-        log.debug("handleBindException：{}", e.getMessage());
+        log.error("handleBindException：{}", e.getMessage());
         StringBuilder msg = new StringBuilder();
         List<FieldError> fieldErrors = e.getFieldErrors();
         for (FieldError fieldError : fieldErrors) {
             String message = fieldError.getDefaultMessage();
             msg.append(message);
         }
-        return RespResult.error("1000", msg.toString());
+        return RespResult.failure(ResultCode.VALIDATE_FAILED, msg.toString());
     }
 
     /**
-     * 自定义参数异常
-     *
-     * @param e
-     * @return
+     * 业务异常
      */
-    @ExceptionHandler(ParamException.class)
-    public RespResult<Void> paramException(ParamException e) {
-        log.debug("paramException :{}", e.getMessage(), e);
-        return RespResult.error("1000", e.getMessage());
+    @ExceptionHandler(BusinessException.class)
+    public RespResult<Void> businessException(BusinessException e) {
+        log.error("businessException :{}", e.getMessage(), e);
+        return RespResult.failure(ResultCode.FAILED, e.getMessage());
     }
 }

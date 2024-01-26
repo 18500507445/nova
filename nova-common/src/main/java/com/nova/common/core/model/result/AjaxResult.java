@@ -1,12 +1,18 @@
 package com.nova.common.core.model.result;
 
 import cn.hutool.core.util.ObjectUtil;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 
 /**
  * 返回实体类
+ *
+ * @author wangzehui
  */
+@Setter
+@Getter
 public class AjaxResult extends HashMap<String, Object> {
 
     private static final long serialVersionUID = 1L;
@@ -322,38 +328,6 @@ public class AjaxResult extends HashMap<String, Object> {
      */
     public static AjaxResult error(String code, String msg) {
         return new AjaxResult(code, msg, null);
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
     }
 
 

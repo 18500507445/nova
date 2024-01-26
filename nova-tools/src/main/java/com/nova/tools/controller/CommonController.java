@@ -76,7 +76,7 @@ public class CommonController extends BaseController {
         try {
             ValidatorUtil.validate(reqDTO);
         } catch (ParamException e) {
-            return RespResult.error(e.getMessage());
+            return RespResult.failure(e.getMessage());
         }
         return RespResult.success();
     }

@@ -1,4 +1,4 @@
-package com.nova.common.core.model.result.avic;
+package com.nova.common.core.model.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,10 +6,9 @@ import lombok.Getter;
 import java.io.Serializable;
 
 /**
- * 返回code枚举
- *
- * @author suo
- * @date 2023/8/23 21:15
+ * @description: 通用返回码对象(主要放各个模块的通用错误码)
+ * @author: wzh
+ * @date: 2022/12/20 11:16
  */
 @Getter
 @AllArgsConstructor

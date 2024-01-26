@@ -4,7 +4,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.business.ValidatorReqDTO;
-import com.nova.common.core.model.result.RespResult;
+import com.nova.common.core.model.result.ResResult;
 import com.nova.common.exception.base.ParamException;
 import com.nova.common.trace.Trace;
 import com.nova.common.utils.common.ValidatorUtil;
@@ -54,31 +54,31 @@ public class CommonController extends BaseController {
      * -w: 以HTML表的格式输出结果
      */
     @GetMapping("/abTest")
-    public RespResult<Void> abTest() {
-        return RespResult.success();
+    public ResResult<Void> abTest() {
+        return ResResult.success();
     }
 
     /**
      * validator，匹配分组1
      */
     @PostMapping("/validator")
-    public RespResult<String> validator(@Validated(ValidatorReqDTO.GroupOne.class) @RequestBody ValidatorReqDTO reqDTO) {
+    public ResResult<String> validator(@Validated(ValidatorReqDTO.GroupOne.class) @RequestBody ValidatorReqDTO reqDTO) {
         HttpServletRequest request = getRequest();
         String header = request.getHeader(Trace.TRACE_ID);
-        return RespResult.success(header);
+        return ResResult.success(header);
     }
 
     /**
      * 自定义validator
      */
     @PostMapping("/customValidator")
-    public RespResult<Void> customValidator(ValidatorReqDTO reqDTO) {
+    public ResResult<Void> customValidator(ValidatorReqDTO reqDTO) {
         try {
             ValidatorUtil.validate(reqDTO);
         } catch (ParamException e) {
-            return RespResult.failure(e.getMessage());
+            return ResResult.failure(e.getMessage());
         }
-        return RespResult.success();
+        return ResResult.success();
     }
 
     @Data
@@ -91,21 +91,21 @@ public class CommonController extends BaseController {
     }
 
     @GetMapping(value = "/time", name = "ResponseBody，测试全局时间戳")
-    public RespResult<DateTime> time() {
-        return RespResult.success(new DateTime(new Date()));
+    public ResResult<DateTime> time() {
+        return ResResult.success(new DateTime(new Date()));
     }
 
     @GetMapping(value = "/jsonTime", name = "ResponseBody，测试全局时间戳")
-    public RespResult<JSONObject> jsonTime() {
+    public ResResult<JSONObject> jsonTime() {
         String jsonString = JSONObject.toJSONString(new DateTime(new Date()));
         JSONObject jsonObject = JSONObject.parseObject(jsonString);
-        return RespResult.success(jsonObject);
+        return ResResult.success(jsonObject);
     }
 
     @GetMapping(value = "/pushMsg", name = "测试发送spring事件")
-    public RespResult<Void> pushMsg() {
+    public ResResult<Void> pushMsg() {
         applicationEventPublisher.publishEvent(new Event<>(1, Arrays.asList("123", "456")));
         applicationEventPublisher.publishEvent(new Event<>(2, "123"));
-        return RespResult.success();
+        return ResResult.success();
     }
 }

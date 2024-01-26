@@ -2,7 +2,7 @@ package com.nova.tools.common;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.common.core.model.result.AjaxResult;
-import com.nova.common.core.model.result.RespResult;
+import com.nova.common.core.model.result.ResResult;
 import com.nova.common.core.model.result.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class ResultTest {
 
     @Test
     public void demoA() {
-        RespResult<Object> success = RespResult.success(ResultCode.SUCCESS);
+        ResResult<Object> success = ResResult.success(ResultCode.SUCCESS);
         success.setData(RESULT);
         System.err.println(JSONUtil.toJsonStr(success));
     }

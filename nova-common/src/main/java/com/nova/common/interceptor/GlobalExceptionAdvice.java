@@ -1,6 +1,6 @@
 package com.nova.common.interceptor;
 
-import com.nova.common.core.model.result.RespResult;
+import com.nova.common.core.model.result.ResResult;
 import com.nova.common.core.model.result.ResultCode;
 import com.nova.common.exception.base.BusinessException;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class GlobalExceptionAdvice {
      * @return
      */
     @ExceptionHandler(BindException.class)
-    public RespResult<Void> handleBindException(BindException e) {
+    public ResResult<Void> handleBindException(BindException e) {
         log.error("handleBindException：{}", e.getMessage());
         StringBuilder msg = new StringBuilder();
         List<FieldError> fieldErrors = e.getFieldErrors();
@@ -35,15 +35,15 @@ public class GlobalExceptionAdvice {
             String message = fieldError.getDefaultMessage();
             msg.append(message);
         }
-        return RespResult.failure(ResultCode.VALIDATE_FAILED, msg.toString());
+        return ResResult.failure(ResultCode.VALIDATE_FAILED, msg.toString());
     }
 
     /**
      * 业务异常
      */
     @ExceptionHandler(BusinessException.class)
-    public RespResult<Void> businessException(BusinessException e) {
+    public ResResult<Void> businessException(BusinessException e) {
         log.error("businessException :{}", e.getMessage(), e);
-        return RespResult.failure(ResultCode.FAILED, e.getMessage());
+        return ResResult.failure(ResultCode.FAILED, e.getMessage());
     }
 }

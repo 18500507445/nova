@@ -1,7 +1,7 @@
 package com.nova.tools.controller;
 
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.model.result.RespResult;
+import com.nova.common.core.model.result.ResResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +28,16 @@ public class WebFluxController extends BaseController {
      * Mono返回单个对象
      */
     @GetMapping("/getOne")
-    public Mono<RespResult<String>> getOne() {
-        return Mono.just(RespResult.success("create"));
+    public Mono<ResResult<String>> getOne() {
+        return Mono.just(ResResult.success("create"));
     }
 
     /**
      * Flux返回List对象
      */
     @GetMapping("/getList")
-    public Flux<RespResult<List<String>>> getList() {
-        return Flux.just(RespResult.success(Arrays.asList("1", "2", "3")));
+    public Flux<ResResult<List<String>>> getList() {
+        return Flux.just(ResResult.success(Arrays.asList("1", "2", "3")));
     }
 
 }

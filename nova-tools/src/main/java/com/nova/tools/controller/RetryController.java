@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.rholder.retry.*;
-import com.nova.common.core.model.result.RespResult;
+import com.nova.common.core.model.result.ResResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.remoting.RemoteAccessException;
@@ -68,24 +68,24 @@ public class RetryController {
      * 注意事项：因为Retryable是走aop的所以直接掉用会失效，需交给spring管理才可以
      */
     @GetMapping("retry")
-    public RespResult<String> retry() {
+    public ResResult<String> retry() {
         try {
             String call = remoteService.call(10);
-            return RespResult.success(call);
+            return ResResult.success(call);
         } catch (Exception e) {
             log.error("RetryController.show Exception", e);
-            return RespResult.failure();
+            return ResResult.failure();
         }
     }
 
     @GetMapping("guavaRetry")
-    public RespResult<String> guavaRetry() {
+    public ResResult<String> guavaRetry() {
         try {
             guavaRetryDemo();
-            return RespResult.success();
+            return ResResult.success();
         } catch (Exception e) {
             log.error("guavaRetry.show Exception", e);
-            return RespResult.failure();
+            return ResResult.failure();
         }
     }
 

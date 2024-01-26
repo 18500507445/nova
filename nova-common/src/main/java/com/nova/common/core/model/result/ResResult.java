@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @date: 2023/03/20 11:16
  */
 @Data
-public class RespResult<T> implements Serializable {
+public class ResResult<T> implements Serializable {
 
     /**
      * 状态码，比如000000代表响应成功
@@ -46,11 +46,11 @@ public class RespResult<T> implements Serializable {
      */
     private String env;
 
-    public RespResult() {
+    public ResResult() {
 
     }
 
-    public RespResult(IResultCode resultCode, T data, Boolean success) {
+    public ResResult(IResultCode resultCode, T data, Boolean success) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = resultCode.getBizMessage();
         this.data = data;
@@ -61,7 +61,7 @@ public class RespResult<T> implements Serializable {
         this.systemTime = System.currentTimeMillis();
     }
 
-    public RespResult(IResultCode resultCode, T data, Boolean success, String bizMessage) {
+    public ResResult(IResultCode resultCode, T data, Boolean success, String bizMessage) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = bizMessage;
         this.data = data;
@@ -72,7 +72,7 @@ public class RespResult<T> implements Serializable {
         this.systemTime = System.currentTimeMillis();
     }
 
-    public RespResult(IResultCode resultCode, Boolean success) {
+    public ResResult(IResultCode resultCode, Boolean success) {
         this.bizCode = resultCode.getBizCode();
         this.bizMessage = resultCode.getBizMessage();
         this.success = success;
@@ -82,51 +82,51 @@ public class RespResult<T> implements Serializable {
         this.systemTime = System.currentTimeMillis();
     }
 
-    public static <T> RespResult<T> success() {
-        return new RespResult<>(ResultCode.SUCCESS, true);
+    public static <T> ResResult<T> success() {
+        return new ResResult<>(ResultCode.SUCCESS, true);
     }
 
-    public static <T> RespResult<T> success(T data) {
-        return new RespResult<>(ResultCode.SUCCESS, data, true);
+    public static <T> ResResult<T> success(T data) {
+        return new ResResult<>(ResultCode.SUCCESS, data, true);
     }
 
-    public static <T> RespResult<T> success(IResultCode resultCode) {
-        return new RespResult<>(resultCode, true);
+    public static <T> ResResult<T> success(IResultCode resultCode) {
+        return new ResResult<>(resultCode, true);
     }
 
-    public static <T> RespResult<T> success(IResultCode resultCode, T data) {
-        return new RespResult<>(resultCode, data, true);
+    public static <T> ResResult<T> success(IResultCode resultCode, T data) {
+        return new ResResult<>(resultCode, data, true);
     }
 
-    public static <T> RespResult<T> success(IResultCode resultCode, String bizMessage) {
-        return new RespResult<>(resultCode, null, true, bizMessage);
+    public static <T> ResResult<T> success(IResultCode resultCode, String bizMessage) {
+        return new ResResult<>(resultCode, null, true, bizMessage);
     }
 
-    public static <T> RespResult<T> success(IResultCode resultCode, T data, String bizMessage) {
-        return new RespResult<>(resultCode, data, true, bizMessage);
+    public static <T> ResResult<T> success(IResultCode resultCode, T data, String bizMessage) {
+        return new ResResult<>(resultCode, data, true, bizMessage);
     }
 
-    public static <T> RespResult<T> failure() {
-        return new RespResult<>(ResultCode.FAILED, true);
+    public static <T> ResResult<T> failure() {
+        return new ResResult<>(ResultCode.FAILED, true);
     }
 
-    public static <T> RespResult<T> failure(String bizMessage) {
-        return new RespResult<>(ResultCode.FAILED, null, false, bizMessage);
+    public static <T> ResResult<T> failure(String bizMessage) {
+        return new ResResult<>(ResultCode.FAILED, null, false, bizMessage);
     }
 
-    public static <T> RespResult<T> failure(IResultCode resultCode) {
-        return new RespResult<>(resultCode, false);
+    public static <T> ResResult<T> failure(IResultCode resultCode) {
+        return new ResResult<>(resultCode, false);
     }
 
-    public static <T> RespResult<T> failure(IResultCode resultCode, String bizMessage) {
-        return new RespResult<>(resultCode, null, false, bizMessage);
+    public static <T> ResResult<T> failure(IResultCode resultCode, String bizMessage) {
+        return new ResResult<>(resultCode, null, false, bizMessage);
     }
 
-    public static <T> RespResult<T> failure(IResultCode resultCode, T data) {
-        return new RespResult<>(resultCode, data, false);
+    public static <T> ResResult<T> failure(IResultCode resultCode, T data) {
+        return new ResResult<>(resultCode, data, false);
     }
 
-    public static <T> RespResult<T> failure(IResultCode resultCode, T data, String bizMessage) {
-        return new RespResult<>(resultCode, data, false, bizMessage);
+    public static <T> ResResult<T> failure(IResultCode resultCode, T data, String bizMessage) {
+        return new ResResult<>(resultCode, data, false, bizMessage);
     }
 }

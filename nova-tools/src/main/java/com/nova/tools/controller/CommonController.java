@@ -8,14 +8,17 @@ import com.nova.common.core.model.result.RespResult;
 import com.nova.common.exception.base.ParamException;
 import com.nova.common.trace.Trace;
 import com.nova.common.utils.common.ValidatorUtil;
+import com.nova.tools.demo.springboot.listener.Event;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -28,6 +31,8 @@ import java.util.Date;
 @RestController
 @RequestMapping("/api")
 public class CommonController extends BaseController {
+
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     /**
      * 如何根据qps，如何评估开启线程数量
@@ -95,5 +100,12 @@ public class CommonController extends BaseController {
         String jsonString = JSONObject.toJSONString(new DateTime(new Date()));
         JSONObject jsonObject = JSONObject.parseObject(jsonString);
         return RespResult.success(jsonObject);
+    }
+
+    @GetMapping(value = "/pushMsg", name = "测试发送spring事件")
+    public RespResult<Void> pushMsg() {
+        applicationEventPublisher.publishEvent(new Event<>(1, Arrays.asList("123", "456")));
+        applicationEventPublisher.publishEvent(new Event<>(2, "123"));
+        return RespResult.success();
     }
 }

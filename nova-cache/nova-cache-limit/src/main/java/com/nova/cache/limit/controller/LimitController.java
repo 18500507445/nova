@@ -5,6 +5,10 @@ import com.nova.cache.limit.annotation.BucketLimit;
 import com.nova.common.core.model.result.AjaxResult;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RRateLimiter;
+import org.redisson.api.RateIntervalUnit;
+import org.redisson.api.RateType;
+import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,13 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class LimitController {
+
+    private final RedissonClient redissonClient;
 
     /**
      * 计数器:redis限流
      */
-    @RequestMapping("redisLimit")
+    @RequestMapping("/redisLimit")
     @AccessLimit(seconds = 5, maxCount = 5)
     public AjaxResult redisLimit() {
         return AjaxResult.success();
@@ -33,10 +39,28 @@ public class LimitController {
      * 令牌桶限流
      * 每秒产生的令牌数，最大容量，请求的令牌数
      */
-    @PostMapping("bucket")
+    @PostMapping("/bucket")
     @BucketLimit(rate = 1, maxCount = 5, requestNum = 1)
     public AjaxResult bucketLua() {
         return AjaxResult.success();
+    }
+
+    /**
+     * redisson的令牌桶
+     * 效果，1-3次请求没问题，第四次等待3秒后返回
+     */
+    @PostMapping("/redissonLimit")
+    public AjaxResult redissonLimit() {
+        RRateLimiter redissonLimit = redissonClient.getRateLimiter("redissonLimit");
+        //5秒3令牌
+        redissonLimit.trySetRate(RateType.OVERALL, 3, 5, RateIntervalUnit.SECONDS);
+        //试图获取一个令牌，获取到返回true
+        boolean b = redissonLimit.tryAcquire(1);
+        if (b) {
+            return AjaxResult.success("接口放行");
+        } else {
+            return AjaxResult.error("接口限流");
+        }
     }
 
 }

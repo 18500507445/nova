@@ -2,13 +2,10 @@ package com.nova.tools.demo.springboot.listener;
 
 import com.alibaba.fastjson2.JSONObject;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,8 +17,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class TestApplicationListener {
-
-    private final ApplicationEventPublisher applicationEventPublisher;
 
     /**
      * 需要启动类开启异步注解，@EnableAsync
@@ -40,15 +35,6 @@ public class TestApplicationListener {
     public void eventTwo(Event<Object> event) {
         Object t = event.getT();
         System.out.println("t = " + JSONObject.toJSONString(t));
-    }
-
-    /**
-     * 放到springboot测试类，写这里只是一个case
-     */
-    @Test
-    public void testPushEvent() {
-        applicationEventPublisher.publishEvent(new Event<>(1, Arrays.asList("123", "456")));
-        applicationEventPublisher.publishEvent(new Event<>(2, "123"));
     }
 
 }

@@ -30,7 +30,7 @@ class Merge1 {
     public static void main(String[] args) throws InterruptedException {
         Merge1 killDemo = new Merge1();
         killDemo.mergeJob();
-        log.debug("等待mergeJob启动");
+        log.info("等待mergeJob启动");
         ThreadUtil.sleep(1500);
 
         List<Future<Result>> list = new ArrayList<>();
@@ -49,9 +49,9 @@ class Merge1 {
         list.forEach(resultFuture -> {
             try {
                 final Result result = resultFuture.get(300, TimeUnit.MILLISECONDS);
-                log.debug("客户端请求响应:{}", result);
+                log.info("客户端请求响应:{}", result);
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
-                e.printStackTrace();
+                System.err.println("e.getMessage() = " + e.getMessage());
             }
         });
 
@@ -78,7 +78,7 @@ class Merge1 {
                 requestPromise.wait(200);
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("e.getMessage() = " + e.getMessage());
         }
         return requestPromise.getResult();
     }
@@ -99,11 +99,8 @@ class Merge1 {
                 while (null != queue.peek()) {
                     list.add(queue.poll());
                 }
-
-                log.debug("合并扣减库存数：{}", list.size());
-
+                log.info("合并扣减库存数：{}", list.size());
                 int sum = list.stream().mapToInt(e -> e.getUserRequest().getCount()).sum();
-
                 //两种情况 (1)库存充足
                 if (sum <= stock) {
                     stock -= sum;

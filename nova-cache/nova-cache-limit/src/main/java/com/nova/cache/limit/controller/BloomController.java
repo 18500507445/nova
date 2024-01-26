@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class BloomController {
 
     private final JedisUtil jedisUtil;
@@ -34,7 +34,7 @@ public class BloomController {
     /**
      * redis实现布隆过滤器
      */
-    @PostMapping("redis")
+    @PostMapping("/redis")
     public void redis() {
         String redisKey = "redisBloom";
         int expectedInsertions = 10000;
@@ -63,7 +63,7 @@ public class BloomController {
     /**
      * redisson实现布隆过滤器
      */
-    @PostMapping("redisson")
+    @PostMapping("/redisson")
     public void redisson() {
         RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter("phoneList");
         //初始化布隆过滤器：预计元素为1000000L,误差率为3%

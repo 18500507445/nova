@@ -44,7 +44,7 @@ class Merge3 {
      */
     private final BlockingQueue<RequestPromise> queue = new LinkedBlockingQueue<>(10);
 
-    private static final ExecutorService pool = Executors.newCachedThreadPool();
+    private static final ExecutorService POOL = Executors.newCachedThreadPool();
 
     /**
      * 模拟数据库操作日志表 order_id和operate_type当做一个unionKey
@@ -54,20 +54,20 @@ class Merge3 {
     public static void main(String[] args) throws InterruptedException {
         Merge3 killDemo = new Merge3();
         killDemo.mergeJob();
-        log.debug("等待mergeJob启动");
+        log.info("等待mergeJob启动");
         Thread.sleep(1500);
 
         CountDownLatch countDownLatch = new CountDownLatch(10);
 
-        log.debug("-------- 库存 --------");
-        log.debug("库存初始数量：{}", STOCK);
+        log.info("-------- 库存 --------");
+        log.info("库存初始数量：{}", STOCK);
 
         Map<UserRequest, Future<Result>> requestFutureMap = new HashMap<>(16);
         for (int i = 1; i <= REQUEST_COUNT; i++) {
             final Long orderId = i + 100L;
             final Long userId = (long) i;
             UserRequest userRequest = new UserRequest(orderId, userId, 1);
-            Future<Result> future = pool.submit(() -> {
+            Future<Result> future = POOL.submit(() -> {
                 countDownLatch.countDown();
                 countDownLatch.await(1, TimeUnit.SECONDS);
                 return killDemo.operate(userRequest);
@@ -75,19 +75,19 @@ class Merge3 {
             requestFutureMap.put(userRequest, future);
         }
 
-        log.debug("------- 客户端响应 -------");
+        log.info("------- 客户端响应 -------");
 
         Thread.sleep(1000);
         requestFutureMap.forEach((key, value) -> {
             try {
                 Result result = value.get(300, TimeUnit.MILLISECONDS);
 
-                log.debug("客户端请求响应：{}", JSONUtil.toJsonStr(result));
+                log.info("客户端请求响应：{}", JSONUtil.toJsonStr(result));
 
                 if (!result.getSuccess() && "等待超时".equals(result.getMsg())) {
                     // 超时，发送请求回滚
 
-                    log.debug("{}，发起回滚操作", key);
+                    log.info("{}，发起回滚操作", key);
                     killDemo.rollback(key);
                 }
             } catch (Exception e) {
@@ -95,25 +95,25 @@ class Merge3 {
             }
         });
 
-        log.debug("------- 库存操作日志 -------");
-        log.debug("扣减成功条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(1)).count());
+        log.info("------- 库存操作日志 -------");
+        log.info("扣减成功条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(1)).count());
         killDemo.operateChangeLogList.forEach(e -> {
             if (e.getOperateType().equals(1)) {
                 System.err.println(e);
             }
         });
 
-        log.debug("扣减回滚条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(2)).count());
+        log.info("扣减回滚条数: {}", killDemo.operateChangeLogList.stream().filter(e -> e.getOperateType().equals(2)).count());
         killDemo.operateChangeLogList.forEach(e -> {
             if (e.getOperateType().equals(2)) {
                 System.err.println(e);
             }
         });
 
-        log.debug("------- 库存 -------");
-        log.debug("库存最终数量 :{}", STOCK);
+        log.info("------- 库存 -------");
+        log.info("库存最终数量 :{}", STOCK);
 
-        pool.shutdown();
+        POOL.shutdown();
     }
 
     /**
@@ -166,7 +166,7 @@ class Merge3 {
                     ThreadUtil.sleep(200);
                 }
 
-                log.debug("合并扣减库存：{}", JSONUtil.toJsonStr(list));
+                log.info("合并扣减库存：{}", JSONUtil.toJsonStr(list));
 
                 int sum = list.stream().mapToInt(e -> e.getUserRequest().getCount()).sum();
                 // 两种情况
@@ -224,7 +224,7 @@ class Merge3 {
             if (hasRollback) {
                 return;
             }
-            log.debug("用户id：{}，最终回滚", userRequest.getUserId());
+            log.info("用户id：{}，最终回滚", userRequest.getUserId());
             STOCK += userRequest.getCount();
             saveChangeLog(Lists.newArrayList(userRequest), 2);
         }

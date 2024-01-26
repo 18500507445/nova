@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * @description: 修复版（https://github.com/ArminZheng/order）
+ * @see <a href="https://github.com/ArminZheng/order">修复版</a>
  * 1 countDown等待
  * 2 await被中断后才会抛异常(无法区分notify和timeout)
  * 3 synchronized 指向堆对象
@@ -30,9 +30,9 @@ class Merge2 {
     /**
      * 合并队列
      */
-    private final BlockingDeque<RequestPromise> queue = new LinkedBlockingDeque<>(10);
+    private final BlockingDeque<RequestPromise> QUEUE = new LinkedBlockingDeque<>(10);
 
-    private static final ExecutorService pool = Executors.newCachedThreadPool();
+    private static final ExecutorService POLL = Executors.newCachedThreadPool();
 
     /**
      * 启动10个线程
@@ -45,7 +45,7 @@ class Merge2 {
     public static void main(String[] args) {
         Merge2 killDemo = new Merge2();
         killDemo.mergeJob();
-        log.debug("等待mergeJob启动");
+        log.info("等待mergeJob启动");
         ThreadUtil.sleep(1500);
 
         List<Future<Result>> futureList = new ArrayList<>();
@@ -53,7 +53,7 @@ class Merge2 {
         for (int i = 1; i <= 10; i++) {
             Long orderId = i + 100L;
             Long userId = (long) i;
-            Future<Result> future = pool.submit(() -> {
+            Future<Result> future = POLL.submit(() -> {
                 countDownLatch.countDown();
                 // 没有做等待
                 countDownLatch.await(1, TimeUnit.SECONDS);
@@ -66,14 +66,14 @@ class Merge2 {
             try {
                 // 每个用户最多等待 300ms
                 Result result = future.get(300, TimeUnit.MILLISECONDS);
-                log.debug("客户端请求响应:{}", result);
+                log.info("客户端请求响应:{}", result);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }
         });
 
-        pool.shutdown();
+        POLL.shutdown();
     }
 
 
@@ -97,7 +97,7 @@ class Merge2 {
     public Result operate(UserRequest userRequest) throws InterruptedException {
         RequestPromise requestPromise = new RequestPromise(userRequest);
         synchronized (requestPromise) {
-            boolean enqueueSuccess = queue.offer(requestPromise, 100, TimeUnit.MILLISECONDS);
+            boolean enqueueSuccess = QUEUE.offer(requestPromise, 100, TimeUnit.MILLISECONDS);
             if (!enqueueSuccess) {
                 return new Result(false, "系统繁忙");
             }
@@ -119,7 +119,7 @@ class Merge2 {
         new Thread(() -> {
             ArrayList<RequestPromise> list = new ArrayList<>();
             while (true) {
-                if (queue.isEmpty()) {
+                if (QUEUE.isEmpty()) {
                     try {
                         TimeUnit.MILLISECONDS.sleep(10);
                         continue;
@@ -129,12 +129,12 @@ class Merge2 {
                 }
 
                 //放弃之前的写法，如果生产端比消费端快，就会造成死循环
-                int batchSize = queue.size();
+                int batchSize = QUEUE.size();
                 for (int i = 0; i < batchSize; i++) {
                     // poll 自动移除
-                    list.add(queue.poll());
+                    list.add(QUEUE.poll());
                 }
-                log.debug("合并扣减库存数：{}", list.size());
+                log.info("合并扣减库存数：{}", list.size());
 
                 int sum = list.stream().mapToInt(e -> e.getUserRequest().getCount()).sum();
                 // 两种情况 ：1/2 库存足够

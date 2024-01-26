@@ -34,12 +34,12 @@ class Merge4 {
      */
     public static final int REQUEST_COUNT = 10;
 
-    private static final ExecutorService pool = Executors.newCachedThreadPool();
+    private static final ExecutorService POLL = Executors.newCachedThreadPool();
 
     /**
      * 库存量
      */
-    private static final AtomicInteger totalStock = new AtomicInteger(6);
+    private static final AtomicInteger TOTAL_STOCK = new AtomicInteger(6);
 
     /**
      * 3人合并一个请求强一起扣，剩余3个库存被其它3个人单独强，最终有4个人没抢到
@@ -49,7 +49,7 @@ class Merge4 {
      */
     public static void main(String[] args) throws InterruptedException {
         CountDownLatch requestCountDown = new CountDownLatch(REQUEST_COUNT);
-        pool.execute(() -> {
+        POLL.execute(() -> {
             List<RequestPromise> promiseList = new ArrayList<>();
             while (true) {
                 //退化为队列单个消费
@@ -57,7 +57,7 @@ class Merge4 {
                 if (BLOCKING_QUEUE.size() <= BATCH_NUMBER) {
                     //控制边界再判断当前队列中是否有残留
                     if (!promiseList.isEmpty()) {
-                        promiseList.forEach(p -> eachTaskHandler(p, totalStock, pool, requestCountDown));
+                        promiseList.forEach(p -> eachTaskHandler(p, TOTAL_STOCK, POLL, requestCountDown));
                         promiseList.clear();
                         continue;
                     }
@@ -66,16 +66,16 @@ class Merge4 {
                     try {
                         p = BLOCKING_QUEUE.take();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        System.err.println("e.getMessage() = " + e.getMessage());
                     }
-                    eachTaskHandler(p, totalStock, pool, requestCountDown);
+                    eachTaskHandler(p, TOTAL_STOCK, POLL, requestCountDown);
                     continue;
                 }
                 //加入批量列表
                 try {
                     promiseList.add(BLOCKING_QUEUE.take());
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    System.err.println("e.getMessage() = " + e.getMessage());
                 }
 
                 /**
@@ -88,12 +88,12 @@ class Merge4 {
                 if (promiseList.size() >= BATCH_NUMBER) {
                     int sum = promiseList.stream().mapToInt(p -> p.request.getWantCount()).sum();
                     //库存充足
-                    if (totalStock.get() >= sum) {
-                        totalStock.addAndGet(-sum);
+                    if (TOTAL_STOCK.get() >= sum) {
+                        TOTAL_STOCK.addAndGet(-sum);
                         promiseList.forEach(p -> {
                             Result result = new Result(true, "批量处理，抢单成功");
                             p.setResult(result);
-                            final Future<RequestPromise> future = pool.submit(p);
+                            final Future<RequestPromise> future = POLL.submit(p);
                             p.setFuture(future);
                             requestCountDown.countDown();
                         });
@@ -101,11 +101,11 @@ class Merge4 {
                         continue;
                     }
                     //无库存
-                    if (totalStock.get() <= 0) {
+                    if (TOTAL_STOCK.get() <= 0) {
                         promiseList.forEach(p -> {
                             Result result = new Result(false, "批量处理，没有库存");
                             p.setResult(result);
-                            final Future<RequestPromise> future = pool.submit(p);
+                            final Future<RequestPromise> future = POLL.submit(p);
                             p.setFuture(future);
                             requestCountDown.countDown();
                         });
@@ -114,9 +114,9 @@ class Merge4 {
                     }
 
                     //库存紧张，退化为单个消费
-                    if (totalStock.get() < sum && totalStock.get() > 0) {
+                    if (TOTAL_STOCK.get() < sum && TOTAL_STOCK.get() > 0) {
                         promiseList.forEach(p -> {
-                            eachTaskHandler(p, totalStock, pool, requestCountDown);
+                            eachTaskHandler(p, TOTAL_STOCK, POLL, requestCountDown);
                         });
                         promiseList.clear();
                     }
@@ -131,7 +131,7 @@ class Merge4 {
             UserRequest userRequest = new UserRequest(1, String.valueOf(i), "order" + i);
             RequestPromise requestPromise = new RequestPromise(userRequest, null);
             requestList.add(requestPromise);
-            pool.submit(() -> {
+            POLL.submit(() -> {
                 BLOCKING_QUEUE.offer(requestPromise);
             });
         }

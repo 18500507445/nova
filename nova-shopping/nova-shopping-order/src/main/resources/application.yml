@@ -33,7 +33,7 @@ logging:
 
   # 线上log路径
   file:
-    path: /Users/wangzehui/Documents/Logs/nova/${spring.application.name}
+    path: /Users/wangzehui/logs/nova/${spring.application.name}
 
 
 # MyBatis

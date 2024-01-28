@@ -14,4 +14,4 @@ logging:
   config: classpath:log4j2-spring.xml
   #指定日志文件输出的目录路径。
   file:
-    path: /Users/wangzehui/Documents/Logs/nova/${spring.application.name}
+    path: /Users/wangzehui/logs/nova/${spring.application.name}

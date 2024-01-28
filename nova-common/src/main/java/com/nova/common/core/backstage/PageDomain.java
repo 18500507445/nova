@@ -26,11 +26,13 @@ public class PageDomain {
     /**
      * 排序列
      */
+    @Getter
     private String orderByColumn;
 
     /**
      * 排序的方向desc或者asc
      */
+    @Getter
     private String isAsc = "asc";
 
     /**
@@ -53,16 +55,8 @@ public class PageDomain {
         this.pageSize = pageSize;
     }
 
-    public String getOrderByColumn() {
-        return orderByColumn;
-    }
-
     public void setOrderByColumn(String orderByColumn) {
         this.orderByColumn = orderByColumn;
-    }
-
-    public String getIsAsc() {
-        return isAsc;
     }
 
     public void setIsAsc(String isAsc) {

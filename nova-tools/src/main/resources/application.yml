@@ -113,4 +113,4 @@ jasypt:
 # log配置
 logging:
   file:
-    path: /Users/wangzehui/Documents/Logs/nova/${spring.application.name}
+    path: /Users/wangzehui/logs/nova/${spring.application.name}

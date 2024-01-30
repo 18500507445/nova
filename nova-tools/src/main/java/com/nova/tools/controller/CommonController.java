@@ -1,5 +1,10 @@
 package com.nova.tools.controller;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.thread.ExecutorBuilder;
+import cn.hutool.core.thread.RejectPolicy;
+import cn.hutool.core.thread.ThreadUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.nova.common.core.controller.BaseController;
@@ -20,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author: wzh
@@ -83,7 +90,7 @@ public class CommonController extends BaseController {
 
     @Data
     @AllArgsConstructor
-    public static class DateTime{
+    public static class DateTime {
 
         //millis：毫秒，unixtime：秒
         @JSONField(format = "millis")
@@ -108,4 +115,50 @@ public class CommonController extends BaseController {
         applicationEventPublisher.publishEvent(new Event<>(2, "123"));
         return ResResult.success();
     }
+
+    //线程阻塞队列
+    public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create()
+            .setCorePoolSize(1)
+            .setMaxPoolSize(1)
+            //同步队列
+            .useSynchronousQueue()
+            //拒绝策略
+            .setHandler(RejectPolicy.BLOCK.getValue())
+            .build();
+
+
+    @GetMapping(value = "/testThread", name = "测试线程池")
+    public ResResult<Void> testThread() {
+        THREAD_POOL.execute(() -> {
+            long id = Thread.currentThread().getId();
+            System.err.println("id = " + id + " Now：" + DateUtil.now());
+            ThreadUtil.sleep(2000);
+        });
+        return ResResult.success();
+    }
+
+    public static final ThreadPoolExecutor POOL = ExecutorBuilder.create()
+            .setCorePoolSize(25)
+            .setMaxPoolSize(50)
+            //同步队列
+            .useArrayBlockingQueue(512)
+            //拒绝策略
+            .setHandler(RejectPolicy.BLOCK.getValue())
+            .build();
+
+    //主线程1秒后直接返回，子线程再过2秒后拿结果（共耗时3秒）
+    @GetMapping(value = "/mainThread", name = "主线程")
+    public ResResult<Void> mainThread() {
+        TimeInterval timer = DateUtil.timer();
+        ThreadUtil.sleep(1000);
+        CompletableFuture<Void> taskA = CompletableFuture.runAsync(() -> {
+            ThreadUtil.sleep(1000);
+        }, POOL);
+        CompletableFuture<Void> taskB = CompletableFuture.runAsync(() -> {
+            ThreadUtil.sleep(2000);
+        }, POOL);
+        CompletableFuture.allOf(taskA, taskB).thenRun(() -> log.info("完成，耗时：{} ms", timer.interval()));
+        return ResResult.success();
+    }
+
 }

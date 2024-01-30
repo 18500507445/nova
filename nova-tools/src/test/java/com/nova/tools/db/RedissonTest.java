@@ -114,7 +114,11 @@ public class RedissonTest {
     @Test
     public void testLock() {
         String key = "redissonLock";
-
+        try {
+            release(key);
+        } catch (Exception e) {
+            log.info("异常",e);
+        }
         boolean lock = lock(key, 100L);
         boolean isLock = isLocked(key);
         System.err.println("lock = " + lock);

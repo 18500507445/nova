@@ -1,5 +1,6 @@
 package com.nova.common.interceptor;
 
+import cn.hutool.core.util.StrUtil;
 import com.nova.common.core.model.result.ResResult;
 import com.nova.common.core.model.result.ResultCode;
 import com.nova.common.exception.base.BusinessException;
@@ -33,9 +34,9 @@ public class GlobalExceptionAdvice {
         List<FieldError> fieldErrors = e.getFieldErrors();
         for (FieldError fieldError : fieldErrors) {
             String message = fieldError.getDefaultMessage();
-            msg.append(message);
+            msg.append(message).append("，");
         }
-        return ResResult.failure(ResultCode.VALIDATE_FAILED, msg.toString());
+        return ResResult.failure(ResultCode.VALIDATE_FAILED, StrUtil.subWithLength(msg.toString(), 0, msg.length() - 1));
     }
 
     /**

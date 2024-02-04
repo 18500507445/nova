@@ -77,6 +77,14 @@ public class RedisTest {
         System.err.println("耗时：" + timer.interval());
     }
 
+    @Test
+    public void demoA() {
+        String key = "testHash";
+        long total = 4000000;
+        final long sharding = 10000L;
+        redisService.scanHashAndDel(key, total, sharding);
+    }
+
     /**
      * 400w数据 list 30m内存
      */
@@ -127,7 +135,6 @@ public class RedisTest {
         boolean unlock = redisService.unlock(key, key);
         System.err.println("unlock = " + unlock);
     }
-
 
 
 }

@@ -69,10 +69,11 @@ public class CommonController extends BaseController {
      * validator，匹配分组1
      */
     @PostMapping("/validator")
-    public ResResult<String> validator(@Validated(ValidatorReqDTO.GroupOne.class) @RequestBody ValidatorReqDTO reqDTO) {
+    public ResResult<ValidatorReqDTO> validator(@Validated(ValidatorReqDTO.GroupOne.class) @RequestBody ValidatorReqDTO reqDTO) {
         HttpServletRequest request = getRequest();
         String header = request.getHeader(Trace.TRACE_ID);
-        return ResResult.success(header);
+        System.err.println("header = " + header);
+        return ResResult.success(reqDTO);
     }
 
     /**
@@ -122,7 +123,7 @@ public class CommonController extends BaseController {
             .setMaxPoolSize(1)
             //同步队列
             .useSynchronousQueue()
-            //拒绝策略
+            //拒绝策略，BLOCK阻塞等待执行，CALLER_RUNS主线程帮助执行
             .setHandler(RejectPolicy.BLOCK.getValue())
             .build();
 

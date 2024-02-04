@@ -2,14 +2,12 @@ package com.nova.starter.redis;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.TimeoutUtils;
-import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -27,6 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2022/6/19 15:40
  */
 @Slf4j
+@Getter
 @Component
 @SuppressWarnings("unchecked")
 public class RedisService {
@@ -352,6 +351,34 @@ public class RedisService {
      */
     public void delHash(String key, Object... item) {
         redisTemplate.opsForHash().delete(key, item);
+    }
+
+    public void scanHashAndDel(String key, long total, final long sharding) {
+        long start = System.currentTimeMillis();
+        int sum = 0;
+        ScanOptions options = ScanOptions.scanOptions().match("*").count(sharding).build();
+        List<Object> delete = new LinkedList<>();
+        // 执行 scan() 方法进行遍历
+        try (Cursor<Map.Entry<Object, Object>> cursor = redisTemplate.opsForHash().scan(key, options)) {
+            while (cursor.hasNext() && total > 0) {
+                Map.Entry<Object, Object> entry = cursor.next();
+                Object field = entry.getKey();
+                sum++;
+                delete.add(field);
+                if (sum >= sharding) {
+                    redisTemplate.opsForHash().delete(key, delete.toArray());
+                    delete.clear();
+                    sum = 0;
+                    total -= sharding;
+                    log.info("scanHashAndDel，total：{}，count：{}", total, sharding);
+                }
+            }
+        }
+        // 检查剩余的键并执行删除操作
+        if (!delete.isEmpty()) {
+            redisTemplate.opsForHash().delete(key, delete.toArray());
+        }
+        log.info("scanHashAndDel，耗时：{} ms", System.currentTimeMillis() - start);
     }
 
     /**

@@ -19,7 +19,8 @@ import java.util.List;
 public class TestApplicationListener {
 
     /**
-     * 需要启动类开启异步注解，@EnableAsync
+     * 默认是同步
+     * 如果需要异步，可使用@Async，启动类开启异步注解@EnableAsync
      *
      * @param event
      */

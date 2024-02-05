@@ -22,6 +22,7 @@
 
 
     /**
+     * mybatis-plus可以添加jdbc-url添加（&rewriteBatchedStatements=true）
      * foreach批量插入，耗时：8479 ms
      */
     @Test

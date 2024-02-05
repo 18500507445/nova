@@ -119,8 +119,8 @@ public class CommonController extends BaseController {
 
     //线程阻塞队列
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create()
-            .setCorePoolSize(1)
-            .setMaxPoolSize(1)
+            .setCorePoolSize(2)
+            .setMaxPoolSize(2)
             //同步队列
             .useSynchronousQueue()
             //拒绝策略，BLOCK阻塞等待执行，CALLER_RUNS主线程帮助执行

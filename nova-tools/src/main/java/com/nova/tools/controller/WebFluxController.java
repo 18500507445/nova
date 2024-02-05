@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description: webflux
+ * @description: webflux 优势：响应式异步非阻塞式，劣势：需要很多api兼容，项目里面需要大量进行替换。非高并发项目对性能没有极高的要求不建议进行替换
  * @date: 2024/01/26 10:41
  */
 @Slf4j(topic = "WebFluxController")

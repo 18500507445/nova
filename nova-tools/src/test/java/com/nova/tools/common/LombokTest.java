@@ -110,8 +110,8 @@ class LombokTest {
     @Test
     public void demoD() {
         DemoD demoD = new DemoD();
-        System.err.println("demoD-ByHutoolJson = " + JSONUtil.toJsonStr(demoD));
-        System.err.println("demoD-ByAliJson = " + JSONObject.toJSONString(demoD));
+        System.err.println("hutoolJson = " + JSONUtil.toJsonStr(demoD));
+        System.err.println("fastJson = " + JSONObject.toJSONString(demoD));
     }
 
 }

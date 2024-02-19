@@ -2,7 +2,7 @@ package com.nova.common.core.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.constant.Constants;
-import com.nova.common.exception.base.GlobalException;
+import com.nova.common.exception.GlobalException;
 import com.nova.common.utils.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

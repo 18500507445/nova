@@ -3,7 +3,7 @@ package com.nova.common.interceptor;
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.core.model.result.ResResult;
 import com.nova.common.core.model.result.ResultCode;
-import com.nova.common.exception.base.BusinessException;
+import com.nova.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;

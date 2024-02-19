@@ -51,9 +51,9 @@ public final class SecurityUtil {
         try {
             if (StrUtil.isNotBlank(clientType)) {
                 if (StrUtil.equals("h5", clientType)) {
-                    decryptvalue = Decrypt(params.getBytes(StandardCharsets.UTF_8), H5_SECRET_KEY);
+                    decryptvalue = decrypt(params.getBytes(StandardCharsets.UTF_8), H5_SECRET_KEY);
                 } else if (ArrayUtil.contains(new String[]{"android", "ios"}, clientType)) {
-                    decryptvalue = Decrypt(URLDecoder.decode(params, "utf-8").getBytes(StandardCharsets.UTF_8), SECRET_KEY);
+                    decryptvalue = decrypt(URLDecoder.decode(params, "utf-8").getBytes(StandardCharsets.UTF_8), SECRET_KEY);
                 }
             } else {
                 decryptvalue = URLDecoder.decode(decrypt(params.getBytes(StandardCharsets.UTF_8)), "utf-8");
@@ -61,7 +61,6 @@ public final class SecurityUtil {
             decryptvalue = URLDecoder.decode(decryptvalue, "utf-8");
         } catch (Exception e) {
             log.error("decryptAllPara====>解密全部参数失败:", e);
-            e.printStackTrace();
         }
         return decryptvalue;
     }
@@ -90,7 +89,7 @@ public final class SecurityUtil {
      * @return
      * @throws Exception
      */
-    public static String Decrypt(byte[] src, String key) throws Exception {
+    public static String decrypt(byte[] src, String key) throws Exception {
         SecretKey sKey = new SecretKeySpec(key.getBytes(), "AES");
         Cipher ci = Cipher.getInstance("AES");
         ci.init(Cipher.DECRYPT_MODE, sKey);
@@ -105,7 +104,7 @@ public final class SecurityUtil {
      * @throws Exception
      * @return加密
      */
-    public static String Encrypt(byte[] src) throws Exception {
+    public static String encrypt(byte[] src) throws Exception {
         SecretKey sKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
         Cipher ci = Cipher.getInstance("AES");
         ci.init(Cipher.ENCRYPT_MODE, sKey);
@@ -119,7 +118,7 @@ public final class SecurityUtil {
      * @throws Exception
      * @return加密
      */
-    public static String Encrypt(byte[] src, String key) throws Exception {
+    public static String encrypt(byte[] src, String key) throws Exception {
         SecretKey sKey = new SecretKeySpec(key.getBytes(), "AES");
         Cipher ci = Cipher.getInstance("AES");
         ci.init(Cipher.ENCRYPT_MODE, sKey);
@@ -181,18 +180,18 @@ public final class SecurityUtil {
             System.err.println("请求加密param:" + param);
             String secret = URLEncoder.encode(param, "utf-8");
             System.err.println("URLenCode:" + secret);
-            String str = SecurityUtil.Encrypt(secret.getBytes(StandardCharsets.UTF_8), "SfNJN1O69Zs1ekjB");
+            String str = SecurityUtil.encrypt(secret.getBytes(StandardCharsets.UTF_8), "SfNJN1O69Zs1ekjB");
             System.err.println("ios加密后str:" + str);
             String encode = URLEncoder.encode(str, "utf-8");
             System.err.println("(这个要传给服务器了)---加密后再Url.enCode:" + encode);
 
             System.err.println("------------------------------------------------------");
             String accessSecretData = URLDecoder.decode(encode, "utf-8");
-            String result = SecurityUtil.Decrypt(accessSecretData.getBytes(StandardCharsets.UTF_8), "SfNJN1O69Zs1ekjB");
+            String result = SecurityUtil.encrypt(accessSecretData.getBytes(StandardCharsets.UTF_8), "SfNJN1O69Zs1ekjB");
             result = URLDecoder.decode(result, "utf-8");
             System.err.println("服务器解密后str:" + result);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
     }
 }

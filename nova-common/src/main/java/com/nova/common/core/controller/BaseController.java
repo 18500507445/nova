@@ -2,32 +2,20 @@ package com.nova.common.core.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.github.pagehelper.PageInfo;
-import com.nova.common.core.backstage.TableDataInfo;
 import com.nova.common.core.model.result.AjaxResult;
 import com.nova.common.utils.common.ServletUtils;
 import com.nova.common.utils.ip.IpUtils;
-import com.nova.common.utils.list.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * web层通用数据处理
  */
 @Slf4j
 public class BaseController {
-
-    /**
-     * 设置请求分页数据
-     */
-    protected void startPage() {
-        PageUtils.startPage();
-    }
-
 
     /**
      * 获取request
@@ -99,18 +87,6 @@ public class BaseController {
      */
     public HttpSession getSession() {
         return getRequest().getSession();
-    }
-
-    /**
-     * 响应请求分页数据
-     */
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    protected TableDataInfo getDataTable(List<?> list) {
-        TableDataInfo rspData = new TableDataInfo();
-        rspData.setCode(0);
-        rspData.setRows(list);
-        rspData.setTotal(new PageInfo(list).getTotal());
-        return rspData;
     }
 
     /**

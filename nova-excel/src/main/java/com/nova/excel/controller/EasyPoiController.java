@@ -2,6 +2,7 @@ package com.nova.excel.controller;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
@@ -10,7 +11,6 @@ import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.RejectPolicy;
 import cn.hutool.core.util.RandomUtil;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.utils.list.PageUtils;
 import com.nova.excel.entity.EasyPoiExportDO;
 import com.nova.excel.utils.ExcelUtils;
 import lombok.RequiredArgsConstructor;
@@ -159,7 +159,7 @@ public class EasyPoiController extends BaseController {
             long threadId = Thread.currentThread().getId();
             List<EasyPoiExportDO> pageList = new ArrayList<>();
             try {
-                pageList = PageUtils.startPage(LIST, pageNum, pageSize);
+                pageList = ListUtil.page(pageNum, pageSize, LIST);
             } catch (RuntimeException e) {
                 log.error("异常消息: {}", e.getMessage());
             } finally {

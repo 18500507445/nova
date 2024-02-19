@@ -10,7 +10,7 @@ import com.alibaba.fastjson2.annotation.JSONField;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.ResResult;
-import com.nova.common.exception.base.ParamException;
+import com.nova.common.exception.ParamException;
 import com.nova.common.trace.Trace;
 import com.nova.common.utils.common.ValidatorUtil;
 import com.nova.tools.demo.springboot.listener.Event;
@@ -92,8 +92,7 @@ public class CommonController extends BaseController {
     @Data
     @AllArgsConstructor
     public static class DateTime {
-
-        //millis：毫秒，unixtime：秒
+        //millis：毫秒，unixTime：秒
         @JSONField(format = "millis")
         private Date time;
     }

@@ -1,4 +1,4 @@
-package com.nova.common.exception.base;
+package com.nova.common.exception;
 
 /**
  * 全局异常

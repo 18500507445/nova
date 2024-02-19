@@ -1,5 +1,6 @@
 package com.nova.common.core.model.result;
 
+import cn.hutool.core.util.EnumUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -50,4 +51,10 @@ public enum ResultCode implements IResultCode, Serializable {
 
     private final String bizMessage;
 
+    /**
+     * 获取返回code枚举类
+     */
+    public static ResultCode getResultCode(String code) {
+        return EnumUtil.getBy(ResultCode::getBizCode, code, SUCCESS);
+    }
 }

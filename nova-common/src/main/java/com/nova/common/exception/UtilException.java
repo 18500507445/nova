@@ -1,7 +1,8 @@
-package com.nova.common.exception.file;
+package com.nova.common.exception;
 
 /**
  * 工具类异常
+ * @author wangzehui
  */
 public class UtilException extends RuntimeException {
 

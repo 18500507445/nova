@@ -37,11 +37,11 @@ public final class PropertiesUtils {
     private String configPath = "";
 
     private static class SingleHolder {
-        private static final PropertiesUtils instance = new PropertiesUtils();
+        private static final PropertiesUtils INSTANCE = new PropertiesUtils();
     }
 
     public static PropertiesUtils getInstance() {
-        return SingleHolder.instance;
+        return SingleHolder.INSTANCE;
     }
 
     public void configure(String path) {
@@ -118,7 +118,7 @@ public final class PropertiesUtils {
      */
     private File getPropertiesFile(String shortPropertyFileName) throws URISyntaxException {
         File propertiesFile;
-        if (this.configPath != null && !"".equals(this.configPath.trim())) {
+        if (this.configPath != null && !this.configPath.trim().isEmpty()) {
             return new File(this.configPath + File.separator + shortPropertyFileName + ".properties");
         }
         String dir = System.getProperty("user.dir") + File.separator + shortPropertyFileName + ".properties";

@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
@@ -15,11 +16,11 @@ import java.util.stream.Stream;
 /**
  * @author wzh
  * <p>
- * https://www.cnblogs.com/stupidMartian/p/9894454.html（原地址）
- * https://blog.csdn.net/biewan0238/article/details/103061933 (true 和false排序)
- * @Date 2020/7/1 13:48
+ * <a href="https://www.cnblogs.com/stupidMartian/p/9894454.html">java list按照 对象指定多个字段属性进行排序</a>（原地址）
+ * <a href="https://blog.csdn.net/biewan0238/article/details/103061933">...</a> (true 和false排序)
+ * @date: 2020/7/1 13:48
  */
-@SuppressWarnings("unchecked")
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ListUtils {
 
@@ -44,7 +45,7 @@ public final class ListUtils {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("异常信息:", e);
             }
             return ret;
         });
@@ -72,7 +73,7 @@ public final class ListUtils {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("异常信息:", e);
             }
             return ret;
         });
@@ -143,7 +144,7 @@ public final class ListUtils {
      */
     public static Object forceGetFieldValue(Object obj, String fieldName) throws Exception {
         Field field = obj.getClass().getDeclaredField(fieldName);
-        Object object = null;
+        Object object;
         boolean accessible = field.isAccessible();
         if (!accessible) {
             // 如果是private,protected修饰的属性，需要修改为可以访问的
@@ -158,34 +159,6 @@ public final class ListUtils {
     }
 
     /**
-     * 获取最大连续重复次数
-     *
-     * @param list
-     * @return
-     */
-    private int getMaxHitNum(List<String> list) {
-        //未命中次数、命中次数、最大连续未命中次数次数、最大连续命中次数
-        int unHit = 0, hit = 0, maxUnHit = 0, maxHit = 0;
-        for (String s : list) {
-            //2未命中，1命中
-            if ("2".equals(s)) {
-                unHit++;   //如果有未命中的，需要把累计的命中次数清零
-                hit = 0;
-            } else if ("1".equals(s)) {
-                hit++;
-                unHit = 0;
-            }
-            if (unHit > maxUnHit) {
-                maxUnHit = unHit;
-            }
-            if (hit > maxHit) {
-                maxHit = hit;
-            }
-        }
-        return maxUnHit;
-    }
-
-    /**
      * map分组
      *
      * @param list
@@ -194,7 +167,7 @@ public final class ListUtils {
      */
     public static Map<String, Object> change(List<Map<String, Object>> list, String oneMapKey) {
         Map<String, Object> resultMap = new LinkedHashMap<>();
-        List setTmp = new LinkedList();
+        List<Object> setTmp = new LinkedList<>();
         for (Map<String, Object> tmp : list) {
             setTmp.add(tmp.get(oneMapKey));
         }
@@ -210,41 +183,6 @@ public final class ListUtils {
             resultMap.put(oneSetTmpStr, oneSetTmpList);
         }
         return resultMap;
-    }
-
-    /**
-     * 首先进行入参检查防止出现空指针异常
-     * 如果两个参数都为空，则返回true
-     * 如果有一项为空，则返回false
-     * 接着对第一个list进行遍历，如果某一项第二个list里面没有，则返回false
-     * 还要再将两个list反过来比较，因为可能一个list是两一个list的子集
-     * 如果成功遍历结束，返回true
-     *
-     * @param l0
-     * @param l1
-     * @return
-     */
-    public static boolean isListEqual(List l0, List l1) {
-        if (l0 == l1) {
-            return true;
-        }
-        if (l0 == null || l1 == null) {
-            return false;
-        }
-        if (l0.size() != l1.size()) {
-            return false;
-        }
-        for (Object o : l0) {
-            if (!l1.contains(o)) {
-                return false;
-            }
-        }
-        for (Object o : l1) {
-            if (!l0.contains(o)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -297,7 +235,7 @@ public final class ListUtils {
 
     /**
      * 获取两个集合的交集
-     *
+     * <p>
      * 还有一种方式：CollUtil.disjunction(huTool)
      *
      * @param c1
@@ -325,12 +263,12 @@ public final class ListUtils {
     private static void cutList(List<Integer> list, int limit) {
         //方法一：使用流遍历操作
         Stream.iterate(0, n -> n + 1).limit(limit).forEach(i -> {
-            List<Integer> collect = list.stream().skip(i * MAX_NUMBER).limit(MAX_NUMBER).collect(Collectors.toList());
+            List<Integer> collect = list.stream().skip((long) i * MAX_NUMBER).limit(MAX_NUMBER).collect(Collectors.toList());
             System.err.println(collect);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常信息:", e);
             }
         });
     }

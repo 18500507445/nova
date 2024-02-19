@@ -1,7 +1,7 @@
 package com.nova.common.utils.common;
 
 
-import com.nova.common.exception.base.ParamException;
+import com.nova.common.exception.ParamException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

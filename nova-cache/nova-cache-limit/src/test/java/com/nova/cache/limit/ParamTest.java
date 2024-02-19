@@ -3,7 +3,7 @@ package com.nova.cache.limit;
 
 import com.google.common.base.Preconditions;
 import com.nova.common.core.model.business.ValidatorReqDTO;
-import com.nova.common.exception.base.ParamException;
+import com.nova.common.exception.ParamException;
 import com.nova.common.utils.common.ValidatorUtil;
 import com.nova.common.utils.copybean.ParamsUtil;
 import lombok.extern.slf4j.Slf4j;

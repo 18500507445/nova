@@ -1,6 +1,7 @@
 package com.nova.excel.controller;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
@@ -15,7 +16,7 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.utils.list.PageUtils;
+import com.nova.common.utils.list.ListUtils;
 import com.nova.excel.entity.AliEasyExportDO;
 import com.nova.excel.entity.WaterMark;
 import com.nova.excel.utils.WaterMarkHandler;
@@ -177,6 +178,7 @@ public class AliExportController extends BaseController {
     /**
      * 并行编排版本，分批写入多个sheet
      * todo 纯装逼，这个CountDownLatch不需要用，CompletableFuture.allOf就代表了countDown后await进行主线程阻塞，这为了计数才用它的
+     *
      * @param totalCount
      * @param shardingSize
      * @param response
@@ -199,7 +201,7 @@ public class AliExportController extends BaseController {
                 throw new RuntimeException("第" + task.getPageNum() + "页运行异常，当前线程id：" + threadId);
             }
             ThreadUtil.sleep(i, TimeUnit.SECONDS);
-            List<AliEasyExportDO> pageList = PageUtils.startPage(LIST, task.getPageNum(), task.getPageSize());
+            List<AliEasyExportDO> pageList = ListUtil.page(task.getPageNum(), task.getPageSize(), LIST);
             if (ObjectUtil.isNotNull(pageList)) {
                 System.err.println("线程Id：" + threadId + ", 查询数据：" + pageList.size() + "条, 页码：" + task.getPageNum() + ", 耗时：" + threadTimer.interval() + "ms");
             }
@@ -282,7 +284,7 @@ public class AliExportController extends BaseController {
                     throw new RuntimeException("第" + pageNum + "页运行异常，当前线程id：" + threadId);
                 }
                 ThreadUtil.sleep(i, TimeUnit.SECONDS);
-                pageList = PageUtils.startPage(LIST, pageNum, pageSize);
+                pageList = ListUtil.page(pageNum, pageSize, LIST);
             } catch (RuntimeException e) {
                 log.error("异常消息: {}", e.getMessage());
             } finally {

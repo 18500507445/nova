@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * @date: 2023/3/15 14:10
  * @see <a href="https://mp.kuaishou.com/docs/develop/server/epay/interfaceDefinitionWithoutChannel.html">支付流程图</a>
  */
-@Slf4j
+@Slf4j(topic = "KsPayment")
 @Component
 public class KsPayment {
 

@@ -580,7 +580,7 @@ public class YeePayment {
             // 取公钥匙对象
             publicKey = keyFactory.generatePublic(bobPubKeySpec);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return publicKey;
     }
@@ -599,7 +599,7 @@ public class YeePayment {
             KeyFactory rsa = KeyFactory.getInstance("RSA");
             privateKey = rsa.generatePrivate(pkcs8EncodedKeySpec);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return privateKey;
     }

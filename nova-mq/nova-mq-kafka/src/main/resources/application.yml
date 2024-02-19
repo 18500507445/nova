@@ -7,7 +7,7 @@ server:
 spring:
   kafka:
     # 指定 Kafka Broker 地址，可以设置多个，以逗号分隔
-    bootstrap-servers: 80fa601ba239.c.methodot.com:31845
+    bootstrap-servers: 5a549d21d2ff.c.methodot.com:31309
     # producer 生产者
     producer:
       retries: 3 # 重试次数

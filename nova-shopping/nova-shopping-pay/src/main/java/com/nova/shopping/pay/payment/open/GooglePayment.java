@@ -35,7 +35,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/3/20 11:32
  */
-@Slf4j
+@Slf4j(topic = "GooglePayment")
 @Component
 public class GooglePayment {
 

@@ -3,6 +3,7 @@ package com.nova.shopping.pay.payment.open;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/3/18 13:42
  */
+@Slf4j(topic = "ApplePayment")
 @Component
 public class ApplePayment {
 
@@ -118,9 +120,8 @@ public class ApplePayment {
                 sb.append(line);
             }
             return sb.toString();
-        } catch (Exception ex) {
-            System.out.println("苹果服务器异常");
-            ex.printStackTrace();
+        } catch (Exception e) {
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -165,9 +166,8 @@ public class ApplePayment {
                 sb.append(line);
             }
             return sb.toString();
-        } catch (Exception ex) {
-            System.out.println("苹果服务器异常");
-            ex.printStackTrace();
+        } catch (Exception e) {
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -185,7 +185,7 @@ public class ApplePayment {
             status = getStatus(json);
             transactionId = getTransactionId(json);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         hashMap.put("status", status);
         hashMap.put("verifyState", verifyState);
@@ -199,8 +199,8 @@ public class ApplePayment {
             if (job.containsKey("status")) {
                 return job.getStr("status");
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            log.error("异常信息:", e);
         }
         return "Real";
     }
@@ -228,8 +228,8 @@ public class ApplePayment {
                     return transactionId;
                 }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            log.error("异常信息:", e);
         }
         return transactionId;
     }

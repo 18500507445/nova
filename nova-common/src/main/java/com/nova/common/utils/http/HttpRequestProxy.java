@@ -16,7 +16,10 @@ import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.Map.Entry;
 
-@Slf4j
+/**
+ * @author wzh
+ */
+@Slf4j(topic = "HttpRequestProxy")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class HttpRequestProxy {
 
@@ -29,11 +32,6 @@ public final class HttpRequestProxy {
      * 读取数据超时
      */
     private static final int readTimeOut = 6000000;
-
-    /**
-     * 请求编码
-     */
-    private static final String requestEncoding = "GBK";
 
     /**
      * 向指定 URL 发送GET方法的请求
@@ -223,22 +221,20 @@ public final class HttpRequestProxy {
             long time22 = System.currentTimeMillis();
             log.debug(reqUrl + "http-get总耗时=" + (time22 - time11) + "毫秒");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         } finally {
             if (rd != null) {
                 try {
                     rd.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    log.error("异常信息:", e);
                 }
             }
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    log.error("异常信息:", e);
                 }
             }
             if (url_con != null) {
@@ -314,22 +310,20 @@ public final class HttpRequestProxy {
             rd.close();
             in.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         } finally {
             if (rd != null) {
                 try {
                     rd.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    log.error("异常信息:", e);
                 }
             }
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    log.error("异常信息:", e);
                 }
             }
             if (url_con != null) {
@@ -369,8 +363,10 @@ public final class HttpRequestProxy {
             URL url = new URL(reqUrl);
             url_con = (HttpURLConnection) url.openConnection();
             url_con.setRequestMethod("POST");
-            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.connectTimeOut));// （单位：毫秒）jdk1.4换成这个,连接超时
-            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.readTimeOut)); // （单位：毫秒）jdk1.4换成这个,读操作超时
+            // （单位：毫秒）jdk1.4换成这个,连接超时
+            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.connectTimeOut));
+            // （单位：毫秒）jdk1.4换成这个,读操作超时
+            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.readTimeOut));
             url_con.setConnectTimeout(HttpRequestProxy.connectTimeOut);//（单位：毫秒）jdk
             // 1.5换成这个,连接超时
             url_con.setReadTimeout(HttpRequestProxy.readTimeOut);//（单位：毫秒）jdk 1.5换成这个,读操作超时
@@ -395,22 +391,20 @@ public final class HttpRequestProxy {
             rd.close();
             in.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         } finally {
             if (rd != null) {
                 try {
                     rd.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    log.error("异常信息:", e);
                 }
             }
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    log.error("异常信息:", e);
                 }
             }
             if (url_con != null) {
@@ -504,7 +498,7 @@ public final class HttpRequestProxy {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String ret;
             while ((ret = br.readLine()) != null) {
-                if (!ret.trim().equals("")) {
+                if (!ret.trim().isEmpty()) {
                     result.append(new String(ret.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
                 }
             }
@@ -565,7 +559,7 @@ public final class HttpRequestProxy {
 
     public static String httpRequest(String requestUrl, String requestMethod, String outputStr) {
         // 创建SSLContext
-        StringBuffer buffer = null;
+        StringBuilder buffer = null;
         try {
             URL url = new URL(requestUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -583,14 +577,14 @@ public final class HttpRequestProxy {
             InputStream is = conn.getInputStream();
             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
-            buffer = new StringBuffer();
+            buffer = new StringBuilder();
             String line = null;
             while ((line = br.readLine()) != null) {
                 buffer.append(line);
             }
             br.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return buffer.toString();
     }
@@ -655,8 +649,4 @@ public final class HttpRequestProxy {
         return bos.toByteArray();
     }
 
-    public static void main(String[] args) {
-
-
-    }
 }

@@ -1,9 +1,9 @@
 package com.nova.smg.sms.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.nova.smg.sms.entity.SmsData;
 import com.nova.smg.sms.entity.SmsInfo;
 import com.nova.smg.sms.entity.SmsResponse;
-import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +33,7 @@ public interface SmsTemplate {
      * @return 发送返回
      */
     default boolean sendSingle(SmsData smsData, String phone) {
-        if (StringUtils.isEmpty(phone)) {
+        if (StrUtil.isEmpty(phone)) {
             return Boolean.FALSE;
         }
         return sendMulti(smsData, Collections.singletonList(phone));

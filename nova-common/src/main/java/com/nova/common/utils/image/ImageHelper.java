@@ -14,7 +14,7 @@ import java.util.UUID;
  * @author wzh
  * @date 2022/7/7 18:08
  */
-@Slf4j
+@Slf4j(topic = "ImageHelper")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ImageHelper {
 
@@ -44,7 +44,7 @@ public final class ImageHelper {
             fops.close();
             System.err.println("图片已经写入" + zipImageUrl);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
     }
 
@@ -54,10 +54,11 @@ public final class ImageHelper {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(5 * 1000);
-            InputStream inStream = conn.getInputStream();// 通过输入流获取图片数据
+            // 通过输入流获取图片数据
+            InputStream inStream = conn.getInputStream();
             return readInputStream(inStream);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -154,7 +155,7 @@ public final class ImageHelper {
             //删除临时文件
             localTempFile.delete();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return result;
     }

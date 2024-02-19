@@ -74,40 +74,6 @@ public class AjaxResult extends HashMap<String, Object> {
     private Object data;
 
     /**
-     * 获取请求过来的参数，取出api中的function名称，添加到返回值中
-     */
-    protected String getApiRequestFunction() {
-        String function = "";
-        //try {
-        //    HttpServletRequest request = ServletUtils.getRequest();
-        //    String apiUrl = request.getParameter("accessSecretData");
-        //    if (ObjectUtil.isEmpty(apiUrl)) {
-        //        return request.getRequestURI();
-        //    }
-        //    apiUrl = SecurityUtil.DecryptAllPara(apiUrl, "");
-        //    String[] arrUrl = apiUrl.split("&");
-        //    Map<String, String> urlParam = new HashMap<>();
-        //    for (String str : arrUrl) {
-        //        String[] arrs = str.split("=");
-        //        if (arrs.length == 1) {
-        //            urlParam.put(arrs[0], "");
-        //        } else {
-        //            urlParam.put(arrs[0], arrs[1]);
-        //        }
-        //    }
-        //    for (Entry<String, String> entry : urlParam.entrySet()) {
-        //        if ("function".equals(entry.getKey())) {
-        //            function = URLDecoder.decode(entry.getValue(), "utf-8");
-        //            break;
-        //        }
-        //    }
-        //} catch (UnsupportedEncodingException e) {
-        //    e.printStackTrace();
-        //}
-        return function;
-    }
-
-    /**
      * 初始化一个新创建的 AjaxResult 对象，使其表示一个空消息。
      */
     public AjaxResult() {
@@ -122,7 +88,6 @@ public class AjaxResult extends HashMap<String, Object> {
     public AjaxResult(Type type, String msg) {
         super.put(CODE_TAG, type.value);
         super.put(MSG_TAG, msg);
-        super.put(FUNCTION_TAG, getApiRequestFunction());
     }
 
     /**
@@ -134,7 +99,6 @@ public class AjaxResult extends HashMap<String, Object> {
     public AjaxResult(String msg, Object data) {
         super.put(CODE_TAG, type.value);
         super.put(MSG_TAG, msg);
-        super.put(FUNCTION_TAG, getApiRequestFunction());
         if (ObjectUtil.isNotNull(data)) {
             super.put(DATA_TAG, data);
         }
@@ -150,7 +114,6 @@ public class AjaxResult extends HashMap<String, Object> {
     public AjaxResult(Type type, String msg, Object data) {
         super.put(CODE_TAG, type.value);
         super.put(MSG_TAG, msg);
-        super.put(FUNCTION_TAG, getApiRequestFunction());
         if (ObjectUtil.isNotNull(data)) {
             super.put(DATA_TAG, data);
         }
@@ -179,7 +142,6 @@ public class AjaxResult extends HashMap<String, Object> {
     public AjaxResult(String code, String msg, Object data) {
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
-        super.put(FUNCTION_TAG, getApiRequestFunction());
         if (ObjectUtil.isNotNull(data)) {
             super.put(DATA_TAG, data);
         }

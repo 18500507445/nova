@@ -14,6 +14,7 @@ import java.util.*;
 
 /**
  * Md5加密方法
+ * @author wzh
  */
 @Slf4j(topic = "Md5Utils")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -40,7 +41,7 @@ public final class Md5Utils {
         try {
             paramSignStr = URLEncoder.encode(paramSignStr, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
 
         //把得到的字符串进行 MD5（转小写），得到 sign
@@ -90,7 +91,7 @@ public final class Md5Utils {
             }
             return new String(str);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
             return "";
         }
     }

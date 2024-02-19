@@ -18,7 +18,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/3/22 09:40
  */
-@Slf4j
+@Slf4j(topic = "AliPayment")
 @Component
 public class AliPayment {
 
@@ -157,7 +157,7 @@ public class AliPayment {
         try {
             result = AlipaySignature.rsaCheckV1(params, publicKey, CHARSET, SIGN_TYPE);
         } catch (AlipayApiException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return result;
     }
@@ -223,14 +223,9 @@ public class AliPayment {
             request.setBizContent(bizContent.toString());
             return alipayClient.execute(request);
         } catch (AlipayApiException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return new AlipayTradeCloseResponse();
     }
 
-
-    public static void main(String[] args) {
-
-
-    }
 }

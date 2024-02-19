@@ -18,7 +18,7 @@ import java.util.Set;
  * @author: wzh
  * @date: 2023/4/18 19:53
  */
-@Slf4j
+@Slf4j(topic = "JedisUtil")
 @Component
 @RequiredArgsConstructor
 public class JedisUtil {
@@ -491,7 +491,7 @@ public class JedisUtil {
         try (Jedis jedis = this.jedisPool.getResource()) {
             map = jedis.hgetAll(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return map;
     }
@@ -509,7 +509,7 @@ public class JedisUtil {
             jedis.hmset(key, hash);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return false;
     }
@@ -526,7 +526,7 @@ public class JedisUtil {
         try (Jedis jedis = this.jedisPool.getResource()) {
             list = jedis.hmget(key, fields);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return list;
     }
@@ -883,7 +883,7 @@ public class JedisUtil {
             pipeline.sync();
             return response.get();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -899,7 +899,7 @@ public class JedisUtil {
         try (Jedis jedis = this.jedisPool.getResource()) {
             jedis.set((name + ":" + objectId).getBytes(), SerializeUtil.serialize(t));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
     }
 
@@ -915,7 +915,7 @@ public class JedisUtil {
         try (Jedis jedis = this.jedisPool.getResource()) {
             jedis.setex((name + ":" + objectId).getBytes(), seconds, SerializeUtil.serialize(t));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
     }
 
@@ -924,7 +924,7 @@ public class JedisUtil {
             byte[] data = jedis.get((key).getBytes());
             return (T) SerializeUtil.deserialize(data);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -942,7 +942,7 @@ public class JedisUtil {
             byte[] data = jedis.get((key).getBytes());
             return (T) SerializeUtil.deserialize(data);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -951,7 +951,7 @@ public class JedisUtil {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return jedis.scriptLoad(new String(buffer));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return "";
     }
@@ -968,7 +968,7 @@ public class JedisUtil {
         try (Jedis jedis = this.jedisPool.getResource()) {
             return (long) ((List<Object>) jedis.evalsha(scriptLua, keys, args)).get(0);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return 0;
     }
@@ -987,7 +987,7 @@ public class JedisUtil {
                 jedis.setbit(key, i, true);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
 
     }
@@ -1010,7 +1010,7 @@ public class JedisUtil {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return true;
     }

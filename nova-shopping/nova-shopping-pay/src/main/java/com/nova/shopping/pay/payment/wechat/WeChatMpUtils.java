@@ -1,6 +1,7 @@
 package com.nova.shopping.pay.payment.wechat;
 
 import com.nova.shopping.pay.payment.open.WeChatPayment;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -19,6 +20,7 @@ import java.util.List;
  * @author: wzh
  * @date: 2023/3/14 22:17
  */
+@Slf4j(topic = "WeChatMpUtils")
 @Component
 public class WeChatMpUtils {
 
@@ -103,7 +105,7 @@ public class WeChatMpUtils {
                     .addData(new WxMpTemplateData("remark", "value", "#FF00FF"));
             return weChatPayment.getWxMpService().getTemplateMsgService().sendTemplateMsg(templateMessage);
         } catch (WxErrorException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }

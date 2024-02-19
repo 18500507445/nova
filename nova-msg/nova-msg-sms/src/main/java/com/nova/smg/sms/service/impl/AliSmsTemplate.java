@@ -14,6 +14,7 @@ import com.nova.smg.sms.entity.SmsResponse;
 import com.nova.smg.sms.service.SmsTemplate;
 import com.yunpian.sdk.util.JsonUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collection;
@@ -24,6 +25,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/4/20 19:57
  */
+@Slf4j(topic = "AliSmsTemplate")
 @RequiredArgsConstructor
 public class AliSmsTemplate implements SmsTemplate {
 
@@ -59,7 +61,7 @@ public class AliSmsTemplate implements SmsTemplate {
             }
             return new SmsResponse(response.getHttpStatus() == SUCCESS && code.equalsIgnoreCase(OK), response.getHttpStatus(), response.getData());
         } catch (ClientException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
             return new SmsResponse(Boolean.FALSE, HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
         }
     }

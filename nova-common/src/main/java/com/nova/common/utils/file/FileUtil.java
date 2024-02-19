@@ -2,13 +2,17 @@ package com.nova.common.utils.file;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.util.function.Consumer;
 
 /**
  * 2019/9/11
+ *
+ * @author wzh
  */
+@Slf4j(topic = "FileUtil")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class FileUtil {
 
@@ -28,7 +32,7 @@ public final class FileUtil {
                 action.accept(tempString);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
     }
 

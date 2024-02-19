@@ -81,7 +81,6 @@ public class RabbitMqTest {
              */
             channel.basicPublish("", QUEUE_NAME, null, "Hello World!".getBytes());
         } catch (Exception e) {
-            e.printStackTrace();
             System.err.println("发送消息出现异常...");
         }
     }

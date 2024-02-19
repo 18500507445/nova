@@ -26,7 +26,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/3/2 10:22
  */
-@Slf4j
+@Slf4j(topic = "HuaweiPayment")
 @Component
 public class HuaweiPayment {
 
@@ -71,7 +71,7 @@ public class HuaweiPayment {
             return false;
         }
         // 当signatureAlgorithm为空时使用默认签名算法
-        if (signatureAlgorithm == null || signatureAlgorithm.length() == 0) {
+        if (signatureAlgorithm == null || signatureAlgorithm.isEmpty()) {
             signatureAlgorithm = "SHA256WithRSA";
         }
         try {
@@ -93,7 +93,7 @@ public class HuaweiPayment {
             // 进行验签
             return signature.verify(bytes);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return false;
     }

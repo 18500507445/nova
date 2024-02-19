@@ -11,6 +11,7 @@ import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.nova.shopping.pay.payment.open.WeChatPayment;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import java.util.Date;
  * @date: 2023/3/14 22:17
  * @see <a href="http://www.binary.ac.cn/weixin-java-pay-javadoc/com/github/binarywang/wxpay/service/WxPayService.html">文档地址</a>
  */
+@Slf4j(topic = "WeChatV2PayUtils")
 @Component
 public class WeChatV2PayUtils {
 
@@ -47,7 +49,7 @@ public class WeChatV2PayUtils {
             Object order = weChatV2PayUtils.createOrder(wxPayUnifiedOrderRequest);
             System.out.println(JSONUtil.toJsonStr(order));
         } catch (WxPayException e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
 
         //String xmlString = "<xml>\n" +

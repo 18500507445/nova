@@ -1,5 +1,6 @@
 package com.nova.mq.kafka.utils;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -12,18 +13,16 @@ import javax.annotation.Resource;
  * @author: wzh
  * @date: 2022/12/20 21:29
  */
+@Getter
 @Slf4j
 public class KafkaProducerUtil {
 
+    /**
+     * -- GETTER --
+     *  放开kafka模版类，便于后续扩展
+     */
     @Resource
     private KafkaTemplate<String, Object> kafkaTemplate;
-
-    /**
-     * 放开kafka模版类，便于后续扩展
-     */
-    public KafkaTemplate<String, Object> getKafkaTemplate() {
-        return kafkaTemplate;
-    }
 
     /**
      * 向指定topic发送消息

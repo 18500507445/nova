@@ -7,6 +7,7 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.hutool.core.util.StrUtil;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ import java.util.Map;
 /**
  * @author wzh
  */
+@Slf4j(topic = "ExcelUtils")
 public class ExcelUtils {
     /**
      * excel 导出
@@ -116,7 +118,7 @@ public class ExcelUtils {
             response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName + "." + ExcelTypeEnum.XLSX.getValue(), "UTF-8"));
             workbook.write(response.getOutputStream());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
     }
 
@@ -142,7 +144,7 @@ public class ExcelUtils {
         try {
             return ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -191,7 +193,7 @@ public class ExcelUtils {
         try {
             return importExcel(file.getInputStream(), titleRows, headerRows, needVerify, pojoClass);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -220,7 +222,7 @@ public class ExcelUtils {
         try {
             return ExcelImportUtil.importExcel(inputStream, pojoClass, params);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常信息:", e);
         }
         return null;
     }
@@ -230,15 +232,13 @@ public class ExcelUtils {
      */
     @Getter
     enum ExcelTypeEnum {
+
         XLS("xls"), XLSX("xlsx");
-        private String value;
+        private final String value;
 
         ExcelTypeEnum(String value) {
             this.value = value;
         }
 
-        public void setValue(String value) {
-            this.value = value;
-        }
     }
 }

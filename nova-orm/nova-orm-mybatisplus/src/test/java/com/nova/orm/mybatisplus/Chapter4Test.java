@@ -4,6 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.baomidou.mybatisplus.extension.toolkit.SimpleQuery;
 import com.nova.orm.mybatisplus.chapter4.FourUserMapper;
 import com.nova.orm.mybatisplus.entity.UserActiveRecordDO;
@@ -17,7 +18,7 @@ import java.util.Map;
 
 /**
  * @author: wzh
- * @description 第四章测试类：进阶篇，分页插件、领域模型、simpleQuery
+ * @description 第四章测试类：进阶篇，分页插件、领域模型、simpleQuery、Db写法
  * @date: 2023/06/15 20:01
  */
 @SpringBootTest
@@ -122,6 +123,9 @@ public class Chapter4Test {
         System.err.println("list = " + JSONUtil.toJsonStr(list));
     }
 
+    /**
+     * list ===> map<Long,Object>
+     */
     @Test
     public void simpleQueryMap() {
         //查询结果id为key，DO为value
@@ -131,6 +135,9 @@ public class Chapter4Test {
         System.err.println("userMap = " + JSONUtil.toJsonStr(userMap));
     }
 
+    /**
+     * list ===> map<Long,String>
+     */
     @Test
     public void simpleQueryMap2() {
         //查询结果任意组合key、value
@@ -140,11 +147,32 @@ public class Chapter4Test {
         System.err.println("userMap = " + JSONUtil.toJsonStr(userMap));
     }
 
+    /**
+     * list ===> map<Long,List<Object>>
+     */
     @Test
     public void simpleQueryGroup() {
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
         Map<String, List<UserDO>> userGroup = SimpleQuery.group(queryWrapper, UserDO::getName);
         System.err.println("userGroup = " + JSONUtil.toJsonStr(userGroup));
+    }
+
+    /**
+     * Db写法Demo，需要循环依赖问题的时候可以使用
+     */
+    @Test
+    public void dbDemo() {
+        List<UserDO> list = Db.lambdaQuery(UserDO.class).eq(UserDO::getName, "Tom").list();
+        System.err.println("list = " + list);
+
+        UserDO one = Db.lambdaQuery(UserDO.class).eq(UserDO::getName, "Tom").last("limit 1").one();
+        System.err.println("one = " + one);
+    }
+
+    @Test
+    public void dbDemoTwo() {
+        boolean update = Db.lambdaUpdate(UserDO.class).eq(UserDO::getId, 1L).set(UserDO::getDesc, "123").update();
+        System.err.println("update = " + update);
     }
 
 

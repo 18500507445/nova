@@ -11,6 +11,7 @@ import com.github.binarywang.wxpay.bean.result.*;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.nova.shopping.pay.payment.open.WeChatPayment;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -288,6 +289,7 @@ public class WeChatV2PayUtils {
      * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
      * @return 生成的二维码的字节数组
      */
+    @SneakyThrows
     public byte[] createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
         return weChatPayment.getWxV2PayService().createScanPayQrcodeMode1(productId, logoFile, sideLength);
     }
@@ -321,6 +323,7 @@ public class WeChatV2PayUtils {
      * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
      * @return 生成的二维码的字节数组
      */
+    @SneakyThrows
     public byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
         return weChatPayment.getWxV2PayService().createScanPayQrcodeMode2(codeUrl, logoFile, sideLength);
     }

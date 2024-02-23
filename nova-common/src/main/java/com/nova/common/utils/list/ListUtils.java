@@ -1,5 +1,6 @@
 package com.nova.common.utils.list;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -312,6 +313,44 @@ public final class ListUtils {
             result.add(value);
         }
         return result;
+    }
+
+    /**
+     * 开始分页
+     *
+     * @param list
+     * @param pageNum  页码
+     * @param pageSize 每页多少条数据
+     */
+    public static <T> List<T> startPage(List<T> list, Integer pageNum, Integer pageSize) {
+        if (CollUtil.isEmpty(list)) {
+            return null;
+        }
+        // 记录总数
+        int count = list.size();
+        // 页数
+        int pageCount;
+        if (count % pageSize == 0) {
+            pageCount = count / pageSize;
+        } else {
+            pageCount = count / pageSize + 1;
+        }
+        // 开始索引
+        int fromIndex;
+        // 结束索引
+        int toIndex;
+        if (!pageNum.equals(pageCount)) {
+            fromIndex = (pageNum - 1) * pageSize;
+            toIndex = fromIndex + pageSize;
+        } else {
+            fromIndex = (pageNum - 1) * pageSize;
+            toIndex = count;
+        }
+        if (fromIndex < list.size()) {
+            return list.subList(fromIndex, toIndex);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
 

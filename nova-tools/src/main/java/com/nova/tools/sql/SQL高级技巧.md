@@ -82,3 +82,11 @@ on duplicate key update age = age + 10;
     </insert>
 </mapper>
 ~~~
+
+
+### mybatis if标签判断boolean
+~~~xml
+<if test="flag != null and 'true'.toString() == flag.toString()">
+    flag = #{flag, jdbcType=BOOLEAN}
+</if>
+~~~

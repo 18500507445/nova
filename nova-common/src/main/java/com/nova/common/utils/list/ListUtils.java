@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author wzh
@@ -261,27 +259,6 @@ public final class ListUtils {
         return Lists.newArrayList(newHashSet);
     }
 
-    private static void cutList(List<Integer> list, int limit) {
-        //方法一：使用流遍历操作
-        Stream.iterate(0, n -> n + 1).limit(limit).forEach(i -> {
-            List<Integer> collect = list.stream().skip((long) i * MAX_NUMBER).limit(MAX_NUMBER).collect(Collectors.toList());
-            System.err.println(collect);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                log.error("异常信息:", e);
-            }
-        });
-    }
-
-    /**
-     * 计算切分次数
-     */
-    private static Integer countStep(Integer size) {
-        return (size + MAX_NUMBER - 1) / MAX_NUMBER;
-    }
-
-
     /**
      * 将一个list均分成n个list,主要通过偏移量来实现的
      * <p>
@@ -353,12 +330,8 @@ public final class ListUtils {
         }
     }
 
-
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-        int limit = countStep(list.size());
-        cutList(list, limit);
-
         List<List<Integer>> partition = Lists.partition(list, 5);
         System.err.println(JSONUtil.toJsonStr(partition));
     }

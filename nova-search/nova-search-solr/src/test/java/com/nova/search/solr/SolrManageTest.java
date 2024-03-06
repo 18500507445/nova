@@ -29,7 +29,7 @@ public class SolrManageTest {
     @Autowired
     private SolrClient solrClient;
 
-    public static final String CORE_NAME = "testcore";
+    public static final String COLLECTION = "testcore";
 
     /**
      * 连接方式一，最好写成单例
@@ -54,10 +54,10 @@ public class SolrManageTest {
         doc.addField("price", "9000");
 
         //5.将文档对象放入客户端对象中
-        client.add(CORE_NAME, doc);
+        client.add(COLLECTION, doc);
 
         //6.提交
-        client.commit(CORE_NAME);
+        client.commit(COLLECTION);
     }
 
     /**
@@ -65,8 +65,8 @@ public class SolrManageTest {
      */
     @Test
     public void clientB() throws SolrServerException, IOException {
-        solrClient.add(CORE_NAME, new SolrInputDocument());
-        solrClient.commit(CORE_NAME);
+        solrClient.add(COLLECTION, new SolrInputDocument());
+        solrClient.commit(COLLECTION);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class SolrManageTest {
         solrQuery.setSort("id", SolrQuery.ORDER.desc);
 
         //查询并返回响应结果
-        QueryResponse response = solrClient.query(CORE_NAME, solrQuery);
+        QueryResponse response = solrClient.query(COLLECTION, solrQuery);
 
         //获取文档集合
         SolrDocumentList documentList = response.getResults();
@@ -128,7 +128,7 @@ public class SolrManageTest {
         User user = new User();
         user.setId("1");
         user.setName("wzh");
-        solrClient.addBean(CORE_NAME, user);
+        solrClient.addBean(COLLECTION, user);
         UpdateResponse response = solrClient.commit();
     }
 

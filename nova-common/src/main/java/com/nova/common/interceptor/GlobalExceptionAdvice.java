@@ -29,7 +29,7 @@ public class GlobalExceptionAdvice {
      */
     @ExceptionHandler(BindException.class)
     public ResResult<Void> handleBindException(BindException e) {
-        log.error("handleBindException：{}", e.getMessage());
+        log.warn("handleBindException：{}", e.getMessage());
         StringBuilder msg = new StringBuilder();
         List<FieldError> fieldErrors = e.getFieldErrors();
         for (FieldError fieldError : fieldErrors) {

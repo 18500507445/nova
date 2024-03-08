@@ -9,7 +9,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>nova.starter.redis</groupId>
     <artifactId>nova-starter-redis</artifactId>
     <packaging>jar</packaging>
 
@@ -18,7 +17,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <fastjson.version>2.0.40</fastjson.version>
+        <fastjson.version>2.0.45</fastjson.version>
 
     </properties>
 

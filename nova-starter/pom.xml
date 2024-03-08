@@ -17,6 +17,7 @@
         <module>nova-starter-redis</module>
         <module>nova-starter-mongo</module>
         <module>nova-starter-xxl</module>
+        <module>nova-starter-sensitive</module>
     </modules>
 
     <properties>

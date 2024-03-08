@@ -23,13 +23,18 @@
         </dependency>
 
         <dependency>
-            <groupId>nova.starter.redis</groupId>
+            <groupId>com.nova.starter</groupId>
             <artifactId>nova-starter-redis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>nova.starter.mongo</groupId>
+            <groupId>com.nova.starter</groupId>
             <artifactId>nova-starter-mongo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nova.starter</groupId>
+            <artifactId>nova-starter-sensitive</artifactId>
         </dependency>
 
         <dependency>
@@ -42,6 +47,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+
+
+
     </dependencies>
 
 </project>

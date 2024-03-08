@@ -13,6 +13,7 @@ import com.nova.common.core.model.result.ResResult;
 import com.nova.common.exception.ParamException;
 import com.nova.common.trace.Trace;
 import com.nova.common.utils.common.ValidatorUtil;
+import com.nova.starter.sensitive.bean.SensitiveBaseDTO;
 import com.nova.tools.demo.springboot.listener.Event;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -159,6 +160,23 @@ public class CommonController extends BaseController {
         }, POOL);
         CompletableFuture.allOf(taskA, taskB).thenRun(() -> log.info("完成，耗时：{} ms", timer.interval()));
         return ResResult.success();
+    }
+
+    @GetMapping(value = "/sensitive", name = "脱敏测试")
+    public ResResult<SensitiveBaseDTO> sensitive() {
+        SensitiveBaseDTO baseDTO = new SensitiveBaseDTO();
+        baseDTO.setName("王三四");
+        baseDTO.setIdCard("44082199612054343");
+        baseDTO.setBankCard("62173300255879654448");
+        baseDTO.setFixedPhone("3110026");
+        baseDTO.setMobile("18500334455");
+        baseDTO.setAddress("北京市朝阳区北苑路北");
+        baseDTO.setEmail("123456789@qq.com");
+
+        baseDTO.setRemark("123我是无敌大德鲁伊，你看看我说的是真的吗？哈哈哈哈哈");
+        baseDTO.setRemarkA("123我是无敌大德鲁伊，你看看我说的是真的吗？哈哈哈哈哈");
+        baseDTO.setRemarkB("123我是无敌大德鲁伊，你看看我说的是真的吗？哈哈哈哈哈");
+        return ResResult.success(baseDTO);
     }
 
 }

@@ -117,20 +117,26 @@
 
             <!-- starter组件 -->
             <dependency>
-                <groupId>nova.starter.redis</groupId>
+                <groupId>com.nova.starter</groupId>
                 <artifactId>nova-starter-redis</artifactId>
                 <version>${nova.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>nova.starter.mongo</groupId>
+                <groupId>com.nova.starter</groupId>
                 <artifactId>nova-starter-mongo</artifactId>
                 <version>${nova.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>nova.starter.xxl</groupId>
+                <groupId>com.nova.starter</groupId>
                 <artifactId>nova-starter-xxl</artifactId>
+                <version>${nova.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.nova.starter</groupId>
+                <artifactId>nova-starter-sensitive</artifactId>
                 <version>${nova.version}</version>
             </dependency>
 

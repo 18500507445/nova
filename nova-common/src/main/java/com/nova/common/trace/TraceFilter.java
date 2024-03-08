@@ -2,8 +2,6 @@ package com.nova.common.trace;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
-import com.nova.common.context.RequestParamsUtil;
-import com.nova.common.context.RequestWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;

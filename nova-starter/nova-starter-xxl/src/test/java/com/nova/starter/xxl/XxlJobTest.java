@@ -1,4 +1,4 @@
-package com.nova.starter.xxl.test;
+package com.nova.starter.xxl;
 
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;

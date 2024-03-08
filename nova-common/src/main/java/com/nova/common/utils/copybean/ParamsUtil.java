@@ -64,7 +64,9 @@ public final class ParamsUtil {
      */
     public static <T> T copyProperties(@Nullable Object source, @Nullable T result) {
         try {
-            BeanUtils.copyProperties(source, result);
+            if (null != source && null != result) {
+                BeanUtils.copyProperties(source, result);
+            }
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());

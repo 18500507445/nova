@@ -69,7 +69,7 @@
 * spring-aop、spring-ioc、spring-mvc、spring-mybatis、springboot相关源码
 
 16.nova-starter
-* 自定义starter：redis、mongo、xxlJob
+* 自定义starter：redis、mongo、xxlJob、自定义脱敏注解
 * <optional>true</optional>：防止依赖传递，导致引入后和项目的包冲突
 
 17.nova-tools

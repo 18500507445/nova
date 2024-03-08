@@ -382,14 +382,14 @@ public final class RandomUtil {
             if (j % 2 == 0) {
                 name = name + FIRST_NAME_MALE.substring(j, j + 2);
             } else {
-                name = name + FIRST_NAME_MALE.substring(j, j + 1);
+                name = name + FIRST_NAME_MALE.charAt(j);
             }
         } else {
             int j = getRandom().nextInt(FIRST_NAME_FEMALE.length() - 2);
             if (j % 2 == 0) {
                 name = name + FIRST_NAME_FEMALE.substring(j, j + 2);
             } else {
-                name = name + FIRST_NAME_FEMALE.substring(j, j + 1);
+                name = name + FIRST_NAME_FEMALE.charAt(j);
             }
         }
         return name;
@@ -403,9 +403,7 @@ public final class RandomUtil {
         String first = PHONE_PRE[index];
         String second = String.valueOf(randomNumber(1, 888) + 10000).substring(1);
         String third = String.valueOf(randomNumber(1, 9100) + 10000).substring(1);
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(first).append(second).append(third);
-        return buffer.toString();
+        return first + second + third;
     }
 
     /**
@@ -416,9 +414,7 @@ public final class RandomUtil {
         String first = ADDRESS[index];
         String second = randomNumber(11, 150) + "号";
         String third = "-" + randomNumber(1, 20) + "-" + randomNumber(1, 10);
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(first).append(second).append(third);
-        return buffer.toString();
+        return first + second + third;
     }
 
 

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author: wzh
- * @description mybatisPlus插件
+ * @description: mybatisPlus插件
  * @date: 2023/06/20 17:45
  */
 @Configuration

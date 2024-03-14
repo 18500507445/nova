@@ -76,7 +76,6 @@ public class MongoTest {
     @Test
     public void testFindOne() {
         Topic one = mongoService.findOne(Topic.class, new String[]{"answer"}, new Object[]{1});
-
         primaryMongoTemplate.save(one);
         System.out.println("one = " + one);
     }

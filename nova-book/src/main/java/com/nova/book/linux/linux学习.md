@@ -45,4 +45,4 @@
 （1）top -c，看一下哪一个pid高
 （2）ps H -eo pid,tid,%cpu | grep 'pid'，查看过高的tid
 （3）printf "%x\n" tid，转换成16进制的线程id
-（4）jstack pid |grep 线程id
+（4）jstack 'pid' |grep '线程id'

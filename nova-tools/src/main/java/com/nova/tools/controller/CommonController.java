@@ -131,8 +131,7 @@ public class CommonController extends BaseController {
     @GetMapping(value = "/testThread", name = "测试线程池")
     public ResResult<Void> testThread() {
         THREAD_POOL.execute(() -> {
-            long id = Thread.currentThread().getId();
-            System.err.println("id = " + id + " Now：" + DateUtil.now());
+            System.err.println("id = " + Thread.currentThread().getId() + " Now：" + DateUtil.now());
             ThreadUtil.sleep(2000);
         });
         return ResResult.success();
@@ -152,12 +151,8 @@ public class CommonController extends BaseController {
     public ResResult<Void> mainThread() {
         TimeInterval timer = DateUtil.timer();
         ThreadUtil.sleep(1000);
-        CompletableFuture<Void> taskA = CompletableFuture.runAsync(() -> {
-            ThreadUtil.sleep(1000);
-        }, POOL);
-        CompletableFuture<Void> taskB = CompletableFuture.runAsync(() -> {
-            ThreadUtil.sleep(2000);
-        }, POOL);
+        CompletableFuture<Void> taskA = CompletableFuture.runAsync(() -> ThreadUtil.sleep(1000), POOL);
+        CompletableFuture<Void> taskB = CompletableFuture.runAsync(() -> ThreadUtil.sleep(2000), POOL);
         CompletableFuture.allOf(taskA, taskB).thenRun(() -> log.info("完成，耗时：{} ms", timer.interval()));
         return ResResult.success();
     }

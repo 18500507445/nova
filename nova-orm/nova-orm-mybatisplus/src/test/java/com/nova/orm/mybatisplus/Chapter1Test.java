@@ -32,11 +32,12 @@ public class Chapter1Test {
 
     @Test
     public void selectList() {
-        PageHelper.startPage(1, 10);
+        Page<Object> page = PageHelper.startPage(1, 10);
         List<UserDO> userDOList = oneUserMapper.selectList(null);
         PageInfo<UserDO> pageInfo = new PageInfo<>(userDOList);
         String jsonStr = JSONUtil.toJsonStr(pageInfo);
         System.err.println("jsonStr = " + jsonStr);
+        System.err.println("page = " + page);
     }
 
     @Test
@@ -48,12 +49,21 @@ public class Chapter1Test {
     public void pagingThree() {
         Page<UserDO> page = PageHelper.startPage(1, 10)
                 .doSelectPage(() -> oneUserMapper.selectList(null));
+        System.err.println("page = " + page);
+        System.err.println("page.getPageNum() = " + page.getPageNum());
+        System.err.println("page.getPageSize() = " + page.getPageSize());
+        System.err.println("page.getPages() = " + page.getPages());
+        System.err.println("page.getTotal() = " + page.getTotal());
+        System.err.println("page.getCountColumn() = " + page.getCountColumn());
+
     }
 
     @Test
     public void pagingFour() {
         PageInfo<UserDO> pageInfo = PageHelper.startPage(1, 10)
                 .doSelectPageInfo(() -> oneUserMapper.selectList(null));
+
+        System.err.println("pageInfo = " + pageInfo);
     }
 
 }

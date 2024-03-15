@@ -102,6 +102,7 @@ class LombokTest {
 
 
     @Data
+    @ToString
     static class DemoD {
         private String pId = "1";
         private boolean isOpen = false;
@@ -112,6 +113,7 @@ class LombokTest {
         DemoD demoD = new DemoD();
         System.err.println("hutoolJson = " + JSONUtil.toJsonStr(demoD));
         System.err.println("fastJson = " + JSONObject.toJSONString(demoD));
+        System.err.println("toString = " + demoD);
     }
 
 }

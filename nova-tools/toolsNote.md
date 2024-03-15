@@ -63,6 +63,130 @@ nova-tools
 * @URL 必须是一个URL
 * @Range(min,max) 数字必须大于min，小于max，[min，max]区间
 
+### lombok.config配置参数
+~~~lombok.config
+## 类型: Boolean
+## 作用: 如果为true, 阻止lombok继续向上层目录查找配置文件
+config.stopbubbling=false
+## 类型: enum (lombok.core.configuration.CapitalizationStrategy)
+## 可选值: [BASIC | BEANSPEC]
+## 作用: 生成getter/setter字段时的属性名大小写规则
+## 详解: 如果分别有字段xName, 和字段userName
+##      在basic模式下, get方法名为getXName和getUserName, beanspec模式则为getxName, getUserName
+## 区别: 两种规范而已, 低版本lombok默认使用的是beanspec
+lombok.accessors.capitalization=BASIC
+## 类型: boolean
+## 作用: 如果为true, 生成的setter方法不再是void, 而是返回this, 方便链式调用
+lombok.accessors.chain=false
+## 类型: boolean
+## 作用: 为true时, 生成getter/setter方法时不加get/set前缀
+## 示例: 字段为username, 那么get/set方法则分别为username()和username(String username)
+lombok.accessors.fluent=false
+## 类型: boolean
+## 作用: 为true时, 生成的getter/setter方法和with(with已弃用)方法带有final修饰符(防止重载)
+lombok.accessors.makeFinal=false
+## 类型: string数组
+## 作用: 生成的getters, setters自动去除指定前缀
+## 默认为空, 示例为仅sys_前缀会被去除
+lombok.accessors.prefix += sys_
+lombok.accessors.prefix += p_
+lombok.accessors.prefix -= p_
+## 类型: boolean
+## 作用: 为true时, 在生成的代码上添加 @javax.annotation.Generated注解, 已弃用, 使用'lombok.addJavaxGeneratedAnnotation' 代替
+lombok.addGeneratedAnnotation = false
+## 类型: boolean
+## 作用: 为true时, 在生成的代码上添加 @javax.annotation.Generated注解
+lombok.addJavaxGeneratedAnnotation=false
+## 类型: boolean
+## 作用: 为true时, 在生成的代码上添加@lombok.Generated注解
+lombok.addLombokGeneratedAnnotation=false
+## 类型: nullity-annotation-library (带有空注解的库)
+## 可选值:  none | javax(=JSR305, 不推荐) | jakarta | eclipse | jetbrains | netbeans | androidx | android.support(安卓已弃用) | checkerframework(推荐) | findbugs | spring | jml | CUSTOM:com.foo.my.nonnull.annotation:com.foo.my.nullable.annotation(自定义)
+## 作用: 非none时, lombok会自动添加@NotNull和@Nullable注解(例如在toString返回值永远不会为null, 而equals方法参数可以为null)
+lombok.addNullAnnotations=none
+## 类型: boolean
+## 作用: 为true时, 在生成的代码上添加 @java.lang.SuppressWarnings("all") 注解
+lombok.addSuppressWarnings=true
+## 类型: boolean
+## 作为: 为true时, 构造函数添加@ConstructorProperties注解
+lombok.anyConstructor.addConstructorProperties=false
+## 类型: boolean
+## 作用: 生成构造函数时自动添加@ConstructorProperties注解
+lombok.anyConstructor.suppressConstructorProperties = false
+## 类型: string
+## 作用: 生成的builder类名称, '*'表示类名, 如设置为'*Abac', 则'User'类的builder类名为: UserAbac
+lombok.builder.className = *Builder
+## 类型: string数组
+## 作用: 将字段上指定的注解复制到getters, setters, with methods, builder-setters等
+## 默认为空, 示例为将字段上的Abac注解复制到getter/setter和构建器的setter方法上(with已被lombok弃用)
+lombok.copyableAnnotations += kim.nzxy.Abcd
+## 类型: enum (lombok.core.configuration.CallSuperType)
+## 可选值: [CALL | SKIP | WARN]
+## 作用: 生成equals 和 hashCode方法时, callSuper的默认值
+lombok.equalsAndHashCode.callSuper = WARN
+## 类型: boolean
+## 作用: 生成equals 和 hashCode方法时, 不调用getter方法, 而是直接使用字段
+lombok.equalsAndHashCode.doNotUseGetters=false
+## 类型: boolean
+## 在生成的代码上添加@edu.umd.cs.findbugs.annotations.SuppressFBWarnings注解
+lombok.extern.findbugs.addSuppressFBWarnings=false
+## 类型: boolean
+## 作用: 将所有字段设为final(即便没有lombok注解), 可以使用@NonFinal注解覆盖此配置
+lombok.fieldDefaults.defaultFinal = false
+## 类型: boolean
+## 作用: 如果没有显示的修饰符(即便没有lombok注解), 将全部加上private修饰符, 可以使用 @PackagePrivate 注解覆盖此配置
+lombok.fieldDefaults.defaultPrivate = [false | true]
+## 类型: string
+## 作用: @FieldNameConstants注解生成的默认内部类类名
+lombok.fieldNameConstants.innerTypeName=Fields
+## 类型: boolean
+## 作用: @FieldNameConstants注解生成的常量名是否大写, 设为true表示大写, 否则和字段名一致
+lombok.fieldNameConstants.uppercase=false
+## 类型: boolean
+## 作用: Boolean类型字段的getter方法名为getXXX()而非isXXX()
+lombok.getter.noIsPrefix=true
+## 类型: 自定义日志声明
+## 作用: CustomLog注解使用,
+## 默认值为空, 示例为自定义log, 返回值和方法中间用空格隔开, NAME位置可选值为: TYPE、NAME、TOPIC 和 NULL
+## 使用NAME生成: private static final my.cool.Logger log = my.cool.LoggerFactory.getLogger(LogExample.class.getName());
+## 使用TYPE生成: private static final my.cool.Logger log = my.cool.LoggerFactory.getLogger(LogExample.class);
+## 使用NULL生成: private static final my.cool.Logger log = my.cool.LoggerFactory.getLogger();
+## 使用TOPIC: 需要在@CustomLog注解中指定topic,
+##      如@CustomLog(topic="abcd")生成: private static final my.cool.Logger log = my.cool.LoggerFactory.createLogger("abcd");
+lombok.log.custom.declaration = my.cool.Logger my.cool.LoggerFactory.createLogger(NAME)
+## 类型: boolean
+## 作用: 生成的日志字段为static字段
+lombok.log.fieldIsStatic = true
+## 类型: identifier-name
+## 作用: 生成的日志字段的字段名
+lombok.log.fieldName = log
+## 类型: boolean
+## 作用: @Data and @Value注解生成一个private的无参构造函数
+lombok.noArgsConstructor.extraPrivate=false
+## 类型: enum (lombok.core.configuration.NullCheckExceptionType)
+## 可选值: [NullPointerException | IllegalArgumentException | Assertion | JDK | Guava]
+## 作用: 如果参数为空, 抛出指定异常
+lombok.nonNull.exceptionType = NullPointerException
+## 类型: boolean
+## 作用: @Singular注解自动将参数名从复数变成单数
+lombok.singular.auto = true
+## 类型: boolean
+## 作用: 如果是java.util包下的继承, 自动变为不可变类型, 如ImmutableList等
+lombok.singular.useGuava=false
+## 类型: enum (lombok.core.configuration.CallSuperType)
+## 作用: 生成toString方法时, callSuper的默认值
+lombok.toString.callSuper=SKIP
+## 类型: boolean
+## 作用: tostring方法不调用getter方法而是直接使用字段值
+lombok.toString.doNotUseGetters = false
+## 类型: boolean
+## 作用: 生成的toString方法是否包含字段名, 不包含的话大概是这样的: "Person(1, 张三, 21, false)"
+lombok.toString.includeFieldNames = true
+## 类型: boolean
+## 作用: 为true表示生成的toString方法仅包含显式标记为 @ToString.Include 的字段和方法, 否则则包含非static字段, 以及非$开头的字段
+lombok.toString.onlyExplicitlyIncluded = false
+~~~
+
 ### Java基础
 * [《Java 线程池详解》](https://mp.weixin.qq.com/s/hrPUZQEm6zp76Euj5ScaZw)
 * [《可以提高千倍效率的Java代码小技巧》](https://mp.weixin.qq.com/s/LaJ2WeOUiYWzcOI1Na7NVA)

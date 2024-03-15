@@ -27,7 +27,6 @@
         <module>nova-excel</module>
         <module>nova-log</module>
         <module>nova-login</module>
-        <module>nova-monitor</module>
         <module>nova-mq</module>
         <module>nova-msg</module>
         <module>nova-orm</module>

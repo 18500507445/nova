@@ -2,7 +2,6 @@ package com.nova.tools.common;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.json.JSONUtil;
-import com.nova.common.utils.common.LinuxUtils;
 import com.nova.tools.demo.entity.People;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -35,14 +34,14 @@ public class ConvertTest {
         PeopleConvert INSTANCES = Mappers.getMapper(PeopleConvert.class);
 
         @Mappings({
-                @Mapping(source = "age", target = "ageA"),
-                @Mapping(source = "createTime", target = "createTimeA", dateFormat = "yyyy-MM-dd")
+                @Mapping(target = "ageA", source = "age"),
+                @Mapping(target = "createTimeA", dateFormat = "yyyy-MM-dd", source = "createTime")
         })
         PeopleVO convertVO(People people);
 
         List<PeopleVO> convertVOList(List<People> list);
 
-        @Mapping(source = "age", target = "ageA")
+        @Mapping(target = "ageA", source = "age")
         default List<PeopleVO> toList(PeopleDTO peopleDTO) {
             return peopleDTO.getIdList().stream()
                     .map(id -> {
@@ -54,6 +53,11 @@ public class ConvertTest {
                     .collect(Collectors.toList());
         }
 
+        /**
+         * 字段值转换，可以使用表达式
+         * @Mapping(target = "status", expression = "java( show.getDelFlag() == 0 ? 1 : 0 )")
+         */
+
     }
 
     @Data
@@ -63,7 +67,7 @@ public class ConvertTest {
 
         private Integer ageA;
 
-        public Date createTimeA;
+        public String createTimeA;
     }
 
     @Data
@@ -81,8 +85,8 @@ public class ConvertTest {
     public void demoA() {
         People people = new People();
         people.setId(1).setAge(18).setCreateTime(new Date());
-
         PeopleVO peopleVO = PeopleConvert.INSTANCES.convertVO(people);
+
         String jsonStr = JSONUtil.toJsonStr(peopleVO);
         System.err.println(jsonStr);
     }
@@ -96,17 +100,11 @@ public class ConvertTest {
         PeopleDTO peopleDTO = new PeopleDTO();
         peopleDTO.setAge(18);
         peopleDTO.setIdList(ListUtil.of(1, 2, 3));
-
         List<PeopleVO> list = PeopleConvert.INSTANCES.toList(peopleDTO);
 
         String jsonStr = JSONUtil.toJsonStr(list);
-
         System.err.println(jsonStr);
     }
 
-    public static void main(String[] args) {
-        String s = LinuxUtils.executeLinux("git config user.name");
-        System.err.println(s);
-    }
 
 }

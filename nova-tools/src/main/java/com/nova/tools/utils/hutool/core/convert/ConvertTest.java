@@ -237,7 +237,7 @@ public class ConvertTest {
 
         final Product product = Convert.convert(Product.class, bytes);
         Assert.equals("zhangsan", product.getName());
-        Assert.equals("张三", product.getCName());
+        Assert.equals("张三", product.getcName());
         Assert.equals("5.1.1", product.getVersion());
     }
 

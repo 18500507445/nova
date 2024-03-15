@@ -11,7 +11,7 @@
 * [xxl-job源码笔记](https://www.processon.com/preview/6433f533b433fa00159576a8)
 
 2.nova-cache
-* nova-cache-redis：Memcached、caffeine、redis（lettuce客户端）
+* nova-cache-redis：Memcached（支持多线程，数据类型只有String）、caffeine（仅本地缓存）、redis（lettuce客户端）
 * nova-cache-lock：[封装redisson分布式锁](nova-cache/lockNote.md)
 * nova-cache-limit：[接口限流、请求，响应拦截器、原生redisson、redis-jedis](nova-cache/limitNote.md)
 * ![](img/redis/客户端对比.jpg)
@@ -21,7 +21,7 @@
 * 框架核心组件、通用工具包（包括常量类，工具类，枚举类，异常类）
 
 4.nova-database
-* 数据库组件（动态数据源）
+* 数据库组件（手写动态数据源）
 
 5.nova-excel
 * [excel工具类](nova-excel/excelNote.md)
@@ -50,8 +50,7 @@
 
 11.nova-orm
 * [mybatis学习](nova-orm/nova-orm-mybatis/mybatisNote.md)
-* [mybatisplus整合pageHelper学习](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
-* [mybatisflex学习](nova-orm/nova-orm-mybatisflex/mybatisflex.md)
+* [mybatisplus、pageHelper、动态数据源](nova-orm/nova-orm-mybatisplus/mybatisplus.md)
 
 12.nova-rpc
 * [手写rpc框架](nova-rpc/nova-rpc-socket/rpcNote.md)

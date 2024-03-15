@@ -10,6 +10,7 @@ import cn.hutool.json.JSONUtil;
 import com.nova.shopping.pay.entity.param.HuaweiPayParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -75,7 +76,7 @@ public class HuaweiPayment {
             signatureAlgorithm = "SHA256WithRSA";
         }
         try {
-            Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+            Security.addProvider(new BouncyCastleProvider());
             // 生成"RSA"的KeyFactory对象
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             byte[] decodedKey = Base64.decodeBase64(publicKey);

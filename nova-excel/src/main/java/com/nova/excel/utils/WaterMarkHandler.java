@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * 单个工作表导出
+ *
  * @author wzh
  */
 @RequiredArgsConstructor
@@ -46,7 +47,7 @@ public class WaterMarkHandler implements SheetWriteHandler {
         // 设置字体平滑
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int y = this.watermark.getYAxis();
+        int y = this.watermark.getyAxis();
         for (String s : textArray) {
             // 从画框的y轴开始画字符串.假设电脑屏幕中心为0，y轴为正数则在下方
             g.drawString(s, 0, y);
@@ -62,8 +63,8 @@ public class WaterMarkHandler implements SheetWriteHandler {
     /**
      * 为Excel打上水印工具函数
      *
-     * @param sheet excel sheet
-     * @param bytes 水印图片字节数组
+     * @param sheet         excel sheet
+     * @param bufferedImage 水印图片字节数组
      */
     public static void putWaterRemarkToExcel(XSSFSheet sheet, BufferedImage bufferedImage) {
         //add relation from sheet to the picture data

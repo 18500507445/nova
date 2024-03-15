@@ -64,7 +64,7 @@ public class CustomWaterMarkHandler implements SheetWriteHandler {
         // 设置字体平滑
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int y = watermark.getYAxis();
+        int y = watermark.getyAxis();
         for (String s : textArray) {
             // 从画框的y轴开始画字符串.假设电脑屏幕中心为0，y轴为正数则在下方
             g.drawString(s, 0, y);

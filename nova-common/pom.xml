@@ -16,12 +16,13 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
+
         <fastjson.version>2.0.45</fastjson.version>
         <hutool.version>5.8.25</hutool.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
         <guava.version>33.0.0-jre</guava.version>
         <guava.retry.version>2.0.0</guava.retry.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
 
         <email.version>1.5</email.version>
         <thumbnailator.version>0.4.17</thumbnailator.version>
@@ -30,7 +31,7 @@
         <poi.version>5.2.3</poi.version>
         <jwt.version>4.4.0</jwt.version>
         <vavr.version>1.0.0-alpha-4</vavr.version>
-        <bouncycastle.version>1.76</bouncycastle.version>
+        <bouncycastle.version>1.77</bouncycastle.version>
         <jsch.version>0.1.55</jsch.version>
         <oshi.version>6.4.5</oshi.version>
         <oss.version>3.17.0</oss.version>
@@ -108,6 +109,12 @@
             <artifactId>httpclient</artifactId>
         </dependency>
 
+        <!-- 更多的监控需要的依赖 访问：http://localhost:8080/actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- SpringBoot集成mybatis框架 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -169,7 +176,7 @@
             <version>${fastjson.version}</version>
         </dependency>
 
-        <!-- 涂工具类 -->
+        <!-- hutool工具类 -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -211,14 +218,7 @@
             <version>${jwt.version}</version>
         </dependency>
 
-        <!-- Vavr:Java8函数式编程拓展库 -->
-        <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-            <version>${vavr.version}</version>
-        </dependency>
-
-        <!-- 测试特殊算法 -->
+        <!-- 提供很多哈希算法和加密算法的第三方库。它提供了Java标准库没有的一些算法，例如，RipeMD160哈希算法 -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15to18</artifactId>
@@ -260,19 +260,6 @@
             <version>${toolkit.version}</version>
         </dependency>
 
-        <!-- SBA监控客户端 -->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${sba.version}</version>
-        </dependency>
-
-        <!-- 更多的监控需要的依赖 访问：http://localhost:8080/actuator -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
         <!-- 阿里线程工具，可以多线程环境中传递值 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -308,15 +295,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok-mapstruct-binding</artifactId>
-            <version>${lombok.mapstruct.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-mapstruct-binding</artifactId>
+            <version>${lombok.mapstruct.version}</version>
         </dependency>
 
     </dependencies>

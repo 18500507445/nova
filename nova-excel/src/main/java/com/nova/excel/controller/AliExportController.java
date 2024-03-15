@@ -77,7 +77,7 @@ public class AliExportController extends BaseController {
         WATER_MARK.setContent("仅供Nova项目使用，翻版必究");
         WATER_MARK.setWidth(600);
         WATER_MARK.setHeight(400);
-        WATER_MARK.setYAxis(200);
+        WATER_MARK.setyAxis(200);
     }
 
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();

@@ -55,6 +55,7 @@
 
         <!-- 3.0之前最后一个版本，不要升级了 -->
         <redisson.version>3.18.0</redisson.version>
+
     </properties>
 
     <!-- 依赖声明-->

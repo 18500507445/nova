@@ -33,6 +33,12 @@
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
+        <!-- 模板引擎 -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
+
         <!--德鲁伊连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -52,12 +58,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis.plus.version}</version>
-        </dependency>
-
-        <!-- 模板引擎 -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
         </dependency>
 
         <!-- 动态数据源 -->

@@ -1,5 +1,6 @@
 package com.nova.orm.mybatis.service.impl;
 
+import com.nova.orm.mybatis.entity.Student;
 import com.nova.orm.mybatis.mapper.StudentMapper;
 import com.nova.orm.mybatis.service.StudentService;
 import org.springframework.stereotype.Service;
@@ -97,5 +98,18 @@ public class StudentServiceImpl implements StudentService {
     public void insertSeven() {
         studentMapper.insertSeven();
         //throw new RuntimeException("我是insertSeven异常！");
+    }
+
+    /**
+     * 在开启事务的情况下，如果走到student2这一行进行msql数据修改，那么读取出来的数据是修改之前的，mybatis有一级缓存(缓存也要根据mysql隔离级别)
+     * 事务是可重复读取的，导致了数据的不一致。
+     */
+    @Override
+    @Transactional
+    public void mybatisCache() {
+        Student student1 = studentMapper.getStudent(1L);
+        System.err.println("student1 = " + student1);
+        Student student2 = studentMapper.getStudent(1L);
+        System.err.println("student2 = " + student2);
     }
 }

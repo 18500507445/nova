@@ -37,7 +37,7 @@ public class MybatisTests {
      */
     @Test
     public void testConfig() {
-        System.err.println(studentMapper.getStudent());
+        System.err.println(studentMapper.getStudent(1L));
     }
 
     /**
@@ -131,6 +131,14 @@ public class MybatisTests {
     public void testSelectMap() {
         Map<String, Student> map = studentMapper.selectMap();
         System.err.println("map = " + map);
+    }
+
+    /**
+     * mybatis一级缓存
+     */
+    @Test
+    public void testQuery() {
+        studentService.mybatisCache();
     }
 
 }

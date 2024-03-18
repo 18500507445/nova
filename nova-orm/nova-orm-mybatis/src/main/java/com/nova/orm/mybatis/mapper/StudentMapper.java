@@ -16,8 +16,8 @@ import java.util.Map;
 @Mapper
 public interface StudentMapper {
 
-    @Select("select * from student where id = 1")
-    Student getStudent();
+    @Select("select * from student where id = #{id}")
+    Student getStudent(Long id);
 
     @Insert("insert into student(name, age) values('事务1', 18)")
     void insertOne();

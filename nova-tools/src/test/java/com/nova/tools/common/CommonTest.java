@@ -101,12 +101,6 @@ public class CommonTest {
      * 测试linux命令
      */
     @Test
-    public void testLinuxCommand() {
-        String s = LinuxUtils.executeLinux("curl cip.cc");
-        System.err.println(s);
-    }
-
-    @Test
     public void getIp() {
         String ip = LinuxUtils.getInternetIp("curl cip.cc");
         System.err.println("ip = " + ip);

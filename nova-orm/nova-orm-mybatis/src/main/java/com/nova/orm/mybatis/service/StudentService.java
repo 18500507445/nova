@@ -18,4 +18,8 @@ public interface StudentService {
     void insertSix();
 
     void insertSeven();
+
+    //mybatis一级缓存
+    void mybatisCache();
+
 }

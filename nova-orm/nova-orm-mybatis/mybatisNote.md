@@ -3,10 +3,6 @@
 * (1) spring整合mybatis
 
 
-### 收集的知识
-* [《百度》](https://www.baidu.com)
-
-
 ### 三种for循环插入耗时对比（10000条），事例在shopping-mall项目测试类
 ![效率总结](../nova-orm-mybatis/src/main/img/效率总结.png)
 ~~~Java

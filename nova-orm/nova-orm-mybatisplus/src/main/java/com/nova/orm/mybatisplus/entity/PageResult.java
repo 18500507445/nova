@@ -37,32 +37,47 @@ public class PageResult<T> {
     private List<T> list;
 
     private PageResult(List<T> list, Page<T> page) {
-        this.list = list;
-        if (null != page) {
-            this.pageIndex = page.getPageNum();
-            this.pageSize = page.getPageSize();
-            this.totalCount = page.getTotal();
-            this.totalPage = page.getPages();
+        if (null == page) {
+            return;
+        }
+        this.pageIndex = page.getPageNum();
+        this.pageSize = page.getPageSize();
+        this.totalCount = page.getTotal();
+        this.totalPage = page.getPages();
+        if (null != list) {
+            this.list = list;
+        } else {
+            this.list = page.getResult();
         }
     }
 
     private PageResult(List<T> list, PageInfo<T> pageInfo) {
-        this.list = list;
-        if (null != pageInfo) {
-            this.pageIndex = pageInfo.getPageNum();
-            this.pageSize = pageInfo.getPageSize();
-            this.totalCount = pageInfo.getTotal();
-            this.totalPage = pageInfo.getPages();
+        if (null == pageInfo) {
+            return;
+        }
+        this.pageIndex = pageInfo.getPageNum();
+        this.pageSize = pageInfo.getPageSize();
+        this.totalCount = pageInfo.getTotal();
+        this.totalPage = pageInfo.getPages();
+        if (null != list) {
+            this.list = list;
+        } else {
+            this.list = pageInfo.getList();
         }
     }
 
     private PageResult(List<T> list, IPage<T> iPage) {
-        this.list = list;
-        if (null != iPage) {
-            this.pageIndex = iPage.getCurrent();
-            this.pageSize = iPage.getSize();
-            this.totalCount = iPage.getTotal();
-            this.totalPage = iPage.getPages();
+        if (null == iPage) {
+            return;
+        }
+        this.pageIndex = iPage.getCurrent();
+        this.pageSize = iPage.getSize();
+        this.totalCount = iPage.getTotal();
+        this.totalPage = iPage.getPages();
+        if (null != list) {
+            this.list = list;
+        } else {
+            this.list = iPage.getRecords();
         }
     }
 
@@ -70,12 +85,12 @@ public class PageResult<T> {
         this.pageIndex = pageIndex;
         this.pageSize = pageSize;
         // 处理数据
-        PageUtil.setFirstPageNo(1);
         if (CollUtil.isEmpty(list)) {
             this.list = new ArrayList<>();
             this.totalCount = 0;
             this.totalPage = 0;
         } else {
+            PageUtil.setFirstPageNo(1);
             this.list = ListUtil.page(pageIndex, pageSize, list);
             this.totalCount = list.size();
             this.totalPage = (totalCount + pageSize - 1) / pageSize;
@@ -87,7 +102,9 @@ public class PageResult<T> {
         this.pageSize = pageSize;
         this.list = list;
         this.totalCount = totalCount;
-        this.totalPage = (totalCount + pageSize - 1) / pageSize;
+        if (pageSize > 0) {
+            this.totalPage = (totalCount + pageSize - 1) / pageSize;
+        }
     }
 
     public static <T> PageResult<T> empty() {
@@ -97,7 +114,7 @@ public class PageResult<T> {
     /**
      * 针对PageHelper-page对象，进行包装处理
      *
-     * @param list<T> 数据
+     * @param list<T> 手动传入list数据
      * @param page    {@link Page}
      * @return <T>
      */
@@ -106,9 +123,19 @@ public class PageResult<T> {
     }
 
     /**
+     * 同上，list取page对象里的
+     *
+     * @param page {@link Page}
+     * @return <T>
+     */
+    public static <T> PageResult<T> page(Page<T> page) {
+        return new PageResult<>(null, page);
+    }
+
+    /**
      * 针对PageHelper-pageInfo对象，进行包装处理
      *
-     * @param list<T>  数据
+     * @param list<T>  手动传入list数据
      * @param pageInfo {@link PageInfo}
      * @return <T>
      */
@@ -117,14 +144,34 @@ public class PageResult<T> {
     }
 
     /**
+     * 同上，list取pageInfo对象里的
+     *
+     * @param pageInfo {@link PageInfo}
+     * @return <T>
+     */
+    public static <T> PageResult<T> pageInfo(PageInfo<T> pageInfo) {
+        return new PageResult<>(null, pageInfo);
+    }
+
+    /**
      * 针对mybatisPlus-IPage对象，进行包装处理
      *
-     * @param list<T> 数据
+     * @param list<T> 手动传入list数据
      * @param iPage   {@link IPage}
      * @return <T>
      */
     public static <T> PageResult<T> iPage(List<T> list, IPage<T> iPage) {
         return new PageResult<>(list, iPage);
+    }
+
+    /**
+     * 同上，list取iPage对象里的
+     *
+     * @param iPage {@link IPage}
+     * @return <T>
+     */
+    public static <T> PageResult<T> iPage(IPage<T> iPage) {
+        return new PageResult<>(null, iPage);
     }
 
     /**

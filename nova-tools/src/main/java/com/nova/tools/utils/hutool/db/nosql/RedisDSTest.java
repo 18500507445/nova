@@ -6,6 +6,6 @@ public class RedisDSTest {
 
     @Test
     public void redisDSTest() {
-        //final Jedis jedis = RedisDS.create().getJedis();
+//        final Jedis jedis = RedisDS.create().getJedis();
     }
 }

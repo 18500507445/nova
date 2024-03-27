@@ -9,7 +9,7 @@ public class MongoDBTest {
 
     @Test
     public void mongoDSTest() {
-        //MongoDatabase db = MongoFactory.getDS("master").getDb("test");
+//        MongoDatabase db = MongoFactory.getDS("master").getDb("test");
         //Assert.equals("test", db.getName());
     }
 }

@@ -26,6 +26,7 @@ public final class ChannelFactory {
     /**
      * 获取渠道基类
      */
+    @Deprecated
     public AbstractChannel get(ChannelEnum channelEnum) {
         return CONTAINER.get(channelEnum);
     }

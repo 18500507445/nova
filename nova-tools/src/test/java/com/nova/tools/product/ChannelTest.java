@@ -1,7 +1,6 @@
 package com.nova.tools.product;
 
 import cn.hutool.json.JSONUtil;
-import com.nova.tools.product.base.AbstractChannel;
 import com.nova.tools.product.base.ChannelFactory;
 import com.nova.tools.product.base.ChannelInit;
 import com.nova.tools.product.base.impl.YxChannel;
@@ -26,17 +25,6 @@ public class ChannelTest {
     private ChannelInit channelInit;
 
     @Test
-    public void channelTest() {
-        AbstractChannel jdChannel = channelFactory.get(ChannelEnum.JD);
-        System.err.println("JdToken = " + jdChannel.getToken(null));
-        System.err.println("JdRefreshToken = " + jdChannel.refreshToken());
-        System.err.println("JdChannel = " + jdChannel.getChannel());
-
-        AbstractChannel yxChannel = channelFactory.get(ChannelEnum.YX);
-        System.err.println("YxRefreshToken = " + yxChannel.refreshToken());
-    }
-
-    @Test
     public void messageTest() {
         YxChannel yxChannel = channelFactory.get(ChannelEnum.YX, YxChannel.class);
         assert yxChannel != null;
@@ -45,7 +33,7 @@ public class ChannelTest {
 
 
     @Test
-    public void configTest() {
+    public void channelTest() {
         YxChannel yxChannel = channelFactory.get(ChannelEnum.YX, YxChannel.class);
         System.out.println("config = " + JSONUtil.toJsonStr(yxChannel.getConfig()));
         channelInit.refresh();

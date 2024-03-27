@@ -194,7 +194,7 @@ class DynamicArrayTest {
         list.addLast(3);
 
         System.err.println("手动foreach开始");
-        list.forEachPro(integer -> System.err.println(integer));
+        list.forEachPro(System.err::println);
 
         System.err.println("迭代器遍历开始");
         for (Integer element : list) {

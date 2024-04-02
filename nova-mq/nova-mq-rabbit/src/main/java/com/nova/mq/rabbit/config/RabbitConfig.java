@@ -31,7 +31,7 @@ public class RabbitConfig {
     }
 
     @Bean(name = "primaryConnectionFactory")
-    public ConnectionFactory connectionFactory(@Qualifier("primaryProperties") RabbitProperties primaryProperties) {
+    public ConnectionFactory primaryConnectionFactory(@Qualifier("primaryProperties") RabbitProperties primaryProperties) {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         //默认2047
         connectionFactory.getRabbitConnectionFactory().setRequestedChannelMax(primaryProperties.getRequestedChannelMax());
@@ -73,8 +73,6 @@ public class RabbitConfig {
 
     /**
      * 直连交换机
-     *
-     * @return
      */
     @Bean("directExchange")
     public Exchange directExchange() {
@@ -83,8 +81,6 @@ public class RabbitConfig {
 
     /**
      * 广播交换机
-     *
-     * @return
      */
     @Bean("fanoutExchange")
     public Exchange fanoutExchange() {
@@ -94,8 +90,6 @@ public class RabbitConfig {
 
     /**
      * 死信交换机
-     *
-     * @return
      */
     @Bean("directDlExchange")
     public Exchange directDlExchange() {
@@ -112,8 +106,6 @@ public class RabbitConfig {
 
     /**
      * 简单队列1
-     *
-     * @return
      */
     @Bean
     public Queue queueSimpleOne() {
@@ -123,8 +115,6 @@ public class RabbitConfig {
 
     /**
      * 简单队列2
-     *
-     * @return
      */
     @Bean
     public Queue queueSimpleTwo() {
@@ -149,8 +139,6 @@ public class RabbitConfig {
 
     /**
      * 将email队列-绑定到广播交换机
-     *
-     * @return
      */
     @Bean
     public Binding bindingFanoutEmail() {
@@ -159,8 +147,6 @@ public class RabbitConfig {
 
     /**
      * 将sms队列-绑定到广播交换机
-     *
-     * @return
      */
     @Bean
     public Binding bindingFanoutSms() {

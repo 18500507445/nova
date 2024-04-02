@@ -1,4 +1,4 @@
-package com.nova.mq.kafka.utils;
+package com.nova.mq.kafka.config;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  */
 @Getter
 @Slf4j
-public class KafkaProducerUtil {
+public class KafkaService {
 
     /**
      * -- GETTER --

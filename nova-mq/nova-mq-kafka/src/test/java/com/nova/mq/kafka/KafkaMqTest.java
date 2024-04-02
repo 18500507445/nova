@@ -2,8 +2,9 @@ package com.nova.mq.kafka;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Destination;
-import com.nova.mq.kafka.utils.KafkaProducerUtil;
+import com.nova.mq.kafka.config.KafkaService;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -24,7 +25,7 @@ import java.util.Map;
 public class KafkaMqTest {
 
     @Resource
-    private KafkaProducerUtil kafkaProducerUtil;
+    private KafkaService kafkaService;
 
     @Resource
     private KafkaTemplate<Object, Object> kafkaTemplate;
@@ -43,7 +44,7 @@ public class KafkaMqTest {
         Map<String, String> params = new HashMap<>(16);
         params.put("userId", "wzhTest");
 
-        kafkaProducerUtil.sendMessage(Destination.TEST_DESTINATION, JSONUtil.toJsonStr(params), new ListenableFutureCallback<SendResult<String, Object>>() {
+        kafkaService.sendMessage(Destination.TEST_DESTINATION, JSONUtil.toJsonStr(params), new ListenableFutureCallback<SendResult<String, Object>>() {
             @Override
             public void onSuccess(SendResult<String, Object> sendResult) {
                 log.info("发送消息成功！topic:{}, partition:{}, offset:{}, key:{}, value:{}",
@@ -55,7 +56,7 @@ public class KafkaMqTest {
             }
 
             @Override
-            public void onFailure(Throwable throwable) {
+            public void onFailure(@NotNull Throwable throwable) {
                 log.error("发送消息失败！errMsg:{}", throwable.getCause(), throwable);
             }
         });

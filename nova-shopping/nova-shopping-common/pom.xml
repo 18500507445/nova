@@ -24,7 +24,7 @@
         <jasypt.version>3.0.5</jasypt.version>
 
         <!-- spring-boot 2.7.18版本 -->
-        <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
+        <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
         <!-- 不要升级了，springboot3之前最高次版本 -->
         <mybatis.version>2.3.2</mybatis.version>
     </properties>
@@ -34,12 +34,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-        </dependency>
-
-        <!-- SpringWeb模块 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
         </dependency>
 
         <dependency>

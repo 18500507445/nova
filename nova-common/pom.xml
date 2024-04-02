@@ -46,6 +46,7 @@
 
         <!-- 2.1.0兼容到spring-boot-starter2.7.18版本，不建议升级了，但是2.1.0和mybatis-plus3.5.5有兼容性问题 暂时降低-->
         <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
+        <!-- 不要升级了，springboot3之前最高次版本 -->
         <mybatis.version>2.3.2</mybatis.version>
 
     </properties>
@@ -286,7 +287,7 @@
             <version>${ip2region.version}</version>
         </dependency>
 
-        <!-- bean转换工具 -->
+        <!-- bean转换工具 start -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -304,6 +305,7 @@
             <artifactId>lombok-mapstruct-binding</artifactId>
             <version>${lombok.mapstruct.version}</version>
         </dependency>
+        <!-- 工具 end -->
 
     </dependencies>
 </project>

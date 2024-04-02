@@ -136,5 +136,4 @@ public class RedisTest {
         System.err.println("unlock = " + unlock);
     }
 
-
 }

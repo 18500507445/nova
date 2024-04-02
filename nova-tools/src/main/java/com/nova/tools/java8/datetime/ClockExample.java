@@ -23,7 +23,7 @@ class ClockExample {
         Instant instant = clock.instant();
         // legacy java.util.Date
         Date legacyDate = Date.from(instant);
-        System.err.println(millis);
-        System.err.println(legacyDate);
+        System.err.println("millis = " + millis);
+        System.err.println("legacyDate = " + legacyDate);
     }
 }

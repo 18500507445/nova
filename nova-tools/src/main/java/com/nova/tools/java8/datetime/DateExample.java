@@ -37,11 +37,11 @@ class DateExample {
         // 今天是：2018年 三月 03日 星期六
         String strDate5 = dateTime.format(DateTimeFormatter.ofPattern("今天是：YYYY年 MMMM dd日 E", Locale.CHINESE));
 
-        System.err.println(strDate1);
-        System.err.println(strDate2);
-        System.err.println(strDate3);
-        System.err.println(strDate4);
-        System.err.println(strDate5);
+        System.err.println("strDate1 = " + strDate1);
+        System.err.println("strDate2 = " + strDate2);
+        System.err.println("strDate3 = " + strDate3);
+        System.err.println("strDate4 = " + strDate4);
+        System.err.println("strDate5 = " + strDate5);
 
         // 将一个字符串解析成一个日期对象
         String strDate6 = "2018-03-03";

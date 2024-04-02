@@ -14,6 +14,7 @@ import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import com.tencentcloudapi.sms.v20210111.models.SendStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
 
@@ -22,6 +23,7 @@ import java.util.Collection;
  * @author: wzh
  * @date: 2023/4/20 20:22
  */
+@Slf4j(topic = "TencentSmsTemplate")
 @RequiredArgsConstructor
 public class TencentSmsTemplate implements SmsTemplate {
 

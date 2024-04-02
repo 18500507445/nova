@@ -12,6 +12,7 @@ import com.yunpian.sdk.constant.Code;
 import com.yunpian.sdk.model.Result;
 import com.yunpian.sdk.model.SmsBatchSend;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/4/20 20:17
  */
+@Slf4j(topic = "YunPianSmsTemplate")
 @RequiredArgsConstructor
 public class YunPianSmsTemplate implements SmsTemplate {
 

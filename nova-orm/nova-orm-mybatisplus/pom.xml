@@ -16,7 +16,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <druid.version>1.2.20</druid.version>
+        <druid.version>1.2.22</druid.version>
         <mybatis.plus.version>3.5.5</mybatis.plus.version>
         <dynamic.version>4.3.0</dynamic.version>
     </properties>

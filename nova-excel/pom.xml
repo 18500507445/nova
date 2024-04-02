@@ -16,7 +16,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <easyexcel.verson>3.3.3</easyexcel.verson>
+        <easyexcel.verson>3.3.4</easyexcel.verson>
         <easypoi.verson>4.5.0</easypoi.verson>
         <schemas.verson>1.4</schemas.verson>
     </properties>

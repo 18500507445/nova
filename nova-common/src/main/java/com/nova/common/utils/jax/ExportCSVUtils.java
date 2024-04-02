@@ -62,7 +62,6 @@ public final class ExportCSVUtils {
      * 删除单个文件
      *
      * @return 单个文件删除成功返回true，否则返回false
-     * @Author AnguangWang
      */
     public static boolean deleteFile(File file) {
         // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除

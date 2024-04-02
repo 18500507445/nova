@@ -25,7 +25,7 @@ public final class DeleteMaven {
     private static final String[] SUFFIX = {".lastUpdated", "jar-in-progress"};
 
     /**
-     * @param args
+     * 删除主方法
      */
     public static void main(String[] args) {
         File mavenRep = new File(MAVEN_REPO_PATH);

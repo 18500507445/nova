@@ -3,7 +3,7 @@ package com.nova.orm.mybatisplus.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
+import com.baomidou.mybatisplus.extension.handlers.Fastjson2TypeHandler;
 import com.nova.orm.mybatisplus.chapter5.GenderEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +24,7 @@ import java.util.Map;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+//autoResultMap json和bean互转生效
 @TableName(value = "user", autoResultMap = true)
 public class UserFiveDO {
     /**
@@ -56,8 +57,9 @@ public class UserFiveDO {
 
     /**
      * 联系方式，字段处理成Json
+     * todo json字符串和map或者pojo对象互转，类型可以选的很多，fastJson需要项目中有依赖
      */
-    @TableField(typeHandler = FastjsonTypeHandler.class)
+    @TableField(typeHandler = Fastjson2TypeHandler.class)
     private Map<String, String> contact;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)

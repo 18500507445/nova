@@ -1,9 +1,6 @@
 package com.nova.orm.mybatisplus;
 
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.baomidou.mybatisplus.generator.config.OutputFile;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.nova.orm.mybatisplus.chapter5.FiveUserMapper;
 import com.nova.orm.mybatisplus.chapter5.FiveUserService;
 import com.nova.orm.mybatisplus.chapter5.GenderEnum;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,33 +91,6 @@ public class Chapter5Test {
         UserFiveDO userDO = new UserFiveDO();
         userDO.setGender(GenderEnum.MAN);
         fiveUserService.saveOrUpdate(userDO, null);
-    }
-
-
-    public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://47.100.174.176:3306/study?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8", "root", "@wangzehui123")
-                .globalConfig(builder -> builder
-                        // 设置作者
-                        .author("wzh")
-                        // 开启 swagger 模式
-//                        .enableSwagger()
-                        // 指定输出目录
-                        .outputDir("/Users/wangzehui/Downloads"))
-                .packageConfig(builder -> builder
-                        // 设置父包名
-                        .parent("com.nova.mybatisplus")
-                        // 设置父包模块名
-//                        .moduleName("system")
-                        // 设置mapperXml生成路径
-                        .pathInfo(Collections.singletonMap(OutputFile.xml, "/Users/wangzehui/Downloads/com/nova/mybatisplus")))
-                .strategyConfig(builder -> builder
-                        // 设置需要生成的表名
-                        .addInclude("user")
-                        // 设置过滤表前缀
-                        .addTablePrefix("t_", "c_"))
-                // 使用Freemarker引擎模板，默认的是Velocity引擎模板
-                .templateEngine(new FreemarkerTemplateEngine())
-                .execute();
     }
 
 

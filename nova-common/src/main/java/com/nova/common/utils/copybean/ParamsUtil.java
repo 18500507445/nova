@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 /**
  * 参数非空校验，Bean拷贝
+ *
+ * @author wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ParamsUtil {
@@ -20,7 +22,10 @@ public final class ParamsUtil {
     /**
      * 参数非空校验
      */
-    public static void checkNotNull(@Nullable Object params) {
+    public static void checkNotNull(Object params) {
+        if (null == params) {
+            return;
+        }
         Class<?> clazz = params.getClass();
         Field[] fields = clazz.getDeclaredFields();
         if (ArrayUtil.isEmpty(fields)) {
@@ -48,10 +53,13 @@ public final class ParamsUtil {
     /**
      * 对 BeanUtils 封装
      */
-    public static <T> T copyProperties(@Nullable Object source, @Nullable Class<T> targetClass) {
+    public static <T> T copyProperties(Object source, Class<T> targetClass) {
         try {
-            T result = targetClass.newInstance();
-            BeanUtils.copyProperties(source, result);
+            T result = null;
+            if (null != source && null != targetClass) {
+                result = targetClass.newInstance();
+                BeanUtils.copyProperties(source, result);
+            }
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());

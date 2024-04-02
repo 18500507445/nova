@@ -29,14 +29,14 @@ public final class ConvertToolUtil {
      *
      * @param from
      * @param to
-     * @param excludsArray 排除属性列表
+     * @param excludeArray 排除属性列表
      * @throws Exception
      */
-    public static void copyPropertiesExclude(Object from, Object to, String[] excludsArray) throws Exception {
+    public static void copyPropertiesExclude(Object from, Object to, String[] excludeArray) throws Exception {
         List<String> excludesList = null;
-        if (excludsArray != null && excludsArray.length > 0) {
+        if (excludeArray != null && excludeArray.length > 0) {
             //构造列表对象
-            excludesList = Arrays.asList(excludsArray);
+            excludesList = Arrays.asList(excludeArray);
         }
         Method[] fromMethods = from.getClass().getDeclaredMethods();
         Method[] toMethods = to.getClass().getDeclaredMethods();
@@ -81,13 +81,13 @@ public final class ConvertToolUtil {
      *
      * @param from
      * @param to
-     * @param includsArray
+     * @param includeArray
      * @throws Exception
      */
-    public static void copyPropertiesInclude(Object from, Object to, String[] includsArray) throws Exception {
+    public static void copyPropertiesInclude(Object from, Object to, String[] includeArray) throws Exception {
         List<String> includesList;
-        if (includsArray != null && includsArray.length > 0) {
-            includesList = Arrays.asList(includsArray);
+        if (includeArray != null && includeArray.length > 0) {
+            includesList = Arrays.asList(includeArray);
         } else {
             return;
         }

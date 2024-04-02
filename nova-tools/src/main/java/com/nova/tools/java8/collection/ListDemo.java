@@ -72,7 +72,6 @@ class ListDemo {
         });
         peopleListNew.forEach(System.err::println);
         System.err.println(JSONUtil.toJsonStr(peopleListNew));
-
     }
 
 

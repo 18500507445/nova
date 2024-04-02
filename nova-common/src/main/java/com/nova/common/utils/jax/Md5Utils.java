@@ -53,14 +53,14 @@ public final class Md5Utils {
         List<String> list = new ArrayList<>();
         String[] params = param.split("&");
 
-        System.err.println("*********2" + params.toString());
+        System.err.println("*********2" + Arrays.toString(params));
 
         // 参数按key进行ASCII码升序排列
         for (String s : params) {
             String[] values = s.split("=");
             list.add(values[0] + values[1]);
         }
-        Collections.sort(list, Collator.getInstance(Locale.ENGLISH));
+        list.sort(Collator.getInstance(Locale.ENGLISH));
 
         String paramSignStr = StrUtil.join("", list);
 
@@ -72,7 +72,6 @@ public final class Md5Utils {
 
     /**
      * @param password
-     * @return
      */
     public static String MD5(String password) {
         char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -101,7 +100,6 @@ public final class Md5Utils {
      *
      * @param signStr
      * @return
-     * @throws Exception
      */
     public static String chenXinSign(String signStr) {
         return MD5(signStr.toLowerCase());
@@ -138,7 +136,7 @@ public final class Md5Utils {
 
     public static String hash(String s) {
         try {
-            return new String(toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+            return new String(Objects.requireNonNull(toHex(md5(s))).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("not supported charset...", e);
             return s;

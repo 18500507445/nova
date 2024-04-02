@@ -1,7 +1,7 @@
 package com.nova.database.annotation;
 
 
-import com.nova.common.enums.DataSourceType;
+import com.nova.database.enums.DataSourceType;
 
 import java.lang.annotation.*;
 

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author wzh
- * @Title: Global
- * @ProjectName crazy
  * @description: 全局配置类
  * @date 2021/7/18 16:19
  */

@@ -1,5 +1,6 @@
 package com.nova.mq.rabbit.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Primary;
  * @author: wzh
  * @date: 2022/9/3 19:47
  */
+@Slf4j(topic = "RabbitConfig")
 @Configuration
 public class RabbitConfig {
 
@@ -32,16 +34,8 @@ public class RabbitConfig {
 
     @Bean(name = "primaryConnectionFactory")
     public ConnectionFactory primaryConnectionFactory(@Qualifier("primaryProperties") RabbitProperties primaryProperties) {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        //默认2047
-        connectionFactory.getRabbitConnectionFactory().setRequestedChannelMax(primaryProperties.getRequestedChannelMax());
-        connectionFactory.setAddresses(primaryProperties.getAddresses());
-        connectionFactory.setUsername(primaryProperties.getUsername());
-        connectionFactory.setPassword(primaryProperties.getPassword());
-        connectionFactory.setVirtualHost(primaryProperties.getVirtualHost());
-        if (null != primaryProperties.getCache().getChannel().getSize()) {
-            connectionFactory.setChannelCacheSize(primaryProperties.getCache().getChannel().getSize());
-        }
+        CachingConnectionFactory connectionFactory = getRabbitConnectionFactory(primaryProperties);
+        log.warn("装配【primaryProperties】：第一个数据源配置，【primaryConnectionFactory】第一个连接工厂");
         return connectionFactory;
     }
 
@@ -69,6 +63,23 @@ public class RabbitConfig {
         //将PrefetchCount设定为1表示一次只能取一个
         factory.setPrefetchCount(1);
         return factory;
+    }
+
+    // 通用获取链接，设置属性
+    private static CachingConnectionFactory getRabbitConnectionFactory(RabbitProperties properties) {
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+        connectionFactory.getRabbitConnectionFactory().setRequestedChannelMax(properties.getRequestedChannelMax());
+        connectionFactory.setAddresses(properties.getAddresses());
+        connectionFactory.setUsername(properties.getUsername());
+        connectionFactory.setPassword(properties.getPassword());
+        connectionFactory.setVirtualHost(properties.getVirtualHost());
+        if (null != properties.getCache().getChannel().getSize()) {
+            connectionFactory.setChannelCacheSize(properties.getCache().getChannel().getSize());
+        }
+        if (null != properties.getCache().getConnection().getSize()) {
+            connectionFactory.setConnectionCacheSize(properties.getCache().getConnection().getSize());
+        }
+        return connectionFactory;
     }
 
     /**

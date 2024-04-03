@@ -85,8 +85,6 @@ public final class ListUtils {
      * @param isAsc    true升序，false降序
      * @param a
      * @param b
-     * @return
-     * @throws Exception
      */
     private static <E> int compareObject(final String sortName, final boolean isAsc, E a, E b) throws Exception {
         int ret;
@@ -120,7 +118,6 @@ public final class ListUtils {
      *
      * @param numObj 数字对象
      * @param length 指定的长度
-     * @return
      */
     public static String addZero2Str(Number numObj, int length) {
         NumberFormat nf = NumberFormat.getInstance();
@@ -138,7 +135,6 @@ public final class ListUtils {
      *
      * @param obj       属性名称所在的对象
      * @param fieldName 属性名称
-     * @return
      * @throws Exception
      */
     public static Object forceGetFieldValue(Object obj, String fieldName) throws Exception {
@@ -162,7 +158,6 @@ public final class ListUtils {
      *
      * @param list
      * @param oneMapKey
-     * @return
      */
     public static Map<String, Object> change(List<Map<String, Object>> list, String oneMapKey) {
         Map<String, Object> resultMap = new LinkedHashMap<>();
@@ -189,7 +184,6 @@ public final class ListUtils {
      *
      * @param o1
      * @param o2
-     * @return
      */
     public static <T> List<T> overlappingList(List<T> o1, List<T> o2) {
         //分别将2个list放入链表队列
@@ -224,7 +218,7 @@ public final class ListUtils {
      *
      * @param big   大集合
      * @param small 小集合
-     * @return 两个集合的差集 big left join small
+     *              两个集合的差集 big left join small
      */
     public static <T> Collection<T> getDiffSection(Collection<T> big, Collection<T> small) {
         Set<T> differenceSet = Sets.difference(Sets.newHashSet(big), Sets.newHashSet(small));
@@ -238,8 +232,7 @@ public final class ListUtils {
      * 还有一种方式：CollUtil.disjunction(huTool)
      *
      * @param c1
-     * @param c2
-     * @return c1 inner join c2
+     * @param c2 c1 inner join c2
      */
     public static <T> List<T> getInterSection(Collection<T> c1, Collection<T> c2) {
         Set<T> intersections = Sets.intersection(Sets.newHashSet(c1), Sets.newHashSet(c2));
@@ -251,7 +244,6 @@ public final class ListUtils {
      *
      * @param c1
      * @param c2
-     * @return
      */
     public static <T> List<T> getUnionSection(Collection<T> c1, Collection<T> c2) {
         c1.addAll(c2);
@@ -265,7 +257,6 @@ public final class ListUtils {
      * 新方法guava：Lists.partition(list, n)，n代表单个list max长度
      *
      * @param source
-     * @return
      */
     public static <T> List<List<T>> averageAssign(List<T> source, int n) {
         if (n <= 0) {
@@ -294,7 +285,7 @@ public final class ListUtils {
 
     /**
      * 开始分页
-     *
+     * todo 替代品是hutool的ListUtil.page(pageIndex, pageSize, list); 注意手动设置起始页PageUtil.setFirstPageNo(1);
      * @param list
      * @param pageNum  页码
      * @param pageSize 每页多少条数据

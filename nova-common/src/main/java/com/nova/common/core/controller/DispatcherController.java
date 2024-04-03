@@ -2,7 +2,7 @@ package com.nova.common.core.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.constant.Constants;
-import com.nova.common.exception.GlobalException;
+import com.nova.common.exception.BusinessException;
 import com.nova.common.utils.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +21,15 @@ import java.util.Map;
  * @author: wzh
  * @date: 2022/11/21 10:56
  */
+@Slf4j(topic = "DispatcherController")
 @RestController
 @RequestMapping("/api")
-@Slf4j
 public class DispatcherController extends BaseController {
 
     /**
      * 请求内部转发机制
      *
-     * @param request  入参
-     * apiUrl: 转发地址 function=/api/gameBBS/gameBBSTest&username=123 AES加密结果
+     * @param request  入参 apiUrl: 转发地址 function=/api/gameBBS/gameBBSTest&username=123 AES加密结果
      * @param response
      */
     @PostMapping(value = {"/forward", "/dispatcher"})
@@ -74,7 +73,7 @@ public class DispatcherController extends BaseController {
             String url = function + param;
             request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception e) {
-            throw new GlobalException("请求参数解析异常");
+            throw new BusinessException("请求参数解析异常");
         }
     }
 

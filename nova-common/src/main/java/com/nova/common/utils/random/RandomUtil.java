@@ -26,7 +26,6 @@ public final class RandomUtil {
      * 权重随机对象 key:Object，value:权重
      *
      * @param map
-     * @return
      */
     public static Object random(Map<Object, Long> map) {
         Set<Map.Entry<Object, Long>> entries = map.entrySet();

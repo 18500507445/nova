@@ -102,7 +102,6 @@ public final class SecurityUtil {
     /**
      * @param src
      * @throws Exception
-     * @return加密
      */
     public static String encrypt(byte[] src) throws Exception {
         SecretKey sKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
@@ -116,7 +115,6 @@ public final class SecurityUtil {
     /**
      * @param src
      * @throws Exception
-     * @return加密
      */
     public static String encrypt(byte[] src, String key) throws Exception {
         SecretKey sKey = new SecretKeySpec(key.getBytes(), "AES");

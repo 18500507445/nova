@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "nova")
-public class Global {
+public class GlobalConfig {
 
     /**
      * 项目名称

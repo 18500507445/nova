@@ -10,10 +10,11 @@ spring:
     username: root #账号
     password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4) #密码
     virtual-host: / #虚拟主机环境
+
+    # todo 默认就是这些值，不用谢
     listener:
       simple:
         retry:
-          initial-interval: 1000 #1秒后重试
           enabled: true #启用发布重试
           max-attempts: 3 #传递消息的最大尝试次数
           max-interval: 10000 #尝试的最大时间间隔

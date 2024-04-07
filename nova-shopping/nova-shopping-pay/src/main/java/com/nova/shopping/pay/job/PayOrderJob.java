@@ -22,15 +22,15 @@ import com.github.pagehelper.PageHelper;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
-import com.nova.shopping.pay.entity.MyPayConfig;
-import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.entity.param.AliPayParam;
-import com.nova.shopping.pay.entity.param.KsPayParam;
-import com.nova.shopping.pay.entity.param.PayParam;
-import com.nova.shopping.pay.entity.param.YeePayParam;
+import com.nova.shopping.pay.repository.entity.PayConfig;
+import com.nova.shopping.pay.repository.entity.PayOrder;
+import com.nova.shopping.pay.web.dto.AliPayParam;
+import com.nova.shopping.pay.web.dto.KsPayParam;
+import com.nova.shopping.pay.web.dto.PayParam;
+import com.nova.shopping.pay.web.dto.YeePayParam;
 import com.nova.shopping.pay.payment.open.*;
-import com.nova.shopping.pay.service.pay.MyPayConfigService;
-import com.nova.shopping.pay.service.pay.MyPayOrderService;
+import com.nova.shopping.pay.service.pay.PayConfigService;
+import com.nova.shopping.pay.service.pay.PayOrderService;
 import com.nova.shopping.pay.service.strategy.impl.KsPayServiceImpl;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -52,9 +52,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PayOrderJob {
 
-    private final MyPayOrderService myPayOrderService;
+    private final PayOrderService payOrderService;
 
-    private final MyPayConfigService myPayConfigService;
+    private final PayConfigService payConfigService;
 
     //private final MyOrderService myOrderService;
 
@@ -78,16 +78,16 @@ public class PayOrderJob {
         int payFlag = 0;
         int updateFlag = 0;
         PageHelper.startPage(1, 20);
-        MyPayOrder query = MyPayOrder.builder().tradeStatus(4).build();
-        List<MyPayOrder> payOrderList = myPayOrderService.selectMyPayOrderList(query);
+        PayOrder query = PayOrder.builder().tradeStatus(4).build();
+        List<PayOrder> payOrderList = payOrderService.selectMyPayOrderList(query);
         try {
             if (CollUtil.isNotEmpty(payOrderList)) {
                 XxlJobHelper.log("reTryOrderJobStart--处理条数:{}", payOrderList.size());
-                for (MyPayOrder payOrder : payOrderList) {
+                for (PayOrder payOrder : payOrderList) {
                     String orderId = payOrder.getOrderId();
                     Long payConfigId = payOrder.getPayConfigId();
                     Integer payWay = payOrder.getPayWay();
-                    MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+                    PayConfig payConfig = payConfigService.getConfigData(payConfigId);
                     if (ObjectUtil.isNotNull(payConfig)) {
                         if (PayWayEnum.ALI.getPayWay() == payWay) {
                             AliPayParam aliPayParam = AliPayParam.builder().appId(payConfig.getAppId())
@@ -139,7 +139,7 @@ public class PayOrderJob {
                         }
                         if (ObjectUtil.equal(1, payFlag)) {
                             payOrder.setTradeStatus(1);
-                            updateFlag = myPayOrderService.updateMyPayOrder(payOrder);
+                            updateFlag = payOrderService.updateMyPayOrder(payOrder);
                             if (updateFlag > 0) {
                                 //myOrderService.successOrderHandler(payOrder.getSource(), payOrder.getSid(), payOrder.getBusinessCode(), orderId, payOrder.getUserName(), "1", payOrder.getFee().toString());
                             }
@@ -165,12 +165,12 @@ public class PayOrderJob {
         TimeInterval timer = DateUtil.timer();
         XxlJobHelper.log("快手结算订单job开始");
         try {
-            MyPayOrder query = MyPayOrder.builder().payWay(6).tradeStatus(1).notEqualRemark("已结算").createTime(DateUtil.offset(new Date(), DateField.DAY_OF_YEAR, -3)).build();
-            List<MyPayOrder> orderList = myPayOrderService.selectMyPayOrderList(query);
+            PayOrder query = PayOrder.builder().payWay(6).tradeStatus(1).notEqualRemark("已结算").createTime(DateUtil.offset(new Date(), DateField.DAY_OF_YEAR, -3)).build();
+            List<PayOrder> orderList = payOrderService.selectMyPayOrderList(query);
             if (CollUtil.isNotEmpty(orderList)) {
-                for (MyPayOrder payOrder : orderList) {
+                for (PayOrder payOrder : orderList) {
                     String orderId = payOrder.getOrderId();
-                    MyPayConfig payConfig = myPayConfigService.selectMyPayConfigById(payOrder.getPayConfigId());
+                    PayConfig payConfig = payConfigService.selectMyPayConfigById(payOrder.getPayConfigId());
                     if (ObjectUtil.isNotNull(payConfig)) {
                         PayParam param = PayParam.builder().payConfigId(payOrder.getPayConfigId()).build();
                         AjaxResult accessTokenResult = ksPayService.getOpenId(param);

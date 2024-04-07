@@ -6,13 +6,13 @@ import com.alibaba.fastjson2.JSONObject;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
-import com.nova.shopping.pay.entity.MyPayConfig;
-import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.entity.param.PayParam;
-import com.nova.shopping.pay.entity.param.YeePayParam;
+import com.nova.shopping.pay.repository.entity.PayConfig;
+import com.nova.shopping.pay.repository.entity.PayOrder;
+import com.nova.shopping.pay.web.dto.PayParam;
+import com.nova.shopping.pay.web.dto.YeePayParam;
 import com.nova.shopping.pay.payment.open.YeePayment;
-import com.nova.shopping.pay.service.pay.MyPayConfigService;
-import com.nova.shopping.pay.service.pay.MyPayOrderService;
+import com.nova.shopping.pay.service.pay.PayConfigService;
+import com.nova.shopping.pay.service.pay.PayOrderService;
 import com.nova.shopping.pay.service.strategy.PayService;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
 import lombok.RequiredArgsConstructor;
@@ -35,9 +35,9 @@ public class YeePayServiceImpl implements PayService {
 
     private final YeePayment yeePayment;
 
-    private final MyPayOrderService myPayOrderService;
+    private final PayOrderService payOrderService;
 
-    private final MyPayConfigService myPayConfigService;
+    private final PayConfigService payConfigService;
 
     @Override
     public PayWayEnum getPayType() {
@@ -70,16 +70,16 @@ public class YeePayServiceImpl implements PayService {
         }
         try {
             //查询订单
-            MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 4);
+            PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 4);
             if (ObjectUtil.isNotNull(payOrder)) {
                 return AjaxResult.error("1000", "订单已存在,请从新下单");
             } else {
                 //1.0 获取支付配置
-                MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+                PayConfig payConfig = payConfigService.getConfigData(payConfigId);
                 if (ObjectUtil.isNull(payConfig)) {
                     return AjaxResult.error("1000", "没有查询到支付方式");
                 }
-                MyPayOrder insert = MyPayOrder.builder().source(source)
+                PayOrder insert = PayOrder.builder().source(source)
                         .sid(sid)
                         .orderId(orderId)
                         .productId(productId)
@@ -111,7 +111,7 @@ public class YeePayServiceImpl implements PayService {
                     insert.setSign(token);
                     insert.setTradeNo(uniqueOrderNo);
                     insert.setRemark(payConfig.getMchId());
-                    int flag = myPayOrderService.insertMyPayOrder(insert);
+                    int flag = payOrderService.insertMyPayOrder(insert);
                     if (0 == flag) {
                         return AjaxResult.error("1000", "创建支付订单失败,请从新下单");
                     }
@@ -138,8 +138,8 @@ public class YeePayServiceImpl implements PayService {
         if (ObjectUtil.hasEmpty(payConfigId, orderId, totalAmount)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
-        MyPayConfig payConfig = myPayConfigService.selectMyPayConfigById(payConfigId);
-        MyPayOrder order = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, param.getPayWay());
+        PayConfig payConfig = payConfigService.selectMyPayConfigById(payConfigId);
+        PayOrder order = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, param.getPayWay());
         if (!ObjectUtil.hasNull(payConfig, order)) {
             YeePayParam yeePayParam = YeePayParam.builder().appKey(payConfig.getAppId())
                     .privateKey(payConfig.getPrivateKey())
@@ -161,12 +161,12 @@ public class YeePayServiceImpl implements PayService {
         if (ObjectUtil.hasEmpty(orderId)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
-        MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, payWay);
+        PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, payWay);
         if (ObjectUtil.isNull(payOrder)) {
             return AjaxResult.error("1000", "没有查询到订单信息");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payOrder.getPayConfigId());
+        PayConfig payConfig = payConfigService.getConfigData(payOrder.getPayConfigId());
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }

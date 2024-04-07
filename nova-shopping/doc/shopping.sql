@@ -1,4 +1,4 @@
-create table if not exists shopping.my_goods
+create table if not exists shopping.goods
 (
     id          bigint unsigned auto_increment comment '主键id'
         primary key,
@@ -14,7 +14,7 @@ create table if not exists shopping.my_goods
 )
     comment '商品表';
 
-create table if not exists shopping.my_order
+create table if not exists shopping.order
 (
     id              bigint unsigned auto_increment comment '主键id'
         primary key,
@@ -31,7 +31,7 @@ create table if not exists shopping.my_order
 )
     comment '订单表';
 
-create table if not exists shopping.my_pay_config
+create table if not exists shopping.pay_config
 (
     id                bigint unsigned auto_increment comment '主键id'
         primary key,
@@ -61,9 +61,9 @@ create table if not exists shopping.my_pay_config
     comment '支付配置表';
 
 create index PAY_CONFIG_INDEX01
-    on shopping.my_pay_config (source);
+    on shopping.pay_config (source);
 
-create table if not exists shopping.my_pay_list
+create table if not exists shopping.pay_list
 (
     id               bigint unsigned auto_increment comment '主键id'
         primary key,
@@ -92,15 +92,15 @@ create table if not exists shopping.my_pay_list
     comment '支付列表';
 
 create index PAY_LIST_INDEX01
-    on shopping.my_pay_list (source);
+    on shopping.pay_list (source);
 
 create index PAY_LIST_INDEX02
-    on shopping.my_pay_list (sid);
+    on shopping.pay_list (sid);
 
 create index UNION_KEY
-    on shopping.my_pay_list (source, sid);
+    on shopping.pay_list (source, sid);
 
-create table if not exists shopping.my_pay_order
+create table if not exists shopping.pay_order
 (
     id            bigint unsigned auto_increment comment '主键id'
         primary key,
@@ -133,18 +133,18 @@ create table if not exists shopping.my_pay_order
     comment '支付订单表明细表';
 
 create index PAY_ORDER_INDEX01
-    on shopping.my_pay_order (trade_status);
+    on shopping.pay_order (trade_status);
 
 create index PAY_ORDER_INDEX02
-    on shopping.my_pay_order (user_name);
+    on shopping.pay_order (user_name);
 
 create index PAY_ORDER_INDEX03
-    on shopping.my_pay_order (trade_no);
+    on shopping.pay_order (trade_no);
 
 create index PAY_ORDER_INDEX04
-    on shopping.my_pay_order (create_time);
+    on shopping.pay_order (create_time);
 
-create table if not exists shopping.my_seckill_order
+create table if not exists shopping.seckill_order
 (
     id          bigint unsigned auto_increment comment '主键id'
         primary key,
@@ -156,7 +156,7 @@ create table if not exists shopping.my_seckill_order
 )
     comment '秒杀订单表';
 
-create table if not exists shopping.my_user
+create table if not exists shopping.user
 (
     id          bigint unsigned auto_increment comment '主键id'
         primary key,

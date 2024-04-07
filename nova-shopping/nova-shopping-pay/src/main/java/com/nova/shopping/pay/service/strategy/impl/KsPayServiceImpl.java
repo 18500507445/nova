@@ -10,13 +10,13 @@ import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
-import com.nova.shopping.pay.entity.MyPayConfig;
-import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.entity.param.KsPayParam;
-import com.nova.shopping.pay.entity.param.PayParam;
+import com.nova.shopping.pay.repository.entity.PayConfig;
+import com.nova.shopping.pay.repository.entity.PayOrder;
+import com.nova.shopping.pay.web.dto.KsPayParam;
+import com.nova.shopping.pay.web.dto.PayParam;
 import com.nova.shopping.pay.payment.open.KsPayment;
-import com.nova.shopping.pay.service.pay.MyPayConfigService;
-import com.nova.shopping.pay.service.pay.MyPayOrderService;
+import com.nova.shopping.pay.service.pay.PayConfigService;
+import com.nova.shopping.pay.service.pay.PayOrderService;
 import com.nova.shopping.pay.service.strategy.PayService;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
 import lombok.RequiredArgsConstructor;
@@ -40,9 +40,9 @@ public class KsPayServiceImpl implements PayService {
 
     private final RedisService redisService;
 
-    private final MyPayConfigService myPayConfigService;
+    private final PayConfigService payConfigService;
 
-    private final MyPayOrderService myPayOrderService;
+    private final PayOrderService payOrderService;
 
     @Override
     public PayWayEnum getPayType() {
@@ -68,16 +68,16 @@ public class KsPayServiceImpl implements PayService {
         }
         try {
             //查询订单
-            MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 6);
+            PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 6);
             if (ObjectUtil.isNotNull(payOrder)) {
                 return AjaxResult.error("1000", "订单已存在,请从新下单");
             } else {
                 //1.0 获取支付配置
-                MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+                PayConfig payConfig = payConfigService.getConfigData(payConfigId);
                 if (ObjectUtil.isNull(payConfig)) {
                     return AjaxResult.error("1000", "没有查询到支付方式");
                 }
-                MyPayOrder insert = MyPayOrder.builder().source(source)
+                PayOrder insert = PayOrder.builder().source(source)
                         .sid(sid)
                         .orderId(orderId)
                         .productId(productId)
@@ -109,7 +109,7 @@ public class KsPayServiceImpl implements PayService {
                                 .build();
                         Map<String, Object> orderMap = ksPayment.tradeOrder(data);
                         if (!orderMap.isEmpty() && ObjectUtil.equals(Constants.KS_CODE, MapUtils.getIntValue(orderMap, "result", 0))) {
-                            int flag = myPayOrderService.insertMyPayOrder(insert);
+                            int flag = payOrderService.insertMyPayOrder(insert);
                             if (0 == flag) {
                                 return AjaxResult.error("1000", "创建支付订单失败,请从新下单");
                             }
@@ -139,7 +139,7 @@ public class KsPayServiceImpl implements PayService {
             return AjaxResult.error("1000", "缺少必要参数payConfigId");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -172,12 +172,12 @@ public class KsPayServiceImpl implements PayService {
         if (ObjectUtil.hasEmpty(orderId)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
-        MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, payWay);
+        PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, payWay);
         if (ObjectUtil.isNull(payOrder)) {
             return AjaxResult.error("1000", "没有查询到订单信息");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payOrder.getPayConfigId());
+        PayConfig payConfig = payConfigService.getConfigData(payOrder.getPayConfigId());
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -212,7 +212,7 @@ public class KsPayServiceImpl implements PayService {
             return AjaxResult.error("1000", "缺少必要参数payConfigId");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -248,7 +248,7 @@ public class KsPayServiceImpl implements PayService {
             return AjaxResult.error("1000", "缺少必要参数");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }

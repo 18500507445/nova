@@ -28,7 +28,7 @@ spring:
 logging:
   level:
     # mybatis开启控制台打印sql
-    com.nova.shopping.order.dao: debug
+    com.nova.shopping.order.mapper: debug
     org.springframework: warn
 
   # 线上log路径

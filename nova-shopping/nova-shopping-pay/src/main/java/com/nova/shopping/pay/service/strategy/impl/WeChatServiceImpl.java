@@ -15,13 +15,13 @@ import com.nova.shopping.common.constant.BaseController;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
-import com.nova.shopping.pay.entity.MyPayConfig;
-import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.entity.param.PayParam;
-import com.nova.shopping.pay.entity.param.WeChatMpParam;
+import com.nova.shopping.pay.repository.entity.PayConfig;
+import com.nova.shopping.pay.repository.entity.PayOrder;
+import com.nova.shopping.pay.web.dto.PayParam;
+import com.nova.shopping.pay.web.dto.WeChatMpParam;
 import com.nova.shopping.pay.payment.open.WeChatPayment;
-import com.nova.shopping.pay.service.pay.MyPayConfigService;
-import com.nova.shopping.pay.service.pay.MyPayOrderService;
+import com.nova.shopping.pay.service.pay.PayConfigService;
+import com.nova.shopping.pay.service.pay.PayOrderService;
 import com.nova.shopping.pay.service.strategy.PayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,9 +48,9 @@ public class WeChatServiceImpl extends BaseController implements PayService {
 
     private final WeChatPayment weChatPayment;
 
-    private final MyPayConfigService myPayConfigService;
+    private final PayConfigService payConfigService;
 
-    private final MyPayOrderService myPayOrderService;
+    private final PayOrderService payOrderService;
 
     private final RedisService redisService;
 
@@ -83,16 +83,16 @@ public class WeChatServiceImpl extends BaseController implements PayService {
         }
         try {
             //查询订单
-            MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 2);
+            PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 2);
             if (ObjectUtil.isNotNull(payOrder)) {
                 return AjaxResult.error("1000", "订单已存在,请从新下单");
             } else {
                 //获取支付配置
-                MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+                PayConfig payConfig = payConfigService.getConfigData(payConfigId);
                 if (ObjectUtil.isNull(payConfig)) {
                     return AjaxResult.error("1000", "没有查询到支付方式");
                 }
-                MyPayOrder insert = MyPayOrder.builder().source(source)
+                PayOrder insert = PayOrder.builder().source(source)
                         .sid(sid)
                         .orderId(orderId)
                         .productId(productId)
@@ -103,7 +103,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
                         .type(type)
                         .businessCode(businessCode)
                         .fee(new BigDecimal(totalAmount)).build();
-                int flag = myPayOrderService.insertMyPayOrder(insert);
+                int flag = payOrderService.insertMyPayOrder(insert);
                 if (0 == flag) {
                     return AjaxResult.error("1000", "创建支付订单失败,请从新下单");
                 }
@@ -119,7 +119,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
         return AjaxResult.success(result);
     }
 
-    private Object weChatV2Pay(MyPayConfig payConfig, PayParam param) {
+    private Object weChatV2Pay(PayConfig payConfig, PayParam param) {
         Object result = "";
         //入支付流水 1H5支付,2小程序,3app支付 4jsapi微信原生
         int type = Integer.parseInt(param.getType());
@@ -153,7 +153,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
         return result;
     }
 
-    private Object weChatV3Pay(MyPayConfig payConfig, PayParam param) {
+    private Object weChatV3Pay(PayConfig payConfig, PayParam param) {
         Object result = "";
         //入支付流水 1H5支付,2小程序,3app支付 4jsapi微信原生
         int type = Integer.parseInt(param.getType());
@@ -199,7 +199,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
             return AjaxResult.error("1000", "缺少必要参数");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -238,12 +238,12 @@ public class WeChatServiceImpl extends BaseController implements PayService {
         if (ObjectUtil.hasEmpty(orderId)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
-        MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, payWay);
+        PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, payWay);
         if (ObjectUtil.isNull(payOrder)) {
             return AjaxResult.error("1000", "没有查询到订单信息");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payOrder.getPayConfigId());
+        PayConfig payConfig = payConfigService.getConfigData(payOrder.getPayConfigId());
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -282,7 +282,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
             return AjaxResult.error("1000", "缺少必要参数authCode、payConfigId、userName、payWay");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -326,7 +326,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
             return AjaxResult.error("1000", "缺少必要参数");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -362,7 +362,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
             return AjaxResult.error("1000", "缺少必要参数");
         }
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig) && StrUtil.isNotBlank(payConfig.getApiV3Key())) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -408,7 +408,7 @@ public class WeChatServiceImpl extends BaseController implements PayService {
             return AjaxResult.error("1000", "缺少必要参数authCode或payConfigId");
         }
         try {
-            MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+            PayConfig payConfig = payConfigService.getConfigData(payConfigId);
             WxMpService wxMpService = weChatPayment.getWxMpService(payConfig.getAppId(), payConfig.getAppSecret());
             WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(authCode);
             wxMpUser = wxMpService.getUserService().userInfo(accessToken.getOpenId(), lang);

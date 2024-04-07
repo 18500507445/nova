@@ -11,13 +11,13 @@ import com.nova.shopping.common.constant.dto.BaseReqDTO;
 import com.nova.shopping.common.constant.dto.OrderParam;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.constant.result.RespResultEnum;
-import com.nova.shopping.order.entity.MyGoods;
-import com.nova.shopping.order.entity.MySeckillOrder;
-import com.nova.shopping.order.entity.MyUser;
-import com.nova.shopping.order.service.MyGoodsService;
-import com.nova.shopping.order.service.MyOrderService;
-import com.nova.shopping.order.service.MySeckillOrderService;
-import com.nova.shopping.order.service.MyUserService;
+import com.nova.shopping.order.repository.entity.Goods;
+import com.nova.shopping.order.repository.entity.SeckillOrder;
+import com.nova.shopping.order.repository.entity.User;
+import com.nova.shopping.order.service.GoodsService;
+import com.nova.shopping.order.service.OrderService;
+import com.nova.shopping.order.service.SeckillOrderService;
+import com.nova.shopping.order.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,15 +44,15 @@ public class OrderController extends BaseController {
 
     private final RedisScript<Long> script;
 
-    private final MyGoodsService myGoodsService;
+    private final GoodsService goodsService;
 
-    private final MyUserService myUserService;
+    private final UserService userService;
 
-    private final MyOrderService myOrderService;
+    private final OrderService orderService;
 
-    private final MySeckillOrderService mySeckillOrderService;
+    private final SeckillOrderService seckillOrderService;
 
-    //private final MyPayConfigService myPayConfigService;
+    //private final PayConfigService payConfigService;
 
     @Value("${spring.datasource.druid.maxActive}")
     private final Long maxActive = 0L;
@@ -90,18 +90,18 @@ public class OrderController extends BaseController {
             paramsMap.put("tradeId", "");
             //固定获取支付配置
             if (ObjectUtil.isNotNull(payConfigId)) {
-                //MyPayConfig payConfig = myPayConfigService.selectMyPayConfigById(payConfigId);
+                //PayConfig payConfig = payConfigService.selectMyPayConfigById(payConfigId);
                 //if (ObjectUtil.isNotNull(payConfig)) {
                 //    result.put("payConfigId", String.valueOf(payConfigId));
                 //}
             } else {
                 //随机一个支付配置
-                //MyPayConfig randomConfig = myPayConfigService.getRandomConfigData(source, sid, String.valueOf(payWay));
+                //PayConfig randomConfig = payConfigService.getRandomConfigData(source, sid, String.valueOf(payWay));
                 //if (ObjectUtil.isNotNull(randomConfig)) {
                 //    result.put("payConfigId", String.valueOf(randomConfig.getId()));
                 //}
             }
-            String orderId = myOrderService.getOrderId(paramsMap);
+            String orderId = orderService.getOrderId(paramsMap);
             result.put("orderId", orderId);
             result.put("productId", productId);
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class OrderController extends BaseController {
         }
 
         //3秒内用户请求总数不超过数据库最大连接数 4/5
-        String userTotalRequestKey = Constants.REDIS_KEY + MyUser.USER_TOTAL_REQUEST;
+        String userTotalRequestKey = Constants.REDIS_KEY + User.USER_TOTAL_REQUEST;
         redisService.incr(userTotalRequestKey, 1L);
         int userTotalRequest = Convert.toInt(redisService.get(userTotalRequestKey), 0);
         if (userTotalRequest >= maxActive) {
@@ -159,15 +159,15 @@ public class OrderController extends BaseController {
      * @return
      */
     public boolean checkBase(Long userId, Long goodsId) {
-        MyUser myUser = myUserService.queryById(userId);
-        if (ObjectUtil.isNull(myUser) || 1 == myUser.getStatus()) {
+        User user = userService.queryById(userId);
+        if (ObjectUtil.isNull(user) || 1 == user.getStatus()) {
             return false;
         }
-        MyGoods myGoods = myGoodsService.queryById(goodsId);
-        if (ObjectUtil.isNull(myGoods) || 1 == myGoods.getStatus() || myGoods.getStock() <= 0) {
+        Goods goods = goodsService.queryById(goodsId);
+        if (ObjectUtil.isNull(goods) || 1 == goods.getStatus() || goods.getStock() <= 0) {
             return false;
         }
-        MySeckillOrder seckillOrder = mySeckillOrderService.queryById(userId, goodsId);
+        SeckillOrder seckillOrder = seckillOrderService.queryById(userId, goodsId);
         return ObjectUtil.isNotNull(seckillOrder);
     }
 

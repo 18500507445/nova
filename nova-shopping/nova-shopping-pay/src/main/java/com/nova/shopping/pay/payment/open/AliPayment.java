@@ -7,7 +7,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.*;
 import com.alipay.api.response.*;
-import com.nova.shopping.pay.entity.param.AliPayParam;
+import com.nova.shopping.pay.web.dto.AliPayParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

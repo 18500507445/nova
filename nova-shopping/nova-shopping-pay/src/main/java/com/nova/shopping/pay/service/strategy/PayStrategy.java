@@ -3,7 +3,7 @@ package com.nova.shopping.pay.service.strategy;
 
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
-import com.nova.shopping.pay.entity.param.PayParam;
+import com.nova.shopping.pay.web.dto.PayParam;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

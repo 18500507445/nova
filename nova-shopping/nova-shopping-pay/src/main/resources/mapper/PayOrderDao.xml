@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nova.shopping.pay.repository.mapper.PayOrderDao">
+    
+    <resultMap type="com.nova.shopping.pay.repository.entity.PayOrder" id="MyPayOrderResult">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="source" column="source" jdbcType="VARCHAR"/>
+        <result property="sid" column="sid" jdbcType="VARCHAR"/>
+        <result property="payConfigId" column="pay_config_id" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+        <result property="tradeNo" column="trade_no" jdbcType="VARCHAR"/>
+        <result property="tradeStatus" column="trade_status" jdbcType="INTEGER"/>
+        <result property="fee" column="fee" jdbcType="NUMERIC"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="payWay" column="pay_way" jdbcType="INTEGER"/>
+        <result property="currencyType" column="currency_type" jdbcType="VARCHAR"/>
+        <result property="sign" column="sign" jdbcType="VARCHAR"/>
+        <result property="businessCode" column="business_code" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="operator" column="operator" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <sql id="selectMyPayOrderVo">
+        select id,
+               pay_config_id,
+               product_id,
+               user_name,
+               order_id,
+               trade_no,
+               trade_status,
+               fee,
+               type,
+               pay_way,
+               currency_type,
+               sign,
+               remark,
+               source,
+               sid,
+               business_code,
+               create_time,
+               update_time,
+               operator
+        from pay_order
+    </sql>
+
+    <select id="selectMyPayOrderList" parameterType="com.nova.shopping.pay.repository.entity.PayOrder" resultMap="MyPayOrderResult">
+        <include refid="selectMyPayOrderVo"/>
+        <where>
+            <if test="payConfigId != null">
+                and pay_config_id = #{payConfigId}
+            </if>
+            <if test="userName != null  and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="orderId != null  and orderId != ''">
+                and order_id = #{orderId}
+            </if>
+            <if test="tradeNo != null  and tradeNo != ''">
+                and trade_no = #{tradeNo}
+            </if>
+            <if test="tradeStatus != null">
+                and trade_status = #{tradeStatus}
+            </if>
+            <if test="fee != null">
+                and fee = #{fee}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="payWay != null">
+                and pay_way = #{payWay}
+            </if>
+            <if test="sign != null  and sign != ''">
+                and sign = #{sign}
+            </if>
+            <if test="source != null  and source != ''">
+                and source = #{source}
+            </if>
+            <if test="sid != null  and sid != ''">
+                and sid = #{sid}
+            </if>
+            <if test="remark != null  and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="notEqualRemark != null  and notEqualRemark != ''">
+                and IFNULL(remark, '') != #{notEqualRemark}
+            </if>
+            <if test="operator != null  and operator != ''">
+                and operator = #{operator}
+            </if>
+            <if test="createTime != null">
+                and create_time &lt;= #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectMyPayOrderById" parameterType="Long" resultMap="MyPayOrderResult">
+        <include refid="selectMyPayOrderVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertMyPayOrder" parameterType="com.nova.shopping.pay.repository.entity.PayOrder" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into pay_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payConfigId != null">
+                pay_config_id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="orderId != null and orderId != ''">
+                order_id,
+            </if>
+            <if test="tradeNo != null">
+                trade_no,
+            </if>
+            <if test="tradeStatus != null">
+                trade_status,
+            </if>
+            <if test="fee != null">
+                fee,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="payWay != null">
+                pay_way,
+            </if>
+            <if test="currencyType != null">
+                currency_type,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="sid != null">
+                sid,
+            </if>
+            <if test="operator != null">
+                operator,
+            </if>
+            <if test="businessCode != null">
+                business_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payConfigId != null">
+                #{payConfigId},
+            </if>
+            <if test="productId != null">
+                #{productId},
+            </if>
+            <if test="userName != null">
+                #{userName},
+            </if>
+            <if test="orderId != null and orderId != ''">
+                #{orderId},
+            </if>
+            <if test="tradeNo != null">
+                #{tradeNo},
+            </if>
+            <if test="tradeStatus != null">
+                #{tradeStatus},
+            </if>
+            <if test="fee != null">
+                #{fee},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="payWay != null">
+                #{payWay},
+            </if>
+            <if test="currencyType != null">
+                #{currencyType},
+            </if>
+            <if test="sign != null">
+                #{sign},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+            <if test="source != null">
+                #{source},
+            </if>
+            <if test="sid != null">
+                #{sid},
+            </if>
+            <if test="operator != null">
+                #{operator},
+            </if>
+            <if test="businessCode != null">
+                #{businessCode},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateMyPayOrder" parameterType="com.nova.shopping.pay.repository.entity.PayOrder">
+        update pay_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productId != null and productId != ''">
+                product_id = #{productId},
+            </if>
+            <if test="tradeNo != null">
+                trade_no = #{tradeNo},
+            </if>
+            <if test="tradeStatus != null">
+                trade_status = #{tradeStatus},
+            </if>
+            <if test="fee != null">
+                fee = #{fee},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="sign != null">
+                sign = #{sign},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="operator != null">
+                operator = #{operator},
+            </if>
+            <if test="businessCode != null">
+                business_code = #{businessCode},
+            </if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <delete id="deleteMyPayOrderById" parameterType="Long">
+        delete
+        from pay_order
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteMyPayOrderByIds" parameterType="String">
+        delete
+        from pay_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectMyPayOrderByOrderIdAndPayWay" resultMap="MyPayOrderResult">
+        <include refid="selectMyPayOrderVo"/>
+        where order_id = #{orderId}
+        and pay_way = #{payWay}
+    </select>
+</mapper>
+

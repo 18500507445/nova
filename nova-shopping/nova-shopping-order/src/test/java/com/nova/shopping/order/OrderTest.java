@@ -6,10 +6,10 @@ import cn.hutool.core.date.TimeInterval;
 import com.alibaba.fastjson2.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.nova.shopping.order.dao.MyOrderDao;
-import com.nova.shopping.order.entity.MyOrder;
-import com.nova.shopping.order.entity.MyUser;
-import com.nova.shopping.order.service.MyUserService;
+import com.nova.shopping.order.repository.mapper.OrderDao;
+import com.nova.shopping.order.repository.entity.Order;
+import com.nova.shopping.order.repository.entity.User;
+import com.nova.shopping.order.service.UserService;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
@@ -31,10 +31,10 @@ import java.util.List;
 public class OrderTest {
 
     @Resource
-    private MyUserService myUserService;
+    private UserService userService;
 
     @Resource
-    private MyOrderDao myOrderDao;
+    private OrderDao orderDao;
 
     @Resource
     private SqlSessionTemplate sqlSessionTemplate;
@@ -43,8 +43,8 @@ public class OrderTest {
 
     @Test
     public void testUser() {
-        final MyUser myUser = myUserService.queryById(1L);
-        System.out.println("myUser = " + JSONObject.toJSONString(myUser));
+        final User user = userService.queryById(1L);
+        System.out.println("myUser = " + JSONObject.toJSONString(user));
     }
 
     /**
@@ -52,25 +52,25 @@ public class OrderTest {
      */
     @Test
     public void testUserList() {
-        Page<MyOrder> myOrders = PageHelper.startPage(1, 10).doSelectPage(() -> myOrderDao.queryList(null));
-        System.out.println("myUser = " + JSONObject.toJSONString(myOrders));
+        Page<Order> orders = PageHelper.startPage(1, 10).doSelectPage(() -> orderDao.queryList(null));
+        System.out.println("myUser = " + JSONObject.toJSONString(orders));
     }
 
-    public List<MyOrder> getList() {
-        List<MyOrder> list = new ArrayList<>();
+    public List<Order> getList() {
+        List<Order> list = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
-            MyOrder myOrder = new MyOrder();
-            myOrder.setUserId(Convert.toLong(i));
-            myOrder.setGoodsId(0L);
-            myOrder.setPrice(new BigDecimal("0"));
-            myOrder.setStatus(0);
-            myOrder.setPayStatus(0);
-            myOrder.setExpirationTime(new Date());
-            myOrder.setRemark("");
-            myOrder.setOperator("");
-            myOrder.setCreateTime(new Date());
-            myOrder.setUpdateTime(new Date());
-            list.add(myOrder);
+            Order order = new Order();
+            order.setUserId(Convert.toLong(i));
+            order.setGoodsId(0L);
+            order.setPrice(new BigDecimal("0"));
+            order.setStatus(0);
+            order.setPayStatus(0);
+            order.setExpirationTime(new Date());
+            order.setRemark("");
+            order.setOperator("");
+            order.setCreateTime(new Date());
+            order.setUpdateTime(new Date());
+            list.add(order);
         }
         return list;
     }
@@ -80,8 +80,8 @@ public class OrderTest {
      */
     @Test
     public void normalInsert() {
-        List<MyOrder> list = getList();
-        list.forEach(myOrder -> myOrderDao.insert(myOrder));
+        List<Order> list = getList();
+        list.forEach(order -> orderDao.insert(order));
         System.out.println("插入" + list.size() + "条数据，耗时 ： " + TIMER.interval() + " ms");
     }
 
@@ -91,7 +91,7 @@ public class OrderTest {
      */
     @Test
     public void testBatch() {
-        int i = myOrderDao.insertBatch(getList());
+        int i = orderDao.insertBatch(getList());
         System.out.println("插入" + i + "条数据，耗时 ： " + TIMER.interval() + " ms");
     }
 
@@ -101,8 +101,8 @@ public class OrderTest {
     @Test
     public void testInsert() {
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
-        MyOrderDao mapper = sqlSession.getMapper(MyOrderDao.class);
-        List<MyOrder> list = getList();
+        OrderDao mapper = sqlSession.getMapper(OrderDao.class);
+        List<Order> list = getList();
         list.forEach(mapper::insert);
         System.out.println("插入" + list.size() + "条数据，耗时 ： " + TIMER.interval() + " ms");
     }

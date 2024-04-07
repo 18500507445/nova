@@ -7,12 +7,12 @@ import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
-import com.nova.shopping.pay.entity.MyPayConfig;
-import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.entity.param.PayParam;
+import com.nova.shopping.pay.repository.entity.PayConfig;
+import com.nova.shopping.pay.repository.entity.PayOrder;
+import com.nova.shopping.pay.web.dto.PayParam;
 import com.nova.shopping.pay.payment.open.GooglePayment;
-import com.nova.shopping.pay.service.pay.MyPayConfigService;
-import com.nova.shopping.pay.service.pay.MyPayOrderService;
+import com.nova.shopping.pay.service.pay.PayConfigService;
+import com.nova.shopping.pay.service.pay.PayOrderService;
 import com.nova.shopping.pay.service.strategy.PayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +31,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class GoogleServiceImpl implements PayService {
 
-    private final MyPayOrderService myPayOrderService;
+    private final PayOrderService payOrderService;
 
-    private final MyPayConfigService myPayConfigService;
+    private final PayConfigService payConfigService;
 
     private final RedisService redisService;
 
@@ -62,9 +62,9 @@ public class GoogleServiceImpl implements PayService {
         }
         try {
             //查询订单
-            MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 5);
+            PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 5);
             if (ObjectUtil.isNull(payOrder)) {
-                MyPayOrder insert = MyPayOrder.builder().source(source)
+                PayOrder insert = PayOrder.builder().source(source)
                         .sid(sid)
                         .orderId(orderId)
                         .productId(productId)
@@ -76,7 +76,7 @@ public class GoogleServiceImpl implements PayService {
                         .businessCode(businessCode)
                         .currencyType(currencyType)
                         .fee(new BigDecimal(totalAmount)).build();
-                int flag = myPayOrderService.insertMyPayOrder(insert);
+                int flag = payOrderService.insertMyPayOrder(insert);
                 if (0 == flag) {
                     return AjaxResult.error("1000", "创建支付订单失败,请从新下单");
                 }
@@ -111,7 +111,7 @@ public class GoogleServiceImpl implements PayService {
     public AjaxResult getOpenId(PayParam param) {
         Long payConfigId = param.getPayConfigId();
         //获取支付配置
-        MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
+        PayConfig payConfig = payConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
@@ -123,7 +123,7 @@ public class GoogleServiceImpl implements PayService {
             String refreshToken = MapUtil.getStr(tokenMap, "refreshToken");
             if (StrUtil.isNotBlank(refreshToken)) {
                 payConfig.setPaySecret(refreshToken);
-                myPayConfigService.updateMyPayConfig(payConfig);
+                payConfigService.updateMyPayConfig(payConfig);
             }
         }
         return AjaxResult.success("接口待开发。。。");

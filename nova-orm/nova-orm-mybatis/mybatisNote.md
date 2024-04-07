@@ -12,7 +12,7 @@
     @Test
     public void normalInsert() {
         List<MyOrder> list = getList();
-        list.forEach(myOrder -> myOrderDao.insert(myOrder));
+        list.forEach(order -> myOrderDao.insert(order));
         System.out.println("插入" + list.size() + "条数据，耗时 ： " + TIMER.interval() + " ms");
     }
 

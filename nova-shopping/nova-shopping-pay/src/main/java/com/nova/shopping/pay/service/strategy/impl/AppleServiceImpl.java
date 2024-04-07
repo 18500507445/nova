@@ -3,9 +3,9 @@ package com.nova.shopping.pay.service.strategy.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
-import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.entity.param.PayParam;
-import com.nova.shopping.pay.service.pay.MyPayOrderService;
+import com.nova.shopping.pay.repository.entity.PayOrder;
+import com.nova.shopping.pay.web.dto.PayParam;
+import com.nova.shopping.pay.service.pay.PayOrderService;
 import com.nova.shopping.pay.service.strategy.PayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class AppleServiceImpl implements PayService {
 
-    private final MyPayOrderService myPayOrderService;
+    private final PayOrderService payOrderService;
 
     @Override
     public PayWayEnum getPayType() {
@@ -59,9 +59,9 @@ public class AppleServiceImpl implements PayService {
         }
         try {
             //查询订单
-            MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 3);
+            PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 3);
             if (ObjectUtil.isNull(payOrder)) {
-                MyPayOrder insert = MyPayOrder.builder().source(source)
+                PayOrder insert = PayOrder.builder().source(source)
                         .sid(sid)
                         .orderId(orderId)
                         .productId(productId)
@@ -73,7 +73,7 @@ public class AppleServiceImpl implements PayService {
                         .businessCode(businessCode)
                         .currencyType(currencyType)
                         .fee(new BigDecimal(totalAmount)).build();
-                int flag = myPayOrderService.insertMyPayOrder(insert);
+                int flag = payOrderService.insertMyPayOrder(insert);
                 if (0 == flag) {
                     return AjaxResult.error("1000", "创建支付订单失败,请从新下单");
                 }

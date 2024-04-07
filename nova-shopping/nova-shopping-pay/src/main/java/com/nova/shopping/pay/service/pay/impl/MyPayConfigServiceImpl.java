@@ -1,4 +1,4 @@
-package com.nova.shopping.pay.service.impl;
+package com.nova.shopping.pay.service.pay.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
@@ -9,7 +9,7 @@ import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.pay.dao.MyPayConfigDao;
 import com.nova.shopping.pay.entity.MyPayConfig;
-import com.nova.shopping.pay.service.MyPayConfigService;
+import com.nova.shopping.pay.service.pay.MyPayConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

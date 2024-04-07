@@ -1,4 +1,4 @@
-package com.nova.shopping.pay.service.pay;
+package com.nova.shopping.pay.service.strategy;
 
 
 import com.nova.shopping.common.constant.result.AjaxResult;

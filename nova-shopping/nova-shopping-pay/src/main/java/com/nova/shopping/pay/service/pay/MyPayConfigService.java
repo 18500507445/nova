@@ -1,4 +1,4 @@
-package com.nova.shopping.pay.service;
+package com.nova.shopping.pay.service.pay;
 
 
 import com.nova.shopping.pay.entity.MyPayConfig;

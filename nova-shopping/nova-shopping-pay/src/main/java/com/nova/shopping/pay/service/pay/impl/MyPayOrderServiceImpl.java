@@ -1,9 +1,9 @@
-package com.nova.shopping.pay.service.impl;
+package com.nova.shopping.pay.service.pay.impl;
 
 import cn.hutool.core.convert.Convert;
 import com.nova.shopping.pay.dao.MyPayOrderDao;
 import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.service.MyPayOrderService;
+import com.nova.shopping.pay.service.pay.MyPayOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

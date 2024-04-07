@@ -1,19 +1,19 @@
-package com.nova.shopping.pay.service.pay.impl;
+package com.nova.shopping.pay.service.strategy.impl;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.nova.shopping.common.config.redis.RedisService;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
 import com.nova.shopping.common.enums.PayWayEnum;
 import com.nova.shopping.pay.entity.MyPayConfig;
 import com.nova.shopping.pay.entity.MyPayOrder;
-import com.nova.shopping.pay.entity.param.HuaweiPayParam;
 import com.nova.shopping.pay.entity.param.PayParam;
-import com.nova.shopping.pay.payment.open.HuaweiPayment;
-import com.nova.shopping.pay.service.MyPayConfigService;
-import com.nova.shopping.pay.service.MyPayOrderService;
-import com.nova.shopping.pay.service.pay.PayService;
+import com.nova.shopping.pay.payment.open.GooglePayment;
+import com.nova.shopping.pay.service.pay.MyPayConfigService;
+import com.nova.shopping.pay.service.pay.MyPayOrderService;
+import com.nova.shopping.pay.service.strategy.PayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,45 +22,47 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 /**
- * @description: 华为支付实现类
+ * @description: 谷歌支付实现类
  * @author: wzh
- * @date: 2023/3/2 10:19
+ * @date: 2023/3/18 21:13
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class HuaweiServiceImpl implements PayService {
-
-    private final RedisService redisService;
-
-    private final HuaweiPayment huaweiPayment;
+public class GoogleServiceImpl implements PayService {
 
     private final MyPayOrderService myPayOrderService;
 
     private final MyPayConfigService myPayConfigService;
 
+    private final RedisService redisService;
+
+    private final GooglePayment googlePayment;
+
     @Override
     public PayWayEnum getPayType() {
-        return PayWayEnum.HUA_WEI_PAY;
+        return PayWayEnum.GOOGLE_PAY;
     }
 
     @Override
     public AjaxResult pay(PayParam param) {
+        //3app支付
+        int type = Integer.parseInt(param.getType());
         String source = param.getSource();
         String sid = param.getSid();
-        int type = Integer.parseInt(param.getType());
         Long payConfigId = param.getPayConfigId();
         int businessCode = param.getBusinessCode();
         String orderId = param.getOrderId();
         String totalAmount = param.getTotalAmount();
         String productId = param.getProductId();
         String userName = param.getUserName();
+        String currencyType = param.getCurrencyType();
         if (ObjectUtil.hasEmpty(source, sid, businessCode, orderId, payConfigId, type, userName, totalAmount, productId)) {
             return AjaxResult.error("1000", "缺少必要参数");
         }
         try {
             //查询订单
-            MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 7);
+            MyPayOrder payOrder = myPayOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 5);
             if (ObjectUtil.isNull(payOrder)) {
                 MyPayOrder insert = MyPayOrder.builder().source(source)
                         .sid(sid)
@@ -69,9 +71,10 @@ public class HuaweiServiceImpl implements PayService {
                         .payConfigId(payConfigId)
                         .userName(userName)
                         .tradeStatus(0)
-                        .payWay(7)
+                        .payWay(5)
                         .type(type)
                         .businessCode(businessCode)
+                        .currencyType(currencyType)
                         .fee(new BigDecimal(totalAmount)).build();
                 int flag = myPayOrderService.insertMyPayOrder(insert);
                 if (0 == flag) {
@@ -83,7 +86,7 @@ public class HuaweiServiceImpl implements PayService {
                 }
             }
         } catch (Exception e) {
-            log.error("huaweiPay异常：{}", e.getMessage());
+            log.error("googlePay异常：{}", e.getMessage());
         }
         return AjaxResult.success();
     }
@@ -106,34 +109,24 @@ public class HuaweiServiceImpl implements PayService {
      */
     @Override
     public AjaxResult getOpenId(PayParam param) {
-        Object accessToken = "";
         Long payConfigId = param.getPayConfigId();
-        if (ObjectUtil.hasEmpty(payConfigId)) {
-            return AjaxResult.error("1000", "缺少必要参数payConfigId");
-        }
         //获取支付配置
         MyPayConfig payConfig = myPayConfigService.getConfigData(payConfigId);
         if (ObjectUtil.isNull(payConfig)) {
             return AjaxResult.error("1000", "没有查询到支付方式");
         }
-        String key = Constants.REDIS_KEY + "getAccessToken_" + payConfig.getId();
-        Object o = redisService.get(key);
-        if (ObjectUtil.isNotNull(o)) {
-            accessToken = o.toString();
-        } else {
-            HuaweiPayParam data = HuaweiPayParam.builder()
-                    .clientId(payConfig.getAppId())
-                    .clientSecret(payConfig.getAppSecret())
-                    .build();
-            Map<String, Object> tokenMap = huaweiPayment.getAccessToken(data);
-            if (MapUtil.isNotEmpty(tokenMap)) {
-                accessToken = MapUtil.getStr(tokenMap, "access_token");
-                if (ObjectUtil.isNotNull(accessToken)) {
-                    redisService.set(key, accessToken, MapUtil.getLong(tokenMap, "expires_in") - 600);
-                }
+        Map<String, String> tokenMap = googlePayment.getAccessToken(payConfig.getAppId(), payConfig.getAppSecret(), payConfig.getPaySecret(), "1");
+        if (MapUtil.isNotEmpty(tokenMap)) {
+            String accessToken = MapUtil.getStr(tokenMap, "accessToken");
+            String key = Constants.REDIS_KEY + "getAccessToken_" + payConfig.getId();
+            redisService.set(key, accessToken, MapUtil.getLong(tokenMap, "expiresIn") - 500);
+            String refreshToken = MapUtil.getStr(tokenMap, "refreshToken");
+            if (StrUtil.isNotBlank(refreshToken)) {
+                payConfig.setPaySecret(refreshToken);
+                myPayConfigService.updateMyPayConfig(payConfig);
             }
         }
-        return AjaxResult.success(accessToken);
+        return AjaxResult.success("接口待开发。。。");
     }
 
     @Override

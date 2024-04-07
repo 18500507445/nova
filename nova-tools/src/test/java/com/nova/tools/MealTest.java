@@ -45,7 +45,7 @@ public class MealTest {
             //循环插入图片
             for (File file : files) {
                 String path = file.getPath();
-                if (StrUtil.contains(path, PICTURE_TYPE)) {
+                if (StrUtil.contains(path, PICTURE_TYPE) && !StrUtil.contains(path, "完成图")) {
                     //文本中图片的名称，切割出xx.jpg
                     String name = StrUtil.subAfter(path, PATH, true);
                     run.addPicture(Files.newInputStream(Paths.get(file.toURI())),

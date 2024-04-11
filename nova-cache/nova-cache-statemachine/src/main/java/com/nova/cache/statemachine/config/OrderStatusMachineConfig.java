@@ -1,6 +1,5 @@
 package com.nova.cache.statemachine.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nova.cache.statemachine.enums.OrderState;
 import com.nova.cache.statemachine.enums.OrderStateChangeAction;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
@@ -14,7 +13,6 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.StateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
@@ -48,11 +46,6 @@ public class OrderStatusMachineConfig extends StateMachineConfigurerAdapter<Orde
         RedisStateMachineContextRepository<OrderState, OrderStateChangeAction> repository = new RedisStateMachineContextRepository<>(redisconnectionFactory);
         RepositoryStateMachinePersist<OrderState, OrderStateChangeAction> p = new RepositoryStateMachinePersist<>(repository);
         return new RedisStateMachinePersister<>(p);
-    }
-
-    @Bean
-    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
-        return builder.build();
     }
 
     /**

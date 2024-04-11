@@ -1,0 +1,25 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  redis:
+    database: 2
+    host: 47.100.174.176
+    port: 63799
+    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    client-type: lettuce
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: 3000
+        max-idle: 8
+        min-idle: 0
+    timeout: 10000
+
+jasypt:
+  encryptor:
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    password: jaspyt_password

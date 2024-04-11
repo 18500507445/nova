@@ -11,12 +11,19 @@
 
     <artifactId>nova-cache</artifactId>
     <packaging>pom</packaging>
-    <description>本地cache、caffeine、redis(lettuce客户端)、限流(jedis客户端)、redisson分布式锁、布隆过滤器</description>
+
+    <description>
+        nova-cache-limit：redis限流(jedis客户端)、布隆过滤器、redisson限流器
+        nova-cache-lock：redisson分布式锁
+        nova-cache-redis：本地cache、caffeine、redis(lettuce客户端)
+        nova-cache-statemachine：spring状态机持久化到redis
+    </description>
 
     <modules>
         <module>nova-cache-limit</module>
         <module>nova-cache-lock</module>
         <module>nova-cache-redis</module>
+        <module>nova-cache-statemachine</module>
     </modules>
 
 </project>

@@ -42,8 +42,8 @@ public class OrderStatusMachineConfig extends StateMachineConfigurerAdapter<Orde
 
     @Bean(name = "orderStateMachinePersister")
     public RedisStateMachinePersister<OrderState, OrderStateChangeAction> getRedisPersister(RedisProperties redisProperties) {
-        RedisConnectionFactory redisconnectionFactory = getRedisconnectionFactory(redisProperties);
-        RedisStateMachineContextRepository<OrderState, OrderStateChangeAction> repository = new RedisStateMachineContextRepository<>(redisconnectionFactory);
+        RedisConnectionFactory redisConnectionFactory = getRedisconnectionFactory(redisProperties);
+        RedisStateMachineContextRepository<OrderState, OrderStateChangeAction> repository = new RedisStateMachineContextRepository<>(redisConnectionFactory);
         RepositoryStateMachinePersist<OrderState, OrderStateChangeAction> p = new RepositoryStateMachinePersist<>(repository);
         return new RedisStateMachinePersister<>(p);
     }

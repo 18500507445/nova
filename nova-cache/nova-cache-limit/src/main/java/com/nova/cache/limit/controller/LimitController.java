@@ -51,16 +51,20 @@ public class LimitController {
      */
     @PostMapping("/redissonLimit")
     public AjaxResult redissonLimit() {
-        RRateLimiter redissonLimit = redissonClient.getRateLimiter("redissonLimit");
+        StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+        String methodName = stack[1].getMethodName();
+        System.err.println("key = " + methodName);
+        RRateLimiter redissonLimit = redissonClient.getRateLimiter(methodName);
         //5秒3令牌
         redissonLimit.trySetRate(RateType.OVERALL, 3, 5, RateIntervalUnit.SECONDS);
         //试图获取一个令牌，获取到返回true
         boolean b = redissonLimit.tryAcquire(1);
-        if (b) {
-            return AjaxResult.success("接口放行");
-        } else {
+        if (!b) {
             return AjaxResult.error("接口限流");
         }
+
+        // 处理业务
+        return AjaxResult.success(methodName);
     }
 
 }

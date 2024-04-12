@@ -30,6 +30,10 @@ class CreateThread {
         };
         //启动
         t.start();
+        printLog();
+    }
+
+    private static void printLog() {
         log.debug("main线程，running");
     }
 
@@ -46,7 +50,7 @@ class CreateThread {
         };
         Thread t = new Thread(runnable, "t2");
         t.start();
-        log.debug("main线程，running");
+        printLog();
     }
 
     /**

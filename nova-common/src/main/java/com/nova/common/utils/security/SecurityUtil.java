@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.Mode;
 import cn.hutool.crypto.Padding;
 import cn.hutool.crypto.symmetric.AES;
+import cn.hutool.json.JSONUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -140,12 +141,14 @@ public final class SecurityUtil {
     public void demoA() {
         try {
             final String key = "SfNJN1O69Zs1ekjB";
-            String param = "{\"wzh\":\"123\"}";
-            System.err.println("请求加密param:" + param);
+            Map<String, String> hashMap = new HashMap<>(16);
+            hashMap.put("wzh","123");
+            String param = JSONUtil.toJsonStr(hashMap);
+            System.err.println("请求加密param：" + param);
             String secret = URLEncoder.encode(param, "utf-8");
-            System.err.println("URLenCode:" + secret);
+            System.err.println("URLenCode：" + secret);
             String str = SecurityUtil.encrypt(secret.getBytes(StandardCharsets.UTF_8), key);
-            System.err.println("加密后str:" + str);
+            System.err.println("加密后str：" + str);
             String encode = URLEncoder.encode(str, "utf-8");
             System.err.println("(这个要传给服务器了)---加密后再Url.enCode:" + encode);
 
@@ -163,7 +166,9 @@ public final class SecurityUtil {
     @Test
     public void demoB() throws UnsupportedEncodingException {
         final String key = "SfNJN1O69Zs1ekjB";
-        String param = "{\"wzh\":\"123\"}";
+        Map<String, String> hashMap = new HashMap<>(16);
+        hashMap.put("a","123");
+        String param = JSONUtil.toJsonStr(hashMap);
         String encode = URLEncoder.encode(param, "utf-8");
         System.err.println("encode = " + encode);
 

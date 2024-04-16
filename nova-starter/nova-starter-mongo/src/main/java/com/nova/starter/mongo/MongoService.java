@@ -228,6 +228,20 @@ public class MongoService {
     }
 
     /**
+     * 根据id查询集合
+     *
+     * @param clazz
+     * @param value
+     * @param collectionName
+     * @param <T>
+     */
+    public <T> T findById(Class<T> clazz, String value, String collectionName) {
+        Criteria criteria = Criteria.where("id").is(value);
+        Query query = Query.query(criteria);
+        return primaryMongoTemplate.findOne(query, clazz, collectionName);
+    }
+
+    /**
      * 查询出所有结果集 集合为数据对象中 @Document 注解所配置的collection
      *
      * @param obj 数据对象

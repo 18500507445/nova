@@ -1,14 +1,20 @@
 package com.nova.common.utils.security;
 
 
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.Mode;
 import cn.hutool.crypto.Padding;
 import cn.hutool.crypto.symmetric.AES;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.TypeReference;
+import com.nova.common.utils.id.IdUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Base64Utils;
@@ -22,6 +28,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 /**
@@ -142,7 +149,7 @@ public final class SecurityUtil {
         try {
             final String key = "SfNJN1O69Zs1ekjB";
             Map<String, String> hashMap = new HashMap<>(16);
-            hashMap.put("wzh","123");
+            hashMap.put("wzh", "123");
             String param = JSONUtil.toJsonStr(hashMap);
             System.err.println("请求加密param：" + param);
             String secret = URLEncoder.encode(param, "utf-8");
@@ -167,7 +174,7 @@ public final class SecurityUtil {
     public void demoB() throws UnsupportedEncodingException {
         final String key = "SfNJN1O69Zs1ekjB";
         Map<String, String> hashMap = new HashMap<>(16);
-        hashMap.put("a","123");
+        hashMap.put("a", "123");
         String param = JSONUtil.toJsonStr(hashMap);
         String encode = URLEncoder.encode(param, "utf-8");
         System.err.println("encode = " + encode);
@@ -178,4 +185,40 @@ public final class SecurityUtil {
         System.err.println("encryptBase64 = " + encryptBase64);
     }
 
+    @Test
+    @SneakyThrows
+    public void demoC() throws UnsupportedEncodingException {
+        final String key = "SfNJN1O69Zs1ekjB";
+        String supplierId = "123";
+        Integer pushType = 1;
+        String snowId = IdUtils.snowId();
+        Long timestamp = System.currentTimeMillis();
+        //键升序
+        Map<String, Object> hashMap = new TreeMap<>();
+        hashMap.put("pushType", pushType);
+        hashMap.put("supplierId", supplierId);
+        hashMap.put("snowId", snowId);
+        hashMap.put("timestamp", timestamp);
+        String param = JSONUtil.toJsonStr(hashMap);
+        String encode = URLEncoder.encode(param, "utf-8");
+        System.out.println("param = " + param);
+        // 构建
+        AES aes = new AES(Mode.ECB, Padding.PKCS5Padding, key.getBytes());
+        String sign = aes.encryptBase64(encode);
+        System.err.println("encryptBase64 = " + sign);
+
+        String jsonData = SecurityUtil.decrypt(sign.getBytes(StandardCharsets.UTF_8), key);
+        String result = URLDecoder.decode(jsonData, "utf-8");
+        System.out.println("result = " + result);
+
+        ThreadUtil.sleep(5000);
+        Map<String, Object> signData = JSONObject.parseObject(result, new TypeReference<Map<String, Object>>() {
+        });
+        Long signTimestamp = MapUtil.getLong(signData, "timestamp");
+        if (System.currentTimeMillis() - signTimestamp > 5000) {
+            System.err.println("超过5秒");
+        } else {
+            System.out.println("成功");
+        }
+    }
 }

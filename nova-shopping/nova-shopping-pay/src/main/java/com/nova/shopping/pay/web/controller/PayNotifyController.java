@@ -21,16 +21,16 @@ import com.github.binarywang.wxpay.util.XmlConfig;
 import com.nova.shopping.common.constant.BaseController;
 import com.nova.shopping.common.constant.Constants;
 import com.nova.shopping.common.constant.result.AjaxResult;
+import com.nova.shopping.pay.payment.open.*;
 import com.nova.shopping.pay.repository.entity.PayConfig;
 import com.nova.shopping.pay.repository.entity.PayOrder;
-import com.nova.shopping.pay.web.dto.HuaweiPayParam;
-import com.nova.shopping.pay.web.dto.KsPayParam;
-import com.nova.shopping.pay.web.dto.PayParam;
-import com.nova.shopping.pay.payment.open.*;
 import com.nova.shopping.pay.service.pay.PayConfigService;
 import com.nova.shopping.pay.service.pay.PayOrderService;
 import com.nova.shopping.pay.service.strategy.impl.HuaweiServiceImpl;
 import com.nova.shopping.pay.service.strategy.impl.KsPayServiceImpl;
+import com.nova.shopping.pay.web.dto.HuaweiPayParam;
+import com.nova.shopping.pay.web.dto.KsPayParam;
+import com.nova.shopping.pay.web.dto.PayParam;
 import com.yeepay.g3.sdk.yop.encrypt.DigitalEnvelopeDTO;
 import com.yeepay.g3.sdk.yop.utils.DigitalEnvelopeUtils;
 import com.yeepay.shade.org.apache.commons.collections4.MapUtils;
@@ -117,7 +117,7 @@ public class PayNotifyController extends BaseController {
             //查询订单
             PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 1);
             if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
-                PayOrder.MyPayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(1);
+                PayOrder.PayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(1);
                 //回调改成:处理中
                 payOrderService.updateMyPayOrder(orderBuilder.tradeStatus(4).build());
                 //查询配置参数，验签处理
@@ -171,7 +171,7 @@ public class PayNotifyController extends BaseController {
             //查询订单
             PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 2);
             if (ObjectUtil.isNotNull(payOrder)) {
-                PayOrder.MyPayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(2);
+                PayOrder.PayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(2);
                 //回调改成:处理中
                 payOrderService.updateMyPayOrder(orderBuilder.tradeStatus(4).build());
                 //查询配置参数，验签处理
@@ -242,7 +242,7 @@ public class PayNotifyController extends BaseController {
             //查询订单
             PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 3);
             if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
-                PayOrder.MyPayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).payWay(3).sign(sign);
+                PayOrder.PayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).payWay(3).sign(sign);
                 //回调改成:处理中
                 payOrderService.updateMyPayOrder(orderBuilder.tradeStatus(4).remark("false").build());
                 //查询配置参数，验签处理
@@ -302,7 +302,7 @@ public class PayNotifyController extends BaseController {
                     //查询订单
                     PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 4);
                     if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
-                        PayOrder.MyPayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(outTradeNo).payWay(4);
+                        PayOrder.PayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(outTradeNo).payWay(4);
                         //回调改成:处理中
                         payOrderService.updateMyPayOrder(orderBuilder.tradeStatus(4).build());
                         BigDecimal fee = payOrder.getFee();
@@ -415,7 +415,7 @@ public class PayNotifyController extends BaseController {
                 return AjaxResult.error("1000", "missing required parameter");
             }
             if (1 != payOrder.getTradeStatus()) {
-                PayOrder.MyPayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(5);
+                PayOrder.PayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).tradeNo(tradeNo).payWay(5);
                 //回调改成:处理中
                 payOrderService.updateMyPayOrder(orderBuilder.tradeStatus(4).build());
                 //查询配置参数，验签处理
@@ -486,7 +486,7 @@ public class PayNotifyController extends BaseController {
                 if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
                     PayConfig payConfig = payConfigService.getConfigData(payOrder.getPayConfigId());
                     boolean check = StrUtil.equals(ksSign, DigestUtils.md5Hex(jsonStr + payConfig.getAppSecret()));
-                    PayOrder.MyPayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).payWay(6).sign(ksOrderNo);
+                    PayOrder.PayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).payWay(6).sign(ksOrderNo);
                     //回调改成:处理中 存入ksOrderNo
                     payOrderService.updateMyPayOrder(orderBuilder.tradeStatus(4).build());
                     if (check && StrUtil.equals(Constants.SUCCESS, status)) {
@@ -643,7 +643,7 @@ public class PayNotifyController extends BaseController {
                 //2.0 查询订单
                 PayOrder payOrder = payOrderService.selectMyPayOrderByOrderIdAndPayWay(orderId, 7);
                 if (ObjectUtil.isNotNull(payOrder) && 1 != payOrder.getTradeStatus()) {
-                    PayOrder.MyPayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).payWay(6);
+                    PayOrder.PayOrderBuilder orderBuilder = PayOrder.builder().orderId(orderId).payWay(6);
 
                     //3.0 rsa验签后 回调改成:处理中
                     payOrderService.updateMyPayOrder(orderBuilder.tradeStatus(4).build());

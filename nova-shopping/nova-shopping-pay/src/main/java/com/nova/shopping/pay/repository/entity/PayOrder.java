@@ -1,10 +1,10 @@
 package com.nova.shopping.pay.repository.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ import java.util.Date;
  * @since 2023-04-14 19:27:15
  */
 @Data
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)

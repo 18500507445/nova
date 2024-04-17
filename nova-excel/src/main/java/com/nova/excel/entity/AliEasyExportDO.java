@@ -4,11 +4,14 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.nova.common.core.model.pojo.BaseDO;
+import com.nova.excel.utils.DateConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.Date;
 
 /**
  * @description: 模拟数据库实体类
@@ -38,8 +41,8 @@ public class AliEasyExportDO extends BaseDO {
     @ExcelProperty(value = "状态", index = 4)
     private Integer status;
 
-    @ExcelProperty(value = "创建时间", index = 5)
-    private String createTime;
+    @ExcelProperty(value = "创建时间", index = 5, converter = DateConverter.class)
+    private Date createTime;
 
     @ExcelProperty(value = "修改时间", index = 6)
     private String updateTime;

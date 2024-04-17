@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.*;
@@ -69,7 +70,7 @@ public class AliExportController extends BaseController {
             data.setAge(i);
             data.setOrderId(UUID.fastUUID().toString());
             data.setStatus(1);
-            data.setCreateTime(DateUtil.now());
+            data.setCreateTime(new Date());
             data.setUpdateTime(DateUtil.now());
             LIST.add(data);
         }

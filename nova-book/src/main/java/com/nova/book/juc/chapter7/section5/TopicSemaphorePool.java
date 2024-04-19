@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
  * @author: wzh
  * @date: 2023/3/30 22:22
  */
+@Slf4j(topic = "TopicSemaphorePool")
 class TopicSemaphorePool {
 
     public static void main(String[] args) {
@@ -78,7 +79,7 @@ class Pool {
         try {
             semaphore.acquire(); // 没有许可的线程，在此等待
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
         for (int i = 0; i < poolSize; i++) {
             // 获取空闲连接

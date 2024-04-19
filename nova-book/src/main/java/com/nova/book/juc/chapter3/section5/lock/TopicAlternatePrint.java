@@ -69,6 +69,7 @@ class TopicAlternatePrint {
     }
 }
 
+@Slf4j(topic = "AwaitSignal")
 class AwaitSignal extends ReentrantLock {
 
     private final int loopNumber;
@@ -92,7 +93,7 @@ class AwaitSignal extends ReentrantLock {
                 System.err.print(str);
                 next.signal();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             } finally {
                 unlock();
             }

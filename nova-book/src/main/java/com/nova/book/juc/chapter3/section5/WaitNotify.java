@@ -21,7 +21,7 @@ class WaitNotify {
                 try {
                     obj.wait(); // 让线程在obj上一直等待下去
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
                 log.debug("t1继续执行....");
             }
@@ -33,7 +33,7 @@ class WaitNotify {
                 try {
                     obj.wait(); // 让线程在obj上一直等待下去
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
                 log.debug("t2继续执行....");
             }

@@ -85,6 +85,7 @@ class Guarded {
 /**
  * 普通版
  */
+@Slf4j(topic = "GuardedObjectOne")
 class GuardedObjectOne {
 
     private Object response;
@@ -96,7 +97,7 @@ class GuardedObjectOne {
                 try {
                     this.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
             return response;
@@ -115,6 +116,7 @@ class GuardedObjectOne {
 /**
  * 加强版-超时等待，类比Thread.join()方法
  */
+@Slf4j(topic = "GuardedObjectTwo")
 class GuardedObjectTwo {
 
     private int id;
@@ -151,7 +153,7 @@ class GuardedObjectTwo {
                 try {
                     this.wait(waitTime);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
                 passed = timer.interval() - begin;
             }

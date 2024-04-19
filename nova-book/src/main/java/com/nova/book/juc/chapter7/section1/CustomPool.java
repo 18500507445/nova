@@ -134,7 +134,7 @@ class ThreadPool {
                     log.debug("正在执行...{}", task);
                     task.run();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 } finally {
                     task = null;
                 }
@@ -191,7 +191,7 @@ class BlockingQueue<T> {
                 try {
                     emptyWaitSet.await();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
             T t = queue.removeFirst();
@@ -222,7 +222,7 @@ class BlockingQueue<T> {
                     //返回值是剩余时间
                     nanos = emptyWaitSet.awaitNanos(nanos);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
             T t = queue.removeFirst();
@@ -246,7 +246,7 @@ class BlockingQueue<T> {
                     log.debug("等待加入任务队列 {} ...", task.toString());
                     fullWaitSet.await();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
             log.debug("加入任务队列 {}", task.toString());
@@ -277,7 +277,7 @@ class BlockingQueue<T> {
                     log.debug("等待加入任务队列 {} ...", task);
                     nanos = fullWaitSet.awaitNanos(nanos);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
             log.debug("加入任务队列 {}", task);

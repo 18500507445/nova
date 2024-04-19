@@ -84,7 +84,7 @@ class CorrectPostureStep {
                     try {
                         room.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -124,7 +124,7 @@ class CorrectPostureStep {
                     try {
                         room.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -144,7 +144,7 @@ class CorrectPostureStep {
                     try {
                         room.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("有饭吗？[{}]", hasTakeout);
@@ -180,7 +180,7 @@ class CorrectPostureStep {
                     try {
                         room.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -200,7 +200,7 @@ class CorrectPostureStep {
                     try {
                         room.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("有饭吗？[{}]", hasTakeout);
@@ -248,7 +248,7 @@ class CorrectPostureStep {
                     try {
                         waitCigaretteSet.await();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("有烟没？[{}]", hasCigarette);
@@ -267,7 +267,7 @@ class CorrectPostureStep {
                     try {
                         waitTakeoutSet.await();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("外卖送到没？[{}]", hasTakeout);

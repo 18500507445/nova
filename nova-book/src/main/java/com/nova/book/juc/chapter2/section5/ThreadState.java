@@ -57,7 +57,7 @@ class ThreadState {
                 try {
                     t2.join(); // waiting
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
         };

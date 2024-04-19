@@ -25,18 +25,18 @@ class CyclicBarrierDemo {
         for (int i = 0; i < 3; i++) {
             CountDownLatch latch = new CountDownLatch(2);
             service.submit(() -> {
-                log.debug("task1 start...");
+                log.info("task1 start...");
                 ThreadUtil.sleep(1000);
                 latch.countDown();
             });
             service.submit(() -> {
-                log.debug("task2 start...");
+                log.info("task2 start...");
                 ThreadUtil.sleep(2000);
                 latch.countDown();
             });
 
             latch.await();
-            log.debug("task1 task2 finish...");
+            log.info("task1 task2 finish...");
         }
         service.shutdown();
     }
@@ -50,25 +50,25 @@ class CyclicBarrierDemo {
         int taskNum = 2, coreSize = 2;
         ExecutorService service = Executors.newFixedThreadPool(coreSize);
         CyclicBarrier barrier = new CyclicBarrier(taskNum, () -> {
-            log.debug("task1, task2 finish...");
+            log.info("task1, task2 finish...");
         });
         for (int i = 0; i < 3; i++) {
             service.submit(() -> {
-                log.debug("task1 start...");
+                log.info("task1 start...");
                 ThreadUtil.sleep(1000);
                 try {
                     barrier.await(); // 2-1=1
                 } catch (InterruptedException | BrokenBarrierException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             });
             service.submit(() -> {
-                log.debug("task2 start...");
+                log.info("task2 start...");
                 ThreadUtil.sleep(2000);
                 try {
                     barrier.await(); // 1-1=0
                 } catch (InterruptedException | BrokenBarrierException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             });
         }

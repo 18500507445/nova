@@ -1,5 +1,6 @@
 package com.nova.book.juc.chapter3.section3;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @author: wzh
  * @date: 2023/3/25 16:58
  */
+@Slf4j(topic = "Direct")
 class SafeAnalysis {
 
 
@@ -158,6 +160,7 @@ class MyController {
         void insert() throws SQLException;
     }
 
+    @Slf4j(topic = "UserDaoImpl")
     static class UserDaoImpl implements UserDao {
 
         @Override
@@ -170,7 +173,7 @@ class MyController {
                 Connection connection = DriverManager.getConnection("", "", "");
                 //..
             } catch (SQLException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         }
 

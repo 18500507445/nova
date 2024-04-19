@@ -55,7 +55,7 @@ class ReentrantLockDemo {
                 log.debug("尝试获取锁");
                 Lock.lockInterruptibly();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
                 log.debug("没有获取到锁，返回");
                 return;
             }

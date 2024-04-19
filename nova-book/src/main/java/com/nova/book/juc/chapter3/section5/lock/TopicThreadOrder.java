@@ -34,7 +34,7 @@ class TopicThreadOrder {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("异常：", e);
                     }
                 }
                 log.debug("1");

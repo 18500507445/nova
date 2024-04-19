@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author: wzh
  * @date: 2023/3/28 09:51
  */
+@Slf4j(topic = "ManyLock")
 class ManyLock {
 
     public static void main(String[] args) {
@@ -16,14 +17,14 @@ class ManyLock {
             try {
                 bigRoom.study();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         }, "小南").start();
         new Thread(() -> {
             try {
                 bigRoom.sleep();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         }, "小女").start();
     }

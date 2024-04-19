@@ -51,7 +51,7 @@ public class TopicStarvation {
             try {
                 log.debug("上菜: {}", f.get());
             } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         });
         waiterPool.execute(() -> {
@@ -63,7 +63,7 @@ public class TopicStarvation {
             try {
                 log.debug("上菜: {}", f.get());
             } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         });
     }

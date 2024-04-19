@@ -2,6 +2,7 @@ package com.nova.book.effectivejava.chapter9.section4;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author: wzh
  * @date: 2023/2/22 14:20
  */
+@Slf4j(topic = "SectionTest4")
 class SectionTest4 {
 
     @Test
@@ -96,7 +98,7 @@ class SectionTest4 {
                     ThreadUtil.sleep(r.nextInt(2000));
                     System.err.println(Thread.currentThread().getName() + "，结束执行");
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 } finally {
                     cd.countDown();
                     sp.release();

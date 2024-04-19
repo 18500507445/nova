@@ -1,5 +1,6 @@
 package com.nova.book.jvm.chapter1.section2;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/3/17 10:37
  */
+@Slf4j(topic = "StackOverFlow")
 class StackOverFlow {
 
     public static int count;
@@ -21,7 +23,7 @@ class StackOverFlow {
         try {
             m1();
         } catch (Throwable e) {
-            e.printStackTrace();
+            log.error("异常：", e);
             System.err.println("count = " + count);
         }
     }

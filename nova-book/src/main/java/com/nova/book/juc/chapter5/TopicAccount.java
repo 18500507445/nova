@@ -2,6 +2,8 @@ package com.nova.book.juc.chapter5;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.lang.Console;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author: wzh
  * @date: 2023/3/29 13:41
  */
+@Slf4j(topic = "TopicAccount")
 class TopicAccount {
 
     /**
@@ -65,7 +68,7 @@ interface Account {
             try {
                 t.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Console.log("异常：", e);
             }
         });
         System.err.println("余额: " + account.getBalance() + "， 耗时: " + timer.interval() + " ms");

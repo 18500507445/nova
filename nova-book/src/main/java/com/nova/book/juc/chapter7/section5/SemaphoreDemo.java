@@ -27,7 +27,7 @@ class SemaphoreDemo {
                 try {
                     semaphore.acquire();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
                 try {
                     log.debug("running...");

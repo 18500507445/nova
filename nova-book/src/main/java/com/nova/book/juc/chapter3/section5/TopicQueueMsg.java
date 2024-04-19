@@ -14,6 +14,7 @@ import java.util.LinkedList;
  * @author: wzh
  * @date: 2023/3/27 10:08
  */
+@Slf4j(topic = "TopicQueueMsg")
 class TopicQueueMsg {
 
     public static void main(String[] args) {
@@ -73,7 +74,7 @@ class MessageQueue {
                     log.debug("队列为空, 消费者线程等待");
                     list.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
             // 从队列头部获取消息并返回
@@ -97,7 +98,7 @@ class MessageQueue {
                     log.debug("队列已满, 生产者线程等待");
                     list.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
             // 将消息加入队列尾部

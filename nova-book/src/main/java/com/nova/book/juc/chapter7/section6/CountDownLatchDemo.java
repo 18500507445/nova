@@ -24,9 +24,9 @@ class CountDownLatchDemo {
 
         //simple();
 
-        threadPool();
+//        threadPool();
 
-        //game();
+        game();
     }
 
     /**
@@ -60,7 +60,7 @@ class CountDownLatchDemo {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
         log.debug("wait end...  共耗时:{}ms", timer.interval());
     }
@@ -98,7 +98,7 @@ class CountDownLatchDemo {
                 latch.await();
                 log.debug("wait end...  共耗时:{}ms", timer.interval());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         });
 
@@ -110,9 +110,7 @@ class CountDownLatchDemo {
      */
     private static void game() {
         AtomicInteger num = new AtomicInteger(1);
-        ExecutorService service = Executors.newFixedThreadPool(10, (r) -> {
-            return new Thread(r, "玩家：" + num.getAndIncrement());
-        });
+        ExecutorService service = Executors.newFixedThreadPool(10, (r) -> new Thread(r, "玩家：" + num.getAndIncrement()));
         CountDownLatch latch = new CountDownLatch(10);
         String[] all = new String[11];
         Random r = new Random();
@@ -130,7 +128,7 @@ class CountDownLatchDemo {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
 
         all[all.length - 1] = "总加载[100%]";

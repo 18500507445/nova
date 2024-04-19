@@ -141,7 +141,7 @@ class TwoPhaseTermination {
                     log.debug("执行监控记录");
                     ThreadUtil.sleep(1);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                     //重新设置打断标记，因为catch后变为false
                     log.debug("重置前的isInterrupted：{}", current.isInterrupted());
                     current.interrupt();

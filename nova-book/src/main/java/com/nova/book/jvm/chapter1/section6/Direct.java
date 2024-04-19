@@ -1,5 +1,7 @@
 package com.nova.book.jvm.chapter1.section6;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.nio.channels.FileChannel;
  * @author: wzh
  * @date: 2023/3/17 18:27
  */
+@Slf4j(topic = "Direct")
 class Direct {
 
     static final String FROM = "/Users/wangzehui/Movies/切尔诺贝利/01.mp4";
@@ -39,7 +42,7 @@ class Direct {
                 bb.clear();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
         long end = System.nanoTime();
         System.err.println("directBuffer 用时：" + (end - start) / 1000_000.0);
@@ -60,7 +63,7 @@ class Direct {
                 to.write(buf, 0, len);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
         long end = System.nanoTime();
         System.err.println("io 用时：" + (end - start) / 1000_000.0);

@@ -23,7 +23,7 @@ class SleepAndWait {
 
                     lock.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
         }, "t1").start();

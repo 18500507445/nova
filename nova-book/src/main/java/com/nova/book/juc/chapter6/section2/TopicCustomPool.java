@@ -88,7 +88,7 @@ class Pool {
                     log.debug("wait...");
                     this.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             }
         }

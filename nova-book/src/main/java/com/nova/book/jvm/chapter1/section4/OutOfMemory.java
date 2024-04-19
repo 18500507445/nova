@@ -1,5 +1,7 @@
 package com.nova.book.jvm.chapter1.section4;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  * @author: wzh
  * @date: 2023/3/17 15:30
  */
+@Slf4j(topic = "OutOfMemory")
 class OutOfMemory {
 
     /**
@@ -27,7 +30,7 @@ class OutOfMemory {
                 i++;
             }
         } catch (Throwable e) {
-            e.printStackTrace();
+            log.error("异常：", e);
             System.err.println("i = " + i);
         }
     }

@@ -1,5 +1,7 @@
 package com.nova.book.algorithm.queqe;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -10,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author: wzh
  * @date: 2023/3/16 14:15
  */
+@Slf4j(topic = "ThreadSafe")
 class ThreadSafe {
 
     private final String[] array = new String[10];
@@ -48,14 +51,14 @@ class ThreadSafe {
             try {
                 queue.offer("e1");
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         }, "t1").start();
         new Thread(() -> {
             try {
                 queue.offer("e2");
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("异常：", e);
             }
         }, "t2").start();
         System.err.println(queue);

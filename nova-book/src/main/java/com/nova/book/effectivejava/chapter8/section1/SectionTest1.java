@@ -1,5 +1,6 @@
 package com.nova.book.effectivejava.chapter8.section1;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
  * @author: wzh
  * @date: 2023/2/22 14:20
  */
+@Slf4j(topic = "SectionTest1")
 class SectionTest1 {
 
     @Test
@@ -18,7 +20,7 @@ class SectionTest1 {
                 arr[i++] = i++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
     }
 

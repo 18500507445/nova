@@ -66,7 +66,7 @@ class Executor {
         try {
             log.debug("{}", future.get());
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
     }
 
@@ -97,11 +97,11 @@ class Executor {
                 try {
                     log.debug("结果：{}", f.get());
                 } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
+                    log.error("异常：", e);
                 }
             });
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
     }
 
@@ -132,7 +132,7 @@ class Executor {
                     }
             ));
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            log.error("异常：", e);
         }
         log.debug("先执行完的结果：{}", result);
     }

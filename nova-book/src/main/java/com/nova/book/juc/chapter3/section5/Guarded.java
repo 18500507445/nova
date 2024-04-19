@@ -3,6 +3,7 @@ package com.nova.book.juc.chapter3.section5;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.thread.ThreadUtil;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Hashtable;
@@ -119,6 +120,7 @@ class GuardedObjectOne {
 @Slf4j(topic = "GuardedObjectTwo")
 class GuardedObjectTwo {
 
+    @Getter
     private int id;
 
     public GuardedObjectTwo() {
@@ -127,10 +129,6 @@ class GuardedObjectTwo {
 
     public GuardedObjectTwo(int id) {
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     private Object response;
@@ -175,7 +173,7 @@ class GuardedObjectTwo {
  */
 class Mailboxes {
 
-    private static final Map<Integer, GuardedObjectTwo> boxes = new Hashtable<>();
+    private static final Map<Integer, GuardedObjectTwo> BOXES = new Hashtable<>();
 
     private static int id = 1;
 
@@ -189,17 +187,17 @@ class Mailboxes {
     }
 
     public static GuardedObjectTwo getGuardedObject(int id) {
-        return boxes.remove(id);
+        return BOXES.remove(id);
     }
 
     public static GuardedObjectTwo createGuardedObject() {
         GuardedObjectTwo go = new GuardedObjectTwo(generateId());
-        boxes.put(go.getId(), go);
+        BOXES.put(go.getId(), go);
         return go;
     }
 
     public static Set<Integer> getIds() {
-        return boxes.keySet();
+        return BOXES.keySet();
     }
 }
 

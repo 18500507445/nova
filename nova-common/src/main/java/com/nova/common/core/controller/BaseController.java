@@ -31,7 +31,6 @@ public class BaseController {
      * 获取请求连接参数
      *
      * @param key
-     * @return
      */
     public String getValue(String key) {
         String value = "";

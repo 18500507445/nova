@@ -55,14 +55,13 @@ public class Constants {
     public static final String CS_NOTIFY_URL = "http://xxx.xxx.xx/api/payNotify/yeePay/divideApply";
 
     /**
-     * 开通钱包通知地址
-     * http://zhongcangpay.solisoli.top/api/userSetting/yeePay/notify
+     * 开通钱包通知地址，http://xxx.solisoli.top/api/userSetting/yeePay/notify
      */
     public static final String WALLET_NOTIFY_URL = "http://xxx.xxx.xx/api/userSetting/yeePay/wallet/notify";
 
     /**
      * 商户入网通知地址-小微(个人)
-     * 入网结果通知:https://open.yeepay.com/docs/products/ptssfk/spis/5f3de63c20289f001ba82527
+     * 入网结果通知：https://open.yeepay.com/docs/products/ptssfk/spis/5f3de63c20289f001ba82527
      */
     public static final String MICRO_NOTIFY_URL = "http://xxx.xxx.xx/api/userSetting/yeePay/account/notify";
 }

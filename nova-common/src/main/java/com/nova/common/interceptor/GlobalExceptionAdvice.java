@@ -23,9 +23,6 @@ public class GlobalExceptionAdvice {
 
     /**
      * 拦截的validator异常
-     *
-     * @param e
-     * @return
      */
     @ExceptionHandler(BindException.class)
     public ResResult<Void> handleBindException(BindException e) {

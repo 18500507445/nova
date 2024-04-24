@@ -121,7 +121,7 @@ public class YeePayServiceImpl implements PayService {
                         result.put("body", body);
                     }
                 } else {
-                    log.debug("yeePayOrderMap：" + JSONUtil.toJsonStr(orderMap));
+                    log.debug("yeePayOrderMap：{}", JSONUtil.toJsonStr(orderMap));
                 }
             }
         } catch (Exception e) {

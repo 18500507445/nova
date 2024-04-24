@@ -620,7 +620,6 @@ public class YeePayment {
         String ip = "106.37.95.108, 172.30.16.168";
         String idCard = "110226199401131417";
 
-        //String url = "https://image.solisoli.top/zc/00916569381182355435.jpeg";
         String url = "https://image.solisoli.top/zc/00916569879043659172.jpg";
         String realName = "王泽辉";
         String bankCardNo = "6214850127212857";
@@ -656,7 +655,6 @@ public class YeePayment {
         //String settleRecordQueryDtos = yeePayUtil.queryRecords(data).get("settleRecordQueryDtos");
         //List<YeePayRecordDto> yeePayRecordDtos = JSONObject.parseArray(settleRecordQueryDtos, YeePayRecordDto.class);
         //System.out.println(JSONObject.toJSONString(yeePayRecordDtos));
-
     }
 
 

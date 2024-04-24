@@ -4,7 +4,7 @@
 <mapper namespace="com.nova.orm.mybatisplus.chapter2.TwoUserMapper">
 
     <select id="selectByName" resultType="com.nova.orm.mybatisplus.entity.UserDO" parameterType="String">
-        select * from user where name = #{name}
+        select * from user where name = #{name} limit 1
     </select>
 
 </mapper>

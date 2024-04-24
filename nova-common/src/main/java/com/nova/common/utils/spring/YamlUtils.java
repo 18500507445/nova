@@ -18,16 +18,16 @@ import java.util.Map;
  * @author yml
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class YamlUtil {
+public final class YamlUtils {
 
     public static Map<?, ?> loadYaml(String fileName) {
-        InputStream in = YamlUtil.class.getClassLoader().getResourceAsStream(fileName);
+        InputStream in = YamlUtils.class.getClassLoader().getResourceAsStream(fileName);
         return StringUtils.isNotEmpty(fileName) ? (LinkedHashMap<?, ?>) new Yaml().load(in) : null;
     }
 
     public static void dumpYaml(String fileName, Map<?, ?> map) throws IOException {
         if (StringUtils.isNotEmpty(fileName)) {
-            FileWriter fileWriter = new FileWriter(YamlUtil.class.getResource(fileName).getFile());
+            FileWriter fileWriter = new FileWriter(YamlUtils.class.getResource(fileName).getFile());
             DumperOptions options = new DumperOptions();
             options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
             Yaml yaml = new Yaml(options);

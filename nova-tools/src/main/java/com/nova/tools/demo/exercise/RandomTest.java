@@ -2,7 +2,7 @@ package com.nova.tools.demo.exercise;
 
 import cn.hutool.core.lang.WeightRandom;
 import cn.hutool.core.util.StrUtil;
-import com.nova.common.utils.random.RandomUtil;
+import com.nova.common.utils.random.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -28,7 +28,7 @@ class RandomTest {
         map.put("C", 1L);
 
         for (int i = 0; i < 1000; i++) {
-            String random = RandomUtil.random(map).toString();
+            String random = RandomUtils.random(map).toString();
             if (StrUtil.equals("A", random)) {
                 sum1++;
             }

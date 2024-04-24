@@ -3,7 +3,7 @@ package com.nova.common.core.controller;
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.constant.Constants;
 import com.nova.common.exception.BusinessException;
-import com.nova.common.utils.security.SecurityUtil;
+import com.nova.common.utils.security.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +45,7 @@ public class DispatcherController extends BaseController {
             String function = "";
             if (StrUtil.isNotBlank(apiUrl)) {
                 log.info("dispatcher====>before:" + apiUrl);
-                apiUrl = SecurityUtil.decryptAllPara(apiUrl, clientType);
+                apiUrl = SecurityUtils.decryptAllPara(apiUrl, clientType);
                 log.info("dispatcher====>after:" + apiUrl);
                 String[] arrUrl = apiUrl.split("&");
                 Map<String, String> urlParam = new HashMap<>(16);

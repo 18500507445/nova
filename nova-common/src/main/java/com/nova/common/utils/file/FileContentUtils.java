@@ -13,7 +13,7 @@ import java.net.URLDecoder;
  * @date: 2022/12/5 21:36
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class FileContentUtil {
+public final class FileContentUtils {
 
     /**
      * 根据文件路径读取文件内容

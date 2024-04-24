@@ -1,4 +1,4 @@
-package com.nova.common.utils.jax;
+package com.nova.common.utils.common;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.AccessLevel;

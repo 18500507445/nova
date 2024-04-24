@@ -12,7 +12,7 @@ import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.ResResult;
 import com.nova.common.exception.ParamException;
 import com.nova.common.trace.Trace;
-import com.nova.common.utils.common.ValidatorUtil;
+import com.nova.common.utils.common.ValidatorUtils;
 import com.nova.starter.sensitive.bean.SensitiveBaseDTO;
 import com.nova.tools.demo.springboot.listener.Event;
 import lombok.AllArgsConstructor;
@@ -83,7 +83,7 @@ public class CommonController extends BaseController {
     @PostMapping("/customValidator")
     public ResResult<Void> customValidator(ValidatorReqDTO reqDTO) {
         try {
-            ValidatorUtil.validate(reqDTO);
+            ValidatorUtils.validate(reqDTO);
         } catch (ParamException e) {
             return ResResult.failure(e.getMessage());
         }

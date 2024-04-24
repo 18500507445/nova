@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
  *
  * @author chengqiang
  */
-public class BeanValidatorUtilTest {
+public class BeanValidatorUtilsTest {
 
     public static class TestClass {
 

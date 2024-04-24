@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author
  */
-public class CreditCodeUtilTest {
+public class CreditCodeUtilsTest {
 
     @Test
     public void isCreditCodeBySimple() {

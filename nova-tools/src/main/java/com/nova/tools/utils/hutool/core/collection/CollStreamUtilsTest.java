@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * CollectionStream测试方法
  */
-public class CollStreamUtilTest {
+public class CollStreamUtilsTest {
 
     @Test
     public void testToIdentityMap() {

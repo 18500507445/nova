@@ -17,7 +17,7 @@ import java.util.Set;
  * @date 2023/6/22 21:13
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ValidatorUtil {
+public final class ValidatorUtils {
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 

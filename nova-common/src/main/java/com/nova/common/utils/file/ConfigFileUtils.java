@@ -12,13 +12,13 @@ import java.util.Properties;
  * 2019/9/11
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ConfigFileUtil {
+public final class ConfigFileUtils {
 
     public static Map<String, String> resourcePropertyFileToMap(String resourcePropertyFileName) {
         Properties properties = new Properties();
         InputStream is = null;
         try {
-            is = ConfigFileUtil.class.getClassLoader().getResourceAsStream(resourcePropertyFileName);
+            is = ConfigFileUtils.class.getClassLoader().getResourceAsStream(resourcePropertyFileName);
             properties.load(is);
         } catch (Exception e) {
             System.err.println("不能读取配置文件 ：" + resourcePropertyFileName);

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class YamlUtilTest {
+public class YamlUtilsTest {
 
     @Test
     public void loadByPathTest() {

@@ -1,4 +1,4 @@
-package com.nova.common.utils.string;
+package com.nova.common.utils.common;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.AccessLevel;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * @date: 2020/4/20 19:27
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class MatchUtil {
+public final class MatchUtils {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();

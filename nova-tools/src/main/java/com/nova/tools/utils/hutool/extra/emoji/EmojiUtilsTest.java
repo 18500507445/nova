@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.emoji.EmojiUtil;
 import org.junit.jupiter.api.Test;
 
-public class EmojiUtilTest {
+public class EmojiUtilsTest {
 
     @Test
     public void toUnicodeTest() {

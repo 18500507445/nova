@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  * @date: 2023/07/24 13:29
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class CollStreamUtil {
+public final class CollStreamUtils {
 
     /**
      * 转换成一个新的集合

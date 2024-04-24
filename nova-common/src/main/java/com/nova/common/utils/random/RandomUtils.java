@@ -1,7 +1,7 @@
 package com.nova.common.utils.random;
 
 
-import com.nova.common.utils.common.LocalDateUtil;
+import com.nova.common.utils.common.LocalDateUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date: 2022/6/17 13:32
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class RandomUtil {
+public final class RandomUtils {
 
     /**
      * 权重随机对象 key:Object，value:权重
@@ -299,8 +299,8 @@ public final class RandomUtil {
         // 16年内
         long endTimestamp = timestamp - oneYearTimestamp * 16;
         long randomTimestamp = beginTimestamp + (long) (Math.random() * (endTimestamp - beginTimestamp));
-        LocalDateTime localDateTime = LocalDateUtil.timestampToLocalDateTime(randomTimestamp);
-        String birth = LocalDateUtil.formatLocalDateTime(localDateTime, "yyyyMMdd");
+        LocalDateTime localDateTime = LocalDateUtils.timestampToLocalDateTime(randomTimestamp);
+        String birth = LocalDateUtils.formatLocalDateTime(localDateTime, "yyyyMMdd");
         return randomIdCard(birth, male);
     }
 

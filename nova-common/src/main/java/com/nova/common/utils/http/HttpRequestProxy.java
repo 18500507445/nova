@@ -26,12 +26,12 @@ public final class HttpRequestProxy {
     /**
      * 连接超时
      */
-    private static final int connectTimeOut = 50000;
+    private static final int CONNECT_TIME_OUT = 50000;
 
     /**
      * 读取数据超时
      */
-    private static final int readTimeOut = 6000000;
+    private static final int READ_TIME_OUT = 6000000;
 
     /**
      * 向指定 URL 发送GET方法的请求
@@ -194,11 +194,11 @@ public final class HttpRequestProxy {
             long time11 = System.currentTimeMillis();
             url_con = (HttpURLConnection) url.openConnection();
             url_con.setRequestMethod("GET");
-            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.connectTimeOut));// （单位：毫秒）jdk1.4换成这个,连接超时
-            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.readTimeOut)); // （单位：毫秒）jdk1.4换成这个,读操作超时
-            url_con.setConnectTimeout(HttpRequestProxy.connectTimeOut);//（单位：毫秒）jdk
+            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.CONNECT_TIME_OUT));// （单位：毫秒）jdk1.4换成这个,连接超时
+            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.READ_TIME_OUT)); // （单位：毫秒）jdk1.4换成这个,读操作超时
+            url_con.setConnectTimeout(HttpRequestProxy.CONNECT_TIME_OUT);//（单位：毫秒）jdk
             // 1.5换成这个,连接超时
-            url_con.setReadTimeout(HttpRequestProxy.readTimeOut);//（单位：毫秒）jdk 1.5换成这个,读操作超时
+            url_con.setReadTimeout(HttpRequestProxy.READ_TIME_OUT);//（单位：毫秒）jdk 1.5换成这个,读操作超时
             url_con.setDoOutput(true);
             byte[] b = params.toString().getBytes();
             url_con.getOutputStream().write(b, 0, b.length);
@@ -286,11 +286,11 @@ public final class HttpRequestProxy {
             URL url = new URL(queryUrl);
             url_con = (HttpURLConnection) url.openConnection();
             url_con.setRequestMethod("GET");
-            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.connectTimeOut));// （单位：毫秒）jdk1.4换成这个,连接超时
-            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.readTimeOut)); // （单位：毫秒）jdk1.4换成这个,读操作超时
-            url_con.setConnectTimeout(HttpRequestProxy.connectTimeOut);//（单位：毫秒）jdk
+            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.CONNECT_TIME_OUT));// （单位：毫秒）jdk1.4换成这个,连接超时
+            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.READ_TIME_OUT)); // （单位：毫秒）jdk1.4换成这个,读操作超时
+            url_con.setConnectTimeout(HttpRequestProxy.CONNECT_TIME_OUT);//（单位：毫秒）jdk
             // 1.5换成这个,连接超时
-            url_con.setReadTimeout(HttpRequestProxy.readTimeOut);//（单位：毫秒）jdk 1.5换成这个,读操作超时
+            url_con.setReadTimeout(HttpRequestProxy.READ_TIME_OUT);//（单位：毫秒）jdk 1.5换成这个,读操作超时
             url_con.setDoOutput(true);
             byte[] b = params.toString().getBytes();
             url_con.getOutputStream().write(b, 0, b.length);
@@ -364,12 +364,12 @@ public final class HttpRequestProxy {
             url_con = (HttpURLConnection) url.openConnection();
             url_con.setRequestMethod("POST");
             // （单位：毫秒）jdk1.4换成这个,连接超时
-            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.connectTimeOut));
+            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.CONNECT_TIME_OUT));
             // （单位：毫秒）jdk1.4换成这个,读操作超时
-            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.readTimeOut));
-            url_con.setConnectTimeout(HttpRequestProxy.connectTimeOut);//（单位：毫秒）jdk
+            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.READ_TIME_OUT));
+            url_con.setConnectTimeout(HttpRequestProxy.CONNECT_TIME_OUT);//（单位：毫秒）jdk
             // 1.5换成这个,连接超时
-            url_con.setReadTimeout(HttpRequestProxy.readTimeOut);//（单位：毫秒）jdk 1.5换成这个,读操作超时
+            url_con.setReadTimeout(HttpRequestProxy.READ_TIME_OUT);//（单位：毫秒）jdk 1.5换成这个,读操作超时
 
             url_con.setDoOutput(true);
             byte[] b = params.toString().getBytes();

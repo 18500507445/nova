@@ -38,7 +38,7 @@ import java.util.TreeMap;
  */
 @Slf4j(topic = "SecurityUtil")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class SecurityUtil {
+public final class SecurityUtils {
 
     /**
      * app:ios和android的key
@@ -82,8 +82,6 @@ public final class SecurityUtil {
      * 解密
      *
      * @param src
-     * @return
-     * @throws Exception
      */
     public static String decrypt(byte[] src) throws Exception {
         SecretKey sKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
@@ -99,8 +97,6 @@ public final class SecurityUtil {
      * 解密
      *
      * @param src
-     * @return
-     * @throws Exception
      */
     public static String decrypt(byte[] src, String key) throws Exception {
         SecretKey sKey = new SecretKeySpec(key.getBytes(), "AES");
@@ -114,7 +110,6 @@ public final class SecurityUtil {
 
     /**
      * @param src
-     * @throws Exception
      */
     public static String encrypt(byte[] src) throws Exception {
         SecretKey sKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
@@ -154,7 +149,7 @@ public final class SecurityUtil {
             System.err.println("请求加密param：" + param);
             String secret = URLEncoder.encode(param, "utf-8");
             System.err.println("URLenCode：" + secret);
-            String str = SecurityUtil.encrypt(secret.getBytes(StandardCharsets.UTF_8), key);
+            String str = SecurityUtils.encrypt(secret.getBytes(StandardCharsets.UTF_8), key);
             System.err.println("加密后str：" + str);
             String encode = URLEncoder.encode(str, "utf-8");
             System.err.println("(这个要传给服务器了)---加密后再Url.enCode:" + encode);
@@ -162,7 +157,7 @@ public final class SecurityUtil {
             System.err.println("------------------------------------------------------");
             String accessSecretData = URLDecoder.decode(encode, "utf-8");
             System.err.println("accessSecretData = " + accessSecretData);
-            String result = SecurityUtil.decrypt(accessSecretData.getBytes(StandardCharsets.UTF_8), key);
+            String result = SecurityUtils.decrypt(accessSecretData.getBytes(StandardCharsets.UTF_8), key);
             result = URLDecoder.decode(result, "utf-8");
             System.err.println("服务器解密后str:" + result);
         } catch (Exception e) {
@@ -171,23 +166,8 @@ public final class SecurityUtil {
     }
 
     @Test
-    public void demoB() throws UnsupportedEncodingException {
-        final String key = "SfNJN1O69Zs1ekjB";
-        Map<String, String> hashMap = new HashMap<>(16);
-        hashMap.put("a", "123");
-        String param = JSONUtil.toJsonStr(hashMap);
-        String encode = URLEncoder.encode(param, "utf-8");
-        System.err.println("encode = " + encode);
-
-        // 构建
-        AES aes = new AES(Mode.ECB, Padding.PKCS5Padding, key.getBytes());
-        String encryptBase64 = aes.encryptBase64(encode);
-        System.err.println("encryptBase64 = " + encryptBase64);
-    }
-
-    @Test
     @SneakyThrows
-    public void demoC() throws UnsupportedEncodingException {
+    public void demoB() throws UnsupportedEncodingException {
         final String key = "SfNJN1O69Zs1ekjB";
         String supplierId = "123";
         Integer pushType = 1;
@@ -207,7 +187,7 @@ public final class SecurityUtil {
         String sign = aes.encryptBase64(encode);
         System.err.println("encryptBase64 = " + sign);
 
-        String jsonData = SecurityUtil.decrypt(sign.getBytes(StandardCharsets.UTF_8), key);
+        String jsonData = SecurityUtils.decrypt(sign.getBytes(StandardCharsets.UTF_8), key);
         String result = URLDecoder.decode(jsonData, "utf-8");
         System.out.println("result = " + result);
 

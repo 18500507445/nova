@@ -12,7 +12,7 @@ import java.util.List;
  * @author wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ConvertToolUtil {
+public final class ConvertToolUtils {
 
     /**
      * 利用反射实现对象之间相同属性复制

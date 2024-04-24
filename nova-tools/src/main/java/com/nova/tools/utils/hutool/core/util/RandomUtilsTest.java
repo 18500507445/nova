@@ -19,7 +19,7 @@ import java.util.Set;
  *
  * @author
  */
-public class RandomUtilTest {
+public class RandomUtilsTest {
 
     @Test
     public void randomEleSetTest() {

@@ -55,7 +55,7 @@ public class ElasticsearchTest {
     private UserRepository userRepository;
 
     @Resource
-    private ElasticsearchRestTemplate elasticsearchTemplate;
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @Test
     public void insertTest() {
@@ -134,7 +134,7 @@ public class ElasticsearchTest {
 //                .withPageable(page)
                 .build();
         //查询
-        SearchHits<User> search = elasticsearchTemplate.search(searchQuery, User.class);
+        SearchHits<User> search = elasticsearchRestTemplate.search(searchQuery, User.class);
         //得到查询返回的内容
         List<SearchHit<User>> searchHits = search.getSearchHits();
         //设置一个最后需要返回的实体类集合
@@ -173,7 +173,7 @@ public class ElasticsearchTest {
                 .withQuery(queryBuilder)
                 .build();
 
-        SearchHits<User> search = elasticsearchTemplate.search(searchQuery, User.class);
+        SearchHits<User> search = elasticsearchRestTemplate.search(searchQuery, User.class);
 
         List<User> userList = new ArrayList<>();
         //得到查询返回的内容

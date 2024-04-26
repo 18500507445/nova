@@ -186,8 +186,8 @@ public class ElasticsearchTest {
         System.err.println("jsonStr = " + jsonStr);
     }
 
-
     @Autowired
+    @Deprecated
     private RestHighLevelClient restHighLevelClient;
 
     @SneakyThrows

@@ -1,6 +1,8 @@
-package com.nova.search.elasticsearch.dao;
+package com.nova.search.elasticsearch.repository;
 
 import com.nova.search.elasticsearch.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +13,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends ElasticsearchRepository<User, Integer> {
+
+    //高级玩法
+    Page<User> getUserByUserNameLike(String userName, Pageable page);
 
 }

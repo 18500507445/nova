@@ -17,5 +17,5 @@ public interface UserService {
 
     Iterable<User> getAll();
 
-    Optional<User> findById(String id);
+    Optional<User> findById(Integer id);
 }

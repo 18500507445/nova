@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  * @date: 2023/07/13 22:57
  */
 @Repository
-public interface UserRepository extends ElasticsearchRepository<User, String> {
+public interface UserRepository extends ElasticsearchRepository<User, Integer> {
 
 }

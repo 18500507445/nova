@@ -25,7 +25,6 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -62,15 +61,16 @@ public class ElasticsearchTest {
         for (int i = 1; i <= 5; i++) {
             User user = new User();
             user.setId((long) i);
-            user.setUsername("张三_" + i);
+            user.setUserName("张三+a" + i);
             user.setPassword("password_" + i);
+            user.setCreateTime(new Date());
             userService.save(user);
         }
     }
 
     @Test
     public void findByIdTest() {
-        Optional<User> entity = userService.findById("1");
+        Optional<User> entity = userService.findById(1);
         entity.ifPresent(user -> log.info("查询成功：{}", JSONUtil.toJsonStr(user)));
     }
 
@@ -94,21 +94,21 @@ public class ElasticsearchTest {
      */
     @Test
     public void otherFunctions() {
-        List<String> idList = Arrays.asList("1", "2");
+        List<Integer> idList = Arrays.asList(1, 2, 3, 4, 5);
         //批量查询
-        userRepository.findAllById(idList);
+//        userRepository.findAllById(idList);
         //批量删除
-//        userRepository.deleteAllById(idList);
+        userRepository.deleteAllById(idList);
         //批量保存
-        List<User> userList = new ArrayList<>();
-        userRepository.saveAll(userList);
-        //查询所有
-        userRepository.findAll();
-
-        //分页查询
-        Pageable page = PageRequest.of(0, 3, Sort.Direction.ASC, "id");
-        Page<User> pageList = userRepository.findAll(page);
-        System.err.println("pageList = " + pageList);
+//        List<User> userList = new ArrayList<>();
+//        userRepository.saveAll(userList);
+//        //查询所有
+//        userRepository.findAll();
+//
+//        //分页查询
+//        Pageable page = PageRequest.of(0, 3, Sort.Direction.ASC, "id");
+//        Page<User> pageList = userRepository.findAll(page);
+//        System.err.println("pageList = " + pageList);
     }
 
     /**
@@ -144,7 +144,7 @@ public class ElasticsearchTest {
             //高亮的内容
             Map<String, List<String>> highlightFields = searchHit.getHighlightFields();
             //将高亮的内容填充到content中
-            searchHit.getContent().setUsername(highlightFields.get("username") == null ? searchHit.getContent().getUsername() : highlightFields.get("username").get(0));
+            searchHit.getContent().setUserName(highlightFields.get("username") == null ? searchHit.getContent().getUserName() : highlightFields.get("username").get(0));
             searchHit.getContent().setPassword(highlightFields.get("password") == null ? searchHit.getContent().getPassword() : highlightFields.get("password").get(0));
             //放到实体类中
             userList.add(searchHit.getContent());
@@ -248,7 +248,7 @@ public class ElasticsearchTest {
         //批量添加
         List<BulkOperation> list = new ArrayList<>();
         user.setPassword("password");
-        user.setUsername("username");
+        user.setUserName("username");
         list.add(new BulkOperation.Builder()
                 //删除替换delete
                 .create(d -> d.document(user).id("1").index(indexName))

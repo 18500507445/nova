@@ -5,6 +5,9 @@ import cn.hutool.json.JSONUtil;
 import com.nova.search.elasticsearch.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.*;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
@@ -21,6 +24,7 @@ import org.springframework.data.elasticsearch.core.query.*;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author: wzh
@@ -133,7 +137,9 @@ public class TemplateTest {
                 .build();
         //查询
         SearchHits<User> search = elasticsearchRestTemplate.search(searchQuery, User.class);
+        long totalHits = search.getTotalHits();
         List<User> userList = processSearch(search);
+        Console.log("totalCount {} ", totalHits);
         Console.log("jsonStr：{} ", JSONUtil.toJsonStr(userList));
     }
 
@@ -186,6 +192,27 @@ public class TemplateTest {
         Console.log("jsonStr：{} ", JSONUtil.toJsonStr(userList));
     }
 
+    //聚合查询
+    @Test
+    public void demoA() {
+        NativeSearchQueryBuilder query = new NativeSearchQueryBuilder();
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+
+        boolQueryBuilder.must(QueryBuilders.matchQuery("password", "password_1"));
+        query.withQuery(boolQueryBuilder);
+        // 作为聚合的字段不能是text类型。所以，author的mapping要有keyword，且通过password聚合。
+        query.withAggregations(AggregationBuilders.terms("count").field("password"));
+        // 不需要获取source结果集，在aggregation里可以获取结果
+        query.withSourceFilter(new FetchSourceFilterBuilder().build());
+
+        SearchHits<User> searchHits = elasticsearchRestTemplate.search(query.build(), User.class);
+        Map<String, Aggregation> aggregationMap = ((Aggregations) Objects.requireNonNull(searchHits.getAggregations()).aggregations()).asMap();
+
+        Console.log("aggregationMap：{} ", JSONUtil.toJsonStr(aggregationMap));
+        Aggregation count = aggregationMap.get("count");
+        System.out.println("count = " + JSONUtil.toJsonStr(count));
+    }
+
 
     //或者用maps的convert进行转换
     private static <T> List<T> processSearch(SearchHits<T> search) {
@@ -198,5 +225,59 @@ public class TemplateTest {
             list.add(searchHit.getContent());
         }
         return list;
+    }
+
+    /**
+     * @param key       : es里索引的域(字段名)
+     * @param classType : 返回的list里的对象并且通过对象里面@Document注解indexName属性获取查询哪个索引
+     * @param values    : 一域多值, 查询的值
+     * @description: 词条查询(不分前端传过来的数据)
+     * <p>
+     * term查询，查询text类型字段时，只有其中的单词相匹配都会查到，text字段会对数据进行分词
+     * term查询，查询keyword类型字段时，只有完全匹配才会查到，keyword字段不会对数据进行分词
+     * term query会去倒排索引中寻找确切的term，它并不知道分词器的存在。这种查询适合keyword 、numeric、date
+     */
+    public <T> List<T> termQuery(String key, Class<T> classType, String... values) {
+        //查询条件(词条查询：对应ES query里的term)
+        TermsQueryBuilder termsQueryBuilder = QueryBuilders.termsQuery(key, values);
+        //创建查询条件构建器SearchSourceBuilder(对应ES外面的大括号)
+        NativeSearchQuery searchQuery = new NativeSearchQuery(termsQueryBuilder);
+        //查询,获取查询结果
+        SearchHits<T> search = elasticsearchRestTemplate.search(searchQuery, classType);
+        //获取值返回
+        return search.getSearchHits().stream().map(SearchHit::getContent).collect(Collectors.toList());
+    }
+
+    @Test
+    public void testTermQuery() {
+        List<User> userList = termQuery("password", User.class, "password_1", "password_2");
+        Console.log("jsonStr：{} ", JSONUtil.toJsonStr(userList));
+    }
+
+    /**
+     * 例如入参分词: 山东省济南市  ik_smart粗粒度:[山东省,济南市] ik_max_word细粒度:[山东省,山东,省,济南市,济南,南市]
+     *
+     * @param operator  : Operator.OR(并集) [默认] 只要分的词有一个和索引字段上对应上则就返回，Operator.AND(交集)   分的词全部满足的数据返回
+     * @param analyzer  : 选择分词器[ik_smart粗粒度,ik_max_word细粒度] 默认:ik_max_word细粒度
+     * @param key       :  es里索引的域(字段名)
+     * @param classType :  返回的list里的对象并且通过对象里面@Document注解indexName属性获取查询哪个索引
+     * @param text      :  查询的值
+     * @description ：matchQuery:词条分词查询(会对查询条件进行分词)
+     */
+    public <T> List<T> matchQuery(Operator operator, String analyzer, String key, Class<T> classType, String text) {
+        //查询条件(词条查询：对应ES query里的match)
+        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(key, text).analyzer(analyzer).operator(operator);
+        //创建查询条件构建器SearchSourceBuilder(对应ES外面的大括号)
+        NativeSearchQuery nativeSearchQuery = new NativeSearchQuery(matchQueryBuilder);
+        //查询,获取查询结果
+        SearchHits<T> search = elasticsearchRestTemplate.search(nativeSearchQuery, classType);
+        //获取值返回
+        return search.getSearchHits().stream().map(SearchHit::getContent).collect(Collectors.toList());
+    }
+
+    @Test
+    public void testMatchQuery() {
+        List<User> userList = matchQuery(Operator.AND, "ik_smart", "password", User.class, "password_1");
+        Console.log("jsonStr：{} ", JSONUtil.toJsonStr(userList));
     }
 }

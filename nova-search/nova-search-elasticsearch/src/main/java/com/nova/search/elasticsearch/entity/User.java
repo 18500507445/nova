@@ -1,6 +1,11 @@
 package com.nova.search.elasticsearch.entity;
 
+import com.alibaba.fastjson2.annotation.JSONField;
+import com.nova.search.elasticsearch.annotation.BaseEsEntity;
+import com.nova.search.elasticsearch.annotation.EsRepository;
+import com.nova.search.elasticsearch.repository.UserRepository;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
@@ -16,9 +21,11 @@ import java.util.Date;
  * @description 实体类
  * @date: 2023/07/13 22:56
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Document(indexName = "user")
-public class User implements Serializable {
+@EsRepository(UserRepository.class)
+public class User extends BaseEsEntity implements Serializable {
 
     /**
      * 必须有 id,这里的 id 是全局唯一的标识，等同于 es 中的"_id"
@@ -36,6 +43,7 @@ public class User implements Serializable {
     private String userName;
 
     //密码1
+    @Field(name = "password", type = FieldType.Keyword)
     private String password;
 
     //密码2
@@ -43,6 +51,7 @@ public class User implements Serializable {
 
     //创建时间
     @Field(name = "createTime", type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     //忽略字段

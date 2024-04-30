@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 import com.alibaba.fastjson2.filter.SimplePropertyPreFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -52,7 +53,8 @@ public final class JsonUtils {
                 break;
         }
         set.addAll(fieldList);
-        String jsonString = JSON.toJSONString(object, filter);
+        //不忽略null值
+        String jsonString = JSON.toJSONString(object, filter, JSONWriter.Feature.WriteNulls);
         if (JSONObject.class.equals(clazz)) {
             return (T) JSON.parseObject(jsonString);
         } else if (JSONArray.class.equals(clazz)) {

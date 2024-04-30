@@ -525,11 +525,11 @@ public final class EsUtils {
     /**
      * @param aggregations {@link Aggregations}
      * @param key          key
-     * @param bucketType   {@link Terms,Range,Histogram,Filters,GeoGrid}
+     * @param bucketType   支持{@link Terms,Range,Histogram,Filters,GeoGrid}
      * @return : List<Bucket> ==> Map<key, docCount>
      * @description: 根据key获取所有桶，然后转List<Map>
      */
-    public static List<Map<String, Object>> getBucketsMap(Aggregations aggregations, String key, Class<?> bucketType) {
+    public static <T> List<Map<String, Object>> getBucketsMap(Aggregations aggregations, String key, Class<T> bucketType) {
         if (null == aggregations || StrUtil.isBlank(key) || null == bucketType) {
             return null;
         }
@@ -567,7 +567,7 @@ public final class EsUtils {
      * @return : List<Bucket> ==> List<Map<String, Object>>
      * @description: 根据key获取所有桶，然后转List<Map>
      */
-    public static <T> List<Map<String, Object>> getBucketsMap(SearchHits<T> searchHits, String key, Class<?> bucketType) {
+    public static <T> List<Map<String, Object>> getBucketsMap(SearchHits<T> searchHits, String key, Class<? extends MultiBucketsAggregation> bucketType) {
         if (null == searchHits) {
             return null;
         }
@@ -622,6 +622,5 @@ public final class EsUtils {
         }
         return indexOps;
     }
-
 
 }

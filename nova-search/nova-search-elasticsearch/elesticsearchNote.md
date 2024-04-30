@@ -673,7 +673,7 @@ public final class EsUtils {
 
 ### 基础查询代码
 ~~~java
-//基础查询
+    //基础查询
     @Test
     public void queryPage() {
         TimeInterval timer = DateUtil.timer();

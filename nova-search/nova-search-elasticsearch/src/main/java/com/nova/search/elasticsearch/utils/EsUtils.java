@@ -16,7 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.MultiField;
-import org.springframework.data.elasticsearch.core.*;
+import org.springframework.data.elasticsearch.core.AggregationsContainer;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.IndexOperations;
+import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.data.repository.CrudRepository;
@@ -329,7 +332,12 @@ public final class EsUtils {
      * @param searchHits {@link SearchHits}
      */
     public static <T> List<T> list(SearchHits<T> searchHits) {
-        return searchHits.stream().map(SearchHit::getContent).collect(Collectors.toList());
+        if (searchHits != null && searchHits.hasSearchHits()) {
+            List<T> list = new ArrayList<>();
+            searchHits.forEach(searchHit -> list.add(searchHit.getContent()));
+            return list;
+        }
+        return null;
     }
 
     /**
@@ -340,14 +348,17 @@ public final class EsUtils {
      * @param <T>        t
      */
     public static <T> PageResult<T> page(SearchHits<T> searchHits, Pageable pageable) {
-        long totalCount = searchHits.getTotalHits();
-        if (totalCount <= 0) {
-            PageResult.empty();
+        if (searchHits != null && searchHits.hasSearchHits()) {
+            long totalCount = searchHits.getTotalHits();
+            if (totalCount <= 0) {
+                PageResult.empty();
+            }
+            List<T> content = list(searchHits);
+            Page<T> page = new PageImpl<>(content, pageable, totalCount);
+            //⚠️注意：ES页码从0开始，需 +1
+            return PageResult.page(content, page.getNumber() + 1, page.getSize(), totalCount);
         }
-        List<T> content = list(searchHits);
-        Page<T> page = new PageImpl<>(content, pageable, totalCount);
-        //⚠️注意：ES页码从0开始，需 +1
-        return PageResult.page(content, page.getNumber() + 1, page.getSize(), totalCount);
+        return null;
     }
 
     /**
@@ -381,8 +392,8 @@ public final class EsUtils {
         if (null == aggregations) {
             return new ArrayList<>();
         }
-        Terms brandAgg = aggregations.get(key);
-        return brandAgg.getBuckets().stream()
+        Terms terms = aggregations.get(key);
+        return terms.getBuckets().stream()
                 .map(MultiBucketsAggregation.Bucket::getKey)
                 .collect(Collectors.toList());
     }
@@ -433,7 +444,6 @@ public final class EsUtils {
         if (null == aggregationsContainer) {
             return null;
         }
-
 
         Map<String, Aggregation> aggregationMap = ((Aggregations) aggregationsContainer.aggregations()).asMap();
         return aggregationMap.get(key);

@@ -1,17 +1,13 @@
 package com.nova.search.elasticsearch.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
-import com.nova.search.elasticsearch.annotation.BaseEsEntity;
 import com.nova.search.elasticsearch.annotation.EsRepository;
+import com.nova.search.elasticsearch.manage.BaseEsEntity;
 import com.nova.search.elasticsearch.repository.UserRepository;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,6 +21,8 @@ import java.util.Date;
 @Data
 @Document(indexName = "user")
 @EsRepository(UserRepository.class)
+//分片数量建议20-30G为一片，从缓冲区刷盘建议：30s，默认1s开销大
+@Setting(shards = 3, refreshInterval = "30s")
 public class User extends BaseEsEntity implements Serializable {
 
     /**
@@ -46,15 +44,29 @@ public class User extends BaseEsEntity implements Serializable {
     @Field(name = "password", type = FieldType.Keyword)
     private String password;
 
-    //密码2
-    private String passwordTwo;
+    //身份证
+    @Field(name = "idCard", type = FieldType.Keyword)
+    private String idCard;
+
+    //性别，1：男，2女
+    @Field(name = "sex", type = FieldType.Integer)
+    private Integer sex;
+
+    //年龄
+    @Field(name = "age", type = FieldType.Integer)
+    private Integer age;
+
+    //地址
+    @Field(name = "address", type = FieldType.Text, analyzer = "ik_max_word")
+    private String address;
 
     //创建时间
     @Field(name = "createTime", type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss")
+    //fastjson序列化格式
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     //忽略字段
-    @Transient
+    @Field(ignoreFields = "bala")
     private String bala;
 }

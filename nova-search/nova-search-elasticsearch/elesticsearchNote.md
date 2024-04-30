@@ -22,3 +22,12 @@
 QueryBuilders.termsQuery()：精确匹配查询类型，它可以匹配多个精确的值。你可以传递一个或多个值，termsQuery 将匹配包含这些值的文档。
 QueryBuilders.matchQuery()：全文检索查询类型，它会将查询字符串分析成词项，并在索引中匹配这些词项。它会考虑词项的相似性、权重和其他相关因素。通常用于对文本进行模糊搜索、匹配短语或对多个字段进行查询。
 
+### [ES查询超过限制，并且NativeSearchQuery设置max数](https://www.cnblogs.com/datangguanjunhou/p/16482242.html)
+
+
+### API说明
+* NativeSearchQuery ：是spring data中的查询条件；
+* NativeSearchQueryBuilder ：用于建造一个NativeSearchQuery查询对象；
+* QueryBuilders ：设置查询条件，是ES中的类，查询条件构构造器
+* SortBuilders ：设置排序条件；
+* HighlightBuilder ：设置高亮显示；

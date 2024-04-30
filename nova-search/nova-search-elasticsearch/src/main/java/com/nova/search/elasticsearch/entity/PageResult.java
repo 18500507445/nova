@@ -1,9 +1,8 @@
-package com.nova.orm.mybatisplus.entity;
+package com.nova.search.elasticsearch.entity;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.PageUtil;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import lombok.Data;
@@ -63,21 +62,6 @@ public class PageResult<T> {
             this.list = list;
         } else {
             this.list = pageInfo.getList();
-        }
-    }
-
-    private PageResult(List<T> list, IPage<T> iPage) {
-        if (null == iPage) {
-            return;
-        }
-        this.pageIndex = iPage.getCurrent();
-        this.pageSize = iPage.getSize();
-        this.totalCount = iPage.getTotal();
-        this.totalPage = iPage.getPages();
-        if (null != list) {
-            this.list = list;
-        } else {
-            this.list = iPage.getRecords();
         }
     }
 
@@ -151,27 +135,6 @@ public class PageResult<T> {
      */
     public static <T> PageResult<T> pageInfo(PageInfo<T> pageInfo) {
         return new PageResult<>(null, pageInfo);
-    }
-
-    /**
-     * 针对mybatisPlus-IPage对象，进行包装处理
-     *
-     * @param list<T> 手动传入list数据
-     * @param iPage   {@link IPage}
-     * @return <T>
-     */
-    public static <T> PageResult<T> iPage(List<T> list, IPage<T> iPage) {
-        return new PageResult<>(list, iPage);
-    }
-
-    /**
-     * 同上，list取iPage对象里的
-     *
-     * @param iPage {@link IPage}
-     * @return <T>
-     */
-    public static <T> PageResult<T> iPage(IPage<T> iPage) {
-        return new PageResult<>(null, iPage);
     }
 
     /**

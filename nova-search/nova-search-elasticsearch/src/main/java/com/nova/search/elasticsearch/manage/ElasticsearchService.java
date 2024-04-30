@@ -2,26 +2,19 @@ package com.nova.search.elasticsearch.manage;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.nova.search.elasticsearch.annotation.BaseEsEntity;
-import com.nova.search.elasticsearch.annotation.EsRepository;
-import com.nova.search.elasticsearch.utils.EsMapUtil;
+import com.nova.search.elasticsearch.utils.EsUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.IndexOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -35,152 +28,11 @@ import java.util.*;
  */
 @Slf4j(topic = "ElasticsearchService")
 @Component
+@Deprecated
 public class ElasticsearchService {
 
     @Resource
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
-
-    @Resource
-    private ApplicationContext context;
-
-    private boolean indexCreate(IndexOperations indexOps) {
-        if (!indexOps.exists()) {
-            indexOps.create();
-            log.info("索引创建成功");
-            return true;
-        } else {
-            log.info("索引创建失败");
-            return false;
-        }
-    }
-
-    private <T> IndexOperations indexCreate(String name, Class<T> clazz) {
-        IndexOperations indexOps;
-        if (null != clazz) {
-            indexOps = elasticsearchRestTemplate.indexOps(clazz);
-        } else {
-            indexOps = elasticsearchRestTemplate.indexOps(IndexCoordinates.of(name));
-        }
-        return indexOps;
-    }
-
-    /**
-     * 创建索引
-     *
-     * @param clazz 类.class
-     * @param <T>   泛型
-     * @description: 需要类打上@Document(indexName = "xx")注解才可以使用
-     */
-    public <T> boolean indexCreate(Class<T> clazz) {
-        IndexOperations indexOps = indexCreate(null, clazz);
-        return indexCreate(indexOps);
-    }
-
-    public boolean indexCreate(String name) {
-        IndexOperations indexOps = indexCreate(name, null);
-        return indexCreate(indexOps);
-    }
-
-    /**
-     * 判断索引是否存在
-     *
-     * @param clazz 类
-     * @param <T>   泛型
-     * @description: 需要类打上@Document(indexName = "xx")注解才可以使用
-     */
-    public <T> boolean indexExists(Class<T> clazz) {
-        IndexOperations indexOps = indexCreate(null, clazz);
-        return indexOps.exists();
-    }
-
-    public boolean indexExists(String name) {
-        IndexOperations indexOps = indexCreate(name, null);
-        return indexOps.exists();
-    }
-
-    /**
-     * 删除索引
-     *
-     * @param clazz 类
-     * @param <T>   泛型
-     * @description: 需要类打上@Document(indexName = "xx")注解才可以使用
-     */
-    public <T> boolean indexDelete(Class<T> clazz) {
-        IndexOperations indexOps = indexCreate(null, clazz);
-        return indexOps.delete();
-    }
-
-    public boolean indexDelete(String name) {
-        IndexOperations indexOps = indexCreate(name, null);
-        return indexOps.delete();
-    }
-
-    /**
-     * 新增数据
-     *
-     * @param bean 数据对象
-     */
-    @SuppressWarnings("unchecked")
-    public <T> void save(T bean) {
-        EsRepository esRepository = bean.getClass().getAnnotation(EsRepository.class);
-        CrudRepository<T, ?> crudRepository = (CrudRepository<T, ?>) context.getBean(esRepository.value());
-        crudRepository.save(bean);
-    }
-
-    //批量新增
-    @SuppressWarnings("unchecked")
-    public <T> void saveAll(List<T> list) {
-        if (null == list || list.isEmpty()) {
-            return;
-        }
-        EsRepository esRepository = list.get(0).getClass().getAnnotation(EsRepository.class);
-        CrudRepository<T, ?> crudRepository = (CrudRepository<T, ?>) context.getBean(esRepository.value());
-        crudRepository.saveAll(list);
-    }
-
-    //根据id查询单个对象
-    @SuppressWarnings("unchecked")
-    public <T, ID> T findById(ID id, Class<T> beanClass) {
-        EsRepository esRepository = beanClass.getAnnotation(EsRepository.class);
-        CrudRepository<T, ID> crudRepository = (CrudRepository<T, ID>) context.getBean(esRepository.value());
-        Optional<T> entity = crudRepository.findById(id);
-        return entity.orElse(null);
-    }
-
-    //根据idList查询list
-    @SuppressWarnings("unchecked")
-    public <T, ID> List<T> findAllById(Iterable<ID> ids, Class<T> beanClass) {
-        EsRepository esRepository = beanClass.getAnnotation(EsRepository.class);
-        CrudRepository<T, ID> crudRepository = (CrudRepository<T, ID>) context.getBean(esRepository.value());
-        return (List<T>) crudRepository.findAllById(ids);
-    }
-
-    //查找所有
-    @SuppressWarnings("unchecked")
-    public <T> List<T> findAll(Class<T> beanClass) {
-        EsRepository esRepository = beanClass.getAnnotation(EsRepository.class);
-        CrudRepository<T, ?> crudRepository = (CrudRepository<T, ?>) context.getBean(esRepository.value());
-        Iterable<T> all = crudRepository.findAll();
-        List<T> list = new ArrayList<>();
-        all.forEach(list::add);
-        return list;
-    }
-
-    //删除单个
-    @SuppressWarnings("unchecked")
-    public <T> void delete(T bean) {
-        EsRepository esRepository = bean.getClass().getAnnotation(EsRepository.class);
-        CrudRepository<T, ?> crudRepository = (CrudRepository<T, ?>) context.getBean(esRepository.value());
-        crudRepository.delete(bean);
-    }
-
-    //删除多个，根据ids
-    @SuppressWarnings("unchecked")
-    public <T, ID> void deleteAllById(Iterable<ID> ids, Class<T> beanClass) {
-        EsRepository esRepository = beanClass.getAnnotation(EsRepository.class);
-        CrudRepository<T, ID> crudRepository = (CrudRepository<T, ID>) context.getBean(esRepository.value());
-        crudRepository.deleteAllById(ids);
-    }
 
     /**
      * 数据查询，返回List
@@ -237,6 +89,7 @@ public class ElasticsearchService {
     }
 
     /*------------------------------------------- private 私有方法 ----------------------------------------------*/
+
     private <T> void getNestQueryBuilder(BoolQueryBuilder boolQueryBuilder, Class<T> clazz, List<BaseEsEntity.MultiLayerRelation> multiLayerQueryList) throws NoSuchFieldException {
         if (null != multiLayerQueryList && !multiLayerQueryList.isEmpty()) {
             for (BaseEsEntity.MultiLayerRelation r : multiLayerQueryList) {
@@ -279,7 +132,7 @@ public class ElasticsearchService {
                 } else {
                     vList.add(entry.getValue());
                 }
-                FieldType type = getFieldType(clazz, k);
+                FieldType type = EsUtils.getFieldType(clazz, k);
                 if (Objects.equals(type, FieldType.Text)) {
                     for (Object o : vList) {
                         if (o instanceof BaseEsEntity.RangeRelation) {
@@ -390,23 +243,6 @@ public class ElasticsearchService {
             }
         }
     }
-
-    private static <T> @Nullable FieldType getFieldType(Class<T> clazz, String k) throws NoSuchFieldException {
-        FieldType type = null;
-        if (!k.contains(".")) {
-            Field f = clazz.getDeclaredField(k);
-            if (f.isAnnotationPresent(org.springframework.data.elasticsearch.annotations.Field.class)) {
-                type = f.getAnnotation(org.springframework.data.elasticsearch.annotations.Field.class).type();
-            } else if (f.isAnnotationPresent(org.springframework.data.elasticsearch.annotations.MultiField.class)) {
-                type = f.getAnnotation(org.springframework.data.elasticsearch.annotations.MultiField.class).mainField().type();
-            }
-        } else {
-            //如果字段Field type定义的是Keyword，走matchQuery效果也是term精确查询
-            type = FieldType.Text;
-        }
-        return type;
-    }
-
 
     /**
      * 构建范围查询

@@ -1,6 +1,5 @@
-package com.nova.search.elasticsearch.annotation;
+package com.nova.search.elasticsearch.manage;
 
-import com.nova.search.elasticsearch.utils.EsMapUtil;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.List;
  * @description: 功能性字段(非mapping结构字段)
  */
 @Data
+@Deprecated
 public class BaseEsEntity {
 
     /**

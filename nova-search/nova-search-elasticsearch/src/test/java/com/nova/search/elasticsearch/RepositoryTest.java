@@ -13,7 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author: wzh
@@ -51,22 +54,6 @@ public class RepositoryTest {
         userRepository.save(user);
     }
 
-    //批量插入
-    @Test
-    public void insertList() {
-        List<User> list = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
-            User user = new User();
-            user.setId((long) i);
-            user.setUserName("张三_" + i);
-            user.setPassword("password_" + i);
-            user.setCreateTime(new Date());
-            list.add(user);
-        }
-        userRepository.saveAll(list);
-    }
-
-
     //根据id查询 + 多条
     @Test
     public void findById() {
@@ -103,7 +90,6 @@ public class RepositoryTest {
         List<Integer> idList = Arrays.asList(1, 2, 3, 4, 5);
         userRepository.deleteAllById(idList);
     }
-
 
     //jpa写法
     @Test

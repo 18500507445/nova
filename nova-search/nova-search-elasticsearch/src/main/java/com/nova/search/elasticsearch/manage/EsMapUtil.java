@@ -1,6 +1,4 @@
-package com.nova.search.elasticsearch.utils;
-
-import com.nova.search.elasticsearch.annotation.IGetterFunction;
+package com.nova.search.elasticsearch.manage;
 
 import java.io.Serializable;
 import java.lang.invoke.SerializedLambda;
@@ -13,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author wzh
  * @description: 工具类
  */
+@Deprecated
 public class EsMapUtil extends LinkedHashMap<String, Object> {
 
     public <T> EsMapUtil put(IGetterFunction<T> fn, Object value) {

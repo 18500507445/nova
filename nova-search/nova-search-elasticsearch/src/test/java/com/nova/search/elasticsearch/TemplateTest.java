@@ -14,6 +14,7 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.range.Range;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
@@ -283,7 +284,7 @@ public class TemplateTest {
         List<? extends Terms.Bucket> buckets = EsUtils.getBuckets(searchHits, key);
         Console.error("buckets：{}", JSONUtil.toJsonStr(buckets));
 
-        List<Map<String, Object>> listMap = EsUtils.getBucketsMap(searchHits, key);
+        List<Map<String, Object>> listMap = EsUtils.getBucketsMap(searchHits, key, Range.class);
         Console.error("listMap：{}", JSONUtil.toJsonStr(listMap));
     }
 

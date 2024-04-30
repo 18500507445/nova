@@ -1,5 +1,6 @@
 package com.nova.search.elasticsearch.utils;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
@@ -13,6 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
+import org.elasticsearch.search.aggregations.bucket.filter.Filters;
+import org.elasticsearch.search.aggregations.bucket.geogrid.GeoGrid;
+import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
+import org.elasticsearch.search.aggregations.bucket.range.Range;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -456,9 +461,9 @@ public final class EsUtils {
     /**
      * @param aggregations {@link Aggregations}
      * @param key          key
-     * @description: 根据key获取所有的桶
+     * @description: 根据key获取所有的桶，仅支持Terms类型
      */
-    public static <T> List<? extends Terms.Bucket> getBuckets(Aggregations aggregations, String key) {
+    public static List<? extends Terms.Bucket> getBuckets(Aggregations aggregations, String key) {
         if (null == aggregations) {
             return null;
         }
@@ -466,10 +471,11 @@ public final class EsUtils {
         return terms.getBuckets();
     }
 
+
     /**
      * @param searchHits {@link SearchHits}
      * @param key        key
-     * @description: 根据key获取所有的桶
+     * @description: 根据key获取所有的桶，仅支持Terms类型
      */
     public static <T> List<? extends Terms.Bucket> getBuckets(SearchHits<T> searchHits, String key) {
         if (null == searchHits) {
@@ -487,9 +493,9 @@ public final class EsUtils {
      * @param aggregations {@link Aggregations}
      * @param key          key
      * @return : List<Bucket> ==> Map<key, docCount>
-     * @description: 根据key获取所有桶，然后转List<Map>
+     * @description: 根据key获取所有桶，然后转List<Map>，仅支持Terms类型
      */
-    public static <T> List<Map<String, Object>> getBucketsMap(Aggregations aggregations, String key) {
+    public static List<Map<String, Object>> getBucketsMap(Aggregations aggregations, String key) {
         if (null == aggregations) {
             return null;
         }
@@ -502,7 +508,7 @@ public final class EsUtils {
      * @param searchHits {@link SearchHits}
      * @param key        key
      * @return : List<Bucket> ==> List<Map<String, Object>>
-     * @description: 根据key获取所有桶，然后转List<Map>
+     * @description: 根据key获取所有桶，然后转List<Map>，仅支持Terms类型
      */
     public static <T> List<Map<String, Object>> getBucketsMap(SearchHits<T> searchHits, String key) {
         if (null == searchHits) {
@@ -514,6 +520,63 @@ public final class EsUtils {
         }
         Aggregations aggregations = (Aggregations) aggregationsContainer.aggregations();
         return getBucketsMap(aggregations, key);
+    }
+
+    /**
+     * @param aggregations {@link Aggregations}
+     * @param key          key
+     * @param bucketType   {@link Terms,Range,Histogram,Filters,GeoGrid}
+     * @return : List<Bucket> ==> Map<key, docCount>
+     * @description: 根据key获取所有桶，然后转List<Map>
+     */
+    public static List<Map<String, Object>> getBucketsMap(Aggregations aggregations, String key, Class<?> bucketType) {
+        if (null == aggregations || StrUtil.isBlank(key) || null == bucketType) {
+            return null;
+        }
+        if (Terms.class.equals(bucketType)) {
+            Terms terms = aggregations.get(key);
+            return JSON.parseObject(JSONObject.toJSONString(terms.getBuckets()), new TypeReference<List<Map<String, Object>>>() {
+            });
+        }
+        if (Range.class.equals(bucketType)) {
+            Range range = aggregations.get(key);
+            return JSON.parseObject(JSONObject.toJSONString(range.getBuckets()), new TypeReference<List<Map<String, Object>>>() {
+            });
+        }
+        if (Histogram.class.equals(bucketType)) {
+            Histogram histogram = aggregations.get(key);
+            return JSON.parseObject(JSONObject.toJSONString(histogram.getBuckets()), new TypeReference<List<Map<String, Object>>>() {
+            });
+        }
+        if (Filters.class.equals(bucketType)) {
+            Filters filters = aggregations.get(key);
+            return JSON.parseObject(JSONObject.toJSONString(filters.getBuckets()), new TypeReference<List<Map<String, Object>>>() {
+            });
+        }
+        if (GeoGrid.class.equals(bucketType)) {
+            GeoGrid geoGrid = aggregations.get(key);
+            return JSON.parseObject(JSONObject.toJSONString(geoGrid.getBuckets()), new TypeReference<List<Map<String, Object>>>() {
+            });
+        }
+        return null;
+    }
+
+    /**
+     * @param searchHits {@link SearchHits}
+     * @param key        key
+     * @return : List<Bucket> ==> List<Map<String, Object>>
+     * @description: 根据key获取所有桶，然后转List<Map>
+     */
+    public static <T> List<Map<String, Object>> getBucketsMap(SearchHits<T> searchHits, String key, Class<?> bucketType) {
+        if (null == searchHits) {
+            return null;
+        }
+        AggregationsContainer<?> aggregationsContainer = searchHits.getAggregations();
+        if (null == aggregationsContainer) {
+            return null;
+        }
+        Aggregations aggregations = (Aggregations) aggregationsContainer.aggregations();
+        return getBucketsMap(aggregations, key, bucketType);
     }
 
 

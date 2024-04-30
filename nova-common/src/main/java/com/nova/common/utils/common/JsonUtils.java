@@ -38,8 +38,6 @@ public final class JsonUtils {
      * @param fieldList 字段list
      * @param clazz     JSONObject.class或JSONArray.class
      * @param type      枚举INCLUDE包含，EXCLUDE排除
-     * @param <T>
-     * @return
      */
     @SuppressWarnings("unchecked")
     public static <T> T fastJsonField(Object object, List<String> fieldList, Class<T> clazz, Type type) {
@@ -55,10 +53,9 @@ public final class JsonUtils {
         }
         set.addAll(fieldList);
         String jsonString = JSON.toJSONString(object, filter);
-        String name = clazz.getName();
-        if (JSONObject.class.getName().equals(name)) {
+        if (JSONObject.class.equals(clazz)) {
             return (T) JSON.parseObject(jsonString);
-        } else if (JSONArray.class.getName().equals(name)) {
+        } else if (JSONArray.class.equals(clazz)) {
             return (T) JSON.parseArray(jsonString);
         } else {
             return null;
@@ -72,12 +69,11 @@ public final class JsonUtils {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     /**
-     * 将对象转换成json字符串。
+     * 将对象转换成json字符串
      * <p>Title: pojoToJson</p>
      * <p>Description: </p>
      *
      * @param data
-     * @return
      */
     public static String objectToJson(Object data) {
         try {
@@ -92,7 +88,6 @@ public final class JsonUtils {
      * 将json结果集转化为对象
      *
      * @param jsonData json数据
-     * @return
      */
     public static <T> T jsonToPojo(String jsonData, Class<T> beanType) {
         try {
@@ -110,7 +105,6 @@ public final class JsonUtils {
      *
      * @param jsonData
      * @param beanType
-     * @return
      */
     public static <T> List<T> jsonToList(String jsonData, Class<T> beanType) {
         JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
@@ -126,7 +120,6 @@ public final class JsonUtils {
      * 将json结果集转化为Map
      *
      * @param jsonData json数据
-     * @return
      */
     public static Map jsonToMap(String jsonData) {
         try {

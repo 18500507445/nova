@@ -5,6 +5,7 @@ import com.nova.search.elasticsearch.annotation.EsRepository;
 import com.nova.search.elasticsearch.entity.PageResult;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.Aggregations;
@@ -366,7 +367,8 @@ public final class EsUtils {
      * @param key   字段名
      * @description: 获取字段类型
      */
-    public static <T> @Nullable FieldType getFieldType(Class<T> clazz, String key) throws NoSuchFieldException {
+    @SneakyThrows
+    public static <T> @Nullable FieldType getFieldType(Class<T> clazz, String key) {
         FieldType type = null;
         if (!key.contains(".")) {
             Field f = clazz.getDeclaredField(key);

@@ -283,8 +283,8 @@ public class TemplateTest {
         List<? extends Terms.Bucket> buckets = EsUtils.getBuckets(searchHits, key);
         Console.error("buckets：{}", JSONUtil.toJsonStr(buckets));
 
-        Map<Object, Long> map = EsUtils.getBucketsMap(searchHits, key);
-        Console.error("map：{}", JSONUtil.toJsonStr(map));
+        List<Map<String, Object>> listMap = EsUtils.getBucketsMap(searchHits, key);
+        Console.error("listMap：{}", JSONUtil.toJsonStr(listMap));
     }
 
     //嵌套聚合，性别分组后，求平均年龄

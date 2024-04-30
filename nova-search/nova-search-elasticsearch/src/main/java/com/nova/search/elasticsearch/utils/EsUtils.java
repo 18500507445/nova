@@ -1,6 +1,9 @@
 package com.nova.search.elasticsearch.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.TypeReference;
 import com.nova.search.elasticsearch.annotation.EsRepository;
 import com.nova.search.elasticsearch.entity.PageResult;
 import lombok.AccessLevel;
@@ -28,7 +31,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -481,28 +487,24 @@ public final class EsUtils {
      * @param aggregations {@link Aggregations}
      * @param key          key
      * @return : List<Bucket> ==> Map<key, docCount>
-     * @description: 根据key获取桶中的key和docCount数量，建议成度：一般
+     * @description: 根据key获取所有桶，然后转List<Map>
      */
-    public static <T> Map<Object, Long> getBucketsMap(Aggregations aggregations, String key) {
+    public static <T> List<Map<String, Object>> getBucketsMap(Aggregations aggregations, String key) {
         if (null == aggregations) {
             return null;
         }
         Terms terms = aggregations.get(key);
-        List<? extends Terms.Bucket> buckets = terms.getBuckets();
-        Map<Object, Long> hashMap = new HashMap<>(16);
-        for (Terms.Bucket bucket : buckets) {
-            hashMap.put(bucket.getKey(), bucket.getDocCount());
-        }
-        return hashMap;
+        return JSON.parseObject(JSONObject.toJSONString(terms.getBuckets()), new TypeReference<List<Map<String, Object>>>() {
+        });
     }
 
     /**
      * @param searchHits {@link SearchHits}
      * @param key        key
-     * @return : List<Bucket> ==> Map<key, docCount>
-     * @description: 根据key获取桶中的key和docCount数量，建议成度：一般
+     * @return : List<Bucket> ==> List<Map<String, Object>>
+     * @description: 根据key获取所有桶，然后转List<Map>
      */
-    public static <T> Map<Object, Long> getBucketsMap(SearchHits<T> searchHits, String key) {
+    public static <T> List<Map<String, Object>> getBucketsMap(SearchHits<T> searchHits, String key) {
         if (null == searchHits) {
             return null;
         }
@@ -513,6 +515,7 @@ public final class EsUtils {
         Aggregations aggregations = (Aggregations) aggregationsContainer.aggregations();
         return getBucketsMap(aggregations, key);
     }
+
 
     /*----------------------------------------- private 私有方法 --------------------------------------------*/
 
@@ -556,5 +559,6 @@ public final class EsUtils {
         }
         return indexOps;
     }
+
 
 }

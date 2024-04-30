@@ -446,6 +446,19 @@ public final class EsUtils {
     }
 
     /**
+     * @param aggregations {@link Aggregations}
+     * @param key          key
+     * @description: 根据key获取所有的桶
+     */
+    public static <T> List<? extends Terms.Bucket> getBuckets(Aggregations aggregations, String key) {
+        if (null == aggregations) {
+            return null;
+        }
+        Terms terms = aggregations.get(key);
+        return terms.getBuckets();
+    }
+
+    /**
      * @param searchHits {@link SearchHits}
      * @param key        key
      * @description: 根据key获取所有的桶
@@ -459,8 +472,7 @@ public final class EsUtils {
             return null;
         }
         Aggregations aggregations = (Aggregations) aggregationsContainer.aggregations();
-        Terms terms = aggregations.get(key);
-        return terms.getBuckets();
+        return getBuckets(aggregations, key);
     }
 
     /**

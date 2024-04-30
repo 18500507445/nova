@@ -434,7 +434,7 @@ public final class EsUtils {
      * @param key          key
      * @description: 根据key获取聚合
      */
-    public static <T> Aggregation getAgg(Aggregations aggregations, String key) {
+    public static Aggregation getAgg(Aggregations aggregations, String key) {
         if (null == aggregations) {
             return null;
         }

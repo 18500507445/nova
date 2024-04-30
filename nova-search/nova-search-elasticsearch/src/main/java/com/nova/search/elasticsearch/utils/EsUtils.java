@@ -476,6 +476,25 @@ public final class EsUtils {
     }
 
     /**
+     * @param aggregations {@link Aggregations}
+     * @param key          key
+     * @return : List<Bucket> ==> Map<key, docCount>
+     * @description: 根据key获取桶中的key和docCount数量，建议成度：一般
+     */
+    public static <T> Map<Object, Long> getBucketsMap(Aggregations aggregations, String key) {
+        if (null == aggregations) {
+            return null;
+        }
+        Terms terms = aggregations.get(key);
+        List<? extends Terms.Bucket> buckets = terms.getBuckets();
+        Map<Object, Long> hashMap = new HashMap<>(16);
+        for (Terms.Bucket bucket : buckets) {
+            hashMap.put(bucket.getKey(), bucket.getDocCount());
+        }
+        return hashMap;
+    }
+
+    /**
      * @param searchHits {@link SearchHits}
      * @param key        key
      * @return : List<Bucket> ==> Map<key, docCount>
@@ -490,13 +509,7 @@ public final class EsUtils {
             return null;
         }
         Aggregations aggregations = (Aggregations) aggregationsContainer.aggregations();
-        Terms terms = aggregations.get(key);
-        List<? extends Terms.Bucket> buckets = terms.getBuckets();
-        Map<Object, Long> hashMap = new HashMap<>(16);
-        for (Terms.Bucket bucket : buckets) {
-            hashMap.put(bucket.getKey(), bucket.getDocCount());
-        }
-        return hashMap;
+        return getBucketsMap(aggregations, key);
     }
 
     /*----------------------------------------- private 私有方法 --------------------------------------------*/

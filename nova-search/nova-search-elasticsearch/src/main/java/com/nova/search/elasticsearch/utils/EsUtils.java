@@ -390,7 +390,7 @@ public final class EsUtils {
      */
     public static List<Object> getAggKeys(Aggregations aggregations, String key) {
         if (null == aggregations) {
-            return new ArrayList<>();
+            return null;
         }
         Terms terms = aggregations.get(key);
         return terms.getBuckets().stream()
@@ -406,17 +406,14 @@ public final class EsUtils {
      */
     public static <T> List<Object> getAggKeys(SearchHits<T> searchHits, String key) {
         if (null == searchHits) {
-            return new ArrayList<>();
+            return null;
         }
         AggregationsContainer<?> aggregationsContainer = searchHits.getAggregations();
         if (null == aggregationsContainer) {
-            return new ArrayList<>();
+            return null;
         }
         Aggregations aggregations = (Aggregations) aggregationsContainer.aggregations();
-        Terms terms = aggregations.get(key);
-        return terms.getBuckets().stream()
-                .map(MultiBucketsAggregation.Bucket::getKey)
-                .collect(Collectors.toList());
+        return getAggKeys(aggregations, key);
     }
 
     /**
@@ -444,9 +441,8 @@ public final class EsUtils {
         if (null == aggregationsContainer) {
             return null;
         }
-
-        Map<String, Aggregation> aggregationMap = ((Aggregations) aggregationsContainer.aggregations()).asMap();
-        return aggregationMap.get(key);
+        Aggregations aggregations = (Aggregations) aggregationsContainer.aggregations();
+        return getAgg(aggregations, key);
     }
 
     /**

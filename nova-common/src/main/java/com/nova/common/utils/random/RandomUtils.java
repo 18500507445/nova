@@ -1,12 +1,13 @@
 package com.nova.common.utils.random;
 
 
-import com.nova.common.utils.common.LocalDateUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -25,7 +26,8 @@ public final class RandomUtils {
     /**
      * 权重随机对象 key:Object，value:权重
      *
-     * @param map
+     * @param map map
+     * @description: 替代品 参照huTool WeightRandom
      */
     public static Object random(Map<Object, Long> map) {
         Set<Map.Entry<Object, Long>> entries = map.entrySet();
@@ -299,8 +301,9 @@ public final class RandomUtils {
         // 16年内
         long endTimestamp = timestamp - oneYearTimestamp * 16;
         long randomTimestamp = beginTimestamp + (long) (Math.random() * (endTimestamp - beginTimestamp));
-        LocalDateTime localDateTime = LocalDateUtils.timestampToLocalDateTime(randomTimestamp);
-        String birth = LocalDateUtils.formatLocalDateTime(localDateTime, "yyyyMMdd");
+        Instant instant = Instant.ofEpochMilli(randomTimestamp);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        String birth = localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         return randomIdCard(birth, male);
     }
 

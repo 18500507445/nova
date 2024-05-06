@@ -1,9 +1,7 @@
-package com.nova.search.elasticsearch.entity;
+package com.nova.search.elasticsearch.repository;
 
 import com.alibaba.fastjson2.annotation.JSONField;
-import com.nova.search.elasticsearch.annotation.EsRepository;
 import com.nova.search.elasticsearch.manage.BaseEsEntity;
-import com.nova.search.elasticsearch.repository.UserRepository;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
@@ -17,11 +15,12 @@ import java.util.Date;
  * @description 实体类
  * @date: 2023/07/13 22:56
  */
+@Deprecated
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Document(indexName = "user")
-@EsRepository(UserRepository.class)
-//分片数量建议20-30G为一片，从缓冲区刷盘建议：30s，默认1s开销大
+//@EsRepository(UserRepository.class)
+//分片数量建议20-30G为一片（默认值1片，1副本），从缓冲区刷盘建议：30s，默认1s开销较大
 @Setting(shards = 3, refreshInterval = "30s")
 public class User extends BaseEsEntity implements Serializable {
 

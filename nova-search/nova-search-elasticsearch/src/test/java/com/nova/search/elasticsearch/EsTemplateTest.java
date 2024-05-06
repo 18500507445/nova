@@ -5,7 +5,7 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.lang.Console;
 import cn.hutool.json.JSONUtil;
 import com.nova.search.elasticsearch.entity.PageResult;
-import com.nova.search.elasticsearch.entity.User;
+import com.nova.search.elasticsearch.repository.User;
 import com.nova.search.elasticsearch.utils.EsUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.common.unit.Fuzziness;
@@ -42,7 +42,7 @@ import java.util.*;
  */
 @Slf4j
 @SpringBootTest
-public class TemplateTest {
+public class EsTemplateTest {
 
     @Resource
     private ElasticsearchRestTemplate elasticsearchRestTemplate;

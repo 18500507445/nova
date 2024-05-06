@@ -134,7 +134,7 @@ public final class EsUtils {
         }
         EsRepository esRepository = list.get(0).getClass().getAnnotation(EsRepository.class);
         if (null == esRepository) {
-            printError(list.get(0));
+            printError(list.get(0).getClass());
         }
         CrudRepository<T, ?> crudRepository = (CrudRepository<T, ?>) SpringUtil.getBean(esRepository.value());
         crudRepository.saveAll(list);
@@ -237,7 +237,7 @@ public final class EsUtils {
     public static <T> Page<T> findAll(T bean, @Nullable String[] fields, Pageable pageable) {
         EsRepository esRepository = bean.getClass().getAnnotation(EsRepository.class);
         if (null == esRepository) {
-            printError(bean);
+            printError(bean.getClass());
         }
         ElasticsearchRepository<T, ?> crudRepository = (ElasticsearchRepository<T, ?>) SpringUtil.getBean(esRepository.value());
         return crudRepository.searchSimilar(bean, fields, pageable);
@@ -283,7 +283,7 @@ public final class EsUtils {
     public static <T> void delete(T bean) {
         EsRepository esRepository = bean.getClass().getAnnotation(EsRepository.class);
         if (null == esRepository) {
-            printError(bean);
+            printError(bean.getClass());
         }
         CrudRepository<T, ?> crudRepository = (CrudRepository<T, ?>) SpringUtil.getBean(esRepository.value());
         crudRepository.delete(bean);
@@ -591,6 +591,11 @@ public final class EsUtils {
     //运行异常，提示语句
     private static <T> void printError(T t) {
         String simpleName = t.getClass().getSimpleName();
+        throw new RuntimeException(simpleName + "类打上@EsRepository(" + simpleName + "Repository.class)注解");
+    }
+
+    private static <T> void printError(Class<T> t) {
+        String simpleName = t.getSimpleName();
         throw new RuntimeException(simpleName + "类打上@EsRepository(" + simpleName + "Repository.class)注解");
     }
 

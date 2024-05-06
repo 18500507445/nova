@@ -1,7 +1,6 @@
-## nova-search-elasticsearch
+## es学习
 
-### 参考文档
-> 官方文档 <https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html>  
+### [官方文档](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html)
 
 ### 名词解释
 1.索引（Index）：索引是Elasticsearch中存储、搜索和分析数据的地方，类似于关系型数据库中的表。一个索引可以包含多个文档，并且可以分布在一个或多个分片上。
@@ -14,18 +13,12 @@
 8.查询（Query）：查询是用于从Elasticsearch中检索数据的操作。Elasticsearch提供了丰富的查询语言和API，包括全文搜索、精确匹配、范围查询、聚合等功能。
 9.聚合（Aggregation）：聚合是在Elasticsearch中进行数据分析的一种功能。它允许你对数据进行分组、计算统计信息、生成报告等，以获取有关数据的洞察力。
 
-### QueryBuilders
-QueryBuilders.termsQuery()：精确匹配查询类型，它可以匹配多个精确的值。你可以传递一个或多个值，termsQuery 将匹配包含这些值的文档。
-QueryBuilders.matchQuery()：全文检索查询类型，它会将查询字符串分析成词项，并在索引中匹配这些词项。它会考虑词项的相似性、权重和其他相关因素。通常用于对文本进行模糊搜索、匹配短语或对多个字段进行查询。
-
-### [ES查询超过限制，并且NativeSearchQuery设置max数](https://www.cnblogs.com/datangguanjunhou/p/16482242.html)
-
 ### API说明
-* NativeSearchQuery ：是spring data中的查询条件；
-* NativeSearchQueryBuilder ：用于建造一个NativeSearchQuery查询对象；
+* NativeSearchQuery ：是Spring data中的查询条件
+* NativeSearchQueryBuilder ：建造一个NativeSearchQuery查询对象
 * QueryBuilders ：设置查询条件，是ES中的类，查询条件构构造器
-* SortBuilders ：设置排序条件；
-* HighlightBuilder ：设置高亮显示；
+* SortBuilders ：设置排序条件
+* HighlightBuilder ：设置高亮显示
 
 ### 桶的说明
 * Terms Bucket（术语桶）：根据字段值进行分组，类似于SQL中的GROUP BY。可以统计每个术语的文档数量或其他指标。
@@ -36,6 +29,8 @@ QueryBuilders.matchQuery()：全文检索查询类型，它会将查询字符串
 * Filter Bucket（过滤桶）：根据给定的过滤条件对文档进行过滤并创建一个桶。可以在桶内统计过滤后的文档数量或其他指标。
 * Nested Bucket（嵌套桶）：用于在嵌套文档结构中进行分组，类似于在嵌套对象上进行递归操作。
 
+### 常见问题
+* [ES查询超过限制，并且NativeSearchQuery设置max数](https://www.cnblogs.com/datangguanjunhou/p/16482242.html)
 
 ### 工具类如何使用
 1.实体类打上@EsRepository注解

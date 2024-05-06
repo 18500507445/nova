@@ -2,7 +2,7 @@ package com.nova.search.elasticsearch;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.json.JSONUtil;
-import com.nova.search.elasticsearch.entity.User;
+import com.nova.search.elasticsearch.repository.User;
 import com.nova.search.elasticsearch.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import java.util.Optional;
  */
 @Slf4j
 @SpringBootTest
-public class RepositoryTest {
+public class EsJpaTest {
 
     @Resource
     private UserRepository userRepository;

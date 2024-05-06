@@ -1,6 +1,5 @@
 package com.nova.search.elasticsearch.repository;
 
-import com.nova.search.elasticsearch.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;

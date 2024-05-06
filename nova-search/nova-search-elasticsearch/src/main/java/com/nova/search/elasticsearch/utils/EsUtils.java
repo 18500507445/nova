@@ -590,13 +590,11 @@ public final class EsUtils {
 
     //运行异常，提示语句
     private static <T> void printError(T t) {
-        String simpleName = t.getClass().getSimpleName();
-        throw new RuntimeException(simpleName + "类打上@EsRepository(" + simpleName + "Repository.class)注解");
+        throw new RuntimeException(t.getClass().getName() + "类打上@EsRepository(" + t.getClass().getSimpleName() + "Repository.class)注解");
     }
 
     private static <T> void printError(Class<T> t) {
-        String simpleName = t.getSimpleName();
-        throw new RuntimeException(simpleName + "类打上@EsRepository(" + simpleName + "Repository.class)注解");
+        throw new RuntimeException(t.getName() + "类打上@EsRepository(" + t.getSimpleName() + "Repository.class)注解");
     }
 
     //创建索引，提示

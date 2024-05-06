@@ -18,7 +18,7 @@ import java.util.Date;
 @Deprecated
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Document(indexName = "user")
+@Document(indexName = "user1")
 //@EsRepository(UserRepository.class)
 //分片数量建议20-30G为一片（默认值1片，1副本），从缓冲区刷盘建议：30s，默认1s开销较大
 @Setting(shards = 3, refreshInterval = "30s")

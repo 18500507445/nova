@@ -2,6 +2,9 @@ package com.nova.tools.common;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nova.common.utils.common.JsonUtils;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
@@ -104,6 +107,10 @@ class LombokTest {
     @Data
     @ToString
     static class DemoD {
+        //fastjson别名
+        @JSONField(name = "pId")
+        //jackson别名
+        @JsonProperty(value = "pId")
         private String pId = "1";
         private boolean isOpen = false;
     }
@@ -114,6 +121,9 @@ class LombokTest {
         System.err.println("hutoolJson = " + JSONUtil.toJsonStr(demoD));
         System.err.println("fastJson = " + JSONObject.toJSONString(demoD));
         System.err.println("toString = " + demoD);
+
+        String jackson = JsonUtils.objectToJson(demoD);
+        System.err.println("jackson = " + jackson);
     }
 
 }

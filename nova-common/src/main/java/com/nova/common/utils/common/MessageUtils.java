@@ -12,6 +12,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MessageUtils {
+
     /**
      * 根据消息键和参数 获取消息 委托给spring messageSource
      *

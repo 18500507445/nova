@@ -23,7 +23,6 @@ public final class EmojiUtils {
     /**
      * @param str 待转换字符串
      * @return 转换后字符串
-     * @throws UnsupportedEncodingException
      * @description emoji表情转换
      */
     public static String emojiConvertToUtf(String str) {
@@ -53,10 +52,9 @@ public final class EmojiUtils {
     /**
      * @param str 转换后的字符串
      * @return 转换前的字符串
-     * @throws UnsupportedEncodingException
      * @description 还原emoji表情的字符串
      */
-    public static String utfemojiRecovery(String str) {
+    public static String utfEmojiRecovery(String str) {
         if (StrUtil.isBlank(str)) {
             return "";
         }
@@ -84,7 +82,7 @@ public final class EmojiUtils {
     }
 
     public static void main(String[] args) {
-        String s = EmojiUtils.utfemojiRecovery("<emoji>%F0%9F%91%8C</emoji>");
+        String s = EmojiUtils.utfEmojiRecovery("<emoji>%F0%9F%91%8C</emoji>");
         System.err.println(s);
         String s1 = EmojiUtils.emojiConvertToUtf(s);
         System.err.println(s1);

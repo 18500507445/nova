@@ -21,7 +21,7 @@ import java.util.Map.Entry;
  */
 @Slf4j(topic = "HttpRequestProxy")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class HttpRequestProxy {
+public final class HttpUtils {
 
     /**
      * 连接超时
@@ -81,13 +81,13 @@ public final class HttpRequestProxy {
             }
             log.info("result - {}", result);
         } catch (ConnectException e) {
-            log.error("调用HttpUtils.sendGet ConnectException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendGet ConnectException, url={},param={}", url, param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendGet SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendGet SocketTimeoutException, url={},param={}", url, param, e);
         } catch (IOException e) {
-            log.error("调用HttpUtils.sendGet IOException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendGet IOException, url={},param={}", url, param, e);
         } catch (Exception e) {
-            log.error("调用HttpsUtil.sendGet Exception, url=" + url + ",param=" + param, e);
+            log.error("调用HttpsUtil.sendGet Exception, url={},param={}", url, param, e);
         }
         return result.toString();
     }
@@ -123,13 +123,13 @@ public final class HttpRequestProxy {
             }
             log.info("result - {}", result);
         } catch (ConnectException e) {
-            log.error("调用HttpUtils.sendPost ConnectException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPost ConnectException, url={},param={}", url, param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendPost SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPost SocketTimeoutException, url={},param={}", url, param, e);
         } catch (IOException e) {
-            log.error("调用HttpUtils.sendPost IOException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPost IOException, url={},param={}", url, param, e);
         } catch (Exception e) {
-            log.error("调用HttpsUtil.sendPost Exception, url=" + url + ",param=" + param, e);
+            log.error("调用HttpsUtil.sendPost Exception, url={},param={}", url, param, e);
         } finally {
             try {
                 if (in != null) {
@@ -143,7 +143,7 @@ public final class HttpRequestProxy {
     }
 
     /**
-     * 糊涂工具类
+     * 糊涂工具类，get请求
      */
     public static String sendGet(String url, Map<String, String> header, Map<String, Object> param) {
         return HttpUtil.createGet(url)
@@ -154,7 +154,7 @@ public final class HttpRequestProxy {
     }
 
     /**
-     *
+     * 糊涂工具类，post请求
      */
     public static String sendPost(String url, Map<String, String> header, Map<String, Object> param) {
         return HttpUtil.createPost(url)
@@ -194,11 +194,14 @@ public final class HttpRequestProxy {
             long time11 = System.currentTimeMillis();
             url_con = (HttpURLConnection) url.openConnection();
             url_con.setRequestMethod("GET");
-            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.CONNECT_TIME_OUT));// （单位：毫秒）jdk1.4换成这个,连接超时
-            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.READ_TIME_OUT)); // （单位：毫秒）jdk1.4换成这个,读操作超时
-            url_con.setConnectTimeout(HttpRequestProxy.CONNECT_TIME_OUT);//（单位：毫秒）jdk
-            // 1.5换成这个,连接超时
-            url_con.setReadTimeout(HttpRequestProxy.READ_TIME_OUT);//（单位：毫秒）jdk 1.5换成这个,读操作超时
+            // （单位：毫秒）jdk1.4换成这个,连接超时
+            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpUtils.CONNECT_TIME_OUT));
+            // （单位：毫秒）jdk1.4换成这个,读操作超时
+            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpUtils.READ_TIME_OUT));
+            //（单位：毫秒）jdk
+            url_con.setConnectTimeout(HttpUtils.CONNECT_TIME_OUT);
+            // （单位：毫秒）jdk 1.5换成这个,读操作超时
+            url_con.setReadTimeout(HttpUtils.READ_TIME_OUT);
             url_con.setDoOutput(true);
             byte[] b = params.toString().getBytes();
             url_con.getOutputStream().write(b, 0, b.length);
@@ -209,7 +212,7 @@ public final class HttpRequestProxy {
             rd = new BufferedReader(new InputStreamReader(in, recvEncoding));
             String tempLine = rd.readLine();
             StringBuilder temp = new StringBuilder();
-            String crlf = System.getProperty("line.separator");
+            String crlf = System.lineSeparator();
             while (tempLine != null) {
                 temp.append(tempLine);
                 temp.append(crlf);
@@ -265,32 +268,33 @@ public final class HttpRequestProxy {
 
             if (paramIndex > 0) {
                 queryUrl = reqUrl.substring(0, paramIndex);
-                String parameters = reqUrl.substring(paramIndex + 1, reqUrl.length());
+                String parameters = reqUrl.substring(paramIndex + 1);
                 String[] paramArray = parameters.split("&");
-                for (int i = 0; i < paramArray.length; i++) {
-                    String string = paramArray[i];
+                for (String string : paramArray) {
                     int index = string.indexOf("=");
                     if (index > 0) {
                         String parameter = string.substring(0, index);
-                        String value = string.substring(index + 1, string.length());
+                        String value = string.substring(index + 1);
                         params.append(parameter);
                         params.append("=");
                         params.append(URLEncoder.encode(value, requestEncoding));
                         params.append("&");
                     }
                 }
-
                 params = params.deleteCharAt(params.length() - 1);
             }
 
             URL url = new URL(queryUrl);
             url_con = (HttpURLConnection) url.openConnection();
             url_con.setRequestMethod("GET");
-            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.CONNECT_TIME_OUT));// （单位：毫秒）jdk1.4换成这个,连接超时
-            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.READ_TIME_OUT)); // （单位：毫秒）jdk1.4换成这个,读操作超时
-            url_con.setConnectTimeout(HttpRequestProxy.CONNECT_TIME_OUT);//（单位：毫秒）jdk
-            // 1.5换成这个,连接超时
-            url_con.setReadTimeout(HttpRequestProxy.READ_TIME_OUT);//（单位：毫秒）jdk 1.5换成这个,读操作超时
+            // （单位：毫秒）jdk1.4换成这个,连接超时
+            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpUtils.CONNECT_TIME_OUT));
+            // （单位：毫秒）jdk1.4换成这个,读操作超时
+            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpUtils.READ_TIME_OUT));
+            //（单位：毫秒）jdk
+            url_con.setConnectTimeout(HttpUtils.CONNECT_TIME_OUT);
+            // //（单位：毫秒）jdk 1.5换成这个,读操作超时
+            url_con.setReadTimeout(HttpUtils.READ_TIME_OUT);
             url_con.setDoOutput(true);
             byte[] b = params.toString().getBytes();
             url_con.getOutputStream().write(b, 0, b.length);
@@ -300,7 +304,7 @@ public final class HttpRequestProxy {
             rd = new BufferedReader(new InputStreamReader(in, recvEncoding));
             String tempLine = rd.readLine();
             StringBuilder temp = new StringBuilder();
-            String crlf = System.getProperty("line.separator");
+            String crlf = System.lineSeparator();
             while (tempLine != null) {
                 temp.append(tempLine);
                 temp.append(crlf);
@@ -345,7 +349,7 @@ public final class HttpRequestProxy {
      */
     public static String doPost(String reqUrl, Map<String, String> parameters, String recvEncoding,
                                 String requestEncoding) {
-        HttpURLConnection url_con = null;
+        HttpURLConnection urlCon = null;
         String responseContent = null;
         InputStream in = null;
         BufferedReader rd = null;
@@ -361,27 +365,28 @@ public final class HttpRequestProxy {
                 params = params.deleteCharAt(params.length() - 1);
             }
             URL url = new URL(reqUrl);
-            url_con = (HttpURLConnection) url.openConnection();
-            url_con.setRequestMethod("POST");
+            urlCon = (HttpURLConnection) url.openConnection();
+            urlCon.setRequestMethod("POST");
             // （单位：毫秒）jdk1.4换成这个,连接超时
-            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpRequestProxy.CONNECT_TIME_OUT));
+            System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(HttpUtils.CONNECT_TIME_OUT));
             // （单位：毫秒）jdk1.4换成这个,读操作超时
-            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpRequestProxy.READ_TIME_OUT));
-            url_con.setConnectTimeout(HttpRequestProxy.CONNECT_TIME_OUT);//（单位：毫秒）jdk
-            // 1.5换成这个,连接超时
-            url_con.setReadTimeout(HttpRequestProxy.READ_TIME_OUT);//（单位：毫秒）jdk 1.5换成这个,读操作超时
+            System.setProperty("sun.net.client.defaultReadTimeout", String.valueOf(HttpUtils.READ_TIME_OUT));
+            //（单位：毫秒）jdk
+            urlCon.setConnectTimeout(HttpUtils.CONNECT_TIME_OUT);
+            //（单位：毫秒）jdk 1.5换成这个,读操作超时
+            urlCon.setReadTimeout(HttpUtils.READ_TIME_OUT);
 
-            url_con.setDoOutput(true);
+            urlCon.setDoOutput(true);
             byte[] b = params.toString().getBytes();
-            url_con.getOutputStream().write(b, 0, b.length);
-            url_con.getOutputStream().flush();
-            url_con.getOutputStream().close();
+            urlCon.getOutputStream().write(b, 0, b.length);
+            urlCon.getOutputStream().flush();
+            urlCon.getOutputStream().close();
 
-            in = url_con.getInputStream();
+            in = urlCon.getInputStream();
             rd = new BufferedReader(new InputStreamReader(in, recvEncoding));
             String tempLine = rd.readLine();
             StringBuilder tempStr = new StringBuilder();
-            String crlf = System.getProperty("line.separator");
+            String crlf = System.lineSeparator();
             while (tempLine != null) {
                 tempStr.append(tempLine);
                 tempStr.append(crlf);
@@ -407,8 +412,8 @@ public final class HttpRequestProxy {
                     log.error("异常信息:", e);
                 }
             }
-            if (url_con != null) {
-                url_con.disconnect();
+            if (urlCon != null) {
+                urlCon.disconnect();
             }
         }
         return responseContent;
@@ -446,13 +451,13 @@ public final class HttpRequestProxy {
             }
             log.info("result - {}", result);
         } catch (ConnectException e) {
-            log.error("调用HttpUtils.sendPost ConnectException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPost ConnectException, url={},param={}", url, param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendPost SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPost SocketTimeoutException, url={},param={}", url, param, e);
         } catch (IOException e) {
-            log.error("调用HttpUtils.sendPost IOException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPost IOException, url={},param={}", url, param, e);
         } catch (Exception e) {
-            log.error("调用HttpsUtil.sendPost Exception, url=" + url + ",param=" + param, e);
+            log.error("调用HttpsUtil.sendPost Exception, url={},param={}", url, param, e);
         } finally {
             try {
                 if (out != null) {
@@ -462,7 +467,7 @@ public final class HttpRequestProxy {
                     in.close();
                 }
             } catch (IOException ex) {
-                log.error("调用in.close Exception, url=" + url + ",param=" + param, ex);
+                log.error("调用in.close Exception, url={},param={}", url, param, ex);
             }
         }
         return result.toString();
@@ -506,13 +511,13 @@ public final class HttpRequestProxy {
             conn.disconnect();
             br.close();
         } catch (ConnectException e) {
-            log.error("调用HttpUtils.sendSSLPost ConnectException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendSSLPost ConnectException, url={},param={}", url, param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendSSLPost SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendSSLPost SocketTimeoutException, url={},param={}", url, param, e);
         } catch (IOException e) {
-            log.error("调用HttpUtils.sendSSLPost IOException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendSSLPost IOException, url={},param={}", url, param, e);
         } catch (Exception e) {
-            log.error("调用HttpsUtil.sendSSLPost Exception, url=" + url + ",param=" + param, e);
+            log.error("调用HttpsUtil.sendSSLPost Exception, url={},param={}", url, param, e);
         }
         return result.toString();
     }
@@ -546,13 +551,13 @@ public final class HttpRequestProxy {
             String encoding = conn.getContentEncoding();
             result = IOUtils.toString(is, encoding);
         } catch (ConnectException e) {
-            log.error("调用HttpUtils.sendPostBody ConnectException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPostBody ConnectException, url={},param={}", url, param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendPostBody SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPostBody SocketTimeoutException, url={},param={}", url, param, e);
         } catch (IOException e) {
-            log.error("调用HttpUtils.sendPostBody IOException, url=" + url + ",param=" + param, e);
+            log.error("调用HttpUtils.sendPostBody IOException, url={},param={}", url, param, e);
         } catch (Exception e) {
-            log.error("调用HttpsUtil.sendPostBody Exception, url=" + url + ",param=" + param, e);
+            log.error("调用HttpsUtil.sendPostBody Exception, url={},param={}", url, param, e);
         }
         return result;
     }
@@ -616,7 +621,6 @@ public final class HttpRequestProxy {
      * 获取二进制文件
      *
      * @param urlStr
-     * @return
      * @throws IOException
      */
     public static byte[] downLoadBinary(String urlStr) throws IOException {
@@ -635,7 +639,6 @@ public final class HttpRequestProxy {
      * 输入流转二进制
      *
      * @param inputStream
-     * @return
      * @throws IOException
      */
     public static byte[] readInputStream(InputStream inputStream) throws IOException {

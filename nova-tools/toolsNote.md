@@ -3,7 +3,8 @@
 ### 简介:
 
 * （1）练习demo，java8特性，hutool测试类，guava测试类
-* （2）[sql练习](https://github.com/dongxuyang1985/sql_in_action)
+* （2）[SQL练习](https://github.com/dongxuyang1985/sql_in_action)
+* （3）[SQL高级技巧](/Users/wangzehui/Documents/IdeaProjects/nova/nova-tools/src/main/java/com/nova/tools/base/sql/SQL高级技巧.md)
 
 ##组织结构
 ```

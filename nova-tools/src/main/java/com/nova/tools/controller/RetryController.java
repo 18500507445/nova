@@ -37,7 +37,7 @@ public class RetryController {
     public static class RemoteService {
 
         /**
-         * @Retryable：标记当前方法会使用重试机制 value：重试的触发机制，当遇到Exception异常的时候，会触发重试，这里的Exception你也可以写的更精确
+         * 注解@Retryable：标记当前方法会使用重试机制 value：重试的触发机制，当遇到Exception异常的时候，会触发重试，这里的Exception你也可以写的更精确
          * maxAttempts：重试次数（包括第一次调用），默认三次
          * delay：重试的间隔时间
          * multiplier：delay时间的间隔倍数
@@ -53,7 +53,7 @@ public class RetryController {
         }
 
         /**
-         * @Recover，标记方法为回调方法，传参与@Retryable的value值需一致 定义回调, 注意异常类型和方法返回值类型要与重试方法一致
+         * 注解@Recover，标记方法为回调方法，传参与@Retryable的value值需一致 定义回调, 注意异常类型和方法返回值类型要与重试方法一致
          */
         @Recover
         public String recover(RemoteAccessException e) {
@@ -98,12 +98,16 @@ public class RetryController {
      */
     public void guavaRetryDemo() throws ExecutionException, RetryException {
         // 创建重试器
-        Retryer<String> retryer = RetryerBuilder.<String>newBuilder().retryIfResult(StrUtil::isBlank) // 结果为null、""才重试
+
+        // 结果为null、""才重试
+        Retryer<String> retryer = RetryerBuilder.<String>newBuilder().retryIfResult(StrUtil::isBlank)
                 .retryIfException() // 有异常就重试
                 .withWaitStrategy(WaitStrategies.fibonacciWait(1000, 1, TimeUnit.MINUTES))
 //                .withWaitStrategy(WaitStrategies.fixedWait(500, TimeUnit.MILLISECONDS))
 //                .withWaitStrategy(WaitStrategies.exponentialWait(1000, 1, TimeUnit.MINUTES))
-                .withStopStrategy(StopStrategies.stopAfterAttempt(10)) // 最多重试3次
+
+                // 最多重试3次
+                .withStopStrategy(StopStrategies.stopAfterAttempt(10))
                 .build();
 
         LongAdder longAdder = new LongAdder();
@@ -121,7 +125,7 @@ public class RetryController {
                 return "";
             }
         });
-        System.err.println(result);
+        System.err.println("result = " + result);
     }
 
 }

@@ -22,6 +22,7 @@ public class User {
 
     private String updateTime;
 
+    //屏蔽字段
     @Transient
     private String startTime;
 

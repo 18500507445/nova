@@ -21,8 +21,9 @@ import java.util.Map;
 /**
  * @author wzh
  */
-@Slf4j(topic = "ExcelUtils")
-public class ExcelUtils {
+@Slf4j(topic = "EasyPoiUtils")
+public class EasyPoiUtils {
+
     /**
      * excel 导出
      *
@@ -32,7 +33,7 @@ public class ExcelUtils {
      * @param pojoClass      pojo类型
      * @param fileName       文件名称
      * @param isCreateHeader 是否创建表头
-     * @param response
+     * @param response       响应
      */
     public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response) {
         ExportParams exportParams = new ExportParams(title, sheetName, ExcelType.XSSF);
@@ -48,7 +49,7 @@ public class ExcelUtils {
      * @param sheetName sheet名称
      * @param pojoClass pojo类型
      * @param fileName  文件名称
-     * @param response
+     * @param response  响应
      */
     public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, HttpServletResponse response) {
         defaultExport(list, pojoClass, fileName, response, new ExportParams(title, sheetName, ExcelType.XSSF));
@@ -60,7 +61,7 @@ public class ExcelUtils {
      * @param list         数据
      * @param pojoClass    pojo类型
      * @param fileName     文件名称
-     * @param response
+     * @param response     响应
      * @param exportParams 导出参数
      */
     public static void exportExcel(List<?> list, Class<?> pojoClass, String fileName, ExportParams exportParams, HttpServletResponse response) {
@@ -72,7 +73,7 @@ public class ExcelUtils {
      *
      * @param list     数据
      * @param fileName 文件名称
-     * @param response
+     * @param response 响应
      */
     public static void exportExcel(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
         defaultExport(list, fileName, response);
@@ -84,7 +85,7 @@ public class ExcelUtils {
      * @param list         数据
      * @param pojoClass    pojo类型
      * @param fileName     文件名称
-     * @param response
+     * @param response     响应
      * @param exportParams 导出参数
      */
     private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName, HttpServletResponse response, ExportParams exportParams) {
@@ -97,7 +98,7 @@ public class ExcelUtils {
      *
      * @param list     数据
      * @param fileName 文件名称
-     * @param response
+     * @param response 响应
      */
     private static void defaultExport(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
         Workbook workbook = ExcelExportUtil.exportExcel(list, ExcelType.HSSF);
@@ -108,7 +109,7 @@ public class ExcelUtils {
      * 下载
      *
      * @param fileName 文件名称
-     * @param response
+     * @param response 响应
      * @param workbook excel数据
      */
     public static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
@@ -129,8 +130,7 @@ public class ExcelUtils {
      * @param titleRows  标题行
      * @param headerRows 表头行
      * @param pojoClass  pojo类型
-     * @param <T>
-     * @return
+     * @param <T>        t
      */
     public static <T> List<T> importExcel(String filePath, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
         if (StrUtil.isBlank(filePath)) {
@@ -154,8 +154,7 @@ public class ExcelUtils {
      *
      * @param file      excel文件
      * @param pojoClass pojo类型
-     * @param <T>
-     * @return
+     * @param <T>       t
      */
     public static <T> List<T> importExcel(MultipartFile file, Class<T> pojoClass) {
         return importExcel(file, 1, 1, pojoClass);
@@ -168,8 +167,7 @@ public class ExcelUtils {
      * @param titleRows  标题行
      * @param headerRows 表头行
      * @param pojoClass  pojo类型
-     * @param <T>
-     * @return
+     * @param <T>        t
      */
     public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
         return importExcel(file, titleRows, headerRows, false, pojoClass);
@@ -183,8 +181,7 @@ public class ExcelUtils {
      * @param headerRows 表头行
      * @param needVerify 是否检验excel内容
      * @param pojoClass  pojo类型
-     * @param <T>
-     * @return
+     * @param <T>        t
      */
     public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows, boolean needVerify, Class<T> pojoClass) {
         if (file == null) {
@@ -206,8 +203,7 @@ public class ExcelUtils {
      * @param headerRows  表头行
      * @param needVerify  是否检验excel内容
      * @param pojoClass   pojo类型
-     * @param <T>
-     * @return
+     * @param <T>         t
      */
     public static <T> List<T> importExcel(InputStream inputStream, Integer titleRows, Integer headerRows, boolean needVerify, Class<T> pojoClass) {
         if (inputStream == null) {
@@ -232,8 +228,8 @@ public class ExcelUtils {
      */
     @Getter
     enum ExcelTypeEnum {
-
         XLS("xls"), XLSX("xlsx");
+
         private final String value;
 
         ExcelTypeEnum(String value) {

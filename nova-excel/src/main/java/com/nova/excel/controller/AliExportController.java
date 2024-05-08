@@ -18,7 +18,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.nova.common.core.controller.BaseController;
 import com.nova.excel.entity.AliEasyExportDO;
 import com.nova.excel.entity.WaterMark;
-import com.nova.excel.utils.WaterMarkHandler;
+import com.nova.excel.utils.watermark.WaterMarkHandler;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

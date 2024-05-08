@@ -12,7 +12,7 @@ import cn.hutool.core.thread.RejectPolicy;
 import cn.hutool.core.util.RandomUtil;
 import com.nova.common.core.controller.BaseController;
 import com.nova.excel.entity.EasyPoiExportDO;
-import com.nova.excel.utils.ExcelUtils;
+import com.nova.excel.utils.EasyPoiUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -107,7 +107,7 @@ public class EasyPoiController extends BaseController {
             System.err.println("共：" + totalNum + " 页，当前写入第 ：" + page + " 页，size：" + list.size() + " 条");
             return list;
         }, totalNum);
-        ExcelUtils.downLoadExcel(fileName, response, workbook);
+        EasyPoiUtils.downLoadExcel(fileName, response, workbook);
         System.err.println("主线程：" + Thread.currentThread().getName() + " , 共导出数据：" + totalCount + " , 整体耗时 ：" + timer.interval() + "ms");
     }
 
@@ -137,7 +137,7 @@ public class EasyPoiController extends BaseController {
         }
         cd.await();
         TimeInterval timer = DateUtil.timer();
-        ExcelUtils.exportExcel(resultList, null, "模板", EasyPoiExportDO.class, fileName, response);
+        EasyPoiUtils.exportExcel(resultList, null, "模板", EasyPoiExportDO.class, fileName, response);
         System.err.println("主线程：" + Thread.currentThread().getName() + " , 共导出数据：" + resultList.size() + " , 写入表格耗时 ：" + timer.interval() + "ms");
     }
 

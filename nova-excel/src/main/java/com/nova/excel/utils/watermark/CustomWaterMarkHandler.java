@@ -1,4 +1,4 @@
-package com.nova.excel.utils;
+package com.nova.excel.utils.watermark;
 
 import cn.hutool.core.img.ImgUtil;
 import com.alibaba.excel.write.handler.SheetWriteHandler;
@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 多个工作表导出
+ * 水印-多个工作表导出
  * @author wzh
  */
 public class CustomWaterMarkHandler implements SheetWriteHandler {

@@ -16,9 +16,9 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <fastjson.version>2.0.48</fastjson.version>
+        <fastjson.version>2.0.49</fastjson.version>
         <hutool.version>5.8.27</hutool.version>
-        <guava.version>33.1.0-jre</guava.version>
+        <guava.version>33.2.0-jre</guava.version>
         <guava.retry.version>2.0.0</guava.retry.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
@@ -202,6 +202,12 @@
             <groupId>com.github.rholder</groupId>
             <artifactId>guava-retrying</artifactId>
             <version>${guava.retry.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jsr305</artifactId>
+                    <groupId>com.google.code.findbugs</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 图片压缩工具 -->

@@ -31,10 +31,12 @@ public final class FileContentUtils {
             br = new BufferedReader(new InputStreamReader((InputStream) fileInPath));
         }
         String line;
-        while ((line = br.readLine()) != null) {
-            System.err.println(line);
+        if (br != null) {
+            while ((line = br.readLine()) != null) {
+                System.err.println(line);
+            }
+            br.close();
         }
-        br.close();
     }
 
     /**

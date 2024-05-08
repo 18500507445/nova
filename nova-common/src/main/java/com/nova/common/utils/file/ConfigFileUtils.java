@@ -9,14 +9,15 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * 2019/9/11
+ * @author wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ConfigFileUtils {
 
+    @SuppressWarnings("unchecked")
     public static Map<String, String> resourcePropertyFileToMap(String resourcePropertyFileName) {
         Properties properties = new Properties();
-        InputStream is = null;
+        InputStream is;
         try {
             is = ConfigFileUtils.class.getClassLoader().getResourceAsStream(resourcePropertyFileName);
             properties.load(is);
@@ -26,6 +27,7 @@ public final class ConfigFileUtils {
         return new LinkedHashMap<String, String>((Map) properties);
     }
 
+    @SuppressWarnings("unchecked")
     public static Map<String, String> propertyFileInputStreamToMap(InputStream propertyFileInputStream) {
         Properties properties = new Properties();
         try {

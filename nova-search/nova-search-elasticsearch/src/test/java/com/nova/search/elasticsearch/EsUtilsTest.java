@@ -17,6 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -122,6 +126,13 @@ public class EsUtilsTest {
     public void findAll() {
         List<User> list = EsUtils.findAll(User.class);
         System.out.println("list = " + JSONUtil.toJsonStr(list));
+    }
+
+    @Test
+    public void findPage() {
+        Pageable page = PageRequest.of(0, 2, Sort.Direction.ASC, "id");
+        Page<User> pageList = EsUtils.findAll(page, User.class);
+        Console.log("pageList：{} ", JSONUtil.toJsonStr(pageList));
     }
 
     @Test

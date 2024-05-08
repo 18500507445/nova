@@ -234,7 +234,7 @@ public final class EsUtils {
      * @param pageable {@link Pageable}
      */
     @SuppressWarnings("unchecked")
-    public static <T> Page<T> findAll(T bean, @Nullable String[] fields, Pageable pageable) {
+    public static <T> Page<T> searchSimilar(T bean, @Nullable String[] fields, Pageable pageable) {
         EsRepository esRepository = bean.getClass().getAnnotation(EsRepository.class);
         if (null == esRepository) {
             printError(bean.getClass());

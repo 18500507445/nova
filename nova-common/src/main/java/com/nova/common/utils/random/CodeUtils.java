@@ -1,4 +1,4 @@
-package com.nova.common.utils.security;
+package com.nova.common.utils.random;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

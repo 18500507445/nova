@@ -3,7 +3,7 @@ package com.nova.common.core.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.nova.common.core.model.result.AjaxResult;
-import com.nova.common.utils.common.ServletUtils;
+import com.nova.common.utils.spring.ServletUtils;
 import com.nova.common.utils.ip.IpUtils;
 import lombok.extern.slf4j.Slf4j;
 

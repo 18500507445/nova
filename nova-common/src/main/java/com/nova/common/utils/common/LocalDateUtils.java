@@ -560,7 +560,8 @@ public final class LocalDateUtils {
      * @return
      */
     public static String getDateAfterDays(int days) {
-        Calendar date = Calendar.getInstance();// today
+        // today
+        Calendar date = Calendar.getInstance();
         date.add(Calendar.DATE, days);
         SimpleDateFormat simpleDate = new SimpleDateFormat(DATE_FORMATTER);
         return simpleDate.format(date.getTime());
@@ -571,7 +572,6 @@ public final class LocalDateUtils {
      *
      * @param source 源日期(yyyy-MM-dd)
      * @param days   指定的天数,正负皆可
-     * @return
      * @throws ParseException
      */
     public static String addDays(String source, int days) {
@@ -585,6 +585,7 @@ public final class LocalDateUtils {
 
     /**
      * LocalDate转换成Date
+     *
      * @param localDate
      * @return
      */
@@ -598,7 +599,6 @@ public final class LocalDateUtils {
      * 24小时时间校验
      *
      * @param time
-     * @return
      */
     public static boolean isValidate24(String time) {
         Pattern p = Pattern.compile(MATCH_TIME_24);
@@ -609,7 +609,6 @@ public final class LocalDateUtils {
      * 日期校验
      *
      * @param date
-     * @return
      */
     public static boolean isDate(String date) {
         Pattern pat = Pattern.compile(REGEX_DATA);

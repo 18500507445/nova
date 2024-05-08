@@ -1,4 +1,4 @@
-package com.nova.common.utils.common;
+package com.nova.common.utils.spring;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;

@@ -2,8 +2,8 @@
 
 ### 简介:
 
-* (1)练习demo，java8特性，hutool测试类，guava测试类
-* (2)sql练习 https://github.com/dongxuyang1985/sql_in_action
+* （1）练习demo，java8特性，hutool测试类，guava测试类
+* （2）[sql练习](https://github.com/dongxuyang1985/sql_in_action)
 
 ##组织结构
 ```
@@ -41,7 +41,7 @@ nova-tools
 | hutool-poi         | 针对POI中Excel和Word的封装                            |
 | hutool-jwt         | JSON Web Token (JWT)封装实现                       |
 
-### Validate参数验证
+### Validate参数验证([CommonController.java#validator](src%2Fmain%2Fjava%2Fcom%2Fnova%2Ftools%2Fcontroller%2FCommonController.java))
 * @Null 限制只能为null
 * @NotNull 限制必须不为null
 * @Length(min=, max=) 验证字符串长度是否在给定的范围之内

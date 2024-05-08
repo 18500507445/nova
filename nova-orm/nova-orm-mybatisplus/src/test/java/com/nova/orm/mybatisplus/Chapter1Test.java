@@ -32,7 +32,7 @@ public class Chapter1Test {
 
     @Test
     public void selectList() {
-        Page<Object> page = PageHelper.startPage(1, 10);
+        Page<UserDO> page = PageHelper.startPage(1, 10);
         List<UserDO> userDOList = oneUserMapper.selectList(null);
         PageInfo<UserDO> pageInfo = new PageInfo<>(userDOList);
         String jsonStr = JSONUtil.toJsonStr(pageInfo);

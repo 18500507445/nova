@@ -19,7 +19,6 @@ public final class FileContentUtils {
      * 根据文件路径读取文件内容
      *
      * @param fileInPath
-     * @throws IOException
      */
     public static void getFileContent(Object fileInPath) throws IOException {
         BufferedReader br = null;
@@ -40,8 +39,8 @@ public final class FileContentUtils {
 
     /**
      * 主要核心方法是使用getResource和getPath方法，这里的getResource("")里面是空字符串
+     *
      * @param fileName
-     * @throws IOException
      */
     public void demoA(String fileName) throws IOException {
         //注意getResource("")里面是空字符串
@@ -56,7 +55,6 @@ public final class FileContentUtils {
      * 直接通过文件名getPath来获取路径
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoB(String fileName) throws IOException {
         //注意getResource("")里面是空字符串
@@ -75,7 +73,6 @@ public final class FileContentUtils {
      * url.getPath()=/pub/files/foobar.txt
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoC(String fileName) throws IOException {
         //注意getResource("")里面是空字符串
@@ -92,7 +89,6 @@ public final class FileContentUtils {
      * springboot项目中需要使用此种方法，因为jar包中没有一个实际的路径存放文件
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoD(String fileName) throws IOException {
         InputStream in = this.getClass().getClassLoader().getResourceAsStream(fileName);
@@ -104,7 +100,6 @@ public final class FileContentUtils {
      * 如果不使用getClassLoader，可以使用getResourceAsStream("/配置测试.txt")直接从resources根路径下获取
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoE(String fileName) throws IOException {
         InputStream in = this.getClass().getResourceAsStream("/" + fileName);
@@ -116,7 +111,6 @@ public final class FileContentUtils {
      * springboot项目中需要使用此种方法，因为jar包中没有一个实际的路径存放文件
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoF(String fileName) throws IOException {
         ClassPathResource classPathResource = new ClassPathResource(fileName);
@@ -128,7 +122,6 @@ public final class FileContentUtils {
      * 通过绝对路径获取项目中文件的位置（不能用于服务器）
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoG(String fileName) throws IOException {
         //E:\WorkSpace\Git\spring-framework-learning-example
@@ -141,7 +134,6 @@ public final class FileContentUtils {
      * 通过绝对路径获取项目中文件的位置（不能用于服务器）
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoH(String fileName) throws IOException {
         //参数为空
@@ -158,15 +150,12 @@ public final class FileContentUtils {
 
     /**
      * 通过绝对路径获取项目中文件的位置(不考虑)
-     *
      * 主要是通过设置环境变量，将文件放在环境变量中，原理也是通过绝对路径获取。
      * 示例中我设置了一个环境变量：TEST_ROOT=E:\\WorkSpace\\Git\\spring-framework-learning-example
-     *
      * System.getenv("TEST_ROOT");
      * System.getProperty("TEST_ROOT")
      *
      * @param fileName
-     * @throws IOException
      */
     public void demoI(String fileName) throws IOException {
         System.setProperty("TEST_ROOT", "E:\\WorkSpace\\Git\\spring-framework-learning-example");

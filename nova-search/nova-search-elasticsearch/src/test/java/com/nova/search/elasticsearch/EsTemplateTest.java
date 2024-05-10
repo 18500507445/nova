@@ -196,7 +196,10 @@ public class EsTemplateTest {
         //范围查询-大于等于、小于等于
         QueryBuilder gtAndLt = QueryBuilders.rangeQuery("id").gte(3).lte(5);
 
-        //组合查询-多个关键字分词查询（type = FieldType.Text）。must(与)、should(或)、mustNot(非)。举例：查找address带有天台和广场，不带有街道的数据
+        /*
+          重点：组合查询-多个关键字分词查询（type = FieldType.Text）。must(与)、should(或)、mustNot(非)。
+          @description: 举例：查找address带有天台和广场，不带有街道的数据
+         */
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
                 .must(QueryBuilders.termQuery("address", "天台"))
                 .must(QueryBuilders.termQuery("address", "广场"))
@@ -226,6 +229,31 @@ public class EsTemplateTest {
         Console.error("pageResult：{} ", JSONUtil.toJsonStr(pageResult));
         Console.error("耗时：{} ", timer.interval());
     }
+
+    /**
+     * 举例，参考user-json数据{@link src/main/resources/user.json}，翻译一个sql
+     * select * from user where id = 204980 and idCard = 152501198306232651 and (address like '%123%' or address like '%345%')
+     */
+    @Test
+    public void sql() {
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        boolQuery.must(QueryBuilders.termQuery("id", 204980));
+        boolQuery.must(QueryBuilders.termQuery("idCard", 152501198306232651L));
+
+        //如果字段是分词TEXT，就不能用wildcardQuery
+        BoolQueryBuilder addressQuery = QueryBuilders.boolQuery();
+        addressQuery.should(QueryBuilders.wildcardQuery("password", "*dfa*"));
+        addressQuery.should(QueryBuilders.wildcardQuery("password", "*345*"));
+        boolQuery.must(addressQuery);
+
+        Query searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(boolQuery)
+                .build();
+        SearchHits<User> searchHits = elasticsearchRestTemplate.search(searchQuery, User.class);
+        List<User> list = EsUtils.list(searchHits);
+        Console.error("list：{} ", JSONUtil.toJsonStr(list));
+    }
+
 
     //高亮查询
     @Test

@@ -1,0 +1,36 @@
+[
+  {
+    "_index": "user",
+    "_type": "_doc",
+    "_id": "204980",
+    "_score": 1.0,
+    "_source": {
+      "_class": "com.nova.search.elasticsearch.entity.User",
+      "id": 204980,
+      "username": "成燕彩",
+      "password": "dfamczxajb1h",
+      "idCard": "152501198306232651",
+      "sex": 2,
+      "age": 64,
+      "address": "汶水街148号-16-9",
+      "createTime": "2024-04-30 02:10:08"
+    }
+  },
+  {
+    "_index": "user",
+    "_type": "_doc",
+    "_id": "204981",
+    "_score": 1.0,
+    "_source": {
+      "_class": "com.nova.search.elasticsearch.entity.User",
+      "id": 204981,
+      "username": "史淑",
+      "password": "bauakliyamp9",
+      "idCard": "632200199305187306",
+      "sex": 2,
+      "age": 36,
+      "address": "福山大厦12号-8-5",
+      "createTime": "2024-04-30 02:10:08"
+    }
+  }
+]

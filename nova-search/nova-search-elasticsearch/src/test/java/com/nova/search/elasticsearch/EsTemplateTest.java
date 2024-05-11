@@ -342,7 +342,15 @@ public class EsTemplateTest {
      */
     @Test
     public void demoA() {
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        boolQuery.must(QueryBuilders.termQuery("age", 64));
 
+        Query searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(boolQuery)
+                .build();
+        SearchHits<User> searchHits = elasticsearchRestTemplate.search(searchQuery, User.class);
+        List<User> list = EsUtils.list(searchHits);
+        Console.error("list：{} ", JSONUtil.toJsonStr(list));
     }
 
 }

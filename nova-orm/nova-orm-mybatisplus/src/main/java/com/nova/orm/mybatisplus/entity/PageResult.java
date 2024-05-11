@@ -81,7 +81,7 @@ public class PageResult<T> {
         }
     }
 
-    private PageResult(List<T> list, int pageIndex, int pageSize) {
+    private PageResult(List<T> list, long pageIndex, long pageSize) {
         this.pageIndex = pageIndex;
         this.pageSize = pageSize;
         // 处理数据
@@ -91,7 +91,7 @@ public class PageResult<T> {
             this.totalPage = 0;
         } else {
             PageUtil.setFirstPageNo(1);
-            this.list = ListUtil.page(pageIndex, pageSize, list);
+            this.list = ListUtil.page(pageIndex > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) pageIndex, pageSize > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) pageSize, list);
             this.totalCount = list.size();
             this.totalPage = (totalCount + pageSize - 1) / pageSize;
         }
@@ -195,7 +195,7 @@ public class PageResult<T> {
      * @param pageSize  页大小
      * @return <T>
      */
-    public static <T> PageResult<T> page(List<T> list, int pageIndex, int pageSize) {
+    public static <T> PageResult<T> page(List<T> list, long pageIndex, long pageSize) {
         return new PageResult<>(list, pageIndex, pageSize);
     }
 

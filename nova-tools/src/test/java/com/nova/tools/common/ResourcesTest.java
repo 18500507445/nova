@@ -27,13 +27,6 @@ public class ResourcesTest {
     @Value("${server.servlet.context-path}")
     private String path;
 
-    public static String STATIC_PATH;
-
-    @Value("${server.servlet.context-path}")
-    public void setStaticPath(String staticPath) {
-        STATIC_PATH = staticPath;
-    }
-
     /**
      * 读取properties文件属性
      */
@@ -60,13 +53,16 @@ public class ResourcesTest {
         System.err.println("path = " + path);
     }
 
-    /**
-     * 属性值赋值静态变量
-     * 当前类需要注册成组件需要有@Component才可以拿到
-     */
+    //@Value读取配置，给变量赋值
+    private static Integer PORT = 123;
+    @Value("${server.port:123}")
+    public void setPort(Integer port) {
+        PORT = port;
+    }
+
     @Test
-    public void readStaticValue() {
-        System.err.println("staticPath = " + ResourcesTest.STATIC_PATH);
+    public void staticValue() {
+        System.out.println("PORT = " + PORT);
     }
 
     /**

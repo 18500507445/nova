@@ -230,30 +230,6 @@ public class EsTemplateTest {
         Console.error("耗时：{} ", timer.interval());
     }
 
-    /**
-     * 举例，参考user-json数据{@link src/main/resources/user.json}，翻译一个sql
-     * select * from user where id = 204980 and idCard = 152501198306232651 and (address like '%123%' or address like '%345%')
-     */
-    @Test
-    public void sql() {
-        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
-        boolQuery.must(QueryBuilders.termQuery("id", 204980));
-        boolQuery.must(QueryBuilders.termQuery("idCard", 152501198306232651L));
-
-        //如果字段是分词TEXT，就不能用wildcardQuery
-        BoolQueryBuilder addressQuery = QueryBuilders.boolQuery();
-        addressQuery.should(QueryBuilders.wildcardQuery("password", "*dfa*"));
-        addressQuery.should(QueryBuilders.wildcardQuery("password", "*345*"));
-        boolQuery.must(addressQuery);
-
-        Query searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(boolQuery)
-                .build();
-        SearchHits<User> searchHits = elasticsearchRestTemplate.search(searchQuery, User.class);
-        List<User> list = EsUtils.list(searchHits);
-        Console.error("list：{} ", JSONUtil.toJsonStr(list));
-    }
-
 
     //高亮查询
     @Test
@@ -335,5 +311,38 @@ public class EsTemplateTest {
         Console.error("buckets：{}", JSONUtil.toJsonStr(buckets));
     }
 
+
+    /**
+     * 翻译一个sql
+     * 举例，参考user-json数据{@link src/main/resources/user.json}
+     * select * from user where id = 204980 and idCard = 152501198306232651 and (address like '%123%' or address like '%345%')
+     */
+    @Test
+    public void sql() {
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        boolQuery.must(QueryBuilders.termQuery("id", 204980));
+        boolQuery.must(QueryBuilders.termQuery("idCard", 152501198306232651L));
+
+        //如果字段是分词TEXT，就不能用wildcardQuery
+        BoolQueryBuilder addressQuery = QueryBuilders.boolQuery();
+        addressQuery.should(QueryBuilders.wildcardQuery("password", "*dfa*"));
+        addressQuery.should(QueryBuilders.wildcardQuery("password", "*345*"));
+        boolQuery.must(addressQuery);
+
+        Query searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(boolQuery)
+                .build();
+        SearchHits<User> searchHits = elasticsearchRestTemplate.search(searchQuery, User.class);
+        List<User> list = EsUtils.list(searchHits);
+        Console.error("list：{} ", JSONUtil.toJsonStr(list));
+    }
+
+    /**
+     * 分词，全量查询
+     */
+    @Test
+    public void demoA() {
+
+    }
 
 }

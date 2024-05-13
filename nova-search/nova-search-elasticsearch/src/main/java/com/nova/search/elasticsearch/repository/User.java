@@ -16,7 +16,6 @@ import java.util.Date;
  * @description 实体类
  * @date: 2023/07/13 22:56
  */
-@Deprecated
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Document(indexName = "user")

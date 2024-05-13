@@ -6,15 +6,10 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.utils.random.RandomUtils;
-import com.nova.search.elasticsearch.manage.BaseEsEntity;
-import com.nova.search.elasticsearch.manage.ElasticsearchService;
-import com.nova.search.elasticsearch.manage.EsMapUtil;
 import com.nova.search.elasticsearch.repository.User;
 import com.nova.search.elasticsearch.utils.EsUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.search.sort.SortOrder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -22,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -31,8 +25,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author: wzh
@@ -42,10 +34,6 @@ import java.util.stream.Stream;
 @Slf4j(topic = "EsUtilsTest")
 @SpringBootTest
 public class EsUtilsTest {
-
-    @Resource
-    @Deprecated
-    private ElasticsearchService elasticsearchService;
 
     public static final String INDEX_NAME = "test_create_index";
 
@@ -140,19 +128,5 @@ public class EsUtilsTest {
         List<Integer> idList = Arrays.asList(1, 2, 3, 4, 5);
         EsUtils.deleteAllById(idList, User.class);
     }
-
-    @Test
-    @Deprecated
-    public void queryList() throws NoSuchFieldException, IllegalAccessException {
-        User user = new User();
-        List<BaseEsEntity.QueryRelation<String>> queryList = Stream.of(new BaseEsEntity.QueryRelation<>("password_1", BaseEsEntity.SHOULD),
-                new BaseEsEntity.QueryRelation<>("password_2", BaseEsEntity.SHOULD)).collect(Collectors.toList());
-        user.setFieldQueryMap(new EsMapUtil().put(User::getPassword, queryList));
-        //排序查询
-        user.setOrderMap(new EsMapUtil().put(User::getId, SortOrder.DESC));
-        List<User> list = elasticsearchService.queryList(user);
-        System.out.println("list = " + JSONObject.toJSONString(list));
-    }
-
 
 }

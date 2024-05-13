@@ -20,6 +20,8 @@
         <tencentcloud.version>3.1.740</tencentcloud.version>
         <yunpiansms.version>1.2.7</yunpiansms.version>
         <qiniusms.version>7.13.0</qiniusms.version>
+
+        <!-- 短信整合Sms4j -->
         <sms4j.version>3.2.1</sms4j.version>
     </properties>
 

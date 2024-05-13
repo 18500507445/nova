@@ -16,6 +16,7 @@ logging:
   file:
     path: /Users/wangzehui/logs/nova/${spring.application.name}
 
+# TLog配置
 tlog:
   # 自动打印调用参数和时间
   enable-invoke-time-print: false

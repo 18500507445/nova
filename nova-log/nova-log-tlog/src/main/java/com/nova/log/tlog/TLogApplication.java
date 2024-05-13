@@ -16,7 +16,7 @@ public class TLogApplication {
     public static void main(String[] args) {
         //进行日志增强，自动判断日志框架
         AspectLogEnhance.enhance();
-        System.err.println("注意看下logback-spring.xml，搜索一下com.yomahub.tlog看下不同的的地方，详情见官方文档");
+        System.err.println("异步输出log，注意看下logback-spring.xml，搜索一下com.yomahub.tlog看下与正常配置的logback不同的地方，详情见官方文档");
         SpringApplication.run(TLogApplication.class, args);
     }
 

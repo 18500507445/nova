@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/")
 public class TLogController {
 
-    @GetMapping("tLogTest")
+    @GetMapping("TLogTest")
     public void tLogTest() {
-        log.info("测试tLogTest");
+        log.error("测试TLog");
     }
 }

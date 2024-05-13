@@ -17,20 +17,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <justauth.version>1.4.0</justauth.version>
-        <sa-token.version>1.36.0</sa-token.version>
+        <sa-token.version>1.37.0</sa-token.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.nova</groupId>
             <artifactId>nova-common</artifactId>
-        </dependency>
-
-        <!-- spring-boot 集成JustAuth三方登录 -->
-        <dependency>
-            <groupId>com.xkcoding.justauth</groupId>
-            <artifactId>justauth-spring-boot-starter</artifactId>
-            <version>${justauth.version}</version>
         </dependency>
 
         <dependency>

@@ -16,7 +16,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <tlog.version>1.5.1</tlog.version>
+        <tlog.version>1.5.2</tlog.version>
     </properties>
 
     <dependencies>

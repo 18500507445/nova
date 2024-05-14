@@ -42,7 +42,7 @@ public class SleuthController {
     private final Tracer tracer;
 
     /**
-     * 复制一个SleuthApplication端口8081，添加add-vm-options（-Dserver.port=8081），进行测试
+     * 复制一个SleuthApplication端口8081，添加add-vm-options，中文java-添加虚拟机选项（-Dserver.port=8081），进行测试
      */
     @GetMapping("/sleuthTest")
     public void sleuthTest() {

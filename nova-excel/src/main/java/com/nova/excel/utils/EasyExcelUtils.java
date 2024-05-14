@@ -73,8 +73,10 @@ public class EasyExcelUtils {
                                  Class<T> head, List<T> data) throws IOException {
         // 输出 Excel
         EasyExcel.write(response.getOutputStream(), head)
-                .autoCloseStream(false) // 不要自动关闭，交给 Servlet 自己处理
-                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()) // 基于 column 长度，自动适配。最大 255 宽度
+                // 不要自动关闭，交给 Servlet 自己处理
+                .autoCloseStream(false)
+                // 基于 column 长度，自动适配。最大 255 宽度
+                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
                 .sheet(sheetName).doWrite(data);
         // 设置 header 和 contentType。写在最后的原因是，避免报错时，响应 contentType 已经被修改了
         response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
@@ -83,7 +85,8 @@ public class EasyExcelUtils {
 
     public static <T> List<T> read(MultipartFile file, Class<T> head) throws IOException {
         return EasyExcel.read(file.getInputStream(), head, null)
-                .autoCloseStream(false)  // 不要自动关闭，交给 Servlet 自己处理
+                // 不要自动关闭，交给 Servlet 自己处理
+                .autoCloseStream(false)
                 .doReadAllSync();
     }
 

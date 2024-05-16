@@ -170,9 +170,9 @@ public class EsTemplateTest {
         QueryBuilder equal = QueryBuilders.termQuery("id", 1L);
         QueryBuilder in = QueryBuilders.termsQuery("id", Arrays.asList(1L, 2L, 3L));
 
-        //精准查询-分词查询
+        //分词查询
         QueryBuilder match = QueryBuilders.matchQuery("address", "天台");
-        //精准查询-分词查询-匹配多个
+        //分词查询-匹配多个
         QueryBuilder multi = QueryBuilders.multiMatchQuery("安", "username", "address");
 
         //精准查询-匹配field查询，支持分词，不带field就是查询所有
@@ -328,22 +328,6 @@ public class EsTemplateTest {
         addressQuery.should(QueryBuilders.wildcardQuery("password", "*dfa*"));
         addressQuery.should(QueryBuilders.wildcardQuery("password", "*345*"));
         boolQuery.must(addressQuery);
-
-        Query searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(boolQuery)
-                .build();
-        SearchHits<User> searchHits = elasticsearchRestTemplate.search(searchQuery, User.class);
-        List<User> list = EsUtils.list(searchHits);
-        Console.error("list：{} ", JSONUtil.toJsonStr(list));
-    }
-
-    /**
-     * 分词，全量查询
-     */
-    @Test
-    public void demoA() {
-        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
-        boolQuery.must(QueryBuilders.termQuery("age", 64));
 
         Query searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(boolQuery)

@@ -15,8 +15,6 @@ import java.util.HashMap;
 @Getter
 public class AjaxResult extends HashMap<String, Object> {
 
-    private static final long serialVersionUID = 1L;
-
     public static final String CODE_TAG = "code";
 
     public static final String MSG_TAG = "msg";
@@ -231,8 +229,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 返回错误消息
-     *
-     * @return
      */
     public static AjaxResult error() {
         return AjaxResult.error("请求失败");
@@ -286,11 +282,15 @@ public class AjaxResult extends HashMap<String, Object> {
      *
      * @param code
      * @param msg
-     * @return
      */
     public static AjaxResult error(String code, String msg) {
         return new AjaxResult(code, msg, null);
     }
 
-
+    public static void main(String[] args) {
+        AjaxResult success = AjaxResult.success("123");
+        success.put("main", "234");
+        System.out.println("success = " + success);
+        System.out.println("success = " + success);
+    }
 }

@@ -1,6 +1,8 @@
 package com.nova.common.core.model.result;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.nova.common.core.model.result.code.IResultCode;
+import com.nova.common.core.model.result.code.ResultCode;
 import com.nova.common.trace.TraceContext;
 import lombok.Data;
 
@@ -129,4 +131,5 @@ public class ResResult<T> implements Serializable {
     public static <T> ResResult<T> failure(IResultCode resultCode, T data, String bizMessage) {
         return new ResResult<>(resultCode, data, false, bizMessage);
     }
+
 }

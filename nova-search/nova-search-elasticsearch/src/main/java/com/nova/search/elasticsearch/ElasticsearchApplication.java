@@ -3,6 +3,7 @@ package com.nova.search.elasticsearch;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
  * @author: wzh
@@ -10,6 +11,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @date: 2023/07/13 13:53
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+//启动创建索引
+@EnableElasticsearchRepositories
 public class ElasticsearchApplication {
 
     public static void main(String[] args) {

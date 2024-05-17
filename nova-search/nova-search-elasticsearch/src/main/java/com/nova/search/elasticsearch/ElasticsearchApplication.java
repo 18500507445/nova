@@ -11,8 +11,8 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  * @date: 2023/07/13 13:53
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-//启动创建索引
-@EnableElasticsearchRepositories
+//ES包扫描
+@EnableElasticsearchRepositories(basePackages = "com.nova.search.elasticsearch.repository")
 public class ElasticsearchApplication {
 
     public static void main(String[] args) {

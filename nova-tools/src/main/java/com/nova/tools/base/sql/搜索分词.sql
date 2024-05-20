@@ -841,6 +841,5 @@ CREATE FULLTEXT INDEX ft_index ON game (name) WITH PARSER ngram;
 -- 默认使用自然语言模式：IN NATURAL LANGUAGE MODE -- '刀剑危机'，分词结果：'刀剑'、'危机'
 select name from game WHERE MATCH (name) AGAINST ('刀剑危机');
 
-
 -- 使用布尔模式：IN BOOLEAN MODE，+和-操作符分别指示一个单词必须存在或不存在，才能进行匹配，'危机*'，则表示匹配危机开头的记录
 select name from game WHERE MATCH (name) AGAINST ('+危机 -孤岛 -GTA' IN BOOLEAN MODE);

@@ -303,6 +303,8 @@ public class EsTemplateTest {
                 AggregationBuilders.terms("group").field("sex")
                         // 在性别聚合桶内进行嵌套聚合，求平均值
                         .subAggregation(AggregationBuilders.avg("avg").field("age"))
+                        // 聚合之后返回条数
+                        .size(Integer.MAX_VALUE)
         );
 
         SearchHits<User> searchHits = elasticsearchRestTemplate.search(query.build(), User.class);

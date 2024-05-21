@@ -16,7 +16,6 @@ class InstantExample {
     void testA() {
         // 创建一个Instant实例
         Instant now = Instant.now();
-
         // 访问Instant的时间
         long seconds = now.getEpochSecond();
         int nanos = now.getNano();
@@ -32,5 +31,13 @@ class InstantExample {
         System.err.println("later   : " + later);
         System.err.println("earlier : " + earlier);
     }
+
+    //获取毫秒时间戳
+    @Test
+    public void milliseconds() {
+        long milliseconds = Instant.now().toEpochMilli();
+        System.err.println("milliseconds = " + milliseconds);
+    }
+
 
 }

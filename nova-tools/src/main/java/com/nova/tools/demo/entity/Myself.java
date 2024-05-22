@@ -26,7 +26,6 @@ public class Myself {
      */
     public static final String STRING_SUCCESS = "success";
 
-
     /**
      * 布尔 true
      */

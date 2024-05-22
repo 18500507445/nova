@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
@@ -159,6 +160,7 @@ class ListDemo {
     public void listToMap() {
         Map<String, Integer> collect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge));
         Map<String, Integer> newCollect = PEOPLE_LIST.stream().collect(Collectors.toMap(People::getName, People::getAge));
+        Map<String, People> peopleMap = PEOPLE_LIST.stream().collect(Collectors.toMap(People::getName, Function.identity()));
         System.err.println(JSONUtil.toJsonStr(collect));
     }
 

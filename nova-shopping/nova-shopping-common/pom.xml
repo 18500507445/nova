@@ -19,7 +19,7 @@
         <druid.version>1.2.23</druid.version>
         <xx.job.verson>2.4.0</xx.job.verson>
 
-        <hutool.version>5.8.27</hutool.version>
+        <hutool.version>5.8.28</hutool.version>
         <fastjson.version>2.0.50</fastjson.version>
         <jasypt.version>3.0.5</jasypt.version>
 

@@ -24,22 +24,23 @@
 - 根据JVM参数启动服务
 
 #### 1.4 日志
-（1）grep 'xxx' xxx.log （查看包含xxx字符串的所有信息）   
-（2）grep -E 'a.*b|b.*a' xxx.log （查看包含a和b字符串的所有信息）    
-（3）tail -fn 500 xxx.log （循环最新500行 ）     
-（4）tail -f xxx.log |grep 'xxx' （动态刷新包含xxx字符串的信息 ）   
-（5）cat xxx.log |grep -A 16 'xxx' （查找文件包含xxx16行以内的内容 ）       
-（6）tail -f xxx.log |grep 'a.*b\|b.*a'（查找包含a和b的内容）       
-（7）grep '1795000521843875840' info.log | head -n 5（查找包含a的前五条内容）       
+（1）grep 'xxx' xxx.log （查看包含xxx字符串的所有信息）     
+（2）grep '1795000521843875840' xxx.log | head -n 5（查找包含a的前五条内容）  
+（3）grep -C 5 "xxx" xxx.log（查找包含xxx的前后各5行内容内容）       
+（4）grep -E 'a.*b|b.*a' xxx.log （查看包含a和b字符串的所有信息）     
+（5）tail -fn 500 xxx.log （循环最新500行 ）         
+（6）tail -f xxx.log |grep 'xxx' （动态刷新包含xxx字符串的信息 ）       
+（7）tail -f xxx.log |grep 'a.*b\|b.*a'（查找包含a和b的内容）       
+（8）cat xxx.log |grep -A 16 'xxx' （慎用，查找文件包含xxx16行以内的内容 ）       
 
 #### 1.5安装环境需要用到的命令
-（1）cat /etc/passwd |cut -f 1 -d :（查询所有用户列表）
-（2）useradd（添加用户）
-（3）passwd（设置密码）
-（4）chmod -R elastic /usr/local/* （给文件夹读写权限）
+（1）cat /etc/passwd |cut -f 1 -d :（查询所有用户列表） 
+（2）useradd（添加用户）    
+（3）passwd（设置密码） 
+（4）chmod -R elastic /usr/local/* （给文件夹读写权限） 
 
 #### 1.6 线上cpu过高，如何排查
-（1）top -c，看一下哪一个pid高
-（2）ps H -eo pid,tid,%cpu | grep 'pid'，查看过高的tid
-（3）printf "%x\n" tid，转换成16进制的线程id
-（4）jstack 'pid' |grep '线程id'
+（1）top -c，看一下哪一个pid高    
+（2）ps H -eo pid,tid,%cpu | grep 'pid'，查看过高的tid  
+（3）printf "%x\n" tid，转换成16进制的线程id   
+（4）jstack 'pid' |grep '线程id'    

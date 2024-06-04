@@ -31,6 +31,12 @@
 
 ### 常见问题
 * [ES查询超过限制，并且NativeSearchQuery设置max数](https://www.cnblogs.com/datangguanjunhou/p/16482242.html)
+* [聚合分页问题](https://www.cnblogs.com/mlzdev/p/11832798.html)
+* ES列表查询命中数量
+~~~
+//返回所有命中条数
+new NativeSearchQueryBuilder().withTrackTotalHits(true).build();
+~~~
 
 ### 工具类如何使用
 1.实体类打上@EsRepository注解

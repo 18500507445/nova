@@ -211,6 +211,8 @@ public class EsTemplateTest {
                 .withQuery(boolQuery)
                 //分页
                 .withPageable(page)
+                //返回所有命中条数
+                .withTrackTotalHits(true)
                 //排序2
 //                .withSorts(sort)
                 .build();

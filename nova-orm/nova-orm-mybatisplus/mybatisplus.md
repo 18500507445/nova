@@ -5,6 +5,7 @@
 * [参考笔记](https://blog.csdn.net/ewertyucf/article/details/130106739)
 * [细讲配置参数](https://yixinforu.blog.csdn.net/article/details/122562231?spm=1001.2014.3001.5502)
 * [常用注解](https://yixinforu.blog.csdn.net/article/details/122516135)
+* [druid属性配置列表](https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8)
 * PageHelper源码核心类PageInterceptor（日志开关、拦截器、count查询）
 
 ### 第一章：入门篇（sql文件在resources路径下）

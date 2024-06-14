@@ -172,11 +172,11 @@ public class EsTemplateTest {
 
         //分词查询
         QueryBuilder match = QueryBuilders.matchQuery("address", "天台");
-        //分词查询-匹配多个
+        //分词查询-匹配多个（经过测试，字段可以放不分词的也行）
         QueryBuilder multi = QueryBuilders.multiMatchQuery("安", "username", "address");
 
         //精准查询-匹配field查询，支持分词，不带field就是查询所有
-        QueryBuilder string = QueryBuilders.queryStringQuery("蓝").field("username").field("address");
+        QueryBuilder string = QueryBuilders.queryStringQuery("街道").field("username").field("address");
 
         //模糊查询-左右模糊查询，其中fuzziness的参数作用是在查询时，es动态的将查询关键词前后增加或者删除一个词，然后进行匹配
         QueryBuilder fuzzy = QueryBuilders.fuzzyQuery("idCard", "530").fuzziness(Fuzziness.ONE);
@@ -198,9 +198,9 @@ public class EsTemplateTest {
 
         /*
           重点：组合查询-多个关键字分词查询（type = FieldType.Text）。must(与)、should(或)、mustNot(非)。
-          @description: 举例：查找address带有天台和广场，不带有街道的数据
+          @description: 举例：查找address带有天台和广场，不带街道的数据
          */
-        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+        BoolQueryBuilder multiple = QueryBuilders.boolQuery()
                 .must(QueryBuilders.termQuery("address", "天台"))
                 .must(QueryBuilders.termQuery("address", "广场"))
                 .mustNot(QueryBuilders.termQuery("address", "街道"));
@@ -208,7 +208,7 @@ public class EsTemplateTest {
 
         //方式1，构建查询
         Query searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(boolQuery)
+                .withQuery(string)
                 //分页
                 .withPageable(page)
                 //返回所有命中条数
@@ -324,13 +324,13 @@ public class EsTemplateTest {
     @Test
     public void sql() {
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
-        boolQuery.must(QueryBuilders.termQuery("id", 204980));
-        boolQuery.must(QueryBuilders.termQuery("idCard", 152501198306232651L));
+        boolQuery.must(QueryBuilders.termQuery("id", 598720));
+        boolQuery.must(QueryBuilders.termQuery("idCard", "653100198706089920"));
 
         //如果字段是分词TEXT，就不能用wildcardQuery
         BoolQueryBuilder addressQuery = QueryBuilders.boolQuery();
-        addressQuery.should(QueryBuilders.wildcardQuery("password", "*dfa*"));
-        addressQuery.should(QueryBuilders.wildcardQuery("password", "*345*"));
+        addressQuery.should(QueryBuilders.wildcardQuery("password", "*6d4*"));
+        addressQuery.should(QueryBuilders.wildcardQuery("password", "*6d4*"));
         boolQuery.must(addressQuery);
 
         Query searchQuery = new NativeSearchQueryBuilder()

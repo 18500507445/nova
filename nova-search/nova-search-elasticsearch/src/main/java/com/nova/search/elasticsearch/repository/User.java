@@ -18,7 +18,7 @@ import java.util.Date;
 @Order(Integer.MIN_VALUE)
 @Data
 //索引名称，默认自动创建
-@Document(indexName = "user1")
+@Document(indexName = "user")
 @EsRepository(UserRepository.class)
 //分片数量建议20-30G为一片（默认值1片，1副本），从缓冲区刷盘建议：30s，默认1s开销较大
 @Setting(shards = 3, refreshInterval = "30s")

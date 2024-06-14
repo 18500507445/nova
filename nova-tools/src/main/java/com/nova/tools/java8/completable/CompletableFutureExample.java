@@ -389,6 +389,7 @@ public class CompletableFutureExample {
             return "taskA";
         }, POOL);
 
+        //thenAccept异常不会抛出
         taskA.thenAccept(s -> {
             int a = 1 / 0;
             System.out.println("thenAccept = " + s);

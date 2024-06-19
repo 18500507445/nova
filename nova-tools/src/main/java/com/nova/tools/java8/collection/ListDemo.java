@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -38,13 +37,13 @@ class ListDemo {
         count = STRINGS.stream().filter(string -> string.length() == 3).count();
         System.err.println("字符串长度为 3 的数量为: " + count);
 
-        List<String> filtered = STRINGS.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
+        List<String> filtered = STRINGS.stream().filter(string -> !string.isEmpty()).collect(toList());
         System.err.println("筛选后的列表: " + filtered);
 
-        String mergedString = STRINGS.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
+        String mergedString = STRINGS.stream().filter(string -> !string.isEmpty()).collect(joining(", "));
         System.err.println("合并字符串: " + mergedString);
 
-        List<Integer> squaresList = NUMBERS.stream().map(i -> i * i).distinct().collect(Collectors.toList());
+        List<Integer> squaresList = NUMBERS.stream().map(i -> i * i).distinct().collect(toList());
         System.err.println("Squares List: " + squaresList);
 
         SecureRandom random = new SecureRandom();
@@ -94,9 +93,9 @@ class ListDemo {
     @Test
     public void listSorted() {
         //降序
-        List<People> descList = PEOPLE_LIST.stream().sorted(Comparator.comparing(People::getAge).reversed()).collect(Collectors.toList());
+        List<People> descList = PEOPLE_LIST.stream().sorted(Comparator.comparing(People::getAge).reversed()).collect(toList());
         //升序
-        List<People> ascList = PEOPLE_LIST.stream().sorted(Comparator.comparing(People::getAge)).collect(Collectors.toList());
+        List<People> ascList = PEOPLE_LIST.stream().sorted(Comparator.comparing(People::getAge)).collect(toList());
 
         System.err.println(JSONUtil.toJsonStr(descList));
         System.err.println(JSONUtil.toJsonStr(ascList));
@@ -115,7 +114,7 @@ class ListDemo {
      */
     @Test
     public void listGrouping() {
-        Map<Integer, List<People>> peopleMap = PEOPLE_LIST.stream().collect(Collectors.groupingBy(People::getGroupId));
+        Map<Integer, List<People>> peopleMap = PEOPLE_LIST.stream().collect(groupingBy(People::getGroupId));
         System.err.println(JSONUtil.toJsonStr(peopleMap));
     }
 
@@ -149,7 +148,7 @@ class ListDemo {
     @Test
     public void listFilter() {
         //过滤掉二组
-        List<People> filterList = PEOPLE_LIST.stream().filter(people -> "一组".equals(people.getGroupName())).collect(Collectors.toList());
+        List<People> filterList = PEOPLE_LIST.stream().filter(people -> "一组".equals(people.getGroupName())).collect(toList());
         System.err.println(JSONUtil.toJsonStr(filterList));
     }
 
@@ -159,8 +158,8 @@ class ListDemo {
     @Test
     public void listToMap() {
         Map<String, Integer> collect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge));
-        Map<String, Integer> newCollect = PEOPLE_LIST.stream().collect(Collectors.toMap(People::getName, People::getAge));
-        Map<String, People> peopleMap = PEOPLE_LIST.stream().collect(Collectors.toMap(People::getName, Function.identity()));
+        Map<String, Integer> newCollect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge));
+        Map<String, People> peopleMap = PEOPLE_LIST.stream().collect(toMap(People::getName, Function.identity()));
         System.err.println(JSONUtil.toJsonStr(collect));
     }
 
@@ -290,6 +289,5 @@ class ListDemo {
         int sum3 = list.parallelStream().reduce(0, Integer::sum) + 5;
         System.err.println("并行流之外加5执行结果：" + sum3);
     }
-
 
 }

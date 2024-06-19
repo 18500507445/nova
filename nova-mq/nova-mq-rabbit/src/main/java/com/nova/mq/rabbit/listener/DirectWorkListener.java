@@ -76,7 +76,7 @@ public class DirectWorkListener {
     public void pollingThread(Message message) {
         long tag = message.getMessageProperties().getDeliveryTag();
         ThreadUtil.sleep(100);
-        System.err.println("工作模式开启多线程,消息id：" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
+        System.err.println("工作模式开启多线程id：+" + Thread.currentThread().getId() + "，消息id：" + tag + ",消息内容：" + JSONUtil.toJsonStr(new String(message.getBody())));
     }
 
     /**

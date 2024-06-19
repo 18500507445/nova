@@ -198,9 +198,10 @@ public class RabbitMqTest {
      */
     @Test
     public void workThread() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10000; i++) {
             rabbitTemplate.convertAndSend(RabbitConstants.QUEUE_WORK_TWO, MSG);
         }
+        ThreadUtil.sleep(50000);
     }
 
     /**

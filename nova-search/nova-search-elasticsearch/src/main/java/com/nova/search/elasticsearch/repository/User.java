@@ -1,6 +1,7 @@
 package com.nova.search.elasticsearch.repository;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nova.search.elasticsearch.annotation.EsRepository;
 import lombok.Data;
 import org.springframework.core.annotation.Order;
@@ -63,6 +64,8 @@ public class User implements Serializable {
     @Field(name = "createTime", type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss")
     //fastjson序列化格式
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    //jackson时间序列化格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     //忽略字段

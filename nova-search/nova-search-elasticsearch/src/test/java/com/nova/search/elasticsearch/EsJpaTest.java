@@ -2,6 +2,7 @@ package com.nova.search.elasticsearch;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.search.elasticsearch.repository.User;
 import com.nova.search.elasticsearch.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +59,7 @@ public class EsJpaTest {
     @Test
     public void findById() {
         Optional<User> entity = userRepository.findById(1);
-        entity.ifPresent(user -> Console.log("单条：{}", JSONUtil.toJsonStr(user)));
+        entity.ifPresent(user -> Console.log("单条：{}", JSONObject.toJSONString(user)));
 
         List<Integer> idList = Arrays.asList(1, 2, 3, 4, 5);
         Iterable<User> all = userRepository.findAllById(idList);

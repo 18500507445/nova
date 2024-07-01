@@ -2,7 +2,7 @@ package com.nova.orm.mybatisplus.chapter5;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.nova.orm.mybatisplus.entity.MyOrder;
+import com.nova.orm.mybatisplus.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 @DS("shopping")
-public interface MyOrderMapper extends BaseMapper<MyOrder> {
+public interface OrderMapper extends BaseMapper<Order> {
 
 }

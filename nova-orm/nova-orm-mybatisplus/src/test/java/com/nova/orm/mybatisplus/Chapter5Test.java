@@ -4,8 +4,8 @@ import cn.hutool.json.JSONUtil;
 import com.nova.orm.mybatisplus.chapter5.FiveUserMapper;
 import com.nova.orm.mybatisplus.chapter5.FiveUserService;
 import com.nova.orm.mybatisplus.chapter5.GenderEnum;
-import com.nova.orm.mybatisplus.chapter5.MyOrderMapper;
-import com.nova.orm.mybatisplus.entity.MyOrder;
+import com.nova.orm.mybatisplus.chapter5.OrderMapper;
+import com.nova.orm.mybatisplus.entity.Order;
 import com.nova.orm.mybatisplus.entity.UserFiveDO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class Chapter5Test {
     private FiveUserMapper fiveUserMapper;
 
     @Autowired
-    private MyOrderMapper myOrderMapper;
+    private OrderMapper orderMapper;
 
     @Autowired
     private FiveUserService fiveUserService;
@@ -99,9 +99,9 @@ public class Chapter5Test {
      */
     @Test
     public void dynamicDataSource() {
-        MyOrder myOrder = myOrderMapper.selectById(1L);
+        Order order = orderMapper.selectById(1L);
         UserFiveDO result = fiveUserMapper.selectById(1671354213734621185L);
-        System.err.println("myOrder = " + JSONUtil.toJsonStr(myOrder));
+        System.err.println("myOrder = " + JSONUtil.toJsonStr(order));
         System.err.println("result = " + JSONUtil.toJsonStr(result));
     }
 

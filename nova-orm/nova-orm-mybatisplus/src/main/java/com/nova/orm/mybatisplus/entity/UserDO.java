@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName(value = "user", autoResultMap = true)
+@TableName(value = "user")
 public class UserDO {
 
     //变量名成：private String name，属性：getName -> Name -> name

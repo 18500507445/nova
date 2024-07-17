@@ -52,6 +52,7 @@ public class FiveUserServiceImpl extends ServiceImpl<FiveUserMapper, UserFiveDO>
         }
     }
 
+    //同数据源
     @Override
     @DSTransactional
     public void theSame() {
@@ -67,6 +68,7 @@ public class FiveUserServiceImpl extends ServiceImpl<FiveUserMapper, UserFiveDO>
         int i = 1 / 0;
     }
 
+    //不同数据源
     @Override
     @DSTransactional
     public void notAlike() {

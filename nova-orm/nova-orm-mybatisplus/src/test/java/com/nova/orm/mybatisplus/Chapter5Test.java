@@ -114,9 +114,10 @@ public class Chapter5Test {
     }
 
     /**
+     * @description: mybatis-plus的DSTransactional所有的受检异常都可以捕获然后生效。具体可以看注解里面的rollbackFor默认值就是Exception.class
      * 多数据源事务：@DSTransactional，直接作用于方法上
-     * (1)同库数据源
-     * (2)不同库数据源
+     * (1)theSame，同库数据源
+     * (2)notAlike，不同库数据源
      */
     @Test
     public void testDsTransaction() {

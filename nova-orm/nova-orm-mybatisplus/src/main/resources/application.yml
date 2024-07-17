@@ -38,13 +38,13 @@ spring:
             minEvictableIdleTimeMillis: 1800000
             # 用来检测连接是否有效的sql，要求是一个查询语句
             validationQuery: SELECT 1 FROM DUAL
-            # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+            # 建议配置true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
             testWhileIdle: true
-            # （先测试这个）申请连接时执行validationQuery检测连接是否有效，会降低性能，一般情况下都可以开启，只有性能要求极其高且连接使用很频繁的情况下才有必要禁用
+            # 建议配置true，申请连接时执行validationQuery检测连接是否有效，会降低性能，只有性能要求极其高且连接使用很频繁的情况下才有必要禁用
             testOnBorrow: true
             # 归还连接时执行validationQuery检测连接是否有效，会降低性能，这个一般不需要开启。
             testOnReturn: false
-            # （先测试这个）连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作。实际项目中建议配置成true
+            # 建议配置true，连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作。（⚠️最好加上，实际情况，超过xx ms，经常会报超时）
             keepAlive: true
 
             # 打开PSCache，并且指定每个连接上PSCache的大小

@@ -114,3 +114,8 @@ jasypt:
 logging:
   file:
     path: /Users/wangzehui/logs/nova/${spring.application.name}
+
+# @value如何获取hashMap结构数据
+test:
+  map: '{"test1":"12345","test2":"54321"}'
+

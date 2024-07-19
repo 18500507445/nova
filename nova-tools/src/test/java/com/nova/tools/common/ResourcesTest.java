@@ -31,7 +31,7 @@ public class ResourcesTest {
 
     private static Map<String, String> HASH_MAP;
 
-    @Value("#{${test.map}}")
+    @Value("#{${test.map:{'key':'value'}}}")
     public void setMapKey(Map<String, String> mapKey) {
         HASH_MAP = mapKey;
     }

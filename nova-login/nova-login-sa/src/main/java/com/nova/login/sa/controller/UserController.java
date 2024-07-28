@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
+import com.nova.common.core.model.result.ResResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,17 +27,16 @@ public class UserController {
      *
      * @param username
      * @param password
-     * @return
      */
     @RequestMapping("login")
-    public SaResult login(String username, String password) {
+    public ResResult<String> login(String username, String password) {
         // 第一步：比对前端提交的账号名称、密码
         if ("wzh".equals(username) && "123456".equals(password)) {
             // 第二步：根据账号id，进行登录
             StpUtil.login(10001);
-            return SaResult.ok("登录成功");
+            return ResResult.success("登录成功");
         }
-        return SaResult.error("登录失败");
+        return ResResult.failure("登录失败");
     }
 
     @RequestMapping("getToken")

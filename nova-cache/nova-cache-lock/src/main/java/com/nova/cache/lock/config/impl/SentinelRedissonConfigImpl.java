@@ -36,7 +36,7 @@ public class SentinelRedissonConfigImpl implements RedissonConfigStrategy {
             for (int i = 1; i < addrTokens.length; i++) {
                 config.useSentinelServers().addSentinelAddress(RedissonEnum.REDIS_CONNECTION_PREFIX.getConstant_value() + addrTokens[i]);
             }
-            log.info("初始化[sentinel]方式Config,redisAddress:" + address);
+            log.info("初始化[sentinel]方式Config,redisAddress:{}", address);
         } catch (Exception e) {
             log.error("sentinel Redisson init error：{}", e.getMessage());
         }

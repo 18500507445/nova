@@ -30,7 +30,7 @@ public class StandaloneRedissonConfigImpl implements RedissonConfigStrategy {
             if (StrUtil.isNotBlank(password)) {
                 config.useSingleServer().setPassword(password);
             }
-            log.info("初始化[standalone]方式Config,redisAddress:" + address);
+            log.info("初始化[standalone]方式Config,redisAddress:{}", address);
         } catch (Exception e) {
             log.error("standalone Redisson init error：{}", e.getMessage());
         }

@@ -25,7 +25,7 @@
 
 #### 1.4 日志
 （1）grep 'xxx' xxx.log （查看包含xxx字符串的所有信息）     
-（2）grep '1795000521843875840' xxx.log | head -n 5（查找包含a的后五条内容）  
+（2）grep 'xxx' xxx.log | tail -n 5（查找包含a的最后五条内容）  
 （3）grep -C 5 "xxx" xxx.log（查找包含xxx的前后各5行内容内容）       
 （4）grep -E 'a.*b|b.*a' xxx.log （查看包含a和b字符串的所有信息）     
 （5）tail -fn 500 xxx.log （循环最新500行 ）         

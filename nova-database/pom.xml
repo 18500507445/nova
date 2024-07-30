@@ -14,9 +14,6 @@
 
         <!-- 手动封装动态数据源 -->
         <module>nova-database-dynamic</module>
-
-        <!-- 监听binlog- github旧项目shyiko，也就是zendesk -->
-        <module>nova-database-zendesk</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>

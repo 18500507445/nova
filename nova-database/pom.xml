@@ -9,11 +9,14 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!-- 监听binlog -->
+        <!-- 监听binlog （最简单的方式，维护到去年了） -->
         <module>nova-database-binlog4j</module>
 
         <!-- 手动封装动态数据源 -->
         <module>nova-database-dynamic</module>
+
+        <!-- 监听binlog- github旧项目shyiko，也就是zendesk -->
+        <module>nova-database-zendesk</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>

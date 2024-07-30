@@ -1,4 +1,4 @@
-package com.nova.database.config;
+package com.nova.database.dynamic.config;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

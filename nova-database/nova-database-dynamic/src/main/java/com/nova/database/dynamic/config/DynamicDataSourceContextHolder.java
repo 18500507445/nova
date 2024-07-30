@@ -1,4 +1,4 @@
-package com.nova.database.config;
+package com.nova.database.dynamic.config;
 
 
 import lombok.extern.slf4j.Slf4j;

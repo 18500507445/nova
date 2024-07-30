@@ -11,7 +11,7 @@
     <dependency>
         <groupId>com.baomidou</groupId>
         <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-        <version>4.3.0</version>
+        <version>4.3.1</version>
     </dependency>
 </dependencies>
 ~~~

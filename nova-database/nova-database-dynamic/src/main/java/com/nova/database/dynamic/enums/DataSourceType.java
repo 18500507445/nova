@@ -1,4 +1,4 @@
-package com.nova.database.enums;
+package com.nova.database.dynamic.enums;
 
 /**
  * 数据源

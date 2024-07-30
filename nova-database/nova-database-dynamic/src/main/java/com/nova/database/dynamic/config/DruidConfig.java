@@ -1,4 +1,4 @@
-package com.nova.database.config;
+package com.nova.database.dynamic.config;
 
 
 import cn.hutool.extra.spring.SpringUtil;
@@ -6,7 +6,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
-import com.nova.database.enums.DataSourceType;
+import com.nova.database.dynamic.enums.DataSourceType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

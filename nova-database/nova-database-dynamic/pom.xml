@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.nova</groupId>
-        <artifactId>nova-orm</artifactId>
+        <artifactId>nova-database</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nova-orm-mybatisplus</artifactId>
+    <artifactId>nova-database-dynamic</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -17,8 +17,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <druid.version>1.2.23</druid.version>
-        <mybatis.plus.version>3.5.5</mybatis.plus.version>
-        <dynamic.version>4.3.1</dynamic.version>
     </properties>
 
     <dependencies>
@@ -33,39 +31,11 @@
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
-        <!-- 模板引擎 -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-        </dependency>
-
-        <!--德鲁伊连接池 -->
+        <!--阿里数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
-
-        <!-- mybatis-plus依赖 -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis.plus.version}</version>
-        </dependency>
-
-        <!-- 代码生成器依赖 -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>${mybatis.plus.version}</version>
-        </dependency>
-
-        <!-- 动态数据源 -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>${dynamic.version}</version>
-        </dependency>
-
     </dependencies>
 </project>

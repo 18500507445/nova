@@ -21,7 +21,8 @@
 * 框架核心组件、通用工具包（包括常量类，工具类，枚举类，异常类）
 
 4.nova-database
-* 数据库组件（手写动态数据源）
+* dynamic，手写动态数据源
+* 
 
 5.nova-excel
 * [excel工具类](nova-excel/excelNote.md)

@@ -1,6 +1,5 @@
 package com.nova.orm.mybatisplus.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.Fastjson2TypeHandler;
@@ -62,10 +61,10 @@ public class UserFiveDO {
     @TableField(typeHandler = Fastjson2TypeHandler.class)
     private Map<String, String> contact;
 
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @TableField(value = "create_time")
     private Date createTime;
 
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "update_time")
     private Date updateTime;
 
 }

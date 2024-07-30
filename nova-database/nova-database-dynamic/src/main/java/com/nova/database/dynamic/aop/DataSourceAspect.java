@@ -1,8 +1,8 @@
-package com.nova.database.aop;
+package com.nova.database.dynamic.aop;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.nova.database.annotation.DataSource;
-import com.nova.database.config.DynamicDataSourceContextHolder;
+import com.nova.database.dynamic.annotation.DataSource;
+import com.nova.database.dynamic.config.DynamicDataSourceContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,8 +29,8 @@ public class DataSourceAspect {
     /**
      * 配置织入点
      */
-    @Pointcut("@annotation(com.nova.database.annotation.DataSource)"
-            + "|| @within(com.nova.database.annotation.DataSource)")
+    @Pointcut("@annotation(com.nova.database.dynamic.annotation.DataSource)"
+            + "|| @within(com.nova.database.dynamic.annotation.DataSource)")
     public void dsPointCut() {
 
     }

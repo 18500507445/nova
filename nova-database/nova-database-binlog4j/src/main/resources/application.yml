@@ -1,0 +1,36 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  binlog4j:
+    # redis配置信息
+    redis-config:
+      database: 1
+      host: 192.168.50.43
+      port: 6379
+      password: ENC(dq8wNmz0GxfkMFCVC4CW1jH1jaul/PnC+cxE+E+SO6nOVRvY602yD++Aw1az0J6M)
+
+    # mysql配置信息
+    client-configs:
+      master:
+        host: 39.106.255.29
+        port: 3306
+        username: avicare
+        password: ENC(DlnN1sJkxbmWrZyUjVbcUO0yQeR6TcbuWEU7Ff/AZ2dCZNojMC/RU3XPgjLfgJDh)
+        # 客户端编号
+        serverId: 1990
+        # 部署模式
+        mode: standalone
+        # 读取记忆
+        persistence: true
+
+
+jasypt:
+  encryptor:
+    # 加密算法
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    # 加密使用的盐
+    password: jaspyt_password

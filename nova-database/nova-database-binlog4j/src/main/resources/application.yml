@@ -16,9 +16,9 @@ spring:
     # mysql配置信息
     client-configs:
       master:
-#        host: 39.106.255.29
-#        port: 3306
-#        username: avicare
+        host: root
+        port: 3306
+        username: root
         password: ENC(DlnN1sJkxbmWrZyUjVbcUO0yQeR6TcbuWEU7Ff/AZ2dCZNojMC/RU3XPgjLfgJDh)
         # 客户端编号
         serverId: 1990

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @description: binlog4j启动类
+ * @description: binlog4j启动类，支持宕机续读
  * @author: wzh
  * @date: 2024/07/30 13:57
  */

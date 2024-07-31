@@ -88,27 +88,6 @@
                 <version>${nova.version}</version>
             </dependency>
 
-            <!-- cache组件 -->
-            <dependency>
-                <groupId>com.nova</groupId>
-                <artifactId>nova-cache</artifactId>
-                <version>${nova.version}</version>
-            </dependency>
-
-            <!-- mq组件 -->
-            <dependency>
-                <groupId>com.nova</groupId>
-                <artifactId>nova-mq</artifactId>
-                <version>${nova.version}</version>
-            </dependency>
-
-            <!-- database组件 -->
-            <dependency>
-                <groupId>com.nova</groupId>
-                <artifactId>nova-database</artifactId>
-                <version>${nova.version}</version>
-            </dependency>
-
             <!-- shopping单独组件 -->
             <dependency>
                 <groupId>com.nova</groupId>

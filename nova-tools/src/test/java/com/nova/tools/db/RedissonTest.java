@@ -32,7 +32,7 @@ public class RedissonTest {
         try {
             flag = rLock.tryLock(0, expireSeconds, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            log.error("Redisson分布式锁【异常】，key = " + key, e);
+            log.error("Redisson分布式锁【异常】，key = {}", key, e);
         } finally {
             if (flag) {
                 log.info("Redisson分布式锁【成功】，key = {}", key);
@@ -49,7 +49,7 @@ public class RedissonTest {
         try {
             flag = rLock.tryLockAsync(0, expireSeconds, TimeUnit.SECONDS).get();
         } catch (Exception e) {
-            log.error("Redisson分布式锁【异步加锁异常】，key = " + key, e);
+            log.error("Redisson分布式锁【异步加锁异常】，key = {}", key, e);
         } finally {
             if (flag) {
                 log.info("Redisson分布式锁【异步加锁成功】，key = {}", key);

@@ -43,12 +43,12 @@ public class CommonController extends BaseController {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    /**
-     * 如何根据qps，如何评估开启线程数量
-     * 200qps，接口单次耗时：0.5秒，那么1秒请求数是 1/0.5 = 2
-     * 机器核数为10，那么10 * 2 = 20，也就是10核1秒并行处理20个请求
-     * 200(qps)/20(parallelRequest/1s) = 10 ,10个线程
-     * 备注：ab test测试返回的Requests per second 约等于 qps数量
+    /*
+      如何根据qps，如何评估开启线程数量
+      200qps，接口单次耗时：0.5秒，那么1秒请求数是 1/0.5 = 2
+      机器核数为10，那么10 * 2 = 20，也就是10核1秒并行处理20个请求
+      200(qps)/20(parallelRequest/1s) = 10 ,10个线程
+      备注：ab test测试返回的Requests per second 约等于 qps数量
      */
 
     /**
@@ -118,7 +118,9 @@ public class CommonController extends BaseController {
         return ResResult.success();
     }
 
-    //线程阻塞队列
+    /**
+     * 线程阻塞队列
+     */
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create()
             .setCorePoolSize(2)
             .setMaxPoolSize(2)
@@ -147,7 +149,9 @@ public class CommonController extends BaseController {
             .setHandler(RejectPolicy.BLOCK.getValue())
             .build();
 
-    //主线程1秒后直接返回，子线程再过2秒后拿结果（共耗时3秒）
+    /**
+     * 主线程1秒后直接返回，子线程再过2秒后拿结果（共耗时3秒）
+     */
     @GetMapping(value = "/mainThread", name = "主线程")
     public ResResult<Void> mainThread() {
         TimeInterval timer = DateUtil.timer();

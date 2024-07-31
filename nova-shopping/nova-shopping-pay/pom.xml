@@ -18,7 +18,7 @@
 
         <weixin.pay.version>4.6.0</weixin.pay.version>
         <weixin.mp.version>4.6.0</weixin.mp.version>
-        <alipay.version>4.38.200.ALL</alipay.version>
+        <alipay.version>4.39.150.ALL</alipay.version>
         <google.pay.version>v3-rev142-1.25.0</google.pay.version>
 
     </properties>

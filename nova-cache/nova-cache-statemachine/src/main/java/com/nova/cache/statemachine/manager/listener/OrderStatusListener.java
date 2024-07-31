@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @WithStateMachine
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class OrderStatusListener {
 
     @OnTransition(source = "WAIT_PAYMENT", target = "WAIT_DELIVER")

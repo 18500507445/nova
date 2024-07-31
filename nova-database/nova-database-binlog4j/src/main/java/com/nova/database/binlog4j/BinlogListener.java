@@ -16,7 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @BinlogSubscriber(clientName = "master")
 public class BinlogListener implements IBinlogEventHandler<Object> {
 
-    //判断当前库，当前表是否执行（可以做定制化，专门处理某一个表）
+    /**
+     * 判断当前库，当前表是否执行（可以做定制化，专门处理某一个表）
+     */
     @Override
     public boolean isHandle(String database, String table) {
         log.info("isHandle --- database：{}，table：{}", database, table);

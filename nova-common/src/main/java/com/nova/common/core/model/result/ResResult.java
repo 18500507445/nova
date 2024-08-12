@@ -4,7 +4,6 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.trace.TraceContext;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -59,6 +58,13 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
     private static String internetIp = "00";
 
     /**
+     * 获取 T.class
+     */
+    public Class<?> getTClass() {
+        return super.get(Constants.DATA).getClass();
+    }
+
+    /**
      * 方便链式调用
      *
      * @param key   键
@@ -79,6 +85,11 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
     public ResResult<T> setData(Object value) {
         super.put(Constants.DATA, value);
         return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T getData() {
+        return (T) super.get(Constants.DATA);
     }
 
     /**

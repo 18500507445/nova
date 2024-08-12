@@ -188,6 +188,9 @@ public class CommonController extends BaseController {
 
         String json = success.toString();
         System.err.println("string = " + json);
+
+        Class<?> tClass = success.getTClass();
+        System.out.println("tClass = " + tClass);
         return success;
     }
 

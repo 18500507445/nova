@@ -24,7 +24,7 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
     /**
      * 内部常量类
      */
-    public static class Constants {
+    private static class Constants {
         //状态码，比如000000代表响应成功
         public static final String BIZ_CODE = "bizCode";
 

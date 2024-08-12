@@ -1,87 +1,141 @@
 package com.nova.common.core.model.result;
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.nova.common.core.model.result.code.IResultCode;
-import com.nova.common.core.model.result.code.ResultCode;
+import cn.hutool.json.JSONUtil;
 import com.nova.common.trace.TraceContext;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * @description: 通用返回结果对象
  * @author: wzh
  * @date: 2023/03/20 11:16
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class ResResult<T> implements Serializable {
+public class ResResult<T> extends HashMap<String, Object> implements Serializable {
 
     /**
-     * 状态码，比如000000代表响应成功
+     * 公网ip 最后2位，方便查找log
      */
-    private String bizCode;
-    /**
-     * 响应信息，用来说明响应情况
-     */
-    private String bizMessage;
-    /**
-     * 响应的具体数据
-     */
-    private T data;
+    @Setter
+    private static String internetIp = "00";
 
-    private Boolean success;
+    //状态码，比如000000代表响应成功
+    public static final String BIZ_CODE = "bizCode";
 
-    /**
-     * 分布式链路id
-     */
-    private String traceId;
+    //响应信息，用来说明响应情况
+    public static final String BIZ_MESSAGE = "bizMessage";
 
-    private String spanId;
+    //data
+    public static final String DATA = "data";
 
-    /**
-     * 系统时间
-     */
-    private Long systemTime;
+    //成功
+    public static final String SUCCESS = "success";
 
-    /**
-     * 当前环境
-     */
-    private String env;
+    //分布式链路id
+    public static final String TRACE_ID = "traceId";
+
+    //分布式分片id
+    public static final String SPAN_ID = "spanId";
+
+    //系统时间
+    public static final String SYSTEM_TIME = "systemTime";
+
+    //当前环境
+    public static final String ENV = "env";
+
+    //ip
+    public static final String IP = "ip";
 
     public ResResult() {
 
     }
 
+    /**
+     * 方便链式调用
+     *
+     * @param key   键
+     * @param value 值
+     * @return 数据对象
+     */
+    @Override
+    public ResResult<T> put(@NotNull String key, Object value) {
+        super.put(key, value);
+        return this;
+    }
+
+    /**
+     * 手动存入Data
+     *
+     * @param value 值
+     */
+    public ResResult<T> setData(Object value) {
+        super.put(DATA, value);
+        return this;
+    }
+
+    /**
+     * 序列化 ==> toJson
+     */
+    @Override
+    public String toString() {
+        return JSONUtil.toJsonStr(this);
+    }
+
     public ResResult(IResultCode resultCode, T data, Boolean success) {
-        this.bizCode = resultCode.getBizCode();
-        this.bizMessage = resultCode.getBizMessage();
-        this.data = data;
-        this.success = success;
-        this.traceId = TraceContext.getCurrentTrace().getTraceId();
-        this.spanId = TraceContext.getCurrentTrace().getSpanId();
-        this.env = SpringUtil.getActiveProfile();
-        this.systemTime = System.currentTimeMillis();
+        super.put(BIZ_CODE, resultCode.getBizCode());
+        super.put(BIZ_MESSAGE, resultCode.getBizMessage());
+        super.put(DATA, data);
+        super.put(SUCCESS, success);
+        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(SYSTEM_TIME, System.currentTimeMillis());
+        super.put(ENV, SpringUtil.getActiveProfile());
+        super.put(IP, internetIp);
     }
 
     public ResResult(IResultCode resultCode, T data, Boolean success, String bizMessage) {
-        this.bizCode = resultCode.getBizCode();
-        this.bizMessage = bizMessage;
-        this.data = data;
-        this.success = success;
-        this.traceId = TraceContext.getCurrentTrace().getTraceId();
-        this.spanId = TraceContext.getCurrentTrace().getSpanId();
-        this.env = SpringUtil.getActiveProfile();
-        this.systemTime = System.currentTimeMillis();
+        super.put(BIZ_CODE, resultCode.getBizCode());
+        super.put(BIZ_MESSAGE, bizMessage);
+        super.put(DATA, data);
+        super.put(SUCCESS, success);
+        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(SYSTEM_TIME, System.currentTimeMillis());
+        super.put(ENV, SpringUtil.getActiveProfile());
+        super.put(IP, internetIp);
     }
 
     public ResResult(IResultCode resultCode, Boolean success) {
-        this.bizCode = resultCode.getBizCode();
-        this.bizMessage = resultCode.getBizMessage();
-        this.success = success;
-        this.traceId = TraceContext.getCurrentTrace().getTraceId();
-        this.spanId = TraceContext.getCurrentTrace().getSpanId();
-        this.env = SpringUtil.getActiveProfile();
-        this.systemTime = System.currentTimeMillis();
+        super.put(BIZ_CODE, resultCode.getBizCode());
+        super.put(BIZ_MESSAGE, resultCode.getBizMessage());
+        super.put(SUCCESS, success);
+        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(SYSTEM_TIME, System.currentTimeMillis());
+        super.put(ENV, SpringUtil.getActiveProfile());
+        super.put(IP, internetIp);
+    }
+
+    public ResResult(ResResult<T> resResult) {
+        if (null != resResult) {
+            super.put(BIZ_CODE, MapUtil.getStr(resResult, BIZ_CODE, ""));
+            super.put(BIZ_MESSAGE, MapUtil.getStr(resResult, BIZ_MESSAGE, ""));
+            super.put(DATA, resResult.get(DATA));
+            super.put(SUCCESS, MapUtil.getBool(resResult, SUCCESS, false));
+        }
+        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(SYSTEM_TIME, System.currentTimeMillis());
+        super.put(ENV, SpringUtil.getActiveProfile());
+        super.put(IP, internetIp);
     }
 
     public static <T> ResResult<T> success() {
@@ -109,7 +163,11 @@ public class ResResult<T> implements Serializable {
     }
 
     public static <T> ResResult<T> failure() {
-        return new ResResult<>(ResultCode.FAILED, true);
+        return new ResResult<>(ResultCode.FAILED, false);
+    }
+
+    public static <T> ResResult<T> failure(T data) {
+        return new ResResult<>(ResultCode.FAILED, data, false);
     }
 
     public static <T> ResResult<T> failure(String bizMessage) {
@@ -132,4 +190,7 @@ public class ResResult<T> implements Serializable {
         return new ResResult<>(resultCode, data, false, bizMessage);
     }
 
+    public static <T> ResResult<T> build(ResResult<T> result) {
+        return new ResResult<>(result);
+    }
 }

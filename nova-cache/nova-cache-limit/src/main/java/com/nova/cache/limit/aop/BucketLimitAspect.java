@@ -2,11 +2,10 @@ package com.nova.cache.limit.aop;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson2.JSON;
 import com.nova.cache.limit.annotation.BucketLimit;
 import com.nova.cache.limit.utils.JedisUtil;
 import com.nova.common.core.controller.BaseController;
-import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.result.ResResult;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -87,7 +86,7 @@ public class BucketLimitAspect extends BaseController implements InitializingBea
         if (null != response) {
             response.setContentType("application/json;charset=UTF-8");
             OutputStream out = response.getOutputStream();
-            String str = JSON.toJSONString(AjaxResult.error(message));
+            String str = ResResult.failure(message).toString();
             out.write(str.getBytes(StandardCharsets.UTF_8));
             out.flush();
             out.close();

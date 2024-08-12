@@ -9,7 +9,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.business.ValidatorReqDTO;
-import com.nova.common.core.model.result.R;
 import com.nova.common.core.model.result.ResResult;
 import com.nova.common.exception.ParamException;
 import com.nova.common.trace.Trace;
@@ -179,12 +178,16 @@ public class CommonController extends BaseController {
         return ResResult.success(baseDTO);
     }
 
-    @GetMapping(value = "/a")
-    public R<Date> a() {
-        R.setInternetIp("ip");
+    //测试返回类
+    @GetMapping(value = "/resResult")
+    public ResResult<Date> resResult() {
+        ResResult.setInternetIp("ip");
         Date date = new Date();
-        R<Date> success = R.success(date);
+        ResResult<Date> success = ResResult.success(date);
         success.put("main", "234");
+
+        String json = success.toString();
+        System.err.println("string = " + json);
         return success;
     }
 

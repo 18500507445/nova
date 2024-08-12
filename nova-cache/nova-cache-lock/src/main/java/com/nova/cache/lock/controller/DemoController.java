@@ -5,7 +5,7 @@ import com.nova.cache.lock.annotation.Lock;
 import com.nova.cache.lock.core.RedissonLock;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.business.ValidatorReqDTO;
-import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.result.ResResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @description:
+ * @description: 缓存redisson测试
  * @author: wzh
  * @date: 2022/11/19 17:19
  */
@@ -32,23 +32,23 @@ public class DemoController extends BaseController {
      */
     @Lock(value = "redisson", expireSeconds = 60)
     @PostMapping("redisson")
-    public AjaxResult redisson(ValidatorReqDTO reqDto) {
-        return AjaxResult.success(reqDto);
+    public ResResult<ValidatorReqDTO> redisson(ValidatorReqDTO reqDto) {
+        return ResResult.success(reqDto);
     }
 
     @PostMapping("offer")
-    public AjaxResult offer(ValidatorReqDTO reqDto) {
-        return AjaxResult.success(redissonLock.bQueueOffer(reqDto.getName(), JSONUtil.toJsonStr(reqDto), 500, TimeUnit.MILLISECONDS));
+    public ResResult<Boolean> offer(ValidatorReqDTO reqDto) {
+        return ResResult.success(redissonLock.bQueueOffer(reqDto.getName(), JSONUtil.toJsonStr(reqDto), 500, TimeUnit.MILLISECONDS));
     }
 
     @PostMapping("poll")
-    public AjaxResult poll(ValidatorReqDTO reqDto) {
+    public ResResult<String> poll(ValidatorReqDTO reqDto) {
         String json = redissonLock.bQueuePoll(reqDto.getName(), 500, TimeUnit.MILLISECONDS, String.class);
-        return AjaxResult.success("success", json);
+        return ResResult.success(json);
     }
 
     @PostMapping("size")
-    public AjaxResult size(ValidatorReqDTO reqDto) {
-        return AjaxResult.success(redissonLock.bQueueSize(reqDto.getName()));
+    public ResResult<Integer> size(ValidatorReqDTO reqDto) {
+        return ResResult.success(redissonLock.bQueueSize(reqDto.getName()));
     }
 }

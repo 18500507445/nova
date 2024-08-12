@@ -1,4 +1,4 @@
-package com.nova.common.core.model.result.code;
+package com.nova.common.core.model.result;
 
 import cn.hutool.core.util.EnumUtil;
 import lombok.AllArgsConstructor;

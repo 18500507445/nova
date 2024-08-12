@@ -2,7 +2,7 @@ package com.nova.cache.limit.controller;
 
 import com.nova.cache.limit.annotation.AccessLimit;
 import com.nova.cache.limit.annotation.BucketLimit;
-import com.nova.common.core.model.result.AjaxResult;
+import com.nova.common.core.model.result.ResResult;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RRateLimiter;
@@ -31,8 +31,8 @@ public class LimitController {
      */
     @RequestMapping("/redisLimit")
     @AccessLimit(seconds = 5, maxCount = 5)
-    public AjaxResult redisLimit() {
-        return AjaxResult.success();
+    public ResResult<Void> redisLimit() {
+        return ResResult.success();
     }
 
     /**
@@ -41,8 +41,8 @@ public class LimitController {
      */
     @PostMapping("/bucket")
     @BucketLimit(rate = 1, maxCount = 5, requestNum = 1)
-    public AjaxResult bucketLua() {
-        return AjaxResult.success();
+    public ResResult<Void> bucketLua() {
+        return ResResult.success();
     }
 
     /**
@@ -50,7 +50,7 @@ public class LimitController {
      * 效果，1-3次请求没问题，第四次等待3秒后返回
      */
     @PostMapping("/redissonLimit")
-    public AjaxResult redissonLimit() {
+    public ResResult<String> redissonLimit() {
         StackTraceElement[] stack = Thread.currentThread().getStackTrace();
         String methodName = stack[1].getMethodName();
         System.err.println("key = " + methodName);
@@ -60,11 +60,11 @@ public class LimitController {
         //试图获取一个令牌，获取到返回true
         boolean b = redissonLimit.tryAcquire(1);
         if (!b) {
-            return AjaxResult.error("接口限流");
+            return ResResult.failure("接口限流");
         }
 
         // 处理业务
-        return AjaxResult.success(methodName);
+        return ResResult.success(methodName);
     }
 
 }

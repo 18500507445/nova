@@ -2,9 +2,8 @@ package com.nova.common.core.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.nova.common.core.model.result.AjaxResult;
-import com.nova.common.utils.spring.ServletUtils;
 import com.nova.common.utils.ip.IpUtils;
+import com.nova.common.utils.spring.ServletUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -123,68 +122,5 @@ public class BaseController {
     public HttpSession getSession() {
         return getRequest().getSession();
     }
-
-    /**
-     * 响应返回结果
-     *
-     * @param rows 影响行数
-     * @return 操作结果
-     */
-    protected AjaxResult toAjax(int rows) {
-        return rows > 0 ? success() : error();
-    }
-
-    /**
-     * 响应返回结果
-     *
-     * @param result 结果
-     * @return 操作结果
-     */
-    protected AjaxResult toAjax(boolean result) {
-        return result ? success() : error();
-    }
-
-    /**
-     * 返回成功
-     */
-    public AjaxResult success() {
-        return AjaxResult.success();
-    }
-
-    /**
-     * 返回失败消息
-     */
-    public AjaxResult error() {
-        return AjaxResult.error();
-    }
-
-    /**
-     * 返回成功消息
-     */
-    public AjaxResult success(String message) {
-        return AjaxResult.success(message);
-    }
-
-    /**
-     * 返回成功数据
-     */
-    public static AjaxResult success(Object data) {
-        return AjaxResult.success("操作成功", data);
-    }
-
-    /**
-     * 返回失败消息
-     */
-    public AjaxResult error(String message) {
-        return AjaxResult.error(message);
-    }
-
-    /**
-     * 返回错误码消息
-     */
-    public AjaxResult error(AjaxResult.Type type, String message) {
-        return new AjaxResult(type, message);
-    }
-
 
 }

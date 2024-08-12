@@ -1,4 +1,4 @@
-package com.nova.common.core.model.result.code;
+package com.nova.common.core.model.result;
 
 /**
  * @description: 基础的返回码对象(基础的返回码)

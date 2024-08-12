@@ -18,7 +18,6 @@ import java.util.HashMap;
  * @date: 2023/03/20 11:16
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
 public class ResResult<T> extends HashMap<String, Object> implements Serializable {
 
     /**

@@ -54,10 +54,6 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
     //ip
     public static final String IP = "ip";
 
-    public ResResult() {
-
-    }
-
     /**
      * 方便链式调用
      *
@@ -87,6 +83,11 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
     @Override
     public String toString() {
         return JSONUtil.toJsonStr(this);
+    }
+
+    // --------------------------------- 构造开始 ---------------------------------
+    public ResResult() {
+
     }
 
     public ResResult(IResultCode resultCode, T data, Boolean success) {
@@ -137,6 +138,9 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
         super.put(ENV, SpringUtil.getActiveProfile());
         super.put(IP, internetIp);
     }
+
+    // --------------------------------- 构造结束 ---------------------------------
+
 
     public static <T> ResResult<T> success() {
         return new ResResult<>(ResultCode.SUCCESS, true);
@@ -190,6 +194,7 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
         return new ResResult<>(resultCode, data, false, bizMessage);
     }
 
+    //转换构造
     public static <T> ResResult<T> build(ResResult<T> result) {
         return new ResResult<>(result);
     }

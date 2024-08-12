@@ -30,7 +30,7 @@ public class DispatcherController extends BaseController {
      * 请求内部转发机制
      *
      * @param request  入参 apiUrl: 转发地址 function=/api/gameBBS/gameBBSTest&username=123 AES加密结果
-     * @param response
+     * @param response response
      */
     @PostMapping(value = {"/forward", "/dispatcher"})
     public void dispatcher(HttpServletRequest request, HttpServletResponse response) {

@@ -22,37 +22,42 @@ import java.util.HashMap;
 public class ResResult<T> extends HashMap<String, Object> implements Serializable {
 
     /**
+     * 内部常量类
+     */
+    public static class Constants {
+        //状态码，比如000000代表响应成功
+        public static final String BIZ_CODE = "bizCode";
+
+        //响应信息，用来说明响应情况
+        public static final String BIZ_MESSAGE = "bizMessage";
+
+        //data
+        public static final String DATA = "data";
+
+        //成功
+        public static final String SUCCESS = "success";
+
+        //分布式链路id
+        public static final String TRACE_ID = "traceId";
+
+        //分布式分片id
+        public static final String SPAN_ID = "spanId";
+
+        //系统时间
+        public static final String SYSTEM_TIME = "systemTime";
+
+        //当前环境
+        public static final String ENV = "env";
+
+        //ip
+        public static final String IP = "ip";
+    }
+
+    /**
      * 公网ip 最后2位，方便查找log
      */
     @Setter
     private static String internetIp = "00";
-
-    //状态码，比如000000代表响应成功
-    public static final String BIZ_CODE = "bizCode";
-
-    //响应信息，用来说明响应情况
-    public static final String BIZ_MESSAGE = "bizMessage";
-
-    //data
-    public static final String DATA = "data";
-
-    //成功
-    public static final String SUCCESS = "success";
-
-    //分布式链路id
-    public static final String TRACE_ID = "traceId";
-
-    //分布式分片id
-    public static final String SPAN_ID = "spanId";
-
-    //系统时间
-    public static final String SYSTEM_TIME = "systemTime";
-
-    //当前环境
-    public static final String ENV = "env";
-
-    //ip
-    public static final String IP = "ip";
 
     /**
      * 方便链式调用
@@ -73,7 +78,7 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
      * @param value 值
      */
     public ResResult<T> setData(Object value) {
-        super.put(DATA, value);
+        super.put(Constants.DATA, value);
         return this;
     }
 
@@ -91,52 +96,52 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
     }
 
     public ResResult(IResultCode resultCode, T data, Boolean success) {
-        super.put(BIZ_CODE, resultCode.getBizCode());
-        super.put(BIZ_MESSAGE, resultCode.getBizMessage());
-        super.put(DATA, data);
-        super.put(SUCCESS, success);
-        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
-        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
-        super.put(SYSTEM_TIME, System.currentTimeMillis());
-        super.put(ENV, SpringUtil.getActiveProfile());
-        super.put(IP, internetIp);
+        super.put(Constants.BIZ_CODE, resultCode.getBizCode());
+        super.put(Constants.BIZ_MESSAGE, resultCode.getBizMessage());
+        super.put(Constants.DATA, data);
+        super.put(Constants.SUCCESS, success);
+        super.put(Constants.TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(Constants.SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(Constants.SYSTEM_TIME, System.currentTimeMillis());
+        super.put(Constants.ENV, SpringUtil.getActiveProfile());
+        super.put(Constants.IP, internetIp);
     }
 
     public ResResult(IResultCode resultCode, T data, Boolean success, String bizMessage) {
-        super.put(BIZ_CODE, resultCode.getBizCode());
-        super.put(BIZ_MESSAGE, bizMessage);
-        super.put(DATA, data);
-        super.put(SUCCESS, success);
-        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
-        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
-        super.put(SYSTEM_TIME, System.currentTimeMillis());
-        super.put(ENV, SpringUtil.getActiveProfile());
-        super.put(IP, internetIp);
+        super.put(Constants.BIZ_CODE, resultCode.getBizCode());
+        super.put(Constants.BIZ_MESSAGE, bizMessage);
+        super.put(Constants.DATA, data);
+        super.put(Constants.SUCCESS, success);
+        super.put(Constants.TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(Constants.SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(Constants.SYSTEM_TIME, System.currentTimeMillis());
+        super.put(Constants.ENV, SpringUtil.getActiveProfile());
+        super.put(Constants.IP, internetIp);
     }
 
     public ResResult(IResultCode resultCode, Boolean success) {
-        super.put(BIZ_CODE, resultCode.getBizCode());
-        super.put(BIZ_MESSAGE, resultCode.getBizMessage());
-        super.put(SUCCESS, success);
-        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
-        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
-        super.put(SYSTEM_TIME, System.currentTimeMillis());
-        super.put(ENV, SpringUtil.getActiveProfile());
-        super.put(IP, internetIp);
+        super.put(Constants.BIZ_CODE, resultCode.getBizCode());
+        super.put(Constants.BIZ_MESSAGE, resultCode.getBizMessage());
+        super.put(Constants.SUCCESS, success);
+        super.put(Constants.TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(Constants.SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(Constants.SYSTEM_TIME, System.currentTimeMillis());
+        super.put(Constants.ENV, SpringUtil.getActiveProfile());
+        super.put(Constants.IP, internetIp);
     }
 
     public ResResult(ResResult<T> resResult) {
         if (null != resResult) {
-            super.put(BIZ_CODE, MapUtil.getStr(resResult, BIZ_CODE, ""));
-            super.put(BIZ_MESSAGE, MapUtil.getStr(resResult, BIZ_MESSAGE, ""));
-            super.put(DATA, resResult.get(DATA));
-            super.put(SUCCESS, MapUtil.getBool(resResult, SUCCESS, false));
+            super.put(Constants.BIZ_CODE, MapUtil.getStr(resResult, Constants.BIZ_CODE, ""));
+            super.put(Constants.BIZ_MESSAGE, MapUtil.getStr(resResult, Constants.BIZ_MESSAGE, ""));
+            super.put(Constants.DATA, resResult.get(Constants.DATA));
+            super.put(Constants.SUCCESS, MapUtil.getBool(resResult, Constants.SUCCESS, false));
         }
-        super.put(TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
-        super.put(SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
-        super.put(SYSTEM_TIME, System.currentTimeMillis());
-        super.put(ENV, SpringUtil.getActiveProfile());
-        super.put(IP, internetIp);
+        super.put(Constants.TRACE_ID, TraceContext.getCurrentTrace().getTraceId());
+        super.put(Constants.SPAN_ID, TraceContext.getCurrentTrace().getSpanId());
+        super.put(Constants.SYSTEM_TIME, System.currentTimeMillis());
+        super.put(Constants.ENV, SpringUtil.getActiveProfile());
+        super.put(Constants.IP, internetIp);
     }
 
     // --------------------------------- 构造结束 ---------------------------------

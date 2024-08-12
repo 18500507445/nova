@@ -2,7 +2,7 @@ package com.nova.common.core.model.result;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.common.trace.TraceContext;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -82,7 +82,7 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
      */
     @Override
     public String toString() {
-        return JSONUtil.toJsonStr(this);
+        return JSONObject.toJSONString(this);
     }
 
     // --------------------------------- 构造开始 ---------------------------------

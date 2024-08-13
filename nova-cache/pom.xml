@@ -13,9 +13,9 @@
     <packaging>pom</packaging>
 
     <description>
-        nova-cache-limit：redis限流(jedis客户端)、布隆过滤器、redisson限流器
-        nova-cache-lock：redisson分布式锁
-        nova-cache-redis：本地cache、caffeine、redis(lettuce客户端)
+        nova-cache-limit：redis限流（jedis客户端）、布隆过滤器、redisson限流器
+        nova-cache-lock：redisson分布式锁（集群、主从、哨兵、单机方式）
+        nova-cache-redis：本地cache、caffeine、redis（lettuce客户端）
         nova-cache-statemachine：spring状态机持久化到redis
     </description>
 

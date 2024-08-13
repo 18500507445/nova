@@ -1,8 +1,7 @@
 ## nova-cache-limit
 ### 简介:
-* (1)接口限流：单机版（ExtRateLimiter）、分布式版（AccessLimit）
-* (2)请求和响应拦截器处理数据、validation、拦截异常统一封装
-* (3)引入jedis、redisson实现布隆过滤器
+* (1)限流jedis执行lua脚本、redisson实现令牌桶限流
+* (2)引入jedis、redisson实现布隆过滤器
 
 
 ## nova-cache-lock

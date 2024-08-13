@@ -1,6 +1,5 @@
 package com.nova.cache.limit.controller;
 
-import com.nova.cache.limit.annotation.AccessLimit;
 import com.nova.cache.limit.annotation.BucketLimit;
 import com.nova.common.core.model.result.ResResult;
 import lombok.AllArgsConstructor;
@@ -27,16 +26,7 @@ public class LimitController {
     private final RedissonClient redissonClient;
 
     /**
-     * 计数器:redis限流
-     */
-    @RequestMapping("/redisLimit")
-    @AccessLimit(seconds = 5, maxCount = 5)
-    public ResResult<Void> redisLimit() {
-        return ResResult.success();
-    }
-
-    /**
-     * 令牌桶限流
+     * jedis调用lua脚本实现令牌桶限流
      * 每秒产生的令牌数，最大容量，请求的令牌数
      */
     @PostMapping("/bucket")

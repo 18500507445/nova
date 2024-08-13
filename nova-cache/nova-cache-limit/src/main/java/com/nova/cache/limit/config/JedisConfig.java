@@ -9,7 +9,7 @@ import redis.clients.jedis.JedisPoolConfig;
 import java.time.Duration;
 
 @Configuration
-public class RedisConfig {
+public class JedisConfig {
 
     @Value("${spring.redis.host}")
     private String host;
@@ -73,7 +73,6 @@ public class RedisConfig {
         jedisPoolConfig.setJmxEnabled(true);
         return new JedisPool(jedisPoolConfig, host, port, timeout, password);
     }
-
 
 
     /**

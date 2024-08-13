@@ -61,7 +61,11 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
      * 获取 T.class
      */
     public Class<?> getTClass() {
-        return super.get(Constants.DATA).getClass();
+        Object o = super.get(Constants.DATA);
+        if (null != o) {
+            return o.getClass();
+        }
+        return null;
     }
 
     /**
@@ -89,7 +93,11 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
 
     @SuppressWarnings("unchecked")
     public T getData() {
-        return (T) super.get(Constants.DATA);
+        Object o = super.get(Constants.DATA);
+        if (o != null) {
+            return (T) o;
+        }
+        return null;
     }
 
     /**
@@ -101,9 +109,6 @@ public class ResResult<T> extends HashMap<String, Object> implements Serializabl
     }
 
     // --------------------------------- 构造开始 ---------------------------------
-    public ResResult() {
-
-    }
 
     public ResResult(IResultCode resultCode, T data, Boolean success) {
         super.put(Constants.BIZ_CODE, resultCode.getBizCode());

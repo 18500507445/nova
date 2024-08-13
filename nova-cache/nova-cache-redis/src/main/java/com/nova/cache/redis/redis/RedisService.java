@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.TimeoutUtils;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationUtils;
 import org.springframework.stereotype.Component;
@@ -759,6 +760,21 @@ public class RedisService {
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
         Long res = redisTemplate.execute(redisScript, Collections.singletonList(LOCK_PREFIX), requestId);
         return new Long(1).equals(res);
+    }
+
+    /**
+     * 执行lua脚本
+     *
+     * @param script
+     * @param key
+     * @param <T>
+     */
+    public <T> T execute(RedisScript<T> script, String key) {
+        return redisTemplate.execute(script, Collections.singletonList(key), Collections.EMPTY_LIST);
+    }
+
+    public <T> T execute(RedisScript<T> script, String key, List<String> args) {
+        return redisTemplate.execute(script, Collections.singletonList(key), args);
     }
 
     /**

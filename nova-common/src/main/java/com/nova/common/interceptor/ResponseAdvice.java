@@ -1,4 +1,4 @@
-package com.nova.cache.limit.interceptor;
+package com.nova.common.interceptor;
 
 import com.nova.common.constant.Constants;
 import lombok.extern.slf4j.Slf4j;

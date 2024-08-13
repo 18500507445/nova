@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
-public class DemoController extends BaseController {
+public class LockController extends BaseController {
 
     private final RedissonLock redissonLock;
 

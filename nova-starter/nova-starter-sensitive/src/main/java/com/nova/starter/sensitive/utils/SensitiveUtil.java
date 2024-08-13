@@ -56,10 +56,7 @@ public class SensitiveUtil {
      * @param cardNum
      */
     public static String handlerBankCard(String cardNum) {
-        if (StrUtil.isEmpty(cardNum)) {
-            return null;
-        }
-        return hide(cardNum, 6, cardNum.length() - 4);
+        return handlerIdCard(cardNum);
     }
 
     /**

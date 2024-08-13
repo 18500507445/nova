@@ -1,4 +1,4 @@
-package com.nova.cache.limit.interceptor;
+package com.nova.common.interceptor;
 
 import cn.hutool.json.JSONUtil;
 import com.nova.common.constant.Constants;

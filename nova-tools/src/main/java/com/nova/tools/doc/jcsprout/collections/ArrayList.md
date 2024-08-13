@@ -137,8 +137,7 @@ transient Object[] elementData;
     public synchronized void insertElementAt(E obj, int index) {
         modCount++;
         if (index > elementCount) {
-            throw new ArrayIndexOutOfBoundsException(index
-                                                     + " > " + elementCount);
+            throw new ArrayIndexOutOfBoundsException(index + " > " + elementCount);
         }
         ensureCapacityHelper(elementCount + 1);
         System.arraycopy(elementData, index, elementData, index + 1, elementCount - index);

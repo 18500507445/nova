@@ -39,7 +39,7 @@ public class KafkaConsumerListener {
 
     @KafkaListener(groupId = "nova-kafka-consumer", topics = {Destination.TEST_DESTINATION})
     public void onMessage(ConsumerRecord<Integer, String> record) {
-        log.info("kafka消息订阅！topic:{},partition:{},value:{}", record.topic(), record.partition(), record.value());
+        log.info("kafka消息订阅！topic:{}，partition:{}，value:{}", record.topic(), record.partition(), record.value());
     }
 
 }

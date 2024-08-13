@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @description:
+ * @description: JustAuth
+ * @see <a href="https://www.justauth.cn">JustAuth</a>
  * @author: wzh
  * @date: 2022/9/8 19:43
  */

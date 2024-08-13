@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Log4j2Controller extends BaseController {
 
     /**
-     * 异步log测试，性能差一倍
+     * 异步log测试，性能快一倍，但是兼容性没有logback好
      */
     @RequestMapping("log")
     public ResResult<Void> limit() {

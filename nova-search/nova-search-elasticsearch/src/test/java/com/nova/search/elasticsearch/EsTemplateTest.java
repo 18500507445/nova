@@ -172,7 +172,7 @@ public class EsTemplateTest {
 
         //分词查询
         QueryBuilder match = QueryBuilders.matchQuery("address", "天台");
-        //分词查询-匹配多个（经过测试，字段可以放不分词的也行）
+        //分词查询-匹配多个字段（经过测试，字段可以放不分词的也行）
         QueryBuilder multi = QueryBuilders.multiMatchQuery("安", "username", "address");
 
         //精准查询-匹配field查询，支持分词，不带field就是查询所有

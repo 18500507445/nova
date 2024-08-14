@@ -130,8 +130,8 @@ public class CommonController extends BaseController {
             .build();
 
 
-    @GetMapping(value = "/testThread", name = "测试线程池")
-    public ResResult<Void> testThread() {
+    @GetMapping(value = "/rejectPolicy", name = "测试线程池-拒绝策略")
+    public ResResult<Void> rejectPolicy() {
         THREAD_POOL.execute(() -> {
             System.err.println("id = " + Thread.currentThread().getId() + " Now：" + DateUtil.now());
             ThreadUtil.sleep(2000);
@@ -151,8 +151,8 @@ public class CommonController extends BaseController {
     /**
      * 主线程1秒后直接返回，子线程再过2秒后拿结果（共耗时3秒）
      */
-    @GetMapping(value = "/mainThread", name = "主线程")
-    public ResResult<Void> mainThread() {
+    @GetMapping(value = "/thenRun", name = "多线程-thenRun")
+    public ResResult<Void> thenRun() {
         TimeInterval timer = DateUtil.timer();
         ThreadUtil.sleep(1000);
         CompletableFuture<Void> taskA = CompletableFuture.runAsync(() -> ThreadUtil.sleep(1000), POOL);

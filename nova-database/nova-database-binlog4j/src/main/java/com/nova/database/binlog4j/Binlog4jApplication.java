@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * @description: binlog4j启动类，支持宕机续读
+ * todo 问题（1）text、longtext解析不出来，而且会后面字段的顺序会乱
  * @author: wzh
  * @date: 2024/07/30 13:57
  */

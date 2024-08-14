@@ -28,14 +28,14 @@ public class TestApplicationListener {
     @EventListener(condition = "#event.id == 1")
     public void eventOne(Event<List<String>> event) {
         List<String> list = event.getT();
-        System.out.println("list = " + JSONObject.toJSONString(list));
+        System.err.println("eventOne = " + JSONObject.toJSONString(list));
     }
 
     @Async
     @EventListener(condition = "#event.id == 2")
     public void eventTwo(Event<Object> event) {
         Object t = event.getT();
-        System.out.println("t = " + JSONObject.toJSONString(t));
+        System.err.println("eventTwo = " + JSONObject.toJSONString(t));
     }
 
 }

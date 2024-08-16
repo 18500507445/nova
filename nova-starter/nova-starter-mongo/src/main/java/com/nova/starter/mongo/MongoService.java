@@ -235,10 +235,23 @@ public class MongoService {
      * @param collectionName
      * @param <T>
      */
-    public <T> T findById(Class<T> clazz, String value, String collectionName) {
+    public <T> T findById(Class<T> clazz, Object value, String collectionName) {
         Criteria criteria = Criteria.where("id").is(value);
         Query query = Query.query(criteria);
         return primaryMongoTemplate.findOne(query, clazz, collectionName);
+    }
+
+    /**
+     * 根据id查询集合
+     *
+     * @param clazz
+     * @param value
+     * @param <T>
+     */
+    public <T> T findById(Class<T> clazz, Object value) {
+        Criteria criteria = Criteria.where("id").is(value);
+        Query query = Query.query(criteria);
+        return primaryMongoTemplate.findOne(query, clazz);
     }
 
     /**

@@ -85,8 +85,8 @@ public class ResourcesTest {
         List<String> list1 = StrUtil.split(resource1.readUtf8Str(), "\n");
         List<String> list2 = StrUtil.split(resource2.readUtf8Str(), "\n");
 
-        Collection<String> subtract1 = CollUtil.subtract(list1, list2);
-        System.out.println(subtract1);
+        Collection<String> intersection = CollUtil.intersection(list1, list2);
+        System.err.println("intersection = " + intersection);
     }
 
 

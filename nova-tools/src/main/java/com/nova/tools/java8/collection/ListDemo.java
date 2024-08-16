@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -153,13 +154,13 @@ class ListDemo {
     }
 
     /**
-     * list转map
+     * list转map，⚠️重复数据v1、v2取v2
      */
     @Test
     public void listToMap() {
-        Map<String, Integer> collect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge));
-        Map<String, Integer> newCollect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge));
-        Map<String, People> peopleMap = PEOPLE_LIST.stream().collect(toMap(People::getName, Function.identity()));
+        Map<String, Integer> collect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge, (v1, v2) -> v1));
+        Map<String, Integer> newCollect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge, (v1, v2) -> v1));
+        Map<String, People> peopleMap = PEOPLE_LIST.stream().collect(toMap(People::getName, Function.identity(), (v1, v2) -> v1));
         System.err.println(JSONUtil.toJsonStr(collect));
     }
 
@@ -169,6 +170,9 @@ class ListDemo {
     @Test
     public void listToObject() {
         List<Object> collect = PEOPLE_LIST.stream().map(People::getAge).collect(toList());
+
+        HashSet<String> hashSet = PEOPLE_LIST.stream().map(People::getName).collect(Collectors.toCollection(HashSet::new));
+
         System.err.println(JSONUtil.toJsonStr(collect));
     }
 

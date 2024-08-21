@@ -47,7 +47,7 @@ public class Chapter5Test {
     @Test
     public void enumTest() {
         UserFiveDO userDO = new UserFiveDO();
-        userDO.setName("Liu").setAge(29).setEmail("12314114@qq.com").setGender(GenderEnum.MAN);
+        userDO.setName("Liu123").setAge(31).setEmail("12314114@qq.com").setGender(GenderEnum.MAN);
         fiveUserMapper.insert(userDO);
     }
 

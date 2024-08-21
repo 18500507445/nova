@@ -52,6 +52,7 @@ public class UserFiveDO {
      */
     private Boolean status;
 
+    @TableField(value = "gender")
     private GenderEnum gender;
 
     /**

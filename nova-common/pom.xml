@@ -18,9 +18,9 @@
 
         <fastjson.version>2.0.52</fastjson.version>
         <hutool.version>5.8.30</hutool.version>
-        <guava.version>33.2.1-jre</guava.version>
+        <guava.version>33.3.0-jre</guava.version>
         <guava.retry.version>2.0.0</guava.retry.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <mapstruct.version>1.6.0</mapstruct.version>
         <lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
 
         <email.version>1.5</email.version>

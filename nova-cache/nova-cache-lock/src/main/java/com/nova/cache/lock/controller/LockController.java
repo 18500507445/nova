@@ -36,6 +36,7 @@ public class LockController extends BaseController {
         return ResResult.success(reqDto);
     }
 
+    //分布式队列BQueue，阻塞
     @PostMapping("offer")
     public ResResult<Boolean> offer(ValidatorReqDTO reqDto) {
         return ResResult.success(redissonLock.bQueueOffer(reqDto.getName(), JSONUtil.toJsonStr(reqDto), 500, TimeUnit.MILLISECONDS));

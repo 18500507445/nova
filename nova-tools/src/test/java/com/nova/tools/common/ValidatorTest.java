@@ -1,4 +1,4 @@
-package com.nova.cache.limit;
+package com.nova.tools.common;
 
 
 import com.google.common.base.Preconditions;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  * @date: 2023/09/07 15:36
  */
 @Slf4j(topic = "ParamTest")
-public class ParamTest {
+public class ValidatorTest {
 
     /**
      * 谷歌guava、请求参数验证

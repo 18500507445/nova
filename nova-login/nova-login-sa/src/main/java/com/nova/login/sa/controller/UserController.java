@@ -25,8 +25,8 @@ public class UserController {
      * 测试登录，浏览器访问：http://localhost:8080/api/user/login?username=wzh&password=123456
      * 登录成功后，Cookie可以从后端控制往浏览器中写入token值，会在前端每次发起请求时自动提交token值
      *
-     * @param username
-     * @param password
+     * @param username username
+     * @param password password
      */
     @RequestMapping("login")
     public ResResult<String> login(String username, String password) {

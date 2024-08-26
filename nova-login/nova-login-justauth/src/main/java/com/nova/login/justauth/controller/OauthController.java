@@ -34,6 +34,7 @@ public class OauthController extends BaseController {
 
     /**
      * 类型列表
+     *
      * @see <a href="http://localhost:8080/api/oauth">类型列表</a>
      */
     @GetMapping

@@ -2,6 +2,7 @@ package com.nova.cache.redis;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.nova.cache.redis.caffeine.CacheUtil;
@@ -12,10 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest
 class RedisApplicationTest {
@@ -29,9 +27,7 @@ class RedisApplicationTest {
     @Autowired
     private MemcachedUtil memcachedUtil;
 
-    /**
-     * redis 设置分组
-     */
+    //分组
     @Test
     public void setGroup() {
         String groupName = "nova-cache:%s";
@@ -42,17 +38,6 @@ class RedisApplicationTest {
             System.err.println(o);
         }
     }
-
-    @Test
-    public void testLock() {
-        for (int i = 0; i < 50; i++) {
-            String uuid = IdUtils.randomUuid();
-            boolean lock = redisService.lock(uuid, 1);
-            System.err.println("lock = " + lock + ", " + i);
-            redisService.unlock(uuid);
-        }
-    }
-
 
     /**
      * 存储Object对象或者json字符串
@@ -80,7 +65,9 @@ class RedisApplicationTest {
         redisService.expire(key, 60L);
 
         ThreadUtil.sleep(5000);
-        redisService.expire(key, 60L);
+        if (!redisService.hasKey(key)) {
+            redisService.expire(key, 60L);
+        }
     }
 
     /**
@@ -93,8 +80,8 @@ class RedisApplicationTest {
         map.put("1", "a");
         map.put("2", "b");
         map.put("3", "c");
+        map.put("4", "d");
         redisService.setHash(key, map);
-
         redisService.delHash(key, "4");
     }
 
@@ -106,9 +93,7 @@ class RedisApplicationTest {
     public void setList() {
         String key = "setList";
         redisService.setList(key, Arrays.asList("1", "2", "3"));
-
         List<Object> objects = redisService.getList(key, 0L, -1L);
-
         System.err.println("objects = " + objects);
     }
 
@@ -118,7 +103,11 @@ class RedisApplicationTest {
      */
     @Test
     public void setSet() {
-        redisService.setSet("setSet", "1", "2", "3", "3");
+        Set<Object> set = new HashSet<>();
+        set.add("1");
+        set.add("2");
+        set.add("3");
+        redisService.setSet("setSet", set);
     }
 
     /**
@@ -127,7 +116,7 @@ class RedisApplicationTest {
      */
     @Test
     public void setZSet() {
-        String key = "rank:2023-04-15";
+        String key = "rank:2023-04-13";
         redisService.setZSet(key, "A", 33);
         redisService.setZSet(key, "B", 44);
         redisService.setZSet(key, "C", 55);
@@ -142,13 +131,61 @@ class RedisApplicationTest {
     @Test
     public void unionZSet() {
         List<String> keys = Arrays.asList("rank:2023-04-14", "rank:2023-04-15");
-        redisService.unionZSetList("rank:2023-04-13", keys, "unionZSet");
+        //将13、14、15合并到total
+        redisService.unionZSetList("rank:2023-04-13", keys, "rank:total");
     }
+
+    @Test
+    public void testLock() {
+        for (int i = 0; i < 50; i++) {
+            String uuid = IdUtils.randomUuid();
+            boolean lock = redisService.lock(uuid, 1);
+            System.err.println("lock = " + lock + ", " + i);
+            redisService.unlock(uuid);
+        }
+    }
+
+    //BitMap（1）点赞（2）日活（3）用户在线状态
+    @Test
+    public void testBitMap() {
+        String key = "bitmap";
+        for (int userId = 1; userId <= 10; userId++) {
+            redisService.setBit(key, userId, RandomUtil.randomBoolean());
+            Boolean bit = redisService.getBit(key, userId);
+            System.err.println("bit = " + bit);
+        }
+        Long count = redisService.bitCount(key);
+        System.err.println("count = " + count);
+    }
+
+
+    /**
+     * @description: HyperLogLog是一种基数估算算法，虽然它能够估计集合中的元素数量，但是它的估计结果是一个近似值，并不是精确的数量
+     */
+    @Test
+    public void testHyperLog() {
+        String key = "hyperLog";
+        List<Object> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        redisService.setHypeLog(key, list);
+
+        Long count = redisService.hypeLogSize(key);
+        System.err.println("count = " + count);
+
+        Long union = redisService.hypeLogUnion("hyperLog", Arrays.asList("hyperLog1", "hyperLog2"));
+        System.err.println("union = " + union);
+    }
+
 
     @Test
     public void del() {
         redisService.del("unionZSet");
     }
+
+    // ---------------------------------caffeineCache---------------------------------
+
 
     /**
      * caffeineCache测试类
@@ -163,6 +200,8 @@ class RedisApplicationTest {
         Object cache = cacheUtil.get(cacheName, key);
         System.err.println("cache = " + cache);
     }
+
+    // ---------------------------------Memcached---------------------------------
 
     /**
      * Memcached测试

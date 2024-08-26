@@ -2,6 +2,7 @@ package com.nova.cache.redis.redis;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataAccessException;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @author: wzh
  * @date: 2022/6/19 15:40
  */
+@Getter
 @Slf4j
 @Component
 public class RedisService {
@@ -435,6 +437,15 @@ public class RedisService {
         }
     }
 
+    public Long setSet(String key, Collection<Object> values) {
+        try {
+            return redisTemplate.opsForSet().add(key, values.toArray());
+        } catch (Exception e) {
+            log.error("Exception: {}", e.getMessage());
+            return 0L;
+        }
+    }
+
     /**
      * 将set数据放入缓存
      *
@@ -446,6 +457,19 @@ public class RedisService {
     public Long setSet(String key, Long time, Object... values) {
         try {
             Long count = redisTemplate.opsForSet().add(key, values);
+            if (time > 0) {
+                expire(key, time);
+            }
+            return count;
+        } catch (Exception e) {
+            log.error("Exception: {}", e.getMessage());
+            return 0L;
+        }
+    }
+
+    public Long setSet(String key, Long time, Collection<Object> values) {
+        try {
+            Long count = redisTemplate.opsForSet().add(key, values.toArray());
             if (time > 0) {
                 expire(key, time);
             }
@@ -724,9 +748,9 @@ public class RedisService {
      * 使用redis保证原子操作（判断是否存在，添加key，设置过期时间）
      * 也可以使用 lua 脚本 "return redis.call('set',KEYS[1], ARGV[1],'NX','PX',ARGV[2])"
      * 问题：如果key过期的时间早于程序执行时间，会导致删除key失败，多应用间释放锁，导致锁一直失效；
-     *
+     * <p>
      * 解决办法：String requestId = UUID.randomUUID().toString().replace("-", "");
-     *
+     * <p>
      * 固定的key，正常情况加锁、解锁需要自己线程完成才能保证并发情况下的问题的发生（例如库存的超卖），
      * 如果有特殊情况不需要线程与线程间的锁那么共享一把，当前服务其它的线程或者其它服务的线程把锁释放了也没有关系，本质上就是降低请求次数
      *
@@ -775,6 +799,63 @@ public class RedisService {
 
     public <T> T execute(RedisScript<T> script, String key, List<String> args) {
         return redisTemplate.execute(script, Collections.singletonList(key), args);
+    }
+
+    /**
+     * 设置标记位BitMap
+     *
+     * @param key    key
+     * @param offset 偏移量
+     * @param tag    设置为1(设置0表示抹去标记)
+     * @description: 应用场景（1）点赞（2）日活（3）用户在线状态
+     */
+    public Boolean setBit(String key, long offset, boolean tag) {
+        return redisTemplate.opsForValue().setBit(key, offset, tag);
+    }
+
+    /**
+     * 获取BitMap
+     *
+     * @param key    key
+     * @param offset 偏移量
+     */
+    public Boolean getBit(String key, long offset) {
+        return redisTemplate.opsForValue().getBit(key, offset);
+    }
+
+    /**
+     * 统计计数
+     *
+     * @param key key
+     */
+    public Long bitCount(String key) {
+        return redisTemplate.execute((RedisCallback<Long>) redisConnection -> redisConnection.bitCount(key.getBytes()));
+    }
+
+    /**
+     * 向HyperLogLog中添加一个或多个元素
+     */
+    public Long setHypeLog(String key, List<Object> value) {
+        return redisTemplate.opsForHyperLogLog().add(key, value.toArray());
+    }
+
+    //获取给定HyperLogLog的基数估计值
+    public Long hypeLogSize(String key) {
+        return redisTemplate.opsForHyperLogLog().size(key);
+    }
+
+    /**
+     * 计算多个HyperLogLog的并集，并返回基数估计值
+     *
+     * @param key
+     * @param values
+     */
+    public Long hypeLogUnion(String key, List<String> values) {
+        return redisTemplate.opsForHyperLogLog().union(key, values.toArray(new String[0]));
+    }
+
+    public void hypeLogDel(String key) {
+        redisTemplate.opsForHyperLogLog().delete(key);
     }
 
     /**

@@ -31,7 +31,6 @@ public class ChannelTest {
         yxChannel.productMessage("");
     }
 
-
     @Test
     public void channelTest() {
         YxChannel yxChannel = channelFactory.get(ChannelEnum.YX, YxChannel.class);

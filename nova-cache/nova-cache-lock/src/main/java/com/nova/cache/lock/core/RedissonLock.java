@@ -63,7 +63,7 @@ public class RedissonLock {
                 log.info("获取Redisson分布式锁[失败]，lockName={}", lockName);
             }
         } catch (InterruptedException e) {
-            log.error("获取Redisson分布式锁[异常]，lockName=" + lockName, e);
+            log.error("获取Redisson分布式锁[异常]，lockName={}", lockName, e);
             return false;
         }
         return flag;
@@ -86,7 +86,7 @@ public class RedissonLock {
         try {
             rLock.lock();
         } catch (Exception e) {
-            log.error("获取Redisson分布式锁[异常]，lockName=" + lockName, e);
+            log.error("获取Redisson分布式锁[异常]，lockName={}", lockName, e);
         }
     }
 
@@ -101,7 +101,6 @@ public class RedissonLock {
      * 分布式队列，RQueue，FIFO
      *
      * @param name
-     * @return
      */
     public boolean rQueueOffer(String name, Object value) {
         RQueue<Object> queue = redissonManager.getRedisson().getQueue(name);

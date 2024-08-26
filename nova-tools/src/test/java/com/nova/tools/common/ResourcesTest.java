@@ -29,12 +29,13 @@ public class ResourcesTest {
     @Value("${server.servlet.context-path}")
     private String path;
 
-    private static Map<String, String> HASH_MAP;
+    //@Value读取配置，给变量赋值，⚠️这种用法当前类必须注册成bean，交给spring管理，例如@Component，@Configuration
+    @Value("${server.port:123}")
+    private Integer PORT = 123;
 
+    //如果属性改成静态，不要搭配@RefreshScope使用，不会刷新的
     @Value("#{${test.map:{'key':'value'}}}")
-    public void setMapKey(Map<String, String> mapKey) {
-        HASH_MAP = mapKey;
-    }
+    private Map<String, String> HASH_MAP;
 
     /**
      * 读取properties文件属性
@@ -62,14 +63,6 @@ public class ResourcesTest {
         System.err.println("path = " + path);
     }
 
-    //@Value读取配置，给变量赋值，⚠️这种用法当前类必须注册成bean，交给spring管理，例如@Component，@Configuration
-    private static Integer PORT = 123;
-
-    @Value("${server.port:123}")
-    public void setPort(Integer port) {
-        PORT = port;
-    }
-
     @Test
     public void staticValue() {
         System.out.println("PORT = " + PORT);
@@ -88,7 +81,6 @@ public class ResourcesTest {
         Collection<String> intersection = CollUtil.intersection(list1, list2);
         System.err.println("intersection = " + intersection);
     }
-
 
     //读取hashMap
     @Test

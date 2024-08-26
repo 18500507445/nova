@@ -9,6 +9,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 敏感词过滤，DFA算法
+ *
+ * @author Looly
+ */
 public class SensitiveUtilTest {
 
     @Test
@@ -40,4 +45,12 @@ public class SensitiveUtilTest {
         String result = SensitiveUtil.sensitiveFilter("赵阿三在做什么。", true, null);
         Assert.equals("***在做什么。", result);
     }
+
+    @Test
+    public void demoA() {
+        SensitiveUtil.init(ListUtil.of("赵", "赵阿", "赵阿三"));
+        String s = SensitiveUtil.sensitiveFilter("你好，赵阿三在做什么。");
+        System.err.println("s = " + s);
+    }
+
 }

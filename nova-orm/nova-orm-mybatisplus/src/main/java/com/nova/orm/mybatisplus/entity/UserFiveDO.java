@@ -44,7 +44,6 @@ public class UserFiveDO {
     /**
      * 邮箱
      */
-
     private String email;
 
     /**

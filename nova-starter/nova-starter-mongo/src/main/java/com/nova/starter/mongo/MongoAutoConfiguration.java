@@ -44,7 +44,7 @@ public class MongoAutoConfiguration {
      * 默认 MongoTemplate
      * ConditionalOnBean 只有当名为primaryMongoProperties的Bean存在于容器中时，才会创建和配置primaryMongoTemplate的bean
      */
-    @Bean(name = "primaryMongoTemplate")
+    @Bean(name = {"primaryMongoTemplate", "mongoTemplate"})
     @Primary
     @ConditionalOnBean(name = "primaryMongoProperties")
     public MongoTemplate primaryMongoTemplate() throws UnsupportedEncodingException {

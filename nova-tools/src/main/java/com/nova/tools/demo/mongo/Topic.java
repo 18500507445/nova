@@ -1,7 +1,9 @@
 package com.nova.tools.demo.mongo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Map;
@@ -13,6 +15,7 @@ import java.util.Map;
  */
 @Document(collection = "tb_topic")
 @Data
+@Accessors(chain = true)
 public class Topic {
 
     /**
@@ -65,5 +68,12 @@ public class Topic {
      * 逻辑删除
      */
     private Boolean delFlag;
+
+    //屏蔽字段
+    @Transient
+    private Integer pageNo;
+
+    @Transient
+    private Integer pageSize;
 
 }

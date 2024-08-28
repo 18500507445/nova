@@ -166,33 +166,29 @@ public class EsTemplateTest {
 
         // ----------------------------构造条件----------------------------
 
-        //精准查询-不分词查询。解释：id = 1的文档
+        //精准查询-不分词。解释：id = 1的文档
         QueryBuilder equal = QueryBuilders.termQuery("id", 1L);
         QueryBuilder in = QueryBuilders.termsQuery("id", Arrays.asList(1L, 2L, 3L));
 
-        //分词查询
+        //模糊查询-单字段，分词
         QueryBuilder match = QueryBuilders.matchQuery("address", "天台");
-        //分词查询-匹配多个字段（经过测试，字段可以放不分词的也行）
-        QueryBuilder multi = QueryBuilders.multiMatchQuery("安", "username", "address");
 
-        //精准查询-匹配field查询，支持分词，不带field就是查询所有
-        QueryBuilder string = QueryBuilders.queryStringQuery("街道").field("username").field("address");
+        //模糊查询-多字段，分词
+        QueryBuilder multi = QueryBuilders.multiMatchQuery("常", "username", "address");
+        //模糊查询-多字段，分词，不带field就是查询所有
+        QueryBuilder string = QueryBuilders.queryStringQuery("常").field("username").field("address");
 
         //模糊查询-左右模糊查询，其中fuzziness的参数作用是在查询时，es动态的将查询关键词前后增加或者删除一个词，然后进行匹配
         QueryBuilder fuzzy = QueryBuilders.fuzzyQuery("idCard", "530").fuzziness(Fuzziness.ONE);
-
         //模糊查询-前缀
         QueryBuilder prefix = QueryBuilders.prefixQuery("idCard", "530");
-
         //模糊查询-通配符，不分词，* 或 ？类比sql like%，不建议做为前缀，效率可能有影响
         QueryBuilder like = QueryBuilders.wildcardQuery("idCard", "530*");
 
         //范围查询-闭区间
         QueryBuilder close = QueryBuilders.rangeQuery("id").from(3).to(5);
-
         //范围查询-开区间
         QueryBuilder open = QueryBuilders.rangeQuery("id").from(3).to(5).includeLower(false).includeUpper(false);
-
         //范围查询-大于等于、小于等于
         QueryBuilder gtAndLt = QueryBuilders.rangeQuery("id").gte(3).lte(5);
 

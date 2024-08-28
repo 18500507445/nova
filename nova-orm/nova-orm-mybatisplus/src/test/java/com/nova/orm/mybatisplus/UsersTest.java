@@ -1,7 +1,6 @@
 package com.nova.orm.mybatisplus;
 
 import cn.hutool.core.collection.ListUtil;
-import cn.hutool.core.util.RandomUtil;
 import com.nova.common.utils.random.RandomUtils;
 import com.nova.orm.mybatisplus.users.Users;
 import com.nova.orm.mybatisplus.users.UsersService;
@@ -27,7 +26,7 @@ public class UsersTest {
     @Test
     public void demoA() {
         List<Users> list = new ArrayList<>();
-        for (int i = 1; i <= 1000000; i++) {
+        for (int i = 1; i <= 4000000; i++) {
             Users user = new Users();
             user.setUserName(RandomUtils.randomName());
             user.setPhone(RandomUtils.randomPhone());

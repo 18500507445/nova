@@ -1,6 +1,7 @@
 package com.nova.orm.mybatisplus;
 
 import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.nova.common.utils.random.RandomUtils;
 import com.nova.orm.mybatisplus.users.Users;
 import com.nova.orm.mybatisplus.users.UsersService;
@@ -26,7 +27,7 @@ public class UsersTest {
     @Test
     public void demoA() {
         List<Users> list = new ArrayList<>();
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i <= 1000000; i++) {
             Users user = new Users();
             user.setUserName(RandomUtils.randomName());
             user.setPhone(RandomUtils.randomPhone());
@@ -38,10 +39,10 @@ public class UsersTest {
             user.setCreateTime(new Date());
             list.add(user);
         }
-        List<List<Users>> split = ListUtil.split(list, 1000);
+        List<List<Users>> split = ListUtil.split(list, 2000);
         for (List<Users> users : split) {
             boolean b = usersService.saveBatch(users);
-            System.out.println(b ? "失败" : "成功");
+            System.err.println(b ? "插入成功" : "插入失败");
         }
     }
 

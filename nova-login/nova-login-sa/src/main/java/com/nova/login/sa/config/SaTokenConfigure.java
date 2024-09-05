@@ -1,7 +1,9 @@
 package com.nova.login.sa.config;
 
 import cn.dev33.satoken.interceptor.SaInterceptor;
+import cn.dev33.satoken.jwt.StpLogicJwtForMixin;
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
+import cn.dev33.satoken.jwt.StpLogicJwtForStateless;
 import cn.dev33.satoken.stp.StpLogic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,9 +26,9 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     }
 
     /**
-     * Simple 简单模式 new StpLogicJwtForSimple();
-     * Mixin 混入模式 new StpLogicJwtForMixin();
-     * Stateless 无状态模式 new StpLogicJwtForStateless();
+     * Simple 简单模式 {@link StpLogicJwtForSimple()}
+     * Mixin 混入模式 {@link StpLogicJwtForMixin ()}
+     * Stateless 无状态模式 {@link StpLogicJwtForStateless ()}
      */
     @Bean
     public StpLogic getStpLogicJwt() {

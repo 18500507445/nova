@@ -2,6 +2,7 @@ package com.nova.login.sa.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.nova.common.core.model.result.ResResult;
@@ -22,23 +23,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     /**
-     * 测试登录，浏览器访问：http://localhost:8080/api/user/login?username=wzh&password=123456
-     * 登录成功后，Cookie可以从后端控制往浏览器中写入token值，会在前端每次发起请求时自动提交token值
-     *
      * @param username username
      * @param password password
+     * @see <a href="http://localhost:8080/api/user/login?username=wzh&password=123456">测试登录</a>
+     * 登录成功后，Cookie可以从后端控制往浏览器中写入token值，会在前端每次发起请求时自动提交token值
      */
     @RequestMapping("login")
     public ResResult<String> login(String username, String password) {
-        // 第一步：比对前端提交的账号名称、密码
-        if ("wzh".equals(username) && "123456".equals(password)) {
-            // 第二步：根据账号id，进行登录
-            StpUtil.login(10001);
-            return ResResult.success("登录成功");
-        }
-        return ResResult.failure("登录失败");
+        Long userId = 10001L;
+        SaLoginModel hashMap = new SaLoginModel();
+        hashMap.setExtra("userName", username);
+        hashMap.setExtra("userId", userId);
+        hashMap.setExtra("department", "技术部");
+        StpUtil.login(userId, hashMap);
+        return ResResult.success("登录成功");
     }
 
+    /**
+     * @see <a href="http://localhost:8080/api/user/getToken>获取token</a>
+     */
     @RequestMapping("getToken")
     public void getToken() {
         // 获取当前会话的 token 值

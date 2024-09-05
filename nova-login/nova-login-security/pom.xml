@@ -27,5 +27,17 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!-- 客户端（Client）-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+        </dependency>
+
+        <!-- 资源服务器（Resource Server）-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

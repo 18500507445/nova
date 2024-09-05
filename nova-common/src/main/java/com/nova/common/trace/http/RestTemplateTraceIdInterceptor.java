@@ -1,5 +1,6 @@
-package com.nova.common.trace;
+package com.nova.common.trace.http;
 
+import com.nova.common.trace.Trace;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.MDC;
 import org.springframework.http.HttpRequest;

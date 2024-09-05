@@ -50,7 +50,7 @@ public final class TraceContext {
         Trace trace = new Trace();
         trace.setTraceId(traceId);
         trace.setSpanId(genSpanId());
-        MDC.put(Trace.TRACE_ID, StrUtil.isNotBlank(TracerUtils.getTraceId()) ? TracerUtils.getTraceId() : trace.getTraceId());
+        MDC.put(Trace.TRACE_ID, trace.getTraceId());
         MDC.put(Trace.SPAN_ID, trace.getSpanId());
         TRACE_CONTEXT.set(trace);
         return trace;

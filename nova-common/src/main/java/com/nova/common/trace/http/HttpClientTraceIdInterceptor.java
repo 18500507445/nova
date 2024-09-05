@@ -1,5 +1,6 @@
-package com.nova.common.trace;
+package com.nova.common.trace.http;
 
+import com.nova.common.trace.Trace;
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;

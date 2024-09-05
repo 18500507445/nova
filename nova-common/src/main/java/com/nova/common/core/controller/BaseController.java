@@ -79,7 +79,7 @@ public class BaseController {
     /**
      * request请求参数转换Map通用处理方法
      */
-    public static Map<String, Object> convertDataMap(HttpServletRequest request) {
+    public static Map<String, Object> convertToMap(HttpServletRequest request) {
         Map<String, String[]> properties = request.getParameterMap();
         Map<String, Object> returnMap = new HashMap<>();
         Iterator<?> entries = properties.entrySet().iterator();

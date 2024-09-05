@@ -1,6 +1,7 @@
-package com.nova.common.trace;
+package com.nova.common.trace.http;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.nova.common.trace.Trace;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

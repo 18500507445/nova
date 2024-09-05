@@ -32,7 +32,7 @@ public class BloomController {
     private final RedissonClient redissonClient;
 
     /**
-     * redis实现布隆过滤器
+     * 方式一：redis实现布隆过滤器
      */
     @PostMapping("/redis")
     public void redis() {
@@ -61,7 +61,7 @@ public class BloomController {
     }
 
     /**
-     * redisson实现布隆过滤器
+     * 方式二：redisson实现布隆过滤器
      */
     @PostMapping("/redisson")
     public void redisson() {

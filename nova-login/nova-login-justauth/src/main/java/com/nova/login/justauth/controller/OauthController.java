@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 这是升级版的justAuth
  * @author: wzh
  * @date: 2023/1/2 21:07
  * @see <a href="https://xkcoding.com/2019/05/22/spring-boot-login-with-oauth.html">快速集成第三方登录功能</a>

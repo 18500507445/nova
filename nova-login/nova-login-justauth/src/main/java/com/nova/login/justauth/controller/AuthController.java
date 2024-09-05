@@ -1,4 +1,4 @@
-package com.nova.login.justauth;
+package com.nova.login.justauth.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author: wzh
+ * @author: wzh 这是原版的justAuth
  * @description: 授权controller
  * @date: 2024/09/05 11:00
  */

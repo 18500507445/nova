@@ -1,6 +1,5 @@
 package com.nova.database.binlog4j.listener;
 
-import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.gitee.Jmysy.binlog4j.core.BinlogEvent;
 import com.gitee.Jmysy.binlog4j.core.IBinlogEventHandler;
@@ -28,11 +27,8 @@ public class BinLog4jListener implements IBinlogEventHandler<BinLog4j> {
      */
     @Override
     public boolean isHandle(String database, String table) {
-        if (StrUtil.equals("avicare_merchant", database) && StrUtil.equals("bin_log4j", table)) {
-            log.info("isHandle --- database：{}，table：{}", database, table);
-            return true;
-        }
-        return false;
+        log.info("isHandle --- database：{}，table：{}", database, table);
+        return true;
     }
 
     @Override

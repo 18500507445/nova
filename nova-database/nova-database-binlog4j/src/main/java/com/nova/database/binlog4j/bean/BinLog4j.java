@@ -19,8 +19,6 @@ public class BinLog4j {
 
     private Integer status;
 
-    private Byte[] remark;
-
     private String json;
 
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")

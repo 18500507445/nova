@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.TimeoutUtils;
@@ -830,6 +831,18 @@ public class RedisService {
      */
     public Long bitCount(String key) {
         return redisTemplate.execute((RedisCallback<Long>) redisConnection -> redisConnection.bitCount(key.getBytes()));
+    }
+
+    //求和
+    public Long bitSum(String result, String... keys) {
+        return redisTemplate.execute((RedisCallback<Long>) redisConnection -> {
+            // 将 keys 转换为 byte[][] 二维数组
+            byte[][] keyBytes = new byte[keys.length][];
+            for (int i = 0; i < keys.length; i++) {
+                keyBytes[i] = keys[i].getBytes();
+            }
+            return redisConnection.bitOp(RedisStringCommands.BitOperation.OR, result.getBytes(), keyBytes);
+        });
     }
 
     /**

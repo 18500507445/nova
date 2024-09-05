@@ -145,7 +145,14 @@ class RedisApplicationTest {
         }
     }
 
-    //BitMap（1）点赞（2）日活（3）用户在线状态
+
+    /**
+     * BitMap
+     * 应用场景如下：
+     * （1）点赞，key存业务id，value存用户id
+     * （2）日活，key存日期，value存用户id
+     * （3）用户在线状态
+     */
     @Test
     public void testBitMap() {
         String key = "bitmap";
@@ -156,6 +163,16 @@ class RedisApplicationTest {
         }
         Long count = redisService.bitCount(key);
         System.err.println("count = " + count);
+    }
+
+    //bitMap求和
+    @Test
+    public void testBitMapCount() {
+        Long l = redisService.bitSum("bitSum", "bitmap1", "bitmap2");
+        if (l > 0) {
+            Long count = redisService.bitCount("bitSum");
+            System.err.println("count = " + count);
+        }
     }
 
 

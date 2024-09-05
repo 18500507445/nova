@@ -9,9 +9,8 @@ spring:
     name: nova-login-sa
   redis:
     database: 1
-    host: 47.100.174.176
-    port: 63799
-    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    host: 127.0.0.1
+    port: 6379
     lettuce:
       pool:
         max-active: 8
@@ -38,10 +37,3 @@ sa-token:
   is-log: true
   # jwt秘钥
   jwt-secret-key: sa-token-jwt
-
-jasypt:
-  encryptor:
-    # 加密算法
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-    # 加密使用的盐
-    password: jaspyt_password

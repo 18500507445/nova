@@ -23,6 +23,7 @@
             <artifactId>nova-common</artifactId>
         </dependency>
 
+        <!-- springboot2.7.18 兼容版本es版本7.17.15，但是分词器不好找要么16要么14，只能兼容es、ik都装16版本的吧 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>

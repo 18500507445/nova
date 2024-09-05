@@ -6,6 +6,8 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSONObject;
+import com.nova.common.utils.common.JsonUtils;
 import com.nova.common.utils.random.RandomUtils;
 import com.nova.search.elasticsearch.repository.User;
 import com.nova.search.elasticsearch.utils.EsUtils;
@@ -100,7 +102,9 @@ public class EsUtilsTest {
     @Test
     public void findById() {
         User user = EsUtils.findById(1L, User.class);
-        System.out.println("user = " + user);
+        System.out.println("user = " + JsonUtils.toJson(user));
+        System.out.println("hutool = " + JSONUtil.toJsonStr(user));
+        System.out.println("fastjson = " + JSONObject.toJSONString(user));
     }
 
     @Test

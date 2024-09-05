@@ -77,7 +77,7 @@ public final class JsonUtils {
      *
      * @param data
      */
-    public static String objectToJson(Object data) {
+    public static String toJson(Object data) {
         try {
             return MAPPER.writeValueAsString(data);
         } catch (JsonProcessingException e) {
@@ -91,7 +91,7 @@ public final class JsonUtils {
      *
      * @param jsonData json数据
      */
-    public static <T> T jsonToPojo(String jsonData, Class<T> beanType) {
+    public static <T> T toBean(String jsonData, Class<T> beanType) {
         try {
             return MAPPER.readValue(jsonData, beanType);
         } catch (Exception e) {

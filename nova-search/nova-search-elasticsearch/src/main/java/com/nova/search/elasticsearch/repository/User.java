@@ -65,7 +65,7 @@ public class User implements Serializable {
     //fastjson序列化格式
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     //jackson时间序列化格式
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     //忽略字段

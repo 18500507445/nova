@@ -41,11 +41,12 @@ public class GlobalExceptionAdvice {
      */
     @ExceptionHandler(BusinessException.class)
     public ResResult<Void> businessException(BusinessException e) {
-        log.error("businessException :{}", e.getMessage(), e);
         ResultCode resultCode = e.getResultCode();
         if (null == resultCode) {
+            log.error("businessException :{}", e.getMessage(), e);
             return ResResult.failure(ResultCode.FAILED, e.getMessage());
         } else {
+            log.error("businessException :{}", resultCode.getBizMessage(), e);
             return ResResult.failure(resultCode);
         }
     }

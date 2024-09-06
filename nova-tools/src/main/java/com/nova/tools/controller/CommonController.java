@@ -10,6 +10,8 @@ import com.alibaba.fastjson2.annotation.JSONField;
 import com.nova.common.core.controller.BaseController;
 import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.ResResult;
+import com.nova.common.core.model.result.ResultCode;
+import com.nova.common.exception.BusinessException;
 import com.nova.common.exception.ParamException;
 import com.nova.common.trace.Trace;
 import com.nova.common.utils.common.ValidatorUtils;
@@ -192,6 +194,14 @@ public class CommonController extends BaseController {
         Class<?> tClass = success.getTClass();
         System.out.println("tClass = " + tClass);
         return success;
+    }
+
+    @GetMapping(value = "/a")
+    public ResResult<Void> a() {
+        if (true) {
+            throw new BusinessException(ResultCode.CURRENT_LIMITING);
+        }
+        return ResResult.success();
     }
 
 }

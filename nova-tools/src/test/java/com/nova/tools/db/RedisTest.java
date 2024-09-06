@@ -46,8 +46,8 @@ public class RedisTest {
         System.err.println("o1 = " + o1);
 
         secondRedisTemplate.opsForValue().set("database2", "1");
-        Object o = secondRedisTemplate.opsForValue().get("database2");
-        System.err.println("o = " + o);
+        Object o2 = secondRedisTemplate.opsForValue().get("database2");
+        System.err.println("o2 = " + o2);
     }
 
 

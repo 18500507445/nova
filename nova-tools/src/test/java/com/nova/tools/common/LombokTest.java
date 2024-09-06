@@ -122,7 +122,7 @@ class LombokTest {
         System.err.println("fastJson = " + JSONObject.toJSONString(demoD));
         System.err.println("toString = " + demoD);
 
-        String jackson = JsonUtils.objectToJson(demoD);
+        String jackson = JsonUtils.toJson(demoD);
         System.err.println("jackson = " + jackson);
     }
 

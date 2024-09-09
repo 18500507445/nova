@@ -708,20 +708,26 @@ public class RedisService {
         return redisTemplate.execute(connection -> deserializeValues(connection.lRange(rawKey, start, end), valueSerializer), true);
     }
 
-    public Double setZSet(String key, String value, double delta) {
+    public Boolean setZSet(String key, String value, double score) {
+        return redisTemplate.opsForZSet().add(key, value, score);
+    }
+
+    //追加、减少分数
+    public Double addZSet(String key, String value, double delta) {
         return redisTemplate.opsForZSet().incrementScore(key, value, delta);
     }
 
     /**
-     * 获取list缓存的内容
+     * 倒序返回分和值
      *
      * @param key   键
      * @param start 开始
      * @param end   结束 0 到 -1代表所有值
+     * @description: .range(key, start, end) 升序返回value
      */
     public JSONArray getZSet(String key, Long start, Long end) {
-        final Set<ZSetOperations.TypedTuple<Object>> zSet = redisTemplate.opsForZSet().reverseRangeWithScores(key, start, end);
-        return JSONArray.parseArray(JSONObject.toJSONString(zSet));
+        final Set<ZSetOperations.TypedTuple<Object>> range = redisTemplate.opsForZSet().reverseRangeWithScores(key, start, end);
+        return JSONArray.parseArray(JSONObject.toJSONString(range));
     }
 
     /**

@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>nova-database-binlog4j</artifactId>
+    <description>监听binlog</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

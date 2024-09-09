@@ -11,7 +11,6 @@
     <modules>
         <!-- 监听binlog （最简单的方式，维护到去年了） -->
         <module>nova-database-binlog4j</module>
-
         <!-- 手动封装动态数据源 -->
         <module>nova-database-dynamic</module>
     </modules>

@@ -18,6 +18,6 @@
                          ${AnsiColor.BRIGHT_CYAN}$$            ========`-.____`-.____\_____/____.-`____.-'========         $$
                          ${AnsiColor.BRIGHT_MAGENTA}$$                                  `=---='                               $$
                          ${AnsiColor.BRIGHT_YELLOW}$$            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        $$
-                         ${AnsiColor.BRIGHT_GREEN}$$                   佛祖保佑          永无BUG         永不修改              $$
+                         ${AnsiColor.BRIGHT_GREEN}$$                  佛祖保佑          永无BUG         永不修改               $$
                          ${AnsiColor.BRIGHT_YELLOW}$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                                                   ${AnsiColor.BRIGHT_YELLOW}Spring Boot: ${spring-boot.formatted-version}
+                                                      ${AnsiColor.BRIGHT_YELLOW}Spring Boot: ${spring-boot.formatted-version}

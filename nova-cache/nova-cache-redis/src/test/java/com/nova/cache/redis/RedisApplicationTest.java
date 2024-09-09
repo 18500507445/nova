@@ -113,16 +113,17 @@ class RedisApplicationTest {
     /**
      * 内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序
      * 应用场景：排行榜
+     * zSet、SortSet
      */
     @Test
     public void setZSet() {
         String key = "rank:2023-04-13";
-        redisService.setZSet(key, "A", 33);
-        redisService.setZSet(key, "B", 44);
-        redisService.setZSet(key, "C", 55);
+        redisService.addZSet(key, "A", 66);
+        redisService.addZSet(key, "B", 44);
+        redisService.addZSet(key, "C", 55);
 
         final JSONArray zSet = redisService.getZSet(key, 0L, -1L);
-        System.err.println(zSet);
+        System.err.println("zSet = " + zSet);
     }
 
     /**

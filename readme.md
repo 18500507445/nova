@@ -22,7 +22,7 @@
 
 4.nova-database
 * dynamic，手写动态数据源
-* 
+* binlog4j，监听binlog
 
 5.nova-excel
 * [excel工具类](nova-excel/excelNote.md)

@@ -1,13 +1,16 @@
 package com.nova.tools.common;
 
+import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.json.JSONUtil;
+import com.nlf.calendar.Holiday;
+import com.nlf.calendar.util.HolidayUtil;
 import com.nova.common.utils.common.LinuxUtils;
 import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +46,9 @@ public class CommonTest {
     @Data
     @EqualsAndHashCode
     static class skuDTO {
-        String skuId = "";
-        String cateId = "";
-        Integer poolType;
+        private String skuId = "";
+        private String cateId = "";
+        private Integer poolType;
     }
 
     /**
@@ -89,15 +92,6 @@ public class CommonTest {
     }
 
     /**
-     * 获取traceId
-     */
-    @Test
-    public void traceIdTest() {
-        String traceId = TraceContext.traceId();
-        System.err.println("s = " + traceId);
-    }
-
-    /**
      * 测试linux命令
      */
     @Test
@@ -106,4 +100,26 @@ public class CommonTest {
         System.err.println("ip = " + ip);
     }
 
+    //
+
+    /**
+     * @description: 判断是否法定假假日、调休
+     * @see <a href="https://6tail.cn/calendar/api.html#holiday-util.about.html">官网</a>
+     */
+    @Test
+    public void holiday() {
+        Holiday holiday = HolidayUtil.getHoliday(2024, 9, 16);
+        Console.log("日期：" + holiday.getDay());
+        Console.log("是否调休：" + holiday.isWork());
+        Console.log("假期名称：" + holiday.getName());
+        Console.log("关联节日：" + holiday.getTarget());
+    }
+
+    //获取所有节日
+    @Test
+    public void holidays() {
+        List<Holiday> holidays = HolidayUtil.getHolidays(2024);
+        String jsonStr = JSONUtil.toJsonStr(holidays);
+        Console.log("holidays：" + jsonStr);
+    }
 }

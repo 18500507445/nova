@@ -1,6 +1,6 @@
 package com.nova.common.utils.thread;
 
-import org.apache.commons.collections4.MapUtils;
+import cn.hutool.core.map.MapUtil;
 import org.slf4j.MDC;
 import org.springframework.core.task.TaskDecorator;
 
@@ -19,7 +19,7 @@ public class MdcTaskDecorator implements TaskDecorator {
         Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
         return () -> {
             try {
-                if (MapUtils.isNotEmpty(copyOfContextMap)) {
+                if (MapUtil.isNotEmpty(copyOfContextMap)) {
                     // 现在：@Async线程上下文！ 恢复Web线程上下文的MDC数据
                     MDC.setContextMap(copyOfContextMap);
                 }

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * @description:
+ * @description: excel启动类
  * @author: wzh
  * @date: 2022/9/8 19:43
  */

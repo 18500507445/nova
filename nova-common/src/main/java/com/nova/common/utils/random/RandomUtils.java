@@ -238,9 +238,7 @@ public final class RandomUtils {
      * @param length     字符串的长度
      */
     public static String randomString(String baseString, int length) {
-
         final StringBuilder sb = new StringBuilder(length);
-
         if (length < 1) {
             length = 1;
         }

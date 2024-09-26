@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * @author: wzh
  * @description 用户数据库对象
@@ -58,4 +60,9 @@ public class UserDO {
     @TableField(exist = false)
     private Boolean online;
 
+    @TableField("create_time")
+    private Date createTime;
+
+    @TableField("update_time")
+    private Date updateTime;
 }

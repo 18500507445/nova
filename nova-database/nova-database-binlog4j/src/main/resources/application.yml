@@ -25,3 +25,5 @@ spring:
         mode: standalone
         # 读取记忆
         persistence: true
+        # 时区偏移量
+        timeOffset: -28800000

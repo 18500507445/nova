@@ -35,7 +35,7 @@ public class Chapter3Test {
         QueryWrapper<UserDO> queryWrapper = new QueryWrapper<>();
 
         //2.设置相等查询条件，指定查询的字段和匹配的值
-        queryWrapper.eq("name", "Tom");
+        queryWrapper.eq("name", "Tom").last("limit 1");
 
         //3.进行条件查询
         UserDO userDO = threeUserMapper.selectOne(queryWrapper);

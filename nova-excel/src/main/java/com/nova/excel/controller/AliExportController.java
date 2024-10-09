@@ -144,9 +144,9 @@ public class AliExportController extends BaseController {
      * @param totalCount
      * @param shardingSize
      * @param response
-     * @throws InterruptedException
-     * @throws ExecutionException
-     * @throws IOException
+     * @throws InterruptedException InterruptedException
+     * @throws ExecutionException ExecutionException
+     * @throws IOException IOException
      */
     public void threadPoolWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws InterruptedException, ExecutionException, IOException {
         TimeInterval timer = DateUtil.timer();
@@ -179,9 +179,9 @@ public class AliExportController extends BaseController {
      * 并行编排版本，分批写入多个sheet
      * todo 纯装逼，这个CountDownLatch不需要用，CompletableFuture.allOf就代表了countDown后await进行主线程阻塞，这为了计数才用它的
      *
-     * @param totalCount
-     * @param shardingSize
-     * @param response
+     * @param totalCount totalCount
+     * @param shardingSize shardingSize
+     * @param response response
      */
     public void completableWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws IOException, InterruptedException {
         TimeInterval timer = DateUtil.timer();

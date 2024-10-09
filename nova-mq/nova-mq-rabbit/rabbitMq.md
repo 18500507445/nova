@@ -196,3 +196,7 @@ public class Producer {
     }
 }
 ```
+
+
+## rabbitMQ常见问题
+1. rabbitmq的长时间未消费报错。[rabbitmq的consumer_timeout修改](https://www.cnblogs.com/long757747969/p/16936604.html)

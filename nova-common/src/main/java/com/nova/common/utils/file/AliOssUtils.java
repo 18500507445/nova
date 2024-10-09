@@ -7,11 +7,13 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
 import com.nova.common.config.AliOssConfig;
+import com.nova.common.utils.id.IdUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,20 +70,53 @@ public class AliOssUtils {
     }
 
     /**
-     * 上传图片
+     * 上传文件
      *
      * @param file file
      */
-    public String uploadImage(MultipartFile file) throws IOException {
+    public String upload(MultipartFile file) throws IOException {
+        String name = file.getName();
+
         //生成文件名 原来的图片名
         String originalFilename = file.getOriginalFilename();
         String ext = "." + FilenameUtils.getExtension(originalFilename);
         String fileName = UUID.fastUUID().toString(true) + ext;
+        System.out.println("fileName = " + fileName);
         //仓库名 文件名
         ossClient.putObject(aliOssConfig.getBucketName(), fileName, file.getInputStream());
         ossClient.shutdown();
         // 生成访问上传后文件的 URL，并返回
         return "https://" + aliOssConfig.getBucketName() + "." + aliOssConfig.getEndpoint() + "/" + fileName;
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param byteArray byteArray
+     */
+    public String upload(byte[] byteArray) {
+        String fileName = IdUtils.snowId() + ".xlsx";
+        System.out.println("fileName = " + fileName);
+        //仓库名 文件名
+        ossClient.putObject(aliOssConfig.getBucketName(), fileName, new ByteArrayInputStream(byteArray));
+        ossClient.shutdown();
+        // 生成访问上传后文件的 URL，并返回
+        return "https://" + aliOssConfig.getBucketName() + "." + aliOssConfig.getEndpoint() + "/" + fileName;
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param file
+     */
+    public String upload(File file) {
+        String name = "export/wzh/" + IdUtils.snowId() + ".xlsx";
+        System.out.println("fileName = " + name);
+        //仓库名 文件名
+        ossClient.putObject(aliOssConfig.getBucketName(), name, file);
+        ossClient.shutdown();
+        // 生成访问上传后文件的 URL，并返回
+        return "https://" + aliOssConfig.getBucketName() + "." + aliOssConfig.getEndpoint() + "/" + name;
     }
 
     /**

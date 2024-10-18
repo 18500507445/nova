@@ -76,8 +76,6 @@ public class LuckyTest {
                 List<Integer> numberList = value.entrySet().iterator().next().getValue();
                 if (numberList.contains(number)) {
                     Console.error("恭喜用户：{} 中奖，号码：{}，奖品：{}", i, number, key);
-                } else {
-                    Console.error("用户：{} ，随机号码：{}", i, number);
                 }
             }
         }

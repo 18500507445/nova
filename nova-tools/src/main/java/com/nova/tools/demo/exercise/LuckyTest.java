@@ -69,7 +69,7 @@ public class LuckyTest {
         //4. 开始抽奖
         TimeInterval timer = DateUtil.timer();
         for (int i = 1; i <= 100; i++) {
-            int number = RandomUtil.randomInt(1, 100);
+            int number = RandomUtil.randomInt(1, result);
             for (Map<String, Map<BigDecimal, List<Integer>>> hashMap : goodsList) {
                 String key = hashMap.entrySet().iterator().next().getKey();
                 Map<BigDecimal, List<Integer>> value = hashMap.entrySet().iterator().next().getValue();

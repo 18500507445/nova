@@ -70,13 +70,21 @@ public class LuckyTest {
         TimeInterval timer = DateUtil.timer();
         for (int i = 1; i <= 100; i++) {
             int number = RandomUtil.randomInt(1, result);
+            boolean flag = false;
+            String key = "";
             for (Map<String, Map<BigDecimal, List<Integer>>> hashMap : goodsList) {
-                String key = hashMap.entrySet().iterator().next().getKey();
+                key = hashMap.entrySet().iterator().next().getKey();
                 Map<BigDecimal, List<Integer>> value = hashMap.entrySet().iterator().next().getValue();
                 List<Integer> numberList = value.entrySet().iterator().next().getValue();
                 if (numberList.contains(number)) {
-                    Console.error("恭喜用户：{} 中奖，号码：{}，奖品：{}", i, number, key);
+                    flag = true;
+                    break;
                 }
+            }
+            if (flag) {
+                Console.error("恭喜用户：{} 中奖，号码：{}，奖品：{}", i, number, key);
+            } else {
+                Console.error("用户：{} ，号码：{}，谢谢惠顾", i, number);
             }
         }
         Console.error("抽奖结束 耗时：{} ms", timer.interval());

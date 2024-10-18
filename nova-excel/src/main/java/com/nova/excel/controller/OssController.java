@@ -41,7 +41,7 @@ public class OssController {
 
     public static List<AliEasyExportDO> LIST = new ArrayList<>();
 
-    public static final int TOTAL = 500;
+    public static final int TOTAL = 10000000;
 
     static {
         for (int i = 1; i <= TOTAL; i++) {
@@ -127,12 +127,13 @@ public class OssController {
         try (ExcelWriter excelWriter = EasyExcel.write(outputFile, AliEasyExportDO.class).build()) {
             log.info("准备写入excel");
 
-            int pageSize = 100;
+            int pageSize = 1000000;
             List<List<AliEasyExportDO>> split = ListUtil.split(LIST, pageSize);
 
             for (int i = 0; i < split.size(); i++) {
                 WriteSheet writeSheet = EasyExcel.writerSheet(i, "sheet" + (i + 1)).build();
                 excelWriter.write(split.get(i), writeSheet);
+                log.info("循环次数：{}", i + 1);
             }
         }
         log.info("准备写入oss");

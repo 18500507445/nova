@@ -84,7 +84,7 @@ public class LuckyTest {
             if (flag) {
                 Console.error("恭喜用户：{} 中奖，号码：{}，奖品：{}", i, number, key);
             } else {
-                Console.error("用户：{} ，号码：{}，谢谢惠顾", i, number);
+                Console.log("用户：{} ，号码：{}，谢谢惠顾", i, number);
             }
         }
         Console.error("抽奖结束 耗时：{} ms", timer.interval());

@@ -103,6 +103,33 @@ class MapExercise {
         }
     }
 
+    private final TreeMap<Integer, Double> priceRanges = new TreeMap<>();
+
+    public void add(int lowerBound, double markupFactor) {
+        priceRanges.put(lowerBound, markupFactor);
+    }
+
+    public double get(int price) {
+        //就是从 TreeMap priceRanges 中获取小于给定价格的最大价格区间的 key
+        int key = priceRanges.lowerKey(price);
+        return priceRanges.get(key);
+    }
+
+    @Test
+    public void treeMapDemo() {
+        MapExercise mapExercise = new MapExercise();
+
+        // Add price ranges and markup factors
+        mapExercise.add(0, 5.34);
+        mapExercise.add(1000, 6.15);
+        mapExercise.add(2000, 5.97);
+        mapExercise.add(3000, 6.37);
+
+        int givenPrice = 5000;
+        double markupFactor = mapExercise.get(givenPrice);
+        System.out.println("Markup factor for price " + givenPrice + ": " + markupFactor);
+    }
+
 
     /**
      * 线程：不安全

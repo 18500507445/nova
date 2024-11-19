@@ -67,7 +67,6 @@ public class OssController {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             log.info("准备写入excel");
             EasyExcel.write(outputStream, AliEasyExportDO.class)
-                    .inMemory(true)
                     .excelType(ExcelTypeEnum.XLSX)
                     .sheet("测试")
                     .doWrite(LIST);
@@ -92,7 +91,6 @@ public class OssController {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             log.info("准备写入excel");
             EasyExcel.write(outputStream, AliEasyExportDO.class)
-                    .inMemory(true)
                     .excelType(ExcelTypeEnum.XLSX)
                     .sheet("测试")
                     .doWrite(LIST);
@@ -109,7 +107,6 @@ public class OssController {
         File outputFile = new File("/Users/wangzehui/Documents/IdeaProjects/nova/nova-excel/src/main/resources/测试demoC.xlsx");
         log.info("准备写入excel");
         EasyExcel.write(outputFile, AliEasyExportDO.class)
-                .inMemory(true)
                 .excelType(ExcelTypeEnum.XLSX)
                 .sheet("测试")
                 .doWrite(LIST);
@@ -126,10 +123,8 @@ public class OssController {
         File outputFile = new File("/Users/wangzehui/Documents/IdeaProjects/nova/nova-excel/src/main/resources/测试demoC.xlsx");
         try (ExcelWriter excelWriter = EasyExcel.write(outputFile, AliEasyExportDO.class).build()) {
             log.info("准备写入excel");
-
             int pageSize = 1000000;
             List<List<AliEasyExportDO>> split = ListUtil.split(LIST, pageSize);
-
             for (int i = 0; i < split.size(); i++) {
                 WriteSheet writeSheet = EasyExcel.writerSheet(i, "sheet" + (i + 1)).build();
                 excelWriter.write(split.get(i), writeSheet);

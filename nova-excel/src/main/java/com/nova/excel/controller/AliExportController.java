@@ -103,6 +103,7 @@ public class AliExportController extends BaseController {
 
         //可以浏览器下载
         EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class)
+                //是否在内存处理，默认会生成临时文件以节约内存。内存模式效率会更好，但是容易OOM。大文件⚠️不要打开
                 .inMemory(true)
                 .excelType(ExcelTypeEnum.XLSX)
                 .sheet("模板")

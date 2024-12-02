@@ -1,5 +1,6 @@
 package com.nova.tools.java8.collection;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.nova.tools.demo.entity.Myself;
@@ -116,7 +117,12 @@ class ListDemo {
     @Test
     public void listGrouping() {
         Map<Integer, List<People>> peopleMap = PEOPLE_LIST.stream().collect(groupingBy(People::getGroupId));
-        System.err.println(JSONUtil.toJsonStr(peopleMap));
+
+        //partitioningBy，二分操作，只会返回2组数据，满足和不满足条件
+        Map<Boolean, List<People>> collect = PEOPLE_LIST.stream().collect(partitioningBy(people -> ObjectUtil.equals(1, people.getGroupId())));
+
+        System.out.println("peopleMap = " + JSONUtil.toJsonStr(peopleMap));
+        System.out.println("collect = " + JSONUtil.toJsonStr(collect));
     }
 
 

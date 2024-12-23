@@ -5,7 +5,6 @@ import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.json.JSONUtil;
 import com.nova.common.core.model.result.ResResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,12 +38,12 @@ public class UserController {
         if ("wzh".equals(username) && "123456".equals(password)) {
 
             Map<String, Object> map = new HashMap<>(16);
-            map.put("username", username);
-            map.put("password", password);
+            map.put("userName", username);
+            map.put("passWord", password);
 
             // 第二步：根据账号id，进行登录
             SaLoginModel model = new SaLoginModel();
-            model.setExtra("userContext", JSONUtil.toJsonStr(map));
+            model.setExtra("userContext", map);
             StpUtil.login(10001, model);
             return ResResult.success("登录成功");
         }
@@ -126,15 +125,15 @@ public class UserController {
         StpUtil.kickout(loginId);
         System.err.println("踢人下线：" + loginId);
 
-        Object userContext = StpUtil.getExtra("userContext");
-        System.err.println("userContext = " + userContext);
+
     }
 
     // 登录校验：只有登录之后才能进入该方法
     @SaCheckLogin
     @RequestMapping("info")
-    public String info() {
-        return "查询用户信息";
+    public ResResult<Object> info() {
+        Object userContext = StpUtil.getExtra("userContext");
+        return ResResult.success(userContext);
     }
 
     // 角色校验：必须具有指定角色才能进入该方法

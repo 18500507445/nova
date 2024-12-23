@@ -2,13 +2,18 @@ package com.nova.login.sa.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.json.JSONUtil;
 import com.nova.common.core.model.result.ResResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: wzh
@@ -32,8 +37,15 @@ public class UserController {
     public ResResult<String> login(String username, String password) {
         // 第一步：比对前端提交的账号名称、密码
         if ("wzh".equals(username) && "123456".equals(password)) {
+
+            Map<String, Object> map = new HashMap<>(16);
+            map.put("username", username);
+            map.put("password", password);
+
             // 第二步：根据账号id，进行登录
-            StpUtil.login(10001);
+            SaLoginModel model = new SaLoginModel();
+            model.setExtra("userContext", JSONUtil.toJsonStr(map));
+            StpUtil.login(10001, model);
             return ResResult.success("登录成功");
         }
         return ResResult.failure("登录失败");
@@ -113,6 +125,9 @@ public class UserController {
 
         StpUtil.kickout(loginId);
         System.err.println("踢人下线：" + loginId);
+
+        Object userContext = StpUtil.getExtra("userContext");
+        System.err.println("userContext = " + userContext);
     }
 
     // 登录校验：只有登录之后才能进入该方法

@@ -1,0 +1,15 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: nova-login-oauth2-auth
+
+  #  security设置
+  security:
+    user:
+      name: admin
+      password: 123456

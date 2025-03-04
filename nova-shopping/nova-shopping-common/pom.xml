@@ -19,12 +19,12 @@
         <druid.version>1.2.24</druid.version>
         <xx.job.verson>2.4.0</xx.job.verson>
 
-        <hutool.version>5.8.34</hutool.version>
-        <fastjson.version>2.0.53</fastjson.version>
+        <hutool.version>5.8.36</hutool.version>
+        <fastjson.version>2.0.56</fastjson.version>
         <jasypt.version>3.0.5</jasypt.version>
 
         <!-- spring-boot 2.7.18版本 -->
-        <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
+        <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
         <!-- 不要升级了，springboot3之前最高次版本 -->
         <mybatis.version>2.3.2</mybatis.version>
     </properties>

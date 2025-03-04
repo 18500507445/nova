@@ -18,7 +18,7 @@
 
         <fastjson.version>2.0.56</fastjson.version>
         <hutool.version>5.8.36</hutool.version>
-        <guava.version>33.3.0-jre</guava.version>
+        <guava.version>33.4.0-jre</guava.version>
         <guava.retry.version>2.0.0</guava.retry.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
@@ -28,7 +28,7 @@
         <commons.io.version>2.13.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
         <poi.version>5.2.3</poi.version>
-        <jwt.version>4.4.0</jwt.version>
+        <jwt.version>4.5.0</jwt.version>
         <vavr.version>1.0.0-alpha-4</vavr.version>
         <bouncycastle.version>1.77</bouncycastle.version>
         <jsch.version>0.1.55</jsch.version>

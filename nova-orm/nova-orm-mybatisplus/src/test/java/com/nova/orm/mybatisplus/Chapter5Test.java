@@ -90,9 +90,8 @@ public class Chapter5Test {
     public void updateAll() {
         UserFiveDO userDO = new UserFiveDO();
         userDO.setGender(GenderEnum.MAN);
-        fiveUserService.saveOrUpdate(userDO, null);
+        fiveUserService.saveOrUpdate(userDO);
     }
-
 
     /**
      * 多数据源查询

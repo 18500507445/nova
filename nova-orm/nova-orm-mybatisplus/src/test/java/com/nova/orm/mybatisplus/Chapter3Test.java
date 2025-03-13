@@ -154,6 +154,7 @@ public class Chapter3Test {
 
     /**
      * 分组、聚合、排序查询
+     * @deprecated :也可以切换成lambda写法
      */
     @Test
     public void groupQuery() {

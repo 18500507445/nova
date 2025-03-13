@@ -25,7 +25,7 @@
 
         <email.version>1.5</email.version>
         <thumbnailator.version>0.4.17</thumbnailator.version>
-        <commons.io.version>2.13.0</commons.io.version>
+        <commons.io.version>2.18.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
         <poi.version>5.2.3</poi.version>
         <jwt.version>4.5.0</jwt.version>

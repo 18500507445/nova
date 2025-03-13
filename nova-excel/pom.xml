@@ -19,6 +19,7 @@
         <easyexcel.verson>4.0.3</easyexcel.verson>
         <easypoi.verson>4.5.0</easypoi.verson>
         <ooxml.verson>5.3.0</ooxml.verson>
+        <commons.io.version>2.18.0</commons.io.version>
     </properties>
 
     <dependencies>
@@ -38,6 +39,13 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
             <version>${easyexcel.verson}</version>
+        </dependency>
+
+        <!--    easyexcel最新版本需要这个包     -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
         </dependency>
 
         <!-- poi 添加水印 -->

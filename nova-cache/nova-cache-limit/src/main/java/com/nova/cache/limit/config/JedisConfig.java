@@ -1,5 +1,6 @@
 package com.nova.cache.limit.config;
 
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -71,7 +72,11 @@ public class JedisConfig {
         jedisPoolConfig.setBlockWhenExhausted(true);
         // 是否启用pool的jmx管理功能, 默认true
         jedisPoolConfig.setJmxEnabled(true);
-        return new JedisPool(jedisPoolConfig, host, port, timeout, password);
+        if (StrUtil.isNotBlank(password)) {
+            return new JedisPool(jedisPoolConfig, host, port, timeout, password);
+        } else {
+            return new JedisPool(jedisPoolConfig, host, port, timeout);
+        }
     }
 
 

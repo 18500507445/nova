@@ -1,8 +1,7 @@
 package com.nova.common.utils.common;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.system.SystemUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,30 +55,28 @@ public final class LinuxUtils {
     }
 
     public static String getInternetIp(String command) {
-        TimeInterval timer = DateUtil.timer();
-        String ip = "";
-        String result = "";
+        String result = "00";
         String line;
+        String osInfo = SystemUtil.getOsInfo().getName();
         try {
+            // 只有linux和mac电脑执行
+            if (StrUtil.containsAnyIgnoreCase(osInfo, "windows")) {
+                return result;
+            }
             ProcessBuilder processBuilder = new ProcessBuilder("/bin/bash", "-c", command);
             Process process = processBuilder.start();
             // 获取命令输出
             InputStream inputStream = process.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             while ((line = reader.readLine()) != null) {
-                if (StrUtil.containsAnyIgnoreCase(line, "ip", ":")) {
-                    List<String> split = StrUtil.split(line, ":");
-                    if (split.size() > 1) {
-                        ip = split.get(1);
+                if (StrUtil.containsAnyIgnoreCase(line, ".")) {
+                    List<String> split = StrUtil.split(line, ".");
+                    if (split.size() > 3) {
+                        result = split.get(3);
                     }
                     break;
                 }
             }
-            List<String> split = StrUtil.split(ip, ".");
-            if (split.size() > 3) {
-                result = split.get(3);
-            }
-            log.info("getInternetIp--ip：{}，result：{}，耗时：{} ms", ip, result, timer.interval());
             return result;
         } catch (IOException e) {
             throw new RuntimeException(e);

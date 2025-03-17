@@ -110,7 +110,7 @@ public class ChannelInit {
     @Order(-2)
     void initIp() {
         System.err.println("initIp，初始化顺序 -2");
-        INTERNET_IP = LinuxUtils.getInternetIp("curl cip.cc");
+        INTERNET_IP = LinuxUtils.getInternetIp("curl ifconfig.co");
         log.warn("获取公网ip后2位，初始化RespResult.IP {}", INTERNET_IP);
     }
 }

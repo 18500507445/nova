@@ -6,9 +6,9 @@ server:
 
 spring:
   redis:
-    host: 47.100.174.176
-    port: 63799
-    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    host: 127.0.0.1
+    port: 6379
+    password:
     jedis:
       pool:
         max-active: 20
@@ -22,7 +22,3 @@ spring:
       master: master
       nodes: 127.0.0.1:26379
 
-jasypt:
-  encryptor:
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-    password: jaspyt_password

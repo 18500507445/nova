@@ -57,6 +57,7 @@ public class UserDO {
     @TableField(select = false)
     private String hide;
 
+    //我们表明这个字段在数据库表中没有对应的列
     @TableField(exist = false)
     private Boolean online;
 

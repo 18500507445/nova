@@ -167,6 +167,10 @@ class ListDemo {
         Map<String, Integer> collect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge, (v1, v2) -> v1));
         Map<String, Integer> newCollect = PEOPLE_LIST.stream().collect(toMap(People::getName, People::getAge, (v1, v2) -> v1));
         Map<String, People> peopleMap = PEOPLE_LIST.stream().collect(toMap(People::getName, Function.identity(), (v1, v2) -> v1));
+
+        TreeMap<Integer, Integer> treeMap = PEOPLE_LIST.stream()
+                .collect(Collectors.toMap(People::getId, People::getAge,
+                        (existingValue, newValue) -> existingValue, TreeMap::new));
         System.err.println(JSONUtil.toJsonStr(collect));
     }
 

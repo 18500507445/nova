@@ -119,15 +119,14 @@ class MapExercise {
     public void treeMapDemo() {
         MapExercise mapExercise = new MapExercise();
 
-        // Add price ranges and markup factors
         mapExercise.add(0, 5.34);
         mapExercise.add(1000, 6.15);
         mapExercise.add(2000, 5.97);
         mapExercise.add(3000, 6.37);
 
-        int givenPrice = 5000;
-        double markupFactor = mapExercise.get(givenPrice);
-        System.out.println("Markup factor for price " + givenPrice + ": " + markupFactor);
+        int price = 5000;
+        double markupFactor = mapExercise.get(price);
+        System.out.println("price " + price + ": " + markupFactor);
     }
 
 

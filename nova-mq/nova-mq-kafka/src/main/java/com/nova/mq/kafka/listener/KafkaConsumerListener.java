@@ -4,7 +4,10 @@ import com.nova.common.constant.Destination;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
+
+import java.time.Duration;
 
 
 /**
@@ -33,8 +36,14 @@ public class KafkaConsumerListener {
      * </ul>
      */
     @KafkaListener(topics = "topicA", groupId = "consumer-group-01-" + "topicA")
-    public void onMessage(Object message) {
-        log.info("[KafkaConsumer01 consumer-group-01][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+    public void onMessage(Object message, Acknowledgment ack) {
+        try {
+            ack.acknowledge();
+            log.info("[KafkaConsumer01 consumer-group-01][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+        } catch (Exception e) {
+            ack.nack(Duration.ofMillis(500));
+            throw new RuntimeException(e);
+        }
     }
 
     @KafkaListener(groupId = "nova-kafka-consumer", topics = {Destination.TEST_DESTINATION})

@@ -7,7 +7,7 @@ server:
 spring:
   kafka:
     # 指定 Kafka Broker 地址，可以设置多个，以逗号分隔
-    bootstrap-servers: 213195b35924.c.methodot.com:31233
+    bootstrap-servers: 127.0.0.1:9092
     # producer 生产者
     producer:
       retries: 3 # 重试次数
@@ -30,7 +30,8 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     listener: # Kafka Consumer Listener 监听器配置
       missing-topics-fatal: false # 消费监听接口监听的主题不存在时，默认会报错。所以通过设置为 false ，解决报错
-      ack-mode: MANUAL # 开启手动 ack
+      ack-mode: manual # 开启手动 ack
+      type: single # 禁用自动提交（按周期）已消费offset
 
 
 # 只打印 WARN 级别

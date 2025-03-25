@@ -6,12 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RBlockingQueue;
-import org.redisson.api.RLock;
-import org.redisson.api.RQueue;
-import org.redisson.api.RReadWriteLock;
+import org.redisson.api.*;
 
+import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * 分布式锁工具类
@@ -141,5 +141,150 @@ public class RedissonLock {
         return redissonManager.getRedisson().getBlockingQueue(name).size();
     }
 
+    /**
+     * 发布通道消息
+     *
+     * @param channelKey 通道key
+     * @param msg        发送数据
+     * @param consumer   自定义处理
+     */
+    public <T> void publish(String channelKey, T msg, Consumer<T> consumer) {
+        RTopic topic = redissonManager.getRedisson().getTopic(channelKey);
+        topic.publish(msg);
+        consumer.accept(msg);
+    }
 
+    /**
+     * 订阅通道接收消息
+     *
+     * @param channelKey 通道key
+     * @param clazz      消息类型
+     * @param consumer   自定义处理
+     */
+    public <T> void subscribe(String channelKey, Class<T> clazz, Consumer<T> consumer) {
+        RTopic topic = redissonManager.getRedisson().getTopic(channelKey);
+        topic.addListener(clazz, (channel, msg) -> consumer.accept(msg));
+    }
+
+    /**
+     * 缓存基本的对象，Integer、String、实体类等
+     *
+     * @param key      缓存的键值
+     * @param value    缓存的值
+     * @param duration 时间
+     */
+    public <T> void setCacheObject(final String key, final T value, final Duration duration) {
+        RBatch batch = redissonManager.getRedisson().createBatch();
+        RBucketAsync<T> bucket = batch.getBucket(key);
+        bucket.setAsync(value);
+        bucket.expireAsync(duration);
+        batch.execute();
+    }
+
+    /**
+     * 获得缓存的基本对象。
+     *
+     * @param key 缓存键值
+     * @return 缓存键值对应的数据
+     */
+    public <T> T getCacheObject(final String key) {
+        RBucket<T> rBucket = redissonManager.getRedisson().getBucket(key);
+        return rBucket.get();
+    }
+
+    /**
+     * 检查缓存对象是否存在
+     *
+     * @param key 缓存的键值
+     */
+    public boolean isExistsObject(final String key) {
+        return redissonManager.getRedisson().getBucket(key).isExists();
+    }
+
+    /**
+     * 缓存List数据
+     *
+     * @param key      缓存的键值
+     * @param dataList 待缓存的List数据
+     * @return 缓存的对象
+     */
+    public <T> boolean setCacheList(final String key, final List<T> dataList) {
+        RList<T> rList = redissonManager.getRedisson().getList(key);
+        return rList.addAll(dataList);
+    }
+
+
+    /**
+     * 获得缓存的list对象
+     *
+     * @param key 缓存的键值
+     * @return 缓存键值对应的数据
+     */
+    public <T> List<T> getCacheList(final String key) {
+        RList<T> rList = redissonManager.getRedisson().getList(key);
+        return rList.readAll();
+    }
+
+    /**
+     * 删除单个对象
+     *
+     * @param key 缓存的键值
+     */
+    public boolean deleteObject(final String key) {
+        return redissonManager.getRedisson().getBucket(key).delete();
+    }
+
+    /**
+     * 设置原子值
+     *
+     * @param key   Redis键
+     * @param value 值
+     */
+    public void setAtomicValue(String key, long value) {
+        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        atomic.set(value);
+    }
+
+    /**
+     * 获取原子值
+     *
+     * @param key Redis键
+     * @return 当前值
+     */
+    public long getAtomicValue(String key) {
+        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        return atomic.get();
+    }
+
+    /**
+     * 递增原子值
+     *
+     * @param key Redis键
+     * @return 当前值
+     */
+    public long incrAtomicValue(String key) {
+        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        return atomic.incrementAndGet();
+    }
+
+    /**
+     * 递减原子值
+     *
+     * @param key Redis键
+     * @return 当前值
+     */
+    public long decrAtomicValue(String key) {
+        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        return atomic.decrementAndGet();
+    }
+
+    /**
+     * 检查redis中是否存在key
+     *
+     * @param key 键
+     */
+    public Boolean hasKey(String key) {
+        RKeys rKeys = redissonManager.getRedisson().getKeys();
+        return rKeys.countExists(key) > 0;
+    }
 }

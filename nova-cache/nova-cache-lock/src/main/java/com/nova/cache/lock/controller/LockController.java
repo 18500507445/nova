@@ -8,10 +8,12 @@ import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.core.model.result.ResResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -52,4 +54,30 @@ public class LockController extends BaseController {
     public ResResult<Integer> size(ValidatorReqDTO reqDto) {
         return ResResult.success(redissonLock.bQueueSize(reqDto.getName()));
     }
+
+    @GetMapping("redis")
+    public ResResult<String> redis() {
+        String key = "redis";
+        redissonLock.setCacheObject(key, key, Duration.ofSeconds(1));
+        String value = redissonLock.getCacheObject(key);
+        return ResResult.success(value);
+    }
+
+    /**
+     * @description: 订阅不会进行删除消息，每次调用越来越多
+     */
+    @GetMapping("publish")
+    public ResResult<Void> publish() {
+        String key = "redis";
+        String value = "redis";
+        redissonLock.publish(key, value, consumer -> {
+            System.err.println("发布通道 => " + key + ", 发送值 => " + value);
+        });
+
+        redissonLock.subscribe(key, String.class, msg -> {
+            System.err.println("订阅通道 => " + key + ", 接收值 => " + msg);
+        });
+        return ResResult.success();
+    }
+
 }

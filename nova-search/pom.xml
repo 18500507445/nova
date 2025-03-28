@@ -12,6 +12,7 @@
     <modules>
         <module>nova-search-solr</module>
         <module>nova-search-elasticsearch</module>
+        <module>nova-search-easyes</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>

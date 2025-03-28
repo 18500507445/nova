@@ -77,8 +77,8 @@ spring:
     mongodb:
       host: 127.0.0.1
       port: 27017
-#      username: root
-#      password: 123
+      username: root
+      password: '123456'
       authentication-database: admin  #认证的库
       database: myself    #操作的库
 

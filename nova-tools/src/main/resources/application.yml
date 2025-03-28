@@ -44,6 +44,7 @@ spring:
     # redis服务器连接端口
     port: 6379
     # redis服务器连接密码（尽量设置密码，防止远程注入服务器挖矿）
+    password: 123456
     lettuce:
       pool:
         # 连接池最大连接数（使用负值表示没有限制）
@@ -57,10 +58,12 @@ spring:
     #连接超时时间
     timeout: 10000
 
+
   redis2:
     database: 2
     host: 127.0.0.1
     port: 6379
+    password: 123456
     lettuce:
       pool:
         max-active: 8

@@ -6,9 +6,9 @@ server:
 
 spring:
   rabbitmq:
-    addresses: 47.100.174.176:5672 #注意这里是amqp协议端口5672
+    addresses: 127.0.0.1:5672 #注意这里是amqp协议端口5672
     username: root #账号
-    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4) #密码
+    password: 123456 #密码
     virtual-host: / #虚拟主机环境
 
     # todo 默认就是这些值，不用谢
@@ -19,8 +19,3 @@ spring:
           max-attempts: 3 #传递消息的最大尝试次数
           max-interval: 10000 #尝试的最大时间间隔
           multiplier: 1.0 #应用于先前传递重试时间间隔的乘数
-
-jasypt:
-  encryptor:
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-    password: jaspyt_password

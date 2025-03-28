@@ -5,9 +5,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://47.100.174.176:3306/shopping?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://127.0.0.1:3306/shopping?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
-        password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+        password: 123456
         # 驱动 mysql：com.mysql.cj.jdbc.Driver oracle：oracle.jdbc.OracleDriver
         driver-class-name: com.mysql.cj.jdbc.Driver
       # 从库数据源
@@ -61,6 +61,7 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
+    password: 123456
     lettuce:
       pool:
         max-active: 8
@@ -69,10 +70,11 @@ spring:
         min-idle: 0
     timeout: 10000
 
+
   rabbitmq:
-    addresses: 47.100.174.176:5672
+    addresses: 127.0.0.1:5672
     username: root #账号
-    password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4) #密码
+    password: 123456 #密码
     virtual-host: /
     listener:
       simple:

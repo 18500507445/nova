@@ -39,7 +39,7 @@ public class ZkServiceRegister implements ServiceRegister {
         // sessionTimeoutMs 与 zoo.cfg中的tickTime 有关系，
         // zk还会根据minSessionTimeout与maxSessionTimeout两个参数重新调整最后的超时值。默认分别为tickTime 的2倍和20倍
         // 使用心跳监听状态
-        this.client = CuratorFrameworkFactory.builder().connectString("47.100.174.176:2181")
+        this.client = CuratorFrameworkFactory.builder().connectString("127.0.0.1:2181")
                 .sessionTimeoutMs(40000).retryPolicy(policy).namespace(ROOT_PATH).build();
         this.client.start();
         System.err.println("zookeeper 连接成功");

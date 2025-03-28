@@ -50,7 +50,7 @@ public class MybatisConfiguration {
     @Bean
     public DataSource dataSource() {
         return new PooledDataSource("com.mysql.cj.jdbc.Driver",
-                "jdbc:mysql://47.100.174.176:3306/study", "root", "@wangzehui123");
+                "jdbc:mysql://127.0.0.1:3306/study", "root", "123456");
     }
 
     /**

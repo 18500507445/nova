@@ -13,7 +13,7 @@ spring:
     # redis服务器连接端口
     port: 6379
     # redis服务器连接密码（尽量设置密码，防止远程注入服务器挖矿）
-    # password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+    password: 123456
 
     # 连接客户端类型
     client-type: lettuce

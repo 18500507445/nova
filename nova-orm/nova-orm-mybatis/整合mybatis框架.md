@@ -67,7 +67,7 @@ mybatis-config.xml配置
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://47.100.174.176:3306/study"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/study"/>
                 <property name="username" value="root"/>
                 <property name="password" value="password"/>
             </dataSource>
@@ -120,7 +120,7 @@ public class MybatisConfiguration {
     @Bean
     public DataSource dataSource(){
         return new PooledDataSource("com.mysql.cj.jdbc.Driver",
-                "jdbc:mysql://47.100.174.176:3306/study", "root", "password");
+                "jdbc:mysql://127.0.0.1:3306/study", "root", "password");
     }
 
     @Bean

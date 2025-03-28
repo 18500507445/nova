@@ -16,9 +16,9 @@ spring:
           # 可以不设置，默认德鲁伊
           type: com.alibaba.druid.pool.DruidDataSource
           username: root
-          password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
+          password: 123456
           # rewriteBatchedStatements设置批处理
-          url: jdbc:mysql://47.100.174.176:3306/study?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&rewriteBatchedStatements=true
+          url: jdbc:mysql://127.0.0.1:3306/study?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&rewriteBatchedStatements=true
           driver-class-name: com.mysql.cj.jdbc.Driver
           druid:
             # 初始连接数
@@ -60,8 +60,8 @@ spring:
             connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
         shopping:
           username: root
-          password: ENC(HfT5aVyvqAy4l4hfdoz6f1Ik+Pt7+d1A/XtxdfNv4oHMZsxUWvfFqAB0heosM8l4)
-          url: jdbc:mysql://47.100.174.176:3306/shopping?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+          password: 123456
+          url: jdbc:mysql://127.0.0.1:3306/shopping?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
           driver-class-name: com.mysql.cj.jdbc.Driver
           druid:
             initialSize: 5

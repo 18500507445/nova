@@ -43,11 +43,11 @@ public class RabbitMqTest {
         // 1: 创建连接工厂
         ConnectionFactory connectionFactory = new ConnectionFactory();
         // 2: 设置连接属性
-        connectionFactory.setHost("47.100.174.176");
+        connectionFactory.setHost("127.0.0.1");
         connectionFactory.setPort(5672);
         connectionFactory.setVirtualHost("/");
         connectionFactory.setUsername("root");
-        connectionFactory.setPassword("@wangzehui123");
+        connectionFactory.setPassword("123456");
 
         Connection connection;
         Channel channel;
@@ -93,11 +93,11 @@ public class RabbitMqTest {
     @Test
     public void consumer() throws Exception {
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("47.100.174.176");
+        connectionFactory.setHost("127.0.0.1");
         connectionFactory.setPort(5672);
         connectionFactory.setVirtualHost("/");
         connectionFactory.setUsername("root");
-        connectionFactory.setPassword("@wangzehui123");
+        connectionFactory.setPassword("123456");
         Connection connection = connectionFactory.newConnection("测试");
         Channel channel = connection.createChannel();
         //创建一个基本的消费者

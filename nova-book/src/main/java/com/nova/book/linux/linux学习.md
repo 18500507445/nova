@@ -14,6 +14,8 @@
 #### 1.2 文件
 （1）open -e .zshrc：打开文件
 （2）vim ~/.zshrc：窗口打开文件
+（3）rs filename ：上传到服务器
+（4）rz filename：下载到本地
 
 #### 1.3 启、停服务
 （1）ps -ef|grep java：查找java进程  

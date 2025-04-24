@@ -4,3 +4,9 @@ server:
   servlet:
     context-path: /
 
+aliyun:
+  oss:
+    endpoint: oss-accelerate.aliyuncs.com
+    accessKeyId: LTAI4G4id7xMN4FWbxoma
+    accessKeySecret: 7ZMOPlFgQz6Ot1xrvKRlpl2Pt
+    bucketName: excel

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * MD5 单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class Md5Test {
 

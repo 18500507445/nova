@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * 事务性数据库操作单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class SessionTest {
 

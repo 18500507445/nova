@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * @author sidian
+ * @author: sidian
  */
 @SpringBootTest(classes = EnableSpringUtilTest.class)
 @EnableSpringUtil

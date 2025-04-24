@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author wzh
+ * @author: wzh
  */
 public class DynamicDataSourceContextHolder {
     public static final Logger log = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);

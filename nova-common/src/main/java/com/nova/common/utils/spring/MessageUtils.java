@@ -8,7 +8,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  * @description: spring国际化，获取i18n资源文件
- * @author wzh
+ * @author: wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MessageUtils {

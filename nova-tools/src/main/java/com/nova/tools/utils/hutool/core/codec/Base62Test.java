@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Base62单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class Base62Test {
 

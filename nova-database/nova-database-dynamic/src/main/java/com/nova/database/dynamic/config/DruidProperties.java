@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * druid 配置属性
- * @author wzh
+ * @author: wzh
  */
 @Configuration
 public class DruidProperties {

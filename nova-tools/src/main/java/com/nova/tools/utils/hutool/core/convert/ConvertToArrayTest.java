@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * 类型转换工具单元测试<br>
  * 转换为数组
  *
- * @author Looly
+ * @author: Looly
  */
 public class ConvertToArrayTest {
 

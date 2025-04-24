@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description ApplicationListener
+ * @description: ApplicationListener
  * ApplicationListener可以监听某个事件的event，触发时机可以穿插在业务方法执行过程中，用户可以自定义某个业务事件
  * @date: 2023/10/08 17:39
  */

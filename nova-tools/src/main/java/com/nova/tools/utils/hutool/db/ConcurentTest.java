@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * SqlRunner线程安全测试
  *
- * @author looly
+ * @author: looly
  */
 
 public class ConcurentTest {

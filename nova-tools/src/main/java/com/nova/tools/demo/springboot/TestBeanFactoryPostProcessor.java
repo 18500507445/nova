@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description BeanFactoryPostProcessor
+ * @description: BeanFactoryPostProcessor
  * 这个接口是beanFactory的扩展接口，调用时机在spring在读取beanDefinition信息之后，实例化bean之前。
  * @date: 2023/10/08 17:18
  */

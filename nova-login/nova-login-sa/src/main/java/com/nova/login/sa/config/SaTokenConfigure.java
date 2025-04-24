@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author: wzh
- * @description sa-token配置类
+ * @description: sa-token配置类
  * @date: 2023/09/28 14:07
  */
 @Configuration

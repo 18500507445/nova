@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description 自定义权限加载接口实现类
+ * @description: 自定义权限加载接口实现类
  * @date: 2023/09/28 16:14
  */
 @Component

@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author: wzh
- * @description cloud-sleuth链路追踪
+ * @description: cloud-sleuth链路追踪
  * @date: 2023/10/12 15:43
  */
 @SpringBootApplication

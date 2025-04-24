@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * 直线干扰验证码单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class CaptchaTest {
 

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 元数据信息单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class MetaUtilTest {
     DataSource ds = DSFactory.get("test");

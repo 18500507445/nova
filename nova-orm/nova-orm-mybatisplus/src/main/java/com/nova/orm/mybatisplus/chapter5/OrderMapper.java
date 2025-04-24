@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author: wzh
- * @description orderMapper
+ * @description: orderMapper
  * @date: 2023/06/21 17:04
  */
 @Mapper

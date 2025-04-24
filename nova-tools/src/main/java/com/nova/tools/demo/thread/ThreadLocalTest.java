@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author: wzh
- * @description threadLocal传值问题
+ * @description: threadLocal传值问题
  * @date: 2023/11/19 21:00
  */
 public class ThreadLocalTest {

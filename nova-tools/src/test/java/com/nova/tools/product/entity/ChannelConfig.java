@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author: wzh
- * @description 渠道配置
+ * @description: 渠道配置
  * @date: 2023/10/26 17:46
  */
 @Data

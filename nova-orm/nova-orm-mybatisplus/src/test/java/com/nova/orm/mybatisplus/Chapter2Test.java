@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author: wzh
- * @description 第二章测试类：基础篇
+ * @description: 第二章测试类：基础篇
  * @date: 2023/06/16 09:35
  */
 @SpringBootTest

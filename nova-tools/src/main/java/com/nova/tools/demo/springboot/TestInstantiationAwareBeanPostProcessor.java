@@ -9,7 +9,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author: wzh
- * @description InstantiationAwareBeanPostProcessor
+ * @description: InstantiationAwareBeanPostProcessor
  * 接口继承了BeanPostProcess接口，BeanPostProcess接口只在bean的初始化阶段进行扩展（注入spring上下文前后），
  * 而InstantiationAwareBeanPostProcessor接口在此基础上增加了3个方法，把可扩展的范围增加了实例化阶段和属性注入阶段。
  * @date: 2023/10/08 17:22

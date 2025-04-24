@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * {@link TypeUtil} 针对 Type 的工具类封装
  *
- * @author Looly
+ * @author: Looly
  */
 public class TypeUtilTest {
 

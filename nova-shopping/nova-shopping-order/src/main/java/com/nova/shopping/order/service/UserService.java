@@ -6,9 +6,9 @@ import com.nova.shopping.order.repository.entity.User;
 import java.util.List;
 
 /**
- * @author wzh
+ * @author: wzh
  * @description: 用户表(MyUser)表服务接口
- * @date 2023-04-15 15:53
+ * @date: 2023-04-15 15:53
  */
 public interface UserService {
 

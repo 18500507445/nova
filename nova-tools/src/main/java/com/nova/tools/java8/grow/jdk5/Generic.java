@@ -6,8 +6,8 @@ import java.util.Map;
 /**
  * 泛型
  *
- * @author wzh
- * @date 2018/2/8
+ * @author: wzh
+ * @date: 2018/2/8
  */
 class Generic<T> {
 

@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * {@link IterUtil} 单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class IterUtilTest {
 

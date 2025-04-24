@@ -24,7 +24,7 @@ import java.util.Map;
  * {@link ReflectUtil}
  * 反射工具类单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class ReflectUtilTest {
 

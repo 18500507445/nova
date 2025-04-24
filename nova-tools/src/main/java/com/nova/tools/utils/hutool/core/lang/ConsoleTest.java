@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 控制台单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class ConsoleTest {
 

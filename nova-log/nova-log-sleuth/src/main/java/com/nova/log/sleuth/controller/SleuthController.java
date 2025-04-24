@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author: wzh
- * @description Sleuth
+ * @description: Sleuth
  * @date: 2023/10/12 15:45
  * @see <a href="https://blog.csdn.net/Allocator/article/details/121662155">springcloud-sleuth 自定义traceId, spanId日志pattern
  */

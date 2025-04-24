@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * 下载单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class DownloadTest {
 

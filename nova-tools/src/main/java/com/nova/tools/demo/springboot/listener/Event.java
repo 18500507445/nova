@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEvent;
 
 /**
  * @author: wzh
- * @description 事件
+ * @description: 事件
  * @date: 2023/11/22 16:52
  */
 @Setter

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author: wzh
- * @description 判断环境工具类
+ * @description: 判断环境工具类
  * @date: 2023/09/28 11:12
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

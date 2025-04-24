@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @author: wzh
- * @description 重试
+ * @description: 重试
  * @date: 2023/12/05 15:56
  */
 @Slf4j(topic = "RetryController")

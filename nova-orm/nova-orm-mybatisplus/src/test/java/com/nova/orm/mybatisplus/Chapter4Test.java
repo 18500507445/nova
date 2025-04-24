@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * @author: wzh
- * @description 第四章测试类：进阶篇，分页插件、领域模型、simpleQuery、Db写法
+ * @description: 第四章测试类：进阶篇，分页插件、领域模型、simpleQuery、Db写法
  * @date: 2023/06/15 20:01
  */
 @SpringBootTest

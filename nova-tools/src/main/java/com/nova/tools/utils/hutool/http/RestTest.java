@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Rest类型请求单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class RestTest {
 

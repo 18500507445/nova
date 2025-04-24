@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * 支付配置表(MyPayConfig)实体类
  *
- * @author wzh
+ * @author: wzh
  * @since 2023-04-14 19:27:14
  */
 @Data

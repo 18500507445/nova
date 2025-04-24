@@ -10,7 +10,7 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * @author wzh
+ * @author: wzh
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @ComponentScan(basePackages = {"com.nova.common", "com.nova.tools"})

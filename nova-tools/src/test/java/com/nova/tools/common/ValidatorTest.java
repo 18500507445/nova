@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author: wzh
- * @description 参数校验测试类
+ * @description: 参数校验测试类
  * @date: 2023/09/07 15:36
  */
 @Slf4j(topic = "ParamTest")

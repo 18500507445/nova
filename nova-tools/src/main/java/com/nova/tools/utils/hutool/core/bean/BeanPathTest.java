@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * {@link BeanPath} 单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class BeanPathTest {
 

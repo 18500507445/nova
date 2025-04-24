@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 文件缓存单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class FileCacheTest {
 

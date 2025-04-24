@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * {@link EnumUtil} 枚举单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class EnumUtilTest {
 

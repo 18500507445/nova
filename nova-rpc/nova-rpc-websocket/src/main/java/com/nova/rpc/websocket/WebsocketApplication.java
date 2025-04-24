@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @author wzh
+ * @author: wzh
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class WebsocketApplication {

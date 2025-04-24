@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 /**
  * @author: wzh
- * @description 配置类
+ * @description: 配置类
  * @date: 2023/08/01 16:18
  */
 @Configuration

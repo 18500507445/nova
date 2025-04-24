@@ -14,7 +14,7 @@ import java.util.Properties;
 
 /**
  * @author: wzh
- * @description spring属性工具类
+ * @description: spring属性工具类
  * @date: 2023/07/24 13:25
  */
 @Slf4j

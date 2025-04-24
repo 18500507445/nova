@@ -18,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * {@link IdUtil} Id工具类单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class IdUtilTest {
 

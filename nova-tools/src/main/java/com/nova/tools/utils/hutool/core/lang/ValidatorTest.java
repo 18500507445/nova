@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 验证器单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class ValidatorTest {
 

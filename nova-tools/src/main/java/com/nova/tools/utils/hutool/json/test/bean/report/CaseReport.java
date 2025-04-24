@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 测试用例报告
  *
- * @author xuwangcheng
+ * @author: xuwangcheng
  * @version 20181012
  */
 public class CaseReport {

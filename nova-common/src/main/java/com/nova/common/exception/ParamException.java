@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * 参数校验异常
  *
- * @date 2022/6/23 21:15
+ * @date: 2022/6/23 21:15
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

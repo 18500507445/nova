@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description InitializingBean
+ * @description: InitializingBean
  * 初始化bean的。InitializingBean接口为bean提供了初始化方法的方式，它只包括afterPropertiesSet方法，
  * 凡是继承该接口的类，在初始化bean的时候都会执行该方法。这个扩展点的触发时机在postProcessAfterInitialization之前
  * @date: 2023/10/08 17:34

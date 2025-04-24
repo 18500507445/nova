@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description 自定义消息转换器
+ * @description: 自定义消息转换器
  * @date: 2023/11/30 11:18
  */
 @Component

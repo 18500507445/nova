@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * @author: wzh
- * @description 用户数据库对象
+ * @description: 用户数据库对象
  * @date: 2023/06/15 19:35
  */
 @Data

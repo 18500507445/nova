@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JSON字符串格式化单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class JSONStrFormatterTest {
 

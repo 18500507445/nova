@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * StrBuilder单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class StrBuilderTest {
 

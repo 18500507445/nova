@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description linux命令工具类
+ * @description: linux命令工具类
  * @date: 2023/10/06 10:08
  */
 @Slf4j(topic = "LinuxUtils")

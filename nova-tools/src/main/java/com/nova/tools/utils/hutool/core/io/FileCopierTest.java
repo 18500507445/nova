@@ -10,7 +10,7 @@ import java.io.File;
 /**
  * 文件拷贝单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class FileCopierTest {
 

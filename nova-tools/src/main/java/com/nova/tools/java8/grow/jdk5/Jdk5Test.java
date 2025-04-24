@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description jdk5测试类
+ * @description: jdk5测试类
  * @date: 2023/07/21 16:10
  */
 public class Jdk5Test {

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * @author: wzh
- * @description order表
+ * @description: order表
  * @date: 2023/06/21 17:03
  */
 @Data

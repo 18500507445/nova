@@ -13,8 +13,8 @@ import org.springframework.core.annotation.Order;
 /**
  * Redisson自动化配置
  *
- * @author wzh
- * @date 2022/12/26 23:10
+ * @author: wzh
+ * @date: 2022/12/26 23:10
  */
 @Slf4j
 @Configuration

@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
 /**
  * BufferUtil单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class BufferUtilTest {
 

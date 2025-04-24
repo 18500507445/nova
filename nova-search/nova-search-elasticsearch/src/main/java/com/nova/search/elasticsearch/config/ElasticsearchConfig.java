@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author: wzh 过时方法可以不用看了
- * @description 配置类，继承AbstractElasticsearchConfiguration，实现elasticsearchClient()抽象方法，创建RestHighLevelClient对象。
+ * @description: 配置类，继承AbstractElasticsearchConfiguration，实现elasticsearchClient()抽象方法，创建RestHighLevelClient对象。
  * @date: 2023/09/22 10:44
  */
 //@ConfigurationProperties(prefix = "spring.elasticsearch")

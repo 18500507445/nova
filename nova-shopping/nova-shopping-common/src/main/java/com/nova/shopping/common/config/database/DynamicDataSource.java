@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 /**
- * @author wzh
+ * @author: wzh
  * 动态数据源
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {

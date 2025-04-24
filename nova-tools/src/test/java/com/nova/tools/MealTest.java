@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description 扫描PATH路径下jpg图片(按照01.jpg 、 10.jpg格式升序)，按照100宽、220高像素写入表格
+ * @description: 扫描PATH路径下jpg图片(按照01.jpg 、 10.jpg格式升序)，按照100宽、220高像素写入表格
  * @date: 2023/10/09 15:37
  */
 public class MealTest {

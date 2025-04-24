@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@link HashUtilTest} Hash算法大全
  *
- * @author looly
+ * @author: looly
  */
 public class HashUtilTest {
 

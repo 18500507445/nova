@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author: wzh
- * @description 显示ip地点工具类
+ * @description: 显示ip地点工具类
  * Ip2region简介，离线IP地址定位库和IP定位数据管理框架
  * @date: 2023/10/06 13:20
  */

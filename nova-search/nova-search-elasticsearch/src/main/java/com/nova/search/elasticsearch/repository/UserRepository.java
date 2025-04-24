@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author: wzh
- * @description 接口
+ * @description: 接口
  * @date: 2023/07/13 22:57
  */
 @Repository

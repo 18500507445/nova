@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 秒杀订单表(MySeckillOrder)实体类
  *
- * @author wzh
+ * @author: wzh
  * @since 2023-04-15 15:53:19
  */
 @Data

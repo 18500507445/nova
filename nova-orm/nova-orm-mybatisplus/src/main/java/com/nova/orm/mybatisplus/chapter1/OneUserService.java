@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description userService
+ * @description: userService
  * @date: 2023/06/15 19:52
  */
 public interface OneUserService {

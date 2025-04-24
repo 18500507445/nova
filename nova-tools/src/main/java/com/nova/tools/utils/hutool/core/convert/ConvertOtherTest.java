@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 其它转换
  *
- * @author Looly
+ * @author: Looly
  */
 public class ConvertOtherTest {
     @Test

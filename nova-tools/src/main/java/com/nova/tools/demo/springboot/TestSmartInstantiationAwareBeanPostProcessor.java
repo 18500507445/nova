@@ -8,7 +8,7 @@ import java.lang.reflect.Constructor;
 
 /**
  * @author: wzh
- * @description SmartInstantiationAwareBeanPostProcessor
+ * @description: SmartInstantiationAwareBeanPostProcessor
  * @date: 2023/10/08 17:25
  */
 //@Component

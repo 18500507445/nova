@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: wzh
- * @description 严选渠道子类
+ * @description: 严选渠道子类
  * @date: 2023/10/24 10:39
  */
 @Component

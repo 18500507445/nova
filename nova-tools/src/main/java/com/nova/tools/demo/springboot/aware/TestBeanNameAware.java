@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description BeanNameAware
+ * @description: BeanNameAware
  * 这个类也是Aware扩展的一种，触发点在bean的初始化之前，也就是postProcessBeforeInitialization之前，这个类的触发点方法只有一个：setBeanName
  * @date: 2023/10/08 17:28
  */

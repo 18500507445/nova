@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * JSON路径单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class JSONPathTest {
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description 三方登录适配器
+ * @description: 三方登录适配器
  * @date: 2023/10/25 17:36
  */
 @Component

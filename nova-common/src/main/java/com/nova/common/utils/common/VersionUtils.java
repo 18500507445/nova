@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author: wzh
- * @description 版本对比工具类
+ * @description: 版本对比工具类
  * @date: 2023/07/24 13:33
  */
 

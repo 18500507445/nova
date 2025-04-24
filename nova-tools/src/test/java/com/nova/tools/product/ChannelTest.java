@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 
 /**
  * @author: wzh
- * @description 渠道测试类
+ * @description: 渠道测试类
  * @date: 2023/10/24 10:46
  */
 @SpringBootTest

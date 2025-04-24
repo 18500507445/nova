@@ -13,7 +13,7 @@ import java.sql.SQLException;
 /**
  * PostgreSQL 单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class PostgreTest {
 

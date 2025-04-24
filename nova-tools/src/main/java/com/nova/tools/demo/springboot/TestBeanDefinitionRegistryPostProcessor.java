@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description BeanDefinitionRegistryPostProcessor，这个接口在读取项目中的beanDefinition之后执行，提供一个补充的扩展点
+ * @description: BeanDefinitionRegistryPostProcessor，这个接口在读取项目中的beanDefinition之后执行，提供一个补充的扩展点
  * @date: 2023/10/08 17:11
  */
 @Component

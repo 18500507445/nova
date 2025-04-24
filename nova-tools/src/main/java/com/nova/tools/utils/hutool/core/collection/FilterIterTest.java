@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  * {@link FilterIter} 单元测试
  *
- * @author chao.wang
+ * @author: chao.wang
  */
 public class FilterIterTest {
 

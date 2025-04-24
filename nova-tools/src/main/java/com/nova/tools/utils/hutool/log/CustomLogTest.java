@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 日志门面单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class CustomLogTest {
 

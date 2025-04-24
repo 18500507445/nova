@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * @author: wzh
- * @description 实体类
+ * @description: 实体类
  * @date: 2023/07/13 22:56
  */
 @Order(Integer.MIN_VALUE)

@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 /**
  * @author: wzh
- * @description 集合Stream常用操作工具类
+ * @description: 集合Stream常用操作工具类
  * 包含：转新集合，过滤，分组，排序，求和，平均，最大值，最小值，分隔，合并，去重
  * @date: 2023/07/24 13:29
  */

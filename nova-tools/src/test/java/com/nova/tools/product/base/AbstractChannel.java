@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: wzh
- * @description 渠道抽象基类，实现Spring的InitializingBean，各个渠道子类重写方法放入容器
+ * @description: 渠道抽象基类，实现Spring的InitializingBean，各个渠道子类重写方法放入容器
  * 设计思路，各个渠道都有的，抽取成抽象方法，子类必须实现，如果拿不准的，抽取成普通方法，求同存异
  * @date: 2023/10/24 10:25
  */

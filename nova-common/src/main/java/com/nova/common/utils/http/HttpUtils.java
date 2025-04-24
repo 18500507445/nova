@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * @author wzh
+ * @author: wzh
  */
 @Slf4j(topic = "HttpRequestProxy")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

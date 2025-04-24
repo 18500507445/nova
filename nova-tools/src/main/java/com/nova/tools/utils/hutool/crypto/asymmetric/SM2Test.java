@@ -24,7 +24,7 @@ import java.security.PublicKey;
 /**
  * SM2算法单元测试
  *
- * @author Looly, Gsealy
+ * @author: Looly, Gsealy
  */
 public class SM2Test {
 

@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * 异常工具单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class ExceptionUtilTest {
 

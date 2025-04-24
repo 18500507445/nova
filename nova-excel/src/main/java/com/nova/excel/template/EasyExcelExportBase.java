@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author: wzh
- * @description easyExcel抽象类
+ * @description: easyExcel抽象类
  * @date: 2023/07/24 13:39
  */
 @Slf4j

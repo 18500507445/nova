@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Excel读取单元测试
  *
- * @author Looly
+ * @author: Looly
  */
 public class ExcelReadTest {
 

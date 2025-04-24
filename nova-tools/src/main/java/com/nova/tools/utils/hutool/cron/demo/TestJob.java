@@ -8,7 +8,7 @@ import cn.hutool.core.util.IdUtil;
 /**
  * 测试定时任务，当触发到定时的时间点时，执行doTest方法
  *
- * @author looly
+ * @author: looly
  */
 public class TestJob {
 

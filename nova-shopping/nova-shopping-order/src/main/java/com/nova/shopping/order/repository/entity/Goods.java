@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * 商品表(MyGoods)实体类
  *
- * @author wzh
+ * @author: wzh
  * @since 2023-04-15 15:53:18
  */
 @Data

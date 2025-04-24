@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 基于sshj 框架SFTP 封装测试.
  *
- * @author youyongkun
+ * @author: youyongkun
  * @since 5.7.18
  */
 public class SftpTest {

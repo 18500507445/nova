@@ -7,8 +7,8 @@ import lombok.Getter;
  * Redis连接方式
  * 包含:standalone-单节点部署方式、sentinel-哨兵部署方式、cluster-集群方式、masterSlave-主从部署方式
  *
- * @author wzh
- * @date 2022/12/26 23:10
+ * @author: wzh
+ * @date: 2022/12/26 23:10
  */
 @Getter
 @AllArgsConstructor

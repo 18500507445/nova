@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author: wzh
- * @description 配置初始化
+ * @description: 配置初始化
  * @date: 2023/10/31 15:56
  */
 @Component

@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author: wzh
- * @description 通用测试类
+ * @description: 通用测试类
  * @date: 2023/07/24 14:43
  */
 @Slf4j(topic = "commonTest")

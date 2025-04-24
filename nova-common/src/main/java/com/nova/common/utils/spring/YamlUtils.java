@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * 配置处理工具类
  *
- * @author yml
+ * @author: yml
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class YamlUtils {

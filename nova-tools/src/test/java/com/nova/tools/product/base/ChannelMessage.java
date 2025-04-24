@@ -2,7 +2,7 @@ package com.nova.tools.product.base;
 
 /**
  * @author: wzh
- * @description 渠道消息接口，（1）主动拉取消息推送接口 如：京东（2）渠道回调通知消息 如：网易严选
+ * @description: 渠道消息接口，（1）主动拉取消息推送接口 如：京东（2）渠道回调通知消息 如：网易严选
  * @date: 2023/10/31 14:29
  */
 public interface ChannelMessage {

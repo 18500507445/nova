@@ -3,7 +3,7 @@ package com.nova.tools.product.base;
 
 /**
  * @author: wzh
- * @description 渠道数据转换接口
+ * @description: 渠道数据转换接口
  * <p>
  * （1）渠道apiResponse --> context
  * （2）渠道apiResponse + context --> context（多次包装context）

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author: wzh
- * @description 配置类
+ * @description: 配置类
  * @date: 2023/12/28 10:46
  */
 @Configuration

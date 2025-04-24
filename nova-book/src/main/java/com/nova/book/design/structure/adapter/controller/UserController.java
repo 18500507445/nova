@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author: wzh
- * @description 用户Controller
+ * @description: 用户Controller
  * @date: 2023/10/25 17:29
  */
 @Slf4j

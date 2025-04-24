@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description ApplicationContextAware，可实现策略模式
+ * @description: ApplicationContextAware，可实现策略模式
  * @date: 2023/10/08 17:10
  */
 @Component

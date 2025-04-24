@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author: wzh
- * @description (1)ForkJoinPool 默认线程池大小=CPU核心数 并非设置越大越好，IO密集型任务 受限于磁盘IO
+ * @description: (1)ForkJoinPool 默认线程池大小=CPU核心数 并非设置越大越好，IO密集型任务 受限于磁盘IO
  * (2)fork-join和ThreadPool，各自有各自的应用场景，二者是并存互补的关系
  * (3)递归任务，很适合用fork-join。如分治任务：分而治之，父任务，依赖于子任务的完成
  * (4)IO密集型任务，不适合fork-join，因为IO密集型任务，CPU核心数不够，任务执行时间过长，会导致CPU空转，浪费CPU资源

@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * @author: wzh
- * @description PostConstruct
+ * @description: PostConstruct
  * @date: 2023/10/08 17:32
  */
 @Component

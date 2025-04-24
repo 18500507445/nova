@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author: wzh
- * @description 日志拦截器
+ * @description: 日志拦截器
  * @date: 2023/08/01 16:15
  */
 @Component

@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Map转换单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class MapConvertTest {
 

@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * @author: wzh
- * @description easyExcel 工具类
+ * @description: easyExcel 工具类
  * @date: 2023/11/03 16:28
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

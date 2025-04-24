@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 
 /**
  * @author: wzh
- * @description 线程包装类，主子线程MDC传递
+ * @description: 线程包装类，主子线程MDC传递
  * @date: 2023/12/24 22:36
  */
 @Slf4j

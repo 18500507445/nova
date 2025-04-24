@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description BeanFactoryAware
+ * @description: BeanFactoryAware
  * 发生在bean的实例化之后，注入属性之前，也就是Setter之前。这个类的扩展点方法为setBeanFactory，可以拿到BeanFactory这个属性
  * @date: 2023/10/08 17:27
  */

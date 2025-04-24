@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: wzh
- * @description CommandLineRunner
+ * @description: CommandLineRunner
  * 接口也只有一个方法：run(String... args)，触发时机为整个项目启动完毕后，自动执行。如果有多个CommandLineRunner，可以利用@Order来进行排序。
  * @date: 2023/10/08 17:35
  */

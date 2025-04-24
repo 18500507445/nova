@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author: wzh
- * @description 业务异常
+ * @description: 业务异常
  * @date: 2024/01/03 19:41
  */
 @EqualsAndHashCode(callSuper = true)

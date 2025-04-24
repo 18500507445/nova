@@ -15,7 +15,7 @@ import java.io.FileInputStream;
  * 该工具通过函数式的方式将那些需要抛出受检查异常的表达式或者代码段转化成一个标准的java8 functional 对象
  * </p>
  *
- * @author conder
+ * @author: conder
  */
 public class CheckedUtilTest {
 

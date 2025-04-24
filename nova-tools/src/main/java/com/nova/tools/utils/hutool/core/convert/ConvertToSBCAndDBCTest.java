@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * 类型转换工具单元测试
  * 全角半角转换
  *
- * @author Looly
+ * @author: Looly
  */
 public class ConvertToSBCAndDBCTest {
 

@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author: wzh
- * @description 渠道工厂
+ * @description: 渠道工厂
  * @date: 2023/10/24 10:11
  */
 @Component

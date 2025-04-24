@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 模板引擎单元测试
  *
- * @author looly
+ * @author: looly
  */
 public class TokenizerUtilTest {
 

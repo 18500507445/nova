@@ -7,8 +7,8 @@ import org.springframework.web.context.annotation.RequestScope;
 import java.util.Map;
 
 /**
- * @author: wzh3
- * @description 日志实体类
+ * @author: wzh
+ * @description: 日志实体类
  * @date: 2023/08/01 16:16
  */
 @Component

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  * @author: wzh
- * @description EnvironmentAware，获取运行环境中变量
+ * @description: EnvironmentAware，获取运行环境中变量
  * @date: 2023/10/08 17:48
  */
 @Component

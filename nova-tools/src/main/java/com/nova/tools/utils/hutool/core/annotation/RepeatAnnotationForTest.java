@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author hongda.li 2022-04-26 17:09
+ * @author: hongda.li 2022-04-26 17:09
  */
 @AnnotationForTest("repeat-annotation")
 @Retention(RetentionPolicy.RUNTIME)

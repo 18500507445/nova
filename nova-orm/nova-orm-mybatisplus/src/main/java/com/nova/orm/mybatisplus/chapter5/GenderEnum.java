@@ -6,7 +6,7 @@ import lombok.Getter;
 
 /**
  * @author: wzh
- * @description 性别枚举
+ * @description: 性别枚举
  * @date: 2023/06/21 10:42
  */
 @Getter

@@ -15,7 +15,7 @@ import java.util.Map;
  * 类型转换工具单元测试<br>
  * 转换为数组
  *
- * @author Looly
+ * @author: Looly
  */
 public class ConvertToBeanTest {
 

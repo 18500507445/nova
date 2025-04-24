@@ -2,7 +2,7 @@ package com.nova.book.design.structure.adapter.service;
 
 /**
  * @author: wzh
- * @description 三方登录接口
+ * @description: 三方登录接口
  * @date: 2023/10/25 17:32
  */
 public interface OtherLoginService {

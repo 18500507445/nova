@@ -11,7 +11,7 @@ import javax.xml.soap.SOAPMessage;
 /**
  * SOAP相关单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class SoapClientTest {
 

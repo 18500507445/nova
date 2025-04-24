@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 用户信息
  *
- * @author 质量过关
+ * @author:质量过关
  */
 @Data
 public class UserInfoDict implements Serializable {

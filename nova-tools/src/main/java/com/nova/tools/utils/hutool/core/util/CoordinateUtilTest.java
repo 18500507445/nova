@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * {@link CoordinateUtil} 坐标转换工具类单元测试
  * 测试参考：https://github.com/wandergis/coordtransform
  *
- * @author hongzhe.qin, looly
+ * @author:hongzhe.qin, looly
  */
 public class CoordinateUtilTest {
 

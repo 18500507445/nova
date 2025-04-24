@@ -16,8 +16,8 @@ import javax.annotation.Resource;
 /**
  * 分布式锁切面
  *
- * @author wzh
- * @date 2022/12/26 23:10
+ * @author: wzh
+ * @date: 2022/12/26 23:10
  */
 @Slf4j
 @Aspect

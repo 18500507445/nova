@@ -249,7 +249,7 @@ public class TreadPoolConfig {
 /**
  * Function:订单服务
  *
- * @author crossoverJie
+ * @author:crossoverJie
  *         Date: 2018/7/28 16:43
  * @since JDK 1.8
  */
@@ -300,7 +300,7 @@ public class CommandOrder extends HystrixCommand<String> {
 /**
  * Function:用户服务
  *
- * @author crossoverJie
+ * @author:crossoverJie
  *         Date: 2018/7/28 16:43
  * @since JDK 1.8
  */

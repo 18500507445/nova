@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 支付订单表明细表(MyPayOrder)表服务实现类
- * @date 2023-04-14 19:27
+ * @date:2023-04-14 19:27
  */
 @Service("myPayOrderService")
 @RequiredArgsConstructor

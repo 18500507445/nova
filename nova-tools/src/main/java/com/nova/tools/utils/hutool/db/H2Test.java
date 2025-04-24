@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * H2数据库单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class H2Test {
 

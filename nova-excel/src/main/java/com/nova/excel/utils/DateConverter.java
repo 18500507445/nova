@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 将时间格式转化为yyyy-MM-dd
  *
- * @author wzh
+ * @author:wzh
  */
 public class DateConverter implements Converter<Date> {
 

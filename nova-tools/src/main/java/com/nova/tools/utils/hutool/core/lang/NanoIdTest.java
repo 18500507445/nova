@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * Tests for NanoId.
  *
- * @author David Klebanoff, Looly
+ * @author:David Klebanoff, Looly
  * @see NanoId
  */
 public class NanoIdTest {

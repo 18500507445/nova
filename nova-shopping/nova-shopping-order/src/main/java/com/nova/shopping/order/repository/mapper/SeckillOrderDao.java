@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 秒杀订单表(MySeckillOrder)表数据库访问层
- * @date 2023-04-15 15:53
+ * @date:2023-04-15 15:53
  */
 @Mapper
 public interface SeckillOrderDao {

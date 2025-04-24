@@ -3,8 +3,8 @@ package com.nova.tools.java8.grow.jdk6;
 /**
  * 用Console开发控制台程序
  *
- * @author wzh
- * @date 2018/2/8
+ * @author:wzh
+ * @date:2018/2/8
  */
 class Console {
 

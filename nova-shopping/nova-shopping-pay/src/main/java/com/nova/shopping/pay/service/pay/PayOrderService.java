@@ -7,9 +7,9 @@ import java.util.List;
 
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 支付订单表明细表(MyPayOrder)表服务接口
- * @date 2023-04-14 19:27
+ * @date:2023-04-14 19:27
  */
 public interface PayOrderService {
 

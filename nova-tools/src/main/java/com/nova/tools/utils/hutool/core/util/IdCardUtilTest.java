@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@link IdcardUtil} 身份证单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class IdCardUtilTest {
 

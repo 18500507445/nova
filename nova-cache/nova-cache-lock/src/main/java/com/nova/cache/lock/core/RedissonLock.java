@@ -20,8 +20,8 @@ import java.util.function.Consumer;
  * 2）支持过期解锁功能,10秒钟以后自动解锁, 无需调用unlock方法手动解锁：lock.lock(10, TimeUnit.SECONDS);
  * 3）尝试加锁，最多等待3秒，上锁以后10秒自动解锁 boolean res = lock.tryLock(3, 10, TimeUnit.SECONDS);
  *
- * @author wzh
- * @date 2022/12/26 20:53
+ * @author:wzh
+ * @date:2022/12/26 20:53
  */
 @Slf4j
 @AllArgsConstructor

@@ -15,7 +15,7 @@ import javax.crypto.spec.IvParameterSpec;
 /**
  * Hmac单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class HmacTest {
 

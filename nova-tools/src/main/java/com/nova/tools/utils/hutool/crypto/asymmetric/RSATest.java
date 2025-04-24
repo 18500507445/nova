@@ -18,7 +18,7 @@ import java.security.PublicKey;
 /**
  * RSA算法单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class RSATest {
 

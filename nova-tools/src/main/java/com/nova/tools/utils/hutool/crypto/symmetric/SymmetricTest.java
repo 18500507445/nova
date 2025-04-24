@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 对称加密算法单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class SymmetricTest {
 

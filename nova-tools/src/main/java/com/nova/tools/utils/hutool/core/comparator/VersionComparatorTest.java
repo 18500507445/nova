@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 版本比较单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class VersionComparatorTest {
 

@@ -3,7 +3,7 @@ package com.nova.tools.utils.hutool.db.nosql;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author VampireAchao
+ * @author:VampireAchao
  */
 public class MongoDBTest {
 

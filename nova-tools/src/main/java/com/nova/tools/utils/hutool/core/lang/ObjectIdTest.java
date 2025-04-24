@@ -10,7 +10,7 @@ import java.util.HashSet;
 /**
  * ObjectId单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class ObjectIdTest {
 

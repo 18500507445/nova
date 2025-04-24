@@ -13,7 +13,7 @@ import java.io.InputStream;
 /**
  * Java源码编译器测试
  *
- * @author lzpeng
+ * @author:lzpeng
  */
 public class JavaSourceCompilerTest {
 

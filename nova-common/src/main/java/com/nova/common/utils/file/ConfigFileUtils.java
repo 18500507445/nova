@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * @author wzh
+ * @author:wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ConfigFileUtils {

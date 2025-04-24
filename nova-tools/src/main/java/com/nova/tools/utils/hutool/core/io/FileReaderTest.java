@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 文件读取测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class FileReaderTest {
 

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * AOP模块单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 class AopTest {
 
@@ -40,7 +40,7 @@ class AopTest {
     /**
      * 有接口
      *
-     * @author looly
+     * @author:looly
      */
     static class Cat implements Animal {
 
@@ -58,7 +58,7 @@ class AopTest {
     /**
      * 无接口
      *
-     * @author looly
+     * @author:looly
      */
     static class Dog {
         public String eat() {

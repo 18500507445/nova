@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * 支付订单表明细表(MyPayOrder)实体类
  *
- * @author wzh
+ * @author:wzh
  * @since 2023-04-14 19:27:15
  */
 @Data

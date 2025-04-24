@@ -14,7 +14,7 @@ import java.net.URLEncoder;
 /**
  * Cookie工具类
  *
- * @author wzh
+ * @author:wzh
  */
 @Slf4j(topic = "CookieUtils")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

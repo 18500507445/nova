@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 定时任务单元测试类
  *
- * @author Looly
+ * @author:Looly
  */
 public class CronPatternTest {
 

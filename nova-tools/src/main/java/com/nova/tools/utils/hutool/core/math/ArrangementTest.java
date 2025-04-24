@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 排列单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class ArrangementTest {
 

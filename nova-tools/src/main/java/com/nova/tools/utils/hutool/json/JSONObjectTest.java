@@ -31,7 +31,7 @@ import java.util.*;
 /**
  * JSONObject单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class JSONObjectTest {
 
@@ -505,7 +505,7 @@ public class JSONObjectTest {
     /**
      * 测试Bean
      *
-     * @author Looly
+     * @author:Looly
      */
     @Data
     public static class TestBean {
@@ -520,7 +520,7 @@ public class JSONObjectTest {
     /**
      * 测试子Bean
      *
-     * @author Looly
+     * @author:Looly
      */
     @Data
     public static class SubBean {
@@ -550,7 +550,7 @@ public class JSONObjectTest {
     /**
      * 测试子Bean
      *
-     * @author Looly
+     * @author:Looly
      */
     @SuppressWarnings("FieldCanBeLocal")
     public static class SameNameBean {

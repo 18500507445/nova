@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 通用树测试
  *
- * @author liangbaikai
+ * @author:liangbaikai
  */
 public class TreeTest {
     // 模拟数据

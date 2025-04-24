@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 支付列表(MyPayList)表数据库访问层
- * @date 2023-04-14 19:27
+ * @date:2023-04-14 19:27
  */
 @Mapper
 public interface PayListDao {

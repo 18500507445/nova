@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.*;
  * {@link JAXBUtil} 工具类
  * 测试 xml 和 bean 互转工具类
  *
- * @author dazer
+ * @author:dazer
  */
 public class JAXBUtilTest {
 

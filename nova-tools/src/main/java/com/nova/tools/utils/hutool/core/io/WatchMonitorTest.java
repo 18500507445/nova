@@ -12,7 +12,7 @@ import java.nio.file.WatchEvent;
 /**
  * 文件监听单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class WatchMonitorTest {
 

@@ -2,7 +2,7 @@ package com.nova.shopping.common.constant.result;
 
 /**
  * 通用返回码对象(主要放各个模块的通用错误码)
- * @author wzh
+ * @author:wzh
  */
 public enum RespResultEnum {
 

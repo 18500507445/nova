@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.DoubleAdder;
 /**
  * 类型转换工具单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class ConvertTest {
 

@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * 用于单元测试的注解类<br>
  * 注解类相关说明见：<a href="https://www.cnblogs.com/xdp-gacl/p/3622275.html">https://www.cnblogs.com/xdp-gacl/p/3622275.html</a>
  *
- * @author looly
+ * @author:looly
  */
 // Retention注解决定MyAnnotation注解的生命周期
 @Retention(RetentionPolicy.RUNTIME)

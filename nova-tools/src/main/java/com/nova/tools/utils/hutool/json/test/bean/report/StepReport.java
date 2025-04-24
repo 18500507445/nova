@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 /**
  * 测试步骤报告
  *
- * @author xuwangcheng
+ * @author:xuwangcheng
  * @version 20181012
  */
 public class StepReport {

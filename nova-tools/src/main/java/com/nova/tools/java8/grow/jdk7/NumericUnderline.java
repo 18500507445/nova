@@ -3,8 +3,8 @@ package com.nova.tools.java8.grow.jdk7;
 /**
  * 数字下划线支持
  *
- * @author wzh
- * @date 2018/2/8
+ * @author:wzh
+ * @date:2018/2/8
  */
 class NumericUnderline {
 

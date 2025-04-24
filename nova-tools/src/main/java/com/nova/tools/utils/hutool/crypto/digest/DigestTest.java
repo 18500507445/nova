@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 摘要算法单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class DigestTest {
 

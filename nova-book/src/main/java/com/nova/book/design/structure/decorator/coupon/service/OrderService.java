@@ -15,8 +15,6 @@ public interface OrderService {
      *
      * @param order 提交的订单数据
      * @return void
-     * @author zhengqingya
-     * @date 2022/12/15 14:58
      */
     void createOrder(OrderDTO order);
 

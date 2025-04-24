@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * {@link GenericBuilder} 单元测试类
  *
- * @author TomXin
+ * @author:TomXin
  */
 public class GenericBuilderTest {
 

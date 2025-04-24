@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 用户表(MyUser)实体类
  *
- * @author wzh
+ * @author:wzh
  * @since 2023-04-15 15:53:19
  */
 @Data

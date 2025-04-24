@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Base64单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class Base64Test {
 

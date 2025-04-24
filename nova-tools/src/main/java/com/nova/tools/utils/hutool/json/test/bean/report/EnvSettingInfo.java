@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * 测试环境信息
  *
- * @author xuwangcheng
+ * @author:xuwangcheng
  * @version 20181012
  */
 public class EnvSettingInfo {

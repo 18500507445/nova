@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * {@link ArrayUtil} 数组工具单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class ArrayUtilTest {
 

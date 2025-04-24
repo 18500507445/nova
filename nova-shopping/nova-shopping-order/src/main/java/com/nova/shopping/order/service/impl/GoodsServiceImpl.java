@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 商品表(MyGoods)表服务实现类
- * @date 2023-04-15 15:53
+ * @date:2023-04-15 15:53
  */
 @Service("myGoodsService")
 @RequiredArgsConstructor

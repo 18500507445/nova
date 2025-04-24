@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Jsch工具类单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class JschUtilTest {
 

@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author wzh
+ * @author:wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ConvertToolUtils {

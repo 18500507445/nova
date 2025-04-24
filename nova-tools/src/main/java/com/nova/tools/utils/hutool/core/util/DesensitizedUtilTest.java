@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@link DesensitizedUtil} 脱敏工具类安全测试
  *
- * @author dazer and nuesoft
+ * @author:dazer and nuesoft
  * @see DesensitizedUtil
  */
 public class DesensitizedUtilTest {

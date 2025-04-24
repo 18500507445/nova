@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * HSQLDB数据库单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class HsqldbTest {
 

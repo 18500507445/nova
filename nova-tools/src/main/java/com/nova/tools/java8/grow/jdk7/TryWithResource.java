@@ -11,8 +11,8 @@ import java.util.Objects;
 /**
  * try-with-resource
  *
- * @author wzh
- * @date 2018/2/8
+ * @author:wzh
+ * @date:2018/2/8
  */
 class TryWithResource {
 

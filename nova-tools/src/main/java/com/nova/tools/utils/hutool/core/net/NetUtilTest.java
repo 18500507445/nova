@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * NetUtil单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class NetUtilTest {
 

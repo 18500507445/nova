@@ -16,8 +16,8 @@ import org.redisson.config.Config;
  * RedissonManager
  * Redisson核心配置，用于提供初始化的redisson实例
  *
- * @author wzh
- * @date 2022/12/26 23:10
+ * @author:wzh
+ * @date:2022/12/26 23:10
  */
 @Getter
 @Slf4j

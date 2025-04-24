@@ -16,7 +16,7 @@ import java.util.Collections;
 /**
  * 合成注解{@link GenericSynthesizedAggregateAnnotation}的测试用例
  *
- * @author huangchengxing
+ * @author:huangchengxing
  */
 public class GenericSynthesizedAggregateAnnotationTest {
 

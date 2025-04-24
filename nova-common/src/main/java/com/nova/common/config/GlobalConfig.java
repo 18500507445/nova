@@ -6,9 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 全局配置类
- * @date 2021/7/18 16:19
+ * @date:2021/7/18 16:19
  */
 @Component
 @ConfigurationProperties(prefix = "nova")

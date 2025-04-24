@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 分布式锁切面
- * @date 2023/03/26 23:10
+ * @date:2023/03/26 23:10
  */
 @Slf4j
 @Aspect

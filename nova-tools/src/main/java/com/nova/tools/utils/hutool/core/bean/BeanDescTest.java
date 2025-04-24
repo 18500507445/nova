@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@link BeanDesc} 单元测试类
  *
- * @author looly
+ * @author:looly
  */
 public class BeanDescTest {
 

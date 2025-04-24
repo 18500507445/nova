@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 /**
  * {@link Opt}的单元测试
  *
- * @author VampireAchao
+ * @author:VampireAchao
  */
 public class OptTest {
 

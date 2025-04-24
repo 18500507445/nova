@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * {@link ClassUtil} 单元测试
  *
- * @author Looly
+ * @author:Looly
  */
 public class ClassUtilTest {
 

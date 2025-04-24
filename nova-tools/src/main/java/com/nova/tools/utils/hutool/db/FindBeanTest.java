@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Entity测试
  *
- * @author looly
+ * @author:looly
  */
 public class FindBeanTest {
 

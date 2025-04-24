@@ -6,9 +6,9 @@ import com.nova.shopping.pay.repository.entity.PayList;
 import java.util.List;
 
 /**
- * @author wzh
+ * @author:wzh
  * @description: 支付列表(MyPayList)表服务接口
- * @date 2023-04-14 19:27
+ * @date:2023-04-14 19:27
  */
 public interface PayListService {
 

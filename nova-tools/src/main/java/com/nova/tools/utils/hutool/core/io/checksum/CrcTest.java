@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * CRC校验单元测试
  *
- * @author looly
+ * @author:looly
  */
 public class CrcTest {
 

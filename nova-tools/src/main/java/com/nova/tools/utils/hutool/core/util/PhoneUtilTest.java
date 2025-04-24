@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * {@link PhoneUtil} 单元测试类
  *
- * @author:dahuoyzs
+ * @author dahuoyzs
  */
 public class PhoneUtilTest {
 

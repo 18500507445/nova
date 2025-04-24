@@ -12,7 +12,7 @@ import java.security.GeneralSecurityException;
 /**
  * 默认邮件帐户设置测试
  *
- * @author:looly
+ * @author looly
  */
 public class MailAccountTest {
 

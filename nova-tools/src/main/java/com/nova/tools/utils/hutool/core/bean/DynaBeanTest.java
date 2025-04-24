@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@link DynaBean}单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class DynaBeanTest {
 

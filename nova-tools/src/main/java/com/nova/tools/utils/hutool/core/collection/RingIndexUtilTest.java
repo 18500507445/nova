@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 集合索引环形获取工具类测试类
  *
- * @author:ZhouChuGang
+ * @author ZhouChuGang
  */
 public class RingIndexUtilTest {
 

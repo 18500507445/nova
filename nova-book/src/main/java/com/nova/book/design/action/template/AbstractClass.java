@@ -11,6 +11,8 @@ public abstract class AbstractClass {
      * 为了防止恶意修改，加上final
      * 行为由父类控制，子类实现。
      * ex：造房子，打好地基，第一步干啥，第二步干啥...
+     *
+     * @author zhengqingya
      */
     final void operation() {
         this.start();

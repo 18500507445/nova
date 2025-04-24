@@ -7,8 +7,8 @@ import java.time.Instant;
 /**
  * Instant 示例
  *
- * @author:wzh
- * @date:2018/3/2
+ * @author wzh
+ * @date 2018/3/2
  */
 class InstantExample {
 

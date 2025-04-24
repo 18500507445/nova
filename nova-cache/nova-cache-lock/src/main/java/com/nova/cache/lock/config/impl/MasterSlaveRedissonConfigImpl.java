@@ -15,8 +15,8 @@ import java.util.List;
  * 连接方式：主节点,子节点,子节点, 主节点一定要在第一位
  * 格式为: 127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381
  *
- * @author:wzh
- * @date:2022/12/26 23:10
+ * @author wzh
+ * @date 2022/12/26 23:10
  */
 @Slf4j
 public class MasterSlaveRedissonConfigImpl implements RedissonConfigStrategy {

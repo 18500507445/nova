@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 克隆单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class CloneTest {
 
@@ -37,7 +37,7 @@ public class CloneTest {
     /**
      * 猫猫类，使用实现Cloneable方式
      *
-     * @author:Looly
+     * @author Looly
      */
     @Data
     static class Cat implements Cloneable<Cat> {
@@ -57,7 +57,7 @@ public class CloneTest {
     /**
      * 狗狗类，用于继承CloneSupport类
      *
-     * @author:Looly
+     * @author Looly
      */
     @EqualsAndHashCode(callSuper = false)
     @Data

@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * {@link FileUtil} 单元测试类
  *
- * @author:Looly
+ * @author Looly
  */
 public class FileUtilTest {
 

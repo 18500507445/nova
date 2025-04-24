@@ -24,7 +24,7 @@ import java.util.Set;
 /**
  * {@link XmlUtil} 工具类
  *
- * @author:Looly
+ * @author Looly
  */
 public class XmlUtilTest {
 

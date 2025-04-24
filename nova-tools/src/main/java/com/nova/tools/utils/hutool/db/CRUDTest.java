@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 增删改查测试
  *
- * @author:looly
+ * @author looly
  */
 public class CRUDTest {
 

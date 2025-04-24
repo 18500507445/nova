@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * ConverterRegistry 单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class ConverterRegistryTest {
 

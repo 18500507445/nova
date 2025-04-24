@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * JSON转换单元测试
  *
- * @author:Looly，质量过关
+ * @author Looly，质量过关
  */
 public class JSONConvertTest {
 

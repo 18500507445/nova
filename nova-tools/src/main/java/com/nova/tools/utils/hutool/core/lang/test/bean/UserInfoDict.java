@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * 用户信息
  *
- * @author:质量过关
+ * @author 质量过关
  */
 @Data
 public class UserInfoDict implements Serializable {

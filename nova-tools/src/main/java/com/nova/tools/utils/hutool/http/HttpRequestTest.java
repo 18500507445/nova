@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * {@link HttpRequest}单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class HttpRequestTest {
     final String url = "http://photo.qzone.qq.com/fcgi-bin/fcg_list_album?uin=88888&outstyle=2";

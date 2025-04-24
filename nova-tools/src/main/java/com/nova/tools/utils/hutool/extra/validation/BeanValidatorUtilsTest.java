@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * java bean 校验工具类单元测试
  *
- * @author:chengqiang
+ * @author chengqiang
  */
 public class BeanValidatorUtilsTest {
 

@@ -5,8 +5,8 @@ import java.util.Arrays;
 /**
  * Lambda 表达式
  *
- * @author:wzh
- * @date:2018/2/8
+ * @author wzh
+ * @date 2018/2/8
  */
 class Lambda {
 

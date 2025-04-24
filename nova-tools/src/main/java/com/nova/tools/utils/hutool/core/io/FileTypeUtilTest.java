@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * 文件类型判断单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class FileTypeUtilTest {
 

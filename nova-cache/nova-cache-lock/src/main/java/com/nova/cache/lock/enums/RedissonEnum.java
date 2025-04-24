@@ -6,8 +6,8 @@ import lombok.Getter;
 /**
  * 全局常量枚举
  *
- * @author:wzh
- * @date:2022/12/26 23:10
+ * @author wzh
+ * @date 2022/12/26 23:10
  */
 @Getter
 @AllArgsConstructor

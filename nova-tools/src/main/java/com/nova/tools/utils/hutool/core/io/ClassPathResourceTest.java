@@ -11,7 +11,7 @@ import java.util.Properties;
 /**
  * ClassPath资源读取测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class ClassPathResourceTest {
 

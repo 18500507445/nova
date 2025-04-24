@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * CompletableFuture工具类测试
  *
- * @author:<achao1441470436@gmail.com>
+ * @author <achao1441470436@gmail.com>
  * @since 2021/11/10 0010 21:15
  */
 public class AsyncUtilTest {

@@ -10,9 +10,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.*;
 
 /**
- * @author:wzh
+ * @author wzh
  * @description: 线程池配置
- * @date:2022/7/18 16:24
+ * @date 2022/7/18 16:24
  */
 @Slf4j(topic = "ThreadPoolConfig")
 @Configuration

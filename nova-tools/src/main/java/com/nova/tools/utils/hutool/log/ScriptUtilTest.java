@@ -13,7 +13,7 @@ import javax.script.ScriptException;
 /**
  * 脚本单元测试类
  *
- * @author:looly
+ * @author looly
  */
 public class ScriptUtilTest {
 

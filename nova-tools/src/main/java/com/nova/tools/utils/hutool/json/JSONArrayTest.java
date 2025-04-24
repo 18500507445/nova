@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * JSONArray单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class JSONArrayTest {
 

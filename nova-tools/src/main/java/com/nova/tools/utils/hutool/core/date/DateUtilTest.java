@@ -25,7 +25,7 @@ import java.util.*;
  * export TZ=Asia/Shanghai
  * </pre>
  *
- * @author:Looly
+ * @author Looly
  */
 public class DateUtilTest {
 

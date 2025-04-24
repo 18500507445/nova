@@ -13,7 +13,7 @@ import java.text.NumberFormat;
 import java.util.*;
 
 /**
- * @author:wzh
+ * @author wzh
  * <p>
  * <a href="https://www.cnblogs.com/stupidMartian/p/9894454.html">java list按照 对象指定多个字段属性进行排序</a>（原地址）
  * <a href="https://blog.csdn.net/biewan0238/article/details/103061933">...</a> (true 和false排序)

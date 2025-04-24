@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * DFA单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class DfaTest {
 

@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * 动态数据源
- * @author:wzh
+ * @author wzh
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 

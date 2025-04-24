@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * 参数非空校验，Bean拷贝
  *
- * @author:wzh
+ * @author wzh
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ParamsUtils {

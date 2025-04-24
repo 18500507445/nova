@@ -11,8 +11,8 @@ import java.net.URL;
 import java.util.UUID;
 
 /**
- * @author:wzh
- * @date:2022/7/7 18:08
+ * @author wzh
+ * @date 2022/7/7 18:08
  */
 @Slf4j(topic = "ImageHelper")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

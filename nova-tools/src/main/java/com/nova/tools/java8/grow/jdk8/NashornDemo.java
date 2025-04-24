@@ -7,8 +7,8 @@ import javax.script.ScriptException;
 /**
  * Nashorn JavaScript引擎
  *
- * @author:wzh
- * @date:2018/2/8
+ * @author wzh
+ * @date 2018/2/8
  */
 class NashornDemo {
 

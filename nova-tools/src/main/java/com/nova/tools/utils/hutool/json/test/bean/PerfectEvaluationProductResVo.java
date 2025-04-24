@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author:wangyan E-mail:wangyan@pospt.cn
+ * @author wangyan E-mail:wangyan@pospt.cn
  * @version 创建时间：2017年9月13日 下午5:16:32
  * 类说明
  */

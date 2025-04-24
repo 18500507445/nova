@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * 转换为集合测试
  *
- * @author:looly
+ * @author looly
  */
 public class ConvertToCollectionTest {
 

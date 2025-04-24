@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 /**
  * Duration 示例
  *
- * @author:wzh
- * @date:2018/3/3
+ * @author wzh
+ * @date 2018/3/3
  */
 class DurationExample {
 

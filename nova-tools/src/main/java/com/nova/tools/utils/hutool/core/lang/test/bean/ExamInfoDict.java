@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author:质量过关
+ * @author 质量过关
  */
 @Data
 public class ExamInfoDict implements Serializable {

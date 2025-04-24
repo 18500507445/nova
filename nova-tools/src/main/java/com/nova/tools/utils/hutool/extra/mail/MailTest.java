@@ -14,7 +14,7 @@ import java.util.Properties;
 /**
  * 邮件发送测试
  *
- * @author:looly
+ * @author looly
  */
 public class MailTest {
 

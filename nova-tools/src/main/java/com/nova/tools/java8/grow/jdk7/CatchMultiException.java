@@ -10,8 +10,8 @@ import java.sql.Statement;
 /**
  * 捕获多异常
  *
- * @author:wzh
- * @date:2018/2/8
+ * @author wzh
+ * @date 2018/2/8
  */
 class CatchMultiException {
 

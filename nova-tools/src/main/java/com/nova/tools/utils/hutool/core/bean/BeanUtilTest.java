@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  * Bean工具单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class BeanUtilTest {
 
@@ -745,7 +745,7 @@ public class BeanUtilTest {
     }
 
     /**
-     * @author:dazer
+     * @author dazer
      * copyProperties(Object source, Object target, CopyOptions copyOptions)
      * 当：copyOptions的 setFieldNameEditor 不为空的时候，有bug,这里进行修复；
      */

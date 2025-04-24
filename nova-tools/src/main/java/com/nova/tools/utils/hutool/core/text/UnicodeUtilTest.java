@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * UnicodeUtil 单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class UnicodeUtilTest {
     @Test

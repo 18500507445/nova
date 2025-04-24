@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 剪贴板工具类单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class ClipboardUtilTest {
 

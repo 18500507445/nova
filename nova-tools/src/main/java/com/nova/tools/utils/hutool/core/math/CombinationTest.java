@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 组合单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class CombinationTest {
 

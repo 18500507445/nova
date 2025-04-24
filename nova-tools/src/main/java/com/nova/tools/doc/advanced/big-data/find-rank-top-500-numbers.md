@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
- * @author:https://github.com/yanglbme
+ * @author https://github.com/yanglbme
  */
 @Data
 public class DataWithSource implements Comparable<DataWithSource> {

@@ -28,7 +28,7 @@ import java.util.*;
 /**
  * 写出Excel单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class ExcelWriteTest {
 

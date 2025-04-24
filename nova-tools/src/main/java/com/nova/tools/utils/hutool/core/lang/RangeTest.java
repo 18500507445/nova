@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 /**
  * {@link Range} 单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class RangeTest {
 

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author:wangyan E-mail:wangyan@pospt.cn
+ * @author wangyan E-mail:wangyan@pospt.cn
  * @version 创建时间：2017年9月11日 上午9:33:01 类说明
  */
 @Data

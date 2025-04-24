@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 敏感词过滤，DFA算法
  *
- * @author:Looly
+ * @author Looly
  */
 public class SensitiveUtilTest {
 

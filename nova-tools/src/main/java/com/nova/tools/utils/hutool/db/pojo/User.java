@@ -3,7 +3,7 @@ package com.nova.tools.utils.hutool.db.pojo;
 /**
  * 测试用POJO，与测试数据库中的user表对应
  *
- * @author:looly
+ * @author looly
  */
 public class User {
 

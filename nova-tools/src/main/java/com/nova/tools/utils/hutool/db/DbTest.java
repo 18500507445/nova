@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Db对象单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class DbTest {
 

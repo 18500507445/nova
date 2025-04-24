@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Snowflake单元测试（雪花算法）
  *
- * @author:Looly
+ * @author Looly
  */
 public class SnowflakeTest {
 

@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * {@link NumberUtil} 单元测试类
  *
- * @author:Looly
+ * @author Looly
  */
 public class NumberUtilTest {
 

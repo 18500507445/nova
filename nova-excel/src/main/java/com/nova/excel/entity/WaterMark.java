@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  * 水印配置类
- * @author:wzh
+ * @author wzh
  */
 @Data
 public class WaterMark {

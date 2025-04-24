@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
 
 
 /**
- * @author:wzh
+ * @author wzh
  */
 @Slf4j(topic = "IpUtils")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

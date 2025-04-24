@@ -15,7 +15,7 @@ import javax.crypto.SecretKey;
 /**
  * SM单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class SmTest {
 

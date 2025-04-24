@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * {@link StrSplitter} 单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class StrSplitterTest {
 

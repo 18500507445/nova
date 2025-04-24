@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 缓存单元测试
  *
- * @author:looly
+ * @author looly
  */
 class CacheConcurrentTest {
 

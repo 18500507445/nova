@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 文本相似度计算工具类单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class TextSimilarityTest {
 

@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 文件上传单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class UploadTest {
 

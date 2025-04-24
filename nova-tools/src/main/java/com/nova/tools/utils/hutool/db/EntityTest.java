@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Entity测试
  *
- * @author:looly
+ * @author looly
  */
 public class EntityTest {
 

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author:wzh
+ * @author wzh
  * druid 配置属性
  */
 @Configuration

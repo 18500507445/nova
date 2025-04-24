@@ -12,7 +12,7 @@ import java.sql.SQLException;
 /**
  * SQL Server操作单元测试
  *
- * @author:looly
+ * @author looly
  */
 public class SqlServerTest {
 

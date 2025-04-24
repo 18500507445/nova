@@ -13,7 +13,7 @@ import java.util.List;
  * {@link StrUtil}
  * 字符串工具类单元测试
  *
- * @author:Looly
+ * @author Looly
  */
 public class StrUtilTest {
 

@@ -23,7 +23,7 @@ public class RedissonProperties {
     /**
      * 连接类型，支持single-单机节点，sentinel-哨兵，cluster-集群，masterSlave-主从
      */
-    private RedissonCons.ConnectionType type;
+    private RedissonCons.ConnectionType type = RedissonCons.ConnectionType.SINGLE;
 
     /**
      * redis连接密码

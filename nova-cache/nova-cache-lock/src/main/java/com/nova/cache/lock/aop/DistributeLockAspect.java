@@ -1,8 +1,8 @@
 package com.nova.cache.lock.aop;
 
 import com.nova.cache.lock.annotation.Lock;
-import com.nova.cache.lock.core.RedissonLock;
-import com.nova.cache.lock.enums.LockType;
+import com.nova.cache.lock.config.RedissonLock;
+import com.nova.cache.lock.enums.RedissonCons.LockType;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

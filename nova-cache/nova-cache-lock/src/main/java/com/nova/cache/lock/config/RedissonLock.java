@@ -1,13 +1,13 @@
-package com.nova.cache.lock.core;
+package com.nova.cache.lock.config;
 
-import com.nova.cache.lock.config.RedissonManager;
-import com.nova.cache.lock.enums.LockType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
+import com.nova.cache.lock.enums.RedissonCons.LockType;
 
+import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +29,8 @@ import java.util.function.Consumer;
 @Data
 public class RedissonLock {
 
-    private RedissonManager redissonManager;
+    @Resource
+    private RedissonClient redissonClient;
 
     /**
      * 加锁操作
@@ -40,19 +41,19 @@ public class RedissonLock {
         RLock rLock;
         switch (lockType) {
             case FAIR:
-                rLock = redissonManager.getRedisson().getFairLock(lockName);
+                rLock = redissonClient.getFairLock(lockName);
                 break;
             case READ:
-                RReadWriteLock readWriteLock = redissonManager.getRedisson().getReadWriteLock(lockName);
+                RReadWriteLock readWriteLock = redissonClient.getReadWriteLock(lockName);
                 rLock = readWriteLock.readLock();
                 break;
             case WRITE:
-                RReadWriteLock rwLock = redissonManager.getRedisson().getReadWriteLock(lockName);
+                RReadWriteLock rwLock = redissonClient.getReadWriteLock(lockName);
                 rLock = rwLock.writeLock();
                 break;
             default:
                 //默认可重入锁
-                rLock = redissonManager.getRedisson().getLock(lockName);
+                rLock = redissonClient.getLock(lockName);
         }
         boolean flag;
         try {
@@ -75,14 +76,14 @@ public class RedissonLock {
      * @param lockName 锁名称
      */
     public void release(String lockName) {
-        redissonManager.getRedisson().getLock(lockName).unlock();
+        redissonClient.getLock(lockName).unlock();
     }
 
     /**
      * 加锁
      */
     public void isLock(String lockName) {
-        RLock rLock = redissonManager.getRedisson().getLock(lockName);
+        RLock rLock = redissonClient.getLock(lockName);
         try {
             rLock.lock();
         } catch (Exception e) {
@@ -94,7 +95,7 @@ public class RedissonLock {
      * 查询是否有锁
      */
     public boolean isLocked(String lockName) {
-        return redissonManager.getRedisson().getLock(lockName).isLocked();
+        return redissonClient.getLock(lockName).isLocked();
     }
 
     /**
@@ -103,17 +104,17 @@ public class RedissonLock {
      * @param name
      */
     public boolean rQueueOffer(String name, Object value) {
-        RQueue<Object> queue = redissonManager.getRedisson().getQueue(name);
+        RQueue<Object> queue = redissonClient.getQueue(name);
         return queue.offer(value);
     }
 
     public <t> t rQueuePoll(String name, Class<t> tClass) {
-        RQueue<t> queue = redissonManager.getRedisson().getQueue(name);
+        RQueue<t> queue = redissonClient.getQueue(name);
         return queue.poll();
     }
 
     public int rQueueSize(String name) {
-        return redissonManager.getRedisson().getQueue(name).size();
+        return redissonClient.getQueue(name).size();
     }
 
     /**
@@ -121,7 +122,7 @@ public class RedissonLock {
      */
     public boolean bQueueOffer(String name, Object value, long time, TimeUnit unit) {
         try {
-            RBlockingQueue<Object> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
+            RBlockingQueue<Object> blockingQueue = redissonClient.getBlockingQueue(name);
             return blockingQueue.offer(value, time, unit);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -130,7 +131,7 @@ public class RedissonLock {
 
     public <t> t bQueuePoll(String name, long time, TimeUnit unit, Class<t> tClass) {
         try {
-            RBlockingQueue<t> blockingQueue = redissonManager.getRedisson().getBlockingQueue(name);
+            RBlockingQueue<t> blockingQueue = redissonClient.getBlockingQueue(name);
             return blockingQueue.poll(time, unit);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -138,7 +139,7 @@ public class RedissonLock {
     }
 
     public int bQueueSize(String name) {
-        return redissonManager.getRedisson().getBlockingQueue(name).size();
+        return redissonClient.getBlockingQueue(name).size();
     }
 
     /**
@@ -149,7 +150,7 @@ public class RedissonLock {
      * @param consumer   自定义处理
      */
     public <T> void publish(String channelKey, T msg, Consumer<T> consumer) {
-        RTopic topic = redissonManager.getRedisson().getTopic(channelKey);
+        RTopic topic = redissonClient.getTopic(channelKey);
         topic.publish(msg);
         consumer.accept(msg);
     }
@@ -162,7 +163,7 @@ public class RedissonLock {
      * @param consumer   自定义处理
      */
     public <T> void subscribe(String channelKey, Class<T> clazz, Consumer<T> consumer) {
-        RTopic topic = redissonManager.getRedisson().getTopic(channelKey);
+        RTopic topic = redissonClient.getTopic(channelKey);
         topic.addListener(clazz, (channel, msg) -> consumer.accept(msg));
     }
 
@@ -174,7 +175,7 @@ public class RedissonLock {
      * @param duration 时间
      */
     public <T> void setCacheObject(final String key, final T value, final Duration duration) {
-        RBatch batch = redissonManager.getRedisson().createBatch();
+        RBatch batch = redissonClient.createBatch();
         RBucketAsync<T> bucket = batch.getBucket(key);
         bucket.setAsync(value);
         bucket.expireAsync(duration);
@@ -188,7 +189,7 @@ public class RedissonLock {
      * @return 缓存键值对应的数据
      */
     public <T> T getCacheObject(final String key) {
-        RBucket<T> rBucket = redissonManager.getRedisson().getBucket(key);
+        RBucket<T> rBucket = redissonClient.getBucket(key);
         return rBucket.get();
     }
 
@@ -198,7 +199,7 @@ public class RedissonLock {
      * @param key 缓存的键值
      */
     public boolean isExistsObject(final String key) {
-        return redissonManager.getRedisson().getBucket(key).isExists();
+        return redissonClient.getBucket(key).isExists();
     }
 
     /**
@@ -209,7 +210,7 @@ public class RedissonLock {
      * @return 缓存的对象
      */
     public <T> boolean setCacheList(final String key, final List<T> dataList) {
-        RList<T> rList = redissonManager.getRedisson().getList(key);
+        RList<T> rList = redissonClient.getList(key);
         return rList.addAll(dataList);
     }
 
@@ -221,7 +222,7 @@ public class RedissonLock {
      * @return 缓存键值对应的数据
      */
     public <T> List<T> getCacheList(final String key) {
-        RList<T> rList = redissonManager.getRedisson().getList(key);
+        RList<T> rList = redissonClient.getList(key);
         return rList.readAll();
     }
 
@@ -231,7 +232,7 @@ public class RedissonLock {
      * @param key 缓存的键值
      */
     public boolean deleteObject(final String key) {
-        return redissonManager.getRedisson().getBucket(key).delete();
+        return redissonClient.getBucket(key).delete();
     }
 
     /**
@@ -241,7 +242,7 @@ public class RedissonLock {
      * @param value 值
      */
     public void setAtomicValue(String key, long value) {
-        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        RAtomicLong atomic = redissonClient.getAtomicLong(key);
         atomic.set(value);
     }
 
@@ -252,7 +253,7 @@ public class RedissonLock {
      * @return 当前值
      */
     public long getAtomicValue(String key) {
-        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        RAtomicLong atomic = redissonClient.getAtomicLong(key);
         return atomic.get();
     }
 
@@ -263,7 +264,7 @@ public class RedissonLock {
      * @return 当前值
      */
     public long incrAtomicValue(String key) {
-        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        RAtomicLong atomic = redissonClient.getAtomicLong(key);
         return atomic.incrementAndGet();
     }
 
@@ -274,7 +275,7 @@ public class RedissonLock {
      * @return 当前值
      */
     public long decrAtomicValue(String key) {
-        RAtomicLong atomic = redissonManager.getRedisson().getAtomicLong(key);
+        RAtomicLong atomic = redissonClient.getAtomicLong(key);
         return atomic.decrementAndGet();
     }
 
@@ -284,7 +285,7 @@ public class RedissonLock {
      * @param key 键
      */
     public Boolean hasKey(String key) {
-        RKeys rKeys = redissonManager.getRedisson().getKeys();
+        RKeys rKeys = redissonClient.getKeys();
         return rKeys.countExists(key) > 0;
     }
 }

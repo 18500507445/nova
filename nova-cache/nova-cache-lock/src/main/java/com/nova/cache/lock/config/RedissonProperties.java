@@ -16,22 +16,22 @@ import org.springframework.context.annotation.Configuration;
 public class RedissonProperties {
 
     /**
-     * redis主机地址，ip：port，有多个用半角逗号分隔
+     * redisson自定义配置：[ip：port]，有多个用半角逗号分隔
      */
     private String address;
 
     /**
-     * 连接类型，支持single-单机节点，sentinel-哨兵，cluster-集群，masterSlave-主从
+     * redisson自定义配置：连接类型，single-单机节点，sentinel-哨兵，cluster-集群，masterSlave-主从
      */
     private RedissonCons.ConnectionType type = RedissonCons.ConnectionType.SINGLE;
 
     /**
-     * redis连接密码
+     * redis配置：密码
      */
     private String password;
 
     /**
-     * 选取数据库
+     * redis配置：数据
      */
     private int database;
 

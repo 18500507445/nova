@@ -44,6 +44,7 @@ public class LimitController {
         StackTraceElement[] stack = Thread.currentThread().getStackTrace();
         String methodName = stack[1].getMethodName();
         System.err.println("key = " + methodName);
+        //获取限流器
         RRateLimiter redissonLimit = redissonClient.getRateLimiter(methodName);
         //5秒3令牌
         redissonLimit.trySetRate(RateType.OVERALL, 3, 5, RateIntervalUnit.SECONDS);

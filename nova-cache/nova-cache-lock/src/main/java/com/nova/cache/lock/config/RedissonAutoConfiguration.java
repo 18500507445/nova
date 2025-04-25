@@ -1,5 +1,6 @@
 package com.nova.cache.lock.config;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.nova.cache.lock.enums.RedissonCons;
 import com.nova.cache.lock.enums.RedissonCons.ConnectionType;
@@ -43,15 +44,18 @@ public class RedissonAutoConfiguration {
 
         // ip + port
         String address = redissonProperties.getAddress();
+        if (StrUtil.isBlank(address)) {
+            log.error("初始化RedissonLock config失败 属性配置address是空");
+        }
         String password = redissonProperties.getPassword();
         int database = redissonProperties.getDatabase();
 
         ConnectionType connectionType = redissonProperties.getType();
-        String redisAddr = RedissonCons.PREFIX + address;
+        String fullAddress = RedissonCons.PREFIX + address;
 
         // 配置单节点模式
         if (ConnectionType.SINGLE == connectionType) {
-            config.useSingleServer().setAddress(redisAddr);
+            config.useSingleServer().setAddress(fullAddress);
             config.useSingleServer().setDatabase(database);
             if (StrUtil.isNotBlank(password)) {
                 config.useSingleServer().setPassword(password);
@@ -99,11 +103,12 @@ public class RedissonAutoConfiguration {
                 slaveList.add(RedissonCons.PREFIX + add);
             }
             slaveList.remove(0);
-            config.useMasterSlaveServers().addSlaveAddress((String[]) slaveList.toArray());
+            config.useMasterSlaveServers().addSlaveAddress(Convert.toStrArray(slaveList));
         }
 
-        log.info("初始化 {} 方式Config，address:{}", connectionType.getDescription(), redisAddr);
+        log.info("初始化 {} 方式Config，address:{}", connectionType.getDescription(), fullAddress);
 
         return Redisson.create(config);
     }
+
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 
 /**
  * @author: wzh
- * @description: redission常量类
+ * @description: redisson常量类
  * @date: 2025/04/24 17:10
  */
 public class RedissonCons {

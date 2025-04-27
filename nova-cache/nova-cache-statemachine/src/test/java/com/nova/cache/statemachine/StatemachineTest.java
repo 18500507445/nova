@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @date: 2024/04/11 15:12
  */
 @SpringBootTest
-public class SpringStatemachineTest {
+public class StatemachineTest {
 
     @Resource
     private OrderFacade orderFacade;

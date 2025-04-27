@@ -31,7 +31,7 @@ import java.util.EnumSet;
  */
 @Configuration
 @EnableStateMachine
-public class OrderStatusMachineConfig extends StateMachineConfigurerAdapter<OrderState, OrderStateChangeAction> {
+public class StatemachineConfig extends StateMachineConfigurerAdapter<OrderState, OrderStateChangeAction> {
 
     @Primary
     @Bean(name = "redisProperties")

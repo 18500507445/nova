@@ -12,10 +12,10 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @ComponentScan(basePackages = {"com.nova.common", "com.nova.cache.statemachine"})
-public class SpringStatemachineApplication {
+public class StatemachineApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringStatemachineApplication.class, args);
+        SpringApplication.run(StatemachineApplication.class, args);
     }
 
 }

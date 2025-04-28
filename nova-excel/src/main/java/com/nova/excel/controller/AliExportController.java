@@ -84,11 +84,14 @@ public class AliExportController extends BaseController {
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
 
     /**
-     * 普通导出，单线程查询，循环写入
+     * 普通导出，单线程查询，循环写入（但是数据超过一定的量，越写越慢）
      */
     @SneakyThrows
     @GetMapping("exportEasyExcel")
     public void exportEasyExcel() {
+        TimeInterval timer = DateUtil.timer();
+        int sum = 0;
+
         HttpServletResponse response = getResponse();
         // 设置响应内容
         response.setContentType("application/vnd.ms-excel");
@@ -97,27 +100,21 @@ public class AliExportController extends BaseController {
         // 文件以附件形式下载
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
 
-        //可以浏览器下载
-        ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class)
-                //是否在内存处理，默认会生成临时文件以节约内存。内存模式效率会更好，但是容易OOM。大文件⚠️不要打开
-                .inMemory(true)
-                .excelType(ExcelTypeEnum.XLSX)
-                .registerWriteHandler(new WaterMarkHandler(WATER_MARK))
-                .build();
+        List<List<AliEasyExportDO>> split = ListUtil.split(LIST, 100000);
 
-        WriteSheet writeSheet = EasyExcel.writerSheet("sheet1").build();
-
-        // 模拟数据库翻页查询
-        int pageNo = 0;
-        int pageSize = 50000;
-        while (true) {
-            List<AliEasyExportDO> page = ListUtil.page(pageNo, pageSize, LIST);
-            if (page.size() < pageSize) {
-                return;
+        //遍历写入sheet
+        try (ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class).build()) {
+            for (int i = 0; i < split.size(); i++) {
+                List<AliEasyExportDO> pageList = split.get(i);
+                if (CollUtil.isNotEmpty(pageList)) {
+                    // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
+                    WriteSheet writeSheet = EasyExcel.writerSheet("单sheet" + i).build();
+                    excelWriter.write(pageList, writeSheet);
+                    sum += pageList.size();
+                }
             }
-            pageNo++;
-            excelWriter.write(page, writeSheet);
         }
+        System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
     }
 
     /**
@@ -199,9 +196,9 @@ public class AliExportController extends BaseController {
         List<CompletableFuture<List<AliEasyExportDO>>> completableFutures = taskList.stream().map(task -> CompletableFuture.supplyAsync(() -> {
             TimeInterval threadTimer = DateUtil.timer();
             long threadId = Thread.currentThread().getId();
-            //随机等待[2-5)秒，模拟数据库IO耗时
-            int i = RandomUtil.randomInt(2, 5);
-            if (i == 4) {
+            //随机等待[1-10)秒，模拟数据库IO耗时
+            int i = RandomUtil.randomInt(1, 10);
+            if (i == 3) {
                 throw new RuntimeException("第" + task.getPageNum() + "页运行异常，当前线程id：" + threadId);
             }
             ThreadUtil.sleep(i, TimeUnit.SECONDS);
@@ -256,11 +253,11 @@ public class AliExportController extends BaseController {
         @Override
         public List<AliEasyExportDO> call() {
             TimeInterval timer = DateUtil.timer();
-            int i = RandomUtil.randomInt(2, 5);
+            int i = RandomUtil.randomInt(1, 10);
             long threadId = Thread.currentThread().getId();
             List<AliEasyExportDO> pageList = new ArrayList<>();
             try {
-                if (i == 4) {
+                if (i == 3) {
                     throw new RuntimeException("第" + pageNum + "页运行异常，当前线程id：" + threadId);
                 }
                 ThreadUtil.sleep(i, TimeUnit.SECONDS);

@@ -84,13 +84,11 @@ public class AliExportController extends BaseController {
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
 
     /**
-     * 阿里easyExcel测试，多线程查询后合并100w然后导出
+     * 普通导出，单线程查询，循环写入
      */
     @SneakyThrows
     @GetMapping("exportEasyExcel")
     public void exportEasyExcel() {
-        TimeInterval timer = DateUtil.timer();
-        String fileName = path + UUID.fastUUID() + ".xlsx";
         HttpServletResponse response = getResponse();
         // 设置响应内容
         response.setContentType("application/vnd.ms-excel");
@@ -98,23 +96,28 @@ public class AliExportController extends BaseController {
         response.setCharacterEncoding("UTF-8");
         // 文件以附件形式下载
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
-        //模拟数据库数据
-        List<AliEasyExportDO> exportList = selectAll(LIST.size(), 50000);
 
         //可以浏览器下载
-        EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class)
+        ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class)
                 //是否在内存处理，默认会生成临时文件以节约内存。内存模式效率会更好，但是容易OOM。大文件⚠️不要打开
                 .inMemory(true)
                 .excelType(ExcelTypeEnum.XLSX)
-                .sheet("模板")
                 .registerWriteHandler(new WaterMarkHandler(WATER_MARK))
-                .doWrite(exportList);
+                .build();
 
-        //可以直接EasyExcel.write(fileName, ExportDO.class)下载到本地或者服务器
-//        EasyExcel.write(fileName, ExportDO.class).excelType(ExcelTypeEnum.XLSX).sheet("模板").doWrite(exportList);
+        WriteSheet writeSheet = EasyExcel.writerSheet("sheet1").build();
 
-        log.info("exportEasyExcel接口耗时：{}ms", timer.interval());
-        System.gc();
+        // 模拟数据库翻页查询
+        int pageNo = 0;
+        int pageSize = 50000;
+        while (true) {
+            List<AliEasyExportDO> page = ListUtil.page(pageNo, pageSize, LIST);
+            if (page.size() < pageSize) {
+                return;
+            }
+            pageNo++;
+            excelWriter.write(page, writeSheet);
+        }
     }
 
     /**
@@ -146,8 +149,8 @@ public class AliExportController extends BaseController {
      * @param shardingSize
      * @param response
      * @throws InterruptedException InterruptedException
-     * @throws ExecutionException ExecutionException
-     * @throws IOException IOException
+     * @throws ExecutionException   ExecutionException
+     * @throws IOException          IOException
      */
     public void threadPoolWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws InterruptedException, ExecutionException, IOException {
         TimeInterval timer = DateUtil.timer();
@@ -180,9 +183,9 @@ public class AliExportController extends BaseController {
      * 并行编排版本，分批写入多个sheet
      * todo 纯装逼，这个CountDownLatch不需要用，CompletableFuture.allOf就代表了countDown后await进行主线程阻塞，这为了计数才用它的
      *
-     * @param totalCount totalCount
+     * @param totalCount   totalCount
      * @param shardingSize shardingSize
-     * @param response response
+     * @param response     response
      */
     public void completableWrite(Integer totalCount, Integer shardingSize, HttpServletResponse response) throws IOException, InterruptedException {
         TimeInterval timer = DateUtil.timer();
@@ -238,30 +241,6 @@ public class AliExportController extends BaseController {
         System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
     }
 
-    public List<AliEasyExportDO> selectAll(Integer totalCount, Integer shardingSize) throws InterruptedException {
-        TimeInterval timer = DateUtil.timer();
-        List<MyCallableTask> taskList = new ArrayList<>();
-        // 计算出多少页，即循环次数
-        int totalNum = totalCount / shardingSize + (totalCount % shardingSize > 0 ? 1 : 0);
-        System.err.println("本次任务量: " + totalNum);
-        CountDownLatch cd = new CountDownLatch(totalNum);
-        for (int i = 1; i <= totalNum; i++) {
-            taskList.add(new MyCallableTask(i, shardingSize, cd));
-        }
-        List<AliEasyExportDO> resultList = new ArrayList<>();
-        try {
-            ThreadPoolExecutor threadPoolExecutor = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
-            List<Future<List<AliEasyExportDO>>> futures = threadPoolExecutor.invokeAll(taskList);
-            for (Future<List<AliEasyExportDO>> future : futures) {
-                resultList.addAll(future.get());
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            log.error("selectAll异常", e);
-        }
-        cd.await();
-        System.err.println("主线程：" + Thread.currentThread().getName() + " , 导出指定数据成功 , 共导出数据：" + resultList.size() + " , 查询数据任务执行完毕共消耗时 ：" + timer.interval() + "ms");
-        return resultList;
-    }
 
     private static final class MyCallableTask implements Callable<List<AliEasyExportDO>> {
         private final CountDownLatch cd;

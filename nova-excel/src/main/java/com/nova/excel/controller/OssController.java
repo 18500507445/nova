@@ -84,9 +84,10 @@ public class OssController {
         }
     }
 
-    //这个测试了，大内存不行
+    //这个测试了，大内存不行（不推荐）
     @SneakyThrows
     @GetMapping("b")
+    @Deprecated
     public void demoB() {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             log.info("准备写入excel");
@@ -100,7 +101,7 @@ public class OssController {
         }
     }
 
-    //单sheet
+    //单sheet，推荐
     @SneakyThrows
     @GetMapping("c")
     public void demoC() {
@@ -116,7 +117,7 @@ public class OssController {
         outputFile.deleteOnExit();
     }
 
-    //多sheet
+    //多sheet，推荐
     @SneakyThrows
     @GetMapping("d")
     public void demoD() {

@@ -13,12 +13,10 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.nova.common.core.controller.BaseController;
 import com.nova.excel.entity.AliEasyExportDO;
 import com.nova.excel.entity.WaterMark;
-import com.nova.excel.utils.watermark.WaterMarkHandler;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -84,11 +82,51 @@ public class AliExportController extends BaseController {
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
 
     /**
-     * 普通导出，单线程查询，循环写入（但是数据超过一定的量，越写越慢）
+     * 普通导出，单线程查询，循环写入（开启内存模式，数据超过一定的量，越写越慢）
      */
     @SneakyThrows
     @GetMapping("exportEasyExcel")
     public void exportEasyExcel() {
+        TimeInterval timer = DateUtil.timer();
+        int sum = 0;
+
+        HttpServletResponse response = getResponse();
+        // 设置响应内容
+        response.setContentType("application/vnd.ms-excel");
+        // 防止下载的文件名字乱码
+        response.setCharacterEncoding("UTF-8");
+        // 文件以附件形式下载
+        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(UUID.fastUUID() + ".xlsx", "utf-8"));
+
+        //todo 注意开启了内存模式
+        ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class)
+                .build();
+        WriteSheet writeSheet = EasyExcel.writerSheet("单sheet").build();
+
+        int pageNo = 0;
+        int pageSize = TOTAL / 10;
+        while (true) {
+            List<AliEasyExportDO> pageList = ListUtil.page(pageNo, pageSize, LIST);
+            if (CollUtil.isNotEmpty(pageList)) {
+                // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
+                excelWriter.write(pageList, writeSheet);
+                sum += pageList.size();
+                pageNo++;
+                System.err.println("写入pageNo" + pageNo);
+            } else {
+                break;
+            }
+        }
+        excelWriter.finish();
+        System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
+    }
+
+    /**
+     * 普通导出，单线程查询，循环写入多sheet
+     */
+    @SneakyThrows
+    @GetMapping("exportEasyExcelSheets")
+    public void exportEasyExcelSheets() {
         TimeInterval timer = DateUtil.timer();
         int sum = 0;
 
@@ -116,6 +154,7 @@ public class AliExportController extends BaseController {
         }
         System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
     }
+
 
     /**
      * 多线程查询，10w一个分区，然后写入不同sheet

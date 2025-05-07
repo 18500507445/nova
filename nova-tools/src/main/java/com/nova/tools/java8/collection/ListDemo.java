@@ -267,7 +267,7 @@ class ListDemo {
         System.err.println("allResult:" + allResult);
 
         //是否有大于14岁
-        boolean oneResult = PEOPLE_LIST.stream().allMatch(i -> i.getAge().compareTo(14) > 0);
+        boolean oneResult = PEOPLE_LIST.stream().anyMatch(i -> i.getAge().compareTo(14) > 0);
         System.err.println("oneResult:" + oneResult);
     }
 

@@ -363,14 +363,14 @@ public final class EsUtils {
         if (searchHits != null && searchHits.hasSearchHits()) {
             long totalCount = searchHits.getTotalHits();
             if (totalCount <= 0) {
-                PageResult.empty();
+                return PageResult.empty();
             }
             List<T> content = list(searchHits);
             Page<T> page = new PageImpl<>(content, pageable, totalCount);
             //⚠️注意：ES页码从0开始，需 +1
             return PageResult.page(content, page.getNumber() + 1, page.getSize(), totalCount);
         }
-        return null;
+        return PageResult.empty();
     }
 
     /**

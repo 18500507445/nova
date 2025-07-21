@@ -78,7 +78,7 @@ public class ResourcesTest {
         List<String> list1 = StrUtil.split(resource1.readUtf8Str(), "\n");
         List<String> list2 = StrUtil.split(resource2.readUtf8Str(), "\n");
 
-        Collection<String> intersection = CollUtil.intersection(list1, list2);
+        Collection<String> intersection = CollUtil.disjunction(list1, list2);
         System.err.println("intersection = " + intersection);
     }
 

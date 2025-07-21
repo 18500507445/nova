@@ -168,6 +168,7 @@ public class EsTemplateTest {
 
         //精准查询-不分词。解释：id = 1的文档
         QueryBuilder equal = QueryBuilders.termQuery("id", 1L);
+        //⚠️in查询 是terms多了一个字母哦
         QueryBuilder in = QueryBuilders.termsQuery("id", Arrays.asList(1L, 2L, 3L));
 
         //模糊查询-单字段，分词

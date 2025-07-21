@@ -33,7 +33,8 @@
 （5）tail -fn 500 xxx.log （循环最新500行 ）         
 （6）tail -f xxx.log |grep 'xxx' （动态刷新包含xxx字符串的信息 ）       
 （7）tail -f xxx.log |grep 'a.*b\|b.*a'（查找包含a和b的内容）       
-（8）cat xxx.log |grep -A 16 'xxx' （慎用，查找文件包含xxx16行以内的内容 ）       
+（8）cat xxx.log |grep -A 16 'xxx' （慎用，查找文件包含xxx16行以内的内容 ）   
+（9）grep "aaa" 日志文件 | tail -1  （查找最后出现一次的地方）
 
 #### 1.5安装环境需要用到的命令
 （1）cat /etc/passwd |cut -f 1 -d :（查询所有用户列表） 

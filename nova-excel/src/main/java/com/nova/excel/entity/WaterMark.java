@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  * 水印配置类
- * @author: wzh
+ * @author: wzh，如果用阿里的需要开启inMemory(true)
  */
 @Data
 public class WaterMark {

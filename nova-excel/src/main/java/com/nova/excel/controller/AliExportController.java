@@ -17,6 +17,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.nova.common.core.controller.BaseController;
 import com.nova.excel.entity.AliEasyExportDO;
 import com.nova.excel.entity.WaterMark;
+import com.nova.excel.utils.WaterMarkHandler;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -51,7 +52,7 @@ public class AliExportController extends BaseController {
      */
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
-    public static final int TOTAL = 1000000;
+    public static final int TOTAL = 10000;
 
     public static String path;
 
@@ -100,6 +101,9 @@ public class AliExportController extends BaseController {
 
         //todo 注意开启了内存模式
         ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class)
+                //是否在内存处理，默认会生成临时文件以节约内存。内存模式效率会更好，但是容易OOM。大文件⚠️不要打开
+                .inMemory(true)
+                .registerWriteHandler(new WaterMarkHandler(WATER_MARK))
                 .build();
         WriteSheet writeSheet = EasyExcel.writerSheet("单sheet").build();
 

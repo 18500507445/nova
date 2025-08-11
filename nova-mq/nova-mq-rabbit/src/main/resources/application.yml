@@ -11,11 +11,15 @@ spring:
     password: 123456 #密码
     virtual-host: / #虚拟主机环境
 
-    # todo 默认就是这些值，不用谢
     listener:
       simple:
+        # 每个消费者可以未完成的未确认消息的最大数量。举例：当prefetch = 2,那么如果有2个消息未ack，消费者不进行消费，队列消息堆积造成阻塞
+        prefetch: 10
+
+        # todo 默认就是这些值，不用修改
         retry:
           enabled: true #启用发布重试
           max-attempts: 3 #传递消息的最大尝试次数
           max-interval: 10000 #尝试的最大时间间隔
           multiplier: 1.0 #应用于先前传递重试时间间隔的乘数
+

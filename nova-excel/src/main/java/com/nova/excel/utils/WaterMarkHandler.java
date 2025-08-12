@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage;
 @Deprecated
 @RequiredArgsConstructor
 public class WaterMarkHandler implements SheetWriteHandler {
+
     private final WaterMark watermark;
 
     private BufferedImage createWatermarkImage(WaterMark watermark) {

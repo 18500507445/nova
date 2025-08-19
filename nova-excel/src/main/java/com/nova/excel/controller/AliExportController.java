@@ -147,7 +147,7 @@ public class AliExportController extends BaseController {
 
         List<List<AliEasyExportDO>> split = ListUtil.split(LIST, 100000);
 
-        //遍历写入sheet
+        //遍历写入不同的sheet
         try (ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream(), AliEasyExportDO.class).build()) {
             for (int i = 0; i < split.size(); i++) {
                 List<AliEasyExportDO> pageList = split.get(i);

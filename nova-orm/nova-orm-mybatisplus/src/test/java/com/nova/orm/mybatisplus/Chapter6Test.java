@@ -72,4 +72,22 @@ public class Chapter6Test {
         System.out.println("json = " + JSONUtil.toJsonStr(list));
     }
 
+
+    //手写的sql，看看mybatis-plus会切入表名吗
+    @Test
+    public void handSqlA() {
+        Long tenantId = 2L;
+        TenantContext.setTenant(tenantId);
+        List<DynamicUser> list = dynamicUserMapper.getList();
+        System.out.println("json = " + JSONUtil.toJsonStr(list));
+    }
+
+    //手写sql，用$占位符替换进去
+    @Test
+    public void handSqlB() {
+        long tenantId = 2L;
+        List<DynamicUser> list = dynamicUserMapper.getListBySuffix(Long.toString(tenantId));
+        System.out.println("json = " + JSONUtil.toJsonStr(list));
+    }
+
 }

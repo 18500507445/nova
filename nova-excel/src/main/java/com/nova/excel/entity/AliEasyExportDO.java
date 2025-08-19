@@ -25,6 +25,9 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 public class AliEasyExportDO extends BaseDO {
 
+    /**
+     * ⚠️：动态表头方法.includeColumnFieldNames()，使用动态表头就需要把index去掉，否则没有的字段的列会空出来，不会顺序写列数据
+     */
     @ExcelProperty(value = "id", index = 0)
     @ColumnWidth(10)
     private Long id;

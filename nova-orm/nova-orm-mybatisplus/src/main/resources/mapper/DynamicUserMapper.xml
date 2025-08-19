@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nova.orm.mybatisplus.chapter6.DynamicUserMapper">
+
+    <select id="getList" resultType="com.nova.orm.mybatisplus.chapter6.DynamicUser">
+      select * from dynamic_user
+    </select>
+
+    <select id="getListBySuffix" resultType="com.nova.orm.mybatisplus.chapter6.DynamicUser">
+        select * from dynamic_user_${suffix}
+    </select>
+</mapper>
+

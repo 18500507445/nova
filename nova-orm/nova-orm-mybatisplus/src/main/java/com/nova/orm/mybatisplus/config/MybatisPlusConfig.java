@@ -76,7 +76,7 @@ public class MybatisPlusConfig {
             //仅dynamic_user进行处理
             if (StrUtil.contains(tableName, "dynamic_user")) {
                 Tenant tenant = TenantContext.getTenant();
-                if (ObjectUtil.isAllNotEmpty(tenant, tenant.getTenantId())) {
+                if (ObjectUtil.isNotNull(tenant) && ObjectUtil.isNotNull(tenant.getTenantId())) {
                     tableName = tableName + "_" + tenant.getTenantId();
                 }
             }

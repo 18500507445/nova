@@ -22,17 +22,16 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
@@ -52,7 +51,7 @@ public class AliExportController extends BaseController {
      */
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
-    public static final int TOTAL = 10000;
+    public static final int TOTAL = 1000000;
 
     public static String path;
 
@@ -82,8 +81,9 @@ public class AliExportController extends BaseController {
 
     public static final ThreadPoolExecutor THREAD_POOL = ExecutorBuilder.create().setCorePoolSize(THREAD_POOL_SIZE).setMaxPoolSize(THREAD_POOL_SIZE * 2).setHandler(RejectPolicy.BLOCK.getValue()).build();
 
+
     /**
-     * 普通导出，单线程查询，循环写入（开启内存模式，数据超过一定的量，越写越慢）
+     * 普通导出，单线程查询，一次查询循环写入（开启内存模式，数据超过一定的量，越写越慢）
      */
     @SneakyThrows
     @GetMapping("exportEasyExcel")
@@ -129,7 +129,7 @@ public class AliExportController extends BaseController {
     }
 
     /**
-     * 普通导出，单线程查询，循环写入多sheet
+     * 普通导出，单线程查询，一次循环写入多sheet（可以改造成数据分页，写入同一个sheet，类似流式写入，具体看pageEasyExcelSheets方法）
      */
     @SneakyThrows
     @GetMapping("exportEasyExcelSheets")
@@ -162,6 +162,48 @@ public class AliExportController extends BaseController {
         System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
     }
 
+
+    /**
+     * 普通导出，单线程查询，数据分页写入同一个sheet，⚠️单sheet最大数据100w
+     */
+    @SneakyThrows
+    @GetMapping("pageEasyExcelSheet")
+    public void pageEasyExcelSheet() {
+        TimeInterval timer = DateUtil.timer();
+        int totalCount = LIST.size();
+
+        int pageSize = 10000, maxCount = 1000000;
+        //数据总页数
+        int totalPage = totalCount / pageSize + (totalCount % pageSize > 0 ? 1 : 0);
+        //excel sheet总页数
+        int excelPage = totalCount / maxCount + (totalCount % maxCount > 0 ? 1 : 0);
+        //游标翻页 最后一个id
+        long lastId = 0L, sum = 0L;
+
+        String path = FilenameUtils.concat("/Users/wangzehui/Documents/IdeaProjects/nova/nova-excel/src/main/resources/", "pageEasyExcelSheet");
+        File file = new File(path);
+        try (ExcelWriter excelWriter = EasyExcel.write(file).build()) {
+            //多循环一页，最后一页放链接，excelPage就一页那么从0开始循环
+            for (int i = excelPage > 1 ? 1 : 0; i < excelPage + 1; i++) {
+                if (i != excelPage) {
+                    for (int j = 0; j < totalPage; j++) {
+                        WriteSheet writeSheet = EasyExcel.writerSheet(j / 100, "sheet" + (j / 100 + 1)).head(AliEasyExportDO.class).build();
+                        List<AliEasyExportDO> list = ListUtil.page(j, pageSize, LIST);
+                        excelWriter.write(list, writeSheet);
+
+                        //游标翻页 最后一个id
+                        lastId = CollUtil.getLast(list).getId();
+                        sum += list.size();
+                        log.info("pageEasyExcelSheet ——> pageIndex：{}", j);
+                    }
+                } else {
+                    WriteSheet writeSheet = EasyExcel.writerSheet(excelPage + 1, "链接sheet").head(AliEasyExportDO.URL.class).build();
+                    excelWriter.write(Collections.singletonList(new AliEasyExportDO.URL()), writeSheet);
+                }
+            }
+        }
+        log.info("pageEasyExcelSheet ——> 共计写入excel数据：{} 条，耗时：{} ms", sum, timer.interval());
+    }
 
     /**
      * 多线程查询，10w一个分区，然后写入不同sheet

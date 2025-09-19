@@ -53,4 +53,11 @@ public class AliEasyExportDO extends BaseDO {
     //字段忽略
     @ExcelIgnore
     private String ignore;
+
+    @Data
+    public static class URL {
+        @ColumnWidth(40)
+        @ExcelProperty(value = "解释点击下方链接")
+        private String link = "https://www.kdocs.cn/l/cpB56QreVafy";
+    }
 }

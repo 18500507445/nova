@@ -5,6 +5,7 @@ import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.RejectPolicy;
@@ -51,7 +52,7 @@ public class AliExportController extends BaseController {
      */
     public static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
 
-    public static final int TOTAL = 1000000;
+    public static final int TOTAL = 2027864;
 
     public static String path;
 
@@ -162,6 +163,46 @@ public class AliExportController extends BaseController {
         System.err.println("写入表格完成,共：" + sum + " 条,耗时 ：" + timer.interval() + "ms");
     }
 
+    public static void main(String[] args) {
+        TimeInterval timer = DateUtil.timer();
+        int totalCount = LIST.size();
+
+        int pageSize = 10000, maxCount = 1000000;
+        //数据总页数
+        int totalPage = totalCount / pageSize + (totalCount % pageSize > 0 ? 1 : 0);
+        //excel sheet总页数
+        int excelPage = totalCount / maxCount + (totalCount % maxCount > 0 ? 1 : 0);
+        //游标翻页 最后一个id
+        long lastId = 0L, sum = 0L, continueNum = 0L;
+
+        String path = FilenameUtils.concat("/Users/wangzehui/Documents/IdeaProjects/nova/nova-excel/src/main/resources/", "pageEasyExcelSheet.xlsx");
+        File file = new File(path);
+        try (ExcelWriter excelWriter = EasyExcel.write(file).build()) {
+            //多循环一页，最后一页放链接，excelPage就一页那么从0开始循环
+            for (int i = excelPage > 1 ? 1 : 0; i < excelPage + 1; i++) {
+                if (i != excelPage) {
+                    if (continueNum > 0) {
+                        continue;
+                    }
+                    for (int j = 0; j < totalPage; j++) {
+                        WriteSheet writeSheet = EasyExcel.writerSheet(j / 100, "sheet" + (j / 100 + 1)).head(AliEasyExportDO.class).build();
+                        List<AliEasyExportDO> list = ListUtil.page(j, pageSize, LIST);
+                        excelWriter.write(list, writeSheet);
+                        //游标翻页 最后一个id
+                        lastId = CollUtil.getLast(list).getId();
+                        sum += list.size();
+                        Console.error("pageEasyExcelSheet ——> pageIndex：{}", j);
+                    }
+                    continueNum++;
+                } else {
+                    WriteSheet writeSheet = EasyExcel.writerSheet(excelPage, "链接sheet").head(AliEasyExportDO.URL.class).build();
+                    excelWriter.write(Collections.singletonList(new AliEasyExportDO.URL()), writeSheet);
+                }
+            }
+        }
+        Console.error("pageEasyExcelSheet ——> 共计写入excel数据：{} 条，耗时：{} ms", sum, timer.interval());
+    }
+
 
     /**
      * 普通导出，单线程查询，数据分页写入同一个sheet，⚠️单sheet最大数据100w
@@ -178,7 +219,7 @@ public class AliExportController extends BaseController {
         //excel sheet总页数
         int excelPage = totalCount / maxCount + (totalCount % maxCount > 0 ? 1 : 0);
         //游标翻页 最后一个id
-        long lastId = 0L, sum = 0L;
+        long lastId = 0L, sum = 0L, continueNum = 0L;
 
         String path = FilenameUtils.concat("/Users/wangzehui/Documents/IdeaProjects/nova/nova-excel/src/main/resources/", "pageEasyExcelSheet");
         File file = new File(path);
@@ -186,6 +227,9 @@ public class AliExportController extends BaseController {
             //多循环一页，最后一页放链接，excelPage就一页那么从0开始循环
             for (int i = excelPage > 1 ? 1 : 0; i < excelPage + 1; i++) {
                 if (i != excelPage) {
+                    if (continueNum > 0) {
+                        continue;
+                    }
                     for (int j = 0; j < totalPage; j++) {
                         WriteSheet writeSheet = EasyExcel.writerSheet(j / 100, "sheet" + (j / 100 + 1)).head(AliEasyExportDO.class).build();
                         List<AliEasyExportDO> list = ListUtil.page(j, pageSize, LIST);
@@ -196,6 +240,7 @@ public class AliExportController extends BaseController {
                         sum += list.size();
                         log.info("pageEasyExcelSheet ——> pageIndex：{}", j);
                     }
+                    continueNum++;
                 } else {
                     WriteSheet writeSheet = EasyExcel.writerSheet(excelPage + 1, "链接sheet").head(AliEasyExportDO.URL.class).build();
                     excelWriter.write(Collections.singletonList(new AliEasyExportDO.URL()), writeSheet);

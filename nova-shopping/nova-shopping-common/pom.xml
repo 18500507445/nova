@@ -17,10 +17,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <druid.version>1.2.24</druid.version>
-        <xx.job.verson>2.4.0</xx.job.verson>
+        <xxl.job.verson>2.5.0</xxl.job.verson>
 
-        <hutool.version>5.8.38</hutool.version>
-        <fastjson.version>2.0.57</fastjson.version>
+        <hutool.version>5.8.40</hutool.version>
+        <fastjson.version>2.0.58</fastjson.version>
         <jasypt.version>3.0.5</jasypt.version>
 
         <!-- spring-boot 2.7.18版本 -->
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
-            <version>${xx.job.verson}</version>
+            <version>${xxl.job.verson}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>gson</artifactId>

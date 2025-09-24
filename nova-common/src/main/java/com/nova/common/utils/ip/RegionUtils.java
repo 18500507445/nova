@@ -5,7 +5,10 @@ import cn.hutool.core.util.StrUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.lionsoul.ip2region.xdb.InetAddressException;
+import org.lionsoul.ip2region.xdb.LongByteArray;
 import org.lionsoul.ip2region.xdb.Searcher;
+import org.lionsoul.ip2region.xdb.Version;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -25,15 +28,19 @@ public final class RegionUtils {
 
     public static final String UN_KNOW = "未知ip";
 
-    //数据下载地址：https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb
-    public static BufferedInputStream INPUT_STREAM = FileUtil.getInputStream("ip2region.xdb");
+    //数据下载地址：https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region_v4.xdb
+    public static BufferedInputStream INPUT_STREAM = FileUtil.getInputStream("ip2region_v4.xdb");
 
     public static Searcher searcher;
 
     static {
         byte[] bytes = RegionUtils.inputStreamToByteArray(INPUT_STREAM);
+        LongByteArray longByteArray = null;
+        if (bytes != null) {
+            longByteArray = new LongByteArray(bytes);
+        }
         try {
-            searcher = Searcher.newWithBuffer(bytes);
+            searcher = Searcher.newWithBuffer(Version.IPv4, longByteArray);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -92,10 +99,11 @@ public final class RegionUtils {
         return UN_KNOW;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InetAddressException {
         for (int i = 0; i < 5; i++) {
-            String region = getRegion("183.242.4.250");
+            String region = getRegion("112.230.234.230");
             System.err.println("region = " + region);
         }
     }
+
 }

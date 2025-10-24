@@ -95,6 +95,24 @@ public class MongoService {
     }
 
     /**
+     * 指定集合 修改数据，且仅修改找到的第一条数据
+     *
+     * @param accordingKey   修改条件 key
+     * @param accordingValue 修改条件 value
+     * @param updateKeys     修改内容 key数组
+     * @param updateValues   修改内容 value数组
+     */
+    public <T> void updateFirst(String accordingKey, Object accordingValue, String[] updateKeys, Object[] updateValues, Class<T> entityClass) {
+        Criteria criteria = Criteria.where(accordingKey).is(accordingValue);
+        Query query = Query.query(criteria);
+        Update update = new Update();
+        for (int i = 0; i < updateKeys.length; i++) {
+            update.set(updateKeys[i], updateValues[i]);
+        }
+        primaryMongoTemplate.updateFirst(query, update, entityClass);
+    }
+
+    /**
      * 指定集合 修改数据，且修改所找到的所有数据
      *
      * @param accordingKey   修改条件 key

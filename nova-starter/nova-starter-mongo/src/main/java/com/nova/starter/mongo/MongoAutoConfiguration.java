@@ -4,16 +4,23 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
+import org.springframework.data.mongodb.core.convert.DbRefResolver;
+import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
+import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
+import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
+import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 
 /**
@@ -24,6 +31,9 @@ import java.util.Arrays;
 @Configuration
 @ConditionalOnClass(name = "org.springframework.data.mongodb.core.MongoTemplate")
 public class MongoAutoConfiguration {
+
+    @Resource
+    private ApplicationContext applicationContext;
 
     @Bean(name = "mongoService")
     public MongoService mongoService() {
@@ -47,16 +57,32 @@ public class MongoAutoConfiguration {
     @Bean(name = {"primaryMongoTemplate", "mongoTemplate"})
     @Primary
     @ConditionalOnBean(name = "primaryMongoProperties")
-    public MongoTemplate primaryMongoTemplate() throws UnsupportedEncodingException {
+    public MongoTemplate primaryMongoTemplate(MappingMongoConverter mappingMongoConverter) throws UnsupportedEncodingException {
         MongoProperties mongoProperties = this.primaryMongoProperties();
         if (null != mongoProperties.getHost()) {
-            MongoTemplate mongoTemplate = new MongoTemplate(primaryMongoFactory(mongoProperties));
+            MongoTemplate mongoTemplate = new MongoTemplate(primaryMongoFactory(mongoProperties), mappingMongoConverter);
             MappingMongoConverter mongoMapping = (MappingMongoConverter) mongoTemplate.getConverter();
             mongoMapping.afterPropertiesSet();
             return mongoTemplate;
         } else {
             return null;
         }
+    }
+
+    /**
+     * 调用 mongoTemplate 的save方法时
+     * spring-data-mongodb 的 TypeConverter 会自动给 Document 添加一个 _class
+     * spring-data-mongodb 是为了在把 Document 转换成 Java 对象时能够转换到具体的子类
+     */
+    @Bean
+    public MappingMongoConverter mappingMongoConverter(MongoDatabaseFactory mongoDatabaseFactory) {
+        DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDatabaseFactory);
+        MongoMappingContext mappingContext = new MongoMappingContext();
+        mappingContext.setAutoIndexCreation(true);
+        mappingContext.setApplicationContext(applicationContext);
+        MappingMongoConverter mappingMongoConverter = new MappingMongoConverter(dbRefResolver, mappingContext);
+        mappingMongoConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
+        return mappingMongoConverter;
     }
 
     /**

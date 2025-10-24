@@ -1,6 +1,8 @@
 package com.nova.tools.db;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.nova.starter.mongo.MongoService;
 import com.nova.tools.demo.mongo.Topic;
 import com.nova.tools.demo.mongo.UserMapper;
@@ -42,6 +44,7 @@ public class MongoTest {
     public void testSave() {
         Topic topic = new Topic();
         topic.setName("从器件角度看，计算机经历了五代变化。但从系统结构看，至今绝大多数计算机仍属于（  ）计算机。");
+        topic.setId(1L);
         topic.setType(1);
         topic.setSubject(1266661195234037761L);
 
@@ -58,9 +61,10 @@ public class MongoTest {
         topic.setNote("计算机组成原理");
 
         String simpleName = topic.getClass().getSimpleName().toLowerCase();
-        mongoService.save(topic, simpleName + "_" + DateUtil.today());
+        mongoService.save(topic);
 
-        primaryMongoTemplate.save(topic);
+        System.out.println("json hutool = " + JSONUtil.toJsonStr(topic));
+        System.out.println("json fast = " + JSONObject.toJSONString(topic));
     }
 
     /**
@@ -87,7 +91,7 @@ public class MongoTest {
     public void testInsert() {
         Topic topic = new Topic();
         topic.setName("测试第三条");
-        topic.setId("66ce880ac7e7287c9f7d0caa");
+        topic.setId(1L);
 
         Map<Integer, String> select = new HashMap<>(16);
         select.put(0, "并行");

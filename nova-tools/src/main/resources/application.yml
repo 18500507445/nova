@@ -82,6 +82,7 @@ spring:
       authentication-database: admin  #认证的库
       database: myself    #操作的库
 
+
 #xxl:
 #  job:
 #    # 执行器通讯TOKEN [选填]：非空时启用；

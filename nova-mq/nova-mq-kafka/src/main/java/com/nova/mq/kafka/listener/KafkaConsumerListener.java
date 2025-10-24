@@ -46,9 +46,12 @@ public class KafkaConsumerListener {
         }
     }
 
-    @KafkaListener(groupId = "nova-kafka-consumer", topics = {Destination.TEST_DESTINATION})
-    public void onMessage(ConsumerRecord<Integer, String> record) {
+
+    @KafkaListener(topics = {Destination.TEST_DESTINATION}, groupId = "nova-kafka-consumer")
+    public void onMessage(ConsumerRecord<Integer, String> record, Acknowledgment ack) {
+        ack.acknowledge();
         log.info("kafka消息订阅！topic:{}，partition:{}，value:{}", record.topic(), record.partition(), record.value());
     }
+
 
 }

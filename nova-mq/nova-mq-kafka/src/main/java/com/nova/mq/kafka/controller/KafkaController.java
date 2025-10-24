@@ -1,5 +1,6 @@
 package com.nova.mq.kafka.controller;
 
+import com.nova.common.constant.Destination;
 import com.nova.common.core.model.result.ResResult;
 import com.nova.mq.kafka.config.KafkaService;
 import lombok.RequiredArgsConstructor;
@@ -27,4 +28,15 @@ public class KafkaController {
         return ResResult.success();
     }
 
+    @GetMapping("/kafka1")
+    public ResResult<Void> kafka1() {
+        kafkaService.sendMessage(Destination.TEST_DESTINATION,"你好");
+        return ResResult.success();
+    }
+
+    @GetMapping("/kafka2")
+    public ResResult<Void> kafka2() {
+        kafkaService.sendMessage("topicB", 1, "kafka2", "你好");
+        return ResResult.success();
+    }
 }

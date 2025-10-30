@@ -25,6 +25,9 @@ public class Document {
      */
     private String title;
 
+    //分数
+    private Integer score;
+
     // 场景一:标记es中不存在的字段
     @IndexField(exist = false)
     private String notExistsField;

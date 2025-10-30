@@ -38,13 +38,13 @@
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>7.17.8</version>
+            <version>7.17.28</version>
         </dependency>
 
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>7.17.8</version>
+            <version>7.17.28</version>
         </dependency>
 
         <!-- 引入easy-es最新版本的依赖-->

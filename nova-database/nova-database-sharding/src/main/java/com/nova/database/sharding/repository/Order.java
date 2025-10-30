@@ -1,4 +1,4 @@
-package com.nova.database.sharding;
+package com.nova.database.sharding.repository;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,6 +22,9 @@ public class Order implements Serializable {
      * 订单ID
      */
     private Integer orderId;
+
+
+    private String userName;
 
     /**
      * 创建时间

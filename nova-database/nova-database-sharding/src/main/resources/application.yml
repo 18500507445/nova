@@ -9,7 +9,7 @@ spring:
     # 数据源配置
     datasource:
       # 数据源名称，多数据源以逗号分隔 ,放在第一个的数据源为未配置分片规则表的默认数据源
-      names: db1 , db0
+      names: db0 , db1
       db0:
         # 数据库连接池类名称
         type: com.zaxxer.hikari.HikariDataSource
@@ -31,7 +31,7 @@ spring:
     rules:
       sharding:
         # 设置默认数据源
-        default-data-source-name: db1
+        default-data-source-name: db0
         # 分片算法配置
         sharding-algorithms:
           database-inline:

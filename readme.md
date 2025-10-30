@@ -22,7 +22,7 @@
 
 4.nova-database
 * dynamic，手写动态数据源
-* binlog4j，监听binlog
+* binlog4j，监听binlog（目前商业使用各个云厂商的DTS服务，可以端到端的数据迁移，端可以自由配置中间件和数据库）
 
 5.nova-excel
 * [excel工具类](nova-excel/excelNote.md)

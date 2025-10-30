@@ -73,6 +73,9 @@ public class Chapter6Test {
     }
 
 
+    // --------------------------------- mp分库分表和手动分库分表 ---------------------------------
+
+
     //手写的sql，看看mybatis-plus会切入表名吗
     @Test
     public void handSqlA() {

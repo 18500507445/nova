@@ -70,7 +70,6 @@ public class MongoService {
      */
     public void removeById(String key, Object value, String collectionName) {
         Criteria criteria = Criteria.where(key).is(value);
-        criteria.and(key).is(value);
         Query query = Query.query(criteria);
         primaryMongoTemplate.remove(query, collectionName);
     }
@@ -132,6 +131,36 @@ public class MongoService {
     }
 
     /**
+     * 指定集合 修改数据，且修改所找到的所有数据
+     *
+     * @param accordingKey   修改条件 key
+     * @param accordingValue 修改条件 value
+     * @param updateKeys     修改内容 key数组
+     * @param updateValues   修改内容 value数组
+     * @param collectionName 集合名
+     */
+    public long updateIn(String accordingKey, Object[] accordingValue, String[] updateKeys, Object[] updateValues, String collectionName) {
+        Criteria criteria = Criteria.where(accordingKey).in(accordingValue);
+        Query query = Query.query(criteria);
+        Update update = new Update();
+        for (int i = 0; i < updateKeys.length; i++) {
+            update.set(updateKeys[i], updateValues[i]);
+        }
+        return primaryMongoTemplate.updateMulti(query, update, collectionName).getModifiedCount();
+    }
+
+    public <T> long updateIn(String accordingKey, Object[] accordingValue, String[] updateKeys, Object[] updateValues, Class<T> entityClass) {
+        Criteria criteria = Criteria.where(accordingKey).in(accordingValue);
+        Query query = Query.query(criteria);
+        Update update = new Update();
+        for (int i = 0; i < updateKeys.length; i++) {
+            update.set(updateKeys[i], updateValues[i]);
+        }
+        return primaryMongoTemplate.updateMulti(query, update, entityClass).getModifiedCount();
+    }
+
+
+    /**
      * 根据条件查询出所有结果集 集合为数据对象中@Document 注解所配置的collection
      *
      * @param clazz      数据对象
@@ -150,6 +179,21 @@ public class MongoService {
         }
         Query query = Query.query(criteria);
         return primaryMongoTemplate.find(query, clazz);
+    }
+
+    public <T> List<T> find(Class<T> clazz, String[] findKeys, Object[] findValues, String collectionName, Sort.Direction direction, String sort) {
+        Criteria criteria = null;
+        for (int i = 0; i < findKeys.length; i++) {
+            if (i == 0) {
+                criteria = Criteria.where(findKeys[i]).is(findValues[i]);
+            } else {
+                criteria.and(findKeys[i]).is(findValues[i]);
+            }
+        }
+        assert criteria != null;
+        Query query = Query.query(criteria);
+        query.with(Sort.by(direction, sort));
+        return primaryMongoTemplate.find(query, clazz, collectionName);
     }
 
     /**

@@ -9,7 +9,7 @@ spring:
     # 数据源配置
     datasource:
       # 数据源名称，多数据源以逗号分隔 ,放在第一个的数据源为未配置分片规则表的默认数据源
-      names: db0 , db1
+      names: db2 , db1 , db0
       db0:
         # 数据库连接池类名称
         type: com.zaxxer.hikari.HikariDataSource
@@ -26,12 +26,20 @@ spring:
         jdbc-url: jdbc:mysql://127.0.0.1:3306/shardingsphere-db1?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
         username: root
         password: 123456
+      db2:
+        # 数据库连接池类名称
+        type: com.zaxxer.hikari.HikariDataSource
+        # 数据库驱动类名
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/shardingsphere-db2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        username: root
+        password: 123456
 
     # 规则配置
     rules:
       sharding:
         # 设置默认数据源
-        default-data-source-name: db0
+        default-data-source-name: db1
         # 分片算法配置
         sharding-algorithms:
           database-inline:
@@ -59,7 +67,7 @@ spring:
           # 逻辑表名称
           t_order:
             # 行表达式标识符可以使用 ${...} 或 $->{...}，但前者与 Spring 本身的属性文件占位符冲突，因此在 Spring 环境中使用行表达式标识符建议使用 $->{...}
-            actual-data-nodes: db$->{0..1}.t_order_$->{0..2}
+            actual-data-nodes: db$->{0..1}.t_order_$->{0..3}
             # 分库策略
             database-strategy:
               standard:

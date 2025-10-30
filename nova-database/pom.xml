@@ -14,6 +14,7 @@
         <!-- 手动封装动态数据源 -->
         <module>nova-database-dynamic</module>
         <module>nova-database-flink</module>
+        <module>nova-database-sharding</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>

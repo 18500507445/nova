@@ -5,20 +5,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.nova</groupId>
-        <artifactId>nova-search</artifactId>
+        <artifactId>nova</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nova-search-easyes</artifactId>
+    <artifactId>nova-orm-esplus</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <easy.es.version>2.1.0</easy.es.version>
     </properties>
 
     <dependencies>
-
         <!-- 排除springboot中内置的es依赖,以防和easy-es中的依赖冲突-->
         <dependency>
             <groupId>com.nova</groupId>
@@ -53,6 +55,6 @@
             <artifactId>easy-es-boot-starter</artifactId>
             <version>${easy.es.version}</version>
         </dependency>
-    </dependencies>
 
+    </dependencies>
 </project>

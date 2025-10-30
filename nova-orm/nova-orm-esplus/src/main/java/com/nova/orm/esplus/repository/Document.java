@@ -1,4 +1,4 @@
-package com.nova.search.easyes.repository;
+package com.nova.orm.esplus.repository;
 
 import lombok.Data;
 import org.dromara.easyes.annotation.IndexField;

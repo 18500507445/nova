@@ -1,4 +1,4 @@
-package com.nova.search.easyes.repository;
+package com.nova.orm.esplus.repository;
 
 import org.dromara.easyes.core.kernel.BaseEsMapper;
 import org.springframework.stereotype.Repository;

@@ -1,8 +1,8 @@
-package com.nova.search.easyes.controller;
+package com.nova.orm.esplus.controller;
 
 import com.nova.common.utils.random.RandomUtils;
-import com.nova.search.easyes.repository.Document;
-import com.nova.search.easyes.repository.DocumentMapper;
+import com.nova.orm.esplus.repository.Document;
+import com.nova.orm.esplus.repository.DocumentMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.easyes.core.conditions.select.LambdaEsQueryWrapper;

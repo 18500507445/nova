@@ -1,5 +1,6 @@
 package com.nova.database.sharding;
 
+import com.nova.common.utils.random.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,14 +15,20 @@ import java.util.Date;
 @SpringBootTest
 public class ShardingTest {
 
+    static {
+        System.setProperty("pagehelper.banner", "false");
+    }
+
+
     @Resource
     private OrderMapper orderMapper;
 
     @Test
     public void demoA() {
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 50; i++) {
             Order order = new Order();
             order.setOrderId(i);
+            order.setUserName(RandomUtils.randomName());
             order.setCreateTime(new Date());
             orderMapper.insert(order);
         }

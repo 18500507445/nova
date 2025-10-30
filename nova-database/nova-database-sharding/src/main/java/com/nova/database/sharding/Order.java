@@ -23,6 +23,9 @@ public class Order implements Serializable {
      */
     private Integer orderId;
 
+    //用户姓名
+    private String userName;
+
     /**
      * 创建时间
      */

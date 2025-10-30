@@ -1,4 +1,4 @@
-package com.nova.common.utils.copybean;
+package com.nova.common.utils.common;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -4,8 +4,8 @@ package com.nova.tools.common;
 import com.google.common.base.Preconditions;
 import com.nova.common.core.model.business.ValidatorReqDTO;
 import com.nova.common.exception.ParamException;
+import com.nova.common.utils.common.CommonUtils;
 import com.nova.common.utils.common.ValidatorUtils;
-import com.nova.common.utils.copybean.ParamsUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +42,7 @@ public class ValidatorTest {
     public void paramUtilTest() {
         ValidatorReqDTO reqDTO = new ValidatorReqDTO();
         try {
-            ParamsUtils.checkNotNull(reqDTO);
+            CommonUtils.checkNotNull(reqDTO);
         } catch (Exception e) {
             String message = e.getMessage();
             System.err.println("message = " + message);

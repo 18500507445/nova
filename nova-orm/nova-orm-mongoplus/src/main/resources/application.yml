@@ -1,0 +1,31 @@
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+
+# DataSource Config
+mongo-plus:
+  data:
+    mongodb:
+      #ip
+      host: 127.0.0.1
+      #端口
+      port: 27017
+      #数据库名
+      database: myself
+      #用户名，没有可不填（若账号中出现@,!等等符号，不需要再进行转码！！！）
+      username: root
+      #密码，同上（若密码中出现@,!等等符号，不需要再进行转码！！！）
+      password: '123456'
+      #验证数据库
+      authenticationDatabase: admin
+      #在超时之前等待连接打开的最长时间（以毫秒为单位）
+      connectTimeoutMS: 50000
+
+  configuration:
+    # banner关闭
+    banner: false
+    # 自动创建索引
+    auto-create-index: true

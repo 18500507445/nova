@@ -7,10 +7,6 @@ server:
 spring:
   data:
     solr:
-      host: http://username:password@ip:port/xxx
-
-jasypt:
-  encryptor:
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-    password: jaspyt_password
+      host: http://8.141.22.42:8983/solr/
+#      host: http://username:password@ip:port/xxx
 

@@ -4,7 +4,12 @@ server:
   servlet:
     context-path: /
 
-jasypt:
-  encryptor:
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-    password: jaspyt_password
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: rocket-mq-producer
+    send-message-timeout: 10000
+  consumer:
+    group: rocket-mq-consumer
+

@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.nova</groupId>
         <artifactId>nova-login</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>nova-login-sa</artifactId>

@@ -7,7 +7,7 @@
     <groupId>com.nova</groupId>
     <artifactId>nova</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <name>nova</name>
     <description>Nova project for Maven</description>
@@ -45,7 +45,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <java.version>1.8</java.version>
-        <nova.version>1.0-SNAPSHOT</nova.version>
+        <!-- nova 当前服务全局版本控制 -->
+        <revision>1.0.0-RELEASE</revision>
 
         <!-- springBoot、springCloud版本控制 -->
         <boot.version>2.7.18</boot.version>
@@ -86,39 +87,39 @@
             <dependency>
                 <groupId>com.nova</groupId>
                 <artifactId>nova-common</artifactId>
-                <version>${nova.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <!-- shopping单独组件 -->
             <dependency>
                 <groupId>com.nova</groupId>
                 <artifactId>nova-shopping-common</artifactId>
-                <version>${nova.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <!-- starter组件 -->
             <dependency>
                 <groupId>com.nova.starter</groupId>
                 <artifactId>nova-starter-redis</artifactId>
-                <version>${nova.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.nova.starter</groupId>
                 <artifactId>nova-starter-mongo</artifactId>
-                <version>${nova.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.nova.starter</groupId>
                 <artifactId>nova-starter-xxl</artifactId>
-                <version>${nova.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.nova.starter</groupId>
                 <artifactId>nova-starter-sensitive</artifactId>
-                <version>${nova.version}</version>
+                <version>${revision}</version>
             </dependency>
 
         </dependencies>

@@ -66,4 +66,11 @@ public class RabbitConstants {
     public static final String QUEUE_TOPIC_THREE = "queue-topic-three";
 
 
+    /**
+     * canal-cloud交换机
+     */
+    public static final String CANAL_CLOUD_EXCHANGE = "canal_cloud_exchange";
+    public static final String CANAL_CLOUD_QUEUE = "canal_cloud_queue";
+    public static final String CANAL_CLOUD_KEY = "canal_cloud_key";
+
 }

@@ -298,4 +298,31 @@ public class RabbitConfig {
     public Binding bindingTopicThree() {
         return BindingBuilder.bind(queueTopicThree()).to(topicExchange()).with("three.#").noargs();
     }
+
+    /**
+     * canal-cloud交换机
+     */
+    @Bean("canalCloudExchange")
+    public Exchange canalCloudExchange() {
+        return ExchangeBuilder.directExchange(RabbitConstants.CANAL_CLOUD_EXCHANGE).build();
+    }
+
+    /**
+     * canal-cloud队列
+     */
+    @Bean
+    public Queue canalCloudQueue() {
+        return new Queue(RabbitConstants.CANAL_CLOUD_QUEUE);
+    }
+
+    /**
+     * canal-cloud绑定
+     */
+    @Bean
+    public Binding canalCloudBinding() {
+        return BindingBuilder
+                .bind(canalCloudQueue())
+                .to(canalCloudExchange())
+                .with(RabbitConstants.CANAL_CLOUD_KEY).noargs();
+    }
 }

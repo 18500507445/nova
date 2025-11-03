@@ -300,19 +300,19 @@ public class RabbitConfig {
     }
 
     /**
-     * canal-cloud交换机
+     * cloud-canal交换机
      */
-    @Bean("canalCloudExchange")
-    public Exchange canalCloudExchange() {
-        return ExchangeBuilder.directExchange(RabbitConstants.CANAL_CLOUD_EXCHANGE).build();
+    @Bean
+    public Exchange cloudCanalExchange() {
+        return ExchangeBuilder.directExchange(RabbitConstants.CLOUD_CANAL_EXCHANGE).build();
     }
 
     /**
-     * canal-cloud队列
+     * cloud-canal队列
      */
     @Bean
-    public Queue canalCloudQueue() {
-        return new Queue(RabbitConstants.CANAL_CLOUD_QUEUE);
+    public Queue cloudCanaldQueue() {
+        return new Queue(RabbitConstants.CLOUD_CANAL_QUEUE);
     }
 
     /**
@@ -321,8 +321,8 @@ public class RabbitConfig {
     @Bean
     public Binding canalCloudBinding() {
         return BindingBuilder
-                .bind(canalCloudQueue())
-                .to(canalCloudExchange())
-                .with(RabbitConstants.CANAL_CLOUD_KEY).noargs();
+                .bind(cloudCanaldQueue())
+                .to(cloudCanalExchange())
+                .with(RabbitConstants.CLOUD_CANAL_KEY).noargs();
     }
 }

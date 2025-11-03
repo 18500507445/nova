@@ -27,7 +27,7 @@ public class CanalCloudListener {
      *
      */
     @RabbitHandler
-    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.CANAL_CLOUD_QUEUE))
+    @RabbitListener(queuesToDeclare = @Queue(RabbitConstants.CLOUD_CANAL_QUEUE))
     public void one(Message message, Channel channel) throws IOException {
         long tag = message.getMessageProperties().getDeliveryTag();
         channel.basicAck(tag, false);

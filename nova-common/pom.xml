@@ -218,7 +218,7 @@
             <version>${thumbnailator.version}</version>
         </dependency>
 
-        <!-- jwt令牌生成算法 token校验 -->
+        <!-- jwt令牌生成算法 token校验 场景：需定制算法或与Auth0生态集成的云原生场景-->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>

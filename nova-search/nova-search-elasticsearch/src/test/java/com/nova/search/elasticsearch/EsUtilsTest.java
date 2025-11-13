@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author: wzh
- * @description: es工具类测试
+ * @description: es工具类测试，封装springboot-stater后的工具类写法
  * @date: 2024/04/28 16:10
  */
 @Slf4j(topic = "EsUtilsTest")

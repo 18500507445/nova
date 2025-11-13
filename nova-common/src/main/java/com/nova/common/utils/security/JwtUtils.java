@@ -53,7 +53,7 @@ public final class JwtUtils {
      *
      * @return true：过期
      */
-    public static boolean isTokenExpired(String token) {
+    public static boolean isExpired(String token) {
         Date now = Calendar.getInstance().getTime();
         return JWT.decode(token).getExpiresAt().before(now);
     }
@@ -87,8 +87,8 @@ public final class JwtUtils {
         String token = sign(jsonStr);
         System.err.println("token：" + token);
 
-        boolean tokenExpired = isTokenExpired(token);
-        System.err.println("tokenExpired = " + tokenExpired);
+        boolean expired = isExpired(token);
+        System.err.println("expired = " + expired);
 
         boolean verify = verify(token, jsonStr);
         System.err.println("verify：" + verify);

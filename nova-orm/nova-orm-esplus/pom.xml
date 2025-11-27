@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.nova</groupId>
-        <artifactId>nova</artifactId>
+        <artifactId>nova-orm</artifactId>
         <version>${revision}</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>nova-orm-esplus</artifactId>

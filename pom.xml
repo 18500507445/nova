@@ -36,7 +36,6 @@
         <module>nova-spring</module>
         <module>nova-starter</module>
         <module>nova-tools</module>
-        <module>nova-orm/nova-orm-esplus</module>
     </modules>
 
     <properties>

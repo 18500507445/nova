@@ -1,9 +1,9 @@
 package com.nova.orm.mybatisplus;
 
 import cn.hutool.core.collection.ListUtil;
-import com.nova.common.utils.random.RandomUtils;
 import com.nova.orm.mybatisplus.users.Users;
 import com.nova.orm.mybatisplus.users.UsersService;
+import com.nova.orm.mybatisplus.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

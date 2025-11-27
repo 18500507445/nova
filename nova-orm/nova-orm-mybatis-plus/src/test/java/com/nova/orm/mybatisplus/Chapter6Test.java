@@ -2,12 +2,12 @@ package com.nova.orm.mybatisplus;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.nova.common.utils.random.RandomUtils;
 import com.nova.orm.mybatisplus.chapter6.DynamicUser;
 import com.nova.orm.mybatisplus.chapter6.DynamicUserMapper;
 import com.nova.orm.mybatisplus.chapter6.TenantUser;
 import com.nova.orm.mybatisplus.chapter6.TenantUserMapper;
 import com.nova.orm.mybatisplus.config.TenantContext;
+import com.nova.orm.mybatisplus.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -2,7 +2,6 @@ package com.nova.orm.mybatisplus.chapter1;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
-import com.nova.common.core.model.result.ResResult;
 import com.nova.orm.mybatisplus.entity.UserDO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +27,9 @@ public class OneUserController {
     private static final TimeInterval TIMER = DateUtil.timer();
 
     @PostMapping("selectList")
-    public ResResult<List<UserDO>> selectList() {
+    public List<UserDO> selectList() {
         try {
-            return ResResult.success(oneUserService.selectList());
+            return oneUserService.selectList();
         } finally {
             log.info("接口：selectList，耗时：{} ms", TIMER.interval());
         }

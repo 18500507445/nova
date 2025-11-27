@@ -10,11 +10,14 @@
 
     <artifactId>nova-orm</artifactId>
     <packaging>pom</packaging>
+
     <modules>
-        <module>nova-orm-mybatis</module>
-        <module>nova-orm-mybatisplus</module>
+        <module>nova-orm-esplus</module>
         <module>nova-orm-mongoplus</module>
+        <module>nova-orm-mybatis</module>
+        <module>nova-orm-mybatis-plus</module>
     </modules>
+
     <modelVersion>4.0.0</modelVersion>
 
     <properties>

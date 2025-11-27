@@ -1,10 +1,10 @@
-#端口
+# 端口
 server:
   port: 8080
   servlet:
     context-path: /
 
-##德鲁伊连接池
+## 德鲁伊连接池
 spring:
   datasource:
     dynamic:
@@ -93,12 +93,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #数据库 下划线命名映射小驼峰命名 user_name --> userName
     map-underscore-to-camel-case: true
-
-
-jasypt:
-  encryptor:
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-    password: jaspyt_password
 
 
 # pagehelper相关配置 可参考https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md

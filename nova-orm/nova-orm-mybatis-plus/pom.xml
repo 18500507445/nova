@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>nova-orm-mybatisplus</artifactId>
+    <artifactId>nova-orm-mybatis-plus</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

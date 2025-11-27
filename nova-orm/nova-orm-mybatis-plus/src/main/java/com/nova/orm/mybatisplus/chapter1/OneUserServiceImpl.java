@@ -2,6 +2,7 @@ package com.nova.orm.mybatisplus.chapter1;
 
 import com.nova.orm.mybatisplus.entity.UserDO;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @date: 2023/06/15 19:54
  */
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OneUserServiceImpl implements OneUserService {
 
     private final OneUserMapper oneUserMapper;

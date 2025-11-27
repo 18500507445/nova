@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <druid.version>1.2.27</druid.version>
-        <mybatis.plus.version>3.5.14</mybatis.plus.version>
+        <mybatis.plus.version>3.5.5</mybatis.plus.version>
         <dynamic.version>4.3.1</dynamic.version>
 
     </properties>
@@ -51,12 +51,6 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis.plus.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-jsqlparser-4.9</artifactId>
             <version>${mybatis.plus.version}</version>
         </dependency>
 

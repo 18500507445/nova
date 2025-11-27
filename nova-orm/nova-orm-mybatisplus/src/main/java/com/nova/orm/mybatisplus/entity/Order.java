@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@TableName(value = "my_order")
+@TableName(value = "`order`")
 public class Order {
 
     /**

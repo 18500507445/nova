@@ -100,7 +100,7 @@ public class Chapter5Test {
     public void dynamicDataSource() {
         Order order = orderMapper.selectById(1L);
         UserFiveDO result = fiveUserMapper.selectById(1671354213734621185L);
-        System.err.println("myOrder = " + JSONUtil.toJsonStr(order));
+        System.err.println("order = " + JSONUtil.toJsonStr(order));
         System.err.println("result = " + JSONUtil.toJsonStr(result));
     }
 

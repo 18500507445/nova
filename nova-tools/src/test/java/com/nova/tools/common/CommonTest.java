@@ -3,6 +3,7 @@ package com.nova.tools.common;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import cn.hutool.json.JSONUtil;
 import com.nlf.calendar.Holiday;
 import com.nlf.calendar.util.HolidayUtil;
@@ -118,8 +119,19 @@ public class CommonTest {
     //获取所有节日
     @Test
     public void holidays() {
-        List<Holiday> holidays = HolidayUtil.getHolidays(2024);
+        List<Holiday> holidays = HolidayUtil.getHolidays(2026);
         String jsonStr = JSONUtil.toJsonStr(holidays);
         Console.log("holidays：" + jsonStr);
     }
+
+    //获取地址拼音
+    @Test
+    public void PinYinTest() {
+        String a = PinyinUtil.getPinyin("北京市-平谷区-东高村镇");
+        System.out.println("a = " + a);
+
+        String c = PinyinUtil.getPinyin('北');
+        System.out.println("c = " + c);
+    }
+
 }

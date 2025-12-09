@@ -39,10 +39,10 @@
         <bitwalker.version>1.21</bitwalker.version>
         <sba.version>2.7.11</sba.version>
         <transmittable.version>2.14.5</transmittable.version>
-        <ip2region.version>3.1.0</ip2region.version>
+        <ip2region.version>3.2.1</ip2region.version>
         <lunar.version>1.7.7</lunar.version>
 
-        <!-- hutool工具类需要的依赖 -->
+        <!-- hutool 工具类需要的依赖 -->
         <emoji-java.version>5.1.1</emoji-java.version>
 
         <!-- 2.1.0兼容spring-boot-starter2.7.18版本，不建议升级了，但是2.1.0和mybatis-plus3.5.5有兼容性问题 暂时降版本-->
